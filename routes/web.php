@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Inicio\InicioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::get('/for', function () {
 Route::get('/dashboard', function () {
     return view('usuario.principa_usul');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/inicio', [InicioController::class, 'vista'])->name('inicio');
+
+Route::get('/inicio/mision-vision', [InicioController::class, 'mision_vision'])->name('mision_vision');
+
 
 
 require __DIR__.'/auth.php';

@@ -8,10 +8,9 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -63,7 +62,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="{{ asset('dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -79,7 +78,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="{{ asset('dist/img/user8-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -95,7 +94,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="{{ asset('dist/img/user3-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -148,47 +147,36 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
-      <!--cerrar sesion-->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-        
-        <!--pantallas pequeñas <span class="d-none d-lg-block"> --> 
-      </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-         <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <div class="dropdown-divider"></div>
-            <a href="route('logout')" class="dropdown-item"  onclick="event.preventDefault(); this.closest('form').submit();">
-              <i class="fas fa-sign-out-alt fa-lg"></i> Cerrar sesión
-            </a>
-          </form>
-      </li>
-
-      <!----->
     </ul>
   </nav>
   <!-- /.navbar -->
 
+ 
+      
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
+    <!--<a href="index3.html" class="brand-link">-->
+     <!-- <img src="img/inesur_logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">AdminLTE 3</span>-->
+     <a href="#"><img src="img/inesur_logo.jpg" class="img-fluid" width="100%" height="40%"></a> 
+    <!--</a>-->
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="img/user3-128x128.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
-
+      <!--actualizar perfil-->
+    
+        <!--finalizar perfil-->
       <!-- SidebarSearch Form -->
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
@@ -206,42 +194,59 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="{{url('/dashboard')}}" class="nav-link active">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Inicio
-              </p>
-            </a>
-          </li>    
          
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-cog"></i>
-              <p>
-                Perfil <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
+          <li class="nav-item menu-open">
+             <!--instanciar la ruta de nav link-->   
+                  <a href="#" class="nav-link active">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                      Inicio
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                  </a>
+                <!--end instancia-->
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+            <li class="nav-item">
+                  <a href="{{route('inicio')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Ver Perfil</p>
-                </a>
+                    <p>
+                    Principal
+                    </p>
+                  </a>
+
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                  <a href="{{route('mision_vision')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Actualizar</p>
-                </a>
+                    <p>
+                    Mision y Visión
+                    </p>
+                  </a>
+
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" :to="'/inicio/historia'">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Historia
+                        </p>
+                  </router-link>
+              </li>
+              <li class="nav-item">
+                <!--instanciar la ruta de nav link-->
+                  <router-link class="nav-link" :to="'/inicio/contactos'">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Contactos</p>
+                  </router-link>
+                <!--end instancia-->
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+         <!--perfil-->
+         <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-award"></i>
+              <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Reconocer
+                Perfil 
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -249,34 +254,52 @@
               <li class="nav-item">
                 <a href="pages/charts/chartjs.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
+                  <p>Actualizar Perfil</p>
+                </a>
+              </li>   
+            </ul>
+          </li>
+         <!--end perfil-->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Programas 
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/charts/chartjs.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/charts/flot.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
+                  <p>Actualizar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/UI/ribbons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Vincular Asignaturas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/charts/inline.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>uPlot</p>
+                  <p>Consultar</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-medal"></i>
+              <i class="nav-icon fas fa-tree"></i>
               <p>
-                Insignias
+                Asignaturas
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -284,28 +307,34 @@
               <li class="nav-item">
                 <a href="pages/UI/general.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>General</p>
+                  <p>Registrar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/timeline.html" class="nav-link">
+                <a href="pages/UI/icons.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Timeline</p>
+                  <p>Actualizar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/ribbons.html" class="nav-link">
+                <a href="pages/UI/buttons.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Ribbons</p>
+                  <p>Consultar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/UI/buttons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Vincular Docente</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-trophy"></i>
+              <i class="nav-icon fas fa-edit"></i>
               <p>
-                Recompensas
+                Docentes
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -313,34 +342,34 @@
               <li class="nav-item">
                 <a href="pages/forms/general.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>General Elements</p>
+                  <p>Registrar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/forms/advanced.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Advanced Elements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Editors</p>
+                  <p>Actualizar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/forms/validation.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Validation</p>
+                  <p>Perfil</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/forms/editors.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Consultar</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-vote-yea"></i>
+              <i class="nav-icon fas fa-table"></i>
               <p>
-                Votación
+                Estudiantes
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -348,27 +377,141 @@
               <li class="nav-item">
                 <a href="pages/tables/simple.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Simple Tables</p>
+                  <p>Registrar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/tables/data.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>DataTables</p>
+                  <p>Actualizar</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/tables/jsgrid.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>jsGrid</p>
+                  <p>Consultar</p>
                 </a>
               </li>
             </ul>
           </li>
-        <!-- <li class="nav-header">EXAMPLES</li>
-    
-          <li class="nav-header">MISCELLANEOUS</li>-->
-          
+          <li class="nav-header">Modulo 2</li>
+
+          <li class="nav-item">
+            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+              <i class="nav-icon fas fa-file"></i>
+              <p>Matriculas</p>
+            </a>
+          </li>
+         
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                Consultas
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Est. por Programa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/compose.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Doc. por Programa</p> <!--para historia-->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/mailbox/read-mail.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Asig. por Programa</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+         
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Calificaciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/examples/invoice.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/examples/profile.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Actualizar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/examples/e-commerce.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Reporte Calificaciones</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-plus-square"></i>
+              <p>
+                Nivelaciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <!--hasta aqui verificar-->
+              <li class="nav-item">
+                <a href="pages/examples/lockscreen.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Est. Reprobados</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/examples/legacy-user-menu.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Valor habilitación</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-search"></i>
+              <p>
+                Certificados
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/search/simple.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laboral</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/search/enhanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Estudiante</p><!--agregar descripcion para el certificados-->
+                </a>
+              </li>
+            </ul>
+          </li>
+          <br>
+          <br>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -376,36 +519,21 @@
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+        @yield('content')
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-     
-    <!-- Main content -->
-    <!-- /.content -->
   </div>
-
+  <!-- Content Wrapper. Contains page content -->
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2022 <a href="https://www.evolucion.co/">Evolucion</a>.</strong>
-    Todos los derechos reservados
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0.0
+      <b>Version</b> 3.2.0
     </div>
   </footer>
 
@@ -415,7 +543,6 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
 @include('usuario.stylejs')
 
 </body>
