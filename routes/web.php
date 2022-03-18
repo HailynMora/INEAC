@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inicio\InicioController;
+use App\Http\Controllers\Docentes\DocenteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,9 @@ Route::get('/inicio', [InicioController::class, 'vista'])->name('inicio');
 
 Route::get('/inicio/mision-vision', [InicioController::class, 'mision_vision'])->name('mision_vision');
 
+Route::get('/docente/registro_docente', [DocenteController::class, 'registro_docente'])->name('registro_docente');
+
+Route::get('/docente/listado_docente', [DocenteController::class, 'listado_docente'])->name('listado_docente');
 
 
 require __DIR__.'/auth.php';

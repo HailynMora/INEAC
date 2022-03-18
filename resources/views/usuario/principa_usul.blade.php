@@ -10,7 +10,7 @@
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="/img/logo.png" alt="INESUR" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -160,7 +160,7 @@
     <!--<a href="index3.html" class="brand-link">-->
      <!-- <img src="img/inesur_logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>-->
-     <a href="#"><img src="img/inesur_logo.jpg" class="img-fluid" width="100%" height="40%"></a> 
+     <a href="#"><img src="/img/inesur_logo.jpg" class="img-fluid" width="100%" height="40%"></a> 
     <!--</a>-->
 
     <!-- Sidebar -->
@@ -244,7 +244,7 @@
          <!--perfil-->
          <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Perfil 
                 <i class="right fas fa-angle-left"></i>
@@ -297,7 +297,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-book-open"></i>
               <p>
                 Asignaturas
                 <i class="fas fa-angle-left right"></i>
@@ -332,7 +332,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Docentes
                 <i class="fas fa-angle-left right"></i>
@@ -340,13 +340,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="{{route('registro_docente')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
+                <a href="{{route('listado_docente')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Actualizar</p>
                 </a>
@@ -393,12 +393,9 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-header">Modulo 2</li>
-
-          <li class="nav-item">
+          </li>          <li class="nav-item">
             <a href="https://adminlte.io/docs/3.1/" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
+              <i class="nav-icon fas fa-file-alt"></i>
               <p>Matriculas</p>
             </a>
           </li>
@@ -465,7 +462,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
+              <i class="nav-icon fas fa-edit"></i>
               <p>
                 Nivelaciones
                 <i class="fas fa-angle-left right"></i>
@@ -489,7 +486,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-search"></i>
+              <i class="nav-icon fas fa-folder-open"></i>
               <p>
                 Certificados
                 <i class="fas fa-angle-left right"></i>
@@ -511,8 +508,10 @@
             </ul>
           </li>
           <br>
-          <br>
+          
+
         </ul>
+        <br><br><br><br>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -530,10 +529,10 @@
   <!-- Content Wrapper. Contains page content -->
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
+    <strong>INEAC 2021 - 2022</strong>
+    
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
+      <b>Version</b> 1.0.0
     </div>
   </footer>
 
