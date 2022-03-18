@@ -375,7 +375,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="{{route('registro_es')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar</p>
                 </a>
@@ -390,6 +390,12 @@
                 <a href="pages/tables/jsgrid.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Consultar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('registro_acu')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Acudiente</p>
                 </a>
               </li>
             </ul>

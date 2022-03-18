@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('perfil', function (Blueprint $table) {
+        Schema::create('perfil_docente', function (Blueprint $table) {
             $table->id();
             $table->string('nivel_estudios');
             $table->string('intereses');
             $table->string('descripcion');
             $table->string('cursos_realizados');
+            $table->string('Experiencia');
+            $table->unsignedBigInteger('id_docente');//atributo para referenciar a categoria
+            $table->foreign('id_docente')->references('id')->on('docente');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perfil');
+        Schema::dropIfExists('perfil_docente');
     }
 };

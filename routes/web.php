@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inicio\InicioController;
-
+use App\Http\Controllers\Estudiantes\EstudiantesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +30,13 @@ Route::get('/dashboard', function () {
 Route::get('/inicio', [InicioController::class, 'vista'])->name('inicio');
 
 Route::get('/inicio/mision-vision', [InicioController::class, 'mision_vision'])->name('mision_vision');
+//estudiantes rutas
+Route::get('/registro/estudiantes', [EstudiantesController::class, 'registro'])->name('registro_es');
 
+//acudiente
+Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->name('registro_acu');
 
+//acudiente
+Route::post('/registro/acudientes', [EstudiantesController::class, 'datosacu'])->name('datosacu');
 
 require __DIR__.'/auth.php';
