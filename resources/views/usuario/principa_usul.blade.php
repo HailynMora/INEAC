@@ -10,7 +10,7 @@
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="#" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -62,7 +62,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="#" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -78,7 +78,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="#" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -94,7 +94,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="#" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -160,7 +160,7 @@
     <!--<a href="index3.html" class="brand-link">-->
      <!-- <img src="img/inesur_logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>-->
-     <a href="#"><img src="img/inesur_logo.jpg" class="img-fluid" width="100%" height="40%"></a> 
+     <a href="#"><img src="#" class="img-fluid" width="100%" height="40%"></a> 
     <!--</a>-->
 
     <!-- Sidebar -->
@@ -168,7 +168,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="img/user3-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="#" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Alexander Pierce</a>
@@ -225,18 +225,19 @@
 
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" :to="'/inicio/historia'">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Historia
-                        </p>
-                  </router-link>
+              <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+                    <p>
+                    Historia
+                    </p>
+                  </a>
               </li>
               <li class="nav-item">
                 <!--instanciar la ruta de nav link-->
-                  <router-link class="nav-link" :to="'/inicio/contactos'">
+                  <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Contactos</p>
-                  </router-link>
+                   </a>
                 <!--end instancia-->
               </li>
             </ul>

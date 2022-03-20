@@ -1,6 +1,6 @@
 @extends('usuario.principa_usul')
 @section('content')
-<form id="formudatos" name="formudatos" method="post">
+<form  method="post" id="formudatos" name="formudatos" method="post">
   @csrf
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -76,7 +76,7 @@
     $.ajax({
       type: "POST",
       url:"{{route('datosacu')}}",
-     
+      
       data:{
         nombre:nombre,
         apellido:apellido,

@@ -15,7 +15,8 @@ use App\Http\Controllers\Estudiantes\EstudiantesController;
 */
 
 Route::get('/', function () {
-    return view('usuario.principa_usul');
+    //return view('usuario.principa_usul');
+    return view('inicio.vista');
 });
 Route::get('/reg', function () {
     return view('prueba');
@@ -24,7 +25,7 @@ Route::get('/for', function () {
     return view('formulario');
 });
 Route::get('/dashboard', function () {
-    return view('usuario.principa_usul');
+    return view('inicio.vista'); //aqui retorna a la vista principal cuando este logeado
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/inicio', [InicioController::class, 'vista'])->name('inicio');
@@ -37,6 +38,6 @@ Route::get('/registro/estudiantes', [EstudiantesController::class, 'registro'])-
 Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->name('registro_acu');
 
 //acudiente
-Route::post('/registro/acudientes', [EstudiantesController::class, 'datosacu'])->name('datosacu');
+Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->name('datosacu');
 
 require __DIR__.'/auth.php';

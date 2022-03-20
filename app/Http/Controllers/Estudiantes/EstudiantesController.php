@@ -23,7 +23,7 @@ class EstudiantesController extends Controller
         return view('estudiantes.acudiente')->with('tipodoc', $tipodoc)->with('paren', $paren)->with('genero', $genero);
     }
 
-    public function datosacu(Request $request){
+    public function datos(Request $request){
         $category = new Acudiente();
         $category->nombre = $request->input('nombre');
         $category->apellido = $request->input('apellido');
