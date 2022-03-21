@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombre',100);
             $table->string('apellido',100);
             $table->string('direccion',100);
-            $table->Integer('telefono')->nullable();
+            $table->string('telefono')->nullable();
             $table->Integer('num_doc')->unique();
             $table->string('correo',100)->unique();
             $table->string('estrato',100);

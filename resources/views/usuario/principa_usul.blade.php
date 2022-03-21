@@ -10,11 +10,7 @@
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-<<<<<<< HEAD
     <img class="animation__shake" src="/img/logo.png" alt="INESUR" height="60" width="60">
-=======
-    <img class="animation__shake" src="#" alt="AdminLTELogo" height="60" width="60">
->>>>>>> db2d6a17c1689dc1ec1ef6c17adc79a9e9a6ddd7
   </div>
 
   <!-- Navbar -->
@@ -164,11 +160,7 @@
     <!--<a href="index3.html" class="brand-link">-->
      <!-- <img src="img/inesur_logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>-->
-<<<<<<< HEAD
      <a href="#"><img src="/img/inesur_logo.jpg" class="img-fluid" width="100%" height="40%"></a> 
-=======
-     <a href="#"><img src="#" class="img-fluid" width="100%" height="40%"></a> 
->>>>>>> db2d6a17c1689dc1ec1ef6c17adc79a9e9a6ddd7
     <!--</a>-->
 
     <!-- Sidebar -->
