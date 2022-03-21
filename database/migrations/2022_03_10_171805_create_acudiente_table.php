@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('nombre',100);
             $table->string('apellido',100);
             $table->string('direccion',100);
-            $table->Integer('telefono');
-            $table->Integer('num_doc');
+            $table->string('telefono');
+            $table->string('num_doc');
             $table->unsignedBigInteger('id_parentesco');//atributo para referenciar a categoria
             $table->foreign('id_parentesco')->references('id')->on('parentezco');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_tipo_doc');//atributo para referenciar a categoria
