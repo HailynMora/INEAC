@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inicio\InicioController;
+
 use App\Http\Controllers\Docentes\DocenteController;
+
+use App\Http\Controllers\Estudiantes\EstudiantesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +34,21 @@ Route::get('/dashboard', function () {
 Route::get('/inicio', [InicioController::class, 'vista'])->name('inicio');
 
 Route::get('/inicio/mision-vision', [InicioController::class, 'mision_vision'])->name('mision_vision');
+//estudiantes rutas
+Route::get('/registro/estudiantes', [EstudiantesController::class, 'registro'])->name('registro_es');
 
-Route::get('/docente/registro_docente', [DocenteController::class, 'registro_docente'])->name('registro_docente');
+//docente
+Route::get('/docente/registro_docente', [DocenteController::class, 'regdocente'])->name('regdocente');
+
+Route::post('/docente/registro_docente', [DocenteController::class, 'datosdoc'])->name('datosdoc');
 
 Route::get('/docente/listado_docente', [DocenteController::class, 'listado_docente'])->name('listado_docente');
 
+//acudiente
+Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->name('registro_acu');
+
+
+//acudiente
+Route::post('/registro/acudientes', [EstudiantesController::class, 'datosacu'])->name('datosacu');
 
 require __DIR__.'/auth.php';

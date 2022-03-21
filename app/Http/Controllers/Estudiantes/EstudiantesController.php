@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Docentes;
+namespace App\Http\Controllers\Estudiantes;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,40 +8,32 @@ use Illuminate\Support\Facades\DB;
 use App\Models\GeneroModel\Genero;
 use App\Models\ParentescoModel\Parentesco;
 use App\Models\TipoDocumentoModel\TipoDocumento;
-use App\Models\DocenteModel\Docente;
+use App\Models\ParentescoModel\Acudiente;
 
-class docenteController extends Controller
+class EstudiantesController extends Controller
 {
-    public function registro_docente(){
-        return view('docente.registro_docente');
-
+    public function registro(){
+        return view('estudiantes.registroestu');
     }
 
-    public function regdocente(){
+    public function regisacudiente(){
         $tipodoc=TipoDocumento::all();
+        $paren=Parentesco::all();
         $genero=Genero::all();
-        return view('docente.registro_docente')->with('tipodoc', $tipodoc)->with('genero', $genero);
+        return view('estudiantes.acudiente')->with('tipodoc', $tipodoc)->with('paren', $paren)->with('genero', $genero);
     }
 
-    public function datosdoc(Request $request){
-        $category = new Docente();
+    public function datosacu(Request $request){
+        $category = new Acudiente();
         $category->nombre = $request->input('nombre');
         $category->apellido = $request->input('apellido');
         $category->direccion = $request->input('direccion');
         $category->telefono = $request->input('telefono');
-        $category->correo = $request->input('correo');
         $category->num_doc = $request->input('numerodoc');
-        $category->fec_vinculacion = $request->input('fec_vinculacion');
-        $category->id_usuario = $request->input('usuario');
+        $category->id_parentesco = $request->input('parentesco');
         $category->id_tipo_doc = $request->input('tipodoc');
         $category->id_genero = $request->input('genero');
         $category->save();
         return back();
-    }
-
-
-    public function listado_docente(){
-        return view('docente.listar_docente');
-
     }
 }

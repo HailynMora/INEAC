@@ -15,57 +15,56 @@
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-            <form>
+            <form id="formudatos" name="formudatos" method="post">
+              @csrf
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="tipo_doc">Tipo de Documento</label>
-                    <select id="tipo_doc" class="form-control">
+                    <label for="tipodoc">Tipo de Documento</label>
+                    <select id="tipodoc" class="form-control" name="tipodoc">
                       <option selected>Seleccionar</option>
-                      <option value="1">Cedula de ciudadania</option>
-                      <option value="2">Tarjeta Identidad</option>
-                      <option value="3">Cedula Extranjera</option>
-                      <option value="4">Pasaporte</option>
+                      @foreach($tipodoc as $t)
+                      <option value="{{$t->id}}">{{$t->descripcion}}</option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="num_doc">Numero Documento</label>
-                    <input type="number" class="form-control" id="num_doc" placeholder="12345678">
+                    <label for="numerodoc">Numero Documento</label>
+                    <input type="number" class="form-control" id="numerodoc" name="numerodoc" placeholder="12345678">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre">
+                    <input type="text" class="form-control" id="nombre" name="nombre">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control" id="apellido">
+                    <input type="text" class="form-control" id="apellido" name="apellido">
                   </div>
               </div>
                 <div class="form-row">
                   <div class="form-group col-md-3">
                     <label for="correo">Correo Electronico</label>
-                    <input type="email" class="form-control" id="correo" placeholder="example@example.com">
+                    <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="telefono">Telefono</label>
-                    <input type="number" class="form-control" id="telefono" >
+                    <input type="number" class="form-control" id="telefono" name="telefono">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="direccion">Direccion</label>
-                    <input type="text" class="form-control" id="direccion">
+                    <input type="text" class="form-control" id="direccion" name="direccion">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="fec_vinculacion">Fecha vinculación</label>
-                    <input type="date" class="form-control" id="fec_vinculacion">
+                    <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="Genero">Genero</label>
-                    <select id="Genero" class="form-control">
-                      <option selected>Seleccionar</option>
-                      <option value="1">Masculino</option>
-                      <option value="2">Femenino</option>
-                      <option value="3">Otro</option>
+                    <label for="genero">Genero</label>
+                    <select id="genero" class="form-control" name="genero">
+                    @foreach($genero as $g)
+                    <option value="{{$g->id}}">{{$g->descripcion}}</option>
+                    @endforeach
                       
                     </select>
                   </div>
@@ -78,4 +77,45 @@
       </div>
     </div>
   </div>
+  <!--instanciar el ajax para quitar el error no definido-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+  $('#formudatos').submit(function(e){
+    e.preventDefault();
+    var nombre=$('#nombre').val();
+    var apellido=$('#apellido').val();
+    var direccion=$('#direccion').val();
+    var telefono=$('#telefono').val();
+    var correo=$('#correo').val();
+    var numerodoc=$('#numerodoc').val();
+    var fec_vinculacion=$('#fec_vinculacion').val();
+    var id_usuario = 1;
+    var tipodoc=$('#tipodoc').val();
+    var genero=$('#tipogen').val();
+    var _token = $('input[name=_token]').val(); //token de seguridad
+
+    $.ajax({
+      type: "POST",
+      url: "{{route('datosdoc')}}",
+      data:{
+        nombre:nombre,
+        apellido:apellido,
+        direccion:direccion,
+        telefono:telefono,
+        correo:correo,
+        numerodoc:numerodoc,
+        fec_vinculacion:fec_vinculacion,
+        id_usuario:id_usuario,
+        tipodoc:tipodoc,
+        genero:genero,
+        _token:_token
+      }, 
+      dataType: "dataType",
+      success: function (response) {
+        $('#formudatos')[0].reset();
+          toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
+      }
+    });
+  })
+</script>
 @endsection

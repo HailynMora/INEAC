@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('direccion',100);
             $table->Integer('telefono')->nullable();
             $table->Integer('num_doc')->unique();
-            $table->unsignedBigInteger('id_perfil');//atributo para referenciar a categoria
-            $table->foreign('id_perfil')->references('id')->on('perfil');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_usuario');//atributo para referenciar a categoria
             $table->foreign('id_usuario')->references('id')->on('users');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_tipo_doc');//atributo para referenciar a categoria
