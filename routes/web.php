@@ -51,5 +51,8 @@ Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudient
 
 //acudiente
 Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->name('datosacu');
+//registro estudiante
+
+Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])->name('datosestudiante');
 
 require __DIR__.'/auth.php';

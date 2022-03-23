@@ -1,25 +1,13 @@
-<<<<<<< HEAD
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src= "{{ asset('plugins/jquery/jquery.min.js')}}"></script>
-=======
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" defer></script>
-<!--<script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>-->
-<!--<script src= "{{ asset('plugins/jquery/jquery.min.js')}}"></script>-->
->>>>>>> db2d6a17c1689dc1ec1ef6c17adc79a9e9a6ddd7
 <!-- jQuery UI 1.11.4 -->
 <!--<script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>-->
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!--<script>
   $.widget.bridge('uibutton', $.ui.button)
-<<<<<<< HEAD
 </script>
-<!--Instanciar jquery ajax-->
+Instanciar jquery ajax-->
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-=======
-</script>-->
->>>>>>> db2d6a17c1689dc1ec1ef6c17adc79a9e9a6ddd7
 <!-- jQuery -->
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -43,10 +31,7 @@
 <!-- AdminLTE for demo purposes -->
 <!--<script src="{{ asset('dist/js/demo.js')}}"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<<<<<<< HEAD
-<script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>
-=======
->>>>>>> db2d6a17c1689dc1ec1ef6c17adc79a9e9a6ddd7
+<!--<script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>-->
 
 <!--mensajes infor-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
