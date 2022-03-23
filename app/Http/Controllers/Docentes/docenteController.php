@@ -6,21 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\GeneroModel\Genero;
-use App\Models\ParentescoModel\Parentesco;
 use App\Models\TipoDocumentoModel\TipoDocumento;
 use App\Models\DocenteModel\Docente;
+use Illuminate\Database\Eloquent\Collection;
 
 class docenteController extends Controller
 {
-    public function registro_docente(){
-        return view('docente.registro_docente');
-
-    }
-
+    public $documento;
+    public $genero;
     public function regdocente(){
         $tipodoc=TipoDocumento::all();
         $genero=Genero::all();
-        return view('docente.registro_docente')->with('tipodoc', $tipodoc)->with('genero', $genero);
+        $documento = json_decode($tipodoc,true);
+        $genero = json_decode($genero,true);
+        $this->documento = $documento;
+        $this->genero = $genero;
+        return view('docente.registro_docente',["documento"=>$this->documento],["genero"=>$this->genero]);
     }
 
     public function datosdoc(Request $request){
@@ -32,16 +33,24 @@ class docenteController extends Controller
         $category->correo = $request->input('correo');
         $category->num_doc = $request->input('numerodoc');
         $category->fec_vinculacion = $request->input('fec_vinculacion');
-        $category->id_usuario = $request->input('usuario');
+        $category->id_usuario = $request->input('id_usuario');
         $category->id_tipo_doc = $request->input('tipodoc');
-        $category->id_genero = $request->input('genero');
+        $category->id_genero = $request->input('tipogen');
         $category->save();
         return back();
     }
-
-
+    public $docente;
     public function listado_docente(){
-        return view('docente.listar_docente');
+        $doc = DB::table('docente')
+        ->select('nombre','apellido','genero.descripcion as genero','fec_vinculacion','tipo_documento.descripcion','num_doc')
+        ->join('genero','id_genero','=','genero.id')
+        ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
+        ->get();
+        $docente = json_decode($doc,true);
+        return var_dump($docente);
+        $this->docente = $docente;
+        return view('docente.registro_docente',["docente"=>$this->docente]);
+        
 
     }
 }

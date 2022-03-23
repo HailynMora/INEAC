@@ -9,6 +9,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
     </form>
     <br><br>
+    @csrf
     <table class="table table-striped">
     <thead>
         <tr>
@@ -21,30 +22,16 @@
         </tr>
     </thead>
     <tbody>
+      @foreach($docente as $d)
         <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
+        <td>{{$d['descripcion']}}</td>
+        <td>{{$d['num_doc']}}</td>
+        <td>{{$d['nombre']}}</td>
+        <td>{{$d['apellido']}}</td>
+        <td>{{$d['fec_vinculacion']}}</td>
+        <td></td>
         </tr>
-        <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        </tr>
+        @endforeach
     </tbody>
     </table>
 </div>

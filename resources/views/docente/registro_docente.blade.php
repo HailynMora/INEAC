@@ -22,8 +22,8 @@
                     <label for="tipodoc">Tipo de Documento</label>
                     <select id="tipodoc" class="form-control" name="tipodoc">
                       <option selected>Seleccionar</option>
-                      @foreach($tipodoc as $t)
-                      <option value="{{$t->id}}">{{$t->descripcion}}</option>
+                      @foreach($documento as $t)
+                      <option value="{{$t['id']}}">{{$t['descripcion']}}</option>
                       @endforeach
                     </select>
                   </div>
@@ -57,13 +57,17 @@
                     <label for="fec_vinculacion">Fecha vinculación</label>
                     <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion">
                   </div>
+                  <div class="form-group col-md-3" >
+                    <label for="id_usuario">usuario</label>
+                    <input type="text" class="form-control" id="id_usuario" name="id_usuario" value="1">
+                  </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="genero">Genero</label>
-                    <select id="genero" class="form-control" name="genero">
+                    <label for="tipogen">Genero</label>
+                    <select id="tipogen" class="form-control" name="tipogen">
                     @foreach($genero as $g)
-                    <option value="{{$g->id}}">{{$g->descripcion}}</option>
+                    <option value="{{$g['id']}}">{{$g['descripcion']}}</option>
                     @endforeach
                       
                     </select>
@@ -78,7 +82,7 @@
     </div>
   </div>
   <!--instanciar el ajax para quitar el error no definido-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
   $('#formudatos').submit(function(e){
     e.preventDefault();
@@ -89,9 +93,9 @@
     var correo=$('#correo').val();
     var numerodoc=$('#numerodoc').val();
     var fec_vinculacion=$('#fec_vinculacion').val();
-    var id_usuario = 1;
+    var id_usuario = $("#id_usuario").val();
     var tipodoc=$('#tipodoc').val();
-    var genero=$('#tipogen').val();
+    var tipogen=$('#tipogen').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({
@@ -107,13 +111,14 @@
         fec_vinculacion:fec_vinculacion,
         id_usuario:id_usuario,
         tipodoc:tipodoc,
-        genero:genero,
+        tipogen:tipogen,
         _token:_token
-      }, 
-      dataType: "dataType",
+      },
       success: function (response) {
-        $('#formudatos')[0].reset();
+        if(response){
+          $('#formudatos')[0].reset();
           toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
+        }
       }
     });
   })
