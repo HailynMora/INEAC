@@ -47,9 +47,8 @@ class docenteController extends Controller
         ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
         ->get();
         $docente = json_decode($doc,true);
-        return var_dump($docente);
         $this->docente = $docente;
-        return view('docente.registro_docente',["docente"=>$this->docente]);
+        return view('docente.listar_docente',["docente"=>$this->docente]);
         
 
     }
