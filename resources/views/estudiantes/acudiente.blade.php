@@ -1,25 +1,28 @@
 @extends('usuario.principa_usul')
 @section('content')
+<div class="alert alert-primary text-center" role="alert">
+ Registro de Acudientes
+</div>
 <form  method="post" id="formudatos" name="formudatos" method="post">
   @csrf
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="nombre">Nombre</label>
-      <input type="text" class="form-control" id="nombre" name="nombre">
+      <input type="text" class="form-control" id="nombre" name="nombre" required>
     </div>
     <div class="form-group col-md-6">
       <label for="apellido">Apellido</label>
-      <input type="text" class="form-control" id="apellido" name="apellido">
+      <input type="text" class="form-control" id="apellido" name="apellido" required>
     </div>
   </div>
   <div class="form-group">
     <label for="direccion">Dirección</label>
-    <input type="text" class="form-control" id="direccion" name="direccion" >
+    <input type="text" class="form-control" id="direccion" name="direccion" required >
   </div>
   <div class="form-row">
   <div class="form-group col-md-6">
     <label for="telefono">Telefono o Celular</label>
-    <input type="text" class="form-control" id="telefono" name="telefono">
+    <input type="text" class="form-control" id="telefono" name="telefono" required>
   </div>
   <div class="form-group col-md-6">
       <label for="tipogen">Genero</label>
@@ -43,7 +46,7 @@
     </div>
     <div class="form-group col-md-4">
       <label for="numerodoc">Número Documento</label>
-      <input type="text" class="form-control" id="numerodoc" name="numerodoc">
+      <input type="text" class="form-control" id="numerodoc" name="numerodoc" required> 
     </div>
     <div class="form-group col-md-4">
     <label for="parentesco">Parentesco</label>
