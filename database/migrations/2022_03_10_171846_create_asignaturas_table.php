@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('asignaturas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',200);
+            $table->string('codigo',200);
             $table->Integer('intensidad_horaria');
             $table->Integer('val_habilitacion');
             $table->unsignedBigInteger('id_objetivos');//atributo para referenciar a categoria

@@ -22,8 +22,8 @@
                     <label for="tipodoc">Tipo de Documento</label>
                     <select id="tipodoc" class="form-control" name="tipodoc">
                       <option selected>Seleccionar</option>
-                      @foreach($documento as $t)
-                      <option value="{{$t['id']}}">{{$t['descripcion']}}</option>
+                      @foreach($tipodoc as $t)
+                      <option value="{{$t->id}}">{{$t->descripcion}}</option>
                       @endforeach
                     </select>
                   </div>
@@ -58,24 +58,26 @@
                     <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion">
                   </div>
                   <div class="form-group col-md-3" >
-                    <label for="id_usuario">usuario</label>
-                    <input type="text" class="form-control" id="id_usuario" name="id_usuario" value="1">
+                  <label for="id_usuario">Usuario</label>
+                  <select id="id_usuario" class="form-control" name="id_usuario">
+                  <option selected>Seleccionar</option>
+                  @foreach($user as $u)
+                  <option value="{{$u->id}}">{{$u->name}}</option>
+                  @endforeach
+                  </select>
                   </div>
-                </div>
-                <div class="form-row">
                   <div class="form-group col-md-3">
                     <label for="tipogen">Genero</label>
                     <select id="tipogen" class="form-control" name="tipogen">
                     @foreach($genero as $g)
-                    <option value="{{$g['id']}}">{{$g['descripcion']}}</option>
+                    <option value="{{$g->id}}">{{$g->descripcion}}</option>
                     @endforeach
-                      
                     </select>
                   </div>
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
-                <button type="submit" class="btn btn-warning">Limpiar</button>
-                <button type="submit" class="btn btn-danger">Cancelar</button>
+                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+                <button type="submit" class="btn btn-danger" >Cancelar</button>
               </form>
         </div>
       </div>
@@ -122,5 +124,10 @@
       }
     });
   })
+
+  function resetform() {
+     $("form select").each(function() { this.selectedIndex = 0 });
+     $("form input[type=text],form input[type=number] ,form input[type=date] , form textarea").each(function() { this.value = '' });
+  }
 </script>
 @endsection
