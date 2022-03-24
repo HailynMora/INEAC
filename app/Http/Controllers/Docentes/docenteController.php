@@ -40,8 +40,7 @@ class docenteController extends Controller
     }
     public $docente;
     public function listado_docente(){
-        $doc = DB::table('docente')
-        ->select('nombre','apellido','genero.descripcion as genero','fec_vinculacion','tipo_documento.descripcion','num_doc')
+        $doc=DB::table('docente')
         ->join('genero','id_genero','=','genero.id')
         ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
         ->get();
