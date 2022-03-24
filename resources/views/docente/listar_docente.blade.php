@@ -22,9 +22,9 @@
         </tr>
     </thead>
     <tbody>
-      @foreach($docente as $d)
+      @foreach($doc as $d)
         <tr>
-        <td>{{$d['descripcion']}}</td>
+        <td>{{$d}}</td>
         <td>{{$d['num_doc']}}</td>
         <td>{{$d['nombre']}}</td>
         <td>{{$d['apellido']}}</td>
