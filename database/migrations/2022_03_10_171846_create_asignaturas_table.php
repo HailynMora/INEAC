@@ -21,8 +21,6 @@ return new class extends Migration
             $table->Integer('val_habilitacion');
             $table->unsignedBigInteger('id_objetivos');//atributo para referenciar a categoria
             $table->foreign('id_objetivos')->references('id')->on('objetivos');//llave foranea para referenciar a la tabla categorias
-            $table->unsignedBigInteger('id_desempenos');//atributo para referenciar a categoria
-            $table->foreign('id_desempenos')->references('id')->on('desempenos');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
             $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();

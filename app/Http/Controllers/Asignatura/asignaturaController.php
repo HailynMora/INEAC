@@ -9,5 +9,5 @@ use App\Models\DocenteModel\Docente;
 use Illuminate\Database\Eloquent\Collection;
 class asignaturaController extends Controller
 {
-    //
+    
 }
