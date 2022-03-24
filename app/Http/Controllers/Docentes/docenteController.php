@@ -9,20 +9,18 @@ use App\Models\GeneroModel\Genero;
 use App\Models\TipoDocumentoModel\TipoDocumento;
 use App\Models\DocenteModel\Docente;
 use Illuminate\Database\Eloquent\Collection;
+use App\Models\User;
 
 class docenteController extends Controller
 {
-   public $documento;
-   public $genero;
+    public $documento;
+    public $genero;
+    public $usu;
     public function regdocente(){
         $tipodoc=TipoDocumento::all();
         $genero=Genero::all();
-        $documento = json_decode($tipodoc,true);
-        $genero = json_decode($genero,true);
-
-        $this->documento = $documento;
-        $this->genero = $genero;
-        return view('docente.registro_docente',["documento"=>$this->documento],["genero"=>$this->genero]);
+        $user=User::all();
+        return view('docente.registro_docente')->with('tipodoc', $tipodoc)->with('genero', $genero)->with('user', $user);
     }
 
     public function datosdoc(Request $request){
@@ -46,10 +44,14 @@ class docenteController extends Controller
         ->join('genero','id_genero','=','genero.id')
         ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
         ->get();
-       // $docente = json_decode($doc,true);
-       // $this->docente = $docente;
-        return view('docente.listar_docente')->with('doc', $doc);
+        $docente = json_decode($doc,true);
+        $this->docente = $docente;
+        return view('docente.listar_docente',["docente"=>$this->docente]);
         
 
+    }
+
+    public function consuldoc(){
+        
     }
 }
