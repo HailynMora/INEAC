@@ -47,11 +47,9 @@ class docenteController extends Controller
         $docente = json_decode($doc,true);
         $this->docente = $docente;
         return view('docente.listar_docente',["docente"=>$this->docente]);
-        
-
     }
 
-    public function consuldoc(){
-        
+    public function consulta(){
+        return view('docente.consultar_docente');
     }
 }

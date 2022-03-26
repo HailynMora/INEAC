@@ -22,35 +22,10 @@
         </tr>
     </thead>
     <tbody>
-      @foreach($docente as $d)
-        <tr>
-        <td>{{$d['descripcion']}}</td>
-        <td>{{$d['num_doc']}}</td>
-        <td>{{$d['nombre']}}</td>
-        <td>{{$d['apellido']}}</td>
-        <td>{{$d['fec_vinculacion']}}</td>
-        <td></td>
-        </tr>
-        @endforeach
+     
     </tbody>
     </table>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>
-    $(function(buscar()));
-    function buscar(consulta){
-        $.$.ajax({
-            type: "post",
-            url: ""{{route('consuldoc')}}"",
-            data: {consulta: consulta},
-            dataType: "html"
-        })
-        .done(function(respuesta){
-            $("#datos").html(respuesta);
-        })
-        .fail(function(){
-            console.log("error");
-        })
-    }
-</script><
+
 @endsection

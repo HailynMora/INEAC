@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inicio\InicioController;
-
 use App\Http\Controllers\Docentes\DocenteController;
-
 use App\Http\Controllers\Estudiantes\EstudiantesController;
+use App\Http\Controllers\Programas\ProgramasController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -54,5 +55,21 @@ Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->nam
 //registro estudiante
 
 Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])->name('datosestudiante');
+
+//consultar docente
+Route::get('/consultar/docente', [DocenteController::class, 'consulta'])->name('consultadoc');
+
+//programa registrar
+Route::get('/registrar/programa', [ProgramasController::class, 'index'])->name('registrarprog');
+
+//guardar los datos
+Route::post('/registro/programas', [ProgramasController::class, 'registro'])->name('regprogramas');
+
+//vincular asignaturas a un programa 
+Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->name('vicularAsignaturas');
+
+//registrar asignatura aun programa a la base de datos
+Route::post('/vicular/asignaturas', [ProgramasController::class, 'regasigcurso'])->name('regvincularasig');
+
 
 require __DIR__.'/auth.php';
