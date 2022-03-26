@@ -20,7 +20,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-3">
                     <label for="tipodoc">Tipo de Documento</label>
-                    <select id="tipodoc" class="form-control" name="tipodoc">
+                    <select id="tipodoc" class="form-control" name="tipodoc" required>
                       <option selected>Seleccionar</option>
                       @foreach($tipodoc as $t)
                       <option value="{{$t->id}}">{{$t->descripcion}}</option>
@@ -29,21 +29,21 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="numerodoc">Numero Documento</label>
-                    <input type="number" class="form-control" id="numerodoc" name="numerodoc" placeholder="12345678">
+                    <input type="number" class="form-control" id="numerodoc" name="numerodoc" placeholder="12345678" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre">
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido">
+                    <input type="text" class="form-control" id="apellido" name="apellido" required>
                   </div>
               </div>
                 <div class="form-row">
                   <div class="form-group col-md-3">
                     <label for="correo">Correo Electronico</label>
-                    <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com">
+                    <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="telefono">Telefono</label>
@@ -55,11 +55,11 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="fec_vinculacion">Fecha vinculación</label>
-                    <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion">
+                    <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required>
                   </div>
                   <div class="form-group col-md-3" >
                   <label for="id_usuario">Usuario</label>
-                  <select id="id_usuario" class="form-control" name="id_usuario">
+                  <select id="id_usuario" class="form-control" name="id_usuario" required>
                   <option selected>Seleccionar</option>
                   @foreach($user as $u)
                   <option value="{{$u->id}}">{{$u->name}}</option>
@@ -68,7 +68,7 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="tipogen">Genero</label>
-                    <select id="tipogen" class="form-control" name="tipogen">
+                    <select id="tipogen" class="form-control" name="tipogen" required>
                     @foreach($genero as $g)
                     <option value="{{$g->id}}">{{$g->descripcion}}</option>
                     @endforeach
@@ -77,7 +77,6 @@
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
-                <button type="submit" class="btn btn-danger" >Cancelar</button>
               </form>
         </div>
       </div>
@@ -119,7 +118,7 @@
       success: function (response) {
         if(response){
           $('#formudatos')[0].reset();
-          toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
+          toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:1000});
         }
       }
     });
@@ -127,7 +126,8 @@
 
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });
-     $("form input[type=text],form input[type=number] ,form input[type=date] , form textarea").each(function() { this.value = '' });
+     $("form input[type=text],form input[type=number] ,form input[type=date] , form input[type=email]").each(function() { this.value = '' });
+     toastr.success('Campos Vacios', {timeOut:1000});
   }
 </script>
 @endsection

@@ -7,6 +7,7 @@ use App\Http\Controllers\Docentes\DocenteController;
 
 use App\Http\Controllers\Estudiantes\EstudiantesController;
 
+use App\Http\Controllers\Asignatura\AsignaturaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,11 +29,13 @@ Route::get('/reg', function () {
 Route::get('/for', function () {
     return view('formulario');
 });
+
 Route::get('/dashboard', function () {
     return view('inicio.vista'); //aqui retorna a la vista principal cuando este logeado
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/inicio', [InicioController::class, 'vista'])->name('inicio');
+
 
 Route::get('/inicio/mision-vision', [InicioController::class, 'mision_vision'])->name('mision_vision');
 //estudiantes rutas
@@ -45,6 +48,9 @@ Route::post('/docente/registro_docente', [DocenteController::class, 'datosdoc'])
 
 Route::get('/docente/listado_docente', [DocenteController::class, 'listado_docente'])->name('listado_docente');
 
+Route::get('/docente/actualizar/{id}', [DocenteController::class, 'form_actualizar'])->name('actualizar_doc');
+
+Route::post('/docente/actualizar/{id}', [DocenteController::class, 'actualizar_docente'])->name('actualizar_docente');
 //acudiente
 Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->name('registro_acu');
 
@@ -54,5 +60,15 @@ Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->nam
 //registro estudiante
 
 Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])->name('datosestudiante');
+
+//asignatura
+Route::get('/asignatura/registro_asignatura', [AsignaturaController::class, 'regasignatura'])->name('regasignatura');
+Route::post('/asignatura/registro_asignatura', [AsignaturaController::class, 'datosasig'])->name('datosasig');
+
+Route::get('/asignatura/vincular_docente', [AsignaturaController::class, 'datos'])->name('datosasignar');
+Route::post('/asignatura/vincular_docente', [AsignaturaController::class, 'vincular'])->name('vincular');
+Route::get('/asignatura/reporte_asignatura', [AsignaturaController::class, 'reporte'])->name('reporte');
+
+
 
 require __DIR__.'/auth.php';

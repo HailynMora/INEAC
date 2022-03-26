@@ -306,15 +306,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="{{route('regasignatura')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="{{route('reporte')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Actualizar</p>
+                  <p>Reporte</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -324,7 +324,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/buttons.html" class="nav-link">
+                <a href="{{route('datosasignar')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vincular Docente</p>
                 </a>
@@ -349,7 +349,7 @@
               <li class="nav-item">
                 <a href="{{route('listado_docente')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Actualizar</p>
+                  <p>Listado</p>
                 </a>
               </li>
               <li class="nav-item">

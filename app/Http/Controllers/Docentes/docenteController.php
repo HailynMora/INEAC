@@ -9,6 +9,7 @@ use App\Models\GeneroModel\Genero;
 use App\Models\TipoDocumentoModel\TipoDocumento;
 use App\Models\DocenteModel\Docente;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class docenteController extends Controller
@@ -41,7 +42,7 @@ class docenteController extends Controller
     public $docente;
     public function listado_docente(){
         $doc=DB::table('docente')
-        ->join('genero','id_genero','=','genero.id')
+        ->select('docente.id as id','nombre','apellido','num_doc','fec_vinculacion','tipo_documento.descripcion')
         ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
         ->get();
         $docente = json_decode($doc,true);
@@ -51,7 +52,28 @@ class docenteController extends Controller
 
     }
 
-    public function consuldoc(){
-        
+    public function form_actualizar($id){
+        $doc = Docente::findOrFail($id);
+        $tipo_doc=TipoDocumento::all();
+        $gen=Genero::all();
+        $u=User::all();
+        return view('docente.modal_actualizar', compact('doc','tipo_doc','gen','u'));
+    }
+    
+    public function actualizar_docente(Request $request,$id){
+        $docente = Docente::FindOrFail($id);
+        $docente->nombre = $request->input('nombre');
+        $docente->apellido = $request->input('apellido');
+        $docente->direccion = $request->input('direccion');
+        $docente->telefono = $request->input('telefono');
+        $docente->correo = $request->input('correo');
+        $docente->num_doc = $request->input('numerodoc');
+        $docente->fec_vinculacion = $request->input('fec_vinculacion');
+        $docente->id_usuario = $request->input('id_usuario');
+        $docente->id_tipo_doc = $request->input('tipodoc');
+        $docente->id_genero = $request->input('tipogen');
+        $docente->save();
+        return redirect('docente.listar_docente');
+
     }
 }

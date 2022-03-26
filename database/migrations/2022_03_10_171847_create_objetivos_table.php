@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('objetivos', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion',100);
+            $table->unsignedBigInteger('id_asignaturas');//atributo para referenciar a categoria
+            $table->foreign('id_asignaturas')->references('id')->on('asignaturas');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }
