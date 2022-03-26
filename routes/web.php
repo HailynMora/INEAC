@@ -5,6 +5,8 @@ use App\Http\Controllers\Inicio\InicioController;
 use App\Http\Controllers\Docentes\DocenteController;
 use App\Http\Controllers\Estudiantes\EstudiantesController;
 use App\Http\Controllers\Programas\ProgramasController;
+use App\Http\Controllers\Estudiantes\ConsultarController;
+use App\Http\Controllers\PostController;
 
 
 
@@ -71,5 +73,9 @@ Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->na
 //registrar asignatura aun programa a la base de datos
 Route::post('/vicular/asignaturas', [ProgramasController::class, 'regasigcurso'])->name('regvincularasig');
 
+//consultar estudiantes
+Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->name('conestudiante');
+Route::get('posts/search',[PostController::class, 'search'])->name('posts.search');
+Route::get('posts/show',[PostController::class, 'show'])->name('posts.show');
 
 require __DIR__.'/auth.php';
