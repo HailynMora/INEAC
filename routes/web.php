@@ -59,7 +59,7 @@ Route::post('/docente/actualizar/{id}', [DocenteController::class, 'actualizar_d
 //acudiente
 Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->name('registro_acu');
 
-
+Route::get('validar-correo/{email}' , DocenteController::class, 'validarUsuario');
 //acudiente
 Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->name('datosacu');
 //registro estudiante

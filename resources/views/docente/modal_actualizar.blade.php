@@ -43,7 +43,7 @@
             </div>
             <div class="form-group col-md-3">
             <label for="fec_vinculacion">Fecha vinculación</label>
-            <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required value="{{$doc->fec_vinculacion}}">
+            <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required value="{{date('Y-m-d', strtotime($doc['fec_vinculacion']))}}"><td></td>
             </div>
             <div class="form-group col-md-3" >
             <label for="id_usuario">Usuario</label>
@@ -63,6 +63,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-success">Actualizar</button>
+        <a href="{{route('listado_docente')}}"type="submit" class="btn btn-warning">Cancelar</a>
         </form>
 </div>
 @endsection

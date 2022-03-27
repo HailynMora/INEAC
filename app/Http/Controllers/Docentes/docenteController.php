@@ -24,14 +24,18 @@ class docenteController extends Controller
         return view('docente.registro_docente')->with('tipodoc', $tipodoc)->with('genero', $genero)->with('user', $user);
     }
 
-    public function datosdoc(Request $request){
-        
-        $correo = $request->input('correo');
-        $res=DB::table('docente')->where('correo', '=', $correo)->count();
-        if($res!=0){
-            $b=1;
-            return back();
+    public function validarUsuario ($email){
+        $correo = Docente::where('correo','=', $email)->first();
+        if ($correo = 'email'){
+            return response()->json(['error'=>'El correo ya existe'],422);
         }else{
+            return response()->json(['success'=>'El correo no existe'],200);
+        }
+    
+    } 
+
+    public function datosdoc(Request $request){
+              
         $category = new Docente();
         $category->nombre = $request->input('nombre');
         $category->apellido = $request->input('apellido');
@@ -44,8 +48,6 @@ class docenteController extends Controller
         $category->id_tipo_doc = $request->input('tipodoc');
         $category->id_genero = $request->input('tipogen');
         $category->save();
-        return back();
-        }
         return back();
        
     }
@@ -81,7 +83,7 @@ class docenteController extends Controller
         $docente->id_tipo_doc = $request->input('tipodoc');
         $docente->id_genero = $request->input('tipogen');
         $docente->save();
-        return redirect('docente.listar_docente');
+        return redirect('/docente/listado_docente');
 
     }
 }

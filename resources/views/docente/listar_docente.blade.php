@@ -27,15 +27,79 @@
         <td>{{$d['num_doc']}}</td>
         <td>{{$d['nombre']}}  {{$d['apellido']}}</td>
         <td>{{date("Y-m-d", strtotime($d['fec_vinculacion']))}}</td>
-        <td>{{$d['id']}}</td>
         <td>
         <a href="{{route('actualizar_doc',$d['id'])}}" class="btn btn-success"><i class="nav-icon fas fa-edit" ></i></a>
-        <button type="button" class="btn btn-info"><i class=" nav-icon fas fa-eye"></i></button>
-        </td>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></button>
+      </td>
         </tr>
         @endforeach
     </tbody>
     </table>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <div class="modal-body">
+        <form id="formudatos" name="formudatos" method="post">
+        @csrf
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="tipo_doc">Tipo Documento</label>
+              <input type="text" class="form-control" id="tipo_doc" name="tipo_doc" disabled value="tipo">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="num_doc">N° Documento</label>
+              <input type="text" class="form-control" id="num_doc" name="num_doc" disabled value="num_doc">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="correo">Correo</label>
+              <input type="text" class="form-control" id="correo" name="correo" disabled value="correo">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="telefono">Telefono</label>
+              <input type="text" class="form-control" id="telefono" name="telefono" disabled value="telefono">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="direccion">Direccion</label>
+              <input type="text" class="form-control" id="direccion" name="direccion" disabled value="direccion">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="genero">Genero</label>
+              <input type="text" class="form-control" id="genero" name="genero" disabled value="genero">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="fec_vinculacion">Fecha de Vinculacion</label>
+              <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="genero">
+            </div>
+            <div class="form-group justify-content-center col-md-12 ">
+              <label for="asig_dictadas">Asignaturas a Cargo</label>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Asignatura</th>
+                    <th scope="col">Programa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>codigo</td>
+                    <td>Asignatura</td>
+                    <td>Programa</td>
+                  </tr>
+                </tbody>
+                </table>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 <script>
   function JsonDate(jsonDate) {
