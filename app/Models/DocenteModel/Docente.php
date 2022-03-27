@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Docente extends Model
 {
     protected $table = 'docente';
+    protected $fec_vinculacion = 'datetime:Y-m-d';
     protected $primaryKey = "id";//tiene que hacer referencia a la llave primaria  
 }

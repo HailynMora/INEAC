@@ -91,10 +91,13 @@ Route::post('/vicular/asignaturas', [ProgramasController::class, 'regasigcurso']
 Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->name('conestudiante');
 Route::get('posts/search',[PostController::class, 'search'])->name('posts.search');
 Route::get('posts/show',[PostController::class, 'show'])->name('posts.show');
+//visualizar estudiante
+Route::get('visualizar/estudiante',[EstudiantesController::class, 'listar'])->name('listarestu');
 
 //consultar docente
 Route::get('/docente/consultar', [ConsultarDocController::class, 'consul_doce'])->name('condocente');
 Route::get('posts/searchD',[PostDocController::class, 'searchD'])->name('posts.searchD');
 Route::get('posts/showD',[PostDocController::class, 'showD'])->name('posts.showD');
+
 
 require __DIR__.'/auth.php';

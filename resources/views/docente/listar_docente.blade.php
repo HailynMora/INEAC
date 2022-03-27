@@ -26,7 +26,7 @@
         <td>{{$d['descripcion']}}</td>
         <td>{{$d['num_doc']}}</td>
         <td>{{$d['nombre']}}  {{$d['apellido']}}</td>
-        <td>{{$d['fec_vinculacion'] }}</td>
+        <td>{{date("Y-m-d", strtotime($d['fec_vinculacion']))}}</td>
         <td>{{$d['id']}}</td>
         <td>
         <a href="{{route('actualizar_doc',$d['id'])}}" class="btn btn-success"><i class="nav-icon fas fa-edit" ></i></a>

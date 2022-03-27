@@ -115,83 +115,13 @@
   </div>
   <!--end estado-->
   <button type="submit" class="btn btn-primary">Registrar</button>
-  <button type="button" id="miboton" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+  <button type="button"  id="miboton" class="btn btn-warning">
   Visualizar
 </button>
 </form>
 <!--Modal de visualizar--->
 <!-- Button trigger modal -->
 
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Estudiantes Registrados</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!--Tabla de informacion-->
-        <table class="table table-striped">
-    <thead>
-        <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Dirección</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Correo</th>
-        <th scope="col">Estrato</th>
-        <th scope="col">Etnia</th>
-        <th scope="col">Genero</th>
-        <th scope="col">Tipo Doc</th>
-        <th scope="col">Número</th>
-        <th scope="col">Acudiente</th>
-        <th scope="col">Usuario</th>
-        <th scope="col">Estado</th>
-        </tr>
-    </thead>
-    <tbody>
-    @if($b == 1)
-      @foreach($estudiante as $d)
-        <tr>
-        <td>{{$d->nombre}}</td>
-        <td>{{$d->apellido}}</td>
-        <td>{{$d->direccion}}</td>
-        <td>{{$d->telefono}}</td>
-        <td>{{$d->correo}}</td>
-        <td>{{$d->estrato}}</td>
-        <td>{{$d->id_etnia}}</td>
-        <td>{{$d->id_genero}}</td>
-        <td>{{$d->id_tipo_doc}}</td>
-        <td>{{$d->num_doc}}</td>
-        <td>{{$d->id_acudiente}}</td>
-        <td>{{$d->id_usuario}}</td>
-        <td>{{$d->id_estado}}</td>
-        </tr>
-        @endforeach
-        @else
-        <div class="alert alert-warning text-center" role="alert">
-               No Hay Registros
-            </div>
-        @endif
-    </tbody>
-    </table>
-        <!--finalizar Tabla de informacion-->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!--End modal visualizar-->
-<!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
   /*tomamos la información del formulario y la enviamos a la ruta y de la ruta al controlador*/
@@ -246,8 +176,7 @@
  <script type="text/javascript">
     $(document).ready(function() {
         $('#miboton').click(function() {
-            // Recargo la página
-            location.reload();
+          location.href ="{{route('listarestu')}}";
         });
     });
 </script>

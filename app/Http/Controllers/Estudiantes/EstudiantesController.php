@@ -25,6 +25,13 @@ class EstudiantesController extends Controller
         $estado=Estado::all();
         $certificado=Certificado::all();
         $user=User::all();
+        return view('estudiantes.registroestu')->with('tipodoc', $tipodoc)
+        ->with('genero', $genero)->with('etnia', $etnia)
+        ->with('acu', $acu)->with('estado', $estado)->with('certificado', $certificado)
+        ->with('user', $user);
+    }
+
+    public function listar(){
         $res=DB::table('estudiante')->count();
         if($res!=0){
             $b=1;
@@ -38,10 +45,7 @@ class EstudiantesController extends Controller
             $estudiante=array('datos');
         }
 
-        return view('estudiantes.registroestu')->with('tipodoc', $tipodoc)
-        ->with('genero', $genero)->with('etnia', $etnia)
-        ->with('acu', $acu)->with('estado', $estado)->with('certificado', $certificado)
-        ->with('user', $user)->with('estudiante', $estudiante)->with('b', $b);
+        return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b);
     }
 
 

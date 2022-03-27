@@ -25,6 +25,13 @@ class docenteController extends Controller
     }
 
     public function datosdoc(Request $request){
+        
+        $correo = $request->input('correo');
+        $res=DB::table('docente')->where('correo', '=', $correo)->count();
+        if($res!=0){
+            $b=1;
+            return back();
+        }else{
         $category = new Docente();
         $category->nombre = $request->input('nombre');
         $category->apellido = $request->input('apellido');
@@ -38,6 +45,9 @@ class docenteController extends Controller
         $category->id_genero = $request->input('tipogen');
         $category->save();
         return back();
+        }
+        return back();
+       
     }
     public $docente;
     public function listado_docente(){
