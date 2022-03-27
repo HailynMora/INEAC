@@ -43,7 +43,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-3">
                     <label for="correo">Correo Electronico</label>
-                    <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" onchange="validarCorreo()" required>
+                    <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" required>
                     <div id="respuesta" class="col-lg-5"></div>
                   </div>
                   
@@ -87,13 +87,9 @@
   <!--instanciar el ajax para quitar el error no definido-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-  function validarCorreo(){
-    var email = $('#correo').val();
-    $.ajax({
-      url:'validar-correo/{email}',
-      type: "GET",
-      success: function(response){
-        $('#formudatos').submit(function(e){
+  
+
+  $('#formudatos').submit(function(e){
             e.preventDefault();
             var nombre=$('#nombre').val();
             var apellido=$('#apellido').val();
@@ -131,15 +127,6 @@
               }
             });
           })
-
-      },
-        error: function(response) {
-          alert('El correo ya se ha registrado anteriormente');
-        }
-    });
-  }
-
-
   
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });

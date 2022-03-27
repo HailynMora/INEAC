@@ -24,15 +24,7 @@ class docenteController extends Controller
         return view('docente.registro_docente')->with('tipodoc', $tipodoc)->with('genero', $genero)->with('user', $user);
     }
 
-    public function validarUsuario ($email){
-        $correo = Docente::where('correo','=', $email)->first();
-        if ($correo = 'email'){
-            return response()->json(['error'=>'El correo ya existe'],422);
-        }else{
-            return response()->json(['success'=>'El correo no existe'],200);
-        }
-    
-    } 
+   
 
     public function datosdoc(Request $request){
               
