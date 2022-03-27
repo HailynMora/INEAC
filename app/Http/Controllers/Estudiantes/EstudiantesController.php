@@ -35,10 +35,18 @@ class EstudiantesController extends Controller
         $res=DB::table('estudiante')->count();
         if($res!=0){
             $b=1;
-            $estudiante=DB::table('estudiante')->get();
-           // ->join('premios', 'id_premio', '=', 'premios.id')
-            //->select('insignia.name', 'insignia.descripcion', 'insignia.puntos', 'insignia.rutaimagen', 'premios.name as prenom')
-            //->get();
+            $estudiante=DB::table('estudiante')
+            ->join('estado', 'id_estado', '=', 'estado.id')
+            ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
+            ->join('genero', 'id_genero', '=', 'genero.id')
+            ->join('etnia', 'id_etnia', '=', 'etnia.id')
+            ->join('users', 'id_usuario', '=', 'users.id')
+            ->join('acudiente', 'estudiante.id_acudiente', '=', 'acudiente.id')
+            ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+            ->select('estudiante.id', 'estudiante.nombre', 'estudiante.apellido', 'estudiante.direccion', 'estudiante.telefono',
+            'estudiante.num_doc', 'estudiante.estrato', 'estudiante.correo', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
+            'genero.descripcion as generoestu', 'etnia.descripcion as etniaestu', 'users.name as usuestu', 'acudiente.nombre as nomacu', 'acudiente.apellido as apeacu', 'parentezco.descripcion as paren')
+            ->get();
         }
         else{
             $b=0;
