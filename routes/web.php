@@ -2,10 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inicio\InicioController;
-
 use App\Http\Controllers\Docentes\DocenteController;
-
 use App\Http\Controllers\Estudiantes\EstudiantesController;
+use App\Http\Controllers\Programas\ProgramasController;
+use App\Http\Controllers\Estudiantes\ConsultarController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\Docentes\PostDocController;
+use App\Http\Controllers\Docentes\ConsultarDocController;
+
+
 
 use App\Http\Controllers\Asignatura\AsignaturaController;
 /*
@@ -60,7 +65,6 @@ Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->nam
 //registro estudiante
 
 Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])->name('datosestudiante');
-
 //asignatura
 Route::get('/asignatura/registro_asignatura', [AsignaturaController::class, 'regasignatura'])->name('regasignatura');
 Route::post('/asignatura/registro_asignatura', [AsignaturaController::class, 'datosasig'])->name('datosasig');
@@ -70,5 +74,27 @@ Route::post('/asignatura/vincular_docente', [AsignaturaController::class, 'vincu
 Route::get('/asignatura/reporte_asignatura', [AsignaturaController::class, 'reporte'])->name('reporte');
 
 
+
+//programa registrar
+Route::get('/registrar/programa', [ProgramasController::class, 'index'])->name('registrarprog');
+
+//guardar los datos
+Route::post('/registro/programas', [ProgramasController::class, 'registro'])->name('regprogramas');
+
+//vincular asignaturas a un programa 
+Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->name('vicularAsignaturas');
+
+//registrar asignatura aun programa a la base de datos
+Route::post('/vicular/asignaturas', [ProgramasController::class, 'regasigcurso'])->name('regvincularasig');
+
+//consultar estudiantes
+Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->name('conestudiante');
+Route::get('posts/search',[PostController::class, 'search'])->name('posts.search');
+Route::get('posts/show',[PostController::class, 'show'])->name('posts.show');
+
+//consultar docente
+Route::get('/docente/consultar', [ConsultarDocController::class, 'consul_doce'])->name('condocente');
+Route::get('posts/searchD',[PostDocController::class, 'searchD'])->name('posts.searchD');
+Route::get('posts/showD',[PostDocController::class, 'showD'])->name('posts.showD');
 
 require __DIR__.'/auth.php';

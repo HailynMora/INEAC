@@ -271,7 +271,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{route('registrarprog')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar</p>
                 </a>
@@ -283,7 +283,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/ribbons.html" class="nav-link">
+                <a href="{{route('vicularAsignaturas')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vincular Asignaturas</p>
                 </a>
@@ -359,7 +359,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
+                <a href="{{route('condocente')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Consultar</p>
                 </a>
@@ -376,7 +376,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('registro_es')}}" class="nav-link">
+                <a href="{{route('registro_es')}}"  class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar</p>
                 </a>
@@ -388,7 +388,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
+                <a href="{{route('conestudiante')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Consultar</p>
                 </a>

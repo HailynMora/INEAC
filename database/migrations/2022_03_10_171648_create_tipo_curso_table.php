@@ -14,8 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tipo_curso', function (Blueprint $table) {
+            //aqui son los programas ofertados
             $table->id();
+            $table->string('codigo',10);
             $table->string('descripcion',100);
+            $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
+            $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }

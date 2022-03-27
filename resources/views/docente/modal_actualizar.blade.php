@@ -62,7 +62,7 @@
             </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-success">Actualizae</button>
+        <button type="submit" class="btn btn-success">Actualizar</button>
         </form>
 </div>
 @endsection
