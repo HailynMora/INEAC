@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-      @foreach($docente as $d)
+      
         <tr>
         <td>{{ $post->num_doc }}</td>
         <td>{{ $post->nombre }} {{ $post->apellido }}</td>
@@ -19,10 +19,9 @@
         <td>{{ $post->fec_vinculacion }}</td>
         
         <td>
-        <a href="{{route('actualizar_doc',$d['id'])}}" class="btn btn-success"><i class="nav-icon fas fa-edit" ></i></a>
+        <a href="{{route('actualizar_doc',$post->id)}}" class="btn btn-success"><i class="nav-icon fas fa-edit" ></i></a>
         <button type="button" class="btn btn-info"><i class=" nav-icon fas fa-eye"></i></button>
         </td>
         </tr>
-        @endforeach
     </tbody>
 </table>
