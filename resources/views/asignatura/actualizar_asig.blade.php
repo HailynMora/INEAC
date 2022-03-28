@@ -25,7 +25,7 @@
                     <input type="number" class="form-control" id="val_habilitacion" name="val_habilitacion" value="{{$asig->val_habilitacion}}">
                   </div>
                   <div class="form-group col-md-6" >
-                  <label for="id_estado">Estado</label>
+                  <label for="id_estado">Estados</label>
                   <select id="id_estado" class="form-control" name="id_estado">
                   @foreach($estado as $es)
                   <option value="{{$es->id}}">{{$es->descripcion}}</option>
