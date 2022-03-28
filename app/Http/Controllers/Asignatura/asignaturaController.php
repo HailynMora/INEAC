@@ -83,18 +83,5 @@ class asignaturaController extends Controller
         $this->asignacion = $asignacion;
         return view('asignatura.vincular_docente',["asignacion"=>$this->asignacion]);
     }*/
-   public function consultar(){
-       return view('asignatura.consultar');
-   }
-
-   public function search(Request $request){
-    $results = Asignatura::where('nombre', 'LIKE', "%{$request->search}%")
-               ->join('estado', 'id_estado', 'estado.id')->get();
-    return view('asignatura.results', compact('results'))->with(['search' => $request->search])->render();
-    }
-        
-    public function show(Request $request){
-        $post = Asignatura::findOrFail($request->id);
-        return view('asignatura.post', compact('post'))->render();
-    }
+   
 }

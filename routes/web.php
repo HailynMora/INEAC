@@ -67,9 +67,6 @@ Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])
 //asignatura
 Route::get('/asignatura/registro_asignatura', [AsignaturaController::class, 'regasignatura'])->name('regasignatura');
 Route::post('/asignatura/registro_asignatura', [AsignaturaController::class, 'datosasig'])->name('datosasig');
-Route::get('consultar/asignaturas', [AsignaturaController::class, 'consultar'])->name('consultarasig');
-Route::get('busqueda/asignaturas',[AsignaturaController::class, 'search'])->name('asigbus');
-Route::get('resultado/asignaturas',[AsignaturaController::class, 'show'])->name('mostrarbus');
 
 
 Route::get('/asignatura/vincular_docente', [AsignaturaController::class, 'datos'])->name('datosasignar');
