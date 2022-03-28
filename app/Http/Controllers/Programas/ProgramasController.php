@@ -50,4 +50,18 @@ class ProgramasController extends Controller
         return back();   
     }
 
+    public function consulta(){
+        return view('programas.consultar');
+    }
+
+    public function search(Request $request){
+        $results = Programas::where('descripcion', 'LIKE', "%{$request->search}%")->get();
+        return view('programas.results', compact('results'))->with(['search' => $request->search])->render();
+    }
+        
+    public function show(Request $request){
+        $post = Programas::findOrFail($request->id);
+        return view('programas.post', compact('post'))->render();
+    }
+
 }

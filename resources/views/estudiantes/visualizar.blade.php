@@ -1,25 +1,26 @@
 @extends('usuario.principa_usul')
 @section('content')
 <!--Tabla de informacion-->
-<table class="table table-striped">
+<div class="container">
+<table class="table table-sm">
        <thead>
         <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Correo</th>
-        <th scope="col">Estado</th>
-        <th scope="col">Acciones</th>
+        <th scope="col" class="table-info">Nombre</th>
+        <th scope="col" class="table-info">Apellido</th>
+        <th scope="col" class="table-info">Telefono</th>
+        <th scope="col" class="d-none d-lg-block table-info">Correo</th>
+        <th scope="col" class="table-info">Estado</th>
+        <th scope="col" class="table-info">Acciones</th>
         </tr>
     </thead>
     <tbody>
-    @if($b == 1)
+    @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
-        <tr>
+        <tr class="table-success">
         <td>{{$d->nombre}}</td>
         <td>{{$d->apellido}}</td>
         <td>{{$d->telefono}}</td>
-        <td>{{$d->correo}}</td>
+        <td  class="d-none d-lg-block">{{$d->correo}}</td>
         <td>{{$d->estadoes}}</td>
         <td><!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>">
@@ -29,11 +30,11 @@
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header alert alert-warning">
                         <h5 class="modal-title" id="staticBackdropLabel">
-                        <div class="alert alert-warning" role="alert">
+                       
                           Datos Estudiante
-                        </div>
+                       
                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -101,6 +102,7 @@
         @endif
     </tbody>
     </table>
+</div>
  <!--finalizar Tabla de informacion-->
 @endsection
 

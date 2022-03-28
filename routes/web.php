@@ -67,6 +67,10 @@ Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])
 //asignatura
 Route::get('/asignatura/registro_asignatura', [AsignaturaController::class, 'regasignatura'])->name('regasignatura');
 Route::post('/asignatura/registro_asignatura', [AsignaturaController::class, 'datosasig'])->name('datosasig');
+Route::get('consultar/asignaturas', [AsignaturaController::class, 'consultar'])->name('consultarasig');
+Route::get('busqueda/asignaturas',[AsignaturaController::class, 'search'])->name('asigbus');
+Route::get('resultado/asignaturas',[AsignaturaController::class, 'show'])->name('mostrarbus');
+
 
 Route::get('/asignatura/vincular_docente', [AsignaturaController::class, 'datos'])->name('datosasignar');
 Route::post('/asignatura/vincular_docente', [AsignaturaController::class, 'vincular'])->name('vincular');
@@ -76,6 +80,10 @@ Route::get('/asignatura/reporte_asignatura', [AsignaturaController::class, 'repo
 
 //programa registrar
 Route::get('/registrar/programa', [ProgramasController::class, 'index'])->name('registrarprog');
+Route::get('/consultar/programa', [ProgramasController::class, 'consulta'])->name('consultar');
+Route::get('busqueda/programas',[ProgramasController::class, 'search'])->name('busqueda');
+Route::get('resultado/programas',[ProgramasController::class, 'show'])->name('mostrarprog');
+
 
 //guardar los datos
 Route::post('/registro/programas', [ProgramasController::class, 'registro'])->name('regprogramas');
@@ -91,6 +99,7 @@ Route::get('consultar/show',[PostAsigController::class, 'show'])->name('posts.sh
 Route::get('/asignatura/actualizar/{id}', [AsignaturaController::class, 'form_actualizar'])->name('actualizar_asig');
 
 Route::post('/asignatura/actualizar/{id}', [AsignaturaController::class, 'actualizar_asignatura'])->name('actualizar_asignatura');
+
 
 //consultar estudiantes
 Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->name('conestudiante');

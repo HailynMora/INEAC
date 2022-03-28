@@ -3,6 +3,7 @@
 <div class="alert alert-primary text-center" role="alert">
  Registro de Estudiantes
 </div>
+<div class="container-fluid">
 <form id="matricula" name="matricula">
   @csrf
   <div class="form-row">
@@ -119,6 +120,7 @@
   Visualizar
 </button>
 </form>
+</div>
 <!--Modal de visualizar--->
 <!-- Button trigger modal -->
 
@@ -169,6 +171,9 @@
           $('#matricula')[0].reset();
           toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
         }
+      },
+      error:function(response){
+          toastr.warning('Datos Repetidos!.', 'Revise el correo o número de documento', {timeOut:3000});
       }
     });
   });
