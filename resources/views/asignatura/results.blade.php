@@ -2,7 +2,7 @@
 <ul class="list-unstyled w-100">
     @forelse ($results as $post)
     <div class="alert alert-primary" role="alert">
-    <i class="fas fa-user-check"></i><a style="text-decoration:none" href="#" class="post-link" data-id="{{ $post->id }}"> &nbsp;{{ $post->nombre }}</a>
+    <i class="fas fa-user-check"></i><a style="text-decoration:none" href="#" class="post-link" data-id="{{ $post->id }}"> &nbsp;{{ $post }}</a>
     </div>
     @empty
         <div class="alert alert-warning" role="alert" data-id="0">

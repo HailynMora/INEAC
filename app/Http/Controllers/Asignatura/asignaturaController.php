@@ -70,7 +70,8 @@ class asignaturaController extends Controller
    }
 
    public function search(Request $request){
-    $results = Asignatura::where('nombre', 'LIKE', "%{$request->search}%")->get();
+    $results = Asignatura::where('nombre', 'LIKE', "%{$request->search}%")
+               ->join('estado', 'id_estado', 'estado.id')->get();
     return view('asignatura.results', compact('results'))->with(['search' => $request->search])->render();
     }
         

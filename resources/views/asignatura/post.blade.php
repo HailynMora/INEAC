@@ -16,6 +16,7 @@
                   <td>{{ $post->codigo }}</td>
                   <td>{{ $post->intensidad_horaria}}</td>
                   <td>{{ $post->val_habilitacion}}</td> 
+                  <td>{{ $post->id_estado}}</td> 
                 <td>
                 <a style="text-decoration:none" type="button" class="btn btn-warning">Accion</a>
                 </td>
