@@ -9,10 +9,9 @@ use App\Http\Controllers\Estudiantes\ConsultarController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Docentes\PostDocController;
 use App\Http\Controllers\Docentes\ConsultarDocController;
-
-
-
 use App\Http\Controllers\Asignatura\AsignaturaController;
+use App\Http\Controllers\Asignatura\ConsultarAsigController;
+use App\Http\Controllers\Asignatura\PostAsigController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,7 +58,7 @@ Route::post('/docente/actualizar/{id}', [DocenteController::class, 'actualizar_d
 //acudiente
 Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->name('registro_acu');
 
-Route::get('validar-correo/{email}' , DocenteController::class, 'validarUsuario');
+
 //acudiente
 Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->name('datosacu');
 //registro estudiante
@@ -86,6 +85,12 @@ Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->na
 
 //registrar asignatura aun programa a la base de datos
 Route::post('/vicular/asignaturas', [ProgramasController::class, 'regasigcurso'])->name('regvincularasig');
+Route::get('/asignaturas/consultar', [ConsultarAsigController::class, 'index'])->name('conasignatura');
+Route::get('consultar/search',[PostAsigController::class, 'search'])->name('posts.searchA');
+Route::get('consultar/show',[PostAsigController::class, 'show'])->name('posts.showA');
+Route::get('/asignatura/actualizar/{id}', [AsignaturaController::class, 'form_actualizar'])->name('actualizar_asig');
+
+Route::post('/asignatura/actualizar/{id}', [AsignaturaController::class, 'actualizar_asignatura'])->name('actualizar_asignatura');
 
 //consultar estudiantes
 Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->name('conestudiante');

@@ -124,6 +124,9 @@
                   $('#formudatos')[0].reset();
                   toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:1000});
                 }
+              },
+              error: function(response){
+                toastr.warning('Datos Repetidos (correo y/o Numero de documento)',{timeOut:1000});
               }
             });
           })

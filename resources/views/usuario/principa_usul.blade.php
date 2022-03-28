@@ -195,7 +195,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
          
-          <li class="nav-item menu-open">
+          <li class="nav-item">
              <!--instanciar la ruta de nav link-->   
                   <a href="#" class="nav-link active">
                     <i class="nav-icon fas fa-th"></i>
@@ -318,7 +318,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/buttons.html" class="nav-link">
+                <a href="{{route('conasignatura')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Consultar</p>
                 </a>

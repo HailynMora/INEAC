@@ -23,7 +23,20 @@
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->val_habilitacion}}</td>
         <td>{{$d->estado}}</td>
-        <td><i class="nav-icon fas fa-book-open"></i> <i class="nav-icon fas fa-user-tie"></i> <i class="nav-icon fas fa-table"></i></td>
+        <td>
+        <a href="{{route('actualizar_asig',$d->id)}}" ><i class="nav-icon fas fa-edit" ></i></a>&nbsp&nbsp&nbsp
+        <?php
+        if($d->estado == 'Activo'){
+            ?>
+            <a href="#" ><i class="nav-icon fas fa-toggle-on"></i></a>
+            <?php
+        }else{
+            ?>
+            <a href="#" ><i class="nav-icon fas fa-toggle-off"></i></a>
+            <?php
+        }
+        ?>
+        </td>
         </tr>
         @endforeach
         </tbody>

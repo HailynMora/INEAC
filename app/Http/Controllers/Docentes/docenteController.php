@@ -27,27 +27,52 @@ class docenteController extends Controller
    
 
     public function datosdoc(Request $request){
-              
-        $category = new Docente();
-        $category->nombre = $request->input('nombre');
-        $category->apellido = $request->input('apellido');
-        $category->direccion = $request->input('direccion');
-        $category->telefono = $request->input('telefono');
-        $category->correo = $request->input('correo');
-        $category->num_doc = $request->input('numerodoc');
-        $category->fec_vinculacion = $request->input('fec_vinculacion');
-        $category->id_usuario = $request->input('id_usuario');
-        $category->id_tipo_doc = $request->input('tipodoc');
-        $category->id_genero = $request->input('tipogen');
-        $category->save();
-        return back();
+        $cor = $request->input('correo');
+        $doc = $request->input('numerodoc');
+        $res1 = DB::table('docente')->where('num_doc','=',$doc)->count();
+        $res2 = DB::table('docente')->where('correo','=',$cor)->count();
+        if($res1!=0 && $res2!=0){
+            return \Response::json([
+                'error' => 'Error datos'
+            ],422);
+        }
+        else{
+            $category = new Docente();
+            $category->nombre = $request->input('nombre');
+            $category->apellido = $request->input('apellido');
+            $category->direccion = $request->input('direccion');
+            $category->telefono = $request->input('telefono');
+            $category->correo = $request->input('correo');
+            $category->num_doc = $request->input('numerodoc');
+            $category->fec_vinculacion = $request->input('fec_vinculacion');
+            $category->id_usuario = $request->input('id_usuario');
+            $category->id_tipo_doc = $request->input('tipodoc');
+            $category->id_genero = $request->input('tipogen');
+            $category->save();
+            return back();
+        }
+        
        
     }
     public $docente;
     public function listado_docente(){
         $doc=DB::table('docente')
-        ->select('docente.id as id','nombre','apellido','num_doc','fec_vinculacion','tipo_documento.descripcion')
+        ->select('docente.id as id',
+                'docente.nombre',
+                'apellido',
+                'num_doc',
+                'fec_vinculacion',
+                'correo',
+                'telefono',
+                'direccion',
+                'genero.descripcion as genero',
+                'asignaturas.codigo',
+                'asignaturas.nombre as nomas',
+                'tipo_documento.descripcion')
         ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
+        ->join('genero','id_genero','=','genero.id')
+        ->join('asig_asignaturas','docente.id','=','asig_asignaturas.id_docente')
+        ->join('asignaturas','asig_asignaturas.id_asignaturas','=','asignaturas.id')
         ->get();
         $docente = json_decode($doc,true);
         $this->docente = $docente;
