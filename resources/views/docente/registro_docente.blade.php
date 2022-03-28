@@ -44,7 +44,9 @@
                   <div class="form-group col-md-3">
                     <label for="correo">Correo Electronico</label>
                     <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" required>
+                    <div id="respuesta" class="col-lg-5"></div>
                   </div>
+                  
                   <div class="form-group col-md-3">
                     <label for="telefono">Telefono</label>
                     <input type="number" class="form-control" id="telefono" name="telefono">
@@ -85,45 +87,50 @@
   <!--instanciar el ajax para quitar el error no definido-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+  
+
   $('#formudatos').submit(function(e){
-    e.preventDefault();
-    var nombre=$('#nombre').val();
-    var apellido=$('#apellido').val();
-    var direccion=$('#direccion').val();
-    var telefono=$('#telefono').val();
-    var correo=$('#correo').val();
-    var numerodoc=$('#numerodoc').val();
-    var fec_vinculacion=$('#fec_vinculacion').val();
-    var id_usuario = $("#id_usuario").val();
-    var tipodoc=$('#tipodoc').val();
-    var tipogen=$('#tipogen').val();
-    var _token = $('input[name=_token]').val(); //token de seguridad
+            e.preventDefault();
+            var nombre=$('#nombre').val();
+            var apellido=$('#apellido').val();
+            var direccion=$('#direccion').val();
+            var telefono=$('#telefono').val();
+            var correo=$('#correo').val();
+            var numerodoc=$('#numerodoc').val();
+            var fec_vinculacion=$('#fec_vinculacion').val();
+            var id_usuario = $("#id_usuario").val();
+            var tipodoc=$('#tipodoc').val();
+            var tipogen=$('#tipogen').val();
+            var _token = $('input[name=_token]').val(); //token de seguridad
 
-    $.ajax({
-      type: "POST",
-      url: "{{route('datosdoc')}}",
-      data:{
-        nombre:nombre,
-        apellido:apellido,
-        direccion:direccion,
-        telefono:telefono,
-        correo:correo,
-        numerodoc:numerodoc,
-        fec_vinculacion:fec_vinculacion,
-        id_usuario:id_usuario,
-        tipodoc:tipodoc,
-        tipogen:tipogen,
-        _token:_token
-      },
-      success: function (response) {
-        if(response){
-          $('#formudatos')[0].reset();
-          toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:1000});
-        }
-      }
-    });
-  })
-
+            $.ajax({
+              type: "POST",
+              url: "{{route('datosdoc')}}",
+              data:{
+                nombre:nombre,
+                apellido:apellido,
+                direccion:direccion,
+                telefono:telefono,
+                correo:correo,
+                numerodoc:numerodoc,
+                fec_vinculacion:fec_vinculacion,
+                id_usuario:id_usuario,
+                tipodoc:tipodoc,
+                tipogen:tipogen,
+                _token:_token
+              },
+              success: function (response) {
+                if(response){
+                  $('#formudatos')[0].reset();
+                  toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:1000});
+                }
+              },
+              error: function(response){
+                toastr.warning('Datos Repetidos (correo y/o Numero de documento)',{timeOut:1000});
+              }
+            });
+          })
+  
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });
      $("form input[type=text],form input[type=number] ,form input[type=date] , form input[type=email]").each(function() { this.value = '' });

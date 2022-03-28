@@ -48,11 +48,29 @@ class asignaturaController extends Controller
     }
     public function reporte(){
         $rep=DB::table('asignaturas')
-        ->select('asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
+        ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
         ->join('estado','id_estado','=','estado.id')
         ->get();
         return view('asignatura.reporte_asignatura')->with('rep',$rep);
     }
+    public function form_actualizar($id){
+        $asig = Asignatura::findOrFail($id);
+        $estado=Estado::all();
+        return view('asignatura.actualizar_asig', compact('asig','estado'));
+    }
+
+    public function actualizar_asignatura(Request $request,$id){
+        $category = Asignatura::FindOrFail($id);
+        $category->nombre = $request->input('nombre');
+        $category->codigo = $request->input('codigo');
+        $category->intensidad_horaria = $request->input('intensidad_horaria');
+        $category->val_habilitacion = $request->input('val_habilitacion');
+        $category->id_estado = $request->input('id_estado');
+        $category->save();
+        return redirect('/asignatura/reporte_asignatura');
+
+    }
+
     public $asignacion;
     /*public function listado(){
         
