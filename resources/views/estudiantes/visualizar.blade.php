@@ -1,6 +1,10 @@
 @extends('usuario.principa_usul')
 @section('content')
 <!--Tabla de informacion-->
+<div class="alert alert-primary text-center"  role="alert">
+  Listado de Estudiantes
+</div>
+<br><br>
 <div class="container">
 <table class="table table-sm">
        <thead>
@@ -23,9 +27,9 @@
         <td  class="d-none d-lg-block">{{$d->correo}}</td>
         <td>{{$d->estadoes}}</td>
         <td><!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>">
-                Ver Mas
-                </button>
+                <a href="{{route('actualizar_est',$d->id)}}" ><i class="nav-icon fas fa-edit" ></i></a>&nbsp&nbsp&nbsp
+                <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>">
+                <i class="nav-icon fas fa-eye"></i></a>
                 <!-- Modal -->
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">

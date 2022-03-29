@@ -16,8 +16,7 @@
                   <td>{{$post->intensidad_horaria}}</td>
                   <td>{{$post->val_habilitacion}}</td>
                 <td>
-                <a style="text-decoration:none" type="button" class="btn btn-warning">Accion</a>
-                </td>
+                <a href="{{route('actualizar_asig',$post->id)}}" ><i class="nav-icon fas fa-edit" ></i></a>&nbsp&nbsp&nbsp                </td>
                 <!--  <td><button type="button" class="btn btn-success">Actualizar</button></td>
                   <td><button type="button" class="btn btn-danger">Eliminar</button></td>
                  -->

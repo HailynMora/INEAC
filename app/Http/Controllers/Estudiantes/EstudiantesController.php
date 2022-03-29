@@ -106,6 +106,37 @@ class EstudiantesController extends Controller
             $Registrar->save();
             return back();
         }
-       
+        
+    }
+    public function form_actualizar($id){
+        $est = Estudiante::findOrFail($id);
+        $tipo_doc=TipoDocumento::all();
+        $gen=Genero::all();
+        $etnia=EtniaModel::all();
+        $acu=Acudiente::all();
+        $estado=Estado::all();
+        $certificado=Certificado::all();
+        $user=User::all();
+        return view('estudiantes.actualizar', compact('est','tipo_doc','gen','etnia','acu','estado','certificado','user'));
+    }
+    public function actualizar_estudiante(Request $request,$id){
+        $estudiante = Estudiante::FindOrFail($id);
+        $estudiante->nombre = $request->input('nombre');
+        $estudiante->apellido = $request->input('apellido');
+        $estudiante->direccion = $request->input('direccion');
+        $estudiante->telefono = $request->input('telefono');
+        $estudiante->num_doc = $request->input('numero_doc');
+        $estudiante->correo = $request->input('correo');
+        $estudiante->estrato = $request->input('estrato');
+        $estudiante->id_etnia = $request->input('etnia');
+        $estudiante->id_genero = $request->input('genero');
+        $estudiante->id_acudiente = $request->input('acudiente');
+        $estudiante->id_tipo_doc = $request->input('tipodoc');
+        $estudiante->id_certificados = $request->input('certificado');
+        $estudiante->id_estado = $request->input('estado');
+        $estudiante->id_usuario = $request->input('usuario');
+        $estudiante->save();
+        return redirect('/visualizar/estudiante');
+
     }
 }

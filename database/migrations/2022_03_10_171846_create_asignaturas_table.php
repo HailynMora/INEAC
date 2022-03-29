@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('asignaturas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',200);
+            $table->string('nombre',200)->unique();
             $table->string('codigo',200)->unique();
             $table->Integer('intensidad_horaria');
             $table->Integer('val_habilitacion')->nullable();

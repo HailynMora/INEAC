@@ -106,6 +106,7 @@
             $.ajax({
               type: "POST",
               url: "{{route('datosdoc')}}",
+              dataType: 'html',
               data:{
                 nombre:nombre,
                 apellido:apellido,

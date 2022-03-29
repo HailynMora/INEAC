@@ -19,14 +19,26 @@ class asignaturaController extends Controller
         return view('asignatura.registro_asignatura')->with('estado',$estado);
     }
     public function datosasig(Request $request){
-        $category = new Asignatura();
-        $category->nombre = $request->input('nombre');
-        $category->codigo = $request->input('codigo');
-        $category->intensidad_horaria = $request->input('intensidad_horaria');
-        $category->val_habilitacion = $request->input('val_habilitacion');
-        $category->id_estado = $request->input('id_estado');
-        $category->save();
-        return back();
+        $cod = $request->input('codigo');
+        $nom = $request->input('nombre');
+        $res1 = DB::table('asignaturas')->where('codigo','=',$cod)->count();
+        $res1 = DB::table('asignaturas')->where('nombre','=',$nom)->count();
+        if($res1!=0 && $res2!=0){
+            return \Response::json([
+                'error' => 'Error datos'
+            ],422);
+        }
+        else{
+            $category = new Asignatura();
+            $category->nombre = $request->input('nombre');
+            $category->codigo = $request->input('codigo');
+            $category->intensidad_horaria = $request->input('intensidad_horaria');
+            $category->val_habilitacion = $request->input('val_habilitacion');
+            $category->id_estado = $request->input('id_estado');
+            $category->save();
+            return back();
+        }
+        
     }
     public function vincular(Request $request){
         $category = new Asignaciondo();

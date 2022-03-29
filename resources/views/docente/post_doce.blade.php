@@ -16,12 +16,36 @@
         <td>{{ $post->nombre }} {{ $post->apellido }}</td>
         <td>{{ $post->telefono }}</td>
         <td>{{ $post->direccion }}</td>
-        <td>{{ $post->fec_vinculacion }}</td>
+        <td>{{date("Y-m-d", strtotime($post->fec_vinculacion))}}</td>
         
         <td>
-        <a href="{{route('actualizar_doc',$post->id)}}" class="btn btn-success"><i class="nav-icon fas fa-edit" ></i></a>
-        <button type="button" class="btn btn-info"><i class=" nav-icon fas fa-eye"></i></button>
-        </td>
+          <a href="{{route('actualizar_doc',$post->id)}}" ><i class="nav-icon fas fa-edit" ></i></a>&nbsp&nbsp&nbsp
+          <a type="button"  data-toggle="modal" data-target="#docente<?php echo $post->id;?>">
+          <i class="nav-icon fas fa-eye"></i></a>
+          <div class="modal fade" id="docente<?php echo $post->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                        <div> DOCENTE:  {{ $post->nombre }} {{ $post->apellido }}</div>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <!---Mostrar datos-->
+                  
+              
+              <!--end mostrar datos-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </td>
         </tr>
     </tbody>
 </table>

@@ -82,6 +82,9 @@
           $('#formudatos')[0].reset();
           toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
         }
+      },
+      error: function(response){
+        toastr.warning('Datos Repetidos (Codigo y/o Nombre)',{timeOut:1000});
       }
     });
   })
