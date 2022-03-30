@@ -42,45 +42,100 @@ Route::get('/inicio', [InicioController::class, 'vista'])->name('inicio');
 
 
 Route::get('/inicio/mision-vision', [InicioController::class, 'mision_vision'])->name('mision_vision');
+//--------------------------------------------INICIO RUTAS ESTUDIANTE--------------------------------------------
 //estudiantes rutas
 Route::get('/registro/estudiantes', [EstudiantesController::class, 'registro'])->name('registro_es');
 
+Route::get('/estudiante/actualizar/{id}', [EstudiantesController::class, 'form_actualizar'])->name('actualizar_est');
+
+Route::post('/estudiante/actualizar/{id}', [EstudiantesController::class, 'actualizar_estudiante'])->name('actualizar_estudiante');
+
+//registro estudiante
+
+Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])->name('datosestudiante');
+
+//acudiente
+Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->name('datosacu');
+
+//acudiente
+Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->name('registro_acu');
+
+//visualizar estudiante
+Route::get('visualizar/estudiante',[EstudiantesController::class, 'listar'])->name('listarestu');
+
+//consultar estudiantes
+Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->name('conestudiante');
+
+Route::get('posts/search',[PostController::class, 'search'])->name('posts.search');
+
+Route::get('posts/show',[PostController::class, 'show'])->name('posts.show');
+
+
+//------------------------------------------FIN RUTAS ESTUDIANTE------------------------------
+
+//---------------------------------------------INICIO RUTAS DOCENTE---------------------------------
 //docente
 Route::get('/docente/registro_docente', [DocenteController::class, 'regdocente'])->name('regdocente');
 
 Route::post('/docente/registro_docente', [DocenteController::class, 'datosdoc'])->name('datosdoc');
 
 Route::get('/docente/listado_docente', [DocenteController::class, 'listado_docente'])->name('listado_docente');
+//ACTUALIZAR DOCENTE
 
 Route::get('/docente/actualizar/{id}', [DocenteController::class, 'form_actualizar'])->name('actualizar_doc');
 
 Route::post('/docente/actualizar/{id}', [DocenteController::class, 'actualizar_docente'])->name('actualizar_docente');
-//acudiente
-Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->name('registro_acu');
+//LISTAR DOCENTE
 
+Route::get('/docente/lista_asig/{id}', [DocenteController::class, 'listar_asig'])->name('asig');
 
-//acudiente
-Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->name('datosacu');
-//registro estudiante
+//consultar docente
+Route::get('/docente/consultar', [ConsultarDocController::class, 'consul_doce'])->name('condocente');
 
-Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])->name('datosestudiante');
+Route::get('posts/searchD',[PostDocController::class, 'searchD'])->name('posts.searchD');
+
+Route::get('posts/showD',[PostDocController::class, 'showD'])->name('posts.showD');
+
+Route::get('listar/{id}', [DocenteController::class, 'listar'])->name('listar');
+
+//----------------------------------------------------FIN RUTAS DOCENTE----------------------------------------
+
+//------------------------------------------------------INICIO RUTAS ASIGNATURAS---------------------------------------
 //asignatura
 Route::get('/asignatura/registro_asignatura', [AsignaturaController::class, 'regasignatura'])->name('regasignatura');
+
 Route::post('/asignatura/registro_asignatura', [AsignaturaController::class, 'datosasig'])->name('datosasig');
 
-
 Route::get('/asignatura/vincular_docente', [AsignaturaController::class, 'datos'])->name('datosasignar');
+
 Route::post('/asignatura/vincular_docente', [AsignaturaController::class, 'vincular'])->name('vincular');
+
 Route::get('/asignatura/reporte_asignatura', [AsignaturaController::class, 'reporte'])->name('reporte');
 
+Route::get('/asignaturas/consultar', [ConsultarAsigController::class, 'index'])->name('conasignatura');
 
+Route::get('consultar/search',[PostAsigController::class, 'search'])->name('posts.searchA');
+
+Route::get('consultar/show',[PostAsigController::class, 'show'])->name('posts.showA');
+
+Route::get('/asignatura/actualizar/{id}', [AsignaturaController::class, 'form_actualizar'])->name('actualizar_asig');
+
+Route::post('/asignatura/actualizar/{id}', [AsignaturaController::class, 'actualizar_asignatura'])->name('actualizar_asignatura');
+
+//--------------------------------------------------FIN RUTAS ASIGNATURAS-------------------------------------------------
+
+//------------------------------------------INICIO RUTAS PROGRAMAS------------------------------------------------
+
+Route::get('/programas/reporte_programas', [ProgramasController::class, 'reporte'])->name('reporte_pro');
 
 //programa registrar
 Route::get('/registrar/programa', [ProgramasController::class, 'index'])->name('registrarprog');
-Route::get('/consultar/programa', [ProgramasController::class, 'consulta'])->name('consultar');
-Route::get('busqueda/programas',[ProgramasController::class, 'search'])->name('busqueda');
-Route::get('resultado/programas',[ProgramasController::class, 'show'])->name('mostrarprog');
 
+Route::get('/consultar/programa', [ProgramasController::class, 'consulta'])->name('consultar');
+
+Route::get('busqueda/programas',[ProgramasController::class, 'search'])->name('busqueda');
+
+Route::get('resultado/programas',[ProgramasController::class, 'show'])->name('mostrarprog');
 
 //guardar los datos
 Route::post('/registro/programas', [ProgramasController::class, 'registro'])->name('regprogramas');
@@ -90,25 +145,12 @@ Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->na
 
 //registrar asignatura aun programa a la base de datos
 Route::post('/vicular/asignaturas', [ProgramasController::class, 'regasigcurso'])->name('regvincularasig');
-Route::get('/asignaturas/consultar', [ConsultarAsigController::class, 'index'])->name('conasignatura');
-Route::get('consultar/search',[PostAsigController::class, 'search'])->name('posts.searchA');
-Route::get('consultar/show',[PostAsigController::class, 'show'])->name('posts.showA');
-Route::get('/asignatura/actualizar/{id}', [AsignaturaController::class, 'form_actualizar'])->name('actualizar_asig');
 
-Route::post('/asignatura/actualizar/{id}', [AsignaturaController::class, 'actualizar_asignatura'])->name('actualizar_asignatura');
+Route::get('/programas/actualizar/{id}', [ProgramasController::class, 'form_actualizar'])->name('actualizar_prog');
+
+Route::post('/programas/actualizar/{id}', [ProgramasController::class, 'actualizar_programa'])->name('actualizar_programa');
 
 
-//consultar estudiantes
-Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->name('conestudiante');
-Route::get('posts/search',[PostController::class, 'search'])->name('posts.search');
-Route::get('posts/show',[PostController::class, 'show'])->name('posts.show');
-//visualizar estudiante
-Route::get('visualizar/estudiante',[EstudiantesController::class, 'listar'])->name('listarestu');
-
-//consultar docente
-Route::get('/docente/consultar', [ConsultarDocController::class, 'consul_doce'])->name('condocente');
-Route::get('posts/searchD',[PostDocController::class, 'searchD'])->name('posts.searchD');
-Route::get('posts/showD',[PostDocController::class, 'showD'])->name('posts.showD');
 
 
 require __DIR__.'/auth.php';

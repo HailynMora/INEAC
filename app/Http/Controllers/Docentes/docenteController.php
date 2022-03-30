@@ -18,7 +18,7 @@ class docenteController extends Controller
     public $genero;
     public $usu;
     public function regdocente(){
-        $tipodoc=TipoDocumento::all();
+        $tipodoc=TipoDocumento::orderBy('id')->paginate(10);
         $genero=Genero::all();
         $user=User::all();
         return view('docente.registro_docente')->with('tipodoc', $tipodoc)->with('genero', $genero)->with('user', $user);
@@ -56,24 +56,51 @@ class docenteController extends Controller
     }
     public $docente;
     public function listado_docente(){
-        $doc=DB::table('docente')
-        ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
-        ->join('genero','id_genero','=','genero.id')
-        ->select('docente.id as id',
-        'docente.nombre',
-        'apellido',
-        'num_doc',
-        'fec_vinculacion',
-        'correo',
-        'telefono',
-        'direccion',
-        'genero.descripcion as genero',
-        'tipo_documento.descripcion as tipo', 'docente.id_tipo_doc')
-        ->get();
+        $res = DB::table('docente')->count();
+        if($res!=0){
+            $b=1;
+            $doc=DB::table('docente')
+            ->select('docente.id as id',
+                    'docente.nombre',
+                    'apellido',
+                    'num_doc',
+                    'fec_vinculacion',
+                    'correo',
+                    'telefono',
+                    'direccion',
+                    'genero.descripcion as genero',
+                    'tipo_documento.descripcion')
+            ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
+            ->join('genero','id_genero','=','genero.id')
+            ->get();
+        }else{
+            $b=0;
+            $doc=0;
+             
+        }
+        
         $docente = json_decode($doc,true);
         $this->docente = $docente;
-        return view('docente.listar_docente',["docente"=>$this->docente]);
+        return view('docente.listar_docente',["docente"=>$this->docente],['b'=>$b]);
     }
+
+    public function listar($id){
+        $res = Docente::FindOrFail($id);
+        $r = json_decode($res,true);
+        $this->r = $r;
+        return view('docente.lista',["r"=>$this->r]);
+    }
+    public function listar_asig($id){
+        $doc = DB::table('docente')
+            ->select('asignaturas.nombre as asig','asignaturas.codigo')
+            ->join('asig_asignaturas','docente.id','=','asig_asignaturas.id_docente')
+            ->join('asig_asignatura','asignaturas.id','=','asig_asignatura.id_asignatura')
+            ->where('asig_asignatura.id_docente','=',$id)
+            ->get();
+            return $doc;
+        return view('docente.lista')->with('doc',$doc);
+    }
+
 
     public function form_actualizar($id){
             $doc = DB::table('docente')->where('docente.id', '=', $id)

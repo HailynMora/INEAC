@@ -277,9 +277,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{{route('reporte_pro')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Actualizar</p>
+                  <p>Listar</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -382,9 +382,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href ="{{route('listarestu')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Actualizar</p>
+                  <p>Listar</p>
                 </a>
               </li>
               <li class="nav-item">

@@ -8,6 +8,7 @@ use App\Models\AsignaturaModel\Programas;
 use App\Models\EstadoModel\Estado;
 use App\Models\AsignaturaModel\Asignatura;
 use App\Models\AsignaturaModel\AsigProgram;
+use Illuminate\Support\Facades\DB;
 
 
 class ProgramasController extends Controller
@@ -62,6 +63,29 @@ class ProgramasController extends Controller
     public function show(Request $request){
         $post = Programas::findOrFail($request->id);
         return view('programas.post', compact('post'))->render();
+    }
+
+    public function reporte(){
+        $rep=DB::table('tipo_curso')
+        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','estado.descripcion as estado')
+        ->join('estado','id_estado','=','estado.id')
+        ->get();
+        return view('programas.reporte_programas')->with('rep',$rep);
+    }
+    public function form_actualizar($id){
+        $prog = Programas::findOrFail($id);
+        $estado=Estado::all();
+        return view('programas.actualizar_programa', compact('prog','estado'));
+    }
+
+    public function actualizar_programa(Request $request,$id){
+        $category = Programas::FindOrFail($id);
+        $category->codigo = $request->input('codigo');
+        $category->descripcion = $request->input('nombre');
+        $category->id_estado = $request->input('estado');
+        $category->save();
+        return redirect('/asignatura/reporte_asignatura');
+
     }
 
 }
