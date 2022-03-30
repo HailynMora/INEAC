@@ -23,7 +23,6 @@
     <tbody>
       @foreach($docente as $d)
         <tr>
-        <td>{{$d['descripcion']}}</td>
         <td>{{$d['num_doc']}}</td>
         <td>{{$d['nombre']}}  {{$d['apellido']}}</td>
         <td>{{date("Y-m-d", strtotime($d['fec_vinculacion']))}}</td>
@@ -88,9 +87,6 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{{$d['codigo']}}</td>
-                    <td>{{$d['nomas']}}</td>
-                    <td>Programa</td>
                   </tr>
                 </tbody>
                 </table>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EstudianteModel\Estudiante;
+use Illuminate\Support\Facades\DB;
 
 
 class PostController extends Controller
@@ -14,7 +15,10 @@ class PostController extends Controller
     }
         
     public function show(Request $request){
-        $post = Estudiante::findOrFail($request->id);
+        $post = DB::table('estudiante')->where('estudiante.id', '=', $request->id)
+                ->join('etnia', 'id_etnia', '=', 'etnia.id')
+                ->select('estudiante.id', 'estudiante.nombre', 'estudiante.apellido', 'estudiante.direccion',
+                'estudiante.telefono', 'estudiante.num_doc', 'etnia.descripcion')->get();
         return view('estudiantes.post', compact('post'))->render();
     }
 

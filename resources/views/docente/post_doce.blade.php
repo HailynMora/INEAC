@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-      
+        
         <tr>
         <td>{{ $post->num_doc }}</td>
         <td>{{ $post->nombre }} {{ $post->apellido }}</td>
