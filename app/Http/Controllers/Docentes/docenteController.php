@@ -84,12 +84,6 @@ class docenteController extends Controller
         return view('docente.listar_docente',["docente"=>$this->docente],['b'=>$b]);
     }
 
-    public function listar($id){
-        $res = Docente::FindOrFail($id);
-        $r = json_decode($res,true);
-        $this->r = $r;
-        return view('docente.lista',["r"=>$this->r]);
-    }
     public function listar_asig($id){
         $doc = DB::table('docente')
             ->select('asignaturas.nombre as asig','asignaturas.codigo')
@@ -97,26 +91,50 @@ class docenteController extends Controller
             ->join('asig_asignatura','asignaturas.id','=','asig_asignatura.id_asignatura')
             ->where('asig_asignatura.id_docente','=',$id)
             ->get();
-            return $doc;
+    
         return view('docente.lista')->with('doc',$doc);
     }
 
 
     public function form_actualizar($id){
-            $doc = DB::table('docente')->where('docente.id', '=', $id)
-            ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
-            ->join('genero','docente.id_genero','=','genero.id')
-            ->join('users','docente.id_usuario','=','users.id')
-            ->select('docente.id as iddoc','docente.nombre', 'docente.apellido', 'docente.direccion', 'docente.telefono', 'docente.correo', 
-            'docente.num_doc', 'docente.fec_vinculacion', 'docente.id_usuario', 'docente.id_tipo_doc', 'tipo_documento.descripcion as desdoc',  'docente.id_genero',
-            'genero.descripcion as gendoc', 'users.name')
-            ->get();
-            //return $doc;
-            $tipo_doc=TipoDocumento::all();
-            $gen=Genero::all();
-            $u=User::all();
         
-        return view('docente.modal_actualizar', compact('doc','tipo_doc','gen','u'));
+            $asig = DB::table('docente')
+                ->join('asig_asignaturas','docente.id','=','asig_asignaturas.id_docente')
+                ->where('asig_asignaturas.id_docente','=', $id)
+                ->count();
+            if($asig!=0){
+                $doc = DB::table('docente')->where('docente.id', '=', $id, 'and', 'asig_asignaturas.id_docente','=', $id)
+                ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
+                ->join('genero','docente.id_genero','=','genero.id')
+                ->join('users','docente.id_usuario','=','users.id')
+                ->join('asig_asignaturas','docente.id','=','asig_asignaturas.id_docente')
+                ->join('asignaturas','asig_asignaturas.id_asignaturas','=','asignaturas.id')
+                ->select('docente.id as iddoc','docente.nombre', 'docente.apellido', 'docente.direccion', 'docente.telefono', 'docente.correo', 
+                'docente.num_doc', 'docente.fec_vinculacion', 'docente.id_usuario', 'docente.id_tipo_doc', 'tipo_documento.descripcion as desdoc',  'docente.id_genero',
+                'genero.descripcion as gendoc', 'users.name','asignaturas.codigo as cod','asignaturas.nombre as asig')
+                ->get();
+                $tipo_doc=TipoDocumento::all();
+                $gen=Genero::all();
+                $u=User::all();
+                $b=1;
+                return view('docente.modal_actualizar', compact('doc','tipo_doc','gen','u','b'));
+            }else{
+                $doc = DB::table('docente')->where('docente.id', '=', $id)
+                ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
+                ->join('genero','docente.id_genero','=','genero.id')
+                ->join('users','docente.id_usuario','=','users.id')
+                ->select('docente.id as iddoc','docente.nombre', 'docente.apellido', 'docente.direccion', 'docente.telefono', 'docente.correo', 
+                'docente.num_doc', 'docente.fec_vinculacion', 'docente.id_usuario', 'docente.id_tipo_doc', 'tipo_documento.descripcion as desdoc',  'docente.id_genero',
+                'genero.descripcion as gendoc', 'users.name')
+                ->get();
+                //return $doc;
+                $tipo_doc=TipoDocumento::all();
+                $gen=Genero::all();
+                $u=User::all();
+                $b=0;
+                return view('docente.modal_actualizar', compact('doc','tipo_doc','gen','u','b'));
+            }
+            
     }
     
     public function actualizar_docente(Request $request,$id){
