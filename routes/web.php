@@ -12,6 +12,9 @@ use App\Http\Controllers\Docentes\ConsultarDocController;
 use App\Http\Controllers\Asignatura\AsignaturaController;
 use App\Http\Controllers\Asignatura\ConsultarAsigController;
 use App\Http\Controllers\Asignatura\PostAsigController;
+use App\Http\Controllers\Perfil\PerfilController;
+use App\Http\Controllers\Matriculas\MatriculasController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -150,6 +153,19 @@ Route::get('/programas/actualizar/{id}', [ProgramasController::class, 'form_actu
 
 Route::post('/programas/actualizar/{id}', [ProgramasController::class, 'actualizar_programa'])->name('actualizar_programa');
 
+Route::get('/perfil/registrar/usu', [PerfilController::class, 'registrar'])->name('regisperfil');
+
+//perfil de usuario
+Route::post('/registro/perfil/usuario', [PerfilController::class, 'regdatos'])->name('regperfil');
+Route::post('/actualizar/perfil/usuario', [PerfilController::class, 'actu'])->name('actuperfiluser');
+
+//actualizar perfil
+Route::get('/perfil/actualizar/usu', [PerfilController::class, 'busperfil'])->name('actuperfil');
+
+//matricular estudiante
+Route::get('/matricular/estudiante', [MatriculasController::class, 'index'])->name('matricularestu');
+Route::get('matricular/search',[MatriculasController::class, 'search'])->name('postmatricular');
+Route::get('matricular/show',[MatriculasController::class, 'show'])->name('showmatricular');
 
 
 

@@ -253,7 +253,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{route('regisperfil')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar</p>
+                </a>
+              </li>  
+              <li class="nav-item">
+                <a href="{{route('actuperfil')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Actualizar Perfil</p>
                 </a>
@@ -401,7 +407,7 @@
               </li>
             </ul>
           </li>          <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+            <a href="{{route('matricularestu')}}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>Matriculas</p>
             </a>
