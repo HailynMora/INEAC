@@ -1,9 +1,9 @@
 
-<div class="form-group justify-content-center col-md-12 " id="docente<?php echo $d['id'];?>">
-<form action="{{route('asig',$d['id'])}}">
+<div class="form-group justify-content-center col-md-12 " id="docente">
+
     @csrf
 <label for="asig_dictadas">Asignaturas a Cargo</label>
-@if($b==1)
+
     <table class="table table-striped">
     <thead>
         <tr>
@@ -22,7 +22,5 @@
         
     </tbody>
 </table>
-@endif
-</form>   
 
 </div>

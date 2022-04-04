@@ -43,6 +43,8 @@
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
+                <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Cancelar</a>
+
               </form>
               <br>
              

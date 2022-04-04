@@ -15,7 +15,7 @@
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-            <form id="formudatos" name="formudatos" method="post">
+            <form id="formudatos" name="formudatos" method="post" class="was-validated">
               @csrf
                 <div class="form-row">
                   <div class="form-group col-md-3">
@@ -33,11 +33,11 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required  onkeypress="return soloLetras(event)">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido" required>
+                    <input type="text" class="form-control" id="apellido" name="apellido" required  onkeypress="return soloLetras(event)">
                   </div>
               </div>
                 <div class="form-row">
@@ -57,7 +57,7 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="fec_vinculacion">Fecha vinculación</label>
-                    <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required>
+                     <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required>
                   </div>
                   <div class="form-group col-md-3" >
                   <label for="id_usuario">Usuario</label>
@@ -79,6 +79,7 @@
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+                <a  class="btn btn-danger" href="{{url('/docente/listado_docente')}}">Cancelar</a>
               </form>
         </div>
       </div>
@@ -87,7 +88,23 @@
   <!--instanciar el ajax para quitar el error no definido-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-  
+  function soloLetras(e) {
+    var key = e.keyCode || e.which,
+      tecla = String.fromCharCode(key).toLowerCase(),
+      letras = " ñáéíóúabcdefghijklmnopqrstuvwxyz",
+      especiales = [8, 37, 39, 46],
+      tecla_especial = false;
+
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = false;
+        break;
+      }
+    }
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }
+  }
 
   $('#formudatos').submit(function(e){
             e.preventDefault();
@@ -123,7 +140,7 @@
               success: function (response) {
                 if(response){
                   $('#formudatos')[0].reset();
-                  toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:1000});
+                  toastr.success('Docente registrado correctamente.', 'Nuevo Registro', {timeOut:1000});
                 }
               },
               error: function(response){

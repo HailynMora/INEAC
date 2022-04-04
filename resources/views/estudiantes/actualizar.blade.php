@@ -89,7 +89,7 @@
                     <div class="form-group col-md-6">
                         <label for="certificado">Certificados</label>
                         <select id="certificado" class="form-control" name="certificado" required> 
-                        <option value="{{$est[0]->id_certificado}}" selected>{{$est[0]->foto}}</option>
+                        <option value="{{$est[0]->id_certificados}}" selected>{{$est[0]->foto}}</option>
                         @foreach($certificado as $cer)
                             <option value="{{$cer->id}}">{{$cer->foto}}</option>
                             @endforeach
@@ -121,6 +121,7 @@
                 </div>
                 <button type="submit" class="btn btn-success">Actualizar</button>
                 <a href="{{route('listarestu')}}"type="submit" class="btn btn-warning">Cancelar</a>
+                
             </form>
         </div>
         
