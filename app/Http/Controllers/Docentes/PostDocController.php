@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\DocenteModel\Docente;
+use Illuminate\Support\Facades\DB;
 
 class PostDocController extends Controller
 {
@@ -16,7 +17,12 @@ class PostDocController extends Controller
     }
         
     public function showD(Request $request){
-        $post = Docente::findOrFail($request->id);
+        $post = DB::table('docente')->where('docente.id','=',$request->id)
+        ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
+        ->join('genero','id_genero','=','genero.id')
+        ->select('docente.id','docente.nombre','docente.apellido','docente.correo','docente.telefono','docente.direccion','docente.fec_vinculacion','docente.num_doc',
+                'tipo_documento.descripcion','genero.descripcion as genero')
+        ->get();
         return view('docente.post_doce', compact('post'))->render();
     }
 }
