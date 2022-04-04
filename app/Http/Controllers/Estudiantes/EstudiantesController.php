@@ -118,9 +118,10 @@ class EstudiantesController extends Controller
             ->join('users', 'id_usuario', '=', 'users.id')
             ->join('acudiente', 'estudiante.id_acudiente', '=', 'acudiente.id')
             ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+            ->join('certificados', 'estudiante.id_certificados', '=', 'certificados.id')
             ->select('estudiante.id', 'estudiante.nombre', 'estudiante.apellido', 'estudiante.direccion', 'estudiante.telefono',
             'estudiante.num_doc', 'estudiante.id_certificados','estudiante.estrato', 'estudiante.correo','estudiante.id_tipo_doc', 'estudiante.id_genero' ,'estudiante.id_etnia','estudiante.id_acudiente','estudiante.id_estado','estudiante.id_usuario','estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
-            'genero.descripcion as generoestu', 'etnia.descripcion as etniaestu', 'users.name as usuestu', 'acudiente.nombre as nomacu', 'acudiente.apellido as apeacu', 'parentezco.descripcion as paren','certificado.foto')
+            'genero.descripcion as generoestu', 'etnia.descripcion as etniaestu', 'users.name as usuestu', 'acudiente.nombre as nomacu', 'acudiente.apellido as apeacu', 'parentezco.descripcion as paren','certificados.foto')
             ->get();
         $tipo_doc=TipoDocumento::all();
         $gen=Genero::all();

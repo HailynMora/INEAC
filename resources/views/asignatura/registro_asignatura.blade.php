@@ -15,20 +15,21 @@
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-            <form id="formudatos" name="formudatos" method="post">
+            <form id="formudatos" name="formudatos" method="post" class="was-validated">
               @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="codigo">Código</label>
-                        <input type="number" class="form-control" id="codigo" name="codigo" placeholder="12345678">
+                        <input type="number" class="form-control" id="codigo" name="codigo" placeholder="12345678" required>
                     </div>
+                    
                     <div class="form-group col-md-6">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="intensidad_horaria">Intensidad Horaria</label>
-                        <input type="number" class="form-control" id="intensidad_horaria" name="intensidad_horaria" placeholder="12345678">
+                        <input type="number" class="form-control" id="intensidad_horaria" name="intensidad_horaria" placeholder="12345678" required>
                     </div>
                   
                 <div class="form-group col-md-6">
@@ -37,7 +38,7 @@
                   </div>
                   <div class="form-group col-md-6" >
                   <label for="id_estado">Estado</label>
-                  <select id="id_estado" class="form-control" name="id_estado">
+                  <select id="id_estado" class="form-control" name="id_estado" required>
                   <option selected>Seleccionar</option>
                   @foreach($estado as $es)
                   <option value="{{$es->id}}">{{$es->descripcion}}</option>
@@ -48,7 +49,7 @@
                 
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
-              
+                <a  class="btn btn-danger" href="{{url('/asignatura/reporte_asignatura')}}">Cancelar</a>
               </form>
         </div>
       </div>
@@ -80,7 +81,7 @@
       success: function (response) {
         if(response){
           $('#formudatos')[0].reset();
-          toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
+          toastr.success('Asignatura registrada exitosamente', 'Nuevo Registro', {timeOut:3000});
         }
       },
       error: function(response){

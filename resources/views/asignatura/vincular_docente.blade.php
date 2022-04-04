@@ -21,9 +21,20 @@
       </div>
       <div class="modal-body">
       <form id="formudatos" name="formudatos" method="post">
+      <h4>Asignaturas</h4>
               @csrf
                 <div class="form-row">
+                 <!-- <div class="form-group col-md-4">
+                  <nav class="navbar navbar-light bg-light">
+                    <form class="form-inline">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success my-4 my-sm-2" type="submit">Search</button>
+                    </form>
+                  </nav>
+                  </div>-->
                   <div class="form-group col-md-6">
+                    
                         <label for="asignatura">Asignatura</label>
                         <select id="asignatura" class="form-control" name="asignatura">
                         <option selected>Seleccionar</option>
@@ -49,6 +60,8 @@
               </div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">Cerrar</button>
                 <button type="submit" class="btn btn-success">Agregar</button>
+                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+                <a  class="btn btn-danger" href="{{url('/asignatura/vincular_docente')}}">Cancelar</a>
               </form>
       </div>
     </div>
@@ -117,10 +130,15 @@
       success: function (response) {
         if(response){
           $('#formudatos')[0].reset();
-          toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
+          toastr.success('Docente vinculado correctamente.', 'Nuevo Registro', {timeOut:3000});
         }
       }
     });
   })
+  function resetform() {
+     $("form select").each(function() { this.selectedIndex = 0 });
+     $("form input[type=text],form input[type=number] ,form input[type=date] , form input[type=email]").each(function() { this.value = '' });
+     toastr.success('Campos Vacios', {timeOut:1000});
+  }
 </script>
 @endsection

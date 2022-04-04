@@ -39,31 +39,31 @@
                     <div class="form-row">
                       <div class="form-group col-md-3">
                         <label for="tipo_doc">Tipo Documento</label>
-                        <input type="text" class="form-control" id="tipo_doc" name="tipo_doc" disabled value="{{$post['descripcion']}}">
+                        <input type="text" class="form-control" id="tipo_doc" name="tipo_doc" disabled value="{{$post[0]->descripcion }}">
                       </div>
                       <div class="form-group col-md-3">
                         <label for="num_doc">N° Documento</label>
-                        <input type="text" class="form-control" id="num_doc" name="num_doc" disabled value="{{$post['num_doc']}}">
+                        <input type="text" class="form-control" id="num_doc" name="num_doc" disabled value="{{$post[0]->num_doc}}">
                       </div>
                       <div class="form-group col-md-3">
                         <label for="correo">Correo</label>
-                        <input type="text" class="form-control" id="correo" name="correo" disabled value="{{$post['correo']}}">
+                        <input type="text" class="form-control" id="correo" name="correo" disabled value="{{$post[0]->correo}}">
                       </div>
                       <div class="form-group col-md-3">
                         <label for="telefono">Telefono</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono" disabled value="{{$post['telefono']}}">
+                        <input type="text" class="form-control" id="telefono" name="telefono" disabled value="{{$post[0]->telefono}}">
                       </div>
                       <div class="form-group col-md-4">
                         <label for="direccion">Direccion</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" disabled value="{{$post['direccion']}}">
+                        <input type="text" class="form-control" id="direccion" name="direccion" disabled value="{{$post[0]->direccion}}">
                       </div>
                       <div class="form-group col-md-4">
                         <label for="genero">Genero</label>
-                        <input type="text" class="form-control" id="genero" name="genero" disabled value="{{$post['genero']}}">
+                        <input type="text" class="form-control" id="genero" name="genero" disabled value="{{$post[0]->genero}}">
                       </div>
                       <div class="form-group col-md-4">
                         <label for="fec_vinculacion">Fecha de Vinculacion</label>
-                        <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($post['fec_vinculacion']))}}">
+                        <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($post[0]->fec_vinculacion))}}">
                       </div>
                       <div class="form-group col-md-12">
                         @include('docente.lista')
