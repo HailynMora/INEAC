@@ -169,4 +169,13 @@ Route::get('matricular/show',[MatriculasController::class, 'show'])->name('showm
 
 
 
+Route::get('/admin/matricular/{id}',[MatriculasController::class, 'matriculasvista'])->name('matricularadmin');
+
+//mostar cursos para matricular estudiante
+Route::get('curso/busqueda',[MatriculasController::class, 'curbus'])->name('curpostbus');
+Route::get('curso/resultado',[MatriculasController::class, 'mosbus'])->name('mostrarcurbus');
+
+//matricula un estudiante
+Route::post('/admin/matricular/estudiante', [MatriculasController::class, 'registromat'])->name('regmatricula');
+
 require __DIR__.'/auth.php';

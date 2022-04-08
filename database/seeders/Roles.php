@@ -18,15 +18,15 @@ class Roles extends Seeder
         $datos = [//array de datos 
             [
             'descripcion' => 'Administrador',
-            'id_permiso' => 5
+            'id_permiso' => 6
              ],
             [
              'descripcion' => 'Docente',
-             'id_permiso' => 4
+             'id_permiso' => 7
             ],
             [
              'descripcion' => 'Estudiante',
-             'id_permiso' => 1
+             'id_permiso' => 10
             ]
 
              
