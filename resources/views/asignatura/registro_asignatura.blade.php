@@ -15,7 +15,7 @@
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-            <form id="formudatos" name="formudatos" method="post" class="was-validated">
+            <form id="formudatos" name="formudatos" method="post">
               @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
