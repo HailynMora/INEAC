@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center" role="alert">
- Registro de Programas
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Registro de Programas</h3>
 </div>
 
 <div class="accordion" id="accordionExample">
@@ -71,6 +71,16 @@
           $('#forprogramas')[0].reset();
           toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
         }
+      },
+      error:function(jqXHR, response){
+          if(jqXHR.status==422){
+            toastr.warning('Datos Repetidos!.', 'El código del programa debe ser único!', {timeOut:3000});
+          }else{
+           if(jqXHR.status==423){
+            toastr.warning('Datos Repetidos!.', 'El nombre del programa debe ser único!', {timeOut:3000});
+           }
+          }
+         
       }
     });
   })

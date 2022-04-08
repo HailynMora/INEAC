@@ -1,11 +1,11 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center" role="alert">
- Reporte Programas
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3> Programas Registrados</h3>
 </div>
 <div class="container">
     <table class="table">
-        <thead class="thead-light">
+        <thead style="background-color:#FFCC00;">
             <tr>
             <th scope="col">Código</th>
             <th scope="col">Programa</th>
@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         @foreach($rep as $d)
-        <tr>
+        <tr style="background-color:#CCFFCC;">
         <td>{{$d->codigo}}</td>
         <td>{{$d->programa}}</td>
         <td>{{$d->estado}}</td>
@@ -26,7 +26,7 @@
         @endforeach
         </tbody>
     </table>
-  
+    {{$rep->links()}}
 </div>
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

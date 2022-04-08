@@ -20,12 +20,30 @@ class ProgramasController extends Controller
 
     }
     public function registro(Request $request){
+        $cod=$request->codigo;
+        $buscod = DB::table('tipo_curso')->where('codigo', '=', $cod)->count();
+        $busnom = DB::table('tipo_curso')->where('descripcion', '=', $request->nombre)->count();
+        if($buscod!=0){//validacion con ajax
+            return \Response::json([
+                'error'  => 'Error datos'
+            ],422);
+        }else{
+
+            if($busnom!=0){
+                return \Response::json([
+                    'error'  => 'Error datos'
+                ],423);
+            }else{
+                $category = new Programas();
+                $category->codigo = $request->input('codigo');
+                $category->descripcion = $request->input('nombre');
+                $category->id_estado = $request->input('estado');
+                $category->save();
+    
+            }
+
+        }
         
-        $category = new Programas();
-        $category->codigo = $request->input('codigo');
-        $category->descripcion = $request->input('nombre');
-        $category->id_estado = $request->input('estado');
-        $category->save();
         return back();
 
     }
@@ -69,7 +87,8 @@ class ProgramasController extends Controller
         $rep=DB::table('tipo_curso')
         ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','estado.descripcion as estado')
         ->join('estado','id_estado','=','estado.id')
-        ->get();
+        ->orderBy('tipo_curso.id', 'ASC')
+        ->paginate(5); //hacer paginacion de las vistas
         return view('programas.reporte_programas')->with('rep',$rep);
     }
     public function form_actualizar($id){
