@@ -79,6 +79,11 @@ class docenteController extends Controller
             ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
             ->join('genero','id_genero','=','genero.id')
             ->get();
+            /*$asig=DB::table('asig_asignatura')
+                    ->select('asig_asignaturas.id_asignaturas','asignaturas.nombre','asignaturas.codigo','tipo_curso.descripcion as programa')
+                    ->join('asignaturas','id_asignaturas','=','asignaturas.id')
+                    ->where('asig_asignatura.id_docente','=',$doc->id)
+                    ->get();*/
         }else{
             $b=0;
             $doc=0;
@@ -92,7 +97,7 @@ class docenteController extends Controller
 
     public function listar_asig($id){
         $doc = DB::table('docente')
-            ->select('asignaturas.nombre as asig','asignaturas.codigo')
+            ->select('asignaturas.nombre as asig','asignaturas.codigo','tipo_curso.nombre')
             ->join('asig_asignaturas','docente.id','=','asig_asignaturas.id_docente')
             ->join('asig_asignatura','asignaturas.id','=','asig_asignatura.id_asignatura')
             ->where('asig_asignatura.id_docente','=',$id)
