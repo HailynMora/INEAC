@@ -22,23 +22,30 @@ class asignaturaController extends Controller
         $cod = $request->input('codigo');
         $nom = $request->input('nombre');
         $res1 = DB::table('asignaturas')->where('codigo','=',$cod)->count();
-        $res1 = DB::table('asignaturas')->where('nombre','=',$nom)->count();
-        if($res1!=0 && $res2!=0){
+        $res2 = DB::table('asignaturas')->where('nombre','=',$nom)->count();
+        if($res1!=0){
             return \Response::json([
                 'error' => 'Error datos'
             ],422);
         }
         else{
-            $category = new Asignatura();
-            $category->nombre = $request->input('nombre');
-            $category->codigo = $request->input('codigo');
-            $category->intensidad_horaria = $request->input('intensidad_horaria');
-            $category->val_habilitacion = $request->input('val_habilitacion');
-            $category->id_estado = $request->input('id_estado');
-            $category->save();
-            return back();
+            if($res2!=0){
+                return \Response::json([
+                    'error' => 'Error datos'
+                ],423);
+            }else{
+                $category = new Asignatura();
+                $category->nombre = $request->input('nombre');
+                $category->codigo = $request->input('codigo');
+                $category->intensidad_horaria = $request->input('intensidad_horaria');
+                $category->val_habilitacion = $request->input('val_habilitacion');
+                $category->id_estado = $request->input('id_estado');
+                $category->save();
+            }
+            
         }
         
+        return back();
     }
     public function vincular(Request $request){
         $category = new Asignaciondo();
@@ -69,6 +76,12 @@ class asignaturaController extends Controller
         $asig = Asignatura::findOrFail($id);
         $estado=Estado::all();
         return view('asignatura.actualizar_asig', compact('asig','estado'));
+       /* $asig=DB::table('asignaturas')
+        ->where('asignaturas.id','=',$id)
+        ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado','asignaturas.id_estado')
+        ->join('estado','id_estado','=','estado.id')
+        
+        ->get();*/
     }
 
     public function actualizar_asignatura(Request $request,$id){

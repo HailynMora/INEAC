@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table table-striped" style="background-color:#FFCC00;">
   <thead>
       <tr>
       <th scope="col">N° Documento</th>
@@ -10,7 +10,7 @@
       </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr style="background-color: #dcedc8;">
       <td>{{ $post[0]->num_doc }}</td>
       <td>{{ $post[0]->nombre }} {{ $post[0]->apellido }}</td>
       <td>{{ $post[0]->telefono }}</td>
@@ -18,9 +18,11 @@
       <td>{{date("Y-m-d", strtotime($post[0]->fec_vinculacion))}}</td>
       
       <td>
-        <a href="{{route('actualizar_doc',$post[0]->id)}}" ><i class="nav-icon fas fa-edit" ></i></a>&nbsp&nbsp&nbsp
+        <a href="{{route('actualizar_doc',$post[0]->id)}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
         <a type="button"  data-toggle="modal" data-target="#docente<?php echo $post[0]->id;?>">
-        <i class="nav-icon fas fa-eye"></i></a>
+        <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
+        &nbsp&nbsp
+        <a href="#" ><i class="fas fa-trash-alt" style="color:  red;" ></i></a>
         <div class="modal fade" id="docente<?php echo $post[0]->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">

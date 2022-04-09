@@ -1,6 +1,8 @@
 @extends('usuario.principa_usul')
 @section('content')
-
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Vincular Asignatura a un Programa</h3>
+</div>
 <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne">

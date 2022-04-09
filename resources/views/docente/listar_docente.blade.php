@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center"  role="alert">
-  Listado de Docentes
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Listado de Docentes</h3>
 </div>
 <div>
     <!--<form class="form-inline my-6 my-lg-0 float-right mb-6">
@@ -10,7 +10,7 @@
     </form>-->
     <br><br>
     @csrf
-    <table class="table table-striped">
+    <table class="table table-striped"style="background-color:#FFCC00;">
     <thead>
         <tr>
         <th scope="col">Tipo Doc</th>
@@ -23,15 +23,17 @@
     <tbody>
       @if($b == 1)
         @foreach($docente as $d)
-        <tr>
+        <tr style="background-color: #dcedc8;">
           <td>{{$d['descripcion']}}</td>
           <td>{{$d['num_doc']}}</td>
           <td>{{$d['nombre']}}  {{$d['apellido']}}</td>
           <td>{{date("Y-m-d", strtotime($d['fec_vinculacion']))}}</td>
           <td>
-            <a href="{{route('actualizar_doc',$d['id'])}}" ><i class="nav-icon fas fa-edit" ></i></a>&nbsp&nbsp&nbsp
-            <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d['id'];?>">
+            <a href="{{route('actualizar_doc',$d['id'])}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
+            <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d['id'];?>" style="color: #66b62b">
             <i class="nav-icon fas fa-eye"></i></a>
+            &nbsp&nbsp
+            <a href="#" ><i class="fas fa-trash-alt" style="color:  red;" ></i></a>
             <div class="modal fade" id="docente<?php echo $d['id'];?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
               <div class="modal-content">

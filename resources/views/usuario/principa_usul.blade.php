@@ -359,12 +359,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/validation.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Perfil</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{route('condocente')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Consultar</p>

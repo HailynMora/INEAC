@@ -1,9 +1,8 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center" role="alert">
- Consultar Programas
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Consultar Programas</h3>
 </div>
-
 <div class="container-fluid">
     <div class="row" id="map_section">
         <div class="col-12">
@@ -11,7 +10,7 @@
                           @csrf
                           <div class="row">
                               <div class="col-12" id="search-wrapper">
-                                  <input type="text" class="form-control w-100 m-0 search" placeholder="Ingrese el nombre a buscar ..." aria-label="Search">
+                                  <input type="text" class="form-control w-100 m-9 search" placeholder="Ingrese el nombre a buscar ..." aria-label="Search">
 
                                   <div id="results">
 

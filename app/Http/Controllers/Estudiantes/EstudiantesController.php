@@ -83,30 +83,35 @@ class EstudiantesController extends Controller
         $co= $request->input('correo');
         $res=DB::table('estudiante')->where('num_doc', '=', $r)->count();
         $c=DB::table('estudiante')->where('correo', '=', $co)->count();
-        if($res!=0 && $c!=0){//validacion con ajax
+        if($res!=0){//validacion con ajax
             return \Response::json([
                 'error'  => 'Error datos'
             ],422);
         }else{
-            $Registrar = new Estudiante();
-            $Registrar->nombre = $request->input('nombre');
-            $Registrar->apellido = $request->input('apellido');
-            $Registrar->direccion = $request->input('direccion');
-            $Registrar->telefono = $request->input('telefono');
-            $Registrar->num_doc = $request->input('numerodoc');
-            $Registrar->correo = $request->input('correo');
-            $Registrar->estrato = $request->input('estrato');
-            $Registrar->id_etnia = $request->input('etnia');
-            $Registrar->id_genero = $request->input('genero');
-            $Registrar->id_acudiente = $request->input('acudiente');
-            $Registrar->id_tipo_doc = $request->input('tipodoc');
-            $Registrar->id_certificados = $request->input('certificado');
-            $Registrar->id_estado = $request->input('estado');
-            $Registrar->id_usuario = $request->input('usuario');
-            $Registrar->save();
-            return back();
+            if($c!=0){
+                return \Response::json([
+                    'error'  => 'Error datos'
+                ],423);
+            }else{
+               $Registrar = new Estudiante();
+                $Registrar->nombre = $request->input('nombre');
+                $Registrar->apellido = $request->input('apellido');
+                $Registrar->direccion = $request->input('direccion');
+                $Registrar->telefono = $request->input('telefono');
+                $Registrar->num_doc = $request->input('numerodoc');
+                $Registrar->correo = $request->input('correo');
+                $Registrar->estrato = $request->input('estrato');
+                $Registrar->id_etnia = $request->input('etnia');
+                $Registrar->id_genero = $request->input('genero');
+                $Registrar->id_acudiente = $request->input('acudiente');
+                $Registrar->id_tipo_doc = $request->input('tipodoc');
+                $Registrar->id_certificados = $request->input('certificado');
+                $Registrar->id_estado = $request->input('estado');
+                $Registrar->id_usuario = $request->input('usuario');
+                $Registrar->save(); 
+            }
         }
-        
+        return back();
     }
     public function form_actualizar($id){
        // $est = Estudiante::findOrFail($id);
