@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center" role="alert">
- Consulta Docente
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>consultar Docentes</h3>
 </div>
 
 <div class="container-fluid">

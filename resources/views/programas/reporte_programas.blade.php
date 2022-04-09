@@ -15,12 +15,14 @@
         </thead>
         <tbody>
         @foreach($rep as $d)
-        <tr style="background-color:#CCFFCC;">
+        <tr style="background-color: #dcedc8;">
         <td>{{$d->codigo}}</td>
         <td>{{$d->programa}}</td>
         <td>{{$d->estado}}</td>
         <td>
-        <a href="{{route('actualizar_prog',$d->id)}}" ><i class="nav-icon fas fa-edit" ></i></a>
+        <a href="{{route('actualizar_prog',$d->id)}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>
+        &nbsp&nbsp
+        <a href="{{route('actualizar_prog',$d->id)}}" ><i class="fas fa-trash-alt" style="color:  red;" ></i></a>
         </td>
         </tr>
         @endforeach

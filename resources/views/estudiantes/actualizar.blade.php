@@ -1,8 +1,9 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center"  role="alert">
-  Actualizar Estudiantes
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Actualizar Estudiante</h3>
 </div>
+<br><br>
 <div class="container">
     <form action="{{route('actualizar_estudiante',$est[0]->id)}}" method="post">
         @csrf

@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center" role="alert">
- Registro de Estudiantes
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Registro de Estudiantes</h3>
 </div>
 <div class="container-fluid">
 <form id="matricula" name="matricula">
@@ -116,7 +116,8 @@
   </div>
   <!--end estado-->
   <button type="submit" class="btn btn-primary">Registrar</button>
-  <button type="button"  id="miboton" class="btn btn-warning">
+  <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+  <button type="button"  id="miboton" class="btn btn-success">
   Visualizar
 </button>
 </form>
@@ -172,11 +173,22 @@
           toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
         }
       },
-      error:function(response){
-          toastr.warning('Datos Repetidos!.', 'Revise el correo o número de documento', {timeOut:3000});
+      error:function(jqXHR, response){
+        if(jqXHR.status==422){
+          toastr.warning('Datos Repetidos!.', 'El Numero de documento debe ser único!', {timeOut:3000});
+        }else{
+          if(jqXHR.status==423){
+            toastr.warning('Datos Repetidos!.', 'El correo debe ser único!', {timeOut:3000});
+          }
+        }
       }
     });
   });
+  function resetform() {
+     $("form select").each(function() { this.selectedIndex = 0 });
+     $("form input[type=text],form input[type=number] ,form input[type=date] , form input[type=email]").each(function() { this.value = '' });
+     toastr.success('Campos Vacios', {timeOut:1000});
+  }
  </script> 
  <script type="text/javascript">
     $(document).ready(function() {

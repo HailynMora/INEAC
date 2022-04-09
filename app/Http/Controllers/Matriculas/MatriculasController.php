@@ -67,5 +67,27 @@ class MatriculasController extends Controller
         }
         
     }
+
+    public function listado(){
+        $val=DB::table('matriculas')->count();
+        if($val=0){
+            $b=0;
+            $estumat=array('dato1', 'dato2', 'dato3');
+        }else{
+            $b=1;
+            $estumat=DB::table('matriculas')->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+            ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+            ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+            ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
+            'matriculas.id_curso as idcur', 'estudiante.nombre', 'estudiante.apellido',
+            'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
+            'tipo_curso.descripcion as nomcurso')
+            ->paginate(7);
+           
+        }
+       
+        
+        return view('matriculas.listadomat')->with('estumat', $estumat)->with('b', $b);
+    }
    
 }

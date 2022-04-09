@@ -1,35 +1,35 @@
 @extends('usuario.principa_usul')
 @section('content')
 <!--Tabla de informacion-->
-<div class="alert alert-primary text-center"  role="alert">
-  Listado de Estudiantes
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Listado de Estudiantes</h3>
 </div>
 <br><br>
 <div class="container">
-<table class="table table-sm">
+<table class="table table-striped"style="background-color:#FFCC00;">
        <thead>
         <tr>
-        <th scope="col" class="table-info">Nombre</th>
-        <th scope="col" class="table-info">Apellido</th>
-        <th scope="col" class="table-info">Telefono</th>
-        <th scope="col" class="d-none d-lg-block table-info">Correo</th>
-        <th scope="col" class="table-info">Estado</th>
-        <th scope="col" class="table-info">Acciones</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col" >Telefono</th>
+        <th scope="col" class="d-none d-lg-block ">Correo</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
         </tr>
     </thead>
     <tbody>
     @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
-        <tr class="table-success">
+        <tr class="table-success"style="background-color: #dcedc8;">
         <td>{{$d->nombre}}</td>
         <td>{{$d->apellido}}</td>
         <td>{{$d->telefono}}</td>
         <td  class="d-none d-lg-block">{{$d->correo}}</td>
         <td>{{$d->estadoes}}</td>
         <td><!-- Button trigger modal -->
-                <a href="{{route('actualizar_est',$d->id)}}" ><i class="nav-icon fas fa-edit" ></i></a>&nbsp&nbsp&nbsp
+                <a href="{{route('actualizar_est',$d->id)}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
                 <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>">
-                <i class="nav-icon fas fa-eye"></i></a>
+                <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
                 <!-- Modal -->
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">

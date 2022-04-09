@@ -1,8 +1,9 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center"  role="alert">
-  Formulario Registro de Docentes
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Registro de Docentes</h3>
 </div>
+<br><br>
 <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne">
@@ -15,7 +16,7 @@
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-            <form id="formudatos" name="formudatos" method="post" class="was-validated">
+            <form id="formudatos" name="formudatos" method="post">
               @csrf
                 <div class="form-row">
                   <div class="form-group col-md-3">
@@ -107,47 +108,53 @@
   }
 
   $('#formudatos').submit(function(e){
-            e.preventDefault();
-            var nombre=$('#nombre').val();
-            var apellido=$('#apellido').val();
-            var direccion=$('#direccion').val();
-            var telefono=$('#telefono').val();
-            var correo=$('#correo').val();
-            var numerodoc=$('#numerodoc').val();
-            var fec_vinculacion=$('#fec_vinculacion').val();
-            var id_usuario = $("#id_usuario").val();
-            var tipodoc=$('#tipodoc').val();
-            var tipogen=$('#tipogen').val();
-            var _token = $('input[name=_token]').val(); //token de seguridad
+    e.preventDefault();
+    var nombre=$('#nombre').val();
+    var apellido=$('#apellido').val();
+    var direccion=$('#direccion').val();
+    var telefono=$('#telefono').val();
+    var correo=$('#correo').val();
+    var numerodoc=$('#numerodoc').val();
+    var fec_vinculacion=$('#fec_vinculacion').val();
+    var id_usuario = $("#id_usuario").val();
+    var tipodoc=$('#tipodoc').val();
+    var tipogen=$('#tipogen').val();
+    var _token = $('input[name=_token]').val(); //token de seguridad
 
-            $.ajax({
-              type: "POST",
-              url: "{{route('datosdoc')}}",
-              dataType: 'html',
-              data:{
-                nombre:nombre,
-                apellido:apellido,
-                direccion:direccion,
-                telefono:telefono,
-                correo:correo,
-                numerodoc:numerodoc,
-                fec_vinculacion:fec_vinculacion,
-                id_usuario:id_usuario,
-                tipodoc:tipodoc,
-                tipogen:tipogen,
-                _token:_token
-              },
-              success: function (response) {
-                if(response){
-                  $('#formudatos')[0].reset();
-                  toastr.success('Docente registrado correctamente.', 'Nuevo Registro', {timeOut:1000});
-                }
-              },
-              error: function(response){
-                toastr.warning('Datos Repetidos (correo y/o Numero de documento)',{timeOut:1000});
-              }
-            });
-          })
+    $.ajax({
+      type: "POST",
+      url: "{{route('datosdoc')}}",
+      dataType: 'html',
+      data:{
+        nombre:nombre,
+        apellido:apellido,
+        direccion:direccion,
+        telefono:telefono,
+        correo:correo,
+        numerodoc:numerodoc,
+        fec_vinculacion:fec_vinculacion,
+        id_usuario:id_usuario,
+        tipodoc:tipodoc,
+        tipogen:tipogen,
+        _token:_token
+      },
+      success: function (response) {
+        if(response){
+          $('#formudatos')[0].reset();
+          toastr.success('Docente registrado correctamente.', 'Nuevo Registro', {timeOut:1000});
+        }
+      },
+      error:function(jqXHR, response){
+        if(jqXHR.status==422){
+          toastr.warning('Datos Repetidos!.', 'El Numero de documento debe ser único!', {timeOut:3000});
+        }else{
+          if(jqXHR.status==423){
+            toastr.warning('Datos Repetidos!.', 'El correo debe ser único!', {timeOut:3000});
+          }
+        }
+      }
+   });
+  })
   
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });

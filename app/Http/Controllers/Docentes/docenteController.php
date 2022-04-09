@@ -31,28 +31,34 @@ class docenteController extends Controller
         $doc = $request->input('numerodoc');
         $res1 = DB::table('docente')->where('num_doc','=',$doc)->count();
         $res2 = DB::table('docente')->where('correo','=',$cor)->count();
-        if($res1!=0 && $res2!=0){
+        if($res1!=0){
             return \Response::json([
                 'error' => 'Error datos'
             ],422);
         }
         else{
-            $category = new Docente();
-            $category->nombre = $request->input('nombre');
-            $category->apellido = $request->input('apellido');
-            $category->direccion = $request->input('direccion');
-            $category->telefono = $request->input('telefono');
-            $category->correo = $request->input('correo');
-            $category->num_doc = $request->input('numerodoc');
-            $category->fec_vinculacion = $request->input('fec_vinculacion');
-            $category->id_usuario = $request->input('id_usuario');
-            $category->id_tipo_doc = $request->input('tipodoc');
-            $category->id_genero = $request->input('tipogen');
-            $category->save();
-            return back();
+            if($res2!=0){
+                return \Response::json([
+                    'error' => 'Error datos'
+                ],423);
+            }else{
+                $category = new Docente();
+                $category->nombre = $request->input('nombre');
+                $category->apellido = $request->input('apellido');
+                $category->direccion = $request->input('direccion');
+                $category->telefono = $request->input('telefono');
+                $category->correo = $request->input('correo');
+                $category->num_doc = $request->input('numerodoc');
+                $category->fec_vinculacion = $request->input('fec_vinculacion');
+                $category->id_usuario = $request->input('id_usuario');
+                $category->id_tipo_doc = $request->input('tipodoc');
+                $category->id_genero = $request->input('tipogen');
+                $category->save();
+                return back();
+            }
+            
         }
-        
-       
+        return back(); 
     }
     public $docente;
     public function listado_docente(){

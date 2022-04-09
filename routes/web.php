@@ -177,5 +177,7 @@ Route::get('curso/resultado',[MatriculasController::class, 'mosbus'])->name('mos
 
 //matricula un estudiante
 Route::post('/admin/matricular/estudiante', [MatriculasController::class, 'registromat'])->name('regmatricula');
+//reporte de estudiantes matriculados
+Route::get('/admin/reporte/estudiante', [MatriculasController::class, 'listado'])->name('listadomatricula');
 
 require __DIR__.'/auth.php';

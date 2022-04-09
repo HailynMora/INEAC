@@ -74,7 +74,10 @@
                      <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
                       <br>
                       <div class="form-group col-md-12 text-center">
+                           <a id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
+                           <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
                             <button type="submit" class="btn btn-success">Matricular</button>
+                            
                      </div>
                       
                                               
@@ -124,6 +127,22 @@
                 });
             });
         });
+        </script>
+
+        <script>
+            let a=document.getElementById('cancelar');
+            a.addEventListener('click',function (event) {
+            event.preventDefault(); //esto cancela el comportamiento del click
+            setTimeout(()=> location.href="{{route('matricularestu')}}");
+            });
+        </script>
+
+        <script>
+            let b=document.getElementById('listado');
+            b.addEventListener('click',function (event) {
+            event.preventDefault(); //esto cancela el comportamiento del click
+            setTimeout(()=> location.href="{{route('listadomatricula')}}");
+            });
         </script>
 
 

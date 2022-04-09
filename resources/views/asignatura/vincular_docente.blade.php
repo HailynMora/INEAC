@@ -1,8 +1,9 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center" role="alert">
- Vincular Docente a Asignaturas
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Vincular Docente a Asignatura</h3>
 </div>
+<br><br>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
 <i class="fas fa-edit"></i>
@@ -82,7 +83,7 @@
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
       <table class="table">
-        <thead class="thead-light">
+        <thead style="background-color:#FFCC00;">
             <tr>
             <th scope="col">Código</th>
             <th scope="col">Asignatura</th>
@@ -93,7 +94,7 @@
         </thead>
         <tbody>
         @foreach($asig as $d)
-        <tr>
+        <tr style="background-color: #dcedc8;">
         <td>{{$d->codigo}}</td>
         <td>{{$d->asig}}</td>
         <td>{{$d->intensidad_horaria}}</td>

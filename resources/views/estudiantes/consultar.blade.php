@@ -1,9 +1,8 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center" role="alert">
- Consultar Estudiante
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Consultar Estudiantes</h3>
 </div>
-
 <div class="container-fluid">
     <div class="row" id="map_section">
         <div class="col-12">

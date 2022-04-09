@@ -1,8 +1,9 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center"  role="alert">
-  Actualizar Docentes
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3> Actualizar Asignaturas</h3>
 </div>
+<br><br>
 <div class="container">
 <form action="{{route('actualizar_asignatura',$asig->id)}}" method="post">
               @csrf
@@ -27,6 +28,7 @@
                   <div class="form-group col-md-6" >
                   <label for="id_estado">Estados</label>
                   <select id="id_estado" class="form-control" name="id_estado">
+                 <!-- <option value="{{$asig->id_estado}}" selected>{{$asig->estado}}</option>-->
                   @foreach($estado as $es)
                   <option value="{{$es->id}}">{{$es->descripcion}}</option>
                   @endforeach
