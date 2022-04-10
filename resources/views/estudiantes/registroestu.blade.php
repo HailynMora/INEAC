@@ -28,7 +28,7 @@
     </div>
     <div class="form-group col-md-4">
       <label for="numero_doc">Número Documento</label>
-      <input type="text" class="form-control" id="numero_doc" name="numero_doc" required>
+      <input type="number" class="form-control" id="numero_doc" name="numero_doc" required>
     </div>
     <div class="form-group col-md-4">
       <label for="correo">Correo</label>
@@ -117,9 +117,8 @@
   <!--end estado-->
   <button type="submit" class="btn btn-primary">Registrar</button>
   <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
-  <button type="button"  id="miboton" class="btn btn-success">
-  Visualizar
-</button>
+  <button type="button"  id="miboton" class="btn btn-success">Visualizar</button>
+  <a  class="btn btn-danger" href="{{url('/visualizar/estudiante')}}">Cancelar</a>
 </form>
 </div>
 <!--Modal de visualizar--->
