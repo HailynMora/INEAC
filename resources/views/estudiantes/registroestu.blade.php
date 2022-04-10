@@ -9,11 +9,11 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="nombre">Nombre</label>
-      <input type="text" class="form-control" id="nombre" name="nombre" required>
+      <input type="text" class="form-control" id="nombre" name="nombre" required onkeypress="return soloLetras(event)">
     </div>
     <div class="form-group col-md-6">
       <label for="apellido">Apellido</label>
-      <input type="text" class="form-control" id="apellido" name="apellido" required>
+      <input type="text" class="form-control" id="apellido" name="apellido" required onkeypress="return soloLetras(event)">
     </div>
   </div>
   <div class="form-row">
@@ -127,6 +127,24 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+  /*FUNCION PARA VALIDAR QUE SOLO INGRESE LETRAS*/
+  function soloLetras(e) {
+    var key = e.keyCode || e.which,
+      tecla = String.fromCharCode(key).toLowerCase(),
+      letras = " ñáéíóúabcdefghijklmnopqrstuvwxyz",
+      especiales = [8, 37, 39, 46],
+      tecla_especial = false;
+
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = false;
+        break;
+      }
+    }
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }
+  }
   /*tomamos la información del formulario y la enviamos a la ruta y de la ruta al controlador*/
   $('#matricula').submit(function(e){
     e.preventDefault();
