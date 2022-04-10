@@ -29,18 +29,41 @@
         <?php
         if($d->estado == 'Activo'){
             ?>
-            <a href="#" ><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
             <?php
         }else{
             ?>
-            <a href="#" ><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
             <?php
         }
         ?>
-        &nbsp&nbsp
-        <a href="#" ><i class="fas fa-trash-alt" style="color:  red;" ></i></a>
         </td>
         </tr>
+        <!-- Ventana modal para eliminar -->
+        <div class="modal fade" id="cambiarAsig{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #563d7c !important;">
+                        <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
+                            <span>¿Cambiar el estado {{$d->estado}} de la asignatura? </span>
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> 
+                    </div>
+                    <div class="modal-body mt-2 text-center">
+                        <strong style="text-align: center !important"> 
+                        {{ $d->codigo }} - {{ $d->asig }}
+                        </strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <a  class="btn btn-success" href="{{ route('cambiarAsig', $d->id) }}">Cambiar</a>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <!---fin ventana eliminar--->
         @endforeach
         </tbody>
     </table>

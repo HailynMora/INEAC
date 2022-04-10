@@ -73,15 +73,14 @@ class asignaturaController extends Controller
         return view('asignatura.reporte_asignatura')->with('rep',$rep);
     }
     public function form_actualizar($id){
-        $asig = Asignatura::findOrFail($id);
+       // $asig = Asignatura::findOrFail($id);
         $estado=Estado::all();
-        return view('asignatura.actualizar_asig', compact('asig','estado'));
-       /* $asig=DB::table('asignaturas')
+        $asig=DB::table('asignaturas')
         ->where('asignaturas.id','=',$id)
         ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado','asignaturas.id_estado')
         ->join('estado','id_estado','=','estado.id')
-        
-        ->get();*/
+        ->get();
+        return view('asignatura.actualizar_asig', compact('asig','estado'));
     }
 
     public function actualizar_asignatura(Request $request,$id){
@@ -94,6 +93,18 @@ class asignaturaController extends Controller
         $category->save();
         return redirect('/asignatura/reporte_asignatura');
 
+    }
+    public function cambiar_asig($id){
+        $asig = Asignatura::find($id);
+        $es = $asig->id_estado;
+        if($es==2){
+            $asig->id_estado = 1;
+            $asig->save();
+        }else{
+            $asig->id_estado = 2;
+            $asig->save();
+        }        
+        return redirect('/asignatura/reporte_asignatura');
     }
 
     public $asignacion;

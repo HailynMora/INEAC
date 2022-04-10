@@ -125,7 +125,7 @@ class ProgramasController extends Controller
             $pro->save();
         }        
         $nombre = $pro->descripcion;
-        return redirect('/programas/reporte_programas')->with('msjdelete', 'El Niño ('.$nombre.') Fue cambiado.');
+        return redirect('/programas/reporte_programas');
 }
 
 }

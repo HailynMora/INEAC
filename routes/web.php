@@ -125,6 +125,8 @@ Route::get('/asignatura/actualizar/{id}', [AsignaturaController::class, 'form_ac
 
 Route::post('/asignatura/actualizar/{id}', [AsignaturaController::class, 'actualizar_asignatura'])->name('actualizar_asignatura');
 
+//ruta cambiar estado
+Route::get('cambiar_as/{id}', [AsignaturaController::class, 'cambiar_asig'])->name('cambiarAsig'); 
 //--------------------------------------------------FIN RUTAS ASIGNATURAS-------------------------------------------------
 
 //------------------------------------------INICIO RUTAS PROGRAMAS------------------------------------------------
