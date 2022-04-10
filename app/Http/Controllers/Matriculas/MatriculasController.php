@@ -8,6 +8,7 @@ use App\Models\EstudianteModel\Estudiante;
 use Illuminate\Support\Facades\DB;
 use App\Models\AsignaturaModel\Programas;
 use App\Models\MatriculasModel\Matricula;
+Use Session;
 
 class MatriculasController extends Controller
 {
@@ -48,23 +49,36 @@ class MatriculasController extends Controller
     }
     
     public function registromat(Request $request){
+        $id = $request->estu;
         $estudiante =Estudiante::findOrfail($request->estu);
         $r=$request->cur;
-        //return $r;
-        if($r!=null){
-            $b=1;
-            $curso = Programas::findOrFail($r);
-            $category = new Matricula();
-            $category->id_estudiante = $request->input('estu');
-            $category->id_curso = $request->input('cur');
-            $category->fec_matricula = $request->input('fecha');
-            $category->save();
-            return back()->with('b', $b);
+        $validarMat= DB::table('matriculas')->where('matriculas.id_estudiante', '=', $id)->count();
+        //return $validarMat;
+        if($validarMat!=0){
+           
+            Session::flash('validacion','Estudiante Ya Esta Registrado');
+            return back();
+        }else{
+
+            if($r!=null){
+                $b=1;
+                $curso = Programas::findOrFail($r);
+                $category = new Matricula();
+                $category->id_estudiante = $request->input('estu');
+                $category->id_curso = $request->input('cur');
+                $category->fec_matricula = $request->input('fecha');
+                $category->save();
+                Session::flash('aceptado','Estudiante Registrado Exitosamente!');
+                return back()->with('b', $b);
+
+            }
+            else{
+                $b=0;
+                return back()->with('b', $b);
+            }
+
         }
-        else{
-            $b=0;
-            return back()->with('b', $b);
-        }
+       
         
     }
 

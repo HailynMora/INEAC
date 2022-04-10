@@ -6,6 +6,22 @@
 <!---->
 <br>
 <div class="container-fluid">
+    <!---Mensaje-->
+    @if(Session::has('validacion'))
+        <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{Session::get('validacion')}}
+        </div>
+    @endif
+    <!-- end mensaje-->
+     <!---Mensaje-->
+     @if(Session::has('aceptado'))
+        <div class="alert alert-primary alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{Session::get('aceptado')}}
+        </div>
+    @endif
+    <!-- end mensaje-->
  <div class="row">
      <div class="col-md-12" style="background-color:#28afc2;">
         <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
