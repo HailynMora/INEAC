@@ -152,6 +152,9 @@ Route::post('/vicular/asignaturas', [ProgramasController::class, 'regasigcurso']
 Route::get('/programas/actualizar/{id}', [ProgramasController::class, 'form_actualizar'])->name('actualizar_prog');
 
 Route::post('/programas/actualizar/{id}', [ProgramasController::class, 'actualizar_programa'])->name('actualizar_programa');
+//ruta cambiar estado
+Route::get('cambiar/{id}', [ProgramasController::class, 'cambiar_pro'])->name('cambiarPro'); 
+
 
 Route::get('/perfil/registrar/usu', [PerfilController::class, 'registrar'])->name('regisperfil');
 

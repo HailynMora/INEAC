@@ -79,8 +79,12 @@ class ProgramasController extends Controller
     }
         
     public function show(Request $request){
-        $post = Programas::findOrFail($request->id);
-        return view('programas.post', compact('post'))->render();
+        $post = DB::table('tipo_curso')->where('tipo_curso.id','=',$request->id)
+        ->join('estado','id_estado','=','estado.id')
+        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.id_estado','estado.descripcion as estado')
+        ->get();
+        $estado=Estado::all();
+        return view('programas.post', compact('post','estado'))->render();
     }
 
     public function reporte(){
@@ -92,7 +96,11 @@ class ProgramasController extends Controller
         return view('programas.reporte_programas')->with('rep',$rep);
     }
     public function form_actualizar($id){
-        $prog = Programas::findOrFail($id);
+        $d =$id;
+        $prog = DB::table('tipo_curso')->where('tipo_curso.id','=',$d)
+        ->join('estado','id_estado','=','estado.id')
+        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.id_estado','estado.descripcion as estado')
+        ->get();
         $estado=Estado::all();
         return view('programas.actualizar_programa', compact('prog','estado'));
     }
@@ -106,5 +114,18 @@ class ProgramasController extends Controller
         return redirect('/asignatura/reporte_asignatura');
 
     }
+    public function cambiar_pro($id){
+        $pro = Programas::find($id);
+        $es = $pro->id_estado;
+        if($es==2){
+            $pro->id_estado = 1;
+            $pro->save();
+        }else{
+            $pro->id_estado = 2;
+            $pro->save();
+        }        
+        $nombre = $pro->descripcion;
+        return redirect('/programas/reporte_programas')->with('msjdelete', 'El Niño ('.$nombre.') Fue cambiado.');
+}
 
 }
