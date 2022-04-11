@@ -56,17 +56,29 @@ class ProgramasController extends Controller
     }
 
     public function regasigcurso(Request $request){
-        $category = new AsigProgram();
-        //$a=$request->input('asig');
-        //$val = AsigProgram::where('id_asignatura', '=', $a)->count();
-        //if($val=0){
+        $r=$request->curso; 
+        $r1=$request->asig; 
+
+        $resdatos=DB::table('cursos')
+        ->where('id_asignatura', '=', $r1)->where('id_tipo_curso', '=', $r)->count();
+
+
+        if($resdatos!=0){
+               return \Response::json([
+                'error'  => 'Error datos'
+            ],422);
+            
+        }else{
+           
+            $category = new AsigProgram();
             $category->id_asignatura = $request->input('asig');
             $category->id_tipo_curso = $request->input('curso');
             $category->fecha = $request->input('fecha');
             $category->save();
-        //}
-       
-        return back();   
+            return back();   
+            
+        }
+
     }
 
     public function consulta(){

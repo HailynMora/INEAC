@@ -15,7 +15,7 @@
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-            <form id="forvincular" name="forvincular" method="POST">
+            <form id="forvincular" name="forvincular" method="POST" >
               @csrf
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -77,7 +77,12 @@
           $('#forvincular')[0].reset();
           toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
         }
-      }
+      },
+      error:function(jqXHR, response){
+          if(jqXHR.status==422){
+            toastr.warning('Datos Repetidos!.', 'Asignatura ya esta vinculada!', {timeOut:3000});
+          }
+          }
     });
   })
   function resetform() {
