@@ -71,7 +71,24 @@
                         <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($d['fec_vinculacion']))}}">
                       </div>
                       <div class="form-group col-md-12">
-                        @include('docente.lista')
+                      <!---asignaturas a cargo-->
+                      <?php 
+                         $id=$d['id'];
+                      ?>
+                      <div class="alert alert-primary" role="alert">
+                         Asignaturas A cargo
+                      </div>
+                       @foreach($condoc as $c)
+                            @if($c->id_docente==$id)
+                                
+                                {{$c->descripcion}} <br>
+                                {{$c->nombre}} <br>
+                                {{$c->codigo}} <br>
+                                {{$c->intensidad_horaria}}   <br>                         
+                            @endif
+
+                      @endforeach
+                      <!---end asignaturas a cargo-->
                       </div>
                     </div>
                   </form>

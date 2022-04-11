@@ -92,7 +92,12 @@ class docenteController extends Controller
         
         $docente = json_decode($doc,true);
         $this->docente = $docente;
-        return view('docente.listar_docente',["docente"=>$this->docente],['b'=>$b]);
+        /////////asignaturas que el docente tiene a cargo
+        
+        $condoc= DB::table('asig_asignaturas')->join('asignaturas','asig_asignaturas.id_asignaturas','=','asignaturas.id')
+        ->get();
+
+        return view('docente.listar_docente',["docente"=>$this->docente],['b'=>$b])->with('condoc',$condoc);
     }
 
     public function listar_asig($id){
