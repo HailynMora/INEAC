@@ -83,7 +83,9 @@ class MatriculasController extends Controller
     }
 
     public function listado(){
+        $es="Activo";
         $val=DB::table('matriculas')->count();
+
         if($val=0){
             $b=0;
             $estumat=array('dato1', 'dato2', 'dato3');
@@ -99,9 +101,54 @@ class MatriculasController extends Controller
             ->paginate(7);
            
         }
+
+        $program=DB::table('tipo_curso')->join('estado', 'tipo_curso.id_estado', '=', 'estado.id')
+                      ->where('estado.descripcion', '=', $es)
+                      ->select('tipo_curso.id as idcur', 'tipo_curso.descripcion as nomcur', 
+                               'estado.descripcion as estadocur')->get();
        
         
-        return view('matriculas.listadomat')->with('estumat', $estumat)->with('b', $b);
+        return view('matriculas.listadomat')->with('estumat', $estumat)->with('b', $b)->with('program', $program);
+    }
+
+    public function filtrares(Request $request){
+        $es="Activo";
+        $idcurso=$request->idcur;
+        
+        $est=DB::table('matriculas')->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+        ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+        ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+        ->where('tipo_curso.id', '=', $idcurso)->count();
+        
+        $program=DB::table('tipo_curso')->join('estado', 'tipo_curso.id_estado', '=', 'estado.id')
+        ->where('estado.descripcion', '=', $es)
+        ->select('tipo_curso.id as idcur', 'tipo_curso.descripcion as nomcur', 
+                 'estado.descripcion as estadocur')->get();
+
+        if($est!=0){
+            $b=1;
+            $estumat1=DB::table('matriculas')->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+            ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+            ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+            ->where('tipo_curso.id', '=', $idcurso)
+            ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
+            'matriculas.id_curso as idcur', 'estudiante.nombre', 'estudiante.apellido',
+            'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
+            'tipo_curso.descripcion as nomcurso', 'tipo_curso.id as idcur')
+           
+            ->paginate(7);
+            return view('matriculas.filtrado')->with('estumat1', $estumat1)->with('b', $b)->with('program', $program);
+            
+        }else{
+            $b=0;
+            $estumat1=array('dato1', 'dato2', 'dato3');
+            Session::flash('validacion','Datos No Encontrados');
+            return view('matriculas.filtrado')->with('estumat1', $estumat1)->with('b', $b)->with('program', $program);
+        }
+
+       
+        
+       
     }
    
 }

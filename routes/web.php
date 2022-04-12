@@ -185,4 +185,7 @@ Route::post('/admin/matricular/estudiante', [MatriculasController::class, 'regis
 //reporte de estudiantes matriculados
 Route::get('/admin/reporte/estudiante', [MatriculasController::class, 'listado'])->name('listadomatricula');
 
+//filtrar estudiantes por cursos
+Route::post('/admin/filtrar/estudiante', [MatriculasController::class, 'filtrares'])->name('filtrarestu');
+
 require __DIR__.'/auth.php';

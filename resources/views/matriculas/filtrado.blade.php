@@ -14,9 +14,20 @@
         @endforeach
       </select>
       <button type="submit" class="btn btn-info">Filtrar</button>
+      <a href ="{{route('listadomatricula')}}" type="button" class="btn btn-info" id="deshacer">Deshacer</a>
     </form>
    </div>
-    <br><br>
+    <br>
+      <!---Mensaje-->
+      @if($b==0)
+      @if(Session::has('validacion'))
+        <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{Session::get('validacion')}}
+        </div>
+     @endif
+     @endif
+    <br>
     <table class="table">
         <thead style="background-color:#F9FF79;">
             <tr>
@@ -35,7 +46,7 @@
         @php
         $con = 1;
         @endphp
-        @foreach($estumat as $e)
+        @foreach($estumat1 as $e)
         <tr style="background-color: #B5F2FF;">
         <td>{{$con++}}</td>
         <td>{{$e->nombre}}</td>
@@ -65,23 +76,12 @@
       <div class="col-md-2">
         <div class="container-fluid">
         @if($b==1)
-         {{$estumat->links()}}
+        {{$estumat1->links()}}
          @endif
+        
        </div>
       </div>
     </div>
    
 </div>
-@if($b=0)
-         hola
-@endif
-
-
 @endsection
-
-        
-       
-        
-        
-        
-        
