@@ -39,7 +39,7 @@ class MatriculasController extends Controller
     
     //buscar cursos a matricular
     public function curbus(Request $request){
-        $results = Programas::where('descripcion', 'LIKE', "%{$request->search}%")->get();
+        $results = Programas::where('descripcion', 'LIKE', "%{$request->search}%")->where('id_estado','=',1)->get();
         return view('matriculas.resulcur', compact('results'))->with(['search' => $request->search])->render();
     }
         
