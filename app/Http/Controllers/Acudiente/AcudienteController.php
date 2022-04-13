@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\ParentescoModel\Acudiente;
+use App\Models\GeneroModel\Genero;
+use App\Models\ParentescoModel\Parentesco;
+use App\Models\TipoDocumentoModel\TipoDocumento;
 
 class AcudienteController extends Controller
 {
@@ -29,6 +32,37 @@ class AcudienteController extends Controller
         }
         return view('acudiente.acudiente')->with('acu', $acu)->with('b', $b);
     }
+    public function form_actualizar($id){
+        // $est = Estudiante::findOrFail($id);
+        $acu = DB::table('acudiente')->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+            ->join('tipo_documento', 'acudiente.id_tipo_doc', '=', 'tipo_documento.id')
+            ->join('genero', 'acudiente.id_genero', '=', 'genero.id')
+            ->where('acudiente.id', '=', $id)
+            ->select('acudiente.id', 'acudiente.nombre', 'acudiente.apellido', 'acudiente.direccion', 'acudiente.telefono',
+            'acudiente.num_doc','acudiente.id_genero','acudiente.id_tipo_doc','acudiente.id_parentesco', 
+            'parentezco.descripcion as parent', 'tipo_documento.descripcion as tipodoc',
+            'genero.descripcion as gen')
+            ->get();
+        $tipodoc=TipoDocumento::all();
+        $paren=Parentesco::all();
+        $genero=Genero::all();
+        return view('acudiente.actualizar', compact('acu','tipodoc','genero','paren'));
+     }
+     public function actualizar_acudiente(Request $request,$id){
+        $category = Acudiente::FindOrFail($id);;
+        $category->nombre = $request->input('nombre');
+        $category->apellido = $request->input('apellido');
+        $category->direccion = $request->input('direccion');
+        $category->telefono = $request->input('telefono');
+        $category->num_doc = $request->input('numerodoc');
+        $category->id_parentesco = $request->input('parentesco');
+        $category->id_tipo_doc = $request->input('tipodoc');
+        $category->id_genero = $request->input('tipogen');
+        $category->save();
+         
+         return redirect('/admin/visualizar/acudiente');
+ 
+     }
 }
 
 /* <div class="row">

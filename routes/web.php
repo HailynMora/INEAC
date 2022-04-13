@@ -77,6 +77,8 @@ Route::get('posts/show',[PostController::class, 'show'])->name('posts.show');
 
 //ruta cambiar estado
 Route::get('cambiar_estudiante/{id}', [EstudiantesController::class, 'cambiar_estado'])->name('cambiarEstad'); 
+
+
 //------------------------------------------FIN RUTAS ESTUDIANTE------------------------------
 
 //---------------------------------------------INICIO RUTAS DOCENTE---------------------------------
@@ -208,5 +210,10 @@ Route::post('/admin/filtrar/estudiante', [MatriculasController::class, 'filtrare
 
 //visuailizar acudiente
 Route::get('/admin/visualizar/acudiente', [AcudienteController::class, 'visualizar'])->name('visacu');
+//ACUDIENTE EDITAR
+Route::get('/acudiente/actualizar/{id}', [AcudienteController::class, 'form_actualizar'])->name('actualizar_acu');
+
+Route::post('/acudiente/actualizar/{id}', [AcudienteController::class, 'actualizar_acudiente'])->name('actualizar_acudiente');
+
 
 require __DIR__.'/auth.php';

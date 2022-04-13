@@ -26,7 +26,7 @@
         <td>{{$d->telefono}}</td>
         <td>{{$d->num_doc}}</td>
         <td><!-- Button trigger modal -->
-                <a href="#" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
+                <a href="{{route('actualizar_acu',$d->id)}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
                 <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>">
                 <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
                 <!-- Modal -->
