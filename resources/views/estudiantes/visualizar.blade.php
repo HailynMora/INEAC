@@ -127,8 +127,8 @@
                         </strong>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         <a  class="btn btn-success" href="{{ route('cambiarEstad', $d->id) }}">Cambiar</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                     </div>

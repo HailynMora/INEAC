@@ -53,8 +53,8 @@
                                 </strong>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <a  class="btn btn-success" href="{{ route('cambiarAsig', $post[0]->id) }}">Cambiar</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
                     </div>
