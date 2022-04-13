@@ -80,6 +80,17 @@ class ProgramasController extends Controller
         }
 
     }
+    
+    public function listarvinculacion(){
+        $asigpro=DB::table('cursos')
+        ->select('cursos.id','id_asignatura','id_tipo_curso','asignaturas.codigo as codas','asignaturas.nombre as asig','tipo_curso.codigo as codcur','tipo_curso.descripcion as curso')
+        ->join('asignaturas','id_asignatura','=','asignaturas.id')
+        ->join('tipo_curso','id_tipo_curso','=','tipo_curso.id')
+        ->orderBy('cursos.id_tipo_curso', 'ASC')
+        ->paginate(5); //hacer paginacion de las vistas
+        return view('programas.listarvinculacion')->with('asigpro',$asigpro);
+
+    }
 
     public function consulta(){
         return view('programas.consultar');
@@ -138,6 +149,10 @@ class ProgramasController extends Controller
         }        
         $nombre = $pro->descripcion;
         return redirect('/programas/reporte_programas');
-}
+    }
+    public function desvincular($id){
+        AsigProgram::find($id)->delete();
+        return redirect('/programas/listado_vinculacion');
+    }
 
 }

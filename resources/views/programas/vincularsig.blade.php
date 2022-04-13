@@ -3,6 +3,10 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3>Vincular Asignatura a un Programa</h3>
 </div>
+<div>
+<a href="{{url('/programas/listado_vinculacion')}}" class="btn btn-success">Listado</a>
+</div>
+<br><br>
 <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne">

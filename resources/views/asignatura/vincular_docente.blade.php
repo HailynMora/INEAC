@@ -25,22 +25,15 @@
       <h4>Asignaturas</h4>
               @csrf
                 <div class="form-row">
-                 <!-- <div class="form-group col-md-4">
-                  <nav class="navbar navbar-light bg-light">
-                    <form class="form-inline">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success my-4 my-sm-2" type="submit">Search</button>
-                    </form>
-                  </nav>
-                  </div>-->
                   <div class="form-group col-md-6">
                     
                         <label for="asignatura">Asignatura</label>
                         <select id="asignatura" class="form-control" name="asignatura">
                         <option selected>Seleccionar</option>
                         @foreach($asignatura as $as)
+                        @if($as->estado=='Activo')
                         <option value="{{$as->id}}">{{$as->nombre}}</option>
+                        @endif
                         @endforeach
                         </select>
                     </div>
@@ -90,6 +83,7 @@
             <th scope="col">IH</th>
             <th scope="col">Docente</th>
             <th scope="col">Descripcion</th>
+            <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -100,7 +94,34 @@
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->nom_doc}} {{$d->ape_doc}}</td>
         <td>{{$d->descripcion}}</td>
+        <td>
+          &nbsp&nbsp
+          <a type="button" data-toggle="modal" data-target="#desvincularDoc{{$d->id}}" ><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
+        </td>
         </tr>
+         <!-- Ventana modal para eliminar -->
+         <div class="modal fade" id="desvincularDoc{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #283593 !important;">
+                        
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> 
+                    </div>
+                    <div class="modal-body mt-2 text-center">
+                    <h4 class="modal-title text-center" style=" text-align: center;">
+                            <span>¿Esta seguro que desea desvincular el docente {{$d->nom_doc}} {{$d->ape_doc}} de la asignatura {{$d->asig}}? </span>
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <a  class="btn btn-success" href="{{ route('desvincular_doc', $d->id) }}">Aceptar</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        <!---fin ventana eliminar--->
         @endforeach
         </tbody>
         </table>
@@ -108,6 +129,7 @@
       </div>
     </div>
   </div>
+  {{$asig->links()}}
 </div>
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

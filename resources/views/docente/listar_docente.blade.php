@@ -75,19 +75,33 @@
                       <?php 
                          $id=$d['id'];
                       ?>
-                      <div class="alert alert-primary" role="alert">
-                         Asignaturas A cargo
-                      </div>
-                       @foreach($condoc as $c)
-                            @if($c->id_docente==$id)
-                                
-                                {{$c->descripcion}} <br>
-                                {{$c->nombre}} <br>
-                                {{$c->codigo}} <br>
-                                {{$c->intensidad_horaria}}   <br>                         
-                            @endif
+                      
+                          <div class="form-group justify-content-center col-md-12 " id="docente">
+                            <label for="asig_dictadas">Asignaturas a Cargo</label>
+                            <table class="table table-striped">
+                              <thead>
+                                  <tr>
+                                  <th scope="col">Codigo</th>
+                                  <th scope="col">Asignatura</th>
+                                  <th scope="col">Intensidad Horaria</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              
+                              @foreach($condoc as $c)
+                                @if($c->id_docente==$id)
+                                <tr>
+                                <td>{{$c->codigo}} </td>
+                                <td>{{$c->nombre}}</td>
+                                <td>{{$c->intensidad_horaria}}</td>  
+                                </tr>                     
+                                @endif
+                              @endforeach
+                              
+                          </tbody>
+                          </table>
 
-                      @endforeach
+                          </div>
                       <!---end asignaturas a cargo-->
                       </div>
                     </div>

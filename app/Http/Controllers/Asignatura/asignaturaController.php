@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Asignatura;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +11,7 @@ use App\Models\ObjetivosModel\Objetivos;
 use App\Models\EstadoModel\Estado;
 use App\Models\AsignaturaModel\Asignatura;
 use App\Models\AsignacionDoModel\Asignaciondo;
+use App\Models\AsignaturaModel\AsigProgram;
 
 class asignaturaController extends Controller
 {
@@ -58,18 +59,22 @@ class asignaturaController extends Controller
     public function datos(){
         $Docente=Docente::all();
         $Asignatura=Asignatura::all();
+        $Asignatura = DB::table('asignaturas')
+        ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
+        ->join('estado','id_estado','=','estado.id')
+        ->get();
         $asig=DB::table('asig_asignaturas')
-        ->select('asignaturas.codigo','descripcion','docente.nombre as nom_doc','docente.apellido as ape_doc','asignaturas.nombre as asig','intensidad_horaria')
+        ->select('asig_asignaturas.id','asignaturas.codigo','descripcion','docente.nombre as nom_doc','docente.apellido as ape_doc','asignaturas.nombre as asig','intensidad_horaria')
         ->join('docente','id_docente','=','docente.id')
         ->join('asignaturas','id_asignaturas','=','asignaturas.id')
-        ->get();
+        ->paginate(5);
         return view('asignatura.vincular_docente')->with('docente',$Docente)->with('asignatura',$Asignatura)->with('asig',$asig);
     }
     public function reporte(){
         $rep=DB::table('asignaturas')
         ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
         ->join('estado','id_estado','=','estado.id')
-        ->get();
+        ->paginate(5);
         return view('asignatura.reporte_asignatura')->with('rep',$rep);
     }
     public function form_actualizar($id){
@@ -106,7 +111,16 @@ class asignaturaController extends Controller
         }        
         return redirect('/asignatura/reporte_asignatura');
     }
-
+    public function eliminar_asig($id){
+        DB::table('asig_asignaturas')->where('id_asignaturas','=',$id)->delete();
+        DB::table('cursos') ->where('id_asignatura', '=', $id)->delete();
+        Asignatura::find($id)->delete();
+        return redirect('/asignatura/reporte_asignatura');
+    }
+    public function desvincular_doc($id){
+        DB::table('asig_asignaturas')->where('id','=',$id)->delete();
+        return redirect('/asignatura/vincular_docente');
+    }
     public $asignacion;
     /*public function listado(){
         

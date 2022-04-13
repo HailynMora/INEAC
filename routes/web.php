@@ -127,6 +127,13 @@ Route::post('/asignatura/actualizar/{id}', [AsignaturaController::class, 'actual
 
 //ruta cambiar estado
 Route::get('cambiar_as/{id}', [AsignaturaController::class, 'cambiar_asig'])->name('cambiarAsig'); 
+//ruta eliminar asignatura
+Route::get('eliminar_as/{id}', [AsignaturaController::class, 'eliminar_asig'])->name('eliminarAsig'); 
+
+//desvincular asignatura
+
+Route::get('desvincular/docente/{id}', [AsignaturaController::class, 'desvincular_doc'])->name('desvincular_doc'); 
+
 //--------------------------------------------------FIN RUTAS ASIGNATURAS-------------------------------------------------
 
 //------------------------------------------INICIO RUTAS PROGRAMAS------------------------------------------------
@@ -147,6 +154,11 @@ Route::post('/registro/programas', [ProgramasController::class, 'registro'])->na
 
 //vincular asignaturas a un programa 
 Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->name('vicularAsignaturas');
+//listado de vinculacion
+Route::get('/programas/listado_vinculacion', [ProgramasController::class, 'listarvinculacion'])->name('listado_asig');
+
+//desvincular asignatura
+Route::get('desvincular/{id}', [ProgramasController::class, 'desvincular'])->name('desvincular'); 
 
 //registrar asignatura aun programa a la base de datos
 Route::post('/vicular/asignaturas', [ProgramasController::class, 'regasigcurso'])->name('regvincularasig');

@@ -37,9 +37,11 @@
             <?php
         }
         ?>
+        &nbsp&nbsp
+        <!--<a type="button" data-toggle="modal" data-target="#eliminarAsig{{$d->id}}"><i class="nav-icon fas fa-trash" style="color: red;"></i></a>-->
         </td>
         </tr>
-        <!-- Ventana modal para eliminar -->
+        <!-- Ventana modal para cambiar -->
         <div class="modal fade" id="cambiarAsig{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -63,11 +65,36 @@
                 </div>
              </div>
         </div>
+        <!---fin ventana cambiar--->
+        <!-- Ventana modal para eliminar 
+        <div class="modal fade" id="eliminarAsig{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #563d7c !important;">
+                        <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
+                            <span>¿Esta seguro que desea eliminar la asignatura  {{$d->asig}}? </span>
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> 
+                    </div>
+                    <div class="modal-body mt-2 text-center">
+                        <strong style="text-align: center !important"> 
+                        {{ $d->asig }} : Se eliminara de toda la Base de Datos
+                        </strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <a  class="btn btn-success" href="{{ route('eliminarAsig', $d->id) }}">Eliminar</a>
+                    </div>
+                </div>
+             </div>
+        </div>-->
         <!---fin ventana eliminar--->
         @endforeach
         </tbody>
     </table>
-  
+    {{$rep->links()}}
 </div>
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
