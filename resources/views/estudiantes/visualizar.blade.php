@@ -9,8 +9,8 @@
 <table class="table table-striped"style="background-color:#FFCC00;">
        <thead>
         <tr>
+        <th scope="col">N° Identificacion</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
         <th scope="col" >Telefono</th>
         <th scope="col" class="d-none d-lg-block ">Correo</th>
         <th scope="col">Estado</th>
@@ -21,8 +21,8 @@
     @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
         <tr class="table-success"style="background-color: #dcedc8;">
-        <td>{{$d->nombre}}</td>
-        <td>{{$d->apellido}}</td>
+        <td>{{$d->num_doc}}</td>
+        <td>{{$d->nombre}} {{$d->apellido}}</td>
         <td>{{$d->telefono}}</td>
         <td  class="d-none d-lg-block">{{$d->correo}}</td>
         <td>{{$d->estadoes}}</td>
@@ -30,6 +30,18 @@
                 <a href="{{route('actualizar_est',$d->id)}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
                 <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>">
                 <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
+                &nbsp&nbsp
+                <?php
+                if($d->estadoes == 'Activo'){
+                    ?>
+                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+                    <?php
+                }else{
+                    ?>
+                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+                    <?php
+                }
+                ?>
                 <!-- Modal -->
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -95,6 +107,33 @@
                     </div>
                 </div>
                 </div>
+                <!-- Ventana modal para cambiar -->
+                <div class="modal fade" id="cambiarEstado{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #283593 !important;">
+                        <h4 class="modal-title text-center" style=" text-align: center;">
+                            <span>ESTUDIANTE: {{$d->nombre}} {{$d->apellido}} </span>
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> 
+                        </div>
+                        <div class="modal-body mt-2 text-center">
+                        <strong style="text-align: center !important"> 
+                            <h4 class="modal-title text-center" style=" text-align: center;">
+                            <span>¿Cambiar el estado {{$d->estadoes}} del Estudiante? </span>
+                            </h4>
+                        </strong>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <a  class="btn btn-success" href="{{ route('cambiarEstad', $d->id) }}">Cambiar</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                    <!---fin ventana cambiar--->
         </td>
         </tr>
         

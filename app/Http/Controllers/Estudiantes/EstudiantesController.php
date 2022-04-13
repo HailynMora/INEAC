@@ -55,6 +55,18 @@ class EstudiantesController extends Controller
 
         return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b);
     }
+    public function cambiar_estado($id){
+        $estu= Estudiante::find($id);
+        $es = $estu->id_estado;
+        if($es==2){
+            $estu->id_estado = 1;
+            $estu->save();
+        }else{
+            $estu->id_estado = 2;
+            $estu->save();
+        }        
+        return redirect('/visualizar/estudiante');
+    }
 
 
     public function regisacudiente(){

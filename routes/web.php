@@ -75,7 +75,8 @@ Route::get('posts/search',[PostController::class, 'search'])->name('posts.search
 
 Route::get('posts/show',[PostController::class, 'show'])->name('posts.show');
 
-
+//ruta cambiar estado
+Route::get('cambiar_estudiante/{id}', [EstudiantesController::class, 'cambiar_estado'])->name('cambiarEstad'); 
 //------------------------------------------FIN RUTAS ESTUDIANTE------------------------------
 
 //---------------------------------------------INICIO RUTAS DOCENTE---------------------------------
