@@ -14,6 +14,8 @@ use App\Http\Controllers\Asignatura\ConsultarAsigController;
 use App\Http\Controllers\Asignatura\PostAsigController;
 use App\Http\Controllers\Perfil\PerfilController;
 use App\Http\Controllers\Matriculas\MatriculasController;
+use App\Http\Controllers\Acudiente\AcudienteController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -199,5 +201,8 @@ Route::get('/admin/reporte/estudiante', [MatriculasController::class, 'listado']
 
 //filtrar estudiantes por cursos
 Route::post('/admin/filtrar/estudiante', [MatriculasController::class, 'filtrares'])->name('filtrarestu');
+
+//visuailizar acudiente
+Route::get('/admin/visualizar/acudiente', [AcudienteController::class, 'visualizar'])->name('visacu');
 
 require __DIR__.'/auth.php';

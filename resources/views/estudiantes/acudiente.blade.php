@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center" role="alert">
- Registro de Acudientes
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Registro de Acudientes</h3>
 </div>
 <form  method="post" id="formudatos" name="formudatos" method="post">
   @csrf
@@ -59,6 +59,9 @@
     </div>
   </div>
   <button type="submit" class="btn btn-primary">Registrar</button>
+  <a href="{{route('visacu')}}" type="button" class="btn btn-success">Visualizar</a>
+  <a type="button" class="btn btn-warning" Onclick="resetform();">Limpiar</a>
+  <a href="{{url('/inicio')}}" type="button" class="btn btn-danger">Cancelar</a>
 </form>
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -100,4 +103,10 @@
     });
   });
  </script> 
+ <script>
+   function resetform() {
+     $("form select").each(function() { this.selectedIndex = 0 });
+     $("form input[type=text],form input[type=number]").each(function() { this.value = '' });
+  }
+ </script>
 @endsection
