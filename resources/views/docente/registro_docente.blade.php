@@ -60,7 +60,7 @@
                     <label for="fec_vinculacion">Fecha vinculación</label>
                      <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required>
                   </div>
-                  <div class="form-group col-md-3" >
+                  <div class="form-group col-md-4" >
                   <label for="id_usuario">Usuario</label>
                   <select id="id_usuario" class="form-control" name="id_usuario" required>
                   <option selected>Seleccionar</option>
@@ -69,11 +69,20 @@
                   @endforeach
                   </select>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label for="tipogen">Genero</label>
                     <select id="tipogen" class="form-control" name="tipogen" required>
                     @foreach($genero as $g)
                     <option value="{{$g->id}}">{{$g->descripcion}}</option>
+                    @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="estado">Estado</label>
+                    <select id="estado" class="form-control" name="estado" required>
+                    <option selected>Seleccionar</option>
+                    @foreach($estado as $es)
+                      <option value="{{$es->id}}">{{$es->descripcion}}</option>
                     @endforeach
                     </select>
                   </div>
@@ -119,6 +128,7 @@
     var id_usuario = $("#id_usuario").val();
     var tipodoc=$('#tipodoc').val();
     var tipogen=$('#tipogen').val();
+    var estado=$('#estado').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({
@@ -136,6 +146,7 @@
         id_usuario:id_usuario,
         tipodoc:tipodoc,
         tipogen:tipogen,
+        estado:estado,
         _token:_token
       },
       success: function (response) {

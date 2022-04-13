@@ -10,6 +10,7 @@ use App\Models\TipoDocumentoModel\TipoDocumento;
 use App\Models\DocenteModel\Docente;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Session;
+use App\Models\EstadoModel\Estado;
 use App\Models\User;
 
 class docenteController extends Controller
@@ -21,7 +22,8 @@ class docenteController extends Controller
         $tipodoc=TipoDocumento::orderBy('id')->paginate(10);
         $genero=Genero::all();
         $user=User::all();
-        return view('docente.registro_docente')->with('tipodoc', $tipodoc)->with('genero', $genero)->with('user', $user);
+        $estado=Estado::all();
+        return view('docente.registro_docente')->with('tipodoc', $tipodoc)->with('genero', $genero)->with('user', $user)->with('estado',$estado);
     }
 
    
@@ -53,6 +55,7 @@ class docenteController extends Controller
                 $category->id_usuario = $request->input('id_usuario');
                 $category->id_tipo_doc = $request->input('tipodoc');
                 $category->id_genero = $request->input('tipogen');
+                $category->id_estado = $request->input('estado');
                 $category->save();
                 return back();
             }
@@ -75,9 +78,11 @@ class docenteController extends Controller
                     'telefono',
                     'direccion',
                     'genero.descripcion as genero',
-                    'tipo_documento.descripcion')
+                    'tipo_documento.descripcion',
+                    'estado.descripcion as estado')
             ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
             ->join('genero','id_genero','=','genero.id')
+            ->join('estado','id_estado','=','estado.id')
             ->get();
            /* $asig=DB::table('asig_asignaturas')
                     ->select('asig_asignaturas.id_asignaturas','asignaturas.nombre','asignaturas.codigo')
@@ -120,6 +125,7 @@ class docenteController extends Controller
                 ->count();
             if($asig!=0){
                 $doc = DB::table('docente')->where('docente.id', '=', $id, 'and', 'asig_asignaturas.id_docente','=', $id)
+                ->join('estado','docente.id_estado','=','estado.id')
                 ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
                 ->join('genero','docente.id_genero','=','genero.id')
                 ->join('users','docente.id_usuario','=','users.id')
@@ -127,28 +133,31 @@ class docenteController extends Controller
                 ->join('asignaturas','asig_asignaturas.id_asignaturas','=','asignaturas.id')
                 ->select('docente.id as iddoc','docente.nombre', 'docente.apellido', 'docente.direccion', 'docente.telefono', 'docente.correo', 
                 'docente.num_doc', 'docente.fec_vinculacion', 'docente.id_usuario', 'docente.id_tipo_doc', 'tipo_documento.descripcion as desdoc',  'docente.id_genero',
-                'genero.descripcion as gendoc', 'users.name','asignaturas.codigo as cod','asignaturas.nombre as asig')
+                'genero.descripcion as gendoc', 'users.name','asignaturas.codigo as cod','asignaturas.nombre as asig','estado.id as idestado','estado.descripcion as estado','docente.id_estado')
                 ->get();
                 $tipo_doc=TipoDocumento::all();
                 $gen=Genero::all();
                 $u=User::all();
+                $es=Estado::all();
                 $b=1;
-                return view('docente.modal_actualizar', compact('doc','tipo_doc','gen','u','b'));
+                return view('docente.modal_actualizar', compact('doc','tipo_doc','gen','u','b','es'));
             }else{
                 $doc = DB::table('docente')->where('docente.id', '=', $id)
+                ->join('estado','docente.id_estado','=','estado.id')
                 ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
                 ->join('genero','docente.id_genero','=','genero.id')
                 ->join('users','docente.id_usuario','=','users.id')
                 ->select('docente.id as iddoc','docente.nombre', 'docente.apellido', 'docente.direccion', 'docente.telefono', 'docente.correo', 
                 'docente.num_doc', 'docente.fec_vinculacion', 'docente.id_usuario', 'docente.id_tipo_doc', 'tipo_documento.descripcion as desdoc',  'docente.id_genero',
-                'genero.descripcion as gendoc', 'users.name')
+                'genero.descripcion as gendoc', 'users.name','estado.id as idestado','estado.descripcion as estado','docente.id_estado')
                 ->get();
                 //return $doc;
                 $tipo_doc=TipoDocumento::all();
                 $gen=Genero::all();
                 $u=User::all();
+                $es=Estado::all();
                 $b=0;
-                return view('docente.modal_actualizar', compact('doc','tipo_doc','gen','u','b'));
+                return view('docente.modal_actualizar', compact('doc','tipo_doc','gen','u','b','es'));
             }
             
     }
@@ -168,5 +177,17 @@ class docenteController extends Controller
         $docente->save();
         return redirect('/docente/listado_docente');
 
+    }
+    public function cambiar_estado($id){
+        $doces= docente::find($id);
+        $es = $doces->id_estado;
+        if($es==2){
+            $doces->id_estado = 1;
+            $doces->save();
+        }else{
+            $doces->id_estado = 2;
+            $doces->save();
+        }        
+        return redirect('/docente/listado_docente');
     }
 }

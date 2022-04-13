@@ -85,6 +85,9 @@ Route::get('/docente/registro_docente', [DocenteController::class, 'regdocente']
 Route::post('/docente/registro_docente', [DocenteController::class, 'datosdoc'])->name('datosdoc');
 
 Route::get('/docente/listado_docente', [DocenteController::class, 'listado_docente'])->name('listado_docente');
+
+//ruta cambiar estado
+Route::get('cambiar_docente/{id}', [DocenteController::class, 'cambiar_estado'])->name('cambiarEstado'); 
 //ACTUALIZAR DOCENTE
 
 Route::get('/docente/actualizar/{id}', [DocenteController::class, 'form_actualizar'])->name('actualizar_doc');

@@ -17,6 +17,7 @@
         <th scope="col">Documento</th>
         <th scope="col">Nombres</th>
         <th scope="col">Fec. Vinculación</th>
+        <th scope="col">Estado</th>
         <th scope="col">Opciones</th>
         </tr>
     </thead>
@@ -28,12 +29,24 @@
           <td>{{$d['num_doc']}}</td>
           <td>{{$d['nombre']}}  {{$d['apellido']}}</td>
           <td>{{date("Y-m-d", strtotime($d['fec_vinculacion']))}}</td>
+          <td>{{$d['estado']}}</td>
           <td>
             <a href="{{route('actualizar_doc',$d['id'])}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
             <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d['id'];?>" style="color: #66b62b">
             <i class="nav-icon fas fa-eye"></i></a>
             &nbsp&nbsp
-            <a href="#" ><i class="fas fa-trash-alt" style="color:  red;" ></i></a>
+            <?php
+            if($d['estado'] == 'Activo'){
+                ?>
+                <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d['id']}}"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+                <?php
+            }else{
+                ?>
+                <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d['id']}}"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+                <?php
+            }
+            ?>
+            <!--MODAL VER-->
             <div class="modal fade" id="docente<?php echo $d['id'];?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
               <div class="modal-content">
@@ -58,17 +71,21 @@
                         <label for="telefono">Telefono</label>
                         <input type="text" class="form-control" id="telefono" name="telefono" disabled value="{{$d['telefono']}}">
                       </div>
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-3">
                         <label for="direccion">Direccion</label>
                         <input type="text" class="form-control" id="direccion" name="direccion" disabled value="{{$d['direccion']}}">
                       </div>
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-3">
                         <label for="genero">Genero</label>
                         <input type="text" class="form-control" id="genero" name="genero" disabled value="{{$d['genero']}}">
                       </div>
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-3">
                         <label for="fec_vinculacion">Fecha de Vinculacion</label>
                         <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($d['fec_vinculacion']))}}">
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="fec_vinculacion">Estado</label>
+                        <input type="text" class="form-control" id="estado" name="estado" disabled value="{{$d['estado']}}">
                       </div>
                       <div class="form-group col-md-12">
                       <!---asignaturas a cargo-->
@@ -113,7 +130,36 @@
                 </div>
               </div>
             </div>
+            <!--FIN MODAL VER-->
+            
           </div>
+          <!-- Ventana modal para cambiar -->
+          <div class="modal fade" id="cambiarEstado{{$d['id']}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #283593 !important;">
+                  <h4 class="modal-title text-center" style=" text-align: center;">
+                    <span>Docente: {{$d['nombre']}}  {{$d['apellido']}} </span>
+                  </h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button> 
+                </div>
+                <div class="modal-body mt-2 text-center">
+                  <strong style="text-align: center !important"> 
+                    <h4 class="modal-title text-center" style=" text-align: center;">
+                      <span>¿Cambiar el estado {{$d['estado']}} del Docente? </span>
+                    </h4>
+                  </strong>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  <a  class="btn btn-success" href="{{ route('cambiarEstado', $d['id']) }}">Cambiar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+            <!---fin ventana cambiar--->
         </td>
       </tr>
       @endforeach
