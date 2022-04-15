@@ -96,7 +96,7 @@
         <td>{{$d->descripcion}}</td>
         <td>
           &nbsp&nbsp
-          <a type="button" data-toggle="modal" data-target="#desvincularDoc{{$d->id}}" ><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
+          <a type="button" data-toggle="modal" data-target="#desvincularDoc{{$d->id}}"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
         </td>
         </tr>
          <!-- Ventana modal para eliminar -->

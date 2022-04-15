@@ -25,7 +25,7 @@
         
             <td>
                 &nbsp&nbsp
-                <a type="button" data-toggle="modal" data-target="#eliminarAsig{{$s->id}}" ><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
+                <a type="button" data-toggle="modal" data-target="#eliminarAsig{{$s->id}}" data-placement="bottom"  title="Eliminar"><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
             </td>
         </tr>
             <!-- Ventana modal para eliminar -->

@@ -59,9 +59,9 @@
         idcur-->
         
         <td>
-        <a href="#" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>
+        <a href="#" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;"  data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
         &nbsp&nbsp
-        <a href="#" ><i class="fas fa-trash-alt" style="color:  red;" ></i></a>
+        <a href="#" ><i class="fas fa-trash-alt" style="color:  red;"  data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>
         </td>
         </tr>
         @endforeach

@@ -31,18 +31,18 @@
           <td>{{date("Y-m-d", strtotime($d['fec_vinculacion']))}}</td>
           <td>{{$d['estado']}}</td>
           <td>
-            <a href="{{route('actualizar_doc',$d['id'])}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
-            <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d['id'];?>" style="color: #66b62b">
+            <a href="{{route('actualizar_doc',$d['id'])}}"  data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
+            <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d['id'];?>" style="color: #66b62b"  data-placement="bottom"  title="Visualizar">
             <i class="nav-icon fas fa-eye"></i></a>
             &nbsp&nbsp
             <?php
             if($d['estado'] == 'Activo'){
                 ?>
-                <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d['id']}}"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+                <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d['id']}}"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
                 <?php
             }else{
                 ?>
-                <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d['id']}}"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+                <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d['id']}}"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
                 <?php
             }
             ?>

@@ -21,18 +21,18 @@
                   <td>{{ $post[0]->num_doc }}</td>
                   <td>{{$post[0]->estadoes}}</td>
                 <td>
-                <a href="{{route('actualizar_est',$post[0]->id)}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
-                <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $post[0]->id;?>">
+                <a href="{{route('actualizar_est',$post[0]->id)}}" data-toggle="tooltip"  data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
+                <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $post[0]->id;?>" data-toggle="tooltip"  data-placement="bottom"  title="Visualizar">
                 <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
                 &nbsp&nbsp
                 <?php
                 if($post[0]->estadoes == 'Activo'){
                     ?>
-                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$post[0]->id}}"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$post[0]->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
                     <?php
                 }else{
                     ?>
-                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$post[0]->id}}"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$post[0]->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
                     <?php
                 }
                 ?>
@@ -48,7 +48,7 @@
                     <div class="modal-header alert alert-warning">
                         <h5 class="modal-title" id="staticBackdropLabel">
                        
-                          Datos Estudiante
+                          Datos Estudiante:  {{ $post[0]->nombre }} {{ $post[0]->apellido }}
                        
                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -110,7 +110,7 @@
                 <div class="modal fade" id="cambiarEstado{{$post[0]->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header" style="background-color: #283593 !important;">
+                        <div class="modal-header" style="background-color: #283593 !important; color:white;">
                         <h4 class="modal-title text-center" style=" text-align: center;">
                             <span>ESTUDIANTE: {{ $post[0]->nombre }} {{ $post[0]->apellido }} </span>
                         </h4>

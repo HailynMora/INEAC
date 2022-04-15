@@ -44,7 +44,10 @@ class MatriculasController extends Controller
     }
         
     public function mosbus(Request $request){
-        $post = Programas::findOrFail($request->id);
+        $post = DB::table('tipo_curso')->where('tipo_curso.id','=',$request->id)
+        ->join('estado','id_estado','=','estado.id')
+        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.id_estado','estado.descripcion as estado')
+        ->get();
         return view('matriculas.mostrarcur', compact('post'))->render();
     }
     

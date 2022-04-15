@@ -22,7 +22,7 @@ class PerfilController extends Controller
             $perfil->descripcion = $request->input('cur');
             $perfil->cursos_realizados = $request->input('inter');
             $perfil->experiencia = $request->input('exp');
-            $perfil->id_docente = 69; //cada docente va a registrar su perfil por lo tanto 
+            $perfil->id_docente = 1; //cada docente va a registrar su perfil por lo tanto 
             //se captura el id de logeado y se almacena en la base de datos
             //se debe validar que el usuario solamente tenga un perfil
             $perfil->save();
@@ -44,7 +44,7 @@ class PerfilController extends Controller
         $perfil->descripcion = $request->input('des');
         $perfil->cursos_realizados = $request->input('cur');
         $perfil->experiencia = $request->input('exp');
-        $perfil->id_docente = 69;
+        $perfil->id_docente =1;
         $perfil->save();
         return back();
     }

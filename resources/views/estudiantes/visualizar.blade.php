@@ -27,18 +27,18 @@
         <td  class="d-none d-lg-block">{{$d->correo}}</td>
         <td>{{$d->estadoes}}</td>
         <td><!-- Button trigger modal -->
-                <a href="{{route('actualizar_est',$d->id)}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
-                <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>">
+                <a href="{{route('actualizar_est',$d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
+                <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>" data-placement="bottom"  title="Ver Estudiante">
                 <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
                 &nbsp&nbsp
                 <?php
                 if($d->estadoes == 'Activo'){
                     ?>
-                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}" data-placement="bottom"  title="Deshabilitar Estudiante"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
                     <?php
                 }else{
                     ?>
-                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"  data-placement="bottom"  title="Habilitar Estudiante"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
                     <?php
                 }
                 ?>
@@ -49,7 +49,7 @@
                     <div class="modal-header alert alert-warning">
                         <h5 class="modal-title" id="staticBackdropLabel">
                        
-                          Datos Estudiante
+                          Datos Estudiante: {{$d->nombre}} {{$d->apellido}}
                        
                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,7 +111,7 @@
                 <div class="modal fade" id="cambiarEstado{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header" style="background-color: #283593 !important;">
+                        <div class="modal-header" style="background-color: #283593 !important; color:white;">
                         <h4 class="modal-title text-center" style=" text-align: center;">
                             <span>ESTUDIANTE: {{$d->nombre}} {{$d->apellido}} </span>
                         </h4>

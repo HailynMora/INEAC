@@ -16,16 +16,16 @@
                   <td>{{ $post[0]->programa }}</td>
                   <td>{{ $post[0]->estado }}</td>
                   <td>
-                    <a href="{{route('actualizar_prog',$post[0]->id)}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>
+                    <a href="{{route('actualizar_prog',$post[0]->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>
                     &nbsp&nbsp
                     <?php
                     if($post[0]->estado == 'Activo'){
                         ?>
-                        <type="button" data-toggle="modal" data-target="#cambiarPro{{$post[0]->id}}"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+                        <a type="button" data-toggle="modal" data-target="#cambiarPro{{$post[0]->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
                         <?php
                     }else{
                         ?>
-                        <a type="button" data-toggle="modal" data-target="#cambiarPro{{$post[0]->id}}" ><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+                        <a type="button" data-toggle="modal" data-target="#cambiarPro{{$post[0]->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
                         <?php
                     }
                     ?>

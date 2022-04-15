@@ -4,7 +4,7 @@
 <table class="table">
               <thead class="table-warning">
               <tr>
-                <th scope="col">No</th>
+               
                 <th scope="col">Codigo</th>
                 <th scope="col">Descripción</th>
                 <th scope="col">Estado</th>
@@ -13,12 +13,11 @@
             </thead>
             <tbody>
                 <tr>
-                  <th scope="row">{{$post->id}}</th>
-                  <td>{{ $post->codigo }}</td>
-                  <td>{{ $post->descripcion }}</td>
-                  <td>{{ $post->id_estado }}</td>
+                  <td>{{ $post[0]->codigo }}</td>
+                  <td>{{ $post[0]->programa }}</td>
+                  <td>{{ $post[0]->estado }}</td>
                 <td>
-                <input type="checkbox" checked data-toggle="toggle" data-style="ios"  id="cur" name="cur" value="{{$post->id}}">
+                <input type="checkbox" checked data-toggle="toggle" data-style="ios"  id="cur" name="cur" value="{{$post[0]->id}}">
                 </td>
                 </tr>
             </tbody>
