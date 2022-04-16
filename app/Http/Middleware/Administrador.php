@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;//hace funcionar los auth
 use DB;
 
-class Estudiante
+class Administrador
 {
     /**
      * Handle an incoming request.
@@ -17,13 +17,14 @@ class Estudiante
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-
-    {
-        $es = DB::table('roles')->where('roles.descripcion', '=', 'Estudiante')->select('roles.id')->first();
-        if (auth()->check() && Auth::user()->id_rol==$es->id){
+    { 
+        $admin = DB::table('roles')->where('roles.descripcion', '=', 'Administrador')->select('roles.id')->first();
+        
+        if (auth()->check() && (Auth::user()->id_rol==$admin->id)){
             return $next($request);
             }
-        return redirect('dashboard');
-        //##############################
+        else{
+            return redirect('dashboard');
+        }
     }
 }

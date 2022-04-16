@@ -68,14 +68,14 @@ Route::post('/registro/acudiente', [EstudiantesController::class, 'datos'])->mid
 Route::get('/registro/acudientes', [EstudiantesController::class, 'regisacudiente'])->middleware(['auth', 'secretaria'])->name('registro_acu');
 
 //visualizar estudiante
-Route::get('visualizar/estudiante',[EstudiantesController::class, 'listar'])->middleware(['auth', 'secretaria', 'docente'])->name('listarestu');
+Route::get('visualizar/estudiante',[EstudiantesController::class, 'listar'])->middleware(['auth', 'secretaria_docente'])->name('listarestu');
 
 //consultar estudiantes
-Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->middleware(['auth', 'secretaria', 'docente'])->name('conestudiante');
+Route::get('/estudiantes/consultar', [ConsultarController::class, 'index'])->middleware(['auth', 'secretaria_docente'])->name('conestudiante');
 
-Route::get('posts/search',[PostController::class, 'search'])->name('posts.search')->middleware(['auth', 'secretaria', 'docente']);
+Route::get('posts/search',[PostController::class, 'search'])->name('posts.search')->middleware(['auth', 'secretaria_docente']);
 
-Route::get('posts/show',[PostController::class, 'show'])->name('posts.show')->middleware(['auth', 'secretaria', 'docente']);
+Route::get('posts/show',[PostController::class, 'show'])->name('posts.show')->middleware(['auth', 'secretaria_docente']);
 
 //ruta cambiar estado
 Route::get('cambiar_estudiante/{id}', [EstudiantesController::class, 'cambiar_estado'])->middleware(['auth', 'secretaria'])->name('cambiarEstad'); 
@@ -89,7 +89,7 @@ Route::get('/docente/registro_docente', [DocenteController::class, 'regdocente']
 
 Route::post('/docente/registro_docente', [DocenteController::class, 'datosdoc'])->middleware(['auth', 'secretaria'])->name('datosdoc');
 
-Route::get('/docente/listado_docente', [DocenteController::class, 'listado_docente'])->middleware(['auth', 'secretaria', 'docente'])->name('listado_docente');
+Route::get('/docente/listado_docente', [DocenteController::class, 'listado_docente'])->middleware(['auth'])->name('listado_docente');
 
 //ruta cambiar estado
 Route::get('cambiar_docente/{id}', [DocenteController::class, 'cambiar_estado'])->middleware(['auth', 'secretaria'])->name('cambiarEstado'); 
@@ -180,14 +180,14 @@ Route::post('/programas/actualizar/{id}', [ProgramasController::class, 'actualiz
 Route::get('cambiar/{id}', [ProgramasController::class, 'cambiar_pro'])->middleware(['auth', 'secretaria'])->name('cambiarPro'); 
 
 
-Route::get('/perfil/registrar/usu', [PerfilController::class, 'registrar'])->middleware(['auth', 'secretaria', 'docente'])->name('regisperfil');
+Route::get('/perfil/registrar/usu', [PerfilController::class, 'registrar'])->middleware(['auth', 'secretaria_docente'])->name('regisperfil');
 
 //perfil de usuario
-Route::post('/registro/perfil/usuario', [PerfilController::class, 'regdatos'])->middleware(['auth', 'secretaria', 'docente'])->name('regperfil');
-Route::post('/actualizar/perfil/usuario', [PerfilController::class, 'actu'])->middleware(['auth', 'secretaria', 'docente'])->name('actuperfiluser');
+Route::post('/registro/perfil/usuario', [PerfilController::class, 'regdatos'])->middleware(['auth', 'secretaria_docente'])->name('regperfil');
+Route::post('/actualizar/perfil/usuario', [PerfilController::class, 'actu'])->middleware(['auth', 'secretaria_docente'])->name('actuperfiluser');
 
 //actualizar perfil
-Route::get('/perfil/actualizar/usu', [PerfilController::class, 'busperfil'])->middleware(['auth', 'secretaria', 'docente'])->name('actuperfil');
+Route::get('/perfil/actualizar/usu', [PerfilController::class, 'busperfil'])->middleware(['auth', 'secretaria_docente'])->name('actuperfil');
 
 //matricular estudiante
 Route::get('/matricular/estudiante', [MatriculasController::class, 'index'])->middleware(['auth', 'secretaria'])->name('matricularestu');
@@ -205,10 +205,10 @@ Route::get('curso/resultado',[MatriculasController::class, 'mosbus'])->middlewar
 //matricula un estudiante
 Route::post('/admin/matricular/estudiante', [MatriculasController::class, 'registromat'])->middleware(['auth', 'secretaria'])->name('regmatricula');
 //reporte de estudiantes matriculados
-Route::get('/admin/reporte/estudiante', [MatriculasController::class, 'listado'])->middleware(['auth', 'secretaria', 'docente'])->name('listadomatricula');
+Route::get('/admin/reporte/estudiante', [MatriculasController::class, 'listado'])->middleware(['auth', 'secretaria_docente'])->name('listadomatricula');
 
 //filtrar estudiantes por cursos
-Route::post('/admin/filtrar/estudiante', [MatriculasController::class, 'filtrares'])->middleware(['auth', 'secretaria', 'docente'])->name('filtrarestu');
+Route::post('/admin/filtrar/estudiante', [MatriculasController::class, 'filtrares'])->middleware(['auth', 'secretaria_docente'])->name('filtrarestu');
 
 //visuailizar acudiente
 Route::get('/admin/visualizar/acudiente', [AcudienteController::class, 'visualizar'])->middleware(['auth', 'secretaria'])->name('visacu');
