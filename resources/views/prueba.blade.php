@@ -2,11 +2,13 @@
 @section('content')
 
 <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+     <x-auth-card>
+     <x-slot name="logo">
+          <a href="/">
+          <br>
+               <img src="{{url('img/logo.png')}}" width="500" class="img-fluid" alt="Cargando Imagen...">
             </a>
+            
         </x-slot>
 
         <!-- Session Status -->

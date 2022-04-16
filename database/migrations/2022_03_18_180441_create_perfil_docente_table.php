@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('descripcion');
             $table->string('cursos_realizados');
             $table->string('Experiencia');
-            $table->unsignedBigInteger('id_docente');//atributo para referenciar a categoria
-            $table->foreign('id_docente')->references('id')->on('docente');//llave foranea para referenciar a la tabla categorias
+            $table->unsignedBigInteger('id_usuario');//atributo para referenciar a categoria
+            $table->foreign('id_usuario')->references('id')->on('users');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }

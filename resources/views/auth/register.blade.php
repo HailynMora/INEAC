@@ -1,11 +1,16 @@
+@extends('principal')
+@section('content')
 <x-guest-layout>
     <x-auth-card>
+       
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+          <a href="/">
+          <br>
+               <img src="{{url('img/logo.png')}}" width="500" class="img-fluid" alt="Cargando Imagen...">
             </a>
+            
         </x-slot>
-
+       
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -39,21 +44,6 @@
 
                 <x-input id="numero" class="block mt-1 w-full" type="number" name="numero" :value="old('numero')" required />
             </div>
-             <!-- Roles -->
-           <!--  <div class="mt-4">
-                <x-label for="rol" :value="__('Elegir Rol')" />
-                <select class="custom-select block mt-1 w-full" id="rol" name="rol">
-                    <option selected>Escoger</option>
-                    @if($b==1){
-                        @foreach($roles as $r)
-                        <option value="{{$r->id}}">{{$r->descripcion}}</option>
-                        @endforeach
-                    }
-                    @endif
-                </select>
-            </div>-->
-
-            <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Contraseña')" />
 
@@ -84,3 +74,5 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+
+@endsection
