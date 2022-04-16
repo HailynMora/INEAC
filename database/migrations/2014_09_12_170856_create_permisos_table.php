@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('permisos', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
             $table->string('descripcion');
-            $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
-            $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
-            $table->timestamps();
+           // $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
+           // $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
+            
+           $table->timestamps();
         });
     }
 

@@ -17,9 +17,10 @@ class Users extends Seeder
     {
         $datos = [//array de datos 
             [
-            'name' => 'Default',
-            'email' => 'default@gmail.com',
+            'name' => 'Administrador',
+            'email' => 'administrador@gmail.com',
             'password'=>'123456789',
+            'id_rol'=>4,
              ]
         ];
         DB::table('users')->insert($datos);//inserta los datos a la tabla roles

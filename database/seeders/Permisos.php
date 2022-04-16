@@ -17,26 +17,17 @@ class Permisos extends Seeder
     {
         $datos = [//array de datos 
             [
-            'descripcion' => 'Leer',
-            'id_estado' => 1
+            'nombre'=>'Todos los permisos',
+            'descripcion' => 'Este usuario podrá agregar, modificar y eliminar información.',
              ],
             [
-             'descripcion' => 'Escribir',
-             'id_estado' => 1
+            'nombre'=>'Editor',
+            'descripcion' => 'Este usuario podrá leer y editar la información.',
             ],
             [
-             'descripcion' => 'Eliminar',
-             'id_estado' => 1
-            ],
-            [
-            'descripcion' => 'Lectura y escritura',
-            'id_estado' => 1
-            ],
-            [
-             'descripcion' => 'Todos los permisos',
-             'id_estado' => 1
-            ],
-    
+            'nombre'=>'Lector',
+            'descripcion' => 'Este usuario solo podrá observar la información.',
+            ],   
 
         ];
         DB::table('permisos')->insert($datos);//inserta los datos a la tabla roles

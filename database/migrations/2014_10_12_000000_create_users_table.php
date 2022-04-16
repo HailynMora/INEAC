@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('id_rol');//atributo para referenciar a categoria
+            $table->foreign('id_rol')->references('id')->on('roles');//llave foranea para referenciar a la tabla categorias
             $table->rememberToken();
             $table->timestamps();
         });
