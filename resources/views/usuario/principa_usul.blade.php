@@ -207,13 +207,13 @@
         </div>
       </div>
     <!--Funcionar los roles--->
-      @if(Auth::user()->id_rol==4) <!--Logeado como administrador-->
+      @if(Auth::user()->id_rol==1) <!--Logeado como administrador-->
             @include('admin.menuadmin')
         @endif
-        @if(Auth::user()->id_rol==5) <!--Logeado como usuario-->
+        @if(Auth::user()->id_rol==2) <!--Logeado como usuario-->
             @include('docente.menudocente')
         @endif
-        @if(Auth::user()->id_rol==6) <!--Logeado como jefe-->
+        @if(Auth::user()->id_rol==3) <!--Logeado como jefe-->
             @include('estudiantes.menuestu')
         @endif
     <!--- finalizar funcionar roles-->

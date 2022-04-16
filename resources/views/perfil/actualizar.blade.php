@@ -15,6 +15,7 @@
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <br>
     <div id="table_cargar">
+    @if($b==1)
     <form>
               @csrf
                 <div class="form-row">
@@ -73,6 +74,12 @@
                 </div>
                
               </form>
+              @endif
+              @if($b==0)
+              <div class="alert alert-success" role="alert">
+                No hay Información Disponible! Registra tu perfil
+              </div>
+              @endif
           </div>
 
   </div>
@@ -80,6 +87,7 @@
 
     <br>
     <div id="table_refresh">
+    @if($b==1)
     <form id="actuperfil" name="actuperfil" method="POST">
               @csrf
                 
@@ -114,6 +122,12 @@
                 </button>
                 <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
               </form>
+              @endif
+              @if($b==0)
+              <div class="alert alert-success" role="alert">
+                No hay Información Disponible! Registra tu perfil
+              </div>
+              @endif
          </div>
   </div>
   

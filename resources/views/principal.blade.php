@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<title>Reconocimiento</title>
+<title>INESUR</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="{{ asset('layouts_inicio/style/layout.css') }}" rel="stylesheet" type="text/css" media="all">
@@ -10,13 +10,13 @@
 <!-- ################################################################################################ -->
 
 <!-- Top Background Image Wrapper -->
-<div class="bgded" style="background-image:url('images/demo/backgrounds/01.png');"> 
+<div class="bgded" style="background-image:url('img/fondo_apli.jpg');"> 
   <!-- ################################################################################################ -->
   <div class="wrapper row1">
     <header id="header" class="hoc clear">
       <div id="logo" class="fl_left"> 
         <!-- ################################################################################################ -->
-        <h1><a href="index.html">Evolución</a></h1>
+        <h1><a href="index.html">INESUR</a></h1>
         <!-- ################################################################################################ -->
       </div>
       <nav id="mainav" class="fl_right"> 

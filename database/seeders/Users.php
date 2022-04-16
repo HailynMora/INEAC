@@ -22,7 +22,7 @@ class Users extends Seeder
             'name' => 'Default',
             'email' => 'adm@gmail.com',
             'password'=>Hash::make($pass),
-            'id_rol'=>4,
+            'id_rol'=>1,
              ]
         ];
         DB::table('users')->insert($datos);//inserta los datos a la tabla roles
