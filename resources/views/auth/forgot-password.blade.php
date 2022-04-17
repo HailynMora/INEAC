@@ -9,8 +9,12 @@
             </a>
         </x-slot>
 
+        <div class="mb-3 text-center text-xl text-emerald-400">
+            {{ __('Restablecer Contraseña') }}
+           </div>
+
         <div class="mb-4 text-lg text-gray-600">
-            {{ __('¿Olvidaste tu contraseña? No hay problema. Simplemente háganos saber su dirección de correo electrónico y le enviaremos un enlace de restablecimiento de contraseña que le permitirá elegir una nueva.') }}
+            {{ __('Ingresa el correo electrónico asociado a tu cuenta y le enviaremos un enlace de restablecimiento de contraseña.') }}
         </div>
 
         <!-- Session Status -->
