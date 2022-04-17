@@ -109,7 +109,7 @@ Route::get('posts/searchD',[PostDocController::class, 'searchD'])->middleware(['
 
 Route::get('posts/showD',[PostDocController::class, 'showD'])->middleware(['auth'])->name('posts.showD');
 
-Route::get('listar/{id}', [DocenteController::class, 'listar'])->middleware(['auth'])->name('listar');
+//Route::get('listar/{id}', [DocenteController::class, 'listar'])->middleware(['auth'])->name('listar');
 
 //----------------------------------------------------FIN RUTAS DOCENTE----------------------------------------
 
@@ -220,5 +220,6 @@ Route::post('/acudiente/actualizar/{id}', [AcudienteController::class, 'actualiz
 //manejo de roles
 Route::get('/visualizar/roles', [Roles::class, 'index'])->middleware(['auth', 'secretaria'])->name('rolesvis');
 Route::post('/modificar/roles/{idrol}', [Roles::class, 'cambiar'])->middleware(['auth', 'secretaria'])->name('cambiarper');
+Route::get('/listar/usuarios', [Roles::class, 'listar_usu'])->middleware(['auth', 'secretaria'])->name('listausu');
 
 require __DIR__.'/auth.php';
