@@ -1,10 +1,81 @@
 @extends('principal')
 @section('content')
+
+    <style>
+      .band {
+        width: 90%;
+        max-width: 1240px;
+        margin: 0 auto;
+        
+        display: grid;
+        
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 20px;
+      }
+
+      @media only screen and (min-width: 500px) {
+        .band {
+          grid-template-columns: 1fr 1fr;
+        }  
+      }
+
+      @media only screen and (min-width: 850px) {
+        .band {
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+      }
+
+
+      .card {
+        background: #48D1EE;
+        text-decoration: none;
+        color: #444;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        
+        position: relative;
+        top: 0;
+        transition: all .1s ease-in;
+      }
+
+      .card:hover {
+        top: -2px;
+        box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+      }
+
+      .card article {
+        padding: 20px;
+      }
+
+      /* typography */
+      .card h1 {
+        font-size: 20px;
+        margin: 0;
+        color: #333;
+      }
+
+      .card p { 
+        line-height: 1.4;
+      }
+
+      .card span {
+        font-size: 12px;
+        font-weight: bold;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        margin: 2em 0 0 0;
+      }
+    </style>
+
 <div class="overlay">
     <div id="pageintro" class="hoc clear"> 
       <!-- ################################################################################################ -->
       <article>
-        <h3 class="heading">Dapibus ligula convallis</h3>
+        <h3 class="heading">INESUR SEDE POTOSI</h3>
         <p>A massa etiam augue nunc lectus duis eget libero non nisi lobortis suscipit praesent viverra nam dapibus orci non erat aliquam erat volutpat.</p>
         <footer><a class="btn" href="#">Gravida sem neque</a></footer>
       </article>
@@ -56,38 +127,33 @@
       </ul>
     </section>
     <!-- ################################################################################################ -->
-    <hr class="btmspace-80">
-    <!-- ################################################################################################ -->
+    <hr class="btmspace-80">       
+          <h1 style=" text-align: center; font-size: 50px;">NUESTROS PROGRAMAS</h1>
+    <br>
     <section class="group">
-      <div class="one_half first"><img class="inspace-15 borderedbox" src="images/demo/474x356.png" alt=""></div>
-      <div class="one_half">
-        <ul class="nospace group inspace-15">
-          <li class="one_half first btmspace-50">
-            <article>
-              <h6 class="heading"><a href="#">Posuere ultricies</a></h6>
-              <p class="nospace">Sed tellus fusce velit orci aliquet et condimentum sit amet dapibus eget odio vivamus urna pellentesque felis&hellip;</p>
-            </article>
-          </li>
-          <li class="one_half btmspace-50">
-            <article>
-              <h6 class="heading"><a href="#">Pellentesque ipsum</a></h6>
-              <p class="nospace">Ut quam imperdiet tincidunt vestibulum eget magna eget sem imperdiet tincidunt praesent sit amet adipiscing&hellip;</p>
-            </article>
-          </li>
-          <li class="one_half first">
-            <article>
-              <h6 class="heading"><a href="#">Risus auctor vel</a></h6>
-              <p class="nospace">Accumsan curabitur cursus porta lectus nam posuere orci in elementum molestie purus erat volutpat ullamcorper&hellip;</p>
-            </article>
-          </li>
-          <li class="one_half">
-            <article>
-              <h6 class="heading"><a href="#">Volutpat vitae</a></h6>
-              <p class="nospace">Elit purus non odio etiam dictum euismod lectus vestibulum tincidunt erat vel molestie gravida ligula lacus&hellip;</p>
-            </article>
-          </li>
-        </ul>
-      </div>
+      <!---######################--->
+
+        @if($b==1)
+        <div class="band"> 
+        @foreach($prog as $p)
+            <div class="item-4">
+                  <a href="#" class="card">
+                    <div class="thumb"></div>
+                    <article>
+                     <div style=" font-size: 20px; text-align: center;"><br><b>{{$p->descripcion}}</b><br></div>
+                      <p>We’ll be putting things together so that as you scroll down from the top of the page you’ll see an “Alien Lander” making its way to touch down.</p>
+                      <span>Kezz Bracey</span>
+                    </article>
+                  </a>
+            </div>
+            @endforeach
+          </div>
+          @endif
+          @if($b==0)
+          <h3 style=" text-align: center; font-size: 50px;">NO HAY PROGRAMAS OFERTADOS</h3>
+          @endif
+      <!------##################---->
+    </div>
     </section>
     <!-- ################################################################################################ -->
     <!-- / main body -->
