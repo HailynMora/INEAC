@@ -4,10 +4,11 @@
  <h3>Listado de Docentes</h3>
 </div>
 <div>
-    <!--<form class="form-inline my-6 my-lg-0 float-right mb-6">
+    <form class="form-inline my-6 my-lg-0 float-right mb-6">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Enviar</button>
-    </form>-->
+    </form>
+    
     <br><br>
     @csrf
     <table class="table table-striped"style="background-color:#FFCC00;">
