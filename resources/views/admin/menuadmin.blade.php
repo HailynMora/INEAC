@@ -147,14 +147,13 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('listado_docente')}}" class="nav-link">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Docentes
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+           <!-- <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('regdocente')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -174,16 +173,15 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li>-->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('listarestu')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Estudiantes
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+           <!--<ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('registro_es')}}"  class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -208,7 +206,7 @@
                   <p>Acudiente</p>
                 </a>
               </li>
-            </ul>
+            </ul>-->
           </li>          <li class="nav-item">
             <a href="{{route('matricularestu')}}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
