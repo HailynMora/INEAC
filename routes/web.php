@@ -29,11 +29,10 @@ use App\Http\Controllers\RolesController\Roles;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [InicioController::class, 'vistaprin']);
     //return view('usuario.principa_usul');
     //return view('inicio.vista');
-    return view('inicio');
-});
+  
 Route::get('/reg', function () {
     return view('prueba');
 });

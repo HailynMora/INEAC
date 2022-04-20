@@ -49,16 +49,16 @@
     <!-- ################################################################################################ -->
     <ul class="nospace clear">
       <li class="one_quarter first">
-        <div class="block clear"><a href="#"><i class="fas fa-phone"></i></a> <span><strong>Give us a call:</strong> +00 (123) 456 7890</span></div>
+        <div class="block clear"><a href="#"><i class="fas fa-phone"></i></a> <span><strong>Soporte Técnico:</strong> (+57) 3178916679</span> <span><br> (+57) 3196672188</span></div>
       </li>
       <li class="one_quarter">
-        <div class="block clear"><a href="#"><i class="fas fa-envelope"></i></a> <span><strong>Send us a mail:</strong> support@domain.com</span></div>
+        <div class="block clear"><a href="#"><i class="fas fa-envelope"></i></a> <span><strong>Correo Institucional:</strong> support@domain.com</span></div>
       </li>
       <li class="one_quarter">
-        <div class="block clear"><a href="#"><i class="fas fa-clock"></i></a> <span><strong> Monday - Saturday:</strong> 08.00am - 18.00pm</span></div>
+        <div class="block clear"><a href="#"><i class="fas fa-clock"></i></a> <span><strong> Lunes  - Domingo:</strong> 08.00am - 6.00pm</span></div>
       </li>
       <li class="one_quarter">
-        <div class="block clear"><a href="#"><i class="fas fa-map-marker-alt"></i></a> <span><strong>Come visit us:</strong> Directions to <a href="#">our location</a></span></div>
+        <div class="block clear"><a href="#"><i class="fas fa-map-marker-alt"></i></a> <span><strong>Visitanos:</strong> Dirección <a href="#">INESUR - Potosi</a></span></div>
       </li>
     </ul>
     <!-- ################################################################################################ -->
@@ -69,8 +69,7 @@
 <div class="wrapper row5">
   <div id="copyright" class="hoc clear"> 
     <!-- ################################################################################################ -->
-    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <p class="fl_left">Copyright &copy; 2022 - Todos los derechos reservados - <a href="#">Universidad De Nariño</a></p>
     <!-- ################################################################################################ -->
   </div>
 </div>
