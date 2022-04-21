@@ -83,7 +83,7 @@ class docenteController extends Controller
             ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
             ->join('genero','id_genero','=','genero.id')
             ->join('estado','id_estado','=','estado.id')
-            ->get();
+            ->paginate(5);
            /* $asig=DB::table('asig_asignaturas')
                     ->select('asig_asignaturas.id_asignaturas','asignaturas.nombre','asignaturas.codigo')
                     ->join('asignaturas','id_asignaturas','=','asignaturas.id')
@@ -95,14 +95,14 @@ class docenteController extends Controller
              
         }
         
-        $docente = json_decode($doc,true);
-        $this->docente = $docente;
+       //$docente = json_decode($doc,true);
+        //$this->docente = $docente;
         /////////asignaturas que el docente tiene a cargo
         
         $condoc= DB::table('asig_asignaturas')->join('asignaturas','asig_asignaturas.id_asignaturas','=','asignaturas.id')
         ->get();
 
-        return view('docente.listar_docente',["docente"=>$this->docente],['b'=>$b])->with('condoc',$condoc);
+        return view('docente.listar_docente')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc);
     }
 
     public function listar_asig($id){
