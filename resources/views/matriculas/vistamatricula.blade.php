@@ -3,106 +3,216 @@
 <div class="alert alert-primary text-center"  role="alert">
   <h4> Matricula Estudiante </h4>
 </div>
-<!---->
-<br>
-<div class="container-fluid">
-    <!---Mensaje-->
-    @if(Session::has('validacion'))
-        <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{Session::get('validacion')}}
-        </div>
-    @endif
-    <!-- end mensaje-->
-     <!---Mensaje-->
-     @if(Session::has('aceptado'))
-        <div class="alert alert-primary alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{Session::get('aceptado')}}
-        </div>
-    @endif
-    <!-- end mensaje-->
- <div class="row">
-     <div class="col-md-12" style="background-color:#28afc2;">
-        <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
-         <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
+<!--navs de matricula bachillerato y matricula tecnicos-->
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Bachillerato</a>
+    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Técnicos</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+  <!--texto matriculas bachillerato-->
+  <br>
         <div class="container-fluid">
-         <div class="row">
-            <div class="col-md-4">
-                <label><h5><b><i class="fas fa-address-card" style="color:#FFC300;"></i>&nbsp Número de Documento</b></h5></label><br>
-            <h5> {{$estu->num_doc}} </h5>
+            <!---Mensaje-->
+            @if(Session::has('validacion'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('validacion')}}
+                </div>
+            @endif
+            <!-- end mensaje-->
+            <!---Mensaje-->
+            @if(Session::has('aceptado'))
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('aceptado')}}
+                </div>
+            @endif
+            <!-- end mensaje-->
+        <div class="row">
+            <div class="col-md-12" style="background-color:#28afc2;">
+                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
+                <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label><h5><b><i class="fas fa-address-card" style="color:#FFC300;"></i>&nbsp Número de Documento</b></h5></label><br>
+                    <h5> {{$estu->num_doc}} </h5>
+                    </div>
+                    <div class="col-md-4">
+                    <label><h5><b><i class="fas fa-user" style="color:#FFC300;"></i>&nbsp Nombre</b></h5></label><br>
+                    <h5> {{$estu->nombre}} {{$estu->apellido}} </h5>
+                    </div>
+                    <div class="col-md-4">
+                    <label><h5><b> <i class="fas fa-envelope" style="color:#FFC300;"></i>&nbsp Correo </b></h5></label><br>
+                    <h5>{{$estu->correo}}</h5>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-               <label><h5><b><i class="fas fa-user" style="color:#FFC300;"></i>&nbsp Nombre</b></h5></label><br>
-               <h5> {{$estu->nombre}} {{$estu->apellido}} </h5>
-            </div>
-            <div class="col-md-4">
-               <label><h5><b> <i class="fas fa-envelope" style="color:#FFC300;"></i>&nbsp Correo </b></h5></label><br>
-               <h5>{{$estu->correo}}</h5>
+                <br>
             </div>
         </div>
-       </div>
-         <br>
-     </div>
-</div>
-</div>
+        </div>
 
-<br>
-<div class="container-fluid">
-<div class="row">
-     <div class="col-md-12" style="background-color:#28afc2;">
-       <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#FFC300;"></i> Buscar Curso</b></h4>
-         <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
-         <div class="col-md-12">
-           <!--Inicio del buscar-->
-                <div class="container-fluid">
-                        <div class="row" id="map_section">
-                            <div class="col-12">
-                            <form action="#" id="search-form">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-12" id="search-wrapper">
-                                                <input type="text" class="form-control w-100 m-0 search" placeholder="Ingrese el nombre a buscar ..." aria-label="Search">
+        <br>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="background-color:#28afc2;">
+            <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#FFC300;"></i> Buscar Curso</b></h4>
+                <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
+                <div class="col-md-12">
+                <!--Inicio del buscar-->
+                        <div class="container-fluid">
+                                <div class="row" id="map_section">
+                                    <div class="col-12">
+                                    <form action="#" id="search-form">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col-12" id="search-wrapper">
+                                                        <input type="text" class="form-control w-100 m-0 search" placeholder="Ingrese el nombre a buscar ..." aria-label="Search">
 
-                                                    <div id="results">
+                                                            <div id="results">
 
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </form>
+                                                <br>    
+                                                
                                             </div>
-                                        </form>
-                                        <br>    
-                                          
                                     </div>
                             </div>
-                    </div>
-           <!--Finalizar el buscar-->
-           <form action="{{route('regmatricula')}}" method="post">
-                    @csrf
-                       <div class="container-fluid">
-                           <div id="post" class="mt-4"></div>
-                           
-                         </div><!--retorna la informacion-->  
-                         <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#FFC300;"></i> Fecha Matricula</b></h4></label>
-                         <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
-                     <div class="form-group col-md-4">
-                            <input type="date" class="form-control" name="fecha" id="fecha" required>
-                     </div>
-                     <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
-                      <br>
-                      <div class="form-group col-md-12 text-center">
-                           <a id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
-                           <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
-                            <button type="submit" class="btn btn-success">Matricular</button>
+                <!--Finalizar el buscar-->
+                <form action="{{route('regmatricula')}}" method="post">
+                            @csrf
+                            <div class="container-fluid">
+                                <div id="post" class="mt-4"></div>
+                                
+                                </div><!--retorna la informacion-->  
+                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#FFC300;"></i> Fecha Matricula</b></h4></label>
+                                <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
+                            <div class="form-group col-md-4">
+                                    <input type="date" class="form-control" name="fecha" id="fecha" required>
+                            </div>
+                            <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
+                            <br>
+                            <div class="form-group col-md-12 text-center">
+                                <a id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
+                                <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
+                                    <button type="submit" class="btn btn-success">Matricular</button>
+                                    
+                            </div>
                             
-                     </div>
-                      
-                                              
-           </form>
-           <!---end informacion-->
-       </div>
-     </div>
+                                                    
+                </form>
+                <!---end informacion-->
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+  <!---end matriculas bachillerato-->
+
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+   <!---matriculas tecnicos-->
+   <br>
+        <div class="container-fluid">
+            <!---Mensaje-->
+            @if(Session::has('validacion'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('validacion')}}
+                </div>
+            @endif
+            <!-- end mensaje-->
+            <!---Mensaje-->
+            @if(Session::has('aceptado'))
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Session::get('aceptado')}}
+                </div>
+            @endif
+            <!-- end mensaje-->
+        <div class="row">
+            <div class="col-md-12" style="background-color:#28afc2;">
+                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
+                <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label><h5><b><i class="fas fa-address-card" style="color:#FFC300;"></i>&nbsp Número de Documento</b></h5></label><br>
+                    <h5> {{$estu->num_doc}} </h5>
+                    </div>
+                    <div class="col-md-4">
+                    <label><h5><b><i class="fas fa-user" style="color:#FFC300;"></i>&nbsp Nombre</b></h5></label><br>
+                    <h5> {{$estu->nombre}} {{$estu->apellido}} </h5>
+                    </div>
+                    <div class="col-md-4">
+                    <label><h5><b> <i class="fas fa-envelope" style="color:#FFC300;"></i>&nbsp Correo </b></h5></label><br>
+                    <h5>{{$estu->correo}}</h5>
+                    </div>
+                </div>
+            </div>
+                <br>
+            </div>
+        </div>
+        </div>
+
+        <br>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="background-color:#28afc2;">
+            <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#FFC300;"></i> Seleccionar Programa</b></h4>
+                <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
+                <div class="col-md-12">
+
+                <form action="{{route('regmatricula')}}" method="post">
+                            @csrf
+                            <div class="container-fluid">
+                                <div id="post" class="mt-4">
+                                  <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Elegir Curso</label>
+                                        <select class="form-control" id="programatec" name="programatec">
+                                        <option >Elegir ...</option>
+                                        @foreach($prog as $pro)
+                                        <option value="{{$pro->id}}">{{$pro->nombretec}}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                   <br>
+                                </div><!--retorna la informacion-->  
+                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#FFC300;"></i> Fecha Matricula</b></h4></label>
+                                     <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
+                                <div class="form-group col-md-4">
+                                        <input type="date" class="form-control" name="fecha" id="fecha" required>
+                                </div>
+                                    <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
+                                <br>
+                                <div class="form-group col-md-12 text-center">
+                                    <a id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
+                                        <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
+                                        <button type="submit" class="btn btn-success">Matricular</button>
+                                        
+                                </div>
+                            
+                                                    
+                </form>
+                <!---end informacion-->
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+   <!---end matriculas tecnicos-->
+  </div>
 </div>
-</div>
+<!--end navs matriculas--->
 
 
 <!--</form>-->

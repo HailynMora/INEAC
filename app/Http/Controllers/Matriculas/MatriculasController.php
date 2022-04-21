@@ -32,9 +32,9 @@ class MatriculasController extends Controller
     }
      
     public function matriculasvista($id){
-        
+        $prog=DB::table('programa_tecnico')->where('id_estado','=',1)->get();
         $estu=Estudiante::findOrfail($id);
-        return view('matriculas.vistamatricula', compact('estu'));
+        return view('matriculas.vistamatricula', compact('estu', 'prog'));
     }
     
     //buscar cursos a matricular
