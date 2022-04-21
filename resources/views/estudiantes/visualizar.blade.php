@@ -4,7 +4,7 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3>Listado de Estudiantes</h3>
 </div>
-<a href="{{route('listarestu')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
+<a href="{{route('registro_es')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
 <form class="form-inline my-6 my-lg-0 float-right mb-6">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
