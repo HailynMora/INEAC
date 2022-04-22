@@ -18,7 +18,11 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-12">
+    <div class="form-group col-md-6">
+        <label for="des">Descripcion</label>
+        <input type="text" class="form-control" id="des" name="des" required value="{{$prog[0]->cursodes}}">
+    </div>
+        <div class="form-group col-md-6">
             <label for="estado">Estado</label>
             <select id="estado" class="form-control" name="estado" required>
             <option value="{{$prog[0]->id_estado}}" selected>{{$prog[0]->estado}}</option>

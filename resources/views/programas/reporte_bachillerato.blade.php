@@ -16,6 +16,7 @@
             <tr>
             <th scope="col">Código</th>
             <th scope="col">Programas</th>
+            <th scope="col">Descripción</th>
             <th scope="col">Estado</th>
             <th scope="col">Opciones</th>
             </tr>
@@ -25,6 +26,7 @@
         <tr style="background-color: #dcedc8;">
         <td>{{$d->codigo}}</td>
         <td>{{$d->programa}}</td>
+        <td>{{$d->cursodes}}</td>
         <td>{{$d->estado}}</td>
         <td>
         <a href="{{route('actualizar_prog',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>

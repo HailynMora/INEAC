@@ -136,7 +136,7 @@ class ProgramasController extends Controller
 
     public function reporte(){
         $rep=DB::table('tipo_curso')
-        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','estado.descripcion as estado')
+        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','estado.descripcion as estado')
         ->join('estado','id_estado','=','estado.id')
         ->orderBy('tipo_curso.id', 'ASC')
         ->paginate(5); //hacer paginacion de las vistas
@@ -157,7 +157,7 @@ class ProgramasController extends Controller
         $d =$id;
         $prog = DB::table('tipo_curso')->where('tipo_curso.id','=',$d)
         ->join('estado','id_estado','=','estado.id')
-        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.id_estado','estado.descripcion as estado')
+        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','tipo_curso.id_estado','estado.descripcion as estado')
         ->get();
         $estado=Estado::all();
         return view('programas.actualizar_programa', compact('prog','estado'));
@@ -168,8 +168,9 @@ class ProgramasController extends Controller
         $category->codigo = $request->input('codigo');
         $category->descripcion = $request->input('nombre');
         $category->id_estado = $request->input('estado');
+        $category->cursodes = $request->input('des');
         $category->save();
-        return redirect('/asignatura/reporte_asignatura');
+        return redirect('/programas/reporte_programas');
 
     }
     public function form_actualizar_tecnico($id){
