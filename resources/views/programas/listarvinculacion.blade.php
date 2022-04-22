@@ -56,6 +56,10 @@
         </tbody>
     </table>
     {{$asigpro->links()}}
+    <div class="mx-auto" style="width: 200px;">
+    <a  class="btn btn-info" href="{{url('/programas/reporte_programas')}}">Regresar</a>
+
+    </div>
     
 </div>
 <!--instanciar el ajax para quitar el error no definido-->

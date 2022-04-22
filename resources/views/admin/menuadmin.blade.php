@@ -94,19 +94,13 @@
               <li class="nav-item">
                 <a href="{{route('reporte_tecnico')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar Tecnico</p>
+                  <p>Técnicos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('reporte_pro')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bachillerato</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('consultar')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
                 </a>
               </li>
             </ul>

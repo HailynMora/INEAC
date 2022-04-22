@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('asignaturas_tecnicos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_tecnico');//atributo para referenciar a categoria
+            $table->foreign('id_tecnico')->references('id')->on('programa_tecnico');
             $table->unsignedBigInteger('id_docente');//atributo para referenciar a categoria
             $table->foreign('id_docente')->references('id')->on('docente');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_asignaturas');//atributo para referenciar a categoria

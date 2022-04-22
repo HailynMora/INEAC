@@ -15,7 +15,7 @@
         <thead style="background-color:#FFCC00;">
             <tr>
             <th scope="col">Código</th>
-            <th scope="col">mareria</th>
+            <th scope="col">Programas</th>
             <th scope="col">Estado</th>
             <th scope="col">Opciones</th>
             </tr>

@@ -30,13 +30,8 @@
               </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                  <label for="estado">Trimestre</label>
-                  <select id="trimestre" class="form-control" name="trimestre" required>
-                  <option selected>Seleccionar</option>
-                  @foreach($trimestre as $t)
-                  <option value="{{$t->id}}">{{$t->nombretri}}</option>
-                  @endforeach
-                  </select>
+                  <label for="descripcion">Descripcion</label>
+                  <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                   </div>
                   <div class="form-group col-md-6">
                   <label for="estado">Estado</label>
@@ -65,7 +60,7 @@
     var nombre=$('#nombre').val();
     var codigo=$('#codigo').val();
     var estado=$('#estado').val();
-    var trimestre=$('#trimestre').val();
+    var descripcion=$('#descripcion').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({
@@ -75,7 +70,7 @@
         nombre:nombre,
         codigo:codigo,
         estado:estado,
-        trimestre:trimestre,
+        descripcion:descripcion,
         _token:_token
       },
       success: function (response) {

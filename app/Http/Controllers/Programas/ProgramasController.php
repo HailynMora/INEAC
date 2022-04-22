@@ -11,6 +11,9 @@ use App\Models\AsignaturaModel\AsigProgram;
 use Illuminate\Support\Facades\DB;
 use App\Models\AsignaturaModel\ProgramasTecnicos;
 use App\Models\TrimestresModel\TrimestresTecnicos;
+use App\Models\AsignaturaModel\AsigTecnicos;
+use App\Models\AsignacionDoModel\AsignacionDoTec;
+use App\Models\DocenteModel\Docente;
 
 
 class ProgramasController extends Controller
@@ -25,8 +28,7 @@ class ProgramasController extends Controller
     public function tec(){
 
         $estado=Estado::all();
-        $trimestre=TrimestresTecnicos::all();
-        return view('programas.resgistrotecnicos')->with('estado', $estado)->with('trimestre', $trimestre);
+        return view('programas.resgistrotecnicos')->with('estado', $estado);
 
     }
     public function registro(Request $request){
@@ -48,6 +50,7 @@ class ProgramasController extends Controller
                 $category->codigo = $request->input('codigo');
                 $category->descripcion = $request->input('nombre');
                 $category->id_estado = $request->input('estado');
+                $category->cursodes = $request->input('des');
                 $category->save();
     
             }
@@ -63,7 +66,7 @@ class ProgramasController extends Controller
         $category->codigotec = $request->input('codigo');
         $category->nombretec = $request->input('nombre');
         $category->id_estado = $request->input('estado');
-        $category->id_trimestre = $request->input('trimestre');
+        $category->descripcion = $request->input('descripcion');
         $category->save();
         return back();
 
@@ -142,9 +145,8 @@ class ProgramasController extends Controller
 
     public function reporte_tecnico(){
         $rep=DB::table('programa_tecnico')
-        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.nombretec','programa_tecnico.id_trimestre','estado.descripcion as estado','trimestre_tecnicos.id as is_tri', 'trimestre_tecnicos.nombretri')
+        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','estado.descripcion as estado')
         ->join('estado','id_estado','=','estado.id')
-        ->join('trimestre_tecnicos','id_trimestre','=','trimestre_tecnicos.id')
         ->orderBy('programa_tecnico.id', 'ASC')
         //->paginate(5); //hacer paginacion de las vistas
         ->get();
@@ -170,6 +172,26 @@ class ProgramasController extends Controller
         return redirect('/asignatura/reporte_asignatura');
 
     }
+    public function form_actualizar_tecnico($id){
+        $d =$id;
+        $prog = DB::table('programa_tecnico')->where('programa_tecnico.id','=',$d)
+        ->join('estado','id_estado','=','estado.id')
+        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','programa_tecnico.id_estado','estado.descripcion as estado')
+        ->get();
+        $estado=Estado::all();
+        return view('programas.actualizar_programa_tecnico', compact('prog','estado'));
+    }
+
+    public function actualizar_programa_tecnico(Request $request,$id){
+        $category = ProgramasTecnicos::FindOrFail($id);
+        $category->codigotec = $request->input('codigo');
+        $category->nombretec = $request->input('nombre');
+        $category->descripcion = $request->input('descripcion');
+        $category->id_estado = $request->input('estado');
+        $category->save();
+        return redirect('/programas/reporte_programas_tecnicos');
+
+    }
     public function cambiar_pro($id){
         $pro = Programas::find($id);
         $es = $pro->id_estado;
@@ -183,15 +205,77 @@ class ProgramasController extends Controller
         $nombre = $pro->descripcion;
         return redirect('/programas/reporte_programas');
     }
+    public function cambiar_pro_tec($id){
+        $pro = ProgramasTecnicos::find($id);
+        $es = $pro->id_estado;
+        if($es==2){
+            $pro->id_estado = 1;
+            $pro->save();
+        }else{
+            $pro->id_estado = 2;
+            $pro->save();
+        }        
+        return redirect('/programas/reporte_programas_tecnicos');
+    }
     public function vincu($id){
         $curso=Programas::find($id);
         $asig=Asignatura::all();
         return view('programas.vincularsig')->with('curso', $curso)->with('asignatura', $asig);
 
     }
+    public function vincu_asig($id){
+        $curso=ProgramasTecnicos::find($id);
+        $asig=Asignatura::all();
+        $tri=TrimestresTecnicos::all();
+        $docente=Docente::all();
+        return view('programas.vincular_asig_tecnico')->with('curso', $curso)->with('asignatura', $asig)->with('trimestre', $tri)->with('docente', $docente);
+
+    }
+
+    public function asig_tec(Request $request){
+        $r=$request->curso; 
+        $r1=$request->asig; 
+        $r2=$request->tri;
+        $r3=$request->docente;
+        $resdatos=DB::table('asignaturas_tecnicos')
+        ->where('id_asignaturas', '=', $r1)->where('id_tecnico', '=', $r)->where('id_trimestre', '=', $r2)->count();
+
+
+        if($resdatos!=0){
+               return \Response::json([
+                'error'  => 'Error datos'
+            ],422);
+            
+        }else{
+           
+            $category = new AsigTecnicos();
+            $category->id_asignaturas = $request->input('asig');
+            $category->id_tecnico = $request->input('curso');
+            $category->id_trimestre = $request->input('tri');
+            $category->id_docente = $request->input('docente');
+            $category->save();
+            return back();   
+            
+        }
+
+    }
+    
+
     public function desvincular($id){
         AsigProgram::find($id)->delete();
         return redirect('/programas/listado_vinculacion');
+    }
+    public function listarvinculaciontec(){
+        $asigpro=DB::table('asignaturas_tecnicos')
+        ->select('asignaturas_tecnicos.id','id_asignaturas','id_trimestre','asignaturas.codigo as codas','asignaturas.nombre as asig','programa_tecnico.codigotec','programa_tecnico.nombretec','trimestre_tecnicos.nombretri','docente.nombre as nomdoc','docente.apellido as apedoc')
+        ->join('asignaturas','id_asignaturas','=','asignaturas.id')
+        ->join('trimestre_tecnicos','id_trimestre','=','trimestre_tecnicos.id')
+        ->join('docente','id_docente','=','docente.id')
+        ->join('programa_tecnico','id_tecnico','=','programa_tecnico.id')
+        ->orderBy('asignaturas_tecnicos.id_tecnico', 'ASC')
+        ->paginate(5); //hacer paginacion de las vistas
+        return view('programas.listado_vinculacion_tec')->with('asigpro',$asigpro);
+
     }
 
 }
