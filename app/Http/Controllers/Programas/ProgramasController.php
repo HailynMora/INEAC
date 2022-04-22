@@ -9,6 +9,8 @@ use App\Models\EstadoModel\Estado;
 use App\Models\AsignaturaModel\Asignatura;
 use App\Models\AsignaturaModel\AsigProgram;
 use Illuminate\Support\Facades\DB;
+use App\Models\AsignaturaModel\ProgramasTecnicos;
+use App\Models\TrimestresModel\TrimestresTecnicos;
 
 
 class ProgramasController extends Controller
@@ -16,7 +18,15 @@ class ProgramasController extends Controller
     public function index(){
 
         $estado=Estado::all();
+        
         return view('programas.registro')->with('estado', $estado);
+
+    }
+    public function tec(){
+
+        $estado=Estado::all();
+        $trimestre=TrimestresTecnicos::all();
+        return view('programas.resgistrotecnicos')->with('estado', $estado)->with('trimestre', $trimestre);
 
     }
     public function registro(Request $request){
@@ -38,6 +48,36 @@ class ProgramasController extends Controller
                 $category->codigo = $request->input('codigo');
                 $category->descripcion = $request->input('nombre');
                 $category->id_estado = $request->input('estado');
+                $category->save();
+    
+            }
+
+        }
+        
+        return back();
+
+    }
+
+    public function registro_tecnicos(Request $request){
+        $cod=$request->codigo;
+        $buscod = DB::table('programa_tecnico')->where('codigotec', '=', $cod)->count();
+        $busnom = DB::table('programa_tecnico')->where('nombretec', '=', $request->nombre)->count();
+        if($buscod!=0){//validacion con ajax
+            return \Response::json([
+                'error'  => 'Error datos'
+            ],422);
+        }else{
+
+            if($busnom!=0){
+                return \Response::json([
+                    'error'  => 'Error datos'
+                ],423);
+            }else{
+                $category = new ProgramasTecnicos();
+                $category->codigotec = $request->input('codigo');
+                $category->nombretec = $request->input('nombre');
+                $category->id_estado = $request->input('estado');
+                $category->id_trimestre = $request->input('trimestre');
                 $category->save();
     
             }
@@ -116,8 +156,20 @@ class ProgramasController extends Controller
         ->join('estado','id_estado','=','estado.id')
         ->orderBy('tipo_curso.id', 'ASC')
         ->paginate(5); //hacer paginacion de las vistas
-        return view('programas.reporte_programas')->with('rep',$rep);
+        return view('programas.reporte_bachillerato')->with('rep',$rep);
     }
+
+    public function reporte_tecnico(){
+        $rep=DB::table('programa_tecnico')
+        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.nombretec','programa_tecnico.id_trimestre','estado.descripcion as estado','trimestre_tecnicos.id as is_tri', 'trimestre_tecnicos.nombretri')
+        ->join('estado','id_estado','=','estado.id')
+        ->join('trimestre_tecnicos','id_trimestre','=','trimestre_tecnicos.id')
+        ->orderBy('programa_tecnico.id', 'ASC')
+        //->paginate(5); //hacer paginacion de las vistas
+        ->get();
+        return view('programas.reporte_tecnico')->with('rep',$rep);
+    }
+
     public function form_actualizar($id){
         $d =$id;
         $prog = DB::table('tipo_curso')->where('tipo_curso.id','=',$d)
@@ -149,6 +201,12 @@ class ProgramasController extends Controller
         }        
         $nombre = $pro->descripcion;
         return redirect('/programas/reporte_programas');
+    }
+    public function vincu($id){
+        $curso=Programas::find($id);
+        $asig=Asignatura::all();
+        return view('programas.vincularsig')->with('curso', $curso)->with('asignatura', $asig);
+
     }
     public function desvincular($id){
         AsigProgram::find($id)->delete();

@@ -1,52 +1,56 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Vincular Asignatura a un Programa</h3>
+ <h3>Registro de Programas Tecnicos</h3>
 </div>
-<div>
-<a href="{{url('/programas/listado_vinculacion')}}" class="btn btn-success">Listado</a>
-</div>
-<br><br>
+
 <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne">
         <h2 class="mb-0">
           <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <i class="fas fa-edit"></i> Vincular Asignaturas a un Programa
+            <i class="fas fa-edit"></i> Datos De Programa
           </button>
         </h2>
       </div>
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-            <form id="forvincular" name="forvincular" method="POST" >
+            <form id="forprogramas" name="forprogramas" method="POST">
               @csrf
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                  <label for="curso">Programa</label>
-                  <input type="text" class="form-control" id="curso" name="curso" required value="{{$curso->id}}" hidden>
-                  <input type="text" class="form-control" id="nomcurso" name="nomcurso" required value="{{$curso->descripcion}}" disabled>
+                  <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                   </div>
                   <div class="form-group col-md-6">
-                  <label for="asig">Asignatura</label>
-                  <select id="asig" class="form-control" name="asig" required>
-                    <option selected>Seleccionar</option>
-                        @foreach($asignatura as $a)
-                           <option value="{{$a->id}}">{{$a->nombre}}</option>
-                        @endforeach
-                  </select>
+                  <label for="codigo">Codigo</label>
+                  <input type="text" class="form-control" id="codigo" name="codigo" required>
                   </div>
               </div>
                 <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" class="form-control" id="fecha" name="fecha" required>
+                  <div class="form-group col-md-6">
+                  <label for="estado">Trimestre</label>
+                  <select id="trimestre" class="form-control" name="trimestre" required>
+                  <option selected>Seleccionar</option>
+                  @foreach($trimestre as $t)
+                  <option value="{{$t->id}}">{{$t->nombretri}}</option>
+                  @endforeach
+                  </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                  <label for="estado">Estado</label>
+                  <select id="estado" class="form-control" name="estado" required>
+                  <option selected>Seleccionar</option>
+                  @foreach($estado as $d)
+                  <option value="{{$d->id}}">{{$d->descripcion}}</option>
+                  @endforeach
+                  </select>
                   </div>
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
                 <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Cancelar</a>
-
               </form>
               <br>
              
@@ -56,38 +60,45 @@
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script>
-  $('#forvincular').submit(function(e){
+  $('#forprogramas').submit(function(e){
     e.preventDefault();
-    var curso=$('#curso').val();
-    var asig=$('#asig').val();
-    var fecha=$('#fecha').val();
+    var nombre=$('#nombre').val();
+    var codigo=$('#codigo').val();
+    var estado=$('#estado').val();
+    var trimestre=$('#trimestre').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({
       type: "POST",
-      url: "{{route('regvincularasig')}}",
+      url: "{{route('regprogramastec')}}",
       data:{
-        curso:curso,
-        asig:asig,
-        fecha:fecha,
+        nombre:nombre,
+        codigo:codigo,
+        estado:estado,
+        trimestre:trimestre,
         _token:_token
       },
       success: function (response) {
         if(response){
-          $('#forvincular')[0].reset();
+          $('#forprogramas')[0].reset();
           toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
         }
       },
       error:function(jqXHR, response){
           if(jqXHR.status==422){
-            toastr.warning('Datos Repetidos!.', 'Asignatura ya esta vinculada!', {timeOut:3000});
+            toastr.warning('Datos Repetidos!.', 'El código del programa debe ser único!', {timeOut:3000});
+          }else{
+           if(jqXHR.status==423){
+            toastr.warning('Datos Repetidos!.', 'El nombre del programa debe ser único!', {timeOut:3000});
+           }
           }
-          }
+         
+      }
     });
   })
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });
-     $("form input[type=date]").each(function() { this.value = '' });
+     $("form input[type=text]").each(function() { this.value = '' });
      toastr.info('Campos Vacios', {timeOut:1000});
   }
 </script>

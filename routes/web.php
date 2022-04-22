@@ -149,6 +149,8 @@ Route::get('desvincular/docente/{id}', [AsignaturaController::class, 'desvincula
 
 Route::get('/programas/reporte_programas', [ProgramasController::class, 'reporte'])->middleware(['auth'])->name('reporte_pro');
 
+Route::get('/programas/reporte_programas_tecnicos', [ProgramasController::class, 'reporte_tecnico'])->middleware(['auth'])->name('reporte_tecnico');
+
 //programa registrar
 Route::get('/registrar/programa', [ProgramasController::class, 'index'])->middleware(['auth', 'secretaria'])->name('registrarprog');
 
@@ -161,8 +163,13 @@ Route::get('resultado/programas',[ProgramasController::class, 'show'])->middlewa
 //guardar los datos
 Route::post('/registro/programas', [ProgramasController::class, 'registro'])->middleware(['auth', 'secretaria'])->name('regprogramas');
 
+Route::get('/registrar/programa_tec', [ProgramasController::class, 'tec'])->middleware(['auth', 'secretaria'])->name('registrarprogtec');
+
+Route::post('/registro/programas_tecnicos', [ProgramasController::class, 'registro_tecnicos'])->middleware(['auth', 'secretaria'])->name('regprogramastec');
+
+
 //vincular asignaturas a un programa 
-Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->middleware(['auth', 'secretaria'])->name('vicularAsignaturas');
+//Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->middleware(['auth', 'secretaria'])->name('vicularAsignaturas');
 //listado de vinculacion
 Route::get('/programas/listado_vinculacion', [ProgramasController::class, 'listarvinculacion'])->middleware(['auth', 'secretaria'])->name('listado_asig');
 
@@ -178,6 +185,7 @@ Route::post('/programas/actualizar/{id}', [ProgramasController::class, 'actualiz
 //ruta cambiar estado
 Route::get('cambiar/{id}', [ProgramasController::class, 'cambiar_pro'])->middleware(['auth', 'secretaria'])->name('cambiarPro'); 
 
+Route::get('vincular/{id}', [ProgramasController::class, 'vincu'])->middleware(['auth', 'secretaria'])->name('vincular_a'); 
 
 Route::get('/perfil/registrar/usu', [PerfilController::class, 'registrar'])->middleware(['auth', 'secretaria_docente'])->name('regisperfil');
 

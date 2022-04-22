@@ -85,22 +85,22 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a href="{{route('registrarprog')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar</p>
+                </a>
+              </li>-->
+              <li class="nav-item">
+                <a href="{{route('reporte_tecnico')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar Tecnico</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('reporte_pro')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Listar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('vicularAsignaturas')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Vincular Asignaturas</p>
+                  <p>Bachillerato</p>
                 </a>
               </li>
               <li class="nav-item">

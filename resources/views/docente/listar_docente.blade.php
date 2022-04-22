@@ -173,7 +173,9 @@
         @endif
       </tbody>
     </table>
+    @if($b==1)
     {{$doc->links()}}
+    @endif
     </div>
    
 
