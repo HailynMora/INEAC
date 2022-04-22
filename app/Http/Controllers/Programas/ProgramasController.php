@@ -59,31 +59,12 @@ class ProgramasController extends Controller
     }
 
     public function registro_tecnicos(Request $request){
-        $cod=$request->codigo;
-        $buscod = DB::table('programa_tecnico')->where('codigotec', '=', $cod)->count();
-        $busnom = DB::table('programa_tecnico')->where('nombretec', '=', $request->nombre)->count();
-        if($buscod!=0){//validacion con ajax
-            return \Response::json([
-                'error'  => 'Error datos'
-            ],422);
-        }else{
-
-            if($busnom!=0){
-                return \Response::json([
-                    'error'  => 'Error datos'
-                ],423);
-            }else{
-                $category = new ProgramasTecnicos();
-                $category->codigotec = $request->input('codigo');
-                $category->nombretec = $request->input('nombre');
-                $category->id_estado = $request->input('estado');
-                $category->id_trimestre = $request->input('trimestre');
-                $category->save();
-    
-            }
-
-        }
-        
+        $category = new ProgramasTecnicos();
+        $category->codigotec = $request->input('codigo');
+        $category->nombretec = $request->input('nombre');
+        $category->id_estado = $request->input('estado');
+        $category->id_trimestre = $request->input('trimestre');
+        $category->save();
         return back();
 
     }
