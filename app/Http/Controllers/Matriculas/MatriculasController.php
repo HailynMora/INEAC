@@ -8,7 +8,9 @@ use App\Models\EstudianteModel\Estudiante;
 use Illuminate\Support\Facades\DB;
 use App\Models\AsignaturaModel\Programas;
 use App\Models\MatriculasModel\Matricula;
+use App\Models\MatriculasModel\MatriculaTec;
 Use Session;
+use Carbon\Carbon;
 
 class MatriculasController extends Controller
 {
@@ -32,9 +34,14 @@ class MatriculasController extends Controller
     }
      
     public function matriculasvista($id){
-        $prog=DB::table('programa_tecnico')->where('id_estado','=',1)->get();
+        $date = Carbon::now()->locale('es')->translatedFormat('Y');;
+        $prog=DB::table('programa_tecnico')->where('id_estado','=',1)
+             ->select('programa_tecnico.id as idtec', 'programa_tecnico.codigotec', 'programa_tecnico.nombretec')
+             ->get();
         $estu=Estudiante::findOrfail($id);
-        return view('matriculas.vistamatricula', compact('estu', 'prog'));
+        $tri =DB::table('trimestre_tecnicos')->get();
+        $anio=$date;
+        return view('matriculas.vistamatricula', compact('estu', 'prog', 'tri','anio'));
     }
     
     //buscar cursos a matricular
@@ -152,6 +159,23 @@ class MatriculasController extends Controller
        
         
        
+    }
+
+    ///###########_matricula tecnico_###############
+    public function matriculatec(Request $request){
+      //"programatec":"1","tri":"3","anio":"2022","per":"B","fecha":"2022-04-21","estu":"1"
+
+              $category = new MatriculaTec();
+              $category->id_estudiante = $request->input('estu');
+              $category->id_tecnico = $request->input('programatec');
+              $category->id_aprobado =1;
+              $category->id_trimestre =$request->input('tri');
+              $category->anio =$request->input('anio');
+              $category->periodo=$request->input('per');
+              $category->fec_matricula = $request->input('fecha');
+              $category->save();
+              Session::flash('matec','Estudiante Registrado Exitosamente!');
+              return back();
     }
    
 }

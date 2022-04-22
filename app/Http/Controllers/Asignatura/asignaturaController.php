@@ -49,11 +49,18 @@ class asignaturaController extends Controller
         return back();
     }
     public function vincular(Request $request){
-        $category = new Asignaciondo();
-        $category->descripcion = $request->input('descripcion');
-        $category->id_docente = $request->input('docente');
-        $category->id_asignaturas = $request->input('asignatura');
-        $category->save();
+        $idasig=$request->asignatura;
+        $iddoc=$request->docente;
+        $resdatos=DB::table('asig_asignaturas')
+                 ->where('id_asignaturas', '=', $idasig)->where('id_docente', '=', $iddoc)
+                 ->count();
+        if($resdatos==0){
+            $category = new Asignaciondo();
+            $category->descripcion = $request->input('descripcion');
+            $category->id_docente = $request->input('docente');
+            $category->id_asignaturas = $request->input('asignatura');
+            $category->save();
+        }
         return back();
     }
     public function datos(){

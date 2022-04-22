@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('codigotec');
             $table->string('nombretec');
+            $table->string('descripcion');
             $table->unsignedBigInteger('id_estado');
             $table->foreign('id_estado')->references('id')->on('estado');
-            $table->unsignedBigInteger('id_trimestre');//atributo para referenciar a categoria
-            $table->foreign('id_trimestre')->references('id')->on('trimestre_tecnicos');
             $table->timestamps();
         });
     }

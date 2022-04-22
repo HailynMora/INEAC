@@ -130,10 +130,10 @@
             @endif
             <!-- end mensaje-->
             <!---Mensaje-->
-            @if(Session::has('aceptado'))
+            @if(Session::has('matec'))
                 <div class="alert alert-primary alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{Session::get('aceptado')}}
+                {{Session::get('matec')}}
                 </div>
             @endif
             <!-- end mensaje-->
@@ -168,24 +168,58 @@
             <div class="col-md-12" style="background-color:#28afc2;">
             <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#FFC300;"></i> Seleccionar Programa</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
-                <div class="col-md-12">
-
-                <form action="{{route('regmatricula')}}" method="post">
+                <form id="formtec" action="{{route('matriculatecnico')}}" method="post">
                             @csrf
-                            <div class="container-fluid">
-                                <div id="post" class="mt-4">
+                            <div class="container-fluid row">
+                                <div  class="col-md-4">
                                   <div class="form-group">
                                         <label for="exampleFormControlSelect1">Elegir Curso</label>
                                         <select class="form-control" id="programatec" name="programatec">
                                         <option >Elegir ...</option>
                                         @foreach($prog as $pro)
-                                        <option value="{{$pro->id}}">{{$pro->nombretec}}</option>
+                                        <option value="{{$pro->idtec}}">{{$pro->nombretec}}</option>
                                         @endforeach
                                         </select>
                                     </div>
                                 </div>
+                                <!--###############-->
+                                <div  class="col-md-4">
+                                  <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Trimestre</label>
+                                        <select class="form-control" id="tri" name="tri">
+                                        <option >Elegir ...</option>
+                                        @foreach($tri as $t)
+                                        <option value="{{$t->id}}">{{$t->nombretri}}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!---#############--->
+                                  <!--###############-->
+                                  <div  class="col-md-2">
+                                  <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Año</label>
+                                        <input type="text"  class="form-control" name="anio" id="anio" value="{{$anio}}">
+                                    </div>
+                                </div>
+                                <!---#############--->
+                                 <!--###############-->
+                                 <div  class="col-md-2">
+                                  <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Periodo</label>
+                                        <select class="form-control" id="per" name="per">
+                                        <option active>Elegir ...</option>
+                                        <option value="A">A</option>  
+                                        <option value="B">B</option>     
+                                        <option value="C">C</option> 
+                                        <option value="D">D</option>                
+                                        </select>
+                                    </div>
+                                </div>
+                                <!---#############--->
                                    <br>
                                 </div><!--retorna la informacion-->  
+                                <br>
                                 <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#FFC300;"></i> Fecha Matricula</b></h4></label>
                                      <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                                 <div class="form-group col-md-4">
@@ -195,8 +229,8 @@
                                 <br>
                                 <div class="form-group col-md-12 text-center">
                                     <a id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
-                                        <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
-                                        <button type="submit" class="btn btn-success">Matricular</button>
+                                    <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
+                                    <button type="submit" class="btn btn-success">Matricular</button>
                                         
                                 </div>
                             
@@ -204,8 +238,7 @@
                 </form>
                 <!---end informacion-->
             </div>
-            </div>
-        </div>
+          </div>
         </div>
 
 
@@ -270,6 +303,4 @@
             setTimeout(()=> location.href="{{route('listadomatricula')}}");
             });
         </script>
-
-
 @endsection

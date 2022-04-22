@@ -229,4 +229,7 @@ Route::get('/visualizar/roles', [Roles::class, 'index'])->middleware(['auth', 's
 Route::post('/modificar/roles/{idrol}', [Roles::class, 'cambiar'])->middleware(['auth', 'secretaria'])->name('cambiarper');
 Route::get('/listar/usuarios', [Roles::class, 'listar_usu'])->middleware(['auth', 'secretaria'])->name('listausu');
 
+//matricular tecnicos
+Route::post('/matricula/tecnico', [MatriculasController::class, 'matriculatec'])->middleware(['auth', 'secretaria'])->name('matriculatecnico');
+
 require __DIR__.'/auth.php';
