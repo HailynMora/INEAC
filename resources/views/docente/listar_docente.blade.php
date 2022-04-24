@@ -54,93 +54,122 @@
                 <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-body">
+                    <br>
                     <!---Mostrar datos-->
-                    <form id="formudatos" name="formudatos" method="post">
-                      @csrf
-                      <div class="form-row">
-                        <div class="form-group col-md-3">
-                          <label for="tipo_doc">Tipo Documento</label>
-                          <input type="text" class="form-control" id="tipo_doc" name="tipo_doc" disabled value="{{$d->descripcion}}">
+                    <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+                     <h4>Docente: {{$d->nombre}}  {{$d->apellido}}</h4>
+                    </div>
+                    <!--ACORDEON-->
+                    <div id="accordion">
+                      <div class="card">
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-chalkboard-teacher"></i> Datos Docente
+                            </button>
+                          </h5>
                         </div>
-                        <div class="form-group col-md-3">
-                          <label for="num_doc">N° Documento</label>
-                          <input type="text" class="form-control" id="num_doc" name="num_doc" disabled value="{{$d->num_doc}}">
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="correo">Correo</label>
-                          <input type="text" class="form-control" id="correo" name="correo" disabled value="{{$d->correo}}">
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="telefono">Telefono</label>
-                          <input type="text" class="form-control" id="telefono" name="telefono" disabled value="{{$d->telefono}}">
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="direccion">Direccion</label>
-                          <input type="text" class="form-control" id="direccion" name="direccion" disabled value="{{$d->direccion}}">
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="genero">Genero</label>
-                          <input type="text" class="form-control" id="genero" name="genero" disabled value="{{$d->genero}}">
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="fec_vinculacion">Fecha de Vinculacion</label>
-                          <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($d->fec_vinculacion))}}">
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="fec_vinculacion">Estado</label>
-                          <input type="text" class="form-control" id="estado" name="estado" disabled value="{{$d->estado}}">
-                        </div>
-                        <div class="form-group col-md-12">
-                        <!---asignaturas a cargo-->
-                        <?php 
-                          $id=$d->id;
-                        ?>
-                        
-                            <div class="form-group justify-content-center col-md-12 " id="docente">
-                              <label for="asig_dictadas">Asignaturas a Cargo</label>
-                              <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Codigo</th>
-                                    <th scope="col">Asignatura</th>
-                                    <th scope="col">Intensidad Horaria</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                
-                                @foreach($condoc as $c)
-                                  @if($c->id_docente==$id)
-                                  <tr>
-                                  <td>{{$c->codigo}} </td>
-                                  <td>{{$c->nombre}}</td>
-                                  <td>{{$c->intensidad_horaria}}</td>  
-                                  </tr>                     
-                                  @endif
-                                @endforeach
-                                
-                            </tbody>
-                            </table>
-
-                            </div>
-                        <!---end asignaturas a cargo-->
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body">
+                            <form id="formudatos" name="formudatos" method="post">
+                              @csrf
+                              <div class="form-row">
+                                <div class="form-group col-md-4">
+                                  <label for="tipo_doc">Tipo Documento</label>
+                                  <input type="text" class="form-control" id="tipo_doc" name="tipo_doc" disabled value="{{$d->descripcion}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="num_doc">N° Documento</label>
+                                  <input type="text" class="form-control" id="num_doc" name="num_doc" disabled value="{{$d->num_doc}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="correo">Correo</label>
+                                  <input type="text" class="form-control" id="correo" name="correo" disabled value="{{$d->correo}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="telefono">Telefono</label>
+                                  <input type="text" class="form-control" id="telefono" name="telefono" disabled value="{{$d->telefono}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="direccion">Direccion</label>
+                                  <input type="text" class="form-control" id="direccion" name="direccion" disabled value="{{$d->direccion}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="genero">Genero</label>
+                                  <input type="text" class="form-control" id="genero" name="genero" disabled value="{{$d->genero}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="fec_vinculacion">Fecha de Vinculacion</label>
+                                  <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($d->fec_vinculacion))}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="fec_vinculacion">Estado</label>
+                                  <input type="text" class="form-control" id="estado" name="estado" disabled value="{{$d->estado}}">
+                                </div>
+                              </div>
+                            </form>
+                            <!--end mostrar datos-->
+                          </div>
                         </div>
                       </div>
-                    </form>
-                    <!--end mostrar datos-->
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                  </div>
-                </div>
+                      <div class="card">
+                        <div class="card-header" id="headingTwo">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              <i class="fas fa-book"></i> Asignaturas a cargo
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                          <div class="card-body">
+                            <div class="form-group col-md-12">
+                              <!---asignaturas a cargo-->
+                              <?php 
+                                $id=$d->id;
+                              ?>
+                              <div class="form-group justify-content-center col-md-12 " id="docente">
+                                <label for="asig_dictadas">Asignaturas a Cargo</label>
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Codigo</th>
+                                      <th scope="col">Asignatura</th>
+                                      <th scope="col">Intensidad Horaria</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  @foreach($condoc as $c)
+                                    @if($c->id_docente==$id)
+                                      <tr>
+                                        <td>{{$c->codigo}} </td>
+                                        <td>{{$c->nombre}}</td>
+                                        <td>{{$c->intensidad_horaria}}</td>  
+                                      </tr>                     
+                                    @endif
+                                  @endforeach
+                                  </tbody>
+                                </table>
+                              </div>
+                              <!---end asignaturas a cargo-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIN ACORDEON-->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>                
               </div>
               <!--FIN MODAL VER-->
-              
             </div>
             <!-- Ventana modal para cambiar -->
             <div class="modal fade" id="cambiarEstado{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <div class="modal-header" style="background-color: #283593 !important;">
+                  <div class="modal-header" style="background-color: #283593; color:#ffffff;!important;">
                     <h4 class="modal-title text-center" style=" text-align: center;">
                       <span>Docente: {{$d->nombre}}  {{$d->apellido}} </span>
                     </h4>

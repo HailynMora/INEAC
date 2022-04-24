@@ -12,9 +12,11 @@ use App\Models\EstadoModel\Estado;
 use App\Models\AsignaturaModel\Asignatura;
 use App\Models\AsignacionDoModel\Asignaciondo;
 use App\Models\AsignaturaModel\AsigProgram;
+use App\Models\AsignaturaModel\AsignaturaTecnicos;
 
 class asignaturaController extends Controller
 {
+    //registro de asignaturas bachillerato
     public function regasignatura(){
         $estado=Estado::all();
         return view('asignatura.registro_asignatura')->with('estado',$estado);
@@ -48,6 +50,41 @@ class asignaturaController extends Controller
         
         return back();
     }
+    //registro asignaturas técnicos
+    public function regasignaturatec(){
+        $estado=Estado::all();
+        return view('asignatura.registro_asig_tec')->with('estado',$estado);
+    }
+    public function datosasigtec(Request $request){
+        $cod = $request->input('codigoasig');
+        $nom = $request->input('nombreasig');
+        $res1 = DB::table('asig_tecnicos')->where('codigoasig','=',$cod)->count();
+        $res2 = DB::table('asig_tecnicos')->where('nombreasig','=',$nom)->count();
+        if($res1!=0){
+            return \Response::json([
+                'error' => 'Error datos'
+            ],422);
+        }
+        else{
+            if($res2!=0){
+                return \Response::json([
+                    'error' => 'Error datos'
+                ],423);
+            }else{
+                $category = new AsignaturaTecnicos();
+                $category->nombreasig = $request->input('nombre');
+                $category->codigoasig = $request->input('codigo');
+                $category->intensidad_horaria = $request->input('intensidad_horaria');
+                $category->val_habilitacion = $request->input('val_habilitacion');
+                $category->id_estado = $request->input('id_estado');
+                $category->save();
+            }
+            
+        }
+        
+        return back();
+    }
+    //vinculacion de docentes a asignaturas
     public function vincular(Request $request){
         $idasig=$request->asignatura;
         $iddoc=$request->docente;
@@ -77,6 +114,7 @@ class asignaturaController extends Controller
         ->paginate(5);
         return view('asignatura.vincular_docente')->with('docente',$Docente)->with('asignatura',$Asignatura)->with('asig',$asig);
     }
+    //reporte de asignaturas bachillerato
     public function reporte(){
         $rep=DB::table('asignaturas')
         ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
@@ -84,6 +122,15 @@ class asignaturaController extends Controller
         ->paginate(5);
         return view('asignatura.reporte_asignatura')->with('rep',$rep);
     }
+    //reporte de asignaturas tecnico
+    public function reportetec(){
+        $rep=DB::table('asig_tecnicos')
+        ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
+        ->join('estado','id_estado','=','estado.id')
+        ->paginate(5);
+        return view('asignatura.reporte_asignaturatec')->with('rep',$rep);
+    }
+    //actualizar asignaturas bachillerato
     public function form_actualizar($id){
        // $asig = Asignatura::findOrFail($id);
         $estado=Estado::all();
@@ -106,6 +153,7 @@ class asignaturaController extends Controller
         return redirect('/asignatura/reporte_asignatura');
 
     }
+    //cambiar asignatura bachillerato
     public function cambiar_asig($id){
         $asig = Asignatura::find($id);
         $es = $asig->id_estado;
@@ -118,12 +166,14 @@ class asignaturaController extends Controller
         }        
         return redirect('/asignatura/reporte_asignatura');
     }
+    //eliminar asignaturas
     public function eliminar_asig($id){
         DB::table('asig_asignaturas')->where('id_asignaturas','=',$id)->delete();
         DB::table('cursos') ->where('id_asignatura', '=', $id)->delete();
         Asignatura::find($id)->delete();
         return redirect('/asignatura/reporte_asignatura');
     }
+    //desvincular docentes de asignaturas bachillerato
     public function desvincular_doc($id){
         DB::table('asig_asignaturas')->where('id','=',$id)->delete();
         return redirect('/asignatura/vincular_docente');

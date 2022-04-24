@@ -115,21 +115,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('regasignatura')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{route('reporte')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Reporte</p>
+                  <p>Asig. Bachillerato</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('conasignatura')}}" class="nav-link">
+                <a href="{{route('reportetec')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
+                  <p>Asig. Técnicos</p>
                 </a>
               </li>
               <li class="nav-item">

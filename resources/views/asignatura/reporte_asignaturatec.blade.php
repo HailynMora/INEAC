@@ -1,9 +1,9 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Reporte Asignaturas</h3>
+ <h3> Reporte Asignaturas Técnicos</h3>
 </div>
-<a href="{{route('regasignatura')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
+<a href="{{route('regasignaturatec')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
 <form class="form-inline my-6 my-lg-0 float-right mb-6">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
@@ -24,7 +24,7 @@
         <tbody>
         @foreach($rep as $d)
         <tr style="background-color: #dcedc8;">
-        <td>{{$d->codigo}}</td>
+        <td>{{$d->codigoasig}}</td>
         <td>{{$d->asig}}</td>
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->val_habilitacion}}</td>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="modal-body mt-2 text-center">
                         <strong style="text-align: center !important"> 
-                        {{ $d->codigo }} - {{ $d->asig }}
+                        {{ $d->codigoasig }} - {{ $d->asig }}
                         </strong>
                     </div>
                     <div class="modal-footer">

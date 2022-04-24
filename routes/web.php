@@ -118,11 +118,17 @@ Route::get('/asignatura/registro_asignatura', [AsignaturaController::class, 'reg
 
 Route::post('/asignatura/registro_asignatura', [AsignaturaController::class, 'datosasig'])->middleware(['auth', 'secretaria'])->name('datosasig');
 
+Route::get('/asignatura_tecnicos/registro_asignatura', [AsignaturaController::class, 'regasignaturatec'])->middleware(['auth', 'secretaria'])->name('regasignaturatec');
+
+Route::post('/asignatura_tecnicos/registro_asignatura', [AsignaturaController::class, 'datosasigtec'])->middleware(['auth', 'secretaria'])->name('datosasigtec');
+
 Route::get('/asignatura/vincular_docente', [AsignaturaController::class, 'datos'])->middleware(['auth', 'secretaria'])->name('datosasignar');
 
 Route::post('/asignatura/vincular_docente', [AsignaturaController::class, 'vincular'])->middleware(['auth', 'secretaria'])->name('vincular');
 
 Route::get('/asignatura/reporte_asignatura', [AsignaturaController::class, 'reporte'])->middleware(['auth'])->name('reporte');
+
+Route::get('/asignatura_tecnicos/reporte_asignatura', [AsignaturaController::class, 'reportetec'])->middleware(['auth'])->name('reportetec');
 
 Route::get('/asignaturas/consultar', [ConsultarAsigController::class, 'index'])->middleware(['auth'])->name('conasignatura');
 
