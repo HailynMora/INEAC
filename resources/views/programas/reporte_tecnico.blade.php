@@ -50,7 +50,7 @@
         <div class="modal fade" id="cambiarPro{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header" style="background-color: #563d7c !important;">
+                    <div class="modal-header" style="background-color: #283593; !important;">
                         <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
                             <span>¿Cambiar el estado {{$d->estado}} del programa? </span>
                         </h4>
@@ -59,8 +59,8 @@
                         </button> 
                     </div>
                     <div class="modal-body mt-2 text-center">
-                        <strong style="text-align: center !important"> 
-                        {{ $d->codigotec }} - {{ $d->nombretec }}
+                        <strong style="text-align: left !important"> 
+                            <h4>Programa: {{ $d->codigotec }} - {{ $d->nombretec }}</h4>
                         </strong>
                     </div>
                     <div class="modal-footer">
