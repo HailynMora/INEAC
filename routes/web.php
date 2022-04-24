@@ -192,6 +192,10 @@ Route::get('cambiar_estado/{id}', [ProgramasController::class, 'cambiar_pro_tec'
 //ruta cambiar estado
 Route::get('cambiar/{id}', [ProgramasController::class, 'cambiar_pro'])->middleware(['auth', 'secretaria'])->name('cambiarPro'); 
 
+Route::get('/programastecnicos/actualizar/{id}', [ProgramasController::class, 'form_actualizar_tecnico'])->middleware(['auth', 'secretaria'])->name('actualizar_prog_tec');
+
+Route::post('/programastecnicos/actualizar/{id}', [ProgramasController::class, 'actualizar_programa_tecnico'])->middleware(['auth', 'secretaria'])->name('actualizar_programa_tec');
+
 Route::get('vincular/{id}', [ProgramasController::class, 'vincu'])->middleware(['auth', 'secretaria'])->name('vincular_a'); 
 Route::get('vincularasig/{id}', [ProgramasController::class, 'vincu_asig'])->middleware(['auth', 'secretaria'])->name('vincular_asig'); 
 Route::post('/vicular/asignaturas/tecnicos', [ProgramasController::class, 'asig_tec'])->middleware(['auth', 'secretaria'])->name('regvincularasigtec');
@@ -205,7 +209,7 @@ Route::get('/perfil/registrar/usu', [PerfilController::class, 'registrar'])->mid
 //perfil de usuario
 Route::post('/registro/perfil/usuario', [PerfilController::class, 'regdatos'])->middleware(['auth', 'secretaria_docente'])->name('regperfil');
 Route::post('/actualizar/perfil/usuario', [PerfilController::class, 'actu'])->middleware(['auth', 'secretaria_docente'])->name('actuperfiluser');
-
+Route::get('vincularasig/{id}', [ProgramasController::class, 'vincu_asig'])->middleware(['auth', 'secretaria'])->name('vincular_asig'); 
 //actualizar perfil
 Route::get('/perfil/actualizar/usu', [PerfilController::class, 'busperfil'])->middleware(['auth', 'secretaria_docente'])->name('actuperfil');
 
@@ -245,4 +249,11 @@ Route::get('/listar/usuarios', [Roles::class, 'listar_usu'])->middleware(['auth'
 //matricular tecnicos
 Route::post('/matricula/tecnico', [MatriculasController::class, 'matriculatec'])->middleware(['auth', 'secretaria'])->name('matriculatecnico');
 
+//rutas reparar
+Route::get('cambiar_estado/{id}', [ProgramasController::class, 'cambiar_pro_tec'])->middleware(['auth', 'secretaria'])->name('cambiarProTec');
+Route::post('/vicular/asignaturas/tecnicos', [ProgramasController::class, 'asig_tec'])->middleware(['auth', 'secretaria'])->name('regvincularasigtec');
+Route::get('/programas/listado_vinculacion_tec', [ProgramasController::class, 'listarvinculaciontec'])->middleware(['auth', 'secretaria'])->name('asigtec');
+
+//ruta elimar asigtecnico vinculada
+Route::get('/tecnico/asignatura/vin/{id}', [ProgramasController::class, 'eliminartec'])->middleware(['auth', 'secretaria'])->name('elimasig');
 require __DIR__.'/auth.php';

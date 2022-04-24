@@ -14,6 +14,7 @@ use App\Models\TrimestresModel\TrimestresTecnicos;
 use App\Models\AsignaturaModel\AsigTecnicos;
 use App\Models\AsignacionDoModel\AsignacionDoTec;
 use App\Models\DocenteModel\Docente;
+use Session;
 
 
 class ProgramasController extends Controller
@@ -229,7 +230,17 @@ class ProgramasController extends Controller
         $asig=Asignatura::all();
         $tri=TrimestresTecnicos::all();
         $docente=Docente::all();
-        return view('programas.vincular_asig_tecnico')->with('curso', $curso)->with('asignatura', $asig)->with('trimestre', $tri)->with('docente', $docente);
+        ////////////////////////////
+        $asigpro=DB::table('asignaturas_tecnicos')
+        ->select('asignaturas_tecnicos.id','id_asignaturas','id_trimestre','asignaturas.codigo as codas','asignaturas.nombre as asig','programa_tecnico.codigotec','programa_tecnico.nombretec','trimestre_tecnicos.nombretri','docente.nombre as nomdoc','docente.apellido as apedoc')
+        ->join('asignaturas','id_asignaturas','=','asignaturas.id')
+        ->join('trimestre_tecnicos','id_trimestre','=','trimestre_tecnicos.id')
+        ->join('docente','id_docente','=','docente.id')
+        ->join('programa_tecnico','id_tecnico','=','programa_tecnico.id')
+        ->orderBy('asignaturas_tecnicos.id_tecnico', 'ASC')
+        ->paginate(5); //hacer paginacion de las vistas
+        ///////////////////////////
+        return view('programas.vincular_asig_tecnico')->with('curso', $curso)->with('asignatura', $asig)->with('trimestre', $tri)->with('docente', $docente)->with('asigpro',$asigpro);
 
     }
 
@@ -277,6 +288,12 @@ class ProgramasController extends Controller
         ->paginate(5); //hacer paginacion de las vistas
         return view('programas.listado_vinculacion_tec')->with('asigpro',$asigpro);
 
+    }
+
+    public function eliminartec($id){
+        DB::table('asignaturas_tecnicos')->where('id','=',$id)->delete();
+        Session::flash('mensaje', 'Dato eliminado con éxito!');
+        return back();
     }
 
 }
