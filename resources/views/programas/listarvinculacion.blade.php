@@ -56,8 +56,11 @@
         </tbody>
     </table>
     {{$asigpro->links()}}
-    
+    <div class="d-flex justify-content-center">
+        <a href="/programas/reporte_programas" class="btn btn-info">Volver</a>
+    </div>
 </div>
+
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 

@@ -3,18 +3,28 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3>Vincular Asignatura a un Programa</h3>
 </div>
-<div>
-<a href="{{url('/programas/listado_vinculacion')}}" class="btn btn-success">Listado</a>
-</div>
 <br><br>
 <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne">
-        <h2 class="mb-0">
-          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <i class="fas fa-edit"></i> Vincular Asignaturas a un Programa
-          </button>
-        </h2>
+        <!---->
+        <div class="row">
+           <div class="col-md-10">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <i class="fas fa-edit"></i> Vincular Asignaturas a un Programa
+              </button>
+            </h2>
+          </div>
+          <div class="col-md-2">
+              <h2 class="mb-0">
+                <a class="btn btn-link btn-block text-left float-right" type="button" href="/programas/reporte_programas">
+                <i class="fas fa-arrow-circle-left"></i> Volver
+                </a>
+              </h2>
+          </div>
+      </div>
+      <!------>
       </div>
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -45,6 +55,7 @@
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
+                <a href="{{url('/programas/listado_vinculacion')}}" class="btn btn-info">Listar</a>
                 <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Cancelar</a>
 
               </form>
