@@ -153,6 +153,29 @@ class asignaturaController extends Controller
         return redirect('/asignatura/reporte_asignatura');
 
     }
+    //actualizar asignaturas tecnico
+    public function form_actualizartec($id){
+       // $asig = Asignatura::findOrFail($id);
+        $estado=Estado::all();
+        $asig=DB::table('asig_tecnicos')
+        ->where('asig_tecnicos.id','=',$id)
+        ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado','asig_tecnicos.id_estado')
+        ->join('estado','id_estado','=','estado.id')
+        ->get();
+        return view('asignatura.actualizar_asigtec', compact('asig','estado'));
+    }
+
+    public function actualizar_asignaturatec(Request $request,$id){
+        $category = AsignaturaTecnicos::FindOrFail($id);
+        $category->nombreasig = $request->input('nombre');
+        $category->codigoasig = $request->input('codigo');
+        $category->intensidad_horaria = $request->input('intensidad_horaria');
+        $category->val_habilitacion = $request->input('val_habilitacion');
+        $category->id_estado = $request->input('id_estado');
+        $category->save();
+        return redirect('/asignatura_tecnicos/reporte_asignatura');
+
+    }
     //cambiar asignatura bachillerato
     public function cambiar_asig($id){
         $asig = Asignatura::find($id);
@@ -165,6 +188,19 @@ class asignaturaController extends Controller
             $asig->save();
         }        
         return redirect('/asignatura/reporte_asignatura');
+    }
+    //cambiar asignatura tecnico
+    public function cambiar_asigtec($id){
+        $asig = AsignaturaTecnicos::find($id);
+        $es = $asig->id_estado;
+        if($es==2){
+            $asig->id_estado = 1;
+            $asig->save();
+        }else{
+            $asig->id_estado = 2;
+            $asig->save();
+        }        
+        return redirect('/asignatura_tecnicos/reporte_asignatura');
     }
     //eliminar asignaturas
     public function eliminar_asig($id){

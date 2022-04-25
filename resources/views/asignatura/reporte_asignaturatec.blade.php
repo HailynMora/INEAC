@@ -30,7 +30,7 @@
         <td>{{$d->val_habilitacion}}</td>
         <td>{{$d->estado}}</td>
         <td>
-        <a href="{{route('actualizar_asig',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>&nbsp&nbsp&nbsp
+        <a href="{{route('actualizar_asigtec',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>&nbsp&nbsp&nbsp
         <?php
         if($d->estado == 'Activo'){
             ?>
@@ -60,11 +60,11 @@
                     </div>
                     <div class="modal-body mt-2 text-center">
                         <strong style="text-align: center !important"> 
-                        {{ $d->codigoasig }} - {{ $d->asig }}
+                        Asignatura: {{ $d->codigoasig }} - {{ $d->asig }}
                         </strong>
                     </div>
                     <div class="modal-footer">
-                        <a  class="btn btn-success" href="{{ route('cambiarAsig', $d->id) }}">Cambiar</a>
+                        <a  class="btn btn-success" href="#">Cambiar</a>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         
                     </div>
