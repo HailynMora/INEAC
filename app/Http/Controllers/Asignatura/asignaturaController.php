@@ -200,7 +200,7 @@ class asignaturaController extends Controller
             $asig->id_estado = 2;
             $asig->save();
         }        
-        return redirect('/asignatura_tecnicos/reporte_asignatura');
+        return back();
     }
     //eliminar asignaturas
     public function eliminar_asig($id){

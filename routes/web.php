@@ -137,7 +137,7 @@ Route::post('/asignatura_tecnicos/actualizar/{id}', [AsignaturaController::class
 Route::get('cambiar_as/{id}', [AsignaturaController::class, 'cambiar_asig'])->middleware(['auth', 'secretaria'])->name('cambiarAsig'); 
 
 //RUTA DESHABILITAR ASIGNATURA TECNICO
-Route::get('cambiar_asigtecnico/{id}', [AsignaturaController::class, 'cambiar_asigtec'])->middleware(['auth', 'secretaria'])->name('deshabilitar'); 
+Route::get('/cambiar/asigtecnico/{id}', [AsignaturaController::class, 'cambiar_asigtec'])->middleware(['auth', 'secretaria'])->name('deshabilitartec'); 
 
 //RUTA ELIMINAR ASIGNATURA BACHILLERATO
 Route::get('eliminar_as/{id}', [AsignaturaController::class, 'eliminar_asig'])->middleware(['auth', 'secretaria'])->name('eliminarAsig'); 

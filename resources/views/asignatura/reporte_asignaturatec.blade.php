@@ -64,9 +64,8 @@
                         </strong>
                     </div>
                     <div class="modal-footer">
-                        <a  class="btn btn-success" href="#">Cambiar</a>
+                        <a class="btn btn-success" href="/cambiar/asigtecnico/{{$d->id}}">Cambiar</a>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        
                     </div>
                 </div>
              </div>
