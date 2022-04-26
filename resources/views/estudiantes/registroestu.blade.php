@@ -25,21 +25,10 @@
       </div>
       <!------>
     </div>
-
+    <form id="matricula" name="matricula">
+        @csrf
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
-        <form id="matricula" name="matricula">
-          @csrf
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" id="nombre" name="nombre" required onkeypress="return soloLetras(event)">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="apellido">Apellido</label>
-              <input type="text" class="form-control" id="apellido" name="apellido" required onkeypress="return soloLetras(event)">
-            </div>
-          </div>
           <div class="form-row">
           <div class="form-group col-md-4">
               <label for="tipodoc">Tipo Documento</label>
@@ -55,95 +44,138 @@
               <input type="number" class="form-control" id="numero_doc" name="numero_doc" required>
             </div>
             <div class="form-group col-md-4">
+            <label for="correo">Dpt. Expedición</label>
+            <input type="text" class="form-control" id="depex" name="depex" required>
+            </div>
+          </div>
+          <!---###############################################--->
+          <div class="form-row">
+          <div class="form-group col-md-4">
+              <label for="numero_doc">Mpio Expedición</label>
+              <input type="text" class="form-control" id="mpioex" name="mpioex" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="genero">Genero</label>
+                <select id="genero" class="form-control" name="genero" required>
+                <option selected>Seleccionar</option>
+                  @foreach($genero as $g)
+                  <option value="{{$g->id}}">{{$g->descripcion}}</option>
+                  @endforeach
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="correo">Fecha Nacimiento</label>
+            <input type="date" class="form-control" id="fecnac" name="fecnac" required>
+            </div>
+          </div>
+          <!---###############--->
+          <!---###############################################--->
+          <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="numero_doc">Dpt. Nacimiento</label>
+              <input type="text" class="form-control" id="dpt_nac" name="dpt_nac" required>
+            </div>
+            <div class="form-group col-md-6">
+             <label for="numero_doc">Mpio. Nacimiento</label>
+              <input type="text" class="form-control" id="mpio_nac" name="mpio_nac" required>
+            </div>
+          </div>
+          <!---###############--->
+          <div class="form-row">
+          <div class="form-group col-md-3">
+              <label for="apellido">Primer Apellido</label>
+              <input type="text" class="form-control" id="firsape" name="firsape" required onkeypress="return soloLetras(event)">
+            </div>
+            <div class="form-group col-md-3">
+            <label for="apellido">Segundo Apellido</label>
+              <input type="text" class="form-control" id="secondape" name="secondape" required onkeypress="return soloLetras(event)">
+            </div>
+            <div class="form-group col-md-3">
+             <label for="nombre">Primer Nombre</label>
+              <input type="text" class="form-control" id="firstname" name="firstname" required onkeypress="return soloLetras(event)">
+            </div>
+            <div class="form-group col-md-3">
+            <label for="apellido">Segundo Nombre</label>
+              <input type="text" class="form-control" id="secondname" name="secondname" required onkeypress="return soloLetras(event)">
+            </div>
+          </div>
+          <!---##################33-->
+          <!---###############--->
+          <div class="form-row">
+          <div class="form-group col-md-3">
+              <label for="apellido">Dtp. Residencia</label>
+              <input type="text" class="form-control" id="dptres" name="dptres" required onkeypress="return soloLetras(event)">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="apellido">Mpio. Residencia</label>
+              <input type="text" class="form-control" id="mpiores" name="mpiores" required onkeypress="return soloLetras(event)">
+            </div>
+            <div class="form-group col-md-3">
+            <label for="apellido">Dir. Residencia</label>
+              <input type="text" class="form-control" id="dirres" name="dirres" required>
+            </div>
+            <div class="form-group col-md-3">
+             <label for="nombre">Barrio</label>
+              <input type="text" class="form-control" id="barrio" name="barrio" required>
+            </div>
+          </div>
+          <!---##################33-->
+           <!---###############--->
+           <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="genero">Zona</label>
+                <select id="zona" class="form-control" name="zona" required>
+                <option selected>Elegir ...</option>
+                  <option value="Rural">Rural</option>
+                  <option value="Urbana">Urbana</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="estrato">Estrato</label>
+              <input type="number" class="form-control" id="estrato" name="estrato" required>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="genero">Tipo Sanguineo</label>
+                <select id="sangre" class="form-control" name="sangre" required>
+                <option selected>Elegir ...</option>
+                  <option value="A+">A+</option>
+                  <option value="B+">B+</option>
+                  <option value="O+">O+</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="A-">A-</option>
+                  <option value="O-">O-</option>
+                  <option value="B-">B-</option>
+                </select>
+          </div>
+          </div>
+          <!---##################33-->
+            <!---###############--->
+            <div class="form-row">
+            <div class="form-group col-md-6">
+             <label for="telefono">Telefono</label>
+             <input type="text" class="form-control" id="telefono" name="telefono" required>
+            </div>
+            <div class="form-group col-md-6">
               <label for="correo">Correo</label>
               <input type="email" class="form-control" id="correo" name="correo" required>
             </div>
           </div>
-          <!--aqui esta estrato-->
-          <div class="form-row">
-          <div class="form-group col-md-4">
-          <label for="telefono">Telefono</label>
-            <input type="text" class="form-control" id="telefono" name="telefono" required>
-            </div>
-            <div class="form-group col-md-4">
-            <label for="direccion">Dirección</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" required>
-            </div>
-            <div class="form-group col-md-4">
-            <label for="estrato">Estrato</label>
-              <input type="number" class="form-control" id="estrato" name="estrato" required>
-            </div>
-          </div>
-          <!---->
-          <div class="form-row">
-            <!--------->
-            <div class="form-group col-md-6">
-            <label for="genero">Genero</label>
-              <select id="genero" class="form-control" name="genero" required>
-              <option selected>Seleccionar</option>
-                @foreach($genero as $g)
-                <option value="{{$g->id}}">{{$g->descripcion}}</option>
-                @endforeach
-              </select>
-            </div>
-            <!---->
-            <div class="form-group col-md-6">
-            <label for="etnia">Tipo Etnia</label>
-              <select id="etnia" class="form-control" name="etnia" required> 
-              @foreach($etnia as $e)
-                <option value="{{$e->id}}">{{$e->descripcion}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-            <label for="acudiente">Acudiente</label>
-              <select id="acudiente" class="form-control" name="acudiente" required>
-              <option selected>Seleccionar</option>
-              @foreach($acu as $a)
-                <option value="{{$a->id}}">{{$a->nombre}} {{$a->apellido}} C.C {{$a->num_doc}}</option>
-                @endforeach
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-            <label for="certificado">Certificados</label>
-              <select id="certificado" class="form-control" name="certificado" required> 
-              @foreach($certificado as $cer)
-                <option value="{{$cer->id}}">{{$cer->foto}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <!--estado certificados-->
-          <div class="form-row">
-            <!--------->
-            <div class="form-group col-md-6">
-            <label for="usuario">Usuario</label>
-              <select id="usuario" class="form-control" name="usuario" required>
-              <option selected>Seleccionar</option>
-                @foreach($user as $u)
-                <option value="{{$u->id}}">{{$u->name}}</option>
-                @endforeach
-              </select>
-            </div>
-            <!---->
-            <div class="form-group col-md-6">
-            <label for="estado">Estado</label>
-              <select id="estado" class="form-control" name="estado" required>
-              <option selected>Seleccionar</option>
+          <!--estado oculto por defecto habilitado-->
+              <select id="estado" class="form-control" name="estado" hidden>
                 @foreach($estado as $es)
                 <option value="{{$es->id}}">{{$es->descripcion}}</option>
                 @endforeach
               </select>
-            </div>
-          </div>
+             
+                <select id="usuario" class="form-control" name="usuario" hidden>
+                  @foreach($user as $u)
+                  <option value="{{$u->id}}">{{$u->name}}</option>
+                  @endforeach
+                </select>
+          <!---##################33-->
           <!--end estado-->
-          <button type="submit" class="btn btn-primary">Registrar</button>
-          <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
-          <button type="button"  id="miboton" class="btn btn-success">Visualizar</button>
-          <a  class="btn btn-danger" href="{{url('/visualizar/estudiante')}}">Cancelar</a>
-        </form>
+
       </div>
     </div>
   </div>
@@ -151,13 +183,49 @@
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Salud
+         Sistema De Salud
         </button>
       </h2>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
-        Some placeholder content for the second accordion panel. This panel is hidden by default.
+         <!----##########################-->
+         <div class="form-row">
+          <div class="form-group col-md-4">
+              <label for="tipodoc">Regimen salud</label>
+              <input type="text" class="form-control" id="regimen" name="regimen" required>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="correo">Carnet EPS</label>
+            <input type="text" class="form-control" id="carnet" name="carnet" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="numero_doc">Nivel Formación</label>
+              <input type="text" class="form-control" id="nivelformacion" name="nivelformacion" required>
+            </div>
+            </div>
+            <!---#####################--->
+                 
+            <div class="form-row">
+            <div class="form-group col-md-4">
+            <label for="correo">Ocupación</label>
+            <input type="text" class="form-control" id="ocupacion" name="ocupacion" required>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="correo">Discapacidad</label>
+            <input type="text" class="form-control" id="dicapacidad" name="discapacidad" required>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="etnia">Multiculturalidad</label>
+                <select id="etnia" class="form-control" name="etnia" required> 
+                @foreach($etnia as $e)
+                  <option value="{{$e->id}}">{{$e->descripcion}}</option>
+                  @endforeach
+                </select>
+             </div>
+
+          </div>
+          <!--################################3-->      
       </div>
     </div>
   </div>
@@ -171,14 +239,85 @@
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
-        And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+        <!----##########################-->
+        <div class="form-row">
+          <div class="form-group col-md-4">
+              <label for="tipodoc">Tipo Documento</label>
+              <select id="tdocacu" name="tdocacu" class="form-control" required>
+              <option selected>Seleccionar</option>
+                @foreach($tipodoc as $t)
+                <option value="{{$t->id}}">{{$t->descripcion}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="numero_doc">Número Documento</label>
+              <input type="number" class="form-control" id="numdocacu" name="numdocacu" required>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="correo">Nombres y Apellidos</label>
+            <input type="text" class="form-control" id="nombresacu" name="nombresacu" required>
+            </div>
+          </div>
+          <!--################################3-->
+          <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="etnia">Parentesco</label>
+                <select id="parentesco" class="form-control" name="parentesco" required> 
+                  @foreach($paren as $p)
+                  <option value="{{$p->id}}">{{$p->descripcion}}</option>
+                  @endforeach
+                </select>
+              </div>
+           <div class="form-group col-md-4">
+              <label for="tipodoc">Dir. Residencia</label>
+              <input type="text" class="form-control" id="diracu" name="diracu" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="numero_doc">Telefono/Celular</label>
+              <input type="number" class="form-control" id="telacu" name="telacu" required>
+            </div>
+          </div>
+          <!---###############################3-->
+          <!-----etnia-->
+       <!------##########################-->
       </div>
     </div>
   </div>
 </div>
 <div class="container-fluid">
+  <!-----
+      tipodoc 
+    numero_doc 
+    depex 
+     mpioex 
+     genero  
+     fecnac 
+     dpt_nac  
+     mpio_nac  
+     firsape 
+     secondape
+    firstname 
+    secondname 
+     dptres 
+     mpiores 
+     dirres 
+     barrio
+    zona
+    estrato
+    sangre 
+    telefono 
+    correo
+     estado
+    usuario
+  --->
 
 </div>
+<button type="submit" class="btn btn-primary">Registrar</button>
+<button type="button"  id="miboton" class="btn btn-success">Visualizar</button>
+<button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+<a  class="btn btn-danger" href="{{url('/visualizar/estudiante')}}">Cancelar</a>
+</form>
 <!--Modal de visualizar--->
 <!-- Button trigger modal -->
 
@@ -205,43 +344,16 @@
   /*tomamos la información del formulario y la enviamos a la ruta y de la ruta al controlador*/
   $('#matricula').submit(function(e){
     e.preventDefault();
-    var nombre=$('#nombre').val();
-    var apellido=$('#apellido').val();
-    var direccion=$('#direccion').val();
-    var telefono=$('#telefono').val();
-    var tipodoc=$('#tipodoc').val();
-    var numerodoc=$('#numero_doc').val();
-    var correo=$('#correo').val();
-    var estrato=$('#estrato').val();
-    var etnia=$('#etnia').val();
-    var genero=$('#genero').val();
-    var acudiente=$('#acudiente').val();
-    var estado=$('#estado').val();
-    var certificado=$('#certificado').val();
-    var usuario=$('#usuario').val();
-    var _token = $('input[name=_token]').val(); //token de seguridad
 
+    var formData = new FormData(this);
+    formData.append('_token', $('input[name=_token]').val());
+    console.log(formData);
     $.ajax({
       type: "POST",
       url:"{{route('datosestudiante')}}",
-      
-      data:{
-        nombre:nombre,
-        apellido:apellido,
-        direccion:direccion,
-        telefono:telefono,
-        genero:genero,
-        tipodoc:tipodoc,
-        numerodoc:numerodoc,
-        correo:correo,
-        estrato:estrato,
-        etnia:etnia,
-        acudiente:acudiente,
-        estado:estado,
-        certificado:certificado,
-        usuario:usuario,
-        _token:_token
-      }, 
+      data:formData,
+      processData: false,  // tell jQuery not to process the data
+      contentType: false,   // tell jQuery not to set contentType
       success:function(response){
         if(response){
           $('#matricula')[0].reset();

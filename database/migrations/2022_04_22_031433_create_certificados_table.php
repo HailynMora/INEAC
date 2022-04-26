@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('certificados', function (Blueprint $table) {
             $table->id();
-            $table->string('cert_medico');
-            $table->string('cert_estudios');
-            $table->string('foto');
-            $table->string('recibo_energia');
-            $table->string('copia_doc_estudiante');
-            $table->string('copia_doc_acudiente');
-
+            $table->string('cert_medico')->nullable();
+            $table->string('cert_estudios')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('recibo_energia')->nullable();
+            $table->string('copia_doc_estudiante')->nullable();
+            $table->string('copia_doc_acudiente')->nullable();
+            $table->unsignedBigInteger('id_estudiante');//atributo para referenciar a categoria
+            $table->foreign('id_estudiante')->references('id')->on('estudiante');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }

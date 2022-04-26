@@ -21,14 +21,13 @@ class EstudiantesController extends Controller
         $tipodoc=TipoDocumento::all();
         $genero=Genero::all();
         $etnia=EtniaModel::all();
-        $acu=Acudiente::all();
         $estado=Estado::all();
-        $certificado=Certificado::all();
         $user=User::all();
+        $paren=Parentesco::all();
         return view('estudiantes.registroestu')->with('tipodoc', $tipodoc)
         ->with('genero', $genero)->with('etnia', $etnia)
-        ->with('acu', $acu)->with('estado', $estado)->with('certificado', $certificado)
-        ->with('user', $user);
+        ->with('estado', $estado)
+        ->with('user', $user)->with('paren', $paren);
     }
 
     public function listar(){
@@ -91,7 +90,7 @@ class EstudiantesController extends Controller
     }
 
     public function matricula(Request $request){
-        $r= $request->input('numerodoc');
+       /* $r= $request->input('numerodoc');
         $co= $request->input('correo');
         $res=DB::table('estudiante')->where('num_doc', '=', $r)->count();
         $c=DB::table('estudiante')->where('correo', '=', $co)->count();
@@ -122,7 +121,7 @@ class EstudiantesController extends Controller
                 $Registrar->id_usuario = $request->input('usuario');
                 $Registrar->save(); 
             }
-        }
+        }*/
         return back();
     }
     public function form_actualizar($id){

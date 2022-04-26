@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('codigotec');
             $table->string('nombretec');
             $table->string('descripcion');
+            $table->string('jornada');
             $table->unsignedBigInteger('id_estado');
             $table->foreign('id_estado')->references('id')->on('estado');
             $table->timestamps();

@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('acudiente', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',100);
-            $table->string('apellido',100);
+            $table->string('lastname',200);
             $table->string('direccion',100);
             $table->string('telefono');
             $table->string('num_doc');
@@ -24,8 +23,8 @@ return new class extends Migration
             $table->foreign('id_parentesco')->references('id')->on('parentezco');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_tipo_doc');//atributo para referenciar a categoria
             $table->foreign('id_tipo_doc')->references('id')->on('tipo_documento');//llave foranea para referenciar a la tabla categorias
-            $table->unsignedBigInteger('id_genero');//atributo para referenciar a categoria
-            $table->foreign('id_genero')->references('id')->on('genero');//llave foranea para referenciar a la tabla categorias
+            $table->unsignedBigInteger('id_estudiante');//atributo para referenciar a categoria
+            $table->foreign('id_estudiante')->references('id')->on('estudiante');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }

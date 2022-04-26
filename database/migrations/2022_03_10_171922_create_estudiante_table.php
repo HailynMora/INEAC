@@ -15,23 +15,29 @@ return new class extends Migration
     {
         Schema::create('estudiante', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',100);
-            $table->string('apellido',100);
-            $table->string('direccion',100)->nullable();
+            $table->string('first_nom',100);
+            $table->string('second_nom',50)->nullable();
+            $table->string('firts_ape',50);
+            $table->string('second_ape',50)->nullable();
+            $table->string('tiposangre',50)->nullable();
+            $table->string('dirresidencia',100)->nullable();
+            $table->string('dptresidencia',100)->nullable();
+            $table->string('munresidencia',100)->nullable();
+            $table->string('zona',100)->nullable();
+            $table->string('barrio',100)->nullable();
             $table->string('telefono')->nullable();
-            $table->Integer('num_doc')->unique();
+            $table->string('num_doc')->unique();
+            $table->string('dpt_expedicion')->nullable();
+            $table->string('mun_expedicion')->nullable();
+            $table->dateTime('fecnacimiento');
+            $table->string('dpt_nacimiento')->nullable();
+            $table->string('mun_nacimiento')->nullable();
             $table->string('correo',100)->unique();
             $table->string('estrato',100);
-            $table->unsignedBigInteger('id_etnia');//atributo para referenciar a categoria
-            $table->foreign('id_etnia')->references('id')->on('etnia');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_genero');//atributo para referenciar a categoria
             $table->foreign('id_genero')->references('id')->on('genero');//llave foranea para referenciar a la tabla categorias
-            $table->unsignedBigInteger('id_acudiente');//atributo para referenciar a categoria
-            $table->foreign('id_acudiente')->references('id')->on('acudiente');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_tipo_doc');//atributo para referenciar a categoria
             $table->foreign('id_tipo_doc')->references('id')->on('tipo_documento');//llave foranea para referenciar a la tabla categorias
-            $table->unsignedBigInteger('id_certificados');//atributo para referenciar a categoria
-            $table->foreign('id_certificados')->references('id')->on('certificados');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
             $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_usuario');//atributo para referenciar a categoria
