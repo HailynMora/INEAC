@@ -3,6 +3,8 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3>Registro de Estudiantes</h3>
 </div>
+<form id="matricula" name="matricula">
+ @csrf
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -25,8 +27,7 @@
       </div>
       <!------>
     </div>
-    <form id="matricula" name="matricula">
-        @csrf
+    
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
           <div class="form-row">
@@ -88,7 +89,7 @@
             </div>
             <div class="form-group col-md-3">
             <label for="apellido">Segundo Apellido</label>
-              <input type="text" class="form-control" id="secondape" name="secondape" required onkeypress="return soloLetras(event)">
+              <input type="text" class="form-control" id="secondape" name="secondape" onkeypress="return soloLetras(event)">
             </div>
             <div class="form-group col-md-3">
              <label for="nombre">Primer Nombre</label>
@@ -96,7 +97,7 @@
             </div>
             <div class="form-group col-md-3">
             <label for="apellido">Segundo Nombre</label>
-              <input type="text" class="form-control" id="secondname" name="secondname" required onkeypress="return soloLetras(event)">
+              <input type="text" class="form-control" id="secondname" name="secondname" onkeypress="return soloLetras(event)">
             </div>
           </div>
           <!---##################33-->

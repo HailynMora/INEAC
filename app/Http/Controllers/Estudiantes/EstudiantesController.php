@@ -13,6 +13,7 @@ use App\Models\ParentescoModel\EtniaModel;
 use App\Models\EstudianteModel\Estudiante;
 use App\Models\CertificadoModel\Certificado;
 use App\Models\EstadoModel\Estado;
+use App\Models\SaludModel\SistemaSalud;
 use App\Models\User;
 
 class EstudiantesController extends Controller
@@ -90,7 +91,8 @@ class EstudiantesController extends Controller
     }
 
     public function matricula(Request $request){
-       /* $r= $request->input('numerodoc');
+
+        $r= $request->input('numerodoc');
         $co= $request->input('correo');
         $res=DB::table('estudiante')->where('num_doc', '=', $r)->count();
         $c=DB::table('estudiante')->where('correo', '=', $co)->count();
@@ -103,26 +105,61 @@ class EstudiantesController extends Controller
                 return \Response::json([
                     'error'  => 'Error datos'
                 ],423);
-            }else{
-               $Registrar = new Estudiante();
-                $Registrar->nombre = $request->input('nombre');
-                $Registrar->apellido = $request->input('apellido');
-                $Registrar->direccion = $request->input('direccion');
+            }else{ 
+                $Registrar = new Estudiante();
+                $Registrar->first_nom = $request->input('firstname');
+                $Registrar->second_nom = $request->input('secondname');
+                $Registrar->firts_ape = $request->input('firsape');
+                if($request->input('secondape')!=NULL){
+                    $Registrar->second_ape = $request->input('secondape');
+                }
+                $Registrar->tiposangre = $request->input('sangre');
+                $Registrar->dirresidencia = $request->input('dirres');
+                $Registrar->dptresidencia = $request->input('dptres');
+                $Registrar->munresidencia = $request->input('mpiores');
+                $Registrar->zona = $request->input('zona');
+                $Registrar->barrio = $request->input('barrio');
                 $Registrar->telefono = $request->input('telefono');
-                $Registrar->num_doc = $request->input('numerodoc');
+                $Registrar->num_doc = $request->input('numero_doc');
+                $Registrar->dpt_expedicion = $request->input('depex');
+                $Registrar->mun_expedicion = $request->input('mpioex');
+                $Registrar->fecnacimiento = $request->input('fecnac');
+                $Registrar->dpt_nacimiento  = $request->input('dpt_nac');
+                $Registrar->mun_nacimiento = $request->input('mpio_nac');
                 $Registrar->correo = $request->input('correo');
                 $Registrar->estrato = $request->input('estrato');
-                $Registrar->id_etnia = $request->input('etnia');
                 $Registrar->id_genero = $request->input('genero');
-                $Registrar->id_acudiente = $request->input('acudiente');
-                $Registrar->id_tipo_doc = $request->input('tipodoc');
-                $Registrar->id_certificados = $request->input('certificado');
+                $Registrar->id_tipo_doc  = $request->input('tipodoc');
                 $Registrar->id_estado = $request->input('estado');
-                $Registrar->id_usuario = $request->input('usuario');
+                $Registrar->id_usuario  = $request->input('usuario');
                 $Registrar->save(); 
+                //////////////////////////#################consultar el id del estudiante ingresado
+                $ndoc=$request->numero_doc;
+                $resestu=DB::table('estudiante')->where('num_doc', '=', $ndoc)->select('estudiante.id as idestu')->first();
+                /////////////////////////77######################### almacenar los datos en la tabla sistema_salud
+                $Salud =new SistemaSalud();
+                $Salud->regimen	= $request->input('regimen');
+                $Salud->eps	= $request->input('carnet');
+                $Salud->nivelformacion= $request->input('nivelformacion');
+                $Salud->ocupacion = $request->input('ocupacion');
+                $Salud->discapacidad = $request->input('discapacidad');	
+                $Salud->id_etnia = $request->input('etnia');
+                $Salud->id_estudiante = $resestu->idestu;
+                $Salud->save(); 
+                /////////////#############################################Almacenar los datos del acudiente
+                $Acu = new Acudiente();
+                $Acu->lastname = $request->input('nombresacu');
+                $Acu->direccion = $request->input('diracu');
+                $Acu->telefono = $request->input('telacu');
+                $Acu->num_doc = $request->input('numdocacu');
+                $Acu->id_parentesco = $request->input('parentesco');
+                $Acu->id_tipo_doc =$request->input('tdocacu');
+                $Acu->id_estudiante	=$resestu->idestu;
+                $Acu->save();
             }
-        }*/
-        return back();
+        }
+              
+        return back();        
     }
     public function form_actualizar($id){
        // $est = Estudiante::findOrFail($id);
