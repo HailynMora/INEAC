@@ -46,14 +46,14 @@
             </div>
             <div class="form-group col-md-4">
             <label for="correo">Dpt. Expedición</label>
-            <input type="text" class="form-control" id="depex" name="depex" required>
+            <input type="text" class="form-control" id="depex" name="depex" >
             </div>
           </div>
           <!---###############################################--->
           <div class="form-row">
           <div class="form-group col-md-4">
               <label for="numero_doc">Mpio Expedición</label>
-              <input type="text" class="form-control" id="mpioex" name="mpioex" required>
+              <input type="text" class="form-control" id="mpioex" name="mpioex" >
             </div>
             <div class="form-group col-md-4">
               <label for="genero">Genero</label>
@@ -74,11 +74,11 @@
           <div class="form-row">
           <div class="form-group col-md-6">
               <label for="numero_doc">Dpt. Nacimiento</label>
-              <input type="text" class="form-control" id="dpt_nac" name="dpt_nac" required>
+              <input type="text" class="form-control" id="dpt_nac" name="dpt_nac" >
             </div>
             <div class="form-group col-md-6">
              <label for="numero_doc">Mpio. Nacimiento</label>
-              <input type="text" class="form-control" id="mpio_nac" name="mpio_nac" required>
+              <input type="text" class="form-control" id="mpio_nac" name="mpio_nac">
             </div>
           </div>
           <!---###############--->
@@ -105,19 +105,19 @@
           <div class="form-row">
           <div class="form-group col-md-3">
               <label for="apellido">Dtp. Residencia</label>
-              <input type="text" class="form-control" id="dptres" name="dptres" required onkeypress="return soloLetras(event)">
+              <input type="text" class="form-control" id="dptres" name="dptres"  onkeypress="return soloLetras(event)">
             </div>
             <div class="form-group col-md-3">
               <label for="apellido">Mpio. Residencia</label>
-              <input type="text" class="form-control" id="mpiores" name="mpiores" required onkeypress="return soloLetras(event)">
+              <input type="text" class="form-control" id="mpiores" name="mpiores"  onkeypress="return soloLetras(event)">
             </div>
             <div class="form-group col-md-3">
             <label for="apellido">Dir. Residencia</label>
-              <input type="text" class="form-control" id="dirres" name="dirres" required>
+              <input type="text" class="form-control" id="dirres" name="dirres" >
             </div>
             <div class="form-group col-md-3">
              <label for="nombre">Barrio</label>
-              <input type="text" class="form-control" id="barrio" name="barrio" required>
+              <input type="text" class="form-control" id="barrio" name="barrio" >
             </div>
           </div>
           <!---##################33-->
@@ -125,7 +125,7 @@
            <div class="form-row">
           <div class="form-group col-md-4">
             <label for="genero">Zona</label>
-                <select id="zona" class="form-control" name="zona" required>
+                <select id="zona" class="form-control" name="zona" >
                 <option selected>Elegir ...</option>
                   <option value="Rural">Rural</option>
                   <option value="Urbana">Urbana</option>
@@ -137,7 +137,7 @@
             </div>
             <div class="form-group col-md-4">
             <label for="genero">Tipo Sanguineo</label>
-                <select id="sangre" class="form-control" name="sangre" required>
+                <select id="sangre" class="form-control" name="sangre" >
                 <option selected>Elegir ...</option>
                   <option value="A+">A+</option>
                   <option value="B+">B+</option>
@@ -155,7 +155,7 @@
             <div class="form-row">
             <div class="form-group col-md-6">
              <label for="telefono">Telefono</label>
-             <input type="text" class="form-control" id="telefono" name="telefono" required>
+             <input type="text" class="form-control" id="telefono" name="telefono" >
             </div>
             <div class="form-group col-md-6">
               <label for="correo">Correo</label>
@@ -202,7 +202,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="numero_doc">Nivel Formación</label>
-              <input type="text" class="form-control" id="nivelformacion" name="nivelformacion" required>
+              <input type="text" class="form-control" id="nivelformacion" name="nivelformacion" >
             </div>
             </div>
             <!---#####################--->
@@ -210,11 +210,11 @@
             <div class="form-row">
             <div class="form-group col-md-4">
             <label for="correo">Ocupación</label>
-            <input type="text" class="form-control" id="ocupacion" name="ocupacion" required>
+            <input type="text" class="form-control" id="ocupacion" name="ocupacion" >
             </div>
             <div class="form-group col-md-4">
             <label for="correo">Discapacidad</label>
-            <input type="text" class="form-control" id="dicapacidad" name="discapacidad" required>
+            <input type="text" class="form-control" id="dicapacidad" name="discapacidad" >
             </div>
             <div class="form-group col-md-4">
             <label for="etnia">Multiculturalidad</label>
