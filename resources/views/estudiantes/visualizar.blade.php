@@ -26,9 +26,17 @@
     <tbody>
     @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
+      <!---
+        dptresidencia
+        munresidencia
+        dpt_expedicion
+        mun_expedicion
+        dpt_nacimiento
+        mun_nacimiento
+       --->
         <tr class="table-success"style="background-color: #dcedc8;">
         <td>{{$d->num_doc}}</td>
-        <td>{{$d->nombre}} {{$d->apellido}}</td>
+        <td>{{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}</td>
         <td>{{$d->telefono}}</td>
         <td  class="d-none d-lg-block">{{$d->correo}}</td>
         <td>{{$d->estadoes}}</td>
@@ -50,12 +58,12 @@
                 ?>
                 <!-- Modal -->
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                     <div class="modal-header alert alert-warning">
                         <h5 class="modal-title" id="staticBackdropLabel">
                        
-                          Datos Estudiante: {{$d->nombre}} {{$d->apellido}}
+                          Datos Estudiante: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}
                        
                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -63,49 +71,122 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    <!---Mostrar datos-->
+                    <!---Mostrar datos--> 
+                    <h4 class="text-centers">Datos Personales</h4>
+                    <hr>
                     <div class="row">
-                        <div class="col-md-4">Nombre</div>
-                        <div class="col-md-4 ml-auto">{{$d->nombre}} {{$d->apellido}}</div>
+                        <div class="col-md-3">Tipo Identificacion</div>
+                        <div class="col-md-3 ml-auto">{{$d->tdoces}}</div>
+                        <div class="col-md-3">Número</div>
+                        <div class="col-md-3 ml-auto">{{$d->num_doc}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Dirección</div>
-                        <div class="col-md-4 ml-auto">{{$d->direccion}}</div>
+                        <div class="col-md-3">Dpt Expedición</div>
+                        <div class="col-md-3 ml-auto">{{$d->dpt_expedicion}}</div>
+                        <div class="col-md-3">Mpio. Expedición</div>
+                        <div class="col-md-3 ml-auto">{{$d->mun_expedicion}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Tipo Doc.</div>
-                        <div class="col-md-4 ml-auto">{{$d->tdoces}}</div>
+                        <div class="col-md-3">Genero</div>
+                        <div class="col-md-3 ml-auto">{{$d->generoestu}}</div>
+                        <div class="col-md-3">Fecha Nac</div>
+                        <div class="col-md-3 ml-auto">{{$d->fecnacimiento}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Número</div>
-                        <div class="col-md-4 ml-auto">{{$d->num_doc}}</div>
+                        <div class="col-md-3">Dpt Nacimiento</div>
+                        <div class="col-md-3 ml-auto">{{$d->dpt_nacimiento}}</div>
+                        <div class="col-md-3">Mpio. Nacimiento</div>
+                        <div class="col-md-3 ml-auto">{{$d->mun_nacimiento}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Genero</div>
-                        <div class="col-md-4 ml-auto">{{$d->generoestu}}</div>
+                        <div class="col-md-3">Primer Apellido</div>
+                        <div class="col-md-3 ml-auto">{{$d->firts_ape}}</div>
+                        <div class="col-md-3">Segundo Apellido</div>
+                        <div class="col-md-3 ml-auto">{{$d->second_ape}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Etnia</div>
-                        <div class="col-md-4 ml-auto">{{$d->etniaestu}}</div>
+                        <div class="col-md-3">Primer Nombre</div>
+                        <div class="col-md-3 ml-auto">{{$d->first_nom}}</div>
+                        <div class="col-md-3">Segundo Nombre</div>
+                        <div class="col-md-3 ml-auto">{{$d->second_nom}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Estrato</div>
-                        <div class="col-md-4 ml-auto">{{$d->estrato}}</div>
+                        <div class="col-md-3">Dir. Residencia</div>
+                        <div class="col-md-3 ml-auto">{{$d->dirresidencia}}</div>
+                        <div class="col-md-3">Barrio</div>
+                        <div class="col-md-3 ml-auto">{{$d->barrio}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Usuario</div>
-                        <div class="col-md-4 ml-auto">{{$d->usuestu}}</div>
+                        <div class="col-md-3">Dpt. Residencia</div>
+                        <div class="col-md-3 ml-auto">{{$d->dptresidencia}}</div>
+                        <div class="col-md-3">Mpio. Residencia</div>
+                        <div class="col-md-3 ml-auto">{{$d->munresidencia}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Acudiente Nombres</div>
-                        <div class="col-md-4 ml-auto">{{$d->nomacu}} {{$d->apeacu}} </div>
+                        <div class="col-md-3">Zona</div>
+                        <div class="col-md-3 ml-auto">{{$d->zona}}</div>
+                        <div class="col-md-3">Telefono/Celular</div>
+                        <div class="col-md-3 ml-auto">{{$d->telefono}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">Parentesco</div>
-                        <div class="col-md-4 ml-auto">{{$d->paren}} </div>
+                        <div class="col-md-3">Estrato</div>
+                        <div class="col-md-3 ml-auto">{{$d->estrato}}</div>
+                        <div class="col-md-3">Tipo Sangre</div>
+                        <div class="col-md-3 ml-auto">{{$d->tiposangre}}</div>
                     </div>
-                    
                     <!--end mostrar datos-->
+                    <!---#########################################sistema salud----->
+                     <br>
+                      <hr>
+                        <h4 class="text-centers">Sistema De Salud</h4>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-3">Regimen Salud</div>
+                        <div class="col-md-3 ml-auto">{{$d->regimen}}</div>
+                        <div class="col-md-3">Carnet/EPS</div>
+                        <div class="col-md-3 ml-auto">{{$d->eps}}</div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-3">Nivel Formación</div>
+                        <div class="col-md-3 ml-auto">{{$d->nivelformacion}}</div>
+                        <div class="col-md-3">Ocupación</div>
+                        <div class="col-md-3 ml-auto">{{$d->ocupacion}}</div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-3">Discapacidad</div>
+                        <div class="col-md-3 ml-auto">{{$d->discapacidad}}</div>
+                        <div class="col-md-3">Multiculturidad</div>
+                        <div class="col-md-3 ml-auto">{{$d->etniades}}</div>
+                     </div>
+                    <!--#####################fin sistema salud---->
+                    <!--#############Datos del acudiente-->
+                      <br>
+                      <hr>
+                        <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-3">Tipo Identificacion</div>
+                        <div class="col-md-3 ml-auto">{{$d->tdocacu}}</div>
+                        <div class="col-md-3">Número</div>
+                        <div class="col-md-3 ml-auto">{{$d->numacu}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">Nombres y Apellido</div>
+                        <div class="col-md-3 ml-auto">{{$d->nomacu}}</div>
+                        <div class="col-md-3">Parentesco</div>
+                        <div class="col-md-3 ml-auto">{{$d->paren}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">Dirección Residencia</div>
+                        <div class="col-md-3 ml-auto">{{$d->diracu}}</div>
+                        <div class="col-md-3">Telefono/Celular</div>
+                        <div class="col-md-3 ml-auto">{{$d->telacu}}</div>
+                      </div>
+                    <!---############End Datos Acudiente-->
+                    <br>
+                      <hr>
+                        <h4 class="text-centers">Datos Del Programa</h4>
+                      <hr>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -119,7 +200,7 @@
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #283593 !important; color:white;">
                         <h4 class="modal-title text-center" style=" text-align: center;">
-                            <span>ESTUDIANTE: {{$d->nombre}} {{$d->apellido}} </span>
+                            <span>ESTUDIANTE: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}} </span>
                         </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
