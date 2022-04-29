@@ -188,46 +188,86 @@ class EstudiantesController extends Controller
         return back();        
     }
     public function form_actualizar($id){
+        
        // $est = Estudiante::findOrFail($id);
-        $est = DB::table('estudiante')->where('estudiante.id','=',$id)
+       $est=DB::table('estudiante')
+            ->where('estudiante.id', '=', $id)
             ->join('estado', 'id_estado', '=', 'estado.id')
             ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
             ->join('genero', 'id_genero', '=', 'genero.id')
-            ->join('etnia', 'id_etnia', '=', 'etnia.id')
             ->join('users', 'id_usuario', '=', 'users.id')
-            ->join('acudiente', 'estudiante.id_acudiente', '=', 'acudiente.id')
+            ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
             ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
-            ->join('certificados', 'estudiante.id_certificados', '=', 'certificados.id')
-            ->select('estudiante.id', 'estudiante.nombre', 'estudiante.apellido', 'estudiante.direccion', 'estudiante.telefono',
-            'estudiante.num_doc', 'estudiante.id_certificados','estudiante.estrato', 'estudiante.correo','estudiante.id_tipo_doc', 'estudiante.id_genero' ,'estudiante.id_etnia','estudiante.id_acudiente','estudiante.id_estado','estudiante.id_usuario','estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
-            'genero.descripcion as generoestu', 'etnia.descripcion as etniaestu', 'users.name as usuestu', 'acudiente.nombre as nomacu', 'acudiente.apellido as apeacu', 'parentezco.descripcion as paren','certificados.foto')
-            ->get();
-        $tipo_doc=TipoDocumento::all();
-        $gen=Genero::all();
+            ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+            ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+            ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+            ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.id_tipo_doc as idtdoces', 'estudiante.id_genero as idgen', 'estudiante.id_estado as idestado', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
+            'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
+            'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
+            'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
+            'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
+            'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
+            'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'sistema_salud.id_etnia as idetnia',  'etnia.descripcion as etniades', 'acudiente.id_parentesco as idparen',  'acudiente.id_tipo_doc as idtpoacu', 'tipo.descripcion as tdocacu')
+	        ->get();
+        $tipodoc=TipoDocumento::all();
+        $genero=Genero::all();
         $etnia=EtniaModel::all();
-        $acu=Acudiente::all();
+        //$acu=Acudiente::all();
         $estado=Estado::all();
-        $certificado=Certificado::all();
-        $user=User::all();
-        return view('estudiantes.actualizar', compact('est','tipo_doc','gen','etnia','acu','estado','certificado','user'));
+       // $certificado=Certificado::all();
+       $paren=Parentesco::all();
+        //$user=User::all();
+        return view('estudiantes.actualizar', compact('est','tipodoc','genero','etnia','estado', 'paren'));
     }
-    public function actualizar_estudiante(Request $request,$id){
-        $estudiante = Estudiante::FindOrFail($id);
-        $estudiante->nombre = $request->input('nombre');
-        $estudiante->apellido = $request->input('apellido');
-        $estudiante->direccion = $request->input('direccion');
-        $estudiante->telefono = $request->input('telefono');
-        $estudiante->num_doc = $request->input('numero_doc');
-        $estudiante->correo = $request->input('correo');
-        $estudiante->estrato = $request->input('estrato');
-        $estudiante->id_etnia = $request->input('etnia');
-        $estudiante->id_genero = $request->input('genero');
-        $estudiante->id_acudiente = $request->input('acudiente');
-        $estudiante->id_tipo_doc = $request->input('tipodoc');
-        $estudiante->id_certificados = $request->input('certificado');
-        $estudiante->id_estado = $request->input('estado');
-        $estudiante->id_usuario = $request->input('usuario');
-        $estudiante->save();
+    public function actualizar_estudiante(Request $request, $id){
+           $Registrar = Estudiante::FindOrFail($id);
+        //#################################################
+            $Registrar->first_nom = $request->input('firstname');
+            $Registrar->second_nom = $request->input('secondname');
+            $Registrar->firts_ape = $request->input('firsape');
+            $Registrar->second_ape = $request->input('secondape');
+            $Registrar->tiposangre = $request->input('sangre');
+            $Registrar->dirresidencia = $request->input('dirres');
+            $Registrar->dptresidencia = $request->input('dptres');
+            $Registrar->munresidencia = $request->input('mpiores');
+            $Registrar->zona = $request->input('zona');
+            $Registrar->barrio = $request->input('barrio');
+            $Registrar->telefono = $request->input('telefono');
+            $Registrar->num_doc = $request->input('numero_doc');
+            $Registrar->dpt_expedicion = $request->input('depex');
+            $Registrar->mun_expedicion = $request->input('mpioex');
+            $Registrar->fecnacimiento = $request->input('fecnac');
+            $Registrar->dpt_nacimiento  = $request->input('dpt_nac');
+            $Registrar->mun_nacimiento = $request->input('mpio_nac');
+            $Registrar->correo = $request->input('correo');
+            $Registrar->estrato = $request->input('estrato');
+            $Registrar->id_genero = $request->input('genero');
+            $Registrar->id_tipo_doc  = $request->input('tipodoc');
+            $Registrar->id_estado = $request->input('estado');
+            $Registrar->id_usuario  = 1;
+            $Registrar->save(); 
+            //////////////////////////#################consultar el id del estudiante ingresado
+            $Salud=SistemaSalud::where('id_estudiante', '=', $id)->first();
+            /////////////////////////77######################### almacenar los datos en la tabla sistema_salud
+            $Salud->regimen	= $request->input('regimen');
+            $Salud->eps	= $request->input('carnet');
+            $Salud->nivelformacion= $request->input('nivelformacion');
+            $Salud->ocupacion = $request->input('ocupacion');
+            $Salud->discapacidad = $request->input('discapacidad');	
+            $Salud->id_etnia = $request->input('etnia');
+            $Salud->save(); 
+            /////////////#############################################Almacenar los datos del acudiente
+            $Acu=Acudiente::where('id_estudiante', '=', $id)->first();
+            $Acu->lastname = $request->input('nombresacu');
+            $Acu->direccion = $request->input('diracu');
+            $Acu->telefono = $request->input('telacu');
+            $Acu->num_doc = $request->input('numdocacu');
+            $Acu->id_parentesco = $request->input('parentesco');
+            $Acu->id_tipo_doc =$request->input('tdocacu');
+            $Acu->save(); 
+
+
+        //#################################################
         return redirect('/visualizar/estudiante');
 
     }
