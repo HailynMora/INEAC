@@ -5,14 +5,13 @@
 </div>
 <div>
 <a href="{{route('regdocente')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
-    <form class="form-inline my-6 my-lg-0 float-right mb-6">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+   <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+      @csrf
+      <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+      <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
     </form>
-    
     <br><br>
     <div class="container">
-    @csrf
       <table class="table table-striped"style="background-color:#FFCC00;">
       <thead>
           <tr>
@@ -24,7 +23,7 @@
           <th scope="col">Opciones</th>
           </tr>
       </thead>
-      <tbody>
+      <tbody id="tabla1">
         @if($b == 1)
           @foreach($doc as $d)
           <tr style="background-color: #dcedc8;">
@@ -201,6 +200,10 @@
         </div>
         @endif
       </tbody>
+      <!--##################datos de la busqueda ##########################3-->
+        <tbody id="datos" style="background-color: #dcedc8;">
+        </tbody>
+      <!--##########################################33-->
     </table>
     @if($b==1)
     {{$doc->links()}}
@@ -209,10 +212,86 @@
    
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+   $('#buscar').submit(function(e){
+    e.preventDefault();
+    var nombre=$('#nombre').val();
+    console.log(nombre);
+    var _token = $('input[name=_token]').val();
+    $.ajax({
+      url:"{{route('buscardoc')}}",
+      type: "POST",
+      data:{
+        nombre:nombre,
+        _token:_token
+      }, 
+      error:function(jqXHR, response){
+        if(jqXHR.status==422){
+          toastr.warning('No hay registros!.', 'Nueva busqueda!', {timeOut:3000});
+        }
+     }
+    }).done(function(res){
+      var arreglo = JSON.parse(res);
+      if(arreglo.length!=0){
+        var conta=0;
+        $('#buscar')[0].reset();
+        $("#datos").empty();
+        $("#tabla1").hide(); 
+        //$("#datosdos").empty();
+      for(var x=0; x<arreglo.length; x++){
+          conta+=1;
+          var valor = '<tr>' +
+          '<td>' +  arreglo[x].descripcion +'</td>' +
+          '<td>' +  arreglo[x].num_doc + '</td>' +
+          '<td>' +  arreglo[x].nombre  + ' ' +  arreglo[x].apellido +'</td>' +
+          '<td>' +  dateFormat(arreglo[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
+          '<td>' +  arreglo[x].estado + '</td>' +
+          '<td>' +  arreglo[x].estado + '</td>' + //agregar los botones
+          '</tr>';
+          $('#datos').append(valor);
+        }
+
+      }else{
+        toastr.warning('Lo sentimos!', 'Datos no encontrados', {timeOut:3000});
+        $('#buscar')[0].reset();
+        $("#datos").empty();
+        $("#tabla1").show();
+      }
+    
+    });
+  });
+</script>
 <script>
   function JsonDate(jsonDate) {
   var date = new Date(parseInt(jsonDate.substr(6)));
   return date ;
 }
+////////////////////////////////7
+function dateFormat(inputDate, format) {
+    //parse the input date
+    const date = new Date(inputDate);
+
+    //extract the parts of the date
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();    
+
+    //replace the month
+    format = format.replace("MM", month.toString().padStart(2,"0"));        
+
+    //replace the year
+    if (format.indexOf("yyyy") > -1) {
+        format = format.replace("yyyy", year.toString());
+    } else if (format.indexOf("yy") > -1) {
+        format = format.replace("yy", year.toString().substr(2,2));
+    }
+
+    //replace the day
+    format = format.replace("dd", day.toString().padStart(2,"0"));
+
+    return format;
+}
+////////////////////////7777////
 </script>
 @endsection

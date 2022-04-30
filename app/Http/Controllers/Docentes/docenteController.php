@@ -84,24 +84,16 @@ class docenteController extends Controller
             ->join('genero','id_genero','=','genero.id')
             ->join('estado','id_estado','=','estado.id')
             ->paginate(5);
-           /* $asig=DB::table('asig_asignaturas')
-                    ->select('asig_asignaturas.id_asignaturas','asignaturas.nombre','asignaturas.codigo')
-                    ->join('asignaturas','id_asignaturas','=','asignaturas.id')
-                    ->where('asig_asignaturas.id_docente','=',$doc[0]->id)
-                    ->get();*/  
-        }else{
-            $b=0;
-            $doc=0;
-             
-        }
-        
-       //$docente = json_decode($doc,true);
-        //$this->docente = $docente;
-        /////////asignaturas que el docente tiene a cargo
+            }else{
+                $b=0;
+                $doc=0;
+                
+            }
         
         $condoc= DB::table('asig_asignaturas')->join('asignaturas','asig_asignaturas.id_asignaturas','=','asignaturas.id')
         ->get();
-
+        ///////////////////////////////////////////
+        //////////////////////////////////////////
         return view('docente.listar_docente')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc);
     }
 
@@ -190,4 +182,26 @@ class docenteController extends Controller
         }        
         return redirect('/docente/listado_docente');
     }
+
+    //////////////////buscar docente////////////////////////
+    public function busquedares(Request $request){
+        $busdocente =  $doc=DB::table('docente')->where('docente.nombre', $request->nombre)
+                        ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
+                        ->join('genero','id_genero','=','genero.id')
+                        ->join('estado','id_estado','=','estado.id')
+                        ->select('docente.id as id',
+                        'docente.nombre',
+                        'apellido',
+                        'num_doc',
+                        'fec_vinculacion',
+                        'correo',
+                        'telefono',
+                        'direccion',
+                        'genero.descripcion as genero',
+                        'tipo_documento.descripcion',
+                        'estado.descripcion as estado')
+                        ->get();
+     return response(json_decode($busdocente,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+    }
+    ////////////////////////////////////////
 }
