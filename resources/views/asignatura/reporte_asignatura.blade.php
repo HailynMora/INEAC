@@ -4,9 +4,10 @@
  <h3> Reporte Asignaturas</h3>
 </div>
 <a href="{{route('regasignatura')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
-<form class="form-inline my-6 my-lg-0 float-right mb-6">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+<form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+  @csrf
+  <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+  <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
 </form>
 <br><br>
 <div class="container">
@@ -21,7 +22,7 @@
             <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tabla1">
         @foreach($rep as $d)
         <tr style="background-color: #dcedc8;">
         <td>{{$d->codigo}}</td>
@@ -99,10 +100,62 @@
         <!---fin ventana eliminar--->
         @endforeach
         </tbody>
+        <!--##################datos de la busqueda ##########################3-->
+        <tbody id="datos" style="background-color: #dcedc8;">
+        </tbody>
+      <!--##########################################33-->
     </table>
     {{$rep->links()}}
 </div>
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+   $('#buscar').submit(function(e){
+    e.preventDefault();
+    var nombre=$('#nombre').val();
+    console.log(nombre);
+    var _token = $('input[name=_token]').val();
+    $.ajax({
+      url:"{{route('buscarasigc')}}",
+      type: "POST",
+      data:{
+        nombre:nombre,
+        _token:_token
+      }, 
+      error:function(jqXHR, response){
+        if(jqXHR.status==422){
+          toastr.warning('No hay registros!.', 'Nueva busqueda!', {timeOut:3000});
+        }
+     }
+    }).done(function(res){
+      var arreglo = JSON.parse(res);
+      if(arreglo.length!=0){
+        var conta=0;
+        $('#buscar')[0].reset();
+        $("#datos").empty();
+        $("#tabla1").hide(); 
+        //$("#datosdos").empty();
+      for(var x=0; x<arreglo.length; x++){
+          conta+=1;
+          var valor = '<tr>' +
+          '<td>' +  arreglo[x].codigo +'</td>' +
+          '<td>' +  arreglo[x].asig + '</td>' +
+          '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
+          '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
+          '<td>' +  arreglo[x].estado + '</td>' +
+          '<td>' +  arreglo[x].estado + '</td>' +//agregar los botones
+          '</tr>';
+          $('#datos').append(valor);
+        }
 
+      }else{
+        toastr.warning('Lo sentimos!', 'Datos no encontrados', {timeOut:3000});
+        $('#buscar')[0].reset();
+        $("#datos").empty();
+        $("#tabla1").show();
+      }
+    
+    });
+  });
+</script>
 @endsection

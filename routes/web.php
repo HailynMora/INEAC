@@ -117,6 +117,9 @@ Route::post('/asignatura/vincular_docente', [AsignaturaController::class, 'vincu
 //RUTA REPORTE DE ASIGNATURAS BACHILLERATO
 Route::get('/asignatura/reporte_asignatura', [AsignaturaController::class, 'reporte'])->middleware(['auth'])->name('reporte');
 
+//buscar ASIGNATURAS BACHILLERATO POR ajax
+Route::post('/buscar/asinatura_ciclo', [AsignaturaController::class, 'busquedares_asigc'])->middleware(['auth', 'secretaria'])->name('buscarasigc');
+
 //RUTA REPORTE DE ASIGNATURAS TECNICOS
 Route::get('/asignatura_tecnicos/reporte_asignatura', [AsignaturaController::class, 'reportetec'])->middleware(['auth'])->name('reportetec');
 

@@ -214,17 +214,14 @@ class asignaturaController extends Controller
         DB::table('asig_asignaturas')->where('id','=',$id)->delete();
         return redirect('/asignatura/vincular_docente');
     }
-    public $asignacion;
-    /*public function listado(){
-        
-        $asig=DB::table('asig_asignaturas')
-        ->select('asignaturas.codigo','descripcion','docente.nombre as nom_doc','docente.apellido as ape_doc','asignaturas.nombre as asig','intensidad_horaria')
-        ->join('docente','id_docente','=','docente.id')
-        ->join('asignaturas','id_asignaturas','=','asignaturas.id')
-        ->get();
-        $asignacion = json_decode($asig,true);
-        $this->asignacion = $asignacion;
-        return view('asignatura.vincular_docente',["asignacion"=>$this->asignacion]);
-    }*/
+    //////////////////buscar asignatura bachilleratos////////////////////////
+    public function busquedares_asigc(Request $request){
+        $busasigc =  $rep=DB::table('asignaturas')->where('asignaturas.nombre','=',$request->nombre)
+                            ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
+                            ->join('estado','id_estado','=','estado.id')
+                        ->get();
+     return response(json_decode($busasigc,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+    }
+    ////////////////////////////////////////
    
 }
