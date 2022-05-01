@@ -42,11 +42,15 @@
                   </div>
               </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-4">
                   <label for="descripcion">Descripcion</label>
                   <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                   </div>
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-4">
+                  <label for="jornada">Jornada</label>
+                  <input type="text" class="form-control" id="jornada" name="jornada" required>
+                  </div>
+                  <div class="form-group col-md-4">
                   <label for="estado">Estado</label>
                   <select id="estado" class="form-control" name="estado" required>
                   <option selected>Seleccionar</option>
@@ -74,6 +78,7 @@
     var codigo=$('#codigo').val();
     var estado=$('#estado').val();
     var descripcion=$('#descripcion').val();
+    var jornada=$('#jornada').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({
@@ -84,6 +89,7 @@
         codigo:codigo,
         estado:estado,
         descripcion:descripcion,
+        jornada:jornada,
         _token:_token
       },
       success: function (response) {

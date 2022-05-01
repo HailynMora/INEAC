@@ -4,11 +4,11 @@
  <h3> Programas Tecnicos Registrados</h3>
 </div>
 <a href="{{route('registrarprogtec')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
-    <form class="form-inline my-6 my-lg-0 float-right mb-6">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
-    
+    <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+      @csrf
+      <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+      <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+    </form>    
     <br><br>
 <div class="container">
     <table class="table">
@@ -16,16 +16,18 @@
             <tr>
             <th scope="col">Código</th>
             <th scope="col">Programa</th>
+            <th scope="col">Jornada</th>
             <th scope="col">Descripcion</th>
             <th scope="col">Estado</th>
             <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tabla1">
         @foreach($rep as $d)
         <tr style="background-color: #dcedc8;">
         <td>{{$d->codigotec}}</td>
         <td>{{$d->nombretec}}</td>
+        <td>{{$d->jornada}}</td>
         <td>{{$d->descripcion}}</td>
         <td>{{$d->estado}}</td>
         <td>
@@ -73,6 +75,68 @@
         <!---fin ventana deshabilitar--->
         @endforeach
         </tbody>
+        <!--##################datos de la busqueda ##########################3-->
+        <tbody id="datos" style="background-color: #dcedc8;">
+        </tbody>
+      <!--##########################################33-->
     </table>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+   $('#buscar').submit(function(e){
+    e.preventDefault();
+    var nombre=$('#nombre').val();
+    console.log(nombre);
+    var _token = $('input[name=_token]').val();
+    $.ajax({
+      url:"{{route('buscartecpro')}}",
+      type: "POST",
+      data:{
+        nombre:nombre,
+        _token:_token
+      }, 
+      error:function(jqXHR, response){
+        if(jqXHR.status==422){
+          toastr.warning('No hay registros!.', 'Nueva busqueda!', {timeOut:3000});
+        }
+     }
+    }).done(function(res){
+      var arreglo = JSON.parse(res);
+      if(arreglo.length!=0){
+        var conta=0;
+        $('#buscar')[0].reset();
+        $("#datos").empty();
+        $("#tabla1").hide(); 
+        //$("#datosdos").empty();
+        for(var x=0; x<arreglo.length; x++){
+          conta+=1;
+          var valor = '<tr>' +
+          '<td>' +  arreglo[x].codigotec +'</td>' +
+          '<td>' +  arreglo[x].nombretec + '</td>' +
+          '<td>' +  arreglo[x].jornada + '</td>' +
+          '<td>' + arreglo[x].descripcion +'</td>' +
+          '<td>' +  arreglo[x].estado + '</td>' +
+          '<td>' +  arreglo[x].id + '</td>' +
+          '<td>' +  
+
+          '<a href="{{route("actualizar_prog_tec",'+arreglo[x].id+')}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>'
+
+          + '</td>' + //agregar los botones
+          '</tr>';
+          console.log(valor);
+          $('#datos').append(valor);
+        }
+
+      }else{
+        toastr.warning('Lo sentimos!', 'Datos no encontrados', {timeOut:3000});
+        $('#buscar')[0].reset();
+        $("#datos").empty();
+        $("#tabla1").show();
+      }
+    
+    });
+  });
+</script>
+
 @endsection

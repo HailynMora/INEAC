@@ -63,12 +63,31 @@ class ProgramasController extends Controller
     }
 
     public function registro_tecnicos(Request $request){
-        $category = new ProgramasTecnicos();
-        $category->codigotec = $request->input('codigo');
-        $category->nombretec = $request->input('nombre');
-        $category->id_estado = $request->input('estado');
-        $category->descripcion = $request->input('descripcion');
-        $category->save();
+        $cod=$request->codigo;
+        $buscod = DB::table('programa_tecnico')->where('codigotec', '=', $cod)->count();
+        $busnom = DB::table('programa_tecnico')->where('nombretec', '=', $request->nombre)->count();
+        if($buscod!=0){//validacion con ajax
+            return \Response::json([
+                'error'  => 'Error datos'
+            ],422);
+        }else{
+
+            if($busnom!=0){
+                return \Response::json([
+                    'error'  => 'Error datos'
+                ],423);
+            }else{
+                 $category = new ProgramasTecnicos();
+                $category->codigotec = $request->input('codigo');
+                $category->nombretec = $request->input('nombre');
+                $category->id_estado = $request->input('estado');
+                $category->descripcion = $request->input('descripcion');
+                $category->jornada = $request->input('jornada');
+                $category->save();
+            }
+
+        }
+       
         return back();
 
     }
@@ -137,7 +156,7 @@ class ProgramasController extends Controller
 
     public function reporte(){
         $rep=DB::table('tipo_curso')
-        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','estado.descripcion as estado')
+        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','estado.descripcion as estado','tipo_curso.jornada')
         ->join('estado','id_estado','=','estado.id')
         ->orderBy('tipo_curso.id', 'ASC')
         ->paginate(5); //hacer paginacion de las vistas
@@ -146,7 +165,7 @@ class ProgramasController extends Controller
 
     public function reporte_tecnico(){
         $rep=DB::table('programa_tecnico')
-        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','estado.descripcion as estado')
+        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','programa_tecnico.jornada','estado.descripcion as estado')
         ->join('estado','id_estado','=','estado.id')
         ->orderBy('programa_tecnico.id', 'ASC')
         //->paginate(5); //hacer paginacion de las vistas
@@ -178,7 +197,7 @@ class ProgramasController extends Controller
         $d =$id;
         $prog = DB::table('programa_tecnico')->where('programa_tecnico.id','=',$d)
         ->join('estado','id_estado','=','estado.id')
-        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','programa_tecnico.id_estado','estado.descripcion as estado')
+        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','programa_tecnico.id_estado','programa_tecnico.jornada','estado.descripcion as estado')
         ->get();
         $estado=Estado::all();
         return view('programas.actualizar_programa_tecnico', compact('prog','estado'));
@@ -189,6 +208,7 @@ class ProgramasController extends Controller
         $category->codigotec = $request->input('codigo');
         $category->nombretec = $request->input('nombre');
         $category->descripcion = $request->input('descripcion');
+        $category->jornada = $request->input('jornada');
         $category->id_estado = $request->input('estado');
         $category->save();
         return redirect('/programas/reporte_programas_tecnicos');
@@ -295,5 +315,16 @@ class ProgramasController extends Controller
         Session::flash('mensaje', 'Dato eliminado con éxito!');
         return back();
     }
+
+    //////////////////buscar tecnico////////////////////////
+    public function busquedares_pro(Request $request){
+        $nom=$request->nombre;
+        $bustecnico =  $tec=DB::table('programa_tecnico')->where('programa_tecnico.nombretec','=', $nom)
+                        ->join('estado','id_estado','=','estado.id')
+                        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','programa_tecnico.jornada','estado.descripcion as estado')
+                        ->get();
+     return response(json_decode($bustecnico,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+    }
+    ////////////////////////////////////////
 
 }

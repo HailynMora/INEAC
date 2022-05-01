@@ -42,11 +42,15 @@
                     </div>
                 </div>
                 <div class="form-row">
-                     <div class="form-group col-md-6">
+                     <div class="form-group col-md-4">
                         <label for="descripcion">Descripcion</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion" required value="{{$prog[0]->descripcion}}">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <label for="jornada">Jornada</label>
+                        <input type="text" class="form-control" id="jornada" name="jornada" required value="{{$prog[0]->jornada}}">
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="estado">Estado</label>
                         <select id="estado" class="form-control" name="estado" required>
                         <option value="{{$prog[0]->id_estado}}" selected>{{$prog[0]->estado}}</option>

@@ -17,7 +17,7 @@
         @foreach($rep as $d)
         <tr style="background-color: #dcedc8;">
         <td>{{$d->codigo}}</td>
-        <td>{{$d->programa}}</td>
+        <td>{{$d->programa}} - {{$d->jornada}}</td>
         <td>{{$d->estado}}</td>
         <td>
         <a href="{{route('actualizar_prog',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>

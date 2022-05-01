@@ -247,7 +247,10 @@
           '<td>' +  arreglo[x].nombre  + ' ' +  arreglo[x].apellido +'</td>' +
           '<td>' +  dateFormat(arreglo[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
           '<td>' +  arreglo[x].estado + '</td>' +
-          '<td>' +  arreglo[x].estado + '</td>' + //agregar los botones
+          '<td>' +   
+          '<a href="route(actualizar_doc,' + arreglo[x].id + ')"' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
+          '<a type="button"  data-toggle="modal" data-target="#docente'+arreglo[x].id +'" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>'
+          '</td>' + //agregar los botones
           '</tr>';
           $('#datos').append(valor);
         }

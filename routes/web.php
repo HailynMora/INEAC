@@ -164,13 +164,17 @@ Route::get('/consultar/programa', [ProgramasController::class, 'consulta'])->mid
 Route::get('busqueda/programas',[ProgramasController::class, 'search'])->middleware(['auth'])->name('busqueda');
 Route::get('resultado/programas',[ProgramasController::class, 'show'])->middleware(['auth'])->name('mostrarprog');
 
+
+
 //RUTA REGISTRO PROGRAMAS TECNICOS
 Route::get('/registrar/programa_tec', [ProgramasController::class, 'tec'])->middleware(['auth', 'secretaria'])->name('registrarprogtec');
 Route::post('/registro/programas_tecnicos', [ProgramasController::class, 'registro_tecnicos'])->middleware(['auth', 'secretaria'])->name('regprogramastec');
 
-
 //vincular asignaturas a un programa 
 //Route::get('/vicular/asignaturas', [ProgramasController::class, 'vincular'])->middleware(['auth', 'secretaria'])->name('vicularAsignaturas');
+
+//buscar PROGRAMA TECNICO POR ajax
+Route::post('/buscar/tecnico', [ProgramasController::class, 'busquedares_pro'])->middleware(['auth', 'secretaria'])->name('buscartecpro');
 
 //RUTA LISTADO DE VINCULACION DE AIGNATURAS A UN CURSO BACHILLERATOS
 Route::get('/programas/listado_vinculacion', [ProgramasController::class, 'listarvinculacion'])->middleware(['auth', 'secretaria'])->name('listado_asig');
