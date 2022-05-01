@@ -52,6 +52,7 @@ class ProgramasController extends Controller
                 $category->descripcion = $request->input('nombre');
                 $category->id_estado = $request->input('estado');
                 $category->cursodes = $request->input('des');
+                $category->jornada = $request->input('jornada');
                 $category->save();
     
             }
@@ -177,7 +178,7 @@ class ProgramasController extends Controller
         $d =$id;
         $prog = DB::table('tipo_curso')->where('tipo_curso.id','=',$d)
         ->join('estado','id_estado','=','estado.id')
-        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','tipo_curso.id_estado','estado.descripcion as estado')
+        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','tipo_curso.id_estado','tipo_curso.jornada','estado.descripcion as estado')
         ->get();
         $estado=Estado::all();
         return view('programas.actualizar_programa', compact('prog','estado'));
@@ -189,6 +190,7 @@ class ProgramasController extends Controller
         $category->descripcion = $request->input('nombre');
         $category->id_estado = $request->input('estado');
         $category->cursodes = $request->input('des');
+        $category->jornada = $request->input('jornada');
         $category->save();
         return redirect('/programas/reporte_programas');
 

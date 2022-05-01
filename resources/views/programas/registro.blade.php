@@ -42,18 +42,22 @@
                   </div>
               </div>
                 <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="des">Descripcion</label>
-                <input type="text" class="form-control" id="des" name="des" required>
-                </div>
-                  <div class="form-group col-md-6">
-                  <label for="estado">Estado</label>
-                  <select id="estado" class="form-control" name="estado" required>
-                  <option selected>Seleccionar</option>
-                  @foreach($estado as $d)
-                  <option value="{{$d->id}}">{{$d->descripcion}}</option>
-                  @endforeach
-                  </select>
+                  <div class="form-group col-md-4">
+                    <label for="des">Descripcion</label>
+                    <input type="text" class="form-control" id="des" name="des" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="jornada">Jornada</label>
+                    <input type="text" class="form-control" id="jornada" name="jornada" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="estado">Estado</label>
+                    <select id="estado" class="form-control" name="estado" required>
+                      <option selected>Seleccionar</option>
+                      @foreach($estado as $d)
+                      <option value="{{$d->id}}">{{$d->descripcion}}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
@@ -74,6 +78,7 @@
     var codigo=$('#codigo').val();
     var estado=$('#estado').val();
     var des=$('#des').val();
+    var jornada=$('#jornada').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({
@@ -84,6 +89,7 @@
         codigo:codigo,
         estado:estado,
         des:des,
+        jornada:jornada,
         _token:_token
       },
       success: function (response) {
