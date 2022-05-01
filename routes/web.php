@@ -123,6 +123,9 @@ Route::post('/buscar/asinatura_ciclo', [AsignaturaController::class, 'busquedare
 //RUTA REPORTE DE ASIGNATURAS TECNICOS
 Route::get('/asignatura_tecnicos/reporte_asignatura', [AsignaturaController::class, 'reportetec'])->middleware(['auth'])->name('reportetec');
 
+//buscar ASIGNATURAS TECNICOS POR ajax
+Route::post('/buscar/asinatura_tec', [AsignaturaController::class, 'busquedares_asigt'])->middleware(['auth', 'secretaria'])->name('buscarasigt');
+
 //RUTA CONSULTAR ASIGNATURA BACHILLERATO
 Route::get('/asignaturas/consultar', [ConsultarAsigController::class, 'index'])->middleware(['auth'])->name('conasignatura');
 Route::get('consultar/search',[PostAsigController::class, 'search'])->middleware(['auth'])->name('posts.searchA');

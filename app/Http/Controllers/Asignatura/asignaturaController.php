@@ -223,5 +223,15 @@ class asignaturaController extends Controller
      return response(json_decode($busasigc,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
     }
     ////////////////////////////////////////
+
+    //////////////////buscar asignatura tecnico////////////////////////
+    public function busquedares_asigt(Request $request){
+        $busasigt = $rep=DB::table('asig_tecnicos')->where('asig_tecnicos.nombreasig','=',$request->nombre)
+                    ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
+                    ->join('estado','id_estado','=','estado.id')
+                    ->get();
+     return response(json_decode($busasigt,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+    }
+    ////////////////////////////////////////
    
 }
