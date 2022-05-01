@@ -5,9 +5,10 @@
  <h3>Listado de Estudiantes</h3>
 </div>
 <a href="{{route('registro_es')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
-<form class="form-inline my-6 my-lg-0 float-right mb-6">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+<form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+  @csrf
+  <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+  <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
 </form>
 <br><br>
 <div class="container">
@@ -23,17 +24,9 @@
         <th scope="col">Acciones</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tabla1">
     @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
-      <!---
-        dptresidencia
-        munresidencia
-        dpt_expedicion
-        mun_expedicion
-        dpt_nacimiento
-        mun_nacimiento
-       --->
         <tr class="table-success"style="background-color: #dcedc8;">
         <td>{{$d->num_doc}}</td>
         <td>{{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}</td>
@@ -231,9 +224,64 @@
             </div>
         @endif
     </tbody>
+    <!--##################datos de la busqueda ##########################3-->
+        <tbody id="datos" style="background-color: #dcedc8;">
+        </tbody>
+      <!--##########################################33-->
     </table>
 </div>
  <!--finalizar Tabla de informacion-->
+ <!--instanciar el ajax para quitar el error no definido-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+   $('#buscar').submit(function(e){
+    e.preventDefault();
+    var nombre=$('#nombre').val();
+    console.log(nombre);
+    var _token = $('input[name=_token]').val();
+    $.ajax({
+      url:"{{route('buscarest')}}",
+      type: "POST",
+      data:{
+        nombre:nombre,
+        _token:_token
+      }, 
+      error:function(jqXHR, response){
+        if(jqXHR.status==422){
+          toastr.warning('No hay registros!.', 'Nueva busqueda!', {timeOut:3000});
+        }
+     }
+    }).done(function(res){
+      var arreglo = JSON.parse(res);
+      if(arreglo.length!=0){
+        var conta=0;
+        $('#buscar')[0].reset();
+        $("#datos").empty();
+        $("#tabla1").hide(); 
+        //$("#datosdos").empty();
+      for(var x=0; x<arreglo.length; x++){
+          conta+=1;
+          var valor = '<tr>' +
+          '<td>' +  arreglo[x].num_doc +'</td>' +
+          '<td>' +  arreglo[x].first_nom + ' ' +  arreglo[x].second_nom + ' ' +  arreglo[x].firts_ape + ' ' +  arreglo[x].second_ape +'</td>' +
+          '<td>' +  arreglo[x].telefono  + '</td>' +
+          '<td>' +  arreglo[x].correo  + '</td>' +
+          '<td>' +  arreglo[x].estadoes + '</td>' +
+          '<td>' +  arreglo[x].estado + '</td>' +//agregar los botones
+          '</tr>';
+          $('#datos').append(valor);
+        }
+
+      }else{
+        toastr.warning('Lo sentimos!', 'Datos no encontrados', {timeOut:3000});
+        $('#buscar')[0].reset();
+        $("#datos").empty();
+        $("#tabla1").show();
+      }
+    
+    });
+  });
+</script>
 @endsection
 
 

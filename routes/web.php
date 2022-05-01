@@ -54,6 +54,9 @@ Route::get('/inicio/mision-vision', [InicioController::class, 'mision_vision'])-
 Route::get('/registro/estudiantes', [EstudiantesController::class, 'registro'])->middleware(['auth', 'secretaria'])->name('registro_es');
 Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])->middleware(['auth', 'secretaria'])->name('datosestudiante');
 
+//buscar ESTUDIANTE POR ajax
+Route::post('/buscar/estudiante', [EstudiantesController::class, 'busquedares_est'])->middleware(['auth', 'secretaria'])->name('buscarest');
+
 //RUTA PARA ACTUALIZAR ESTUDIANTES
 Route::get('/estudiante/actualizar/{id}', [EstudiantesController::class, 'form_actualizar'])->middleware(['auth', 'secretaria'])->name('actualizar_est');
 
