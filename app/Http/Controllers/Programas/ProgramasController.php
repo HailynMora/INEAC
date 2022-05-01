@@ -318,6 +318,16 @@ class ProgramasController extends Controller
         return back();
     }
 
+    //////////////////buscar ciclo////////////////////////
+    public function busquedares_ciclo(Request $request){
+        $nom=$request->nombre;
+        $busciclo =  $tec=DB::table('tipo_curso')->where('tipo_curso.descripcion','=', $nom)
+                        ->join('estado','id_estado','=','estado.id')
+                        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion','tipo_curso.cursodes','tipo_curso.jornada','estado.descripcion as estado')
+                        ->get();
+     return response(json_decode($busciclo,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+    }
+    ////////////////////////////////////////
     //////////////////buscar tecnico////////////////////////
     public function busquedares_pro(Request $request){
         $nom=$request->nombre;

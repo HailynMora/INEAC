@@ -163,6 +163,8 @@ Route::post('/registro/programas', [ProgramasController::class, 'registro'])->mi
 Route::get('/consultar/programa', [ProgramasController::class, 'consulta'])->middleware(['auth'])->name('consultar');
 Route::get('busqueda/programas',[ProgramasController::class, 'search'])->middleware(['auth'])->name('busqueda');
 Route::get('resultado/programas',[ProgramasController::class, 'show'])->middleware(['auth'])->name('mostrarprog');
+//buscar PROGRAMA TECNICO POR ajax
+Route::post('/buscar/ciclo', [ProgramasController::class, 'busquedares_ciclo'])->middleware(['auth', 'secretaria'])->name('buscarciclo');
 
 
 
