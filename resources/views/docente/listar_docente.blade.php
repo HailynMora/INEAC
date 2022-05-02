@@ -4,12 +4,18 @@
  <h3>Listado de Docentes</h3>
 </div>
 <div>
-<a href="{{route('regdocente')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
-   <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+<div class="row">
+  <div class="col-md-6">
+  <a href="{{route('regdocente')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
+  </div>
+  <div class="col-md-6">
+  <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
       @csrf
-      <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+      <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="No. Identificación" aria-label="Search" required>
       <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
     </form>
+    </div>
+</div>
     <br><br>
     <div class="container">
       <table class="table table-striped"style="background-color:#FFCC00;">
@@ -209,9 +215,151 @@
     {{$doc->links()}}
     @endif
     </div>
-   
-
 </div>
+<!--modal para datos-->
+<!-- Button trigger modal -->
+<!-- Modal -->
+ <!--MODAL VER-->
+ <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <br>
+                    <!---Mostrar datos-->
+                    <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+                     <h4 id="nomdocente" class="reset"></h4>
+                    </div>
+                    <!--ACORDEON-->
+                    <div id="accordion">
+                      <div class="card">
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-chalkboard-teacher"></i> Datos Docente
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body">
+                            <form id="formudatos" name="formudatos" method="post">
+                              @csrf
+                              <div class="form-row">
+                                <div class="form-group col-md-4">
+                                  <label for="tipo_doc">Tipo Documento</label>
+                                  <div class="form-control reset" id="tipodocdocente"> </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="num_doc">N° Documento</label>
+                                  <div class="form-control reset" id="numdocdocente"> </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="correo">Fecha de Vinculación</label>
+                                  <div class="form-control reset" id="fecdocente"> </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="telefono">Telefono</label>
+                                  <div class="form-control reset" id="telefonodocente"> </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="direccion">Direccion</label>
+                                  <div class="form-control reset" id="direcciondocente"> </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="genero">Genero</label>
+                                  <div class="form-control reset" id="generodocente"> </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="fec_vinculacion">Correo</label>
+                                  <div class="form-control reset" id="correodocente" > </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="fec_vinculacion">Estado</label>
+                                  <div class="form-control reset" id="estadocente"> </div>
+                                  </div>
+                              </div>
+                            </form>
+                            <!--end mostrar datos-->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header" id="headingTwo">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              <i class="fas fa-book"></i> Asignaturas a cargo
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                          <div class="card-body">
+                            <div class="form-group col-md-12">
+                              <!---asignaturas a cargo-->
+                              <?php 
+                                $id=$d->id;
+                              ?>
+                              <div class="form-group justify-content-center col-md-12 " id="docente">
+                                <label for="asig_dictadas">Asignaturas a Cargo</label>
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Codigo</th>
+                                      <th scope="col">Asignatura</th>
+                                      <th scope="col">Intensidad Horaria</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                 
+                                  </tbody>
+                                </table>
+                              </div>
+                              <!---end asignaturas a cargo-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIN ACORDEON-->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>                
+              </div>
+            </div>
+              <!--FIN MODAL VER-->
+              <!--Modal deshabilitar y habilitar-->
+              <div class="modal fade" id="cambiarEstado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header" style="background-color: #283593; color:#ffffff;!important;">
+                    <h4 class="modal-title text-center" style=" text-align: center;">
+                     <div id="nomdoc" class="reset"></div>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> 
+                  </div>
+                  <div class="modal-body mt-2 text-center">
+                    <strong style="text-align: center !important"> 
+                      <h4 class="modal-title text-center" style=" text-align: center;">
+                        <span>¿Cambiar el estado del Docente? </span>
+                      </h4>
+                    </strong>
+                  </div>
+                  <div class="modal-footer">
+                    <form action="{{route('deshabdocente')}}" method="GET">
+                      @csrf
+                    <input id="idocente" name="idocente" hidden> 
+                    <button type="submit" class="btn btn-success">Cambiar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                     </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!--Find Modal deshabilitar y habilitar-->
+<!--end modal para datos-->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
    $('#buscar').submit(function(e){
@@ -238,21 +386,74 @@
         $('#buscar')[0].reset();
         $("#datos").empty();
         $("#tabla1").hide(); 
+        $(".reset").empty(); 
+        console.log(arreglo);
         //$("#datosdos").empty();
       for(var x=0; x<arreglo.length; x++){
           conta+=1;
-          var valor = '<tr>' +
+          
+          if ( arreglo[x].estado == "Activo") { // true
+
+            var valor = '<tr>' +
           '<td>' +  arreglo[x].descripcion +'</td>' +
           '<td>' +  arreglo[x].num_doc + '</td>' +
           '<td>' +  arreglo[x].nombre  + ' ' +  arreglo[x].apellido +'</td>' +
           '<td>' +  dateFormat(arreglo[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
           '<td>' +  arreglo[x].estado + '</td>' +
           '<td>' +   
-          '<a href="route(actualizar_doc,' + arreglo[x].id + ')"' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
-          '<a type="button"  data-toggle="modal" data-target="#docente'+arreglo[x].id +'" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>'
+          '<a  href="/docente/actualizar/' + arreglo[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
+          '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
+          '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>'
           '</td>' + //agregar los botones
-          '</tr>';
+          ' </tr>';
+            
+          } else {
+
+            var valor = '<tr>' +
+          '<td>' +  arreglo[x].descripcion +'</td>' +
+          '<td>' +  arreglo[x].num_doc + '</td>' +
+          '<td>' +  arreglo[x].nombre  + ' ' +  arreglo[x].apellido +'</td>' +
+          '<td>' +  dateFormat(arreglo[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
+          '<td>' +  arreglo[x].estado + '</td>' +
+          '<td>' +   
+          '<a  href="/docente/actualizar/' + arreglo[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
+          '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
+          '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>'
+          '</td>' + //agregar los botones
+          ' </tr>';
+           
+          }
+
+         
+          var nombre = arreglo[x].nombre + ' '  +  arreglo[x].apellido;
+          var tipodoc = arreglo[x].descripcion;
+          var num = arreglo[x].num_doc; 
+          var correo = arreglo[x].correo;
+          var tel = arreglo[x].telefono;
+          var dir = arreglo[x].direccion;
+          var gen = arreglo[x].genero;
+          var fec = dateFormat(arreglo[x].fec_vinculacion, 'yyyy-MM-dd');
+          var es = arreglo[x].estado;
+          var idoc =  arreglo[x].id;
+          //  
+          //   
           $('#datos').append(valor);
+          $('#dato').append(valor);
+          $('#nomdocente').append(nombre); //nombre docente modal exampleModal
+          $('#tipodocdocente').append(tipodoc); 
+          $('#numdocdocente').append(num); 
+          $('#correodocente').append(correo); 
+          $('#direcciondocente').append(dir);
+          $('#generodocente').append(gen);
+          $('#telefonodocente').append(tel);
+          $('#fecdocente').append(fec);
+          $('#estadocente').append(es);
+          $('#nomdoc').append(nombre);
+          document.getElementsByName("idocente")[0].value = idoc; //colocar valores en los inputs
+          
+          //////////////////////////////////////cambiar estado
+          //////////////////////////////////////////////
+
         }
 
       }else{

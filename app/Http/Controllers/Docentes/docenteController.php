@@ -185,7 +185,7 @@ class docenteController extends Controller
 
     //////////////////buscar docente////////////////////////
     public function busquedares(Request $request){
-        $busdocente =  $doc=DB::table('docente')->where('docente.nombre', $request->nombre)
+        $busdocente =  $doc=DB::table('docente')->where('docente.num_doc', $request->nombre)
                         ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
                         ->join('genero','id_genero','=','genero.id')
                         ->join('estado','id_estado','=','estado.id')
@@ -204,4 +204,18 @@ class docenteController extends Controller
      return response(json_decode($busdocente,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
     }
     ////////////////////////////////////////
+      public function cambiardoc(Request $request){
+        $doces= docente::find($request->idocente);
+        $es = $doces->id_estado;
+        if($es==2){
+            $doces->id_estado = 1;
+            $doces->save();
+        }else{
+            $doces->id_estado = 2;
+            $doces->save();
+        }        
+        return redirect('/docente/listado_docente');
+
+      }
+    ///////////////////////////////////////77
 }

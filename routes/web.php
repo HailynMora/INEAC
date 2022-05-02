@@ -272,4 +272,6 @@ Route::get('/programas/listado_vinculacion_tec', [ProgramasController::class, 'l
 Route::get('/tecnico/asignatura/vin/{id}', [ProgramasController::class, 'eliminartec'])->middleware(['auth', 'secretaria'])->name('elimasig');
 //buscar docente ajax
 Route::post('/buscar/docente', [docenteController::class, 'busquedares'])->middleware(['auth', 'secretaria'])->name('buscardoc');
+Route::get('/estado/docente', [docenteController::class, 'cambiardoc'])->middleware(['auth', 'secretaria'])->name('deshabdocente');
+
 require __DIR__.'/auth.php';
