@@ -185,23 +185,46 @@ class docenteController extends Controller
 
     //////////////////buscar docente////////////////////////
     public function busquedares(Request $request){
-        $busdocente =  $doc=DB::table('docente')->where('docente.num_doc', $request->nombre)
-                        ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
-                        ->join('genero','id_genero','=','genero.id')
-                        ->join('estado','id_estado','=','estado.id')
-                        ->select('docente.id as id',
-                        'docente.nombre',
-                        'apellido',
-                        'num_doc',
-                        'fec_vinculacion',
-                        'correo',
-                        'telefono',
-                        'direccion',
-                        'genero.descripcion as genero',
-                        'tipo_documento.descripcion',
-                        'estado.descripcion as estado')
-                        ->get();
-     return response(json_decode($busdocente,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+        $bus = DB::table('docente')->where('docente.num_doc', $request->nombre)->get();
+        $idoc = $bus[0]->id;
+        $val = DB::table('docente')->where('docente.num_doc', $request->nombre)->count();
+        if($val==0){//validacion con ajax
+            $busdocente=[];
+            $datos=[];
+            return response()->json(['busdocente' => $busdocente, 'datos' => $datos]);
+        }else{
+
+            $busdocente =   DB::table('docente')->where('docente.num_doc', $request->nombre)
+            ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
+            ->join('genero','id_genero','=','genero.id')
+            ->join('estado','docente.id_estado','=','estado.id')
+            ->select('docente.id as id',
+            'docente.nombre',
+            'apellido',
+            'num_doc',
+            'fec_vinculacion',
+            'correo',
+            'telefono',
+            'direccion',
+            'genero.descripcion as genero',
+            'tipo_documento.descripcion',
+            'estado.descripcion as estado',
+            )
+            ->get(); 
+
+   
+            $datos = DB::table('asig_asignaturas')->where('asig_asignaturas.id_docente', '=', $idoc)
+            ->join('asignaturas', 'asig_asignaturas.id_asignaturas', '=', 'asignaturas.id')
+            ->select(DB::raw('asignaturas.nombre as asig, asignaturas.codigo, asignaturas.intensidad_horaria'))
+            ->get();
+           
+            return response()->json(['busdocente' => $busdocente, 'datos' => $datos]);
+
+        }
+           
+               
+                      
+           
     }
     ////////////////////////////////////////
       public function cambiardoc(Request $request){

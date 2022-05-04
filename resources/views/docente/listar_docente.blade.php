@@ -307,8 +307,8 @@
                                       <th scope="col">Intensidad Horaria</th>
                                     </tr>
                                   </thead>
-                                  <tbody>
-                                 
+                                  <tbody id="asignatura">
+                                   
                                   </tbody>
                                 </table>
                               </div>
@@ -372,36 +372,29 @@
       type: "POST",
       data:{
         nombre:nombre,
-        _token:_token
-      }, 
-      error:function(jqXHR, response){
-        if(jqXHR.status==422){
-          toastr.warning('No hay registros!.', 'Nueva busqueda!', {timeOut:3000});
-        }
-     }
-    }).done(function(res){
-      var arreglo = JSON.parse(res);
-      if(arreglo.length!=0){
+        _token:_token,
+      }
+    }).done(function(response){
+      var arreglo =response;
         var conta=0;
         $('#buscar')[0].reset();
         $("#datos").empty();
         $("#tabla1").hide(); 
         $(".reset").empty(); 
-        console.log(arreglo);
+        $('#asignatura').empty();
         //$("#datosdos").empty();
-      for(var x=0; x<arreglo.length; x++){
+      for(var x=0; x<arreglo.busdocente.length; x++){
           conta+=1;
-          
-          if ( arreglo[x].estado == "Activo") { // true
-
+         
+          if ( arreglo.busdocente[x].estado == "Activo") { // true
             var valor = '<tr>' +
-          '<td>' +  arreglo[x].descripcion +'</td>' +
-          '<td>' +  arreglo[x].num_doc + '</td>' +
-          '<td>' +  arreglo[x].nombre  + ' ' +  arreglo[x].apellido +'</td>' +
-          '<td>' +  dateFormat(arreglo[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
-          '<td>' +  arreglo[x].estado + '</td>' +
+          '<td>' +  arreglo.busdocente[x].descripcion +'</td>' +
+          '<td>' +  arreglo.busdocente[x].num_doc + '</td>' +
+          '<td>' +  arreglo.busdocente[x].nombre  + ' ' +  arreglo.busdocente[x].apellido +'</td>' +
+          '<td>' +  dateFormat(arreglo.busdocente[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
+          '<td>' +  arreglo.busdocente[x].estado + '</td>' +
           '<td>' +   
-          '<a  href="/docente/actualizar/' + arreglo[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
+          '<a  href="/docente/actualizar/' + arreglo.busdocente[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
           '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
           '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>'
           '</td>' + //agregar los botones
@@ -410,13 +403,13 @@
           } else {
 
             var valor = '<tr>' +
-          '<td>' +  arreglo[x].descripcion +'</td>' +
-          '<td>' +  arreglo[x].num_doc + '</td>' +
-          '<td>' +  arreglo[x].nombre  + ' ' +  arreglo[x].apellido +'</td>' +
-          '<td>' +  dateFormat(arreglo[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
-          '<td>' +  arreglo[x].estado + '</td>' +
+          '<td>' +  arreglo.busdocente[x].descripcion +'</td>' +
+          '<td>' +  arreglo.busdocente[x].num_doc + '</td>' +
+          '<td>' +  arreglo.busdocente[x].nombre  + ' ' +  arreglo.busdocente[x].apellido +'</td>' +
+          '<td>' +  dateFormat(arreglo.busdocente[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
+          '<td>' +  arreglo.busdocente[x].estado + '</td>' +
           '<td>' +   
-          '<a  href="/docente/actualizar/' + arreglo[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
+          '<a  href="/docente/actualizar/' + arreglo.busdocente[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
           '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
           '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>'
           '</td>' + //agregar los botones
@@ -425,16 +418,16 @@
           }
 
          
-          var nombre = arreglo[x].nombre + ' '  +  arreglo[x].apellido;
-          var tipodoc = arreglo[x].descripcion;
-          var num = arreglo[x].num_doc; 
-          var correo = arreglo[x].correo;
-          var tel = arreglo[x].telefono;
-          var dir = arreglo[x].direccion;
-          var gen = arreglo[x].genero;
-          var fec = dateFormat(arreglo[x].fec_vinculacion, 'yyyy-MM-dd');
-          var es = arreglo[x].estado;
-          var idoc =  arreglo[x].id;
+          var nombre = arreglo.busdocente[x].nombre + ' '  +  arreglo.busdocente[x].apellido;
+          var tipodoc = arreglo.busdocente[x].descripcion;
+          var num = arreglo.busdocente[x].num_doc; 
+          var correo = arreglo.busdocente[x].correo;
+          var tel = arreglo.busdocente[x].telefono;
+          var dir = arreglo.busdocente[x].direccion;
+          var gen = arreglo.busdocente[x].genero;
+          var fec = dateFormat(arreglo.busdocente[x].fec_vinculacion, 'yyyy-MM-dd');
+          var es = arreglo.busdocente[x].estado;
+          var idoc =  arreglo.busdocente[x].id;
           //  
           //   
           $('#datos').append(valor);
@@ -451,25 +444,37 @@
           $('#nomdoc').append(nombre);
           document.getElementsByName("idocente")[0].value = idoc; //colocar valores en los inputs
           
-          //////////////////////////////////////cambiar estado
+          //////////////////////////////////////asignaturas imprimirs
+          for(var x=0; x<arreglo.datos.length; x++){
+            var d = '<tr>' +
+            '<td>' +  arreglo.datos[x].codigo +'</td>' +
+            '<td>' +  arreglo.datos[x].asig +'</td>' + 
+            '<td>' +  arreglo.datos[x].intensidad_horaria +'</td>' +
+            '</tr>';
+            $('#asignatura').append(d);//imprime los datos en la tabla
+             
+          }
+         
           //////////////////////////////////////////////
 
         }
 
-      }else{
+    
+    }).fail(function(jqXHR, response){
+        console.log(response);
         toastr.warning('Lo sentimos!', 'Datos no encontrados', {timeOut:3000});
         $('#buscar')[0].reset();
         $("#datos").empty();
         $("#tabla1").show();
-      }
-    
-    });
+	  });
   });
+
+
 </script>
 <script>
   function JsonDate(jsonDate) {
   var date = new Date(parseInt(jsonDate.substr(6)));
-  return date ;
+  return date;
 }
 ////////////////////////////////7
 function dateFormat(inputDate, format) {
