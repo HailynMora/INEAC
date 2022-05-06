@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert alert-primary text-center"  role="alert">
-  <h4> Matricula Estudiante </h4>
+  <h4> Matricula Estudiante</h4>
 </div>
 <!--navs de matricula bachillerato y matricula tecnicos-->
 <nav>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-4">
                     <label><h5><b><i class="fas fa-user" style="color:#FFC300;"></i>&nbsp Nombre</b></h5></label><br>
-                    <h5> {{$estu->nombre}} {{$estu->apellido}} </h5>
+                    <h5> {{$estu->first_nom}} {{$estu->second_nom}} {{$estu->firts_ape}} {{$estu->second_ape}}  </h5>
                     </div>
                     <div class="col-md-4">
                     <label><h5><b> <i class="fas fa-envelope" style="color:#FFC300;"></i>&nbsp Correo </b></h5></label><br>
@@ -91,12 +91,36 @@
                                 <div id="post" class="mt-4"></div>
                                 
                                 </div><!--retorna la informacion-->  
-                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#FFC300;"></i> Fecha Matricula</b></h4></label>
+                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#FFC300;"></i>&nbsp;Periodo Académico</b></h4></label>
                                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
-                            <div class="form-group col-md-4">
-                                    <input type="date" class="form-control" name="fecha" id="fecha" required>
-                            </div>
-                            <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
+                                <div class="row">
+                                   <div class="form-group col-md-4">
+                                   <label for="exampleFormControlSelect1">Fecha</label>
+                                      <input type="date" class="form-control" name="fecha" id="fecha" required>
+                                    </div>
+                                        <!--###############-->
+                                   
+                                    <div class="form-group col-md-4">
+                                            <label for="exampleFormControlSelect1">Año</label>
+                                            <input type="text"  class="form-control" name="anioba" id="anioba" value="{{$anio}}">
+                                        </div>
+                                   
+                                    <!---#############--->
+                                    <!--###############-->
+                                    
+                                    <div class="form-group col-md-4">
+                                            <label for="exampleFormControlSelect1">Periodo</label>
+                                            <select class="form-control" id="perbachiller" name="perbachiller">
+                                            <option active>Elegir ...</option>
+                                            <option value="A">A</option>  
+                                            <option value="B">B</option>                    
+                                            </select>
+                                        </div>
+                                   
+                                    <!---#############--->
+                                </div>
+                            
+                               <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
                             <br>
                             <div class="form-group col-md-12 text-center">
                                 <a id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
@@ -149,7 +173,7 @@
                     </div>
                     <div class="col-md-4">
                     <label><h5><b><i class="fas fa-user" style="color:#FFC300;"></i>&nbsp Nombre</b></h5></label><br>
-                    <h5> {{$estu->nombre}} {{$estu->apellido}} </h5>
+                    <h5> {{$estu->first_nom}} {{$estu->second_nom}} {{$estu->firts_ape}} {{$estu->second_ape}} </h5>
                     </div>
                     <div class="col-md-4">
                     <label><h5><b> <i class="fas fa-envelope" style="color:#FFC300;"></i>&nbsp Correo </b></h5></label><br>

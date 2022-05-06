@@ -38,8 +38,8 @@
         @foreach($estumat as $e)
         <tr style="background-color: #B5F2FF;">
         <td>{{$con++}}</td>
-        <td>{{$e->nombre}}</td>
-        <td>{{$e->apellido}}</td>
+        <td>{{$e->nombre}} {{$e->segundonom}}</td>
+        <td>{{$e->primerape}} {{$e->segundoape}}</td>
         <td>{{$e->destipo}}</td>
         <td>{{$e->num_doc}}</td>
         <td>{{$e->telefono}}</td>

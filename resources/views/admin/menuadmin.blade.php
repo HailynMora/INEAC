@@ -195,12 +195,12 @@
                 </a>
               </li>
             </ul>-->
-          </li>          <li class="nav-item">
+        <!--  </li><li class="nav-item">
             <a href="{{route('matricularestu')}}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>Matriculas</p>
             </a>
-          </li>
+          </li>-->
          
           <li class="nav-item">
             <a href="#" class="nav-link">

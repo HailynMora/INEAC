@@ -35,9 +35,10 @@
         <td>{{$d->estadoes}}</td>
         <td><!-- Button trigger modal -->
                 <a href="{{route('actualizar_est',$d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
+                <a href="{{route('matricularadmin', $d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp
                 <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>" data-placement="bottom"  title="Ver Estudiante">
                 <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
-                &nbsp&nbsp
+                 &nbsp&nbsp
                 <?php
                 if($d->estadoes == 'Activo'){
                     ?>

@@ -15,7 +15,6 @@ use Carbon\Carbon;
 class MatriculasController extends Controller
 {
     public function index(){
-
         return view('matriculas.matricula');
     }
 
@@ -41,6 +40,7 @@ class MatriculasController extends Controller
         $estu=Estudiante::findOrfail($id);
         $tri =DB::table('trimestre_tecnicos')->get();
         $anio=$date;
+       
         return view('matriculas.vistamatricula', compact('estu', 'prog', 'tri','anio'));
     }
     
@@ -76,6 +76,8 @@ class MatriculasController extends Controller
                 $category = new Matricula();
                 $category->id_estudiante = $request->input('estu');
                 $category->id_curso = $request->input('cur');
+                $category->anio = $request->input('anioba');
+                $category->periodo= $request->input('perbachiller');
                 $category->fec_matricula = $request->input('fecha');
                 $category->save();
                 Session::flash('aceptado','Estudiante Registrado Exitosamente!');
@@ -105,11 +107,12 @@ class MatriculasController extends Controller
             ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
             ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
             ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
-            'matriculas.id_curso as idcur', 'estudiante.nombre', 'estudiante.apellido',
+            'matriculas.id_curso as idcur', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
+            'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
             'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
             'tipo_curso.descripcion as nomcurso')
             ->paginate(7);
-           
+        
         }
 
         $program=DB::table('tipo_curso')->join('estado', 'tipo_curso.id_estado', '=', 'estado.id')
@@ -142,7 +145,8 @@ class MatriculasController extends Controller
             ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
             ->where('tipo_curso.id', '=', $idcurso)
             ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
-            'matriculas.id_curso as idcur', 'estudiante.nombre', 'estudiante.apellido',
+            'matriculas.id_curso as idcur', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
+            'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
             'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
             'tipo_curso.descripcion as nomcurso', 'tipo_curso.id as idcur')
            
