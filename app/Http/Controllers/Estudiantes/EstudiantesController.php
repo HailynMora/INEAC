@@ -252,7 +252,7 @@ class EstudiantesController extends Controller
 
     //////////////////buscar estudiante////////////////////////
     public function busquedares_est(Request $request){
-        $busest = $estudiante=DB::table('estudiante')->where('estudiante.first_nom','=',$request->nombre)
+        $busest = $estudiante=DB::table('estudiante')->where('estudiante.num_doc','=',$request->nombre)
                     ->join('estado', 'id_estado', '=', 'estado.id')
                     ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
                     ->join('genero', 'id_genero', '=', 'genero.id')
