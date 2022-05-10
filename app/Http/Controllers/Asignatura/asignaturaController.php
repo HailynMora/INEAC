@@ -233,5 +233,38 @@ class asignaturaController extends Controller
      return response(json_decode($busasigt,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
     }
     ////////////////////////////////////////
+
+    /////////////////////////////////7cambia el estado de la asignatura en busqueda ajax no borrar
+
+    public function cambiar_estado(Request $request){
+     
+        $asig = Asignatura::find($request->idasig);
+        $es = $asig->id_estado;
+        if($es==2){
+            $asig->id_estado = 1;
+            $asig->save();
+        }else{
+            $asig->id_estado = 2;
+            $asig->save();
+        }        
+        return back();
+
+    }
+
+    public function tecnico_asignatura(Request $request){
+     
+        $asig = AsignaturaTecnicos::find($request->idasig);
+        $es = $asig->id_estado;
+        if($es==2){
+            $asig->id_estado = 1;
+            $asig->save();
+        }else{
+            $asig->id_estado = 2;
+            $asig->save();
+        }        
+        return back();
+
+
+    }
    
 }

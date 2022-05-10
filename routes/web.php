@@ -76,6 +76,7 @@ Route::get('posts/show',[PostController::class, 'show'])->name('posts.show')->mi
 
 //RUTA DESHABILITAR UN ESTUDIANTE
 Route::get('cambiar_estudiante/{id}', [EstudiantesController::class, 'cambiar_estado'])->middleware(['auth', 'secretaria'])->name('cambiarEstad'); 
+Route::post('estudiante/estado', [EstudiantesController::class, 'cambiarestado'])->middleware(['auth', 'secretaria'])->name('deshaestudiante'); 
 
 
 //------------------------------------------FIN RUTAS ESTUDIANTE------------------------------
@@ -141,9 +142,12 @@ Route::post('/asignatura/actualizar/{id}', [AsignaturaController::class, 'actual
 //RUTA ACTUALIZAR ASIGNATURAS TECNICOS
 Route::get('/asignatura_tecnicos/actualizar/{id}', [AsignaturaController::class, 'form_actualizartec'])->middleware(['auth', 'secretaria'])->name('actualizar_asigtec');
 Route::post('/asignatura_tecnicos/actualizar/{id}', [AsignaturaController::class, 'actualizar_asignaturatec'])->middleware(['auth', 'secretaria'])->name('actualizar_asignaturatec');
+Route::post('/asignatura_tecnicos/estado', [AsignaturaController::class, 'tecnico_asignatura'])->middleware(['auth', 'secretaria'])->name('deshasigtec');
+
 
 //RUTA DESHABILITAR ASIGNATURA BACHILLERATO
 Route::get('cambiar_as/{id}', [AsignaturaController::class, 'cambiar_asig'])->middleware(['auth', 'secretaria'])->name('cambiarAsig'); 
+Route::post('/asignatura/estado', [AsignaturaController::class, 'cambiar_estado'])->middleware(['auth', 'secretaria'])->name('deshasignatura');
 
 //RUTA DESHABILITAR ASIGNATURA TECNICO
 Route::get('/cambiar/asigtecnico/{id}', [AsignaturaController::class, 'cambiar_asigtec'])->middleware(['auth', 'secretaria'])->name('deshabilitartec'); 
@@ -273,5 +277,6 @@ Route::get('/tecnico/asignatura/vin/{id}', [ProgramasController::class, 'elimina
 //buscar docente ajax
 Route::post('/buscar/docente', [docenteController::class, 'busquedares'])->middleware(['auth', 'secretaria'])->name('buscardoc');
 Route::get('/estado/docente', [docenteController::class, 'cambiardoc'])->middleware(['auth', 'secretaria'])->name('deshabdocente');
+
 
 require __DIR__.'/auth.php';

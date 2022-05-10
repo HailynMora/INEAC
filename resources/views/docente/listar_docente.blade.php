@@ -294,9 +294,6 @@
                           <div class="card-body">
                             <div class="form-group col-md-12">
                               <!---asignaturas a cargo-->
-                              <?php 
-                                $id=$d->id;
-                              ?>
                               <div class="form-group justify-content-center col-md-12 " id="docente">
                                 <label for="asig_dictadas">Asignaturas a Cargo</label>
                                 <table class="table table-striped">
