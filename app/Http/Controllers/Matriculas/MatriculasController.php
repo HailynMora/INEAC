@@ -285,16 +285,24 @@ class MatriculasController extends Controller
         ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
        ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
        ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
-       ->select('matriculas.id as idmat','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
-       'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
+       ->select('matriculas.id as idmat','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom','estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
        'estudiante.telefono', 'estudiante.num_doc', 'estudiante.correo', 'tipo_documento.descripcion as destipo', 
        'tipo_curso.descripcion as curso', 'tipo_curso.id as idcurso',
        'aprobado.nombre as aprobado', 'matriculas.anio', 'matriculas.periodo', 'matriculas.fec_matricula')
        ->get();
        $cursos=DB::table('tipo_curso')->get();
         return view('matriculas.vista_actualizar')->with('bachi', $bachi)->with('cursos', $cursos);
-
     }
-   
+   //actualizzar matricula bachillerato 
+    public function actubachi(Request $request){
+        $category = Matricula::findOrfail($request->idmat);
+        $category->id_curso = $request->input('curso');
+        $category->anio =$request->input('anioba');
+        $category->periodo=$request->input('perbachiller');
+        $category->fec_matricula = $request->input('fecha');
+        $category->save();
+        Session::flash('actualizar','Estudiante Actualizado Exitosamente!');
+        return back();
+    }
 }
   

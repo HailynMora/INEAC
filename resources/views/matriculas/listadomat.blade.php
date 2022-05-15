@@ -48,7 +48,7 @@
         idcur-->
         
         <td>
-        <a href="#" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
+        <a href="/matricula/estudiante/bachillerato/actualizar/{{$e->idmat}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
         &nbsp&nbsp
         <!---deshabilitar un estudiante-->
           <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$e->idmat}}"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>

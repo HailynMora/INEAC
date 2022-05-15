@@ -250,6 +250,9 @@ Route::get('curso/resultado',[MatriculasController::class, 'mosbus'])->middlewar
 
 //matricula un estudiante
 Route::post('/admin/matricular/estudiante', [MatriculasController::class, 'registromat'])->middleware(['auth', 'secretaria'])->name('regmatricula');
+
+Route::post('/actualizar/matricula/bachillerato', [MatriculasController::class, 'actubachi'])->middleware(['auth', 'secretaria'])->name('actualizar_matricula_bachi');
+
 //reporte de estudiantes matriculados
 Route::get('/admin/reporte/estudiante', [MatriculasController::class, 'listado'])->middleware(['auth', 'secretaria_docente'])->name('listadomatricula');
 
