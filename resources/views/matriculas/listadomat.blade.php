@@ -17,7 +17,7 @@
     </form>
   </div>
     <br><br>
-    <table class="table table-responsive">
+    <table class="table ">
         <thead style="background-color:#F9FF79;">
             <tr>
             <th scope="col">No</th>
@@ -91,16 +91,23 @@
         </tbody>
     </table>
     <div class="row">
-      <div class="col-md-5">
-      </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
       </div>
       <div class="col-md-2">
         <div class="container-fluid">
         @if($b==1)
          {{$estumat->links()}}
-         @endif
+        @endif
        </div>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-2">
+        <h2 class="mb-0">
+          <a class="btn btn-link btn-block text-left float-right" type="button" href="/visualizar/estudiante">
+          <i class="fas fa-arrow-circle-left"></i> Volver
+          </a>
+        </h2>
       </div>
     </div>
    

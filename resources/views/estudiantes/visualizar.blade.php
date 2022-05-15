@@ -4,12 +4,26 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3>Listado de Estudiantes</h3>
 </div>
-<a href="{{route('registro_es')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
-<form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
-  @csrf
-  <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Número Identificación" aria-label="Search">
-  <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
-</form>
+<div class="row">
+    <div class="col-md-1">
+        <a href="{{route('registro_es')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
+    </div>
+    <div class="col-md-1">
+        <a href="{{route('listadomatricula')}}" class="btn btn-outline-info my-2 my-sm-0" >Bto.Ciclo</a>
+    </div>
+    <div class="col-md-1">
+        <a href="/listado/matricula/tecnico" class="btn btn-outline-info my-2 my-sm-0" >Técnicos</a>
+    </div>
+    <div class="col-md-9">
+        <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+          @csrf
+          <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Número Identificación" aria-label="Search">
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+        </form>
+    </div>
+</div>
+
+
 <br><br>
 <div class="container table-responsive">
 

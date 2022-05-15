@@ -94,9 +94,7 @@
         <!--end respuesta-->
     </table>
     <div class="row">
-      <div class="col-md-5">
-      </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
       </div>
       <div class="col-md-2">
         <div class="container-fluid">
@@ -104,6 +102,15 @@
          {{$estutec->links()}}
          @endif
        </div>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-2">
+        <h2 class="mb-0">
+          <a class="btn btn-link btn-block text-left float-right" type="button" href="/visualizar/estudiante">
+          <i class="fas fa-arrow-circle-left"></i> Volver
+          </a>
+        </h2>
       </div>
     </div>
    
