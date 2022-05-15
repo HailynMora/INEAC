@@ -123,7 +123,7 @@
                                <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
                             <br>
                             <div class="form-group col-md-12 text-center">
-                                <a id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
+                                <a href="/visualizar/estudiante" type="button" class="btn btn-warning">Cancelar</a>
                                 <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
                                     <button type="submit" class="btn btn-success">Matricular</button>
                                     
@@ -162,21 +162,21 @@
             @endif
             <!-- end mensaje-->
         <div class="row">
-            <div class="col-md-12" style="background-color:#28afc2;">
-                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
+            <div class="col-md-12" style="background-color:#8FA1FF;">
+                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#3843D0;"></i> Datos Estudiante</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
                 <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-                        <label><h5><b><i class="fas fa-address-card" style="color:#FFC300;"></i>&nbsp Número de Documento</b></h5></label><br>
+                        <label><h5><b><i class="fas fa-address-card" style="color:#3843D0;"></i>&nbsp Número de Documento</b></h5></label><br>
                     <h5> {{$estu->num_doc}} </h5>
                     </div>
                     <div class="col-md-4">
-                    <label><h5><b><i class="fas fa-user" style="color:#FFC300;"></i>&nbsp Nombre</b></h5></label><br>
+                    <label><h5><b><i class="fas fa-user" style="color:#3843D0;"></i>&nbsp Nombre</b></h5></label><br>
                     <h5> {{$estu->first_nom}} {{$estu->second_nom}} {{$estu->firts_ape}} {{$estu->second_ape}} </h5>
                     </div>
                     <div class="col-md-4">
-                    <label><h5><b> <i class="fas fa-envelope" style="color:#FFC300;"></i>&nbsp Correo </b></h5></label><br>
+                    <label><h5><b> <i class="fas fa-envelope" style="color:#3843D0;"></i>&nbsp Correo </b></h5></label><br>
                     <h5>{{$estu->correo}}</h5>
                     </div>
                 </div>
@@ -189,8 +189,8 @@
         <br>
         <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12" style="background-color:#28afc2;">
-            <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#FFC300;"></i> Seleccionar Programa</b></h4>
+            <div class="col-md-12" style="background-color:#8FA1FF;">
+            <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#3843D0;"></i> Seleccionar Programa</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                 <form id="formtec" action="{{route('matriculatecnico')}}" method="post">
                             @csrf
@@ -244,7 +244,7 @@
                                    <br>
                                 </div><!--retorna la informacion-->  
                                 <br>
-                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#FFC300;"></i> Fecha Matricula</b></h4></label>
+                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha Matricula</b></h4></label>
                                      <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                                 <div class="form-group col-md-4">
                                         <input type="date" class="form-control" name="fecha" id="fecha" required>
@@ -252,8 +252,8 @@
                                     <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
                                 <br>
                                 <div class="form-group col-md-12 text-center">
-                                    <a id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
-                                    <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
+                                    <a href="/visualizar/estudiante" id="cancelar" type="button" class="btn" style="background-color:#FED615; color:white;">Cancelar</a>
+                                    <a  href="{{route('listado_tecnico')}}" id="listado" type="button" class="btn" style="background-color:#8852FF; color:white;">Visualizar</a>
                                     <button type="submit" class="btn btn-success">Matricular</button>
                                         
                                 </div>
@@ -310,14 +310,6 @@
                 });
             });
         });
-        </script>
-
-        <script>
-            let a=document.getElementById('cancelar');
-            a.addEventListener('click',function (event) {
-            event.preventDefault(); //esto cancela el comportamiento del click
-            setTimeout(()=> location.href="{{route('matricularestu')}}");
-            });
         </script>
 
         <script>

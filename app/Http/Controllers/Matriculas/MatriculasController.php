@@ -78,6 +78,7 @@ class MatriculasController extends Controller
                 $category->id_curso = $request->input('cur');
                 $category->anio = $request->input('anioba');
                 $category->periodo= $request->input('perbachiller');
+                $category->id_aprobado= 1;
                 $category->fec_matricula = $request->input('fecha');
                 $category->save();
                 Session::flash('aceptado','Estudiante Registrado Exitosamente!');
@@ -103,7 +104,7 @@ class MatriculasController extends Controller
             $estumat=array('dato1', 'dato2', 'dato3');
         }else{
             $b=1;
-            $estumat=DB::table('matriculas')->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+            $estumat=DB::table('matriculas')->where('id_aprobado', '!=', 4)->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
             ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
             ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
             ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
@@ -124,62 +125,159 @@ class MatriculasController extends Controller
         return view('matriculas.listadomat')->with('estumat', $estumat)->with('b', $b)->with('program', $program);
     }
 
-    public function filtrares(Request $request){
-        $es="Activo";
-        $idcurso=$request->idcur;
-        
-        $est=DB::table('matriculas')->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
-        ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
-        ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
-        ->where('tipo_curso.id', '=', $idcurso)->count();
-        
-        $program=DB::table('tipo_curso')->join('estado', 'tipo_curso.id_estado', '=', 'estado.id')
-        ->where('estado.descripcion', '=', $es)
-        ->select('tipo_curso.id as idcur', 'tipo_curso.descripcion as nomcur', 
-                 'estado.descripcion as estadocur')->get();
-
-        if($est!=0){
-            $b=1;
-            $estumat1=DB::table('matriculas')->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
-            ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
-            ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
-            ->where('tipo_curso.id', '=', $idcurso)
-            ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
-            'matriculas.id_curso as idcur', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
-            'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
-            'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
-            'tipo_curso.descripcion as nomcurso', 'tipo_curso.id as idcur')
-           
-            ->paginate(7);
-            return view('matriculas.filtrado')->with('estumat1', $estumat1)->with('b', $b)->with('program', $program);
-            
-        }else{
-            $b=0;
-            $estumat1=array('dato1', 'dato2', 'dato3');
-            Session::flash('validacion','Datos No Encontrados');
-            return view('matriculas.filtrado')->with('estumat1', $estumat1)->with('b', $b)->with('program', $program);
-        }
-
-       
-        
-       
-    }
-
+   
     ///###########_matricula tecnico_###############
     public function matriculatec(Request $request){
-      //"programatec":"1","tri":"3","anio":"2022","per":"B","fecha":"2022-04-21","estu":"1"
+              $repetido =DB::table('matricula_tecnico')->where('id_estudiante', $request->estu)->where('id_aprobado', 1)->count();
+            if($repetido==0){
+                    $category = new MatriculaTec();
+                    $category->id_estudiante = $request->input('estu');
+                    $category->id_tecnico = $request->input('programatec');
+                    $category->id_aprobado =1;
+                    $category->id_trimestre =$request->input('tri');
+                    $category->anio =$request->input('anio');
+                    $category->periodo=$request->input('per');
+                    $category->fec_matricula = $request->input('fecha');
+                    $category->save();
+                    Session::flash('matec','Estudiante Registrado Exitosamente!');
+                    return back();
+            }else{
 
-              $category = new MatriculaTec();
-              $category->id_estudiante = $request->input('estu');
-              $category->id_tecnico = $request->input('programatec');
-              $category->id_aprobado =1;
-              $category->id_trimestre =$request->input('tri');
-              $category->anio =$request->input('anio');
-              $category->periodo=$request->input('per');
-              $category->fec_matricula = $request->input('fecha');
-              $category->save();
-              Session::flash('matec','Estudiante Registrado Exitosamente!');
-              return back();
+                $rep =DB::table('matricula_tecnico')->where('id_estudiante', $request->estu)->where('id_aprobado','=', 4)->count();
+                $r =DB::table('matricula_tecnico')->where('id_estudiante', $request->estu)->where('id_aprobado', 1)->count();
+                if($rep==1 && $r==0){
+                    $category = new MatriculaTec();
+                    $category->id_estudiante = $request->input('estu');
+                    $category->id_tecnico = $request->input('programatec');
+                    $category->id_aprobado =1;
+                    $category->id_trimestre =$request->input('tri');
+                    $category->anio =$request->input('anio');
+                    $category->periodo=$request->input('per');
+                    $category->fec_matricula = $request->input('fecha');
+                    $category->save();
+                    Session::flash('matec','Estudiante Registrado Exitosamente!');
+                    return back();
+                }else{
+                    Session::flash('matec','Estudiante ya registrado!');
+                    return back();
+                }
+               
+
+            }
+
+
+           
+             
+    }
+
+    ///listado de estudiantes matriculados a un tecnico
+
+    public function listado_tec(){
+        
+        $valtec=DB::table('matricula_tecnico')->count();
+        if($valtec!=0){
+            $b=1;
+            $estutec=DB::table('matricula_tecnico')->where('id_aprobado', '!=', 4)->join('estudiante', 'matricula_tecnico.id_estudiante', '=', 'estudiante.id')
+            ->join('programa_tecnico', 'matricula_tecnico.id_tecnico', '=', 'programa_tecnico.id')
+            ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+            ->join('aprobado', 'matricula_tecnico.id_aprobado', '=', 'aprobado.id')
+            ->join('trimestre_tecnicos', 'matricula_tecnico.id_trimestre', '=', 'trimestre_tecnicos.id')
+            ->select('matricula_tecnico.id', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
+            'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
+            'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
+            'programa_tecnico.nombretec', 'programa_tecnico.descripcion as destec',
+            'aprobado.nombre as aprobado')
+            ->paginate(7);
+        }else{
+            $b=0;
+            $estutec="datos";
+        }
+        $tecnico =DB::table('programa_tecnico')->get();
+        return view('tecnico.listadomat')->with('estutec', $estutec)->with('b', $b)->with('tecnico', $tecnico);
+    }
+
+    public function estudiantestec(Request $request){
+     
+        $estutec=DB::table('matricula_tecnico')->where('matricula_tecnico.id_tecnico', '=', $request->idtec)
+        ->join('estudiante', 'matricula_tecnico.id_estudiante', '=', 'estudiante.id')
+        ->join('programa_tecnico', 'matricula_tecnico.id_tecnico', '=', 'programa_tecnico.id')
+        ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+        ->join('aprobado', 'matricula_tecnico.id_aprobado', '=', 'aprobado.id')
+        ->join('trimestre_tecnicos', 'matricula_tecnico.id_trimestre', '=', 'trimestre_tecnicos.id')
+        ->select('matricula_tecnico.id','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom',
+        'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
+        'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
+        'programa_tecnico.nombretec', 'programa_tecnico.descripcion as destec',
+        'aprobado.nombre as aprobado')
+        ->get();
+        return response(json_decode($estutec),200)->header('Content-type', 'text/plain');
+
+    }
+
+    //actualizar informacion del estuante matriculado
+
+    public function actualizar_mat_tecnico($id){
+        $tecmat=DB::table('matricula_tecnico')->where('matricula_tecnico.id', $id)
+                 ->join('estudiante', 'matricula_tecnico.id_estudiante', '=', 'estudiante.id')
+                 ->join('programa_tecnico', 'matricula_tecnico.id_tecnico', '=', 'programa_tecnico.id')
+                ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+                ->join('aprobado', 'matricula_tecnico.id_aprobado', '=', 'aprobado.id')
+                ->join('trimestre_tecnicos', 'matricula_tecnico.id_trimestre', '=', 'trimestre_tecnicos.id')
+                ->select('matricula_tecnico.id','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
+                'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
+                'estudiante.telefono', 'estudiante.num_doc', 'estudiante.correo', 'tipo_documento.descripcion as destipo', 
+                'programa_tecnico.nombretec', 'programa_tecnico.descripcion as destec',
+                'aprobado.nombre as aprobado', 'matricula_tecnico.anio', 'matricula_tecnico.periodo', 'matricula_tecnico.fec_matricula',
+                'trimestre_tecnicos.nombretri', 'trimestre_tecnicos.id as idtri', 'programa_tecnico.id as idtec')
+                ->get();
+
+          $progtec=DB::table('programa_tecnico')->get();
+          $trimestre=DB::table('trimestre_tecnicos')->get();
+
+     return view('tecnico.matriculaactu')->with('tecmat', $tecmat)->with('progtec', $progtec)->with('trimestre', $trimestre);
+    }
+
+    //actualizzar matricula tecnico 
+    public function actumat(Request $request){
+        $category = MatriculaTec::findOrfail($request->idmat);
+        $category->id_tecnico = $request->input('programatec');
+        $category->id_trimestre =$request->input('tri');
+        $category->anio =$request->input('anio');
+        $category->periodo=$request->input('per');
+        $category->fec_matricula = $request->input('fecha');
+        $category->save();
+        Session::flash('actualizar','Estudiante Actualizado Exitosamente!');
+        return back();
+    }
+
+    public function estado_mat(Request $request){
+        
+        $category = MatriculaTec::findOrfail($request->idestudiante);
+        $category->id_aprobado = 4;
+        $category->save();
+        return back();
+    }
+
+    public function estado_mat_bachillerato(Request $request){
+        
+        $category = Matricula::findOrfail($request->idestudiante);
+        $category->id_aprobado = 4;
+        $category->save();
+        return back();
+    }
+
+    public function estudiantesbachillerato(Request $request){
+        $bachi=DB::table('matriculas')->where('matriculas.id', '=', $request->idbachi)->where('id_aprobado', '!=', 4)->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+        ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+        ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+        ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
+        'matriculas.id_curso as idcur', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
+        'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
+        'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
+        'tipo_curso.descripcion as nomcurso')
+        ->get();
+        return response(json_decode($bachi),200)->header('Content-type', 'text/plain');
     }
    
 }
+  

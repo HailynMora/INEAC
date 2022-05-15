@@ -21,6 +21,8 @@ return new class extends Migration
             $table->foreign('id_curso')->references('id')->on('tipo_curso');//llave foranea para referenciar a la tabla categorias
             $table->string('anio');
             $table->string('periodo');
+            $table->unsignedBigInteger('id_aprobado');//atributo para referenciar a categoria
+            $table->foreign('id_aprobado')->references('id')->on('aprobado');
             $table->dateTime('fec_matricula');
             $table->timestamps();
         });

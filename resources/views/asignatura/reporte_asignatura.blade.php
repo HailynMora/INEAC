@@ -6,7 +6,7 @@
 <a href="{{route('regasignatura')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
 <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
   @csrf
-  <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+  <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
   <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
 </form>
 <br><br>
@@ -72,32 +72,37 @@
                 </div>
              </div>
         </div>
-        <!---fin ventana cambiar--->
-        <!-- Ventana modal para eliminar 
-        <div class="modal fade" id="eliminarAsig{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
+       <!--Modal deshabilitar y habilitar-->
+       <div class="modal fade" id="cambiarEstado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header" style="background-color: #563d7c !important;">
-                        <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
-                            <span>¿Esta seguro que desea eliminar la asignatura  {{$d->asig}}? </span>
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> 
-                    </div>
-                    <div class="modal-body mt-2 text-center">
-                        <strong style="text-align: center !important"> 
-                        {{ $d->asig }} : Se eliminara de toda la Base de Datos
-                        </strong>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <a  class="btn btn-success" href="{{ route('eliminarAsig', $d->id) }}">Eliminar</a>
-                    </div>
+                  <div class="modal-header" style="background-color: #283593; color:#ffffff;!important;">
+                    <h4 class="modal-title text-center" style=" text-align: center;">
+                     <div id="nomdoc" class="reset"></div>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> 
+                  </div>
+                  <div class="modal-body mt-2 text-center">
+                    <strong style="text-align: center !important"> 
+                      <h4 class="modal-title text-center" style=" text-align: center;">
+                        <span>¿Cambiar estado de la asignatura? </span>
+                      </h4>
+                    </strong>
+                  </div>
+                  <div class="modal-footer">
+                    <form action="{{route('deshasignatura')}}" method="POST">
+                      @csrf
+                    <input id="idasig" name="idasig" hidden> 
+                    <button type="submit" class="btn btn-success">Cambiar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                     </form>
+                  </div>
                 </div>
-             </div>
-        </div>-->
-        <!---fin ventana eliminar--->
+              </div>
+            </div>
+              <!--Find Modal deshabilitar y habilitar-->
         @endforeach
         </tbody>
         <!--##################datos de la busqueda ##########################3-->
@@ -137,15 +142,36 @@
         //$("#datosdos").empty();
       for(var x=0; x<arreglo.length; x++){
           conta+=1;
+       if ( arreglo[x].estado == "Activo") { // true
           var valor = '<tr>' +
           '<td>' +  arreglo[x].codigo +'</td>' +
           '<td>' +  arreglo[x].asig + '</td>' +
           '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
           '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
           '<td>' +  arreglo[x].estado + '</td>' +
-          '<td>' +  arreglo[x].estado + '</td>' +//agregar los botones
+          '<td>'+ ' <a href="/asignatura/actualizar/'+ arreglo[x].id +' "  data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>' + 
+                  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>'+
+          '</td>' +//agregar los botones
           '</tr>';
           $('#datos').append(valor);
+         }else{
+          
+            var valor = '<tr>' +
+            '<td>' +  arreglo[x].codigo +'</td>' +
+            '<td>' +  arreglo[x].asig + '</td>' +
+            '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
+            '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
+            '<td>' +  arreglo[x].estado + '</td>' +
+            '<td>'+ ' <a href="/asignatura/actualizar/'+ arreglo[x].id +' "  data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>' + 
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>'+
+            '</td>' +//agregar los botones
+            '</tr>';
+            $('#datos').append(valor);
+
+         }
+
+         document.getElementsByName("idasig")[0].value = arreglo[x].id;
+
         }
 
       }else{

@@ -76,6 +76,7 @@ Route::get('posts/show',[PostController::class, 'show'])->name('posts.show')->mi
 
 //RUTA DESHABILITAR UN ESTUDIANTE
 Route::get('cambiar_estudiante/{id}', [EstudiantesController::class, 'cambiar_estado'])->middleware(['auth', 'secretaria'])->name('cambiarEstad'); 
+Route::post('estudiante/estado', [EstudiantesController::class, 'cambiarestado'])->middleware(['auth', 'secretaria'])->name('deshaestudiante'); 
 
 
 //------------------------------------------FIN RUTAS ESTUDIANTE------------------------------
@@ -141,9 +142,12 @@ Route::post('/asignatura/actualizar/{id}', [AsignaturaController::class, 'actual
 //RUTA ACTUALIZAR ASIGNATURAS TECNICOS
 Route::get('/asignatura_tecnicos/actualizar/{id}', [AsignaturaController::class, 'form_actualizartec'])->middleware(['auth', 'secretaria'])->name('actualizar_asigtec');
 Route::post('/asignatura_tecnicos/actualizar/{id}', [AsignaturaController::class, 'actualizar_asignaturatec'])->middleware(['auth', 'secretaria'])->name('actualizar_asignaturatec');
+Route::post('/asignatura_tecnicos/estado', [AsignaturaController::class, 'tecnico_asignatura'])->middleware(['auth', 'secretaria'])->name('deshasigtec');
+
 
 //RUTA DESHABILITAR ASIGNATURA BACHILLERATO
 Route::get('cambiar_as/{id}', [AsignaturaController::class, 'cambiar_asig'])->middleware(['auth', 'secretaria'])->name('cambiarAsig'); 
+Route::post('/asignatura/estado', [AsignaturaController::class, 'cambiar_estado'])->middleware(['auth', 'secretaria'])->name('deshasignatura');
 
 //RUTA DESHABILITAR ASIGNATURA TECNICO
 Route::get('/cambiar/asigtecnico/{id}', [AsignaturaController::class, 'cambiar_asigtec'])->middleware(['auth', 'secretaria'])->name('deshabilitartec'); 
@@ -263,6 +267,11 @@ Route::get('/listar/usuarios', [Roles::class, 'listar_usu'])->middleware(['auth'
 
 //matricular tecnicos
 Route::post('/matricula/tecnico', [MatriculasController::class, 'matriculatec'])->middleware(['auth', 'secretaria'])->name('matriculatecnico');
+Route::get('listado/matricula/tecnico', [MatriculasController::class, 'listado_tec'])->middleware(['auth', 'secretaria'])->name('listado_tecnico');
+Route::post('/listado/estudiantes/tecnico', [MatriculasController::class, 'estudiantestec'])->middleware(['auth', 'secretaria'])->name('estutec');
+Route::get('/matricula/estudiante/actualizar/{id}', [MatriculasController::class, 'actualizar_mat_tecnico'])->middleware(['auth', 'secretaria'])->name('mat_tec');
+Route::post('/actualizar/matricula/tecnico', [MatriculasController::class, 'actumat'])->middleware(['auth', 'secretaria'])->name('actualizar_matricula_tecnico');
+Route::get('/cambiar/estado/matricula', [MatriculasController::class, 'estado_mat'])->middleware(['auth', 'secretaria'])->name('cambiar_estado_mat');
 
 
 Route::post('/vicular/asignaturas/tecnicos', [ProgramasController::class, 'asig_tec'])->middleware(['auth', 'secretaria'])->name('regvincularasigtec');
@@ -273,5 +282,8 @@ Route::get('/tecnico/asignatura/vin/{id}', [ProgramasController::class, 'elimina
 //buscar docente ajax
 Route::post('/buscar/docente', [docenteController::class, 'busquedares'])->middleware(['auth', 'secretaria'])->name('buscardoc');
 Route::get('/estado/docente', [docenteController::class, 'cambiardoc'])->middleware(['auth', 'secretaria'])->name('deshabdocente');
+Route::get('/cambiar/estado/matricula/bachillerato', [MatriculasController::class, 'estado_mat_bachillerato'])->middleware(['auth', 'secretaria'])->name('cambiar_estado_bachillerato');
+Route::post('/filtrar/estudiantes/bachillerato', [MatriculasController::class, 'estudiantesbachillerato'])->middleware(['auth', 'secretaria'])->name('estubachillerato');
+
 
 require __DIR__.'/auth.php';

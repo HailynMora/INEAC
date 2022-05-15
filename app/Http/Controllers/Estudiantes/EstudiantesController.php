@@ -272,5 +272,22 @@ class EstudiantesController extends Controller
                     ->get();
      return response(json_decode($busest,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
     }
-    ////////////////////////////////////////
+    ////////////////////////////////////////cambiar el estado del estudianet por ajax
+
+    
+    public function cambiarestado(Request $request){
+        $estu= Estudiante::find($request->idestudiante);
+        $es = $estu->id_estado;
+        if($es==2){
+            $estu->id_estado = 1;
+            $estu->save();
+        }else{
+            $estu->id_estado = 2;
+            $estu->save();
+        }        
+        return back();
+    }
+   
+
+
 }
