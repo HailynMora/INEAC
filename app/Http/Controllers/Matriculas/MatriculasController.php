@@ -278,6 +278,23 @@ class MatriculasController extends Controller
         ->get();
         return response(json_decode($bachi),200)->header('Content-type', 'text/plain');
     }
+
+    public function actu_mat_bachi($id){//actualizar matriculas bachillerato
+        $bachi=DB::table('matriculas')->where('matriculas.id', $id)
+        ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+        ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+       ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+       ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
+       ->select('matriculas.id as idmat','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
+       'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
+       'estudiante.telefono', 'estudiante.num_doc', 'estudiante.correo', 'tipo_documento.descripcion as destipo', 
+       'tipo_curso.descripcion as curso', 'tipo_curso.id as idcurso',
+       'aprobado.nombre as aprobado', 'matriculas.anio', 'matriculas.periodo', 'matriculas.fec_matricula')
+       ->get();
+       $cursos=DB::table('tipo_curso')->get();
+        return view('matriculas.vista_actualizar')->with('bachi', $bachi)->with('cursos', $cursos);
+
+    }
    
 }
   

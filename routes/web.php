@@ -285,5 +285,8 @@ Route::get('/estado/docente', [docenteController::class, 'cambiardoc'])->middlew
 Route::get('/cambiar/estado/matricula/bachillerato', [MatriculasController::class, 'estado_mat_bachillerato'])->middleware(['auth', 'secretaria'])->name('cambiar_estado_bachillerato');
 Route::post('/filtrar/estudiantes/bachillerato', [MatriculasController::class, 'estudiantesbachillerato'])->middleware(['auth', 'secretaria'])->name('estubachillerato');
 
+//editar matricula bachillerato
+Route::get('/matricula/estudiante/bachillerato/actualizar/{id}', [MatriculasController::class, 'actu_mat_bachi'])->middleware(['auth', 'secretaria']);
+
 
 require __DIR__.'/auth.php';

@@ -148,7 +148,7 @@
             '<td>' +  ar[i].telefono  + '</td>' +
             '<td>' +  ar[i].nomcurso + '</td>' +
             '<td>' 
-              + '<a href="/matricula/estudiante/actualizar/' + ar[i].idmat + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp&nbsp;'+ 
+              + '<a href="/matricula/estudiante/bachillerato/actualizar/' + ar[i].idmat + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp&nbsp;'+ 
                 '<a type="button" data-toggle="modal" data-target="#estado'+ar[i].idmat+'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
                ' <div class="modal fade" id="estado'+ar[i].idmat+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
               '<div class="modal-dialog" role="document">'+
