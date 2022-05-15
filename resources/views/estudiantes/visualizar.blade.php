@@ -269,7 +269,8 @@
           '<td>' +  arreglo[x].correo  + '</td>' +
           '<td>' +  arreglo[x].estadoes + '</td>' +
           '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
-          '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp'
+                    '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp' +
+
 
           + '</td>' +//agregar los botones
           '</tr>';
