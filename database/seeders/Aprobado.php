@@ -25,6 +25,9 @@ class Aprobado extends Seeder
             [
              'nombre' => 'Reprobado'
             ],
+            [
+             'nombre' => 'Retirado'
+            ]
 
         ];
         DB::table('aprobado')->insert($datos);

@@ -11,15 +11,15 @@
   <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
 </form>
 <br><br>
-<div class="container">
+<div class="container table-responsive">
 
-<table class="table table-striped"style="background-color:#FFCC00;">
+<table class="table" style="background-color:#FFCC00;" >
        <thead>
         <tr>
         <th scope="col">N° Identificacion</th>
         <th scope="col">Nombre</th>
-        <th scope="col" >Telefono</th>
-        <th scope="col" class="d-none d-lg-block ">Correo</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Correo</th>
         <th scope="col">Estado</th>
         <th scope="col">Acciones</th>
         </tr>
@@ -27,29 +27,17 @@
     <tbody id="tabla1">
     @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
-        <tr class="table-success"style="background-color: #dcedc8;">
+        <tr class="table-success" >
         <td>{{$d->num_doc}}</td>
         <td>{{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}</td>
         <td>{{$d->telefono}}</td>
-        <td  class="d-none d-lg-block">{{$d->correo}}</td>
+        <td>{{$d->correo}}</td>
         <td>{{$d->estadoes}}</td>
         <td><!-- Button trigger modal -->
                 <a href="{{route('actualizar_est',$d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
                 <a href="{{route('matricularadmin', $d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp
                 <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>" data-placement="bottom"  title="Ver Estudiante">
                 <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
-                 &nbsp&nbsp
-                <?php
-                if($d->estadoes == 'Activo'){
-                    ?>
-                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}" data-placement="bottom"  title="Deshabilitar Estudiante"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
-                    <?php
-                }else{
-                    ?>
-                    <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"  data-placement="bottom"  title="Habilitar Estudiante"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
-                    <?php
-                }
-                ?>
                 <!-- Modal -->
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -188,33 +176,6 @@
                     </div>
                 </div>
                 </div>
-                <!-- Ventana modal para cambiar -->
-                <div class="modal fade" id="cambiarEstado{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #283593 !important; color:white;">
-                        <h4 class="modal-title text-center" style=" text-align: center;">
-                            <span>ESTUDIANTE: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}} </span>
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> 
-                        </div>
-                        <div class="modal-body mt-2 text-center">
-                        <strong style="text-align: center !important"> 
-                            <h4 class="modal-title text-center" style=" text-align: center;">
-                            <span>¿Cambiar el estado {{$d->estadoes}} del Estudiante? </span>
-                            </h4>
-                        </strong>
-                        </div>
-                        <div class="modal-footer">
-                        <a  class="btn btn-success" href="{{ route('cambiarEstad', $d->id) }}">Cambiar</a>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                    <!---fin ventana cambiar--->
                     <!--Datos estuidnate ajax mostrar-->
                    <!-- Button trigger modal -->
         </td>
@@ -228,42 +189,12 @@
         @endif
     </tbody>
     <!--##################datos de la busqueda ##########################3-->
-        <tbody id="datos" style="background-color: #dcedc8;">
+        <tbody id="datos" class="table-success">
         </tbody>
       <!--##########################################33-->
     </table>
 </div>
- <!--Modal deshabilitar y habilitar-->
- <div class="modal fade" id="cambiarEstado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header" style="background-color: #283593; color:#ffffff;!important;">
-                    <h4 class="modal-title text-center" style=" text-align: center;">
-                     <div id="nomdoc" class="reset"></div>
-                    </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button> 
-                  </div>
-                  <div class="modal-body mt-2 text-center">
-                    <strong style="text-align: center !important"> 
-                      <h4 class="modal-title text-center" style=" text-align: center;">
-                        <span>¿Cambiar estado del estudiante? </span>
-                      </h4>
-                    </strong>
-                  </div>
-                  <div class="modal-footer">
-                    <form action="{{route('deshaestudiante')}}" method="POST">
-                      @csrf
-                    <input id="idestudiante" name="idestudiante" hidden> 
-                    <button type="submit" class="btn btn-success">Cambiar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                     </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-    <!--Find Modal deshabilitar y habilitar-->
+
  <!--finalizar Tabla de informacion-->
    <!-- Modal -->
    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -282,63 +213,63 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-3"><b>Tipo Identificacion</b></div>
-                        <div class="col-md-3 ml-auto iden"> </div>
+                        <div class="col-md-3 ml-auto iden" id="limpiar1"> </div>
                         <div class="col-md-3"><b>Número</b></div>
-                        <div class="col-md-3 ml-auto num"> </div>
+                        <div class="col-md-3 ml-auto num" id="limpiar2"> </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3"><b>Dpt Expedición</b></div>
-                        <div class="col-md-3 ml-auto dtoex">  </div>
+                        <div class="col-md-3 ml-auto dtoex" id="limpiar3">  </div>
                         <div class="col-md-3"><b>Mpio. Expedición</b></div>
-                        <div class="col-md-3 ml-auto mpioex"> </div>
+                        <div class="col-md-3 ml-auto mpioex" id="limpiar4"> </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3"><b>Genero</b></div>
-                        <div class="col-md-3 ml-auto gen"> </div>
+                        <div class="col-md-3 ml-auto gen" id="limpiar5"> </div>
                         <div class="col-md-3"><b>Fecha Nac</b></div>
-                        <div class="col-md-3 ml-auto fecna"> </div>
+                        <div class="col-md-3 ml-auto fecna" id="limpiar6"> </div>
                     </div>
                     <div class="row"> 
                         <div class="col-md-3"><b>Dpt Nacimiento</b></div>
-                        <div class="col-md-3 ml-auto dtona"> </div>
+                        <div class="col-md-3 ml-auto dtona" id="limpiar7"> </div>
                         <div class="col-md-3"><b>Mpio. Nacimiento</b></div>
-                        <div class="col-md-3 ml-auto mpionac"> </div>
+                        <div class="col-md-3 ml-auto mpionac" id="limpiar8"> </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3"><b>Primer Apellido</b></div>
-                        <div class="col-md-3 ml-auto primerape"> </div>
+                        <div class="col-md-3 ml-auto primerape" id="limpiar9"> </div>
                         <div class="col-md-3"><b>Segundo Apellido</b></div>
-                        <div class="col-md-3 ml-auto segundoape"> </div>
+                        <div class="col-md-3 ml-auto segundoape" id="limpiar10"> </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3"><b>Primer Nombre</b></div>
-                        <div class="col-md-3 ml-auto primernom"> </div>
+                        <div class="col-md-3 ml-auto primernom" id="limpiar11"> </div>
                         <div class="col-md-3"><b>Segundo Nombre</b></div>
-                        <div class="col-md-3 ml-auto segundonom"> </div>
+                        <div class="col-md-3 ml-auto segundonom" id="limpiar12"> </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3"><b>Dir. Residencia</b></div>
-                        <div class="col-md-3 ml-auto dires"> </div>
+                        <div class="col-md-3 ml-auto dires" id="limpiar13"> </div>
                         <div class="col-md-3"><b>Barrio</b></div>
-                        <div class="col-md-3 ml-auto barrio">  </div>
+                        <div class="col-md-3 ml-auto barrio" id="limpiar14">  </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3"><b>Dpt. Residencia</b></div>
-                        <div class="col-md-3 ml-auto dtores"> </div>
+                        <div class="col-md-3 ml-auto dtores" id="limpiar15"> </div>
                         <div class="col-md-3"><b>Mpio. Residencia</b></div>
-                        <div class="col-md-3 ml-auto mpiores"> </div>
+                        <div class="col-md-3 ml-auto mpiores" id="limpiar16"> </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3"><b>Zona</b></div>
-                        <div class="col-md-3 ml-auto zona"> </div>
+                        <div class="col-md-3 ml-auto zona" id="limpiar17"> </div>
                         <div class="col-md-3"><b>Telefono/Celular</b></div>
-                        <div class="col-md-3 ml-auto celular"> </div>
+                        <div class="col-md-3 ml-auto celular" id="limpiar18"> </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3"><b>Estrato</b></div>
-                        <div class="col-md-3 ml-auto estrato"> </div>
+                        <div class="col-md-3 ml-auto estrato" id="limpiar19"> </div>
                         <div class="col-md-3"><b>Tipo Sangre</b></div>
-                        <div class="col-md-3 ml-auto tsangre"> </div>
+                        <div class="col-md-3 ml-auto tsangre" id="limpiar20"> </div>
                     </div>
                     <!--end mostrar datos-->
                     <!---#########################################sistema salud----->
@@ -348,21 +279,21 @@
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Regimen Salud</b></div>
-                        <div class="col-md-3 ml-auto regimen"> </div>
+                        <div class="col-md-3 ml-auto regimen" id="limpiar21"> </div>
                         <div class="col-md-3"><b>Carnet/EPS</b></div>
-                        <div class="col-md-3 ml-auto carnet"> </div>
+                        <div class="col-md-3 ml-auto carnet" id="limpiar22"> </div>
                      </div>
                      <div class="row">
                         <div class="col-md-3"><b>Nivel Formación</b></div>
-                        <div class="col-md-3 ml-auto formacion"> </div>
+                        <div class="col-md-3 ml-auto formacion" id="limpiar23"> </div>
                         <div class="col-md-3"><b>Ocupación</b></div>
-                        <div class="col-md-3 ml-auto ocupacion"> </div>
+                        <div class="col-md-3 ml-auto ocupacion" id="limpiar24"> </div>
                      </div>
                      <div class="row">
                         <div class="col-md-3"><b>Discapacidad</b></div>
-                        <div class="col-md-3 ml-auto discap"> </div>
+                        <div class="col-md-3 ml-auto discap" id="limpiar25"> </div>
                         <div class="col-md-3"><b>Multiculturidad</b></div>
-                        <div class="col-md-3 ml-auto etnia"> </div>
+                        <div class="col-md-3 ml-auto etnia" id="limpiar26"> </div>
                      </div>
                     <!--#####################fin sistema salud---->
                     <!--#############Datos del acudiente-->
@@ -372,21 +303,21 @@
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Tipo Identificacion</b></div>
-                        <div class="col-md-3 ml-auto idenacu"> </div>
+                        <div class="col-md-3 ml-auto idenacu" id="limpiar27"> </div>
                         <div class="col-md-3"><b>Número</b></div>
-                        <div class="col-md-3 ml-auto numacu"> </div>
+                        <div class="col-md-3 ml-auto numacu" id="limpiar28"> </div>
                       </div>
                       <div class="row">
                         <div class="col-md-3"><b>Nombres y Apellido</b></div>
-                        <div class="col-md-3 ml-auto nomacu"> </div>
+                        <div class="col-md-3 ml-auto nomacu" id="limpiar29"> </div>
                         <div class="col-md-3"><b>Parentesco</b></div>
-                        <div class="col-md-3 ml-auto paren"> </div>
+                        <div class="col-md-3 ml-auto paren" id="limpiar30"> </div>
                       </div>
                       <div class="row">
                         <div class="col-md-3"><b>Dirección Residencia</b></div>
-                        <div class="col-md-3 ml-auto diracu"> </div>
+                        <div class="col-md-3 ml-auto diracu" id="limpiar31"> </div>
                         <div class="col-md-3"><b>Telefono/Celular</b></div>
-                        <div class="col-md-3 ml-auto telacu"> </div>
+                        <div class="col-md-3 ml-auto telacu" id="limpiar32"> </div>
                       </div>
                     <!---############End Datos Acudiente-->
                     <br>
@@ -433,6 +364,9 @@
         $('#buscar')[0].reset();
         $("#datos").empty();
         $("#tabla1").hide(); 
+        for(var i=1; i<=32; i++){//limpia los datos de los divs para que no salgan uno sobre otro 
+          $('#limpiar'+[i]).empty();
+        }
         //$("#datosdos").empty();
       for(var x=0; x<arreglo.length; x++){
           conta+=1;
@@ -446,8 +380,8 @@
           '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
                     '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp'+
                     '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>&nbsp&nbsp&nbsp'+
-                    '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>'
-           + '</td>' +//agregar los botones
+        
+           '</td>' +//agregar los botones
           '</tr>';
             $('#datos').append(valor);
 
@@ -461,8 +395,7 @@
               '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
                         '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp'+
                         '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>&nbsp&nbsp&nbsp'+
-                        '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>&nbsp&nbsp&nbsp'
-              + '</td>' +//agregar los botones
+               '</td>' +//agregar los botones
               '</tr>';
                 $('#datos').append(valor);
            
@@ -506,9 +439,6 @@
           $('.diracu').append(arreglo[x].diracu);
           $('.telacu').append(arreglo[x].telacu);
           //end datos acudiente
-
-          document.getElementsByName("idestudiante")[0].value = arreglo[x].id;
-
         }
 
       }else{
