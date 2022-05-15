@@ -104,7 +104,7 @@
       </div>
       <div class="col-md-2">
         <h2 class="mb-0">
-          <a class="btn btn-link btn-block text-left float-right" type="button" href="/visualizar/estudiante">
+          <a class="btn btn-link btn-block text-left float-left" type="button" href="/visualizar/estudiante">
           <i class="fas fa-arrow-circle-left"></i> Volver
           </a>
         </h2>
@@ -121,6 +121,7 @@
     e.preventDefault();
     var idbachi=$('#idbachi').val();
     var _token = $('input[name=_token]').val();
+    console.log(idbachi);
     $.ajax({
       url:"{{route('estubachillerato')}}",
       type: "POST",

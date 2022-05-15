@@ -267,7 +267,7 @@ class MatriculasController extends Controller
     }
 
     public function estudiantesbachillerato(Request $request){
-        $bachi=DB::table('matriculas')->where('matriculas.id', '=', $request->idbachi)->where('id_aprobado', '!=', 4)->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+        $bachi=DB::table('matriculas')->where('matriculas.id_curso', '=', $request->idbachi)->where('id_aprobado', '!=', 4)->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
         ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
         ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
         ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
