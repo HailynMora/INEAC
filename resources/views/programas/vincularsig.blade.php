@@ -57,10 +57,6 @@
                         @endforeach
                   </select>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" class="form-control" id="fecha" name="fecha" required>
-                  </div>
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>

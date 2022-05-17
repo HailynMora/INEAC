@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Asignaturas Vinculadas a Programas</h3>
+ <h3> Asignaturas Vinculadas a Programas </h3>
 </div>
 <div class="container">
     <table class="table">
@@ -11,6 +11,7 @@
             <th scope="col">Programa</th>
             <th scope="col">Cód. Asignatura</th>
             <th scope="col">Asignatura</th>
+            <th scope="col">Docente</th>
             <th scope="col">Opciones</th>
             </tr>
         </thead>
@@ -22,7 +23,7 @@
             <td>{{$s->curso}}</td>
             <td>{{$s->codas}}</td>
             <td>{{$s->asig}}</td>
-        
+            <td>{{$s->nomdoc}} {{$s->apedoc}}</td>
             <td>
                 &nbsp&nbsp
                 <a type="button" data-toggle="modal" data-target="#eliminarAsig{{$s->id}}" data-placement="bottom"  title="Eliminar"><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
@@ -56,8 +57,15 @@
         </tbody>
     </table>
     {{$asigpro->links()}}
-    <div class="d-flex justify-content-center">
-        <a href="/programas/reporte_programas" class="btn btn-info">Volver</a>
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+          <h2 class="mb-0">
+            <a class="btn btn-link btn-block text-left float-right" type="button" href="/programas/reporte_programas">
+            <i class="fas fa-arrow-circle-left"></i> Volver
+            </a>
+          </h2>
+        </div>
     </div>
 </div>
 
