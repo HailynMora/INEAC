@@ -119,7 +119,7 @@ class ProgramasController extends Controller
             $category = new AsigProgram();
             $category->id_asignatura = $request->input('asig');
             $category->id_tipo_curso = $request->input('curso');
-            $category->fecha = $request->input('fecha');
+            $category->id_docente = $request->input('docente');
             $category->save();
             return back();   
             
