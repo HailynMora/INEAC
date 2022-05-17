@@ -48,7 +48,16 @@
                   </div>
               </div>
                 <div class="form-row">
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-6">
+                    <label for="fecha">Docente</label>
+                    <select id="asig" class="form-control" name="asig" required>
+                    <option selected>Seleccionar</option>
+                        @foreach($asignatura as $a)
+                           <option value="{{$a->id}}">{{$a->nombre}}</option>
+                        @endforeach
+                  </select>
+                  </div>
+                  <div class="form-group col-md-6">
                     <label for="fecha">Fecha</label>
                     <input type="date" class="form-control" id="fecha" name="fecha" required>
                   </div>

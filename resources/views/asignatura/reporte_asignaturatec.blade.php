@@ -111,7 +111,25 @@
         </tbody>
       <!--##########################################33-->
     </table>
-    {{$rep->links()}}
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-2">
+        <div class="container-fluid">
+        {{$rep->links()}}
+       </div>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-2">
+        <h2 class="mb-0">
+          <a class="btn btn-link btn-block text-left float-left" type="button" href="{{route('reporte_tecnico')}}">
+          <i class="fas fa-arrow-circle-left"></i> Volver
+          </a>
+        </h2>
+      </div>
+    </div>
+    
 </div>
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Reporte Asignaturas</h3>
+ <h3> Reporte Asignaturas Bachillerato</h3>
 </div>
 <a href="{{route('regasignatura')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
 <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
@@ -110,7 +110,25 @@
         </tbody>
       <!--##########################################33-->
     </table>
-    {{$rep->links()}}
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-2">
+        <div class="container-fluid">
+        {{$rep->links()}}
+       </div>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-2">
+        <h2 class="mb-0">
+          <a class="btn btn-link btn-block text-left float-left" type="button" href="{{route('reporte_pro')}}">
+          <i class="fas fa-arrow-circle-left"></i> Volver
+          </a>
+        </h2>
+      </div>
+    </div>
+    
 </div>
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

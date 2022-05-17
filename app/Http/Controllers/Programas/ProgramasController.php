@@ -14,6 +14,7 @@ use App\Models\TrimestresModel\TrimestresTecnicos;
 use App\Models\AsignaturaModel\AsigTecnicos;
 use App\Models\AsignacionDoModel\AsignacionDoTec;
 use App\Models\DocenteModel\Docente;
+use App\Models\AsignaturaModel\AsignaturaTecnicos;
 use Session;
 
 
@@ -249,7 +250,7 @@ class ProgramasController extends Controller
     }
     public function vincu_asig($id){
         $curso=ProgramasTecnicos::find($id);
-        $asig=Asignatura::all();
+        $asig=AsignaturaTecnicos::all();
         $tri=TrimestresTecnicos::all();
         $docente=Docente::all();
         ////////////////////////////

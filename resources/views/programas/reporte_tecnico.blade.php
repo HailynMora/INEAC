@@ -4,6 +4,7 @@
  <h3> Programas Tecnicos Registrados</h3>
 </div>
 <a href="{{route('registrarprogtec')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
+<a href="{{route('reportetec')}}" class="btn btn-outline-warning my-2 my-sm-0" >Asig. Técnicos</a>
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
       @csrf
       <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">

@@ -67,7 +67,7 @@
                   <select id="asig" class="form-control" name="asig" required>
                     <option selected>Seleccionar</option>
                         @foreach($asignatura as $a)
-                           <option value="{{$a->id}}">{{$a->nombre}}</option>
+                           <option value="{{$a->id}}">{{$a->nombreasig}}</option>
                         @endforeach
                   </select>
                   </div> 
