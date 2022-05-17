@@ -245,7 +245,8 @@ class ProgramasController extends Controller
     public function vincu($id){
         $curso=Programas::find($id);
         $asig=Asignatura::all();
-        return view('programas.vincularsig')->with('curso', $curso)->with('asignatura', $asig);
+        $docente=Docente::all();
+        return view('programas.vincularsig')->with('curso', $curso)->with('asignatura', $asig)->with('docente', $docente);
 
     }
     public function vincu_asig($id){

@@ -49,11 +49,11 @@
               </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="fecha">Docente</label>
-                    <select id="asig" class="form-control" name="asig" required>
+                    <label for="docente">Docente</label>
+                    <select id="docente" class="form-control" name="docente" required>
                     <option selected>Seleccionar</option>
-                        @foreach($asignatura as $a)
-                           <option value="{{$a->id}}">{{$a->nombre}}</option>
+                        @foreach($docente as $d)
+                           <option value="{{$d->id}}">{{$d->nombre}} {{$d->apellido}}</option>
                         @endforeach
                   </select>
                   </div>
@@ -80,6 +80,7 @@
     e.preventDefault();
     var curso=$('#curso').val();
     var asig=$('#asig').val();
+    var docente=$('#docente').val();
     var fecha=$('#fecha').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
@@ -90,6 +91,7 @@
         curso:curso,
         asig:asig,
         fecha:fecha,
+        docente:docente,
         _token:_token
       },
       success: function (response) {
