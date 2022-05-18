@@ -16,6 +16,7 @@ use App\Http\Controllers\Perfil\PerfilController;
 use App\Http\Controllers\Matriculas\MatriculasController;
 use App\Http\Controllers\Acudiente\AcudienteController;
 use App\Http\Controllers\RolesController\Roles;
+use App\Http\Controllers\Resportes\ReportesController;
 
 
 /*
@@ -291,5 +292,7 @@ Route::post('/filtrar/estudiantes/bachillerato', [MatriculasController::class, '
 //editar matricula bachillerato
 Route::get('/matricula/estudiante/bachillerato/actualizar/{id}', [MatriculasController::class, 'actu_mat_bachi'])->middleware(['auth', 'secretaria']);
 
+//reporte de estudantes exel
+Route::get('/reporte/estudiantes/bachillerato/{id}', [ReportesController::class, 'reporte_bachillerato'])->middleware(['auth', 'secretaria']);
 
 require __DIR__.'/auth.php';
