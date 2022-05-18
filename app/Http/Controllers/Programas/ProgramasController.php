@@ -257,13 +257,15 @@ class ProgramasController extends Controller
         $docente=Docente::all();
         ////////////////////////////
         $asigpro=DB::table('asignaturas_tecnicos')
-        ->select('asignaturas_tecnicos.id','id_asignaturas','id_trimestre','asignaturas.codigo as codas','asignaturas.nombre as asig','programa_tecnico.codigotec','programa_tecnico.nombretec','trimestre_tecnicos.nombretri','docente.nombre as nomdoc','docente.apellido as apedoc')
-        ->join('asignaturas','id_asignaturas','=','asignaturas.id')
-        ->join('trimestre_tecnicos','id_trimestre','=','trimestre_tecnicos.id')
-        ->join('docente','id_docente','=','docente.id')
-        ->join('programa_tecnico','id_tecnico','=','programa_tecnico.id')
+        ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+        ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+        ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+        ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+        ->select('asignaturas_tecnicos.id','id_asignaturas','id_trimestre','asig_tecnicos.codigoasig as codas',
+                  'asig_tecnicos.nombreasig as asig', 'asig_tecnicos.intensidad_horaria as horas', 'programa_tecnico.codigotec','programa_tecnico.nombretec',
+                  'trimestre_tecnicos.nombretri','docente.nombre as nomdoc','docente.apellido as apedoc')
         ->orderBy('asignaturas_tecnicos.id_tecnico', 'ASC')
-        ->paginate(5); //hacer paginacion de las vistas
+        ->get(); //hacer paginacion de las vistas
         ///////////////////////////
         return view('programas.vincular_asig_tecnico')->with('curso', $curso)->with('asignatura', $asig)->with('trimestre', $tri)->with('docente', $docente)->with('asigpro',$asigpro);
 

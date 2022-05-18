@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Programas Registrados</h3>
+ <h3> Programas Bachillerato Registrados</h3>
 </div>
 <div class="container">
     <table class="table">

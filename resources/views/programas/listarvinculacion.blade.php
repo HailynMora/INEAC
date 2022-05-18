@@ -61,7 +61,7 @@
         <div class="col-md-10"></div>
         <div class="col-md-2">
           <h2 class="mb-0">
-            <a class="btn btn-link btn-block text-left float-right" type="button" href="/programas/reporte_programas">
+            <a class="btn btn-link float-right" type="button" href="/programas/reporte_programas">
             <i class="fas fa-arrow-circle-left"></i> Volver
             </a>
           </h2>

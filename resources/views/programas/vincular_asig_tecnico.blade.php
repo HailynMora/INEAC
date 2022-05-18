@@ -100,7 +100,7 @@
   <!-- Button trigger modal -->
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <div class="modal-title alert text-center" role="alert" style="color:black;">
@@ -121,6 +121,7 @@
                     <th scope="col">Trimestre</th>
                     <th scope="col">Cód. Asignatura</th>
                     <th scope="col">Asignatura</th>
+                    <th scope="col">I/Horaria</th>
                     <th scope="col">Docente</th>
                     <th scope="col">Opciones</th>
                     </tr>
@@ -134,6 +135,7 @@
                     <td>{{$s->nombretri}}</td>
                     <td>{{$s->codas}}</td>
                     <td>{{$s->asig}}</td>
+                    <td>{{$s->horas}}</td>
                     <td>{{$s->nomdoc}} {{$s->apedoc}}</td>
                     
                     <td>
@@ -175,7 +177,6 @@
                 
                 </tbody>
             </table>
-            {{$asigpro->links()}}
         </div>
       
      <!---####################--->   

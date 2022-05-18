@@ -123,7 +123,7 @@
       </div>
       <div class="col-md-2">
         <h2 class="mb-0">
-          <a class="btn btn-link btn-block text-left float-left" type="button" href="{{route('reporte_tecnico')}}">
+          <a class="btn btn-link  float-right" type="button" href="{{route('reporte_tecnico')}}">
           <i class="fas fa-arrow-circle-left"></i> Volver
           </a>
         </h2>
