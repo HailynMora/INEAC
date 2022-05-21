@@ -295,4 +295,7 @@ Route::get('/matricula/estudiante/bachillerato/actualizar/{id}', [MatriculasCont
 //reporte de estudantes exel
 Route::get('/reporte/estudiantes/bachillerato/{id}', [ReportesController::class, 'reporte_bachillerato'])->middleware(['auth', 'secretaria']);
 
+//reporte matriculados
+Route::get('/reporte/matriculas', [ReportesController::class, 'reporte_matriculados'])->middleware(['auth', 'secretaria'])->name('matriculados_bach');
+
 require __DIR__.'/auth.php';

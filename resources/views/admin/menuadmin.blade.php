@@ -201,7 +201,14 @@
               <p>Matriculas</p>
             </a>
           </li>-->
-         
+          <li class="nav-item">
+            <a href="{{route('matriculados_bach')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-tie"></i>
+              <p>
+                Reporte
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>

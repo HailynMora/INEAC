@@ -304,5 +304,7 @@ class MatriculasController extends Controller
         Session::flash('actualizar','Estudiante Actualizado Exitosamente!');
         return back();
     }
+
+   
 }
   
