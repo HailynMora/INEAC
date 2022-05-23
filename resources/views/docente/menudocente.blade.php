@@ -41,39 +41,16 @@
                     </p>
                   </a>
               </li>
-              <li class="nav-item">
-                <!--instanciar la ruta de nav link-->
-                  <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Contactos</p>
-                   </a>
-                <!--end instancia-->
-              </li>
             </ul>
           </li>
          <!--perfil-->
          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('regisperfil')}}" class="nav-link">
               <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Perfil 
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('regisperfil')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar</p>
-                </a>
-              </li>  
-              <li class="nav-item">
-                <a href="{{route('actuperfil')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Actualizar Perfil</p>
-                </a>
-              </li>   
-            </ul>
           </li>
          <!--end perfil-->
           <li class="nav-item">
