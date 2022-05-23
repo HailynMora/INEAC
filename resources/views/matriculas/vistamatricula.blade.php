@@ -3,20 +3,9 @@
 <div class="alert alert-primary text-center"  role="alert">
   <h4> Matricula Estudiante</h4>
 </div>
-<!--navs de matricula bachillerato y matricula tecnicos-->
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Bachillerato</a>
-    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Técnicos</a>
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-  <!--texto matriculas bachillerato-->
-  <br>
-        <div class="container-fluid">
-            <!---Mensaje-->
-            @if(Session::has('validacion'))
+<!--mensajes-->
+       <!---Mensaje-->
+       @if(Session::has('validacion'))
                 <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 {{Session::get('validacion')}}
@@ -24,13 +13,26 @@
             @endif
             <!-- end mensaje-->
             <!---Mensaje-->
-            @if(Session::has('aceptado'))
-                <div class="alert alert-primary alert-dismissible" role="alert">
+            @if(Session::has('matec'))
+                <div class="alert alert-dismissible" role="alert" style="background-color:#8BF4E4;">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{Session::get('aceptado')}}
+                {{Session::get('matec')}}
                 </div>
             @endif
             <!-- end mensaje-->
+<!--navs de matricula bachillerato y matricula tecnicos-->
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" style="font-size: 120%;">&nbsp;Bachillerato</a>
+    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" style="font-size: 120%;">&nbsp;Técnicos</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+  <!--texto matriculas bachillerato-->
+  <br>
+        <div class="container-fluid">
         <div class="row">
             <div class="col-md-12" style="background-color:#28afc2;">
                 <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
@@ -124,7 +126,7 @@
                             <br>
                             <div class="form-group col-md-12 text-center">
                                 <a href="/visualizar/estudiante" type="button" class="btn btn-warning">Cancelar</a>
-                                <a id="listado" type="button" class="btn btn-secondary">Visualizar</a>
+                                <a id="listado" type="button" class="btn"  style="background-color:#8852FF; color:white;">Visualizar</a>
                                     <button type="submit" class="btn btn-success">Matricular</button>
                                     
                             </div>
@@ -145,22 +147,7 @@
    <!---matriculas tecnicos-->
    <br>
         <div class="container-fluid">
-            <!---Mensaje-->
-            @if(Session::has('validacion'))
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{Session::get('validacion')}}
-                </div>
-            @endif
-            <!-- end mensaje-->
-            <!---Mensaje-->
-            @if(Session::has('matec'))
-                <div class="alert alert-primary alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {{Session::get('matec')}}
-                </div>
-            @endif
-            <!-- end mensaje-->
+     
         <div class="row">
             <div class="col-md-12" style="background-color:#8FA1FF;">
                 <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#3843D0;"></i> Datos Estudiante</b></h4>
@@ -319,4 +306,5 @@
             setTimeout(()=> location.href="{{route('listadomatricula')}}");
             });
         </script>
+       <!--https://www.fucsalud.edu.co/themes/custom/fucs/Manua-Academusoft-Docente/contenidos1.html-->
 @endsection

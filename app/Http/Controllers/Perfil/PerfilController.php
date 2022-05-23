@@ -66,7 +66,9 @@ class PerfilController extends Controller
         $perfil->experiencia = $request->input('exp');
         $perfil->id_usuario = $idl;
         $perfil->save();
-        return back();
+        
+        $datosper = Perfil::FindOrFail($iden);
+        return response()->json(['datosper' => $datosper]);
     }
 
     

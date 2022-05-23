@@ -62,15 +62,25 @@ class MatriculasController extends Controller
         $id = $request->estu;
         $estudiante =Estudiante::findOrfail($request->estu);
         $r=$request->cur;
-        $validarMat= DB::table('matriculas')->where('matriculas.id_estudiante', '=', $id)->count();
+        $validarMat= DB::table('matriculas')->where('matriculas.id_estudiante', '=', $id)->where('id_aprobado', 1)->count();
         //return $validarMat;
-        if($validarMat!=0){
-           
-            Session::flash('validacion','Estudiante Ya Esta Registrado');
-            return back();
+        if($validarMat==0){
+                $curso = Programas::findOrFail($r);
+                $category = new Matricula();
+                $category->id_estudiante = $request->input('estu');
+                $category->id_curso = $request->input('cur');
+                $category->anio = $request->input('anioba');
+                $category->periodo= $request->input('perbachiller');
+                $category->id_aprobado= 1;
+                $category->fec_matricula = $request->input('fecha');
+                $category->save();
+                Session::flash('matec','Estudiante Registrado Exitosamente!');
+               //Session::flash('validacion','Estudiante Ya Esta Registrado');
+               return back();
         }else{
-
-            if($r!=null){
+            $repe = DB::table('matriculas')->where('id_estudiante', $id)->where('id_aprobado','=', 4)->count();
+            $r = DB::table('matriculas')->where('id_estudiante', $id)->where('id_aprobado', 1)->count();
+            if($repe==1 && $r==0){
                 $b=1;
                 $curso = Programas::findOrFail($r);
                 $category = new Matricula();
@@ -81,13 +91,14 @@ class MatriculasController extends Controller
                 $category->id_aprobado= 1;
                 $category->fec_matricula = $request->input('fecha');
                 $category->save();
-                Session::flash('aceptado','Estudiante Registrado Exitosamente!');
-                return back()->with('b', $b);
+                Session::flash('matec','Estudiante Registrado Exitosamente!');
+                return back();
 
             }
             else{
                 $b=0;
-                return back()->with('b', $b);
+                Session::flash('validacion','Estudiante ya registrado!');
+                return back();
             }
 
         }
@@ -158,7 +169,7 @@ class MatriculasController extends Controller
                     Session::flash('matec','Estudiante Registrado Exitosamente!');
                     return back();
                 }else{
-                    Session::flash('matec','Estudiante ya registrado!');
+                    Session::flash('validacion','Estudiante ya registrado!');
                     return back();
                 }
                

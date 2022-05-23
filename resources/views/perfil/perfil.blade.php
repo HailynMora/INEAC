@@ -7,11 +7,18 @@
 <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne">
-        <h2 class="mb-0">
-          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <i class="fas fa-edit"></i> Datos De Perfil
-          </button>
-        </h2>
+        <h6 class="mb-0">
+          <div class="row">
+            <div class="col-6">
+              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <i class="fas fa-file-alt"></i>&nbsp;Datos De Perfil
+              </button>
+            </div>
+            <div class="col-6 text-right" style="padding-top:10px;">
+             <a href="{{route('actuperfil')}}"><i class="fas fa-edit"></i>&nbsp;Actualizar</a>
+            </div>
+          </div>
+        </h6>
       </div>
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
