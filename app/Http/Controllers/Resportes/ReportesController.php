@@ -17,10 +17,12 @@ class ReportesController extends Controller
         return Excel::download(new EstudiantesBachiExport($id), 'listado.xlsx');
     }
     public function reporte_matriculados(){
-        $mat = DB::table('matriculas')
-            ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
-            ->select('matriculas.id as idmat','matriculas.id_curso as idcur','tipo_curso.descripcion as nomcurso','tipo_curso.codigo')
+        $mat = DB::table('tipo_curso')
+            ->select('tipo_curso.id as idcur','tipo_curso.descripcion as nomcurso','tipo_curso.codigo')
             ->get();
-        return view('matriculas.reporte')->with('mat',$mat);
+        $matec = DB::table('programa_tecnico')
+        ->select('id','codigotec','nombretec')
+        ->get();
+        return view('matriculas.reporte')->with('mat',$mat)->with('matec',$matec);
     }
 }
