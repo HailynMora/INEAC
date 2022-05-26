@@ -287,7 +287,36 @@ class EstudiantesController extends Controller
         }        
         return back();
     }
-   
+    public function listar_estudo(){
+        $res=DB::table('estudiante')->count(); //validar datos cuando no hay estudiantes
+        if($res!=0){
+            $b=1;
+            $estudiante=DB::table('estudiante')
+            ->join('estado', 'id_estado', '=', 'estado.id')
+            ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
+            ->join('genero', 'id_genero', '=', 'genero.id')
+            ->join('users', 'id_usuario', '=', 'users.id')
+            ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+            ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+            ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+            ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+            ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+            ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
+            'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
+            'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
+            'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
+            'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
+            'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
+            'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
+	        ->get();
+        }
+        else{
+            $b=0;
+            $estudiante=array('datos');
+        }
+
+        return view('estudiantes.listado_doc')->with('estudiante', $estudiante)->with('b', $b);
+    }
 
 
 }

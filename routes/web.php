@@ -56,7 +56,7 @@ Route::get('/registro/estudiantes', [EstudiantesController::class, 'registro'])-
 Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])->middleware(['auth', 'secretaria'])->name('datosestudiante');
 
 //buscar ESTUDIANTE POR ajax
-Route::post('/buscar/estudiante', [EstudiantesController::class, 'busquedares_est'])->middleware(['auth', 'secretaria'])->name('buscarest');
+Route::post('/buscar/estudiante', [EstudiantesController::class, 'busquedares_est'])->middleware(['auth', 'secretaria_docente'])->name('buscarest');
 
 //RUTA PARA ACTUALIZAR ESTUDIANTES
 Route::get('/estudiante/actualizar/{id}', [EstudiantesController::class, 'form_actualizar'])->middleware(['auth', 'secretaria'])->name('actualizar_est');
@@ -129,7 +129,7 @@ Route::post('/buscar/asinatura_ciclo', [AsignaturaController::class, 'busquedare
 Route::get('/asignatura_tecnicos/reporte_asignatura', [AsignaturaController::class, 'reportetec'])->middleware(['auth'])->name('reportetec');
 
 //buscar ASIGNATURAS TECNICOS POR ajax
-Route::post('/buscar/asinatura_tec', [AsignaturaController::class, 'busquedares_asigt'])->middleware(['auth', 'secretaria'])->name('buscarasigt');
+Route::post('/buscar/asinatura_tec', [AsignaturaController::class, 'busquedares_asigt'])->middleware(['auth', 'secretaria_docente'])->name('buscarasigt');
 
 //RUTA CONSULTAR ASIGNATURA BACHILLERATO
 Route::get('/asignaturas/consultar', [ConsultarAsigController::class, 'index'])->middleware(['auth'])->name('conasignatura');
@@ -297,5 +297,15 @@ Route::get('/reporte/estudiantes/bachillerato/{id}', [ReportesController::class,
 
 //reporte matriculados
 Route::get('/reporte/matriculas', [ReportesController::class, 'reporte_matriculados'])->middleware(['auth', 'secretaria'])->name('matriculados_bach');
+
+//RUTA REPORTE DE ASIGNATURAS DOCENTES
+Route::get('/asignatura/reporte', [AsignaturaController::class, 'asig_doc'])->middleware(['auth', 'secretaria_docente'])->name('reporte_asigdoc');
+
+//RUTA LISTADO DOCENTES
+Route::get('/docente/listado', [DocenteController::class, 'listado_doc'])->middleware(['auth','secretaria_docente'])->name('listado_doc');
+
+//RUTA REPORTE DE ESTUDIANTES
+Route::get('listar/estudiantes',[EstudiantesController::class, 'listar_estudo'])->middleware(['auth', 'secretaria_docente'])->name('listarestudo');
+
 
 require __DIR__.'/auth.php';

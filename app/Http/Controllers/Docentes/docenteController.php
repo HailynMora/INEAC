@@ -241,4 +241,36 @@ class docenteController extends Controller
 
       }
     ///////////////////////////////////////77
+       public function listado_doc(){
+        $res = DB::table('docente')->count();
+        if($res!=0){
+            $b=1;
+            $doc=DB::table('docente')
+            ->select('docente.id as id',
+                    'docente.nombre',
+                    'apellido',
+                    'num_doc',
+                    'fec_vinculacion',
+                    'correo',
+                    'telefono',
+                    'direccion',
+                    'genero.descripcion as genero',
+                    'tipo_documento.descripcion',
+                    'estado.descripcion as estado')
+            ->join('tipo_documento','id_tipo_doc','=','tipo_documento.id')
+            ->join('genero','id_genero','=','genero.id')
+            ->join('estado','id_estado','=','estado.id')
+            ->paginate(5);
+            }else{
+                $b=0;
+                $doc=0;
+                
+            }
+        
+        $condoc= DB::table('asig_asignaturas')->join('asignaturas','asig_asignaturas.id_asignaturas','=','asignaturas.id')
+        ->get();
+        ///////////////////////////////////////////
+        //////////////////////////////////////////
+        return view('docente.lista')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc);
+    }
 }

@@ -54,96 +54,29 @@
           </li>
          <!--end perfil-->
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Programas 
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('reporte_pro')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('consultar')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('reporte_asigdoc')}}" class="nav-link">
               <i class="nav-icon fas fa-book-open"></i>
               <p>
                 Asignaturas
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('reporte')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Reporte</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('conasignatura')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
-                </a>
-              </li>
-            </ul>
+            
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('listado_doc')}}" class="nav-link">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Docentes
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('listado_docente')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listado</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('condocente')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('listarestudo')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Estudiantes
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href ="{{route('listarestu')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('conestudiante')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
-                </a>
-              </li>
-              </ul>
           </li>                  
           <li class="nav-item">
             <a href="#" class="nav-link">
