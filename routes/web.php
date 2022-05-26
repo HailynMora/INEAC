@@ -297,6 +297,8 @@ Route::get('/reporte/estudiantes/bachillerato/{id}', [ReportesController::class,
 
 //reporte matriculados
 Route::get('/reporte/matriculas', [ReportesController::class, 'reporte_matriculados'])->middleware(['auth', 'secretaria'])->name('matriculados_bach');
+Route::post('/filtrar/reporte', [ReportesController::class, 'filtrar'])->middleware(['auth', 'secretaria'])->name('filtrarper');
+Route::post('/filtrar/reporte/tecnico', [ReportesController::class, 'filtrartec'])->middleware(['auth', 'secretaria'])->name('filtrartecnicos');
 
 //RUTA REPORTE DE ASIGNATURAS DOCENTES
 Route::get('/asignatura/reporte', [AsignaturaController::class, 'asig_doc'])->middleware(['auth', 'secretaria_docente'])->name('reporte_asigdoc');
