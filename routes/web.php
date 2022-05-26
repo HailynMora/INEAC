@@ -284,7 +284,7 @@ Route::get('/programas/listado_vinculacion_tec', [ProgramasController::class, 'l
 //ruta elimar asigtecnico vinculada
 Route::get('/tecnico/asignatura/vin/{id}', [ProgramasController::class, 'eliminartec'])->middleware(['auth', 'secretaria'])->name('elimasig');
 //buscar docente ajax
-Route::post('/buscar/docente', [docenteController::class, 'busquedares'])->middleware(['auth', 'secretaria'])->name('buscardoc');
+Route::post('/buscar/docente', [docenteController::class, 'busquedares'])->middleware(['auth', 'secretaria_docente'])->name('buscardoc');
 Route::get('/estado/docente', [docenteController::class, 'cambiardoc'])->middleware(['auth', 'secretaria'])->name('deshabdocente');
 Route::get('/cambiar/estado/matricula/bachillerato', [MatriculasController::class, 'estado_mat_bachillerato'])->middleware(['auth', 'secretaria'])->name('cambiar_estado_bachillerato');
 Route::post('/filtrar/estudiantes/bachillerato', [MatriculasController::class, 'estudiantesbachillerato'])->middleware(['auth', 'secretaria'])->name('estubachillerato');

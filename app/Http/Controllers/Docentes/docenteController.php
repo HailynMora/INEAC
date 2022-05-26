@@ -97,16 +97,6 @@ class docenteController extends Controller
         return view('docente.listar_docente')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc);
     }
 
-    public function listar_asig($id){
-        $doc = DB::table('docente')
-            ->select('asignaturas.nombre as asig','asignaturas.codigo','tipo_curso.nombre')
-            ->join('asig_asignaturas','docente.id','=','asig_asignaturas.id_docente')
-            ->join('asig_asignatura','asignaturas.id','=','asig_asignatura.id_asignatura')
-            ->where('asig_asignatura.id_docente','=',$id)
-            ->get();
-    
-        return view('docente.lista')->with('doc',$doc);
-    }
 
 
     public function form_actualizar($id){
