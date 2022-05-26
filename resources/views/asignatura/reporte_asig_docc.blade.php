@@ -3,6 +3,7 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3> Reporte Asignaturas Técnicos</h3>
 </div>
+<a href="{{route('reporte_asigdoc')}}" type="submit" class="btn btn-outline-success my-2 my-sm-0">Asignaturas Técnicos</a>
 <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
   @csrf
   <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
@@ -22,41 +23,23 @@
             </tr>
         </thead>
         <tbody id="tabla1">
-        @foreach($repe as $d)
+        @foreach($rep as $d)
         <tr style="background-color: #dcedc8;">
-        <td>{{$d->codigoasig}}</td>
+        <td>{{$d->codigo}}</td>
         <td>{{$d->asig}}</td>
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->val_habilitacion}}</td>
-        <td>Técnicos</td>
+        <td>Ciclos</td>
         <td>{{$d->estado}}</td>
-      </tr>
-      @endforeach
+
+        </tr>
+        @endforeach
         </tbody>
         <!--##################datos de la busqueda ##########################3-->
         <tbody id="datos" style="background-color: #dcedc8;">
         </tbody>
       <!--##########################################33-->
     </table>
-    <div class="row">
-      <div class="col-md-4">
-      </div>
-      <div class="col-md-2">
-        <div class="container-fluid">
-        {{$repe->links()}}
-       </div>
-      </div>
-      <div class="col-md-4">
-      </div>
-      <div class="col-md-2">
-        <h2 class="mb-0">
-          <a class="btn btn-link  float-right" type="button" href="/asignatura/reporte_c">
-          <i class="fas fa-arrow-circle-left"></i> Volver
-          </a>
-        </h2>
-      </div>
-    </div>
-    
 </div>
 <!--instanciar el ajax para quitar el error no definido-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -67,7 +50,7 @@
     console.log(nombre);
     var _token = $('input[name=_token]').val();
     $.ajax({
-      url:"{{route('buscarasigt')}}",
+      url:"{{route('buscarasigc')}}",
       type: "POST",
       data:{
         nombre:nombre,
@@ -90,22 +73,22 @@
           conta+=1;
         if ( arreglo[x].estado == "Activo") { // true
           var valor = '<tr>' +
-          '<td>' +  arreglo[x].codigoasig +'</td>' +
+          '<td>' +  arreglo[x].codigo +'</td>' +
           '<td>' +  arreglo[x].asig + '</td>' +
           '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
           '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
-          '<td>Ténicos</td>' +
+          '<td> Ciclos </td>' +
           '<td>' +  arreglo[x].estado + '</td>' +
           '</tr>';
           $('#datos').append(valor);
         }else{
          
             var valor = '<tr>' +
-            '<td>' +  arreglo[x].codigoasig +'</td>' +
+            '<td>' +  arreglo[x].codigo +'</td>' +
             '<td>' +  arreglo[x].asig + '</td>' +
             '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
             '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
-            '<td>Técnicos</td>' +
+            '<td>Ciclos</td>' +
             '<td>' +  arreglo[x].estado + '</td>' +
             '</tr>';
             $('#datos').append(valor);

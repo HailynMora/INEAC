@@ -266,14 +266,18 @@ class asignaturaController extends Controller
     }
 
     public function asig_doc(){
-        $rep=DB::table('asignaturas')
-        ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
-        ->join('estado','id_estado','=','estado.id')
-        ->get();
         $repe=DB::table('asig_tecnicos')
         ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
         ->join('estado','id_estado','=','estado.id')
         ->paginate(5);
-        return view('asignatura.reporte_asig_doc')->with('rep',$rep)->with('repe',$repe);
+        return view('asignatura.reporte_asig_doc')->with('repe',$repe);
+    }
+    public function asig_docc(){
+        $rep=DB::table('asignaturas')
+        ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
+        ->join('estado','id_estado','=','estado.id')
+        ->get();
+       
+        return view('asignatura.reporte_asig_docc')->with('rep',$rep);
     }
 }

@@ -123,7 +123,7 @@ Route::post('/asignatura/vincular_docente', [AsignaturaController::class, 'vincu
 Route::get('/asignatura/reporte_asignatura', [AsignaturaController::class, 'reporte'])->middleware(['auth'])->name('reporte');
 
 //buscar ASIGNATURAS BACHILLERATO POR ajax
-Route::post('/buscar/asinatura_ciclo', [AsignaturaController::class, 'busquedares_asigc'])->middleware(['auth', 'secretaria'])->name('buscarasigc');
+Route::post('/buscar/asinatura_ciclo', [AsignaturaController::class, 'busquedares_asigc'])->middleware(['auth', 'secretaria_docente'])->name('buscarasigc');
 
 //RUTA REPORTE DE ASIGNATURAS TECNICOS
 Route::get('/asignatura_tecnicos/reporte_asignatura', [AsignaturaController::class, 'reportetec'])->middleware(['auth'])->name('reportetec');
@@ -302,6 +302,10 @@ Route::post('/filtrar/reporte/tecnico', [ReportesController::class, 'filtrartec'
 
 //RUTA REPORTE DE ASIGNATURAS DOCENTES
 Route::get('/asignatura/reporte', [AsignaturaController::class, 'asig_doc'])->middleware(['auth', 'secretaria_docente'])->name('reporte_asigdoc');
+
+//RUTA REPORTE DE ASIGNATURAS DOCENTES
+Route::get('/asignatura/reporte_c', [AsignaturaController::class, 'asig_docc'])->middleware(['auth', 'secretaria_docente'])->name('reporte_asigdocc');
+
 
 //RUTA LISTADO DOCENTES
 Route::get('/docente/listado', [DocenteController::class, 'listado_doc'])->middleware(['auth','secretaria_docente'])->name('listado_doc');

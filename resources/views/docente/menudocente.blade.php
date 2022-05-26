@@ -54,7 +54,7 @@
           </li>
          <!--end perfil-->
           <li class="nav-item">
-            <a href="{{route('reporte_asigdoc')}}" class="nav-link">
+            <a href="{{route('reporte_asigdocc')}}" class="nav-link">
               <i class="nav-icon fas fa-book-open"></i>
               <p>
                 Asignaturas
