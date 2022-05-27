@@ -17,7 +17,7 @@ use App\Http\Controllers\Matriculas\MatriculasController;
 use App\Http\Controllers\Acudiente\AcudienteController;
 use App\Http\Controllers\RolesController\Roles;
 use App\Http\Controllers\Resportes\ReportesController;
-
+use App\Http\Controllers\Docentes\ReporteAsigController;
 
 /*
 |--------------------------------------------------------------------------
@@ -313,5 +313,10 @@ Route::get('/docente/listado', [DocenteController::class, 'listado_doc'])->middl
 //RUTA REPORTE DE ESTUDIANTES
 Route::get('listar/estudiantes',[EstudiantesController::class, 'listar_estudo'])->middleware(['auth', 'secretaria_docente'])->name('listarestudo');
 
+//buscar ASIGNATURAS BACHILLERATO POR ajax
+Route::post('/buscar/asinatura_b', [ReporteAsigController::class, 'busquedares_asigc'])->middleware(['auth', 'secretaria_docente'])->name('busasigb');
+
+//buscar ASIGNATURAS TECNICOS POR ajax
+Route::post('/buscar/asinatura_t', [ReporteAsigController::class, 'busquedares_asigt'])->middleware(['auth', 'secretaria_docente'])->name('busasigt');
 
 require __DIR__.'/auth.php';

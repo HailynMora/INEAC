@@ -19,18 +19,17 @@
             <th scope="col">Intensidad Horaria</th>
             <th scope="col">Val. Habilitación</th>
             <th scope="col">Programa</th>
-            <th scope="col">Estado </th>
             </tr>
         </thead>
         <tbody id="tabla1">
         @foreach($rep as $d)
         <tr style="background-color: #dcedc8;">
+
         <td>{{$d->codigo}}</td>
         <td>{{$d->asig}}</td>
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->val_habilitacion}}</td>
-        <td>Ciclos</td>
-        <td>{{$d->estado}}</td>
+        <td>{{$d->curso}}</td>
 
         </tr>
         @endforeach
@@ -50,7 +49,7 @@
     console.log(nombre);
     var _token = $('input[name=_token]').val();
     $.ajax({
-      url:"{{route('buscarasigc')}}",
+      url:"{{route('busasigb')}}",
       type: "POST",
       data:{
         nombre:nombre,
@@ -77,8 +76,7 @@
           '<td>' +  arreglo[x].asig + '</td>' +
           '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
           '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
-          '<td> Ciclos </td>' +
-          '<td>' +  arreglo[x].estado + '</td>' +
+          '<td>' +  arreglo[x].curso + '</td>' +
           '</tr>';
           $('#datos').append(valor);
         }else{
@@ -88,8 +86,7 @@
             '<td>' +  arreglo[x].asig + '</td>' +
             '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
             '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
-            '<td>Ciclos</td>' +
-            '<td>' +  arreglo[x].estado + '</td>' +
+            '<td>' +  arreglo[x].curso + '</td>' +
             '</tr>';
             $('#datos').append(valor);
         }

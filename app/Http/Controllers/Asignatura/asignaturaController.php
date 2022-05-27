@@ -13,6 +13,7 @@ use App\Models\AsignaturaModel\Asignatura;
 use App\Models\AsignacionDoModel\Asignaciondo;
 use App\Models\AsignaturaModel\AsigProgram;
 use App\Models\AsignaturaModel\AsignaturaTecnicos;
+use Illuminate\Support\Facades\Auth;
 
 class asignaturaController extends Controller
 {
@@ -264,18 +265,28 @@ class asignaturaController extends Controller
         }        
         return back();
     }
-
     public function asig_doc(){
-        $repe=DB::table('asig_tecnicos')
-        ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
-        ->join('estado','id_estado','=','estado.id')
-        ->paginate(5);
+        $idlog=auth()->id();
+        $doc=DB::table('docente')->where('docente.id_usuario',$idlog)->select('docente.id')->get();
+        $d= $doc[0]->id;
+        $repe=DB::table('asignaturas_tecnicos')
+        ->where('asignaturas_tecnicos.id_docente',$d)
+        ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','programa_tecnico.nombretec')
+        ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+        ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+        ->get();
         return view('asignatura.reporte_asig_doc')->with('repe',$repe);
     }
     public function asig_docc(){
-        $rep=DB::table('asignaturas')
-        ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado')
+        $idlog=auth()->id();
+        $doc=DB::table('docente')->where('docente.id_usuario',$idlog)->select('docente.id')->get();
+        $d= $doc[0]->id;
+        $rep=DB::table('cursos')
+        ->where('cursos.id_docente',$d)
+        ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
         ->join('estado','id_estado','=','estado.id')
+        ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+        ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado','tipo_curso.descripcion as curso')
         ->get();
        
         return view('asignatura.reporte_asig_docc')->with('rep',$rep);

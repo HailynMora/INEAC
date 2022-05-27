@@ -18,7 +18,6 @@
             <th scope="col">Intensidad Horaria</th>
             <th scope="col">Val. Habilitación</th>
             <th scope="col">Programa</th>
-            <th scope="col">Estado </th>
             </tr>
         </thead>
         <tbody id="tabla1">
@@ -28,8 +27,7 @@
         <td>{{$d->asig}}</td>
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->val_habilitacion}}</td>
-        <td>Técnicos</td>
-        <td>{{$d->estado}}</td>
+        <td>{{$d->nombretec}}</td>
       </tr>
       @endforeach
         </tbody>
@@ -43,7 +41,6 @@
       </div>
       <div class="col-md-2">
         <div class="container-fluid">
-        {{$repe->links()}}
        </div>
       </div>
       <div class="col-md-4">
@@ -67,7 +64,7 @@
     console.log(nombre);
     var _token = $('input[name=_token]').val();
     $.ajax({
-      url:"{{route('buscarasigt')}}",
+      url:"{{route('busasigt')}}",
       type: "POST",
       data:{
         nombre:nombre,
@@ -94,8 +91,7 @@
           '<td>' +  arreglo[x].asig + '</td>' +
           '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
           '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
-          '<td>Ténicos</td>' +
-          '<td>' +  arreglo[x].estado + '</td>' +
+          '<td>' +  arreglo[x].nombretec + '</td>' +
           '</tr>';
           $('#datos').append(valor);
         }else{
@@ -105,8 +101,7 @@
             '<td>' +  arreglo[x].asig + '</td>' +
             '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
             '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
-            '<td>Técnicos</td>' +
-            '<td>' +  arreglo[x].estado + '</td>' +
+            '<td>' +  arreglo[x].nombretec + '</td>' +
             '</tr>';
             $('#datos').append(valor);
         }

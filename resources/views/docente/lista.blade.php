@@ -25,7 +25,7 @@
           <th scope="col">Documento</th>
           <th scope="col">Nombres</th>
           <th scope="col">Fec. Vinculación</th>
-          <th scope="col">Estado</th>
+          <th scope="col">Opciones</th>
           </tr>
       </thead>
       <tbody id="tabla1">
@@ -36,7 +36,125 @@
             <td>{{$d->num_doc}}</td>
             <td>{{$d->nombre}}  {{$d->apellido}}</td>
             <td>{{date("Y-m-d", strtotime($d->fec_vinculacion))}}</td>
-            <td>{{$d->estado}}</td>
+            <td>
+              <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d->id;?>" style="color: #66b62b"  data-placement="bottom"  title="Visualizar">
+              <i class="nav-icon fas fa-eye"></i></a>
+              <!--MODAL VER-->
+              <div class="modal fade" id="docente<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <br>
+                    <!---Mostrar datos-->
+                    <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+                     <h4>Docente: {{$d->nombre}}  {{$d->apellido}}</h4>
+                    </div>
+                    <!--ACORDEON-->
+                    <div id="accordion">
+                      <div class="card">
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-chalkboard-teacher"></i> Datos Docente
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body">
+                            <form id="formudatos" name="formudatos" method="post">
+                              @csrf
+                              <div class="form-row">
+                                <div class="form-group col-md-4">
+                                  <label for="tipo_doc">Tipo Documento</label>
+                                  <input type="text" class="form-control" id="tipo_doc" name="tipo_doc" disabled value="{{$d->descripcion}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="num_doc">N° Documento</label>
+                                  <input type="text" class="form-control" id="num_doc" name="num_doc" disabled value="{{$d->num_doc}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="correo">Correo</label>
+                                  <input type="text" class="form-control" id="correo" name="correo" disabled value="{{$d->correo}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="telefono">Telefono</label>
+                                  <input type="text" class="form-control" id="telefono" name="telefono" disabled value="{{$d->telefono}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="direccion">Direccion</label>
+                                  <input type="text" class="form-control" id="direccion" name="direccion" disabled value="{{$d->direccion}}">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="genero">Genero</label>
+                                  <input type="text" class="form-control" id="genero" name="genero" disabled value="{{$d->genero}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="fec_vinculacion">Fecha de Vinculacion</label>
+                                  <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($d->fec_vinculacion))}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="fec_vinculacion">Estado</label>
+                                  <input type="text" class="form-control" id="estado" name="estado" disabled value="{{$d->estado}}">
+                                </div>
+                              </div>
+                            </form>
+                            <!--end mostrar datos-->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header" id="headingTwo">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              <i class="fas fa-book"></i> Asignaturas a cargo
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                          <div class="card-body">
+                            <div class="form-group col-md-12">
+                              <!---asignaturas a cargo-->
+                              <?php 
+                                $id=$d->id;
+                              ?>
+                              <div class="form-group justify-content-center col-md-12 " id="docente">
+                                <label for="asig_dictadas">Asignaturas a Cargo</label>
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Codigo</th>
+                                      <th scope="col">Asignatura</th>
+                                      <th scope="col">Intensidad Horaria</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  @foreach($condoc as $c)
+                                    @if($c->id_docente==$id)
+                                      <tr>
+                                        <td>{{$c->codigo}} </td>
+                                        <td>{{$c->nombre}}</td>
+                                        <td>{{$c->intensidad_horaria}}</td>  
+                                      </tr>                     
+                                    @endif
+                                  @endforeach
+                                  </tbody>
+                                </table>
+                              </div>
+                              <!---end asignaturas a cargo-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--FIN ACORDEON-->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>                
+              </div>
+              <!--FIN MODAL VER-->
+            </td>
             <td>
           </td>
         </tr>
@@ -57,7 +175,112 @@
     @endif
     </div>
 </div>
-
+ <!--MODAL VER-->
+ <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <br>
+          <!---Mostrar datos-->
+          <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+            <h4 id="nomdocente" class="reset"></h4>
+          </div>
+          <!--ACORDEON-->
+          <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-chalkboard-teacher"></i> Datos Docente
+                  </button>
+                 </h5>
+              </div>
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  <form id="formudatos" name="formudatos" method="post">
+                    @csrf
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="tipo_doc">Tipo Documento</label>
+                        <div class="form-control reset" id="tipodocdocente"> </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="num_doc">N° Documento</label>
+                        <div class="form-control reset" id="numdocdocente"> </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="correo">Fecha de Vinculación</label>
+                        <div class="form-control reset" id="fecdocente"> </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="telefono">Telefono</label>
+                        <div class="form-control reset" id="telefonodocente"> </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="direccion">Direccion</label>
+                        <div class="form-control reset" id="direcciondocente"> </div>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="genero">Genero</label>
+                        <div class="form-control reset" id="generodocente"> </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="fec_vinculacion">Correo</label>
+                        <div class="form-control reset" id="correodocente" > </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="fec_vinculacion">Estado</label>
+                        <div class="form-control reset" id="estadocente"> </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!--end mostrar datos-->
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <i class="fas fa-book"></i> Asignaturas a cargo
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="form-group col-md-12">
+                    <!---asignaturas a cargo-->
+                    <div class="form-group justify-content-center col-md-12 " id="docente">
+                      <label for="asig_dictadas">Asignaturas a Cargo</label>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Asignatura</th>
+                            <th scope="col">Intensidad Horaria</th>
+                          </tr>
+                        </thead>
+                        <tbody id="asignatura">
+                                 
+                        </tbody>
+                      </table>
+                    </div>
+                    <!---end asignaturas a cargo-->
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!--FIN ACORDEON-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>                
+  </div>
+</div>
+<!--FIN MODAL VER-->
+<!--end modal para datos-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
    $('#buscar').submit(function(e){
@@ -90,7 +313,7 @@
           '<td>' +  arreglo.busdocente[x].num_doc + '</td>' +
           '<td>' +  arreglo.busdocente[x].nombre  + ' ' +  arreglo.busdocente[x].apellido +'</td>' +
           '<td>' +  dateFormat(arreglo.busdocente[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
-          '<td>' +  arreglo.busdocente[x].estado + '</td>' +
+      
           '<td>' +   
           '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
           '</td>' + //agregar los botones
@@ -103,7 +326,7 @@
           '<td>' +  arreglo.busdocente[x].num_doc + '</td>' +
           '<td>' +  arreglo.busdocente[x].nombre  + ' ' +  arreglo.busdocente[x].apellido +'</td>' +
           '<td>' +  dateFormat(arreglo.busdocente[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
-          '<td>' +  arreglo.busdocente[x].estado + '</td>' +
+ 
           '<td>' +    
           '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
           '</td>' + //agregar los botones
