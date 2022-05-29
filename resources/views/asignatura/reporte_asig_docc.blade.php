@@ -19,6 +19,7 @@
             <th scope="col">Intensidad Horaria</th>
             <th scope="col">Val. Habilitación</th>
             <th scope="col">Programa</th>
+            <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody id="tabla1">
@@ -30,8 +31,52 @@
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->val_habilitacion}}</td>
         <td>{{$d->curso}}</td>
-
+        <td>
+          <!-- Button trigger modal -->
+          <a type="button" data-toggle="modal" data-target="#objetivosModal{{$d->ida}}" title="Objetivos">
+            <i class="fas fa-book-open"></i>
+          </a>
+          &nbsp&nbsp&nbsp
+          <a type="button" data-toggle="modal" data-target="#listaModal{{$d->ida}}" title="Lista de Objetivos">
+            <i class="fas fa-ellipsis-h"></i>
+          </a>
+        </td>
         </tr>
+        <!-- Modal -->
+        <form id="regobjetivo" >
+          @csrf
+          <div class="modal fade" id="objetivosModal{{$d->ida}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Objetivos de Asignatura {{$d->asig}}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label>Objetivo</label>&nbsp
+                    </div>
+                    <div class="col-md-9">
+                      <textarea rows="2" cols="60" id="objetivo" name="objetivo" > </textarea>
+                      <input value="{{$d->ida}}" name="idasig" id="idasig"  >
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </form>
+       <!--fin modak-->
+       <!-- Modal lista objetivos-->
+       
+        <!--lista objetivos-->
         @endforeach
         </tbody>
         <!--##################datos de la busqueda ##########################3-->
@@ -104,5 +149,33 @@
     
     });
   });
+  
+</script>
+<script>
+  $('#regobjetivo').submit(function(e){
+    e.preventDefault();
+    var obj=$('#objetivo').val();
+    var asig=$('#idasig').val();
+    var _token = $('input[name=_token]').val(); //token de seguridad
+    console.log(obj);
+    console.log(asig);
+    $.ajax({
+      type: "POST",
+      url: "{{route('regobjet')}}",
+      data:{
+        obj:obj,
+        asig:asig,
+        _token:_token
+      },
+      success: function (response) {
+        if(response){
+          $('#regobjetivo')[0].reset();
+          toastr.success('Objetivo registrado con exito', 'Nuevo Registro', {timeOut:3000});
+          $('#objetivo').val('');
+        }
+      }
+    });
+  });
+  
 </script>
 @endsection

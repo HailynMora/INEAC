@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Docentes;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\ObjetivosModel\Objetivos;
 use DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,11 +40,19 @@ class ReporteAsigController extends Controller
         $d= $doc[0]->id;
         $busasigt=DB::table('asignaturas_tecnicos')
         ->where('asignaturas_tecnicos.id_docente',$d)
-        ->where('asig_tecnicos.nombreasig','=',$request->nombre)
+        ->where('asig_tecnicos.nombreasig','LIKE',$request->nombre)
         ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','programa_tecnico.nombretec')
         ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
         ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
         ->get();
      return response(json_decode($busasigt,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+    }
+    public function regobjet(Request $request){
+       /* $category = new Objetivos();
+        $category->id_asignaturas= $request->input('asig');
+        $category->descripcion = $request->input('obj');
+        $category->save();
+        */
+        return back();
     }
 }
