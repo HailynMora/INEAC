@@ -318,6 +318,8 @@ Route::post('/buscar/asinatura_b', [ReporteAsigController::class, 'busquedares_a
 
 //buscar ASIGNATURAS TECNICOS POR ajax
 Route::post('/buscar/asinatura_t', [ReporteAsigController::class, 'busquedares_asigt'])->middleware(['auth', 'secretaria_docente'])->name('busasigt');
+Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'reg'])->middleware(['auth', 'secretaria_docente'])->name('regobjet');
 
-Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'regobjet'])->middleware(['auth', 'secretaria_docente'])->name('regobjet');
+//eliminar objetivos 
+Route::get('/eliminar/objetivos/{id}',[ReporteAsigController::class, 'elim_obj'])->middleware(['auth', 'secretaria_docente']);
 require __DIR__.'/auth.php';

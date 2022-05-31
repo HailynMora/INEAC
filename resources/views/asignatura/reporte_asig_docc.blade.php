@@ -1,16 +1,37 @@
 @extends('usuario.principa_usul')
 @section('content')
+
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3> Reporte Asignaturas Técnicos</h3>
 </div>
-<a href="{{route('reporte_asigdoc')}}" type="submit" class="btn btn-outline-success my-2 my-sm-0">Asignaturas Técnicos</a>
+<div class="container" style="padding-left: 11px;">
+   <a href="{{route('reporte_asigdoc')}}" type="button" class="btn btn-outline-success my-4 my-sm-0" >Asignaturas Técnicos</a>
+</div>
 <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
   @csrf
   <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
   <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
 </form>
 <br><br>
-<div class="container">
+@if(Session::has('msjobjetivo'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong> {{Session::get('msjobjetivo')}}</strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+@if(Session::has('elimi'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong> {{Session::get('elimi')}}</strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
+
+<br>
+<div class="table-responsive">
     <table class="table">
         <thead style="background-color:#FFCC00;">
             <tr>
@@ -33,50 +54,101 @@
         <td>{{$d->curso}}</td>
         <td>
           <!-- Button trigger modal -->
-          <a type="button" data-toggle="modal" data-target="#objetivosModal{{$d->ida}}" title="Objetivos">
-            <i class="fas fa-book-open"></i>
+          <a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop{{$d->ida}}">
+             <i class="fas fa-book-open"></i>
           </a>
           &nbsp&nbsp&nbsp
           <a type="button" data-toggle="modal" data-target="#listaModal{{$d->ida}}" title="Lista de Objetivos">
-            <i class="fas fa-ellipsis-h"></i>
-          </a>
-        </td>
-        </tr>
-        <!-- Modal -->
-        <form id="regobjetivo" >
+             <i class="fas fa-list-alt"></i>
+            </a>
+          <!-- Modal -->
+        <form action="{{route('regobjet')}}"  method="post" id="objetivosform">
           @csrf
-          <div class="modal fade" id="objetivosModal{{$d->ida}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+          <div class="modal fade" id="staticBackdrop{{$d->ida}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Objetivos de Asignatura {{$d->asig}}</h5>
+                  <h5 class="modal-title" id="staticBackdropLabel">Registrar Objetivos de la asignatura: <span style="background-color:Yellow;">{{$d->asig}}</span></h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <label>Objetivo</label>&nbsp
-                    </div>
-                    <div class="col-md-9">
-                      <textarea rows="2" cols="60" id="objetivo" name="objetivo" > </textarea>
-                      <input value="{{$d->ida}}" name="idasig" id="idasig"  >
-                    </div>
+                <!--###############################--->
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Objetivo</label>
+                    <textarea class="form-control" id="objetivo" name="objetivo" rows="3"></textarea>
                   </div>
+                  <input type="text" id="idasigna" name="idasigna" value="{{$d->ida}}" hidden>
+               <!---###############################--> 
+
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-success">Enviar</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
               </div>
             </div>
           </div>
-          </form>
-       <!--fin modak-->
-       <!-- Modal lista objetivos-->
-       
-        <!--lista objetivos-->
+         </form>
+         </td>
+         </tr>
+         <!---modal de objetivos visualizar-->
+         <div class="modal fade" id="listaModal{{$d->ida}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Objetivos de la asignatura: <span style="background-color:Yellow;">{{$d->asig}}</span></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <!--###############################--->
+                <?php 
+                   $contador=1;
+                ?>
+                @if($b!=0)
+                   <div style="background-color:#CDFFEB; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px;" >
+                   <div class="row">
+                        <div class="col-2">
+                          No
+                        </div>
+                        <div class="col-8">
+                          Objetivos
+                        </div>
+                        <div class="col-2">
+                          Acción
+                        </div>
+                    </div>
+                  </div>
+                    <hr style="background-color:black;">
+                @foreach($ob as $j)
+                   @if($j->id_asignaturas==$d->ida)
+                    <div class="row">
+                        <div class="col-2" style="padding-left:15px;">
+                          {{$contador++}}
+                        </div>
+                        <div class="col-8">
+                          {{$j->descripcion}}
+                        </div>
+                        <div class="col-2">
+                          <a href="/eliminar/objetivos/{{$j->id}}" class="btn btn-success" type="button"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                    <hr style="background-color:black;">
+                   @endif
+                  @endforeach
+                 @endif
+               <!---###############################--> 
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+         <!--end modal-->
         @endforeach
         </tbody>
         <!--##################datos de la busqueda ##########################3-->
@@ -151,31 +223,5 @@
   });
   
 </script>
-<script>
-  $('#regobjetivo').submit(function(e){
-    e.preventDefault();
-    var obj=$('#objetivo').val();
-    var asig=$('#idasig').val();
-    var _token = $('input[name=_token]').val(); //token de seguridad
-    console.log(obj);
-    console.log(asig);
-    $.ajax({
-      type: "POST",
-      url: "{{route('regobjet')}}",
-      data:{
-        obj:obj,
-        asig:asig,
-        _token:_token
-      },
-      success: function (response) {
-        if(response){
-          $('#regobjetivo')[0].reset();
-          toastr.success('Objetivo registrado con exito', 'Nuevo Registro', {timeOut:3000});
-          $('#objetivo').val('');
-        }
-      }
-    });
-  });
-  
-</script>
+
 @endsection

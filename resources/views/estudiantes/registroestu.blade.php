@@ -162,6 +162,18 @@
               <input type="email" class="form-control" id="correo" name="correo" required>
             </div>
           </div>
+          <!---registrar usuario-->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+              <label for="email">Usuario</label>
+              <input type="email" class="form-control" id="email" name="email"  required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="correo">Contraseña</label>
+                <input type="password" class="form-control" id="pass" name="pass" required>
+              </div>
+            </div>
+          <!---end user-->
           <!--estado oculto por defecto habilitado-->
               <select id="estado" class="form-control" name="estado" hidden>
                 @foreach($estado as $es)
@@ -285,33 +297,12 @@
       </div>
     </div>
   </div>
+
 </div>
+<!--#####################################--->
+
+<!--#######################################-->
 <div class="container-fluid">
-  <!-----
-      tipodoc 
-    numero_doc 
-    depex 
-     mpioex 
-     genero  
-     fecnac 
-     dpt_nac  
-     mpio_nac  
-     firsape 
-     secondape
-    firstname 
-    secondname 
-     dptres 
-     mpiores 
-     dirres 
-     barrio
-    zona
-    estrato
-    sangre 
-    telefono 
-    correo
-     estado
-    usuario
-  --->
 
 </div>
 <button type="submit" class="btn btn-primary">Registrar</button>

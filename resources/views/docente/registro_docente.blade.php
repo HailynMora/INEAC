@@ -73,16 +73,7 @@
                     <label for="fec_vinculacion">Fecha vinculación</label>
                      <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required>
                   </div>
-                  <div class="form-group col-md-4" >
-                  <label for="id_usuario">Usuario</label>
-                  <select id="id_usuario" class="form-control" name="id_usuario" required>
-                  <option selected>Seleccionar</option>
-                  @foreach($user as $u)
-                  <option value="{{$u->id}}">{{$u->name}}</option>
-                  @endforeach
-                  </select>
-                  </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-6">
                     <label for="tipogen">Genero</label>
                     <select id="tipogen" class="form-control" name="tipogen" required>
                     @foreach($genero as $g)
@@ -90,7 +81,7 @@
                     @endforeach
                     </select>
                   </div>
-                  <div class="form-group col-md-4">
+                  <div class="form-group col-md-6">
                     <label for="estado">Estado</label>
                     <select id="estado" class="form-control" name="estado" required>
                     <option selected>Seleccionar</option>
@@ -99,6 +90,14 @@
                     @endforeach
                     </select>
                   </div>
+                      <div class="form-group col-md-6">
+                        <label for="direccion">Usuario</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label for="direccion">Contraseña</label>
+                        <input type="password" class="form-control" id="pass" name="pass">
+                      </div>
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
@@ -138,7 +137,8 @@
     var correo=$('#correo').val();
     var numerodoc=$('#numerodoc').val();
     var fec_vinculacion=$('#fec_vinculacion').val();
-    var id_usuario = $("#id_usuario").val();
+    var email = $("#email").val();
+    var pass = $("#pass").val();
     var tipodoc=$('#tipodoc').val();
     var tipogen=$('#tipogen').val();
     var estado=$('#estado').val();
@@ -156,7 +156,8 @@
         correo:correo,
         numerodoc:numerodoc,
         fec_vinculacion:fec_vinculacion,
-        id_usuario:id_usuario,
+        email:email,
+        pass:pass,
         tipodoc:tipodoc,
         tipogen:tipogen,
         estado:estado,
@@ -177,7 +178,10 @@
           }
         }
       }
-   });
+   }).fail(function(jqXHR, response){
+        toastr.warning('Docente ya se encuentra registrado', 'Datos Duplicados!', {timeOut:3000});
+        $('#formudatos')[0].reset();
+	  });
   })
   
   function resetform() {

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Docentes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ObjetivosModel\Objetivos;
-use DB;
 use Illuminate\Support\Facades\Auth;
+use DB;
+Use Session;
+
 
 class ReporteAsigController extends Controller
 {
@@ -47,12 +49,21 @@ class ReporteAsigController extends Controller
         ->get();
      return response(json_decode($busasigt,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
     }
-    public function regobjet(Request $request){
-       /* $category = new Objetivos();
-        $category->id_asignaturas= $request->input('asig');
-        $category->descripcion = $request->input('obj');
+    
+    public function reg(Request $request){
+        $category = new Objetivos();
+        $category->id_asignaturas= $request->input('idasigna');
+        $category->descripcion = $request->input('objetivo');
         $category->save();
-        */
+        Session::flash('msjobjetivo','Objetivos registrados de manera exitosa!');
         return back();
     }
+
+    //eliminar objetivos de la asignatura
+    public function elim_obj($id){
+        DB::table('objetivos')->where('objetivos.id', $id)->delete();
+        Session::flash('elimi','Objetivo eliminado de manera exitosa!');
+        return back();
+    }
+
 }
