@@ -40,6 +40,10 @@
           <a type="button" data-toggle="modal" data-target="#listaModal{{$d->ida}}" title="Lista de Objetivos">
             <i class="fas fa-ellipsis-h"></i>
           </a>
+          &nbsp&nbsp&nbsp
+          <a href="/registro/notas/{{$d->idcurso}}/{{$d->ida}}" title="Ingresar notas" style="color: #678a3f;">
+          <i class="fas fa-sticky-note"></i>
+          </a>
         </td>
         </tr>
         <!-- Modal -->

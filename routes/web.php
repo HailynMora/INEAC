@@ -18,6 +18,7 @@ use App\Http\Controllers\Acudiente\AcudienteController;
 use App\Http\Controllers\RolesController\Roles;
 use App\Http\Controllers\Resportes\ReportesController;
 use App\Http\Controllers\Docentes\ReporteAsigController;
+use App\Http\Controllers\Calificaciones\CalificacionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -320,4 +321,8 @@ Route::post('/buscar/asinatura_b', [ReporteAsigController::class, 'busquedares_a
 Route::post('/buscar/asinatura_t', [ReporteAsigController::class, 'busquedares_asigt'])->middleware(['auth', 'secretaria_docente'])->name('busasigt');
 
 Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'regobjet'])->middleware(['auth', 'secretaria_docente'])->name('regobjet');
+
+//RUTA INGRESAR NOTAS
+Route::get('registro/notas/{id}/{im}',[CalificacionesController::class, 'listado'])->middleware(['auth', 'secretaria_docente'])->name('matcurso');
+
 require __DIR__.'/auth.php';

@@ -286,7 +286,7 @@ class asignaturaController extends Controller
         ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
         ->join('estado','id_estado','=','estado.id')
         ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
-        ->select('asignaturas.id as ida','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado','tipo_curso.descripcion as curso')
+        ->select('asignaturas.id as ida','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado','tipo_curso.descripcion as curso','tipo_curso.id as idcurso')
         ->get();
        
         return view('asignatura.reporte_asig_docc')->with('rep',$rep);
