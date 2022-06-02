@@ -11,6 +11,7 @@ use App\Models\DocenteModel\Docente;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Session;
 use App\Models\EstadoModel\Estado;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class docenteController extends Controller
@@ -29,10 +30,26 @@ class docenteController extends Controller
    
 
     public function datosdoc(Request $request){
+        //consultar el id del rol
+        $idrol = DB::table('roles')->where('roles.descripcion', 'like', 'Docente')->select('roles.id')->first();
+        //end id del rol
         $cor = $request->input('correo');
         $doc = $request->input('numerodoc');
         $res1 = DB::table('docente')->where('num_doc','=',$doc)->count();
         $res2 = DB::table('docente')->where('correo','=',$cor)->count();
+
+        //crear usuario 
+        $usu = new User();
+        $usu->name = $request->input('nombre');
+        $usu->email = $request->input('email');
+        $usu->password = Hash::make($request->pass);
+        $usu->id_rol = $idrol->id;
+        $usu->save();
+        /*
+        'email' => $request->email,
+        'id_rol' => $es->idest,
+        'password' => Hash::make($request->password),*/
+        //end crear usuario
         if($res1!=0){
             return \Response::json([
                 'error' => 'Error datos'
@@ -52,7 +69,7 @@ class docenteController extends Controller
                 $category->correo = $request->input('correo');
                 $category->num_doc = $request->input('numerodoc');
                 $category->fec_vinculacion = $request->input('fec_vinculacion');
-                $category->id_usuario = $request->input('id_usuario');
+                $category->id_usuario = $usu->id;//aqui se guarda la id del usuario
                 $category->id_tipo_doc = $request->input('tipodoc');
                 $category->id_genero = $request->input('tipogen');
                 $category->id_estado = $request->input('estado');

@@ -14,7 +14,9 @@ use App\Models\EstudianteModel\Estudiante;
 use App\Models\CertificadoModel\Certificado;
 use App\Models\EstadoModel\Estado;
 use App\Models\SaludModel\SistemaSalud;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+
 
 class EstudiantesController extends Controller
 {
@@ -102,6 +104,17 @@ class EstudiantesController extends Controller
         $co= $request->input('correo');
         $res=DB::table('estudiante')->where('num_doc', '=', $r)->count();
         $c=DB::table('estudiante')->where('correo', '=', $co)->count();
+        //consultar id del rol
+        $idrol = DB::table('roles')->where('roles.descripcion', 'like', 'Estudiante')->select('roles.id')->first();
+        //crear el user
+        $usu = new User();
+        $usu->name = $request->input('firstname');
+        $usu->email = $request->input('email');
+        $usu->password = Hash::make($request->pass);
+        $usu->id_rol = $idrol->id;
+        $usu->save();
+        //end crear user
+
         if($res!=0){//validacion con ajax
             return \Response::json([
                 'error'  => 'Error datos'
@@ -135,7 +148,7 @@ class EstudiantesController extends Controller
                 $Registrar->id_genero = $request->input('genero');
                 $Registrar->id_tipo_doc  = $request->input('tipodoc');
                 $Registrar->id_estado = $request->input('estado');
-                $Registrar->id_usuario  = $request->input('usuario');
+                $Registrar->id_usuario  = $usu->id;
                 $Registrar->save(); 
                 //////////////////////////#################consultar el id del estudiante ingresado
                 $ndoc=$request->numero_doc;

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('descripcion',100);
             $table->unsignedBigInteger('id_asignaturas');//atributo para referenciar a categoria
-            $table->foreign('id_asignaturas')->references('id')->on('asignaturas');//llave foranea para referenciar a la tabla categorias
+            $table->foreign('id_asignaturas')->references('id')->on('cursos');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }

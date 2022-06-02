@@ -18,6 +18,7 @@
             <th scope="col">Intensidad Horaria</th>
             <th scope="col">Val. Habilitación</th>
             <th scope="col">Programa</th>
+            <th scope="col">Acción</th>
             </tr>
         </thead>
         <tbody id="tabla1">
@@ -28,6 +29,45 @@
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->val_habilitacion}}</td>
         <td>{{$d->nombretec}}</td>
+        <td>
+                  <!-- Button trigger modal -->
+                        <a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop{{$d->id}}">
+                          <i class="fas fa-book-open"></i>
+                        </a>
+                        <a type="button" data-toggle="modal" data-target="#listaModal{{$d->id}}" title="Lista de Objetivos">
+                          <i class="fas fa-list-alt"></i>
+                          </a>
+                        <!-- Modal -->
+                      <form action="{{route('regobjet')}}"  method="post" id="objetivosform">
+                      @csrf
+                      <div class="modal fade" id="staticBackdrop{{$d->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="staticBackdropLabel">Registrar Objetivos de la asignatura: <span style="background-color:Yellow;">{{$d->asig}}</span></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                            <!--###############################--->
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Objetivo</label>
+                                <textarea class="form-control" id="objetivo" name="objetivo" rows="3"></textarea>
+                              </div>
+                            <input type="text" id="idasigna" name="idasigna" value="{{$d->id}}" hidden>
+                          <!---###############################--> 
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+        </td>
       </tr>
       @endforeach
         </tbody>
