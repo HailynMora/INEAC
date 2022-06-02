@@ -35,7 +35,7 @@
                   <div class="form-group col-md-6">
                   <label for="curso">Programa</label>
                   <input type="text" class="form-control" id="curso" name="curso" required value="{{$curso->id}}" hidden>
-                  <input type="text" class="form-control" id="nomcurso" name="nomcurso" required value="{{$curso->descripcion}}" disabled>
+                  <input type="text" style="background-color:white;" class="form-control" id="nomcurso" name="nomcurso" value="{{$curso->descripcion}}" disabled>
                   </div>
                   <div class="form-group col-md-6">
                   <label for="asig">Asignatura</label>
@@ -55,6 +55,18 @@
                         @foreach($docente as $d)
                            <option value="{{$d->id}}">{{$d->nombre}} {{$d->apellido}}</option>
                         @endforeach
+                  </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="docente">Año</label>
+                    <input type="text" style="background-color:white;" class="form-control" id="anio" name="anio" value="{{$date}}" disabled>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="docente">Periodo</label>
+                    <select id="periodo"  class="form-control" name="periodo" required>
+                           <option selected>Seleccionar</option>
+                           <option value="A">A</option>
+                           <option value="B">B</option>
                   </select>
                   </div>
                 </div>
@@ -78,6 +90,8 @@
     var asig=$('#asig').val();
     var docente=$('#docente').val();
     var fecha=$('#fecha').val();
+    var anio=$('#anio').val();
+    var periodo=$('#periodo').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({
@@ -88,6 +102,8 @@
         asig:asig,
         fecha:fecha,
         docente:docente,
+        anio:anio,
+        periodo:periodo,
         _token:_token
       },
       success: function (response) {

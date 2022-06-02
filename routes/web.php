@@ -322,4 +322,6 @@ Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'reg'])->mid
 
 //eliminar objetivos 
 Route::get('/eliminar/objetivos/{id}',[ReporteAsigController::class, 'elim_obj'])->middleware(['auth', 'secretaria_docente']);
+//filtrar por periodo
+Route::post('/objetivos/asignatura/filtrar', [ReporteAsigController::class, 'filtrarobjec'])->middleware(['auth', 'secretaria_docente'])->name('filtrarasignacion');
 require __DIR__.'/auth.php';

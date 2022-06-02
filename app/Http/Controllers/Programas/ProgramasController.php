@@ -15,6 +15,7 @@ use App\Models\AsignaturaModel\AsigTecnicos;
 use App\Models\AsignacionDoModel\AsignacionDoTec;
 use App\Models\DocenteModel\Docente;
 use App\Models\AsignaturaModel\AsignaturaTecnicos;
+use Carbon\Carbon;
 use Session;
 
 
@@ -106,7 +107,11 @@ class ProgramasController extends Controller
         $r1=$request->asig; 
 
         $resdatos=DB::table('cursos')
-        ->where('id_asignatura', '=', $r1)->where('id_tipo_curso', '=', $r)->count();
+                 ->where('id_asignatura', '=', $r1)
+                 ->where('id_tipo_curso', '=', $r)
+                 ->where('anio', '=', $request->anio)
+                 ->where('periodo', '=', $request->periodo)
+                 ->count();
 
 
         if($resdatos!=0){
@@ -120,6 +125,8 @@ class ProgramasController extends Controller
             $category->id_asignatura = $request->input('asig');
             $category->id_tipo_curso = $request->input('curso');
             $category->id_docente = $request->input('docente');
+            $category->anio = $request->input('anio');
+            $category->periodo = $request->input('periodo');
             $category->save();
             return back();   
             
@@ -244,10 +251,11 @@ class ProgramasController extends Controller
         return redirect('/programas/reporte_programas_tecnicos');
     }
     public function vincu($id){
+        $date = Carbon::now()->locale('es')->translatedFormat('Y');
         $curso=Programas::find($id);
         $asig=Asignatura::all();
         $docente=Docente::all();
-        return view('programas.vincularsig')->with('curso', $curso)->with('asignatura', $asig)->with('docente', $docente);
+        return view('programas.vincularsig')->with('curso', $curso)->with('asignatura', $asig)->with('docente', $docente)->with('date', $date);
 
     }
     public function vincu_asig($id){

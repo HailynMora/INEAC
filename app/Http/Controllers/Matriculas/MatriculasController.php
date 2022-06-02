@@ -33,7 +33,7 @@ class MatriculasController extends Controller
     }
      
     public function matriculasvista($id){
-        $date = Carbon::now()->locale('es')->translatedFormat('Y');;
+        $date = Carbon::now()->locale('es')->translatedFormat('Y');
         $prog=DB::table('programa_tecnico')->where('id_estado','=',1)
              ->select('programa_tecnico.id as idtec', 'programa_tecnico.codigotec', 'programa_tecnico.nombretec')
              ->get();

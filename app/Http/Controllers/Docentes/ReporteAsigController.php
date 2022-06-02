@@ -26,7 +26,9 @@ class ReporteAsigController extends Controller
         ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
         ->join('estado','id_estado','=','estado.id')
         ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
-        ->select('asignaturas.id','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado','tipo_curso.descripcion as curso')
+        ->select('cursos.id','asignaturas.codigo','asignaturas.nombre as asig',
+                 'intensidad_horaria','val_habilitacion','estado.descripcion as estado',
+                 'tipo_curso.descripcion as curso', 'cursos.anio', 'cursos.periodo')
         ->get();
                        
      return response(json_decode($busasigc,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
@@ -64,6 +66,12 @@ class ReporteAsigController extends Controller
         DB::table('objetivos')->where('objetivos.id', $id)->delete();
         Session::flash('elimi','Objetivo eliminado de manera exitosa!');
         return back();
+    }
+
+    //filtrar objetivos de la asig
+    
+    public function filtrarobjec(Request $request){
+        return $request;
     }
 
 }

@@ -267,8 +267,8 @@ class asignaturaController extends Controller
     }
     public function asig_doc(){
         $idlog=auth()->id();
-        $doc=DB::table('docente')->where('docente.id_usuario',$idlog)->select('docente.id')->get();
-        $d= $doc[0]->id;
+        $doc=DB::table('docente')->where('docente.id_usuario', $idlog)->select('docente.id')->first();
+        $d= $doc->id;
         $repe=DB::table('asignaturas_tecnicos')
         ->where('asignaturas_tecnicos.id_docente',$d)
         ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','programa_tecnico.nombretec')
@@ -278,6 +278,7 @@ class asignaturaController extends Controller
         return view('asignatura.reporte_asig_doc')->with('repe',$repe);
     }
     public function asig_docc(){
+        //'asignaturas.id as ida' se quito
         $idlog=auth()->id();
         $doc=DB::table('docente')->where('docente.id_usuario', '=', $idlog)->select('docente.id')->first();
         $d= $doc->id;
@@ -286,7 +287,10 @@ class asignaturaController extends Controller
         ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
         ->join('estado','id_estado','=','estado.id')
         ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
-        ->select('asignaturas.id as ida','asignaturas.codigo','asignaturas.nombre as asig','intensidad_horaria','val_habilitacion','estado.descripcion as estado','tipo_curso.descripcion as curso')
+        ->select('asignaturas.codigo',
+        'asignaturas.nombre as asig','intensidad_horaria',
+        'val_habilitacion','estado.descripcion as estado',
+        'tipo_curso.descripcion as curso', 'cursos.anio', 'cursos.periodo', 'cursos.id as ida')
         ->get();
         //consultar si existe objetivos
         $val=DB::table('objetivos')->count();
@@ -297,6 +301,9 @@ class asignaturaController extends Controller
             $b=0;
             $ob=0;
         }
-        return view('asignatura.reporte_asig_docc')->with('rep',$rep)->with('ob',$ob)->with('b',$b);
+        //validar si muestra el boton
+        $ver=DB::table('asignaturas_tecnicos')->where('asignaturas_tecnicos.id_docente', $d)->count();
+
+        return view('asignatura.reporte_asig_docc')->with('rep',$rep)->with('ob',$ob)->with('b',$b)->with('boton',$ver);
     }
 }
