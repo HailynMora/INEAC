@@ -290,7 +290,8 @@ class asignaturaController extends Controller
         ->select('asignaturas.codigo',
         'asignaturas.nombre as asig','intensidad_horaria',
         'val_habilitacion','estado.descripcion as estado',
-        'tipo_curso.descripcion as curso', 'cursos.anio', 'cursos.periodo', 'cursos.id as ida')
+        'tipo_curso.descripcion as curso', 'cursos.anio',
+        'cursos.periodo', 'cursos.id as ida', 'cursos.id_tipo_curso as idcurso')
         ->get();
         //consultar si existe objetivos
         $val=DB::table('objetivos')->count();
@@ -303,7 +304,7 @@ class asignaturaController extends Controller
         }
         //validar si muestra el boton
         $ver=DB::table('asignaturas_tecnicos')->where('asignaturas_tecnicos.id_docente', $d)->count();
-
+         //return $rep;
         return view('asignatura.reporte_asig_docc')->with('rep',$rep)->with('ob',$ob)->with('b',$b)->with('boton',$ver);
     }
 }

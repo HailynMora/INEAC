@@ -20,51 +20,27 @@
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               <i class="fas fa-filter"></i>
               </button>
-        <!-- Modal -->
-        <form id="regobjetivo" >
-          @csrf
-          <div class="modal fade" id="objetivosModal{{$d->ida}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Objetivos de Asignatura {{$d->asig}}</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <label>Objetivo</label>&nbsp
-                      <!-- Modal -->
-                      <form action="{{route('filtrarasignacion')}}" method="POST">
-                        @csrf
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Filtro de asignaturas</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <!--formulario-->
-                                <div class="row">
-                                    <div class="col-6">
-                                      <input type="text" name="anio" class="form-control" placeholder="Año"  aria-describedby="addon-wrapping">
-                                    </div>
-                                    <div class="col-6">
-                                      <input type="text"  name="periodo" class="form-control" placeholder="Periodo"  aria-describedby="addon-wrapping">
-                                    </div>
-                                </div>
-                                <!--end formulario-->
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                                <button type="submit" class="btn btn-primary">Filtrar</button>
-                              </div>
-                            </div>
+             <!-- Button trigger modal -->
+              <!-- Modal -->
+              <form action="{{route('filtrarasignacion')}}" method="POST">
+                @csrf
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Filtro de asignaturas</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <!--formulario-->
+                      <div class="row">
+                          <div class="col-6">
+                            <input type="text" name="anio" class="form-control" placeholder="Año"  aria-describedby="addon-wrapping">
+                          </div>
+                          <div class="col-6">
+                            <input type="text"  name="periodo" class="form-control" placeholder="Periodo"  aria-describedby="addon-wrapping">
                           </div>
                         </div>
                       </form>
@@ -139,15 +115,11 @@
                         </a>
                         <a type="button" data-toggle="modal" data-target="#listaModal{{$d->ida}}" title="Lista de Objetivos">
                           <i class="fas fa-list-alt"></i>
-                          </a>
-                          <!-- Button trigger modal -->
-                          <a type="button" data-toggle="modal" data-target="#objetivosModal{{$d->ida}}" title="Objetivos">
-                            <i class="fas fa-book-open"></i>
-                          </a>
-                          &nbsp&nbsp&nbsp
-                          <a href="/registro/notas/{{$d->idcurso}}/{{$d->ida}}" title="Ingresar notas" style="color: #678a3f;">
+                        </a>
+                        <!-- vemtana de registrar notas -->
+                        <a href="/registro/notas/{{$d->idcurso}}/{{$d->anio}}/{{$d->periodo}}" title="Ingresar notas" style="color: #678a3f;">
                           <i class="fas fa-sticky-note"></i>
-                          </a>
+                        </a>
                         <!-- Modal -->
                     <form action="{{route('regobjet')}}"  method="post" id="objetivosform">
                       @csrf
