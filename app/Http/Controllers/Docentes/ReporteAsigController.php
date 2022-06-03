@@ -71,7 +71,35 @@ class ReporteAsigController extends Controller
     //filtrar objetivos de la asig
     
     public function filtrarobjec(Request $request){
-        return $request;
+        $idlog=auth()->id();
+        $doc=DB::table('docente')->where('docente.id_usuario', '=', $idlog)->select('docente.id')->first();
+        $d= $doc->id;
+        $rep=DB::table('cursos')
+        ->where('cursos.id_docente',$d)
+        ->where('cursos.periodo',$request->periodo)
+        ->where('cursos.anio',$request->anio)
+        ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+        ->join('estado','id_estado','=','estado.id')
+        ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+        ->select('asignaturas.codigo',
+        'asignaturas.nombre as asig','intensidad_horaria',
+        'val_habilitacion','estado.descripcion as estado',
+        'tipo_curso.descripcion as curso', 'cursos.anio',
+        'cursos.periodo', 'cursos.id as ida', 'cursos.id_tipo_curso as idcurso')
+        ->get();
+        //consultar si existe objetivos
+        $val=DB::table('objetivos')->count();
+        if($val!=0){
+            $b=1;
+            $ob = DB::table('objetivos')->get();
+        }else{
+            $b=0;
+            $ob=0;
+        }
+        //validar si muestra el boton
+        $ver=DB::table('asignaturas_tecnicos')->where('asignaturas_tecnicos.id_docente', $d)->count();
+         //return $rep;
+        return view('asignatura.reporte_asig_docc')->with('rep',$rep)->with('ob',$ob)->with('b',$b)->with('boton',$ver);
     }
 
 }

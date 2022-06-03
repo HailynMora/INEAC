@@ -37,16 +37,17 @@
                       <!--formulario-->
                       <div class="row">
                           <div class="col-6">
-                            <input type="text" name="anio" class="form-control" placeholder="Año"  aria-describedby="addon-wrapping">
+                            <input type="text" name="anio" class="form-control" placeholder="Año ejm. 2022"  aria-describedby="addon-wrapping" required>
                           </div>
                           <div class="col-6">
-                            <input type="text"  name="periodo" class="form-control" placeholder="Periodo"  aria-describedby="addon-wrapping">
+                            <input type="text"  name="periodo" class="form-control" placeholder="Periodo ejm. A"  aria-describedby="addon-wrapping" required>
                           </div>
                       </div>
                       <!--end formulario-->
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color:#33FFDD; color:black;">Salir</button>
+                      <a href="{{route('reporte_asigdocc')}}" type="button" class="btn" style="background-color:#FFCC00;">Deshacer</a>
                       <button type="submit" class="btn btn-primary">Filtrar</button>
                     </div>
                   </div>
