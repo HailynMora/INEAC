@@ -20,43 +20,7 @@
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               <i class="fas fa-filter"></i>
               </button>
-
-        <td>{{$d->codigo}}</td>
-        <td>{{$d->asig}}</td>
-        <td>{{$d->intensidad_horaria}}</td>
-        <td>{{$d->val_habilitacion}}</td>
-        <td>{{$d->curso}}</td>
-        <td>
-          <!-- Button trigger modal -->
-          <a type="button" data-toggle="modal" data-target="#objetivosModal{{$d->ida}}" title="Objetivos">
-            <i class="fas fa-book-open"></i>
-          </a>
-          &nbsp&nbsp&nbsp
-          <a type="button" data-toggle="modal" data-target="#listaModal{{$d->ida}}" title="Lista de Objetivos">
-            <i class="fas fa-ellipsis-h"></i>
-          </a>
-          &nbsp&nbsp&nbsp
-          <a href="/registro/notas/{{$d->idcurso}}/{{$d->ida}}" title="Ingresar notas" style="color: #678a3f;">
-          <i class="fas fa-sticky-note"></i>
-          </a>
-        </td>
-        </tr>
-        <!-- Modal -->
-        <form id="regobjetivo" >
-          @csrf
-          <div class="modal fade" id="objetivosModal{{$d->ida}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Objetivos de Asignatura {{$d->asig}}</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <label>Objetivo</label>&nbsp
+             <!-- Button trigger modal -->
               <!-- Modal -->
               <form action="{{route('filtrarasignacion')}}" method="POST">
                 @csrf
@@ -156,7 +120,11 @@
                         </a>
                         <a type="button" data-toggle="modal" data-target="#listaModal{{$d->ida}}" title="Lista de Objetivos">
                           <i class="fas fa-list-alt"></i>
-                          </a>
+                        </a>
+                        <!-- vemtana de registrar notas -->
+                        <a href="/registro/notas/{{$d->idcurso}}/{{$d->anio}}/{{$d->periodo}}" title="Ingresar notas" style="color: #678a3f;">
+                          <i class="fas fa-sticky-note"></i>
+                        </a>
                         <!-- Modal -->
                     <form action="{{route('regobjet')}}"  method="post" id="objetivosform">
                       @csrf
