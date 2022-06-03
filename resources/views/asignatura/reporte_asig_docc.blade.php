@@ -42,8 +42,9 @@
                           <div class="col-6">
                             <input type="text"  name="periodo" class="form-control" placeholder="Periodo ejm. A"  aria-describedby="addon-wrapping" required>
                           </div>
-                      </div>
-                      <!--end formulario-->
+                        </div>
+                      </form>
+                    <!--end filtrar-->
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color:#33FFDD; color:black;">Salir</button>
@@ -53,16 +54,7 @@
                   </div>
                 </div>
               </div>
-            </form>
-            <!--end filtrar-->
-          </div>
-            <div class="col-md-6">
-            <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
-                @csrf
-                <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search" required>
-                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
-              </form>
-              </div>
+            </div>
           </div>
          <!--end cabecera-->
       </h2>
