@@ -4,7 +4,7 @@
  <h3>Registro Calificaciones</h3>
 </div>
 <br>
-<div class="container">
+<div class="container table-responsive">
     <table class="table">
         <thead style="background-color:#FFCC00;">
             <tr>
@@ -25,7 +25,7 @@
         <td>{{$es->primerape}} {{$es->segundoape}} {{$es->nombre}} {{$es->segundonom}} </td>
         <td>
         <a type="button"  data-toggle="modal" data-target="#exampleModal">
-            <i class="fas fa-plus-circle" style="color:#5e6457;"></i>
+            <i class="fas fa-book-open" style="color:#06DBE1; font-size:20px;"></i>
         </a>  
         </td>
         </tr>

@@ -115,7 +115,7 @@
                           <i class="fas fa-list-alt"></i>
                         </a>
                         <!-- vemtana de registrar notas -->
-                        <a href="/registro/notas/{{$d->idcurso}}/{{$d->anio}}/{{$d->periodo}}" title="Ingresar notas" style="color: #678a3f;">
+                        <a href="/registro/notas/{{$d->idcurso}}/{{$d->anio}}/{{$d->periodo}}/{{$d->idasig}}" title="Ingresar notas" style="color: #678a3f;">
                           <i class="fas fa-sticky-note"></i>
                         </a>
                         <!-- Modal -->

@@ -324,7 +324,7 @@ Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'reg'])->mid
 Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'regobjet'])->middleware(['auth', 'secretaria_docente'])->name('regobjet');
 
 //RUTA INGRESAR NOTAS
-Route::get('registro/notas/{id}/{im}/{per}',[CalificacionesController::class, 'listado'])->middleware(['auth', 'secretaria_docente'])->name('matcurso');
+Route::get('registro/notas/{id}/{im}/{per}/{asig}',[CalificacionesController::class, 'listado'])->middleware(['auth', 'secretaria_docente'])->name('matcurso');
 
 //eliminar objetivos 
 Route::get('/eliminar/objetivos/{id}',[ReporteAsigController::class, 'elim_obj'])->middleware(['auth', 'secretaria_docente']);
