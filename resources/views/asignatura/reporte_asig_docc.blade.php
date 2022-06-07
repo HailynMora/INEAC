@@ -37,21 +37,19 @@
                       <!--formulario-->
                       <div class="row">
                           <div class="col-6">
-                            <input type="text" name="anio" class="form-control" placeholder="Año"  aria-describedby="addon-wrapping">
+                            <input type="text" name="anio" class="form-control" placeholder="Año ejm. 2022"  aria-describedby="addon-wrapping" required>
                           </div>
                           <div class="col-6">
-                            <input type="text"  name="periodo" class="form-control" placeholder="Periodo"  aria-describedby="addon-wrapping">
+                            <input type="text"  name="periodo" class="form-control" placeholder="Periodo ejm. A"  aria-describedby="addon-wrapping" required>
                           </div>
                         </div>
                       </form>
                     <!--end filtrar-->
                     </div>
-                    <div class="col-md-6">
-                      <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
-                        @csrf
-                        <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search" required>
-                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
-                      </form>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color:#33FFDD; color:black;">Salir</button>
+                      <a href="{{route('reporte_asigdocc')}}" type="button" class="btn" style="background-color:#FFCC00;">Deshacer</a>
+                      <button type="submit" class="btn btn-primary">Filtrar</button>
                     </div>
                   </div>
                 </div>
