@@ -13,6 +13,8 @@
     <table class="table">
         <thead style="background-color:#FFCC00;">
             <tr>
+            <th scope="col">Año</th>
+            <th scope="col">Periodo</th>
             <th scope="col">Código</th>
             <th scope="col">Asignatura</th>
             <th scope="col">Intensidad Horaria</th>
@@ -24,6 +26,8 @@
         <tbody id="tabla1">
         @foreach($repe as $d)
         <tr style="background-color: #dcedc8;">
+        <td>{{$d->anio}}</td>
+        <td>{{$d->periodo}}</td>
         <td>{{$d->codigoasig}}</td>
         <td>{{$d->asig}}</td>
         <td>{{$d->intensidad_horaria}}</td>

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreign('id_asignaturas')->references('id')->on('asig_tecnicos');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_trimestre');//atributo para referenciar a categoria
             $table->foreign('id_trimestre')->references('id')->on('trimestre_tecnicos');
+            $table->string('anio',10);
+            $table->string('periodo',10);
             $table->timestamps();
         });
     }

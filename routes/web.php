@@ -279,7 +279,7 @@ Route::post('/actualizar/matricula/tecnico', [MatriculasController::class, 'actu
 Route::get('/cambiar/estado/matricula', [MatriculasController::class, 'estado_mat'])->middleware(['auth', 'secretaria'])->name('cambiar_estado_mat');
 
 
-Route::post('/vicular/asignaturas/tecnicos', [ProgramasController::class, 'asig_tec'])->middleware(['auth', 'secretaria'])->name('regvincularasigtec');
+//Route::post('/vicular/asignaturas/tecnicos', [ProgramasController::class, 'asig_tec'])->middleware(['auth', 'secretaria'])->name('regvincularasigtec');
 Route::get('/programas/listado_vinculacion_tec', [ProgramasController::class, 'listarvinculaciontec'])->middleware(['auth', 'secretaria'])->name('asigtec');
 
 //ruta elimar asigtecnico vinculada

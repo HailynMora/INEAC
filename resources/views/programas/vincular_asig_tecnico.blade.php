@@ -52,17 +52,6 @@
                   <input type="text" class="form-control" id="nomcurso" name="nomcurso" required value="{{$curso->nombretec}}" disabled>
                   </div>
                   <div class="form-group col-md-6">
-                  <label for="tri">Trimestre</label>
-                  <select id="tri" class="form-control" name="tri" required>
-                    <option selected>Seleccionar</option>
-                        @foreach($trimestre as $t)
-                           <option value="{{$t->id}}">{{$t->nombretri}}</option>
-                        @endforeach
-                  </select>
-                  </div>
-              </div>
-                <div class="form-row"> 
-                <div class="form-group col-md-6">
                   <label for="asig">Asignatura</label>
                   <select id="asig" class="form-control" name="asig" required>
                     <option selected>Seleccionar</option>
@@ -71,7 +60,10 @@
                         @endforeach
                   </select>
                   </div> 
-                  <div class="form-group col-md-6">
+                 
+              </div>
+                <div class="form-row"> 
+                <div class="form-group col-md-6">
                   <label for="docente">Docente</label>
                   <select id="docente" class="form-control" name="docente" required>
                     <option selected>Seleccionar</option>
@@ -79,8 +71,35 @@
                            <option value="{{$d->id}}">{{$d->nombre}} {{$d->apellido}}</option>
                         @endforeach
                   </select>
-                  </div>                
+                  </div>  
+                <div class="form-group col-md-6">
+                  <label for="tri">Trimestre</label>
+                  <select id="tri" class="form-control" name="tri" required>
+                    <option selected>Seleccionar</option>
+                        @foreach($trimestre as $t)
+                           <option value="{{$t->id}}">{{$t->nombretri}}</option>
+                        @endforeach
+                  </select>
+                  </div>           
                 </div>
+                <!--periodo y anio-->
+                <div class="form-row"> 
+                <div class="form-group col-md-6">
+                  <label for="docente">Año</label>
+                    <input class="form-control" name="anio" id="anio" value="{{$date}}">
+                  </div>  
+                <div class="form-group col-md-6">
+                  <label for="periodo">Periodo</label>
+                  <select id="periodo" class="form-control" name="periodo" required>
+                    <option selected>Seleccionar</option> 
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                  </select>
+                  </div>          
+                </div>
+                <!---end periodo y anio--->
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
                 <a  class="btn btn-danger" href="{{url('/programas/reporte_programas_tecnicos')}}">Cancelar</a>
@@ -116,10 +135,11 @@
             <table class="table">
                 <thead style="background-color:#FFCC00;">
                     <tr>
+                    <th scope="col">Año</th>
+                    <th scope="col">Periodo</th>
                     <th scope="col">Cód. Programa</th>
                     <th scope="col">Programa</th>
                     <th scope="col">Trimestre</th>
-                    <th scope="col">Cód. Asignatura</th>
                     <th scope="col">Asignatura</th>
                     <th scope="col">I/Horaria</th>
                     <th scope="col">Docente</th>
@@ -130,10 +150,11 @@
                 
                 @foreach($asigpro as $s)
                 <tr style="background-color: #dcedc8;">
+                    <td>{{$s->anio}}</td>
+                    <td>{{$s->periodo}}</td>
                     <td>{{$s->codigotec}}</td>
                     <td>{{$s->nombretec}}</td>
                     <td>{{$s->nombretri}}</td>
-                    <td>{{$s->codas}}</td>
                     <td>{{$s->asig}}</td>
                     <td>{{$s->horas}}</td>
                     <td>{{$s->nomdoc}} {{$s->apedoc}}</td>
@@ -155,7 +176,7 @@
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                      ¿Desea elimar la materia Vinculada de forma permanente?
+                                      ¿Desea eliminar la materia Vinculada de forma permanente?
                 
                                     </div>
                                     <div class="modal-footer">
@@ -199,6 +220,8 @@
     var asig=$('#asig').val();
     var tri=$('#tri').val();
     var docente=$('#docente').val();
+    var anio=$('#anio').val();
+    var periodo=$('#periodo').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({
@@ -209,6 +232,8 @@
         asig:asig,
         tri:tri,
         docente:docente,
+        anio:anio,
+        periodo:periodo,
         _token:_token
       },
       success: function (response) {

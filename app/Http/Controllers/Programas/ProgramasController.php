@@ -136,7 +136,10 @@ class ProgramasController extends Controller
     
     public function listarvinculacion(){
         $asigpro=DB::table('cursos')
-        ->select('cursos.id','id_asignatura','id_tipo_curso','asignaturas.codigo as codas','asignaturas.nombre as asig','tipo_curso.codigo as codcur','tipo_curso.descripcion as curso','docente.nombre as nomdoc','docente.apellido as apedoc')
+        ->select('cursos.id','id_asignatura','id_tipo_curso','asignaturas.codigo as codas',
+                 'asignaturas.nombre as asig','tipo_curso.codigo as codcur',
+                 'tipo_curso.descripcion as curso','docente.nombre as nomdoc',
+                 'docente.apellido as apedoc')
         ->join('asignaturas','id_asignatura','=','asignaturas.id')
         ->join('tipo_curso','id_tipo_curso','=','tipo_curso.id')
         ->join('docente','id_docente','=','docente.id')
@@ -259,6 +262,7 @@ class ProgramasController extends Controller
 
     }
     public function vincu_asig($id){
+        $date = Carbon::now()->locale('es')->translatedFormat('Y');
         $curso=ProgramasTecnicos::find($id);
         $asig=AsignaturaTecnicos::all();
         $tri=TrimestresTecnicos::all();
@@ -270,12 +274,16 @@ class ProgramasController extends Controller
         ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
         ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
         ->select('asignaturas_tecnicos.id','id_asignaturas','id_trimestre','asig_tecnicos.codigoasig as codas',
-                  'asig_tecnicos.nombreasig as asig', 'asig_tecnicos.intensidad_horaria as horas', 'programa_tecnico.codigotec','programa_tecnico.nombretec',
-                  'trimestre_tecnicos.nombretri','docente.nombre as nomdoc','docente.apellido as apedoc')
-        ->orderBy('asignaturas_tecnicos.id_tecnico', 'ASC')
+                  'asig_tecnicos.nombreasig as asig', 'asig_tecnicos.intensidad_horaria as horas', 
+                  'programa_tecnico.codigotec','programa_tecnico.nombretec',
+                  'trimestre_tecnicos.nombretri','docente.nombre as nomdoc','docente.apellido as apedoc',
+                  'asignaturas_tecnicos.anio', 'asignaturas_tecnicos.periodo')
+        ->orderBy('asignaturas_tecnicos.periodo', 'ASC')
         ->get(); //hacer paginacion de las vistas
         ///////////////////////////
-        return view('programas.vincular_asig_tecnico')->with('curso', $curso)->with('asignatura', $asig)->with('trimestre', $tri)->with('docente', $docente)->with('asigpro',$asigpro);
+        return view('programas.vincular_asig_tecnico')->with('curso', $curso)
+              ->with('asignatura', $asig)->with('trimestre', $tri)->with('docente', $docente)
+              ->with('asigpro',$asigpro)->with('date',$date);
 
     }
 
@@ -285,8 +293,12 @@ class ProgramasController extends Controller
         $r2=$request->tri;
         $r3=$request->docente;
         $resdatos=DB::table('asignaturas_tecnicos')
-        ->where('id_asignaturas', '=', $r1)->where('id_tecnico', '=', $r)->where('id_trimestre', '=', $r2)->count();
-
+                  ->where('id_asignaturas', '=', $r1)
+                  ->where('id_tecnico', '=', $r)
+                  ->where('id_trimestre', '=', $r2)
+                  ->where('anio', '=', $request->anio)
+                  ->where('periodo', '=', $request->periodo)
+                  ->count();
 
         if($resdatos!=0){
                return \Response::json([
@@ -300,6 +312,8 @@ class ProgramasController extends Controller
             $category->id_tecnico = $request->input('curso');
             $category->id_trimestre = $request->input('tri');
             $category->id_docente = $request->input('docente');
+            $category->anio = $request->input('anio');
+            $category->periodo = $request->input('periodo');
             $category->save();
             return back();   
             

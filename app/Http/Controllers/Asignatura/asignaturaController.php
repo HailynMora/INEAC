@@ -271,9 +271,13 @@ class asignaturaController extends Controller
         $d= $doc->id;
         $repe=DB::table('asignaturas_tecnicos')
         ->where('asignaturas_tecnicos.id_docente',$d)
-        ->select('asig_tecnicos.id','asig_tecnicos.codigoasig','asig_tecnicos.nombreasig as asig','intensidad_horaria','val_habilitacion','programa_tecnico.nombretec')
+        ->select('asig_tecnicos.id','asig_tecnicos.codigoasig',
+                 'asig_tecnicos.nombreasig as asig','intensidad_horaria',
+                 'val_habilitacion','programa_tecnico.nombretec', 'asignaturas_tecnicos.anio', 
+                 'asignaturas_tecnicos.periodo', 'asignaturas_tecnicos.created_at')
         ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
         ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+        ->orderBy('asignaturas_tecnicos.created_at', 'ASC')
         ->get();
         return view('asignatura.reporte_asig_doc')->with('repe',$repe);
     }
