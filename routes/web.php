@@ -330,4 +330,6 @@ Route::get('registro/notas/{id}/{im}/{per}',[CalificacionesController::class, 'l
 Route::get('/eliminar/objetivos/{id}',[ReporteAsigController::class, 'elim_obj'])->middleware(['auth', 'secretaria_docente']);
 //filtrar por periodo
 Route::post('/objetivos/asignatura/filtrar', [ReporteAsigController::class, 'filtrarobjec'])->middleware(['auth', 'secretaria_docente'])->name('filtrarasignacion');
+Route::post('/registro/notas', [CalificacionesController::class, 'regnotas'])->middleware(['auth', 'secretaria_docente'])->name('regnotas');
+
 require __DIR__.'/auth.php';
