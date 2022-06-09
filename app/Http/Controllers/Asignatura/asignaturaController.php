@@ -271,15 +271,24 @@ class asignaturaController extends Controller
         $d= $doc->id;
         $repe=DB::table('asignaturas_tecnicos')
         ->where('asignaturas_tecnicos.id_docente',$d)
-        ->select('asig_tecnicos.id','asig_tecnicos.codigoasig',
+        ->select('asignaturas_tecnicos.id','asig_tecnicos.codigoasig',
                  'asig_tecnicos.nombreasig as asig','intensidad_horaria',
                  'val_habilitacion','programa_tecnico.nombretec', 'asignaturas_tecnicos.anio', 
-                 'asignaturas_tecnicos.periodo', 'asignaturas_tecnicos.created_at')
+                 'asignaturas_tecnicos.periodo', 'trimestre_tecnicos.nombretri as trimestre')
         ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
         ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
-        ->orderBy('asignaturas_tecnicos.created_at', 'ASC')
+        ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+        ->orderBy('asignaturas_tecnicos.periodo', 'ASC')
         ->get();
-        return view('asignatura.reporte_asig_doc')->with('repe',$repe);
+        $val=DB::table('objetivostec')->count();
+        if($val!=0){
+            $b=1;
+            $ob = DB::table('objetivostec')->get();
+        }else{
+            $b=0;
+            $ob=0;
+        }
+        return view('asignatura.reporte_asig_doc')->with('repe',$repe)->with('b',$b)->with('ob',$ob);
     }
     public function asig_docc(){
         //'asignaturas.id as ida' se quito

@@ -318,10 +318,9 @@ Route::get('listar/estudiantes',[EstudiantesController::class, 'listar_estudo'])
 Route::post('/buscar/asinatura_b', [ReporteAsigController::class, 'busquedares_asigc'])->middleware(['auth', 'secretaria_docente'])->name('busasigb');
 
 //buscar ASIGNATURAS TECNICOS POR ajax
-Route::post('/buscar/asinatura_t', [ReporteAsigController::class, 'busquedares_asigt'])->middleware(['auth', 'secretaria_docente'])->name('busasigt');
 Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'reg'])->middleware(['auth', 'secretaria_docente'])->name('regobjet');
 
-Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'regobjet'])->middleware(['auth', 'secretaria_docente'])->name('regobjet');
+Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'regobtec'])->middleware(['auth', 'secretaria_docente'])->name('regobjettec');
 
 //RUTA INGRESAR NOTAS
 Route::get('registro/notas/{id}/{im}/{per}/{asig}',[CalificacionesController::class, 'listado'])->middleware(['auth', 'secretaria_docente'])->name('matcurso');
@@ -330,6 +329,8 @@ Route::get('registro/notas/{id}/{im}/{per}/{asig}',[CalificacionesController::cl
 Route::get('/eliminar/objetivos/{id}',[ReporteAsigController::class, 'elim_obj'])->middleware(['auth', 'secretaria_docente']);
 //filtrar por periodo
 Route::post('/objetivos/asignatura/filtrar', [ReporteAsigController::class, 'filtrarobjec'])->middleware(['auth', 'secretaria_docente'])->name('filtrarasignacion');
+Route::post('/objetivos/asignatura/tecnico/filtrar', [ReporteAsigController::class, 'filtrar_tec_as'])->middleware(['auth', 'secretaria_docente'])->name('filasig_tecnico');
 Route::post('/registro/notas', [CalificacionesController::class, 'regnotas'])->middleware(['auth', 'secretaria_docente'])->name('regnotas');
+
 
 require __DIR__.'/auth.php';

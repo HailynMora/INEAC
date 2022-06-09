@@ -50,4 +50,6 @@ class ReportesController extends Controller
 
     }
 
+   
+
 }

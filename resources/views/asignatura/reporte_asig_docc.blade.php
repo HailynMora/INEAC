@@ -43,7 +43,6 @@
                             <input type="text"  name="periodo" class="form-control" placeholder="Periodo ejm. A"  aria-describedby="addon-wrapping" required>
                           </div>
                         </div>
-                      </form>
                     <!--end filtrar-->
                     </div>
                     <div class="modal-footer">
@@ -54,6 +53,7 @@
                   </div>
                 </div>
               </div>
+              </form>
             </div>
           </div>
          <!--end cabecera-->
@@ -85,27 +85,27 @@
                 <table class="table">
                     <thead style="background-color:#FFCC00;">
                         <tr>
+                        <th scope="col">Anio</th>
+                        <th scope="col">Periodo</th>
+                        <th scope="col">Programa</th>
                         <th scope="col">Código</th>
                         <th scope="col">Asignatura</th>
                         <th scope="col">Intensidad Horaria</th>
                         <th scope="col">Val. Habilitación</th>
-                        <th scope="col">Programa</th>
-                        <th scope="col">Anio</th>
-                        <th scope="col">Periodo</th>
+                        
                         <th scope="col">Opciones</th>
                         </tr>
                     </thead>
                     <tbody id="tabla1">
                     @foreach($rep as $d)
                     <tr style="background-color: #dcedc8;">
-
+                    <td>{{$d->anio}}</td>
+                    <td>{{$d->periodo}}</td>
+                    <td>{{$d->curso}}</td>
                     <td>{{$d->codigo}}</td>
                     <td>{{$d->asig}}</td>
                     <td>{{$d->intensidad_horaria}}</td>
                     <td>{{$d->val_habilitacion}}</td>
-                    <td>{{$d->curso}}</td>
-                    <td>{{$d->anio}}</td>
-                    <td>{{$d->periodo}}</td>
                     <td>
                         <!-- Button trigger modal -->
                         <a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop{{$d->ida}}">
