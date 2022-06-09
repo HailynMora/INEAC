@@ -24,13 +24,17 @@
         <td>{{$es->num_doc}}</td>
         <td>{{$es->primerape}} {{$es->segundoape}} {{$es->nombre}} {{$es->segundonom}} </td>
         <td>
-        <a type="button"  data-toggle="modal" data-target="#exampleModal">
+        <a type="button"  data-toggle="modal" data-target="#exampleModal{{$es->idest}}">
             <i class="fas fa-book-open" style="color:#06DBE1; font-size:20px;"></i>
         </a>  
+        &nbsp&nbsp&nbsp
+        <a type="button" data-toggle="modal" data-target="#verModal{{$es->idest}}">
+            <i class="fas fa-eye" style="color:#8daf65; font-size:20px;"></i>
+        </a> 
         </td>
         </tr>
-        <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal calificaciones -->
+            <div class="modal fade" id="exampleModal{{$es->idest}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     @foreach($as as $a)
                     <div class="modal-content">
@@ -164,7 +168,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input id="idcur" name="idcur" value="{{$a->idcur}}" >
+                                <input id="idcur" name="idcur" value="{{$a->idcur}}" hidden >
+                                <input id="idest" name="idest" value="{{$es->idest}}" hidden>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -176,8 +181,101 @@
                     @endforeach
                 </div>
             </div>
-        <!--Fin modal-->
-
+        <!--Fin modal calificaciones-->
+        <!-- Modal ver calificaciones-->
+        <div class="modal fade" id="verModal{{$es->idest}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                @foreach($nota as $n)
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5 style="text-align: center;">Calificaciones</h5>
+                        <div style="background-color:#CDFFEB; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px;" >
+                            <div class="row">
+                                <div class="col-3">
+                                    <b>N°</b>
+                                </div>
+                                <div class="col-6">
+                                    <b>Calificación</b>
+                                </div>
+                                <div class="col-3">
+                                    <b>Porcentaje</b>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="background-color:black;">
+                        <div class="row">
+                            <div class="col-3" style="padding-left:15px;">
+                                1
+                            </div>
+                            <div class="col-6">
+                                <lable>{{$n->nota1}}</lable>
+                            </div>
+                            <div class="col-3">
+                                <lable>{{$n->por1}}</lable>
+                            </div>
+                        </div>
+                        <hr style="background-color:black;">
+                        <div class="row">
+                            <div class="col-3" style="padding-left:15px;">
+                                2
+                            </div>
+                            <div class="col-6">
+                                <lable>{{$n->nota2}}</lable>
+                            </div>
+                            <div class="col-3">
+                                <lable>{{$n->por2}}</lable>
+                            </div>
+                        </div>
+                        <hr style="background-color:black;">
+                        <div class="row">
+                            <div class="col-3" style="padding-left:15px;">
+                                3
+                            </div>
+                            <div class="col-6">
+                                <lable>{{$n->nota3}}</lable>
+                            </div>
+                            <div class="col-3">
+                                <lable>{{$n->por3}}</lable>
+                            </div>
+                        </div>
+                        <hr style="background-color:black;">
+                        <div class="row">
+                            <div class="col-3" style="padding-left:15px;">
+                                4
+                            </div>
+                            <div class="col-6">
+                                <lable>{{$n->nota4}}</lable>
+                            </div>
+                            <div class="col-3">
+                                <lable>{{$n->por4}}</lable>
+                            </div>
+                        </div>
+                        <hr style="background-color:black;">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h5>Definitiva: </h5>
+                            </div>
+                            <div class="col-md-5">
+                                <lable><p>{{$n->definitiva}}</p></lable>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        <!--fin modal ver calificaciones-->
         @endforeach
     </tbody>
     </table>

@@ -34,8 +34,19 @@ class CalificacionesController extends Controller
                     ->select('cursos.id as idcur','id_asignatura','asignaturas.nombre','tipo_curso.descripcion', 
                               'docente.nombre as nomdoc', 'docente.apellido as apedoc')
                     ->get();
-
-           return view('calificaciones.calificaciones')->with('estumat',$estumat)->with('as',$as);
+            $asnot=DB::table('cursos')
+            ->where('id_tipo_curso','=',$id)
+            ->where('anio','=',$anio)
+            ->where('periodo','=',$per)
+            ->where('id_asignatura','=',$asig)
+            ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+            ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+            ->join('docente','cursos.id_docente','=','docente.id')
+            ->select('cursos.id as idcur')
+            ->get();
+            $idcurn=$asnot[0]->idcur;
+            $nota=DB::table('notas')->where('id_curso','=',$idcurn)->get();
+           return view('calificaciones.calificaciones')->with('estumat',$estumat)->with('as',$as)->with('nota',$nota);
     }
 
     public function regnotas(Request $request){
@@ -59,6 +70,7 @@ class CalificacionesController extends Controller
         $category->por4= $request->input('porcentaje4');
         $category->definitiva= $final;
         $category->id_curso = $request->input('idcur');
+        $category->id_estudiante = $request->input('idest');
         $category->save();
         return back();
     }
