@@ -317,7 +317,7 @@ Route::get('listar/estudiantes',[EstudiantesController::class, 'listar_estudo'])
 Route::post('/buscar/asinatura_b', [ReporteAsigController::class, 'busquedares_asigc'])->middleware(['auth', 'secretaria_docente'])->name('busasigb');
 
 //buscar ASIGNATURAS TECNICOS POR ajax
-Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'reg'])->middleware(['auth', 'secretaria_docente'])->name('regobjet');
+Route::post('/objetivos/asignaturas', [ReporteAsigController::class, 'reg'])->middleware(['auth', 'secretaria_docente'])->name('regobjet');
 
 Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'regobtec'])->middleware(['auth', 'secretaria_docente'])->name('regobjettec');
 
