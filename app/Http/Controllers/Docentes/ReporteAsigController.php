@@ -64,7 +64,7 @@ class ReporteAsigController extends Controller
         ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
         ->join('estado','id_estado','=','estado.id')
         ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
-        ->select('asignaturas.codigo',
+        ->select('asignaturas.id as idasig', 'asignaturas.codigo',
         'asignaturas.nombre as asig','intensidad_horaria',
         'val_habilitacion','estado.descripcion as estado',
         'tipo_curso.descripcion as curso', 'cursos.anio',
@@ -81,7 +81,7 @@ class ReporteAsigController extends Controller
         }
         //validar si muestra el boton
         $ver=DB::table('asignaturas_tecnicos')->where('asignaturas_tecnicos.id_docente', $d)->count();
-         //return $rep;
+       
         return view('asignatura.reporte_asig_docc')->with('rep',$rep)->with('ob',$ob)->with('b',$b)->with('boton',$ver);
     }
 
