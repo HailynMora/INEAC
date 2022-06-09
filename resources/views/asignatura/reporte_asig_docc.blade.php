@@ -119,7 +119,7 @@
                           <i class="fas fa-sticky-note"></i>
                         </a>
                         <!-- Modal -->
-                    <form action="{{route('regobjet')}}"  method="post" id="objetivosform">
+                    <form action="{{route('regisob')}}"  method="POST">
                       @csrf
                       <div class="modal fade" id="staticBackdrop{{$d->ida}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">

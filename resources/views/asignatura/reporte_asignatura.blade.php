@@ -4,7 +4,7 @@
  <h3> Reporte Asignaturas Bachillerato</h3>
 </div>
   <!--modal-->
-   <!-- Button trigger modal -->
+   <!-- Button trigger modal-->
    <div class="row">
      <div class="col-6">
         <button type="button"class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#RegAsig">
