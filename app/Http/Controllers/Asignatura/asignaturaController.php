@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Auth;
 class asignaturaController extends Controller
 {
     //registro de asignaturas bachillerato
-    public function regasignatura(){
-        $estado=Estado::all();
-        return view('asignatura.registro_asignatura')->with('estado',$estado);
-    }
     public function datosasig(Request $request){
         $cod = $request->input('codigo');
         $nom = $request->input('nombre');

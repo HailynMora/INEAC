@@ -109,7 +109,6 @@ Route::get('posts/showD',[PostDocController::class, 'showD'])->middleware(['auth
 
 //------------------------------------------------------INICIO RUTAS ASIGNATURAS---------------------------------------
 //RUTA REGISTRO ASIGNATURAS BACHILLERATOS
-Route::get('/asignatura/registro_asignatura', [AsignaturaController::class, 'regasignatura'])->middleware(['auth', 'secretaria'])->name('regasignatura');
 Route::post('/asignatura/registro_asignatura', [AsignaturaController::class, 'datosasig'])->middleware(['auth', 'secretaria'])->name('datosasig');
 
 //RUTA REGISTRO ASIGNATURAS TECNICOS

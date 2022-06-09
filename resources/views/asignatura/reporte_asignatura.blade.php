@@ -3,12 +3,92 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3> Reporte Asignaturas Bachillerato</h3>
 </div>
-<a href="{{route('regasignatura')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
-<form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
-  @csrf
-  <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
-  <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
-</form>
+  <!--modal-->
+   <!-- Button trigger modal -->
+   <div class="row">
+     <div class="col-6">
+        <button type="button"class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#RegAsig">
+          Registrar
+        </button>
+      </div>
+      <!-- Modal -->
+      <form id="formudatos" name="formudatos" method="post">
+      @csrf
+      <div class="modal fade" id="RegAsig" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <h3 class="text-center" style="background-color: #283593; color:#ffffff; padding-top:15px; padding-bottom:15px;">
+                    Registro de Asignaturas
+              </h3>
+            <div class="modal-body">
+              <!--registrar modal-->
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                      <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-edit"></i> Asignaturas
+                          </button>
+                        </h2>
+                      </div>
+                  
+                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="codigo">Código</label>
+                                        <input type="number" class="form-control" id="codigo" name="codigo" placeholder="12345678" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="intensidad_horaria">Intensidad Horaria</label>
+                                        <input type="number" class="form-control" id="intensidad_horaria" name="intensidad_horaria" placeholder="12345678" required>
+                                    </div>
+                                  
+                                <div class="form-group col-md-6">
+                                    <label for="val_habilitacion">Valor Habilitación</label>
+                                    <input type="number" class="form-control" id="val_habilitacion" name="val_habilitacion" placeholder="12345678">
+                                  </div>
+                                  <div class="form-group col-md-6" >
+                                  <label for="id_estado">Estado</label>
+                                  <select id="id_estado" class="form-control" name="id_estado" required>
+                                  <option selected>Seleccionar</option>
+                                  <option value="1">Activo</option>
+                                  <option value="2">Inactivo</option>
+                                  </select>
+                                  </div>
+                              </div>
+                                                              
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              <!--##########################3--->
+            </div>
+            <div class="modal-footer">
+              <!--botones -->
+               <button type="submit" class="btn btn-success">Registrar</button>
+               <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+              <a  class="btn btn-danger" href="{{url('/asignatura/reporte_asignatura')}}">Cancelar</a>
+              <!--end botones-->
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+<!--##########end modal--########-->
+     <div class="col-6">
+        <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+        @csrf
+        <input id="nombrebus" name="nombrebus" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+      </form>
+     </div>
+  </div>
 <br><br>
 <div class="container">
     <table class="table">
@@ -135,9 +215,9 @@
 <script>
    $('#buscar').submit(function(e){
     e.preventDefault();
-    var nombre=$('#nombre').val();
-    console.log(nombre);
+    var nombre=$('#nombrebus').val();
     var _token = $('input[name=_token]').val();
+    console.log(nombre);
     $.ajax({
       url:"{{route('buscarasigc')}}",
       type: "POST",
@@ -201,5 +281,50 @@
     
     });
   });
+</script>
+<script>
+  $('#formudatos').submit(function(e){
+    e.preventDefault();
+    var codigo=$('#codigo').val();
+    var nombre=$('#nombre').val();
+    var intensidad_horaria=$('#intensidad_horaria').val();
+    var val_habilitacion=$('#val_habilitacion').val();
+    var id_estado=$('#id_estado').val();
+    var _token = $('input[name=_token]').val(); //token de seguridad
+
+    $.ajax({
+      type: "POST",
+      url: "{{route('datosasig')}}",
+      data:{
+        codigo:codigo,
+        nombre:nombre,
+        intensidad_horaria:intensidad_horaria,
+        val_habilitacion:val_habilitacion,
+        id_estado:id_estado,
+        _token:_token
+      },
+      success: function (response) {
+        if(response){
+          $('#formudatos')[0].reset();
+          toastr.success('Asignatura registrada exitosamente', 'Nuevo Registro', {timeOut:3000});
+        }
+      },
+      error:function(jqXHR, response){
+          if(jqXHR.status==422){
+            toastr.warning('Datos Repetidos!.', 'El código de la Asignatura debe ser único!', {timeOut:3000});
+          }else{
+           if(jqXHR.status==423){
+            toastr.warning('Datos Repetidos!.', 'El nombre de la Asignatura  debe ser único!', {timeOut:3000});
+           }
+          }
+         
+      }
+    });
+  })
+
+  function resetform() {
+     $("form select").each(function() { this.selectedIndex = 0 });
+     $("form input[type=text],form input[type=number]").each(function() { this.value = '' });
+  }
 </script>
 @endsection
