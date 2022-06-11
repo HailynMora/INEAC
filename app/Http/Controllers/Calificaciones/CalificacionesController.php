@@ -22,8 +22,7 @@ class CalificacionesController extends Controller
                         'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
                         'tipo_curso.descripcion as nomcurso', 'matriculas.periodo as per', 'matriculas.anio as an')
                 ->get();
-
-            $as=DB::table('cursos')
+               $as=DB::table('cursos')
                     ->where('id_tipo_curso','=',$id)
                     ->where('anio','=',$anio)
                     ->where('periodo','=',$per)
@@ -31,22 +30,10 @@ class CalificacionesController extends Controller
                     ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
                     ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
                     ->join('docente','cursos.id_docente','=','docente.id')
-                    ->select('cursos.id as idcur','id_asignatura','asignaturas.nombre','tipo_curso.descripcion', 
-                              'docente.nombre as nomdoc', 'docente.apellido as apedoc')
+                    ->select('cursos.id as idcur','id_asignatura','asignaturas.nombre',
+                             'tipo_curso.descripcion','docente.nombre as nomdoc', 'docente.apellido as apedoc')
                     ->get();
-            $asnot=DB::table('cursos')
-            ->where('id_tipo_curso','=',$id)
-            ->where('anio','=',$anio)
-            ->where('periodo','=',$per)
-            ->where('id_asignatura','=',$asig)
-            ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
-            ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
-            ->join('docente','cursos.id_docente','=','docente.id')
-            ->select('cursos.id as idcur')
-            ->get();
-            $idcurn=$asnot[0]->idcur;
-            $nota=DB::table('notas')->where('id_curso','=',$idcurn)->get();
-           return view('calificaciones.calificaciones')->with('estumat',$estumat)->with('as',$as)->with('nota',$nota);
+            return view('calificaciones.calificaciones')->with('estumat',$estumat)->with('as',$as);
     }
 
     public function regnotas(Request $request){
@@ -74,5 +61,27 @@ class CalificacionesController extends Controller
         $category->save();
         return back();
     }
+
+    public function repnotas($id, $id4){
+        $nota = DB::table('notas')->where('id_curso','=',$id4)->where('id_estudiante','=',$id)
+                ->join('cursos','notas.id_curso', '=', 'cursos.id')
+                ->join('asignaturas','cursos.id_asignatura', '=', 'asignaturas.id')
+                ->join('tipo_curso','cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                ->join('docente','cursos.id_docente', '=', 'docente.id')
+                ->join('estudiante','notas.id_estudiante', '=', 'estudiante.id')
+                ->select('estudiante.first_nom as nomes', 'estudiante.second_nom', 
+                         'estudiante.firts_ape as apes', 'estudiante.second_ape', 
+                         'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 
+                         'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'cursos.anio', 
+                         'cursos.periodo', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
+                         'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4')
+                ->get();
+        return view('calificaciones.vernota')->with('nota',$nota);
+       }
+
+        public function prom(Request $request){
+              return $request;
+            //return response()->json(['res' => $request]);
+        }
     
 }

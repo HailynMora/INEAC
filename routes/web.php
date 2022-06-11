@@ -331,5 +331,9 @@ Route::post('/objetivos/asignatura/filtrar', [ReporteAsigController::class, 'fil
 Route::post('/objetivos/asignatura/tecnico/filtrar', [ReporteAsigController::class, 'filtrar_tec_as'])->middleware(['auth', 'secretaria_docente'])->name('filasig_tecnico');
 Route::post('/registro/notas', [CalificacionesController::class, 'regnotas'])->middleware(['auth', 'secretaria_docente'])->name('regnotas');
 
+//ver notas estudiante
+Route::get('/ver/notas/estudiante/{id}/{id4}',[CalificacionesController::class, 'repnotas'])->middleware(['auth', 'secretaria_docente']);
+
+Route::post('/calcular/nota', [CalificacionesController::class, 'prom'])->middleware(['auth', 'secretaria_docente'])->name('calcular');
 
 require __DIR__.'/auth.php';
