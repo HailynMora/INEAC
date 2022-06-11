@@ -69,11 +69,11 @@ class asignaturaController extends Controller
                 ],423);
             }else{
                 $category = new AsignaturaTecnicos();
-                $category->nombreasig = $request->input('nombre');
+                $category->nombreasig = $request->input('nomas');
                 $category->codigoasig = $request->input('codigo');
                 $category->intensidad_horaria = $request->input('intensidad_horaria');
                 $category->val_habilitacion = $request->input('val_habilitacion');
-                $category->id_estado = $request->input('id_estado');
+                $category->id_estado = $request->input('estado');
                 $category->save();
             }
             

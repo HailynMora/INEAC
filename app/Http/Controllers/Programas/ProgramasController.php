@@ -51,7 +51,7 @@ class ProgramasController extends Controller
             }else{
                 $category = new Programas();
                 $category->codigo = $request->input('codigo');
-                $category->descripcion = $request->input('nombre');
+                $category->descripcion = $request->input('nombac');
                 $category->id_estado = $request->input('estado');
                 $category->cursodes = $request->input('des');
                 $category->jornada = $request->input('jornada');
@@ -68,7 +68,7 @@ class ProgramasController extends Controller
     public function registro_tecnicos(Request $request){
         $cod=$request->codigo;
         $buscod = DB::table('programa_tecnico')->where('codigotec', '=', $cod)->count();
-        $busnom = DB::table('programa_tecnico')->where('nombretec', '=', $request->nombre)->count();
+        $busnom = DB::table('programa_tecnico')->where('nombretec', '=', $request->nomtec)->count();
         if($buscod!=0){//validacion con ajax
             return \Response::json([
                 'error'  => 'Error datos'
@@ -82,7 +82,7 @@ class ProgramasController extends Controller
             }else{
                  $category = new ProgramasTecnicos();
                 $category->codigotec = $request->input('codigo');
-                $category->nombretec = $request->input('nombre');
+                $category->nombretec = $request->input('nomtec');
                 $category->id_estado = $request->input('estado');
                 $category->descripcion = $request->input('descripcion');
                 $category->jornada = $request->input('jornada');

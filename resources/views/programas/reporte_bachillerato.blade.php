@@ -3,15 +3,91 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3> Programas Bachillerato Registrados</h3>
 </div>
-<a href="{{route('registrarprog')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
-<a href="{{route('reporte')}}"  class="btn btn-outline-warning my-2 my-sm-0" >Asig. Bachillerato</a>
+<div class="row">
+  <div class="col-6">
+    <button type="button"class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#RegBac">
+      Registrar
+    </button>
+    <!--BOTON REGISTRO ASIGNATURAS-->
+      <a href="{{route('reporte')}}"  class="btn btn-outline-warning my-2 my-sm-0" >Asig. Bachillerato</a>
+    <!--FIN BOTON REGISTRO ASIG-->
+  </div>
+  <div class="col-6">
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
       @csrf
       <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
       <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
     </form>
-    
     <br><br>
+  </div>
+  <!--INICIO MODAL-->
+   <form id="forprogramas" name="forprogramas" method="POST">
+      @csrf
+      <div class="modal fade" id="RegBac" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <h3 class="text-center" style="background-color: #283593; color:#ffffff; padding-top:15px; padding-bottom:15px;">
+              Registro  Programas 
+            </h3>
+            <div class="modal-body">
+              <!--registrar modal-->
+                <div class="accordion" id="accordionExample">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <i class="fas fa-edit"></i> Datos De Programa
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombac" name="nombac" required>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="codigo">Codigo</label>
+                            <input type="text" class="form-control" id="codigo" name="codigo" required>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="des">Descripcion</label>
+                            <input type="text" class="form-control" id="des" name="des" required>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="jornada">Jornada</label>
+                            <input type="text" class="form-control" id="jornada" name="jornada" required>
+                          </div>
+                          <div class="form-group col-md-4" >
+                            <label for="estado">Estado</label>
+                            <select id="estado" class="form-control" name="estado" required>
+                              <option selected>Seleccionar</option>
+                              <option value="1">Activo</option>
+                              <option value="2">Inactivo</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!--FIN REGISTRAR MODAL--->
+            </div>
+            <div class="modal-footer">
+              <!--botones -->
+                <button type="submit" class="btn btn-success">Registrar</button>
+                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+                <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Cancelar</a>
+              <!--end botones-->
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  <!--FIN MODAL-->
+</div>   
 <div class="container">
     <table class="table">
         <thead style="background-color:#FFCC00;">
@@ -141,5 +217,50 @@
     
     });
   });
+</script>
+<script>
+  $('#forprogramas').submit(function(e){
+    e.preventDefault();
+    var nombac=$('#nombac').val();
+    var codigo=$('#codigo').val();
+    var estado=$('#estado').val();
+    var des=$('#des').val();
+    var jornada=$('#jornada').val();
+    var _token = $('input[name=_token]').val(); //token de seguridad
+
+    $.ajax({
+      type: "POST",
+      url: "{{route('regprogramas')}}",
+      data:{
+        nombac:nombac,
+        codigo:codigo,
+        estado:estado,
+        des:des,
+        jornada:jornada,
+        _token:_token
+      },
+      success: function (response) {
+        if(response){
+          $('#forprogramas')[0].reset();
+          toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
+        }
+      },
+      error:function(jqXHR, response){
+          if(jqXHR.status==422){
+            toastr.warning('Datos Repetidos!.', 'El código del programa debe ser único!', {timeOut:3000});
+          }else{
+           if(jqXHR.status==423){
+            toastr.warning('Datos Repetidos!.', 'El nombre del programa debe ser único!', {timeOut:3000});
+           }
+          }
+         
+      }
+    });
+  })
+  function resetform() {
+     $("form select").each(function() { this.selectedIndex = 0 });
+     $("form input[type=text]").each(function() { this.value = '' });
+     toastr.info('Campos Vacios', {timeOut:1000});
+  }
 </script>
 @endsection
