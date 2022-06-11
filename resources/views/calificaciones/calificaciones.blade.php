@@ -164,7 +164,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div style="text-align: center;">
-                                            <button type="button" class="btn btn-info" value="Calcular" onclick="Calcular();">Calcular</button>
+                                            <a type="button"  value="Calcular" onclick="Calcular();"><i class="fas fa-calculator" style="color:#85a462; font-size:30px;"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -294,9 +294,10 @@
         var not4=$('#nota4').val();
         var por4=$('#porcentaje4').val();
         var def;
+       
         def = ((parseFloat(not1)*por1)+(parseFloat(not2)*por2)+(parseFloat(not3)*por3)+(parseFloat(not4)*por4));
         document.getElementById('defi').innerHTML = def;
-
+        console.log(def)
     }
 </script>
 
