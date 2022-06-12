@@ -334,6 +334,6 @@ Route::post('/registro/notas', [CalificacionesController::class, 'regnotas'])->m
 //ver notas estudiante
 Route::get('/ver/notas/estudiante/{id}/{id4}',[CalificacionesController::class, 'repnotas'])->middleware(['auth', 'secretaria_docente']);
 
-Route::post('/calcular/nota', [CalificacionesController::class, 'prom'])->middleware(['auth', 'secretaria_docente'])->name('calcular');
+Route::post('/actualizar/nota', [CalificacionesController::class, 'actunotas'])->middleware(['auth', 'secretaria_docente'])->name('actualizarNota');
 
 require __DIR__.'/auth.php';

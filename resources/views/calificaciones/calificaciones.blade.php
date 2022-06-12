@@ -12,14 +12,34 @@
                 <div class="col-6">
                 </div>
                 <div class="col-6">
-                    <a href="/asignatura/reporte_c" type="button" class="float-right"><i class="fas fa-long-arrow-alt-left"></i> Regresar</a>
+                    <a  href="/asignatura/reporte_c" class="btn float-right"><i class="fas fa-backward"></i>&nbsp;Regresar</a>
                 </div>
             </div>
         </div>
         <div class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 <!--tabla-->
-                    <table class="table table-striped"style="background-color:#FFCC00;">
+                <!--mensajes-->
+                @if(Session::has('notare'))
+                    <div class="alert alert-dismissible fade show" role="alert" style="background-color:#AFDCEC;">
+                        <strong> {{Session::get('notare')}}</strong> 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+                    @if(Session::has('notaval'))
+                    <div class="alert alert-dismissible fade show" role="alert" style="background-color:#38ACEC;">
+                        <strong> {{Session::get('notaval')}}</strong> 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+                <!--end mensajes-->
+                <br>
+                <div class="table-responsive">
+                    <table class="table" style="background-color:#FFCC00;">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
@@ -45,10 +65,12 @@
                                         <!--modal-->
                                         <!-- Button trigger modal -->
                                         <a type="button"  data-toggle="modal" data-target="#exampleModal{{$t->idest}}" title="Ingresar Nota">
-                                            <i class="fas fa-book-open" style="color:#537993; font-size:22px;"></i>
+                                            <i class="bi bi-journal-bookmark" style="color:black; font-size:24px;"></i>
                                         </a>
                                         &nbsp&nbsp
-                                        <a type="button" href="/ver/notas/estudiante/{{$t->idest}}/{{$as[0]->idcur}}" style="background-color:#3b5567;" title="Visualizar Nota"><i class="fas fa-file-alt" style="color:#AFCEE3; font-size:22px;"></i></a>
+                                        <a  href="/ver/notas/estudiante/{{$t->idest}}/{{$as[0]->idcur}}" title="Visualizar Nota">
+                                          <i class="bi bi-file-earmark-ruled" style="color:black; font-size:24px;"></i>
+                                       </a>
                                         <!-- Modal -->
                                         <form action="{{route('regnotas')}}" method="POST">
                                         @csrf
@@ -60,7 +82,8 @@
                                                         </div>
                                                         <div class="modal-body">
                                                         <!--table-->
-                                                        <table class="table table-striped"style="background-color:#FFCC00;">
+                                                        <div class="table-responsive">
+                                                        <table class="table" style="background-color:#FFCC00;">
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">No</th>
@@ -68,16 +91,16 @@
                                                                     <th scope="col">Porcentaje</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody style="background-color: #dcedc8;">
+                                                            <tbody style="background-color: #7FFFD4;">
                                                                 <tr>
                                                                     <th scope="row">1</th>
                                                                     <td>
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" id="nota1" name="nota1" placeholder="Ejm. 3.5" required>
+                                                                            <input type="number" step="any" min="0" max="5" class="form-control" id="nota1" name="nota1" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje1" name="porcentaje1">
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
@@ -98,11 +121,11 @@
                                                                     <th scope="row">2</th>
                                                                     <td>
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" id="nota2" name="nota2" placeholder="Ejm. 3.5" required>
+                                                                            <input type="number" step="any" min="0" max="5" class="form-control" id="nota2" name="nota2" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje2" name="porcentaje2">
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
@@ -122,12 +145,12 @@
                                                                 <tr>
                                                                 <th scope="row">3</th>
                                                                     <td>
-                                                                        <div class="form-group">
-                                                                            <input type="text" class="form-control" id="nota3" name="nota3" placeholder="Ejm. 3.5" required>
+                                                                        <div class="form-group" style="padding-top:7px;">
+                                                                            <input type="number" step="any" min="0" max="5" class="form-control" id="nota3" name="nota3" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje3" name="porcentaje3">
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
@@ -148,11 +171,11 @@
                                                                     <th scope="row">4</th>
                                                                     <td>
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" id="nota4" name="nota4" placeholder="Ejm. 3.5" required>
+                                                                            <input type="number" step="any" min="0" max="5" type="text" class="form-control" id="nota4" name="nota4" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje4" name="porcentaje4">
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
@@ -171,12 +194,13 @@
                                                                 <!--end cuarta fila-->
                                                             </tbody>
                                                         </table>
+                                                      </div>
                                                         <!--end table-->
                                                         <input id="idcur" name="idcur" value="{{$as[0]->idcur}}" hidden >
                                                         <input id="idest" name="idest" value="{{$t->idest}}"  hidden>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn"  style="background-color:#FFCC00;" data-dismiss="modal">Salir</button>
                                                         <button type="submit" class="btn btn-primary">enviar</button>
                                                     </div>
                                                 </div>
@@ -188,6 +212,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                   </div>
                 <!--end tabla-->
             </div>
         </div>

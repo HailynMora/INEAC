@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\CalificacionesModel\Notas;
+use Session;
 
 class CalificacionesController extends Controller
 {
@@ -45,20 +46,29 @@ class CalificacionesController extends Controller
         $p3 = $request->porcentaje3;
         $n4 = $request->nota4;
         $p4 = $request->porcentaje4;
-        $final = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
-        $category = new Notas();
-        $category->nota1= $request->input('nota1');
-        $category->por1= $request->input('porcentaje1');
-        $category->nota2= $request->input('nota2');
-        $category->por2= $request->input('porcentaje2');
-        $category->nota3= $request->input('nota3');
-        $category->por3= $request->input('porcentaje3');
-        $category->nota4= $request->input('nota4');
-        $category->por4= $request->input('porcentaje4');
-        $category->definitiva= $final;
-        $category->id_curso = $request->input('idcur');
-        $category->id_estudiante = $request->input('idest');
-        $category->save();
+        //validar si la nota de un estudiante ya se encuentra para una materia
+        $valnotas = DB::table('notas')->where('id_curso', $request->idcur)->where('id_estudiante', $request->idcur)->count();
+        if($valnotas == 0){
+                $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
+                $final = round($val, 1);
+                $category = new Notas();
+                $category->nota1= $request->input('nota1');
+                $category->por1= $request->input('porcentaje1');
+                $category->nota2= $request->input('nota2');
+                $category->por2= $request->input('porcentaje2');
+                $category->nota3= $request->input('nota3');
+                $category->por3= $request->input('porcentaje3');
+                $category->nota4= $request->input('nota4');
+                $category->por4= $request->input('porcentaje4');
+                $category->definitiva= $final;
+                $category->id_curso = $request->input('idcur');
+                $category->id_estudiante = $request->input('idest');
+                $category->save();
+                Session::flash('notare','Calificaciones registradas exitosamente.');
+
+        }else{
+                Session::flash('notaval','Calificaciones ya se encuentran registradas.');
+        }
         return back();
     }
 
@@ -73,15 +83,37 @@ class CalificacionesController extends Controller
                          'estudiante.firts_ape as apes', 'estudiante.second_ape', 
                          'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 
                          'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'cursos.anio', 
-                         'cursos.periodo', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
+                         'cursos.periodo', 'notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
                          'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4')
                 ->get();
         return view('calificaciones.vernota')->with('nota',$nota);
        }
 
-        public function prom(Request $request){
-              return $request;
+        public function actunotas(Request $request){
+                $n1 = $request->nota1;
+                $p1 = $request->porcentaje1;
+                $n2 = $request->nota2;
+                $p2 = $request->porcentaje2;
+                $n3 = $request->nota3;
+                $p3 = $request->porcentaje3;
+                $n4 = $request->nota4;
+                $p4 = $request->porcentaje4;
+                $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
+                $final = round($val, 1);
+                //actualizar
+                $category = Notas::findOrfail($request->idnota);
+                $category->nota1= $request->input('nota1');
+                $category->por1= $request->input('porcentaje1');
+                $category->nota2= $request->input('nota2');
+                $category->por2= $request->input('porcentaje2');
+                $category->nota3= $request->input('nota3');
+                $category->por3= $request->input('porcentaje3');
+                $category->nota4= $request->input('nota4');
+                $category->por4= $request->input('porcentaje4');
+                $category->definitiva= $final;
+                $category->save();
+              return back();
             //return response()->json(['res' => $request]);
         }
-    
+
 }
