@@ -186,7 +186,7 @@ class CalificacionesController extends Controller
                          'estudiante.firts_ape as apes', 'estudiante.second_ape', 
                          'asig_tecnicos.nombreasig as asignatura', 'programa_tecnico.nombretec as curso', 
                          'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'asignaturas_tecnicos.anio', 
-                         'asignaturas_tecnicos.periodo', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 
+                         'asignaturas_tecnicos.periodo','notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 
                          'notas_tecnico.nota4', 'notas_tecnico.definitiva','notas_tecnico.por1', 'notas_tecnico.por2', 
                          'notas_tecnico.por3', 'notas_tecnico.por4')
                 ->get();
@@ -250,6 +250,32 @@ class CalificacionesController extends Controller
                         Session::flash('erroractu','Error!. El porcentaje debe sumar 100%');
 
                 }
+              return back();
+            //return response()->json(['res' => $request]);
+        }
+        public function actunotastec(Request $request){
+                $n1 = $request->nota1;
+                $p1 = $request->porcentaje1;
+                $n2 = $request->nota2;
+                $p2 = $request->porcentaje2;
+                $n3 = $request->nota3;
+                $p3 = $request->porcentaje3;
+                $n4 = $request->nota4;
+                $p4 = $request->porcentaje4;
+                $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
+                $final = round($val, 1);
+                //actualizar
+                $category = NotasTecnico::findOrfail($request->idnota);
+                $category->nota1= $request->input('nota1');
+                $category->por1= $request->input('porcentaje1');
+                $category->nota2= $request->input('nota2');
+                $category->por2= $request->input('porcentaje2');
+                $category->nota3= $request->input('nota3');
+                $category->por3= $request->input('porcentaje3');
+                $category->nota4= $request->input('nota4');
+                $category->por4= $request->input('porcentaje4');
+                $category->definitiva= $final;
+                $category->save();
               return back();
             //return response()->json(['res' => $request]);
         }

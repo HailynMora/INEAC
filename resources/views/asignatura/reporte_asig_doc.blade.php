@@ -87,15 +87,15 @@
                 <td>{{$d->val_habilitacion}}</td>
                 <td>
                   <!-- Button trigger modal -->
-                  <a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop{{$d->idasig}}">
-                    <i class="fas fa-book-open"></i>
+                  <a type="button"  data-toggle="modal" data-target="#staticBackdrop{{$d->idasig}}" title="Registrar Objetivos">
+                    <i class="fas fa-book-open" style="color:#215EBB; font-size:22px;"></i>&nbsp;
                   </a>
                   <a type="button" data-toggle="modal" data-target="#listaModalT{{$d->idasig}}" title="Lista de Objetivos">
-                    <i class="fas fa-list-alt"></i>
+                    <i class="fas fa-list-alt" style="color:#FFC107; font-size:22px;"></i>&nbsp;
                   </a>
                   <!-- vemtana de registrar notas -->
                   <a href="/registro/notas/tecnico/{{$d->idtec}}/{{$d->anio}}/{{$d->periodo}}/{{$d->idastec}}/{{$d->idtri}}" title="Ingresar notas" style="color: #678a3f;">
-                    <i class="fas fa-sticky-note"></i>
+                    <i class="fas fa-sticky-note" style="color:#219F9C; font-size:22px;"></i>
                   </a>
                   <!-- Modal -->
                   <!-- Modal -->
