@@ -45,10 +45,10 @@
                                         <!--modal-->
                                         <!-- Button trigger modal -->
                                         <a type="button"  data-toggle="modal" data-target="#exampleModal{{$t->idest}}" title="Ingresar Nota">
-                                            <i class="fas fa-book-open" style="color:#537993; font-size:22px;"></i>
+                                            <i class="bi bi-journal-bookmark" style="color:black; font-size:24px;"></i>
                                         </a>
                                         &nbsp&nbsp
-                                        <a type="button" href="/ver/notas/estudiante/tecnico/{{$t->idest}}/{{$asig[0]->idastec}}" style="background-color:#3b5567;" title="Visualizar Nota"><i class="fas fa-file-alt" style="color:#AFCEE3; font-size:22px;"></i></a>
+                                        <a type="button" href="/ver/notas/estudiante/tecnico/{{$t->idest}}/{{$asig[0]->idastec}}" title="Visualizar Nota"><i class="bi bi-file-earmark-ruled" style="color:black; font-size:24px;"></i></a>
                                         <!-- Modal -->
                                         <form action="{{route('regnotastec')}}" method="POST">
                                         @csrf
@@ -60,7 +60,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                         <!--table-->
-                                                        <table class="table table-striped"style="background-color:#FFCC00;">
+                                                        <table class="table" style="background-color:#FFCC00;">
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">No</th>
@@ -68,12 +68,12 @@
                                                                     <th scope="col">Porcentaje</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody style="background-color: #dcedc8;">
+                                                            <tbody style="background-color: #7FFFD4;">
                                                                 <tr>
                                                                     <th scope="row">1</th>
                                                                     <td>
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" id="nota1" name="nota1" placeholder="Ejm. 3.5" required>
+                                                                            <input type="number" step="any" min="0" max="5" class="form-control" id="nota1" name="nota1" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -98,7 +98,7 @@
                                                                     <th scope="row">2</th>
                                                                     <td>
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" id="nota2" name="nota2" placeholder="Ejm. 3.5" required>
+                                                                            <input type="number" step="any" min="0" max="5" class="form-control" id="nota2" name="nota2" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -123,7 +123,7 @@
                                                                 <th scope="row">3</th>
                                                                     <td>
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" id="nota3" name="nota3" placeholder="Ejm. 3.5" required>
+                                                                            <input type="number" step="any" min="0" max="5" class="form-control" id="nota3" name="nota3" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -148,7 +148,7 @@
                                                                     <th scope="row">4</th>
                                                                     <td>
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" id="nota4" name="nota4" placeholder="Ejm. 3.5" required>
+                                                                            <input type="number" step="any" min="0" max="5" type="text" class="form-control" id="nota4" name="nota4" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
                                                                     <td>
