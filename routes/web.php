@@ -321,8 +321,11 @@ Route::post('/objetivos/asignatura/bachiller', [ReporteAsigController::class, 'r
 
 Route::post('/objetivos/asignatura', [ReporteAsigController::class, 'regobtec'])->middleware(['auth', 'secretaria_docente'])->name('regobjettec');
 
-//RUTA INGRESAR NOTAS
+//RUTA INGRESAR NOTAS BACHILLER
 Route::get('registro/notas/{id}/{im}/{per}/{asig}',[CalificacionesController::class, 'listado'])->middleware(['auth', 'secretaria_docente'])->name('matcurso');
+
+//RUTA INGRESAR NOTAS TECNICO
+Route::get('registro/notas/tecnico/{id}/{im}/{per}/{asig}/{tri}',[CalificacionesController::class, 'listado_tec'])->middleware(['auth', 'secretaria_docente'])->name('tec');
 
 //eliminar objetivos 
 Route::get('/eliminar/objetivos/{id}',[ReporteAsigController::class, 'elim_obj'])->middleware(['auth', 'secretaria_docente']);
@@ -331,9 +334,16 @@ Route::post('/objetivos/asignatura/filtrar', [ReporteAsigController::class, 'fil
 Route::post('/objetivos/asignatura/tecnico/filtrar', [ReporteAsigController::class, 'filtrar_tec_as'])->middleware(['auth', 'secretaria_docente'])->name('filasig_tecnico');
 Route::post('/registro/notas', [CalificacionesController::class, 'regnotas'])->middleware(['auth', 'secretaria_docente'])->name('regnotas');
 
+Route::post('/registro/notas/tecnicos', [CalificacionesController::class, 'regnotastec'])->middleware(['auth', 'secretaria_docente'])->name('regnotastec');
+
+
 //ver notas estudiante
 Route::get('/ver/notas/estudiante/{id}/{id4}',[CalificacionesController::class, 'repnotas'])->middleware(['auth', 'secretaria_docente']);
 
+Route::get('/ver/notas/estudiante/tecnico/{id}/{id4}',[CalificacionesController::class, 'repnotastec'])->middleware(['auth', 'secretaria_docente']);
+
+
+Route::post('/calcular/nota', [CalificacionesController::class, 'prom'])->middleware(['auth', 'secretaria_docente'])->name('calcular');
 Route::post('/actualizar/nota', [CalificacionesController::class, 'actunotas'])->middleware(['auth', 'secretaria_docente'])->name('actualizarNota');
 
 Route::get('//reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);

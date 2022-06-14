@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\CalificacionesModel\Notas;
+use App\Models\CalificacionesModel\NotasTecnico;
 use Session;
 
 class CalificacionesController extends Controller
@@ -35,6 +36,37 @@ class CalificacionesController extends Controller
                              'tipo_curso.descripcion','docente.nombre as nomdoc', 'docente.apellido as apedoc')
                     ->get();
             return view('calificaciones.calificaciones')->with('estumat',$estumat)->with('as',$as);
+    }
+
+    public function listado_tec($id,$anio,$per,$asig,$tri){                
+        $mates = DB::table('matricula_tecnico')
+                ->where('id_tecnico',$id)
+                ->where('anio',$anio)
+                ->where('periodo',$per)
+                ->where('id_trimestre',$tri)
+                ->join('estudiante','matricula_tecnico.id_estudiante','=','estudiante.id')
+                ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
+                ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+                ->join('trimestre_tecnicos', 'matricula_tecnico.id_trimestre', '=', 'trimestre_tecnicos.id')
+                ->select('matricula_tecnico.id as idmati','matricula_tecnico.id_estudiante as idest',
+                        'matricula_tecnico.id_tecnico as idtec','estudiante.first_nom as nombre', 
+                        'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 
+                        'estudiante.firts_ape as primerape', 'estudiante.telefono', 'estudiante.num_doc', 
+                        'tipo_documento.descripcion as destipo','matricula_tecnico.periodo as per',
+                        'matricula_tecnico.anio as an', 'trimestre_tecnicos.nombretri')
+                ->get();
+        $asig = DB::table('asignaturas_tecnicos')
+                ->where('id_asignaturas',$asig)
+                ->where('id_tecnico',$id)
+                ->where('anio',$anio)
+                ->where('periodo',$per)
+                ->where('id_trimestre',$tri)
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                ->select('asignaturas_tecnicos.id as idastec','id_asignaturas','asig_tecnicos.nombreasig','programa_tecnico.nombretec','docente.nombre as nomdoc', 'docente.apellido as apedoc')
+                ->get();
+        return view('calificaciones.calificacionestec')->with('mates',$mates)->with('asig',$asig);
     }
 
     public function regnotas(Request $request){
@@ -99,6 +131,31 @@ class CalificacionesController extends Controller
         }
         return back();
     }
+    public function regnotastec(Request $request){
+        $n1 = $request->nota1;
+        $p1 = $request->porcentaje1;
+        $n2 = $request->nota2;
+        $p2 = $request->porcentaje2;
+        $n3 = $request->nota3;
+        $p3 = $request->porcentaje3;
+        $n4 = $request->nota4;
+        $p4 = $request->porcentaje4;
+        $final = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
+        $category = new NotasTecnico();
+        $category->nota1= $request->input('nota1');
+        $category->por1= $request->input('porcentaje1');
+        $category->nota2= $request->input('nota2');
+        $category->por2= $request->input('porcentaje2');
+        $category->nota3= $request->input('nota3');
+        $category->por3= $request->input('porcentaje3');
+        $category->nota4= $request->input('nota4');
+        $category->por4= $request->input('porcentaje4');
+        $category->definitiva= $final;
+        $category->id_tecnicos = $request->input('idcur');
+        $category->id_estudiante = $request->input('idest');
+        $category->save();
+        return back();
+    }
 
     public function repnotas($id, $id4){
         $nota = DB::table('notas')->where('id_curso','=',$id4)->where('id_estudiante','=',$id)
@@ -118,6 +175,28 @@ class CalificacionesController extends Controller
         return view('calificaciones.vernota')->with('nota',$nota);
        }
 
+       public function repnotastec($id, $id4){
+        $nota = DB::table('notas_tecnico')->where('id_tecnicos','=',$id4)->where('id_estudiante','=',$id)
+                ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
+                ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                ->select('estudiante.first_nom as nomes', 'estudiante.second_nom', 
+                         'estudiante.firts_ape as apes', 'estudiante.second_ape', 
+                         'asig_tecnicos.nombreasig as asignatura', 'programa_tecnico.nombretec as curso', 
+                         'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'asignaturas_tecnicos.anio', 
+                         'asignaturas_tecnicos.periodo', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 
+                         'notas_tecnico.nota4', 'notas_tecnico.definitiva','notas_tecnico.por1', 'notas_tecnico.por2', 
+                         'notas_tecnico.por3', 'notas_tecnico.por4')
+                ->get();
+        return view('calificaciones.vernotatec')->with('nota',$nota);
+       }
+
+
+        public function prom(Request $request){
+              return $request;
+        }
         public function actunotas(Request $request){
                 $n1 = $request->nota1;
                 $p1 = $request->porcentaje1;
