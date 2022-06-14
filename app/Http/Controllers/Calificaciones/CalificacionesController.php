@@ -46,11 +46,34 @@ class CalificacionesController extends Controller
         $p3 = $request->porcentaje3;
         $n4 = $request->nota4;
         $p4 = $request->porcentaje4;
+        //validar el porcentaje
+        $porval = ($p1)+($p2)+($p3)+($p4);
+        $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
+        $final = round($val, 1);
+        //validar el desempenio
+        if($final >= 1 && $final < 3){
+                $desempenio = 4;
+        }else{
+                if($final >= 3 && $final < 4){
+                        $desempenio = 2;
+                }else{
+                        if($final >= 4 && $final < 4.7){
+                                $desempenio = 3;
+
+                        }else{
+                                if($final >= 4.7 && $final <= 5){
+                                        $desempenio = 1;  
+                                }else{
+                                        $desempenio = 5;
+
+                                }
+                        }
+                }
+        }
         //validar si la nota de un estudiante ya se encuentra para una materia
-        $valnotas = DB::table('notas')->where('id_curso', $request->idcur)->where('id_estudiante', $request->idcur)->count();
+        if($porval==1){
+          $valnotas = DB::table('notas')->where('id_curso', $request->idcur)->where('id_estudiante', $request->idcur)->count();
         if($valnotas == 0){
-                $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
-                $final = round($val, 1);
                 $category = new Notas();
                 $category->nota1= $request->input('nota1');
                 $category->por1= $request->input('porcentaje1');
@@ -63,11 +86,16 @@ class CalificacionesController extends Controller
                 $category->definitiva= $final;
                 $category->id_curso = $request->input('idcur');
                 $category->id_estudiante = $request->input('idest');
+                $category->id_desempenio = $desempenio;
                 $category->save();
                 Session::flash('notare','Calificaciones registradas exitosamente.');
 
+                }else{
+                        Session::flash('notaval','Calificaciones ya se encuentran registradas.');
+                }
         }else{
-                Session::flash('notaval','Calificaciones ya se encuentran registradas.');
+                Session::flash('notaval','Error!. El porcentaje debe sumar 100%');
+
         }
         return back();
     }
@@ -79,12 +107,13 @@ class CalificacionesController extends Controller
                 ->join('tipo_curso','cursos.id_tipo_curso', '=', 'tipo_curso.id')
                 ->join('docente','cursos.id_docente', '=', 'docente.id')
                 ->join('estudiante','notas.id_estudiante', '=', 'estudiante.id')
+                ->join('desempenos','notas.id_desempenio', '=', 'desempenos.id')
                 ->select('estudiante.first_nom as nomes', 'estudiante.second_nom', 
                          'estudiante.firts_ape as apes', 'estudiante.second_ape', 
                          'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 
                          'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'cursos.anio', 
                          'cursos.periodo', 'notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
-                         'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4')
+                         'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'desempenos.descripcion as desem')
                 ->get();
         return view('calificaciones.vernota')->with('nota',$nota);
        }
@@ -101,19 +130,69 @@ class CalificacionesController extends Controller
                 $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
                 $final = round($val, 1);
                 //actualizar
-                $category = Notas::findOrfail($request->idnota);
-                $category->nota1= $request->input('nota1');
-                $category->por1= $request->input('porcentaje1');
-                $category->nota2= $request->input('nota2');
-                $category->por2= $request->input('porcentaje2');
-                $category->nota3= $request->input('nota3');
-                $category->por3= $request->input('porcentaje3');
-                $category->nota4= $request->input('nota4');
-                $category->por4= $request->input('porcentaje4');
-                $category->definitiva= $final;
-                $category->save();
+                if($final >= 1 && $final < 3){
+                        $desempenio = 4;
+                }else{
+                        if($final >= 3 && $final < 4){
+                                $desempenio = 2;
+                        }else{
+                                if($final >= 4 && $final < 4.7){
+                                        $desempenio = 3;
+        
+                                }else{
+                                        if($final >= 4.7 && $final <= 5){
+                                                $desempenio = 1;  
+                                        }else{
+                                                $desempenio = 5;
+        
+                                        }
+                                }
+                        }
+                }
+                //validar porcentaje
+                $porval = ($p1)+($p2)+($p3)+($p4);
+                if($porval == 1){
+                        $category = Notas::findOrfail($request->idnota);
+                        $category->nota1= $request->input('nota1');
+                        $category->por1= $request->input('porcentaje1');
+                        $category->nota2= $request->input('nota2');
+                        $category->por2= $request->input('porcentaje2');
+                        $category->nota3= $request->input('nota3');
+                        $category->por3= $request->input('porcentaje3');
+                        $category->nota4= $request->input('nota4');
+                        $category->por4= $request->input('porcentaje4');
+                        $category->definitiva= $final;
+                        $category->id_desempenio = $desempenio;
+                        $category->save();
+                        Session::flash('notac','Actualización realizada exitosamente.');
+
+                }else{
+
+                        Session::flash('erroractu','Error!. El porcentaje debe sumar 100%');
+
+                }
               return back();
             //return response()->json(['res' => $request]);
+        }
+
+
+        public function vernotas($id){
+            $consulta = DB::table('notas')->where('notas.id', $id)
+                        ->join('cursos','notas.id_curso', '=', 'cursos.id')
+                        ->join('asignaturas','cursos.id_asignatura', '=', 'asignaturas.id')
+                        ->join('tipo_curso','cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                        ->join('docente','cursos.id_docente', '=', 'docente.id')
+                        ->join('estudiante','notas.id_estudiante', '=', 'estudiante.id')
+                        ->join('desempenos','notas.id_desempenio', '=', 'desempenos.id')
+                        ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
+                                'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
+                                'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 
+                                'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'cursos.anio', 
+                                'cursos.periodo', 'notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
+                                'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'desempenos.descripcion as desem')
+                        ->get();
+            //return $consulta;
+            return view('calificaciones.reportenota')->with('consulta', $consulta);
         }
 
 }

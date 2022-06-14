@@ -51,6 +51,7 @@
                                     <td>
                                         <div class="form-group" style="padding-top:7px;">
                                             <select id="porcentaje1" name="porcentaje1">
+                                                <option value="{{$a->por1}}" selected>{{$a->por1*100}}%</option>
                                                 <option value="0.1">10%</option>
                                                 <option value="0.2">20%</option>
                                                 <option value="0.3">30%</option>
@@ -76,6 +77,7 @@
                                     <td>
                                         <div class="form-group" style="padding-top:7px;">
                                             <select id="porcentaje2" name="porcentaje2">
+                                                <option value="{{$a->por2}}" selected>{{$a->por2*100}}%</option>
                                                 <option value="0.1">10%</option>
                                                 <option value="0.2">20%</option>
                                                 <option value="0.3">30%</option>
@@ -101,6 +103,7 @@
                                     <td>
                                         <div class="form-group" style="padding-top:7px;">
                                             <select id="porcentaje3" name="porcentaje3">
+                                                <option value="{{$a->por3}}" selected>{{$a->por3*100}}%</option>
                                                 <option value="0.1">10%</option>
                                                 <option value="0.2">20%</option>
                                                 <option value="0.3">30%</option>
@@ -126,6 +129,7 @@
                                     <td>
                                         <div class="form-group" style="padding-top:7px;">
                                             <select id="porcentaje4" name="porcentaje4">
+                                               <option value="{{$a->por4}}" selected>{{$a->por4*100}}%</option>
                                                 <option value="0.1">10%</option>
                                                 <option value="0.2">20%</option>
                                                 <option value="0.3">30%</option>
@@ -160,6 +164,28 @@
             </div>
       </div>
     </div>
+     <!--mensaje-->
+     @if(Session::has('notac'))
+     <div class="container">
+            <div class="alert alert-dismissible fade show" role="alert" style="background-color:#AFDCEC;">
+                <strong> {{Session::get('notac')}}</strong> 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+      @endif
+       @if(Session::has('erroractu'))
+       <div class="container">
+                    <div class="alert alert-dismissible fade show" role="alert" style="background-color:#38ACEC;">
+                        <strong> {{Session::get('erroractu')}}</strong> 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+        </div>
+       @endif
+     <!--end mensaje-->
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
        <!--table-->
@@ -264,9 +290,10 @@
                             <div class="col-3">
                             </div>
                             <div class="col-3">
+                            <label><p>{{$n->desem}}</p></label>
                             </div>
                             <div class="col-3">
-                              <label><p>{{$n->definitiva}}</p></label>
+                            <label><p>{{$n->definitiva}}</p></label>
                             </div>
                         </div>
                 </div>

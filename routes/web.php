@@ -336,4 +336,5 @@ Route::get('/ver/notas/estudiante/{id}/{id4}',[CalificacionesController::class, 
 
 Route::post('/actualizar/nota', [CalificacionesController::class, 'actunotas'])->middleware(['auth', 'secretaria_docente'])->name('actualizarNota');
 
+Route::get('//reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);
 require __DIR__.'/auth.php';

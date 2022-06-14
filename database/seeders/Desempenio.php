@@ -27,6 +27,9 @@ class Desempenio extends Seeder
             ],
             [
              'descripcion' => 'Insuficiente'
+            ],
+            [
+            'descripcion' => 'Deficiente'
             ]
 
         ];

@@ -10,6 +10,9 @@
         <div class="card-header" id="headingOne">
             <div class="row">
                 <div class="col-6">
+                   <div class="conatiner">
+                   <a href="/reporte/notas/{{$as[0]->idcur}}"><img src="{{asset('dist/img/informe.png')}}" class="img-fluid" ></a>
+                  </div>
                 </div>
                 <div class="col-6">
                     <a  href="/asignatura/reporte_c" class="btn float-right"><i class="fas fa-backward"></i>&nbsp;Regresar</a>
