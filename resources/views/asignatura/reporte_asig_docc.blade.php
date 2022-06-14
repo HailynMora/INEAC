@@ -108,15 +108,15 @@
                     <td>{{$d->val_habilitacion}}</td>
                     <td>
                         <!-- Button trigger modal -->
-                        <a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop{{$d->ida}}">
-                          <i class="fas fa-book-open"></i>
-                        </a>
-                        <a type="button" data-toggle="modal" data-target="#listaModal{{$d->ida}}" title="Lista de Objetivos">
-                          <i class="fas fa-list-alt"></i>
+                        <a type="button"  data-toggle="modal" data-target="#staticBackdrop{{$d->ida}}" title="Registrar Objetivos">
+                          <i class="fas fa-book-open" style="color:#215EBB; font-size:22px;"></i>&nbsp;
+                        </a> 
+                        <a type="button"  data-toggle="modal" data-target="#listaModal{{$d->ida}}" title="Lista de Objetivos" >
+                          <i class="fas fa-list-alt" style="color:#FFC107; font-size:22px;"></i>&nbsp;
                         </a>
                         <!-- vemtana de registrar notas -->
-                        <a href="/registro/notas/{{$d->idcurso}}/{{$d->anio}}/{{$d->periodo}}/{{$d->idasig}}" title="Ingresar notas" style="color: #678a3f;">
-                          <i class="fas fa-sticky-note"></i>
+                        <a type="button"  href="/registro/notas/{{$d->idcurso}}/{{$d->anio}}/{{$d->periodo}}/{{$d->idasig}}" title="Ingresar notas">
+                          <i class="fas fa-sticky-note" style="color:#219F9C; font-size:22px;"></i>
                         </a>
                         <!-- Modal -->
                     <form action="{{route('regisob')}}"  method="POST">
