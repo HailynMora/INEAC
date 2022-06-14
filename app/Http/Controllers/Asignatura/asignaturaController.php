@@ -267,13 +267,13 @@ class asignaturaController extends Controller
         $d= $doc->id;
         $repe=DB::table('asignaturas_tecnicos')
         ->where('asignaturas_tecnicos.id_docente',$d)
-        ->select('asignaturas_tecnicos.id','asig_tecnicos.codigoasig',
-                 'asig_tecnicos.nombreasig as asig','intensidad_horaria',
-                 'val_habilitacion','programa_tecnico.nombretec', 'asignaturas_tecnicos.anio', 
-                 'asignaturas_tecnicos.periodo', 'trimestre_tecnicos.nombretri as trimestre')
         ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
         ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
         ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+        ->select('asignaturas_tecnicos.id as idastec','asig_tecnicos.codigoasig','asig_tecnicos.id as idasig',
+                 'asig_tecnicos.nombreasig as asig','intensidad_horaria',
+                 'val_habilitacion','programa_tecnico.id as idtec','programa_tecnico.nombretec', 'asignaturas_tecnicos.anio', 
+                 'asignaturas_tecnicos.periodo','trimestre_tecnicos.id as idtri', 'trimestre_tecnicos.nombretri as trimestre')
         ->orderBy('asignaturas_tecnicos.periodo', 'ASC')
         ->get();
         $val=DB::table('objetivostec')->count();
