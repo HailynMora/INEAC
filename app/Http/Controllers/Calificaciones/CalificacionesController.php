@@ -282,7 +282,7 @@ class CalificacionesController extends Controller
 
 
         public function vernotas($id){
-            $consulta = DB::table('notas')->where('notas.id', $id)
+            $consulta = DB::table('notas')->where('notas.id_curso', $id)
                         ->join('cursos','notas.id_curso', '=', 'cursos.id')
                         ->join('asignaturas','cursos.id_asignatura', '=', 'asignaturas.id')
                         ->join('tipo_curso','cursos.id_tipo_curso', '=', 'tipo_curso.id')
@@ -296,8 +296,10 @@ class CalificacionesController extends Controller
                                 'cursos.periodo', 'notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
                                 'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'desempenos.descripcion as desem')
                         ->get();
+             $objetivos = DB::table('objetivos')->where('objetivos.id_asignaturas', $id)->select('descripcion')->get();
+             
             //return $consulta;
-            return view('calificaciones.reportenota')->with('consulta', $consulta);
+            return view('calificaciones.reportenota')->with('consulta', $consulta)->with('objetivos', $objetivos);
         }
 
 }
