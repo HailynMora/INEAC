@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inicio\InicioController;
-use App\Http\Controllers\Docentes\DocenteController;
+use App\Http\Controllers\Docentes\docenteController;
 use App\Http\Controllers\Estudiantes\EstudiantesController;
 use App\Http\Controllers\Programas\ProgramasController;
 use App\Http\Controllers\Estudiantes\ConsultarController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Docentes\PostDocController;
 use App\Http\Controllers\Docentes\ConsultarDocController;
-use App\Http\Controllers\Asignatura\AsignaturaController;
+use App\Http\Controllers\Asignatura\asignaturaController;
 use App\Http\Controllers\Asignatura\ConsultarAsigController;
 use App\Http\Controllers\Asignatura\PostAsigController;
 use App\Http\Controllers\Perfil\PerfilController;
@@ -346,11 +346,11 @@ Route::get('/ver/notas/estudiante/tecnico/{id}/{id4}',[CalificacionesController:
 Route::post('/calcular/nota', [CalificacionesController::class, 'prom'])->middleware(['auth', 'secretaria_docente'])->name('calcular');
 Route::post('/actualizar/nota', [CalificacionesController::class, 'actunotas'])->middleware(['auth', 'secretaria_docente'])->name('actualizarNota');
 
-<<<<<<< HEAD
 Route::get('//reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);
-=======
+Route::get('/reporte/notas/tecnico/{id}',[CalificacionesController::class, 'vernotastec'])->middleware(['auth', 'secretaria_docente']);
+
+
 Route::post('/actualizar/nota/tecnico', [CalificacionesController::class, 'actunotastec'])->middleware(['auth', 'secretaria_docente'])->name('actualizarNotaTec');
 
 
->>>>>>> 591fc989026e1b3746915bd40db8e1e037e27345
 require __DIR__.'/auth.php';

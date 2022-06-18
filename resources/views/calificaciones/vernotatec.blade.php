@@ -258,6 +258,7 @@
                             <div class="col-3">
                             </div>
                             <div class="col-3">
+                                <label><p>{{$n->desem}}</p></label>
                             </div>
                             <div class="col-3">
                               <label><p>{{$n->definitiva}}</p></label>

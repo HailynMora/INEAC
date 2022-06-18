@@ -10,6 +10,9 @@
         <div class="card-header" id="headingOne">
             <div class="row">
                 <div class="col-6">
+                    <div class="conatiner">
+                        <a href="/reporte/notas/tecnico/{{$asig[0]->idastec}}"><img src="{{asset('dist/img/informe.png')}}" class="img-fluid" ></a>
+                    </div>
                 </div>
                 <div class="col-6">
                     <a href="/asignatura/reporte" type="button" class="float-right"><i class="fas fa-long-arrow-alt-left"></i> Regresar</a>
@@ -19,7 +22,27 @@
         <div class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
                 <!--tabla-->
-                    <table class="table table-striped"style="background-color:#FFCC00;">
+                <!--mensajes-->
+                @if(Session::has('notare'))
+                    <div class="alert alert-dismissible fade show" role="alert" style="background-color:#AFDCEC;">
+                        <strong> {{Session::get('notare')}}</strong> 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+                    @if(Session::has('notaval'))
+                    <div class="alert alert-dismissible fade show" role="alert" style="background-color:#38ACEC;">
+                        <strong> {{Session::get('notaval')}}</strong> 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+                <!--end mensajes-->
+                <br>
+                <div class="table-responsive">
+                    <table class="table" style="background-color:#FFCC00;">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
@@ -77,7 +100,7 @@
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje1" name="porcentaje1">
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
@@ -102,7 +125,7 @@
                                                                         </div>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje2" name="porcentaje2">
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
@@ -122,7 +145,7 @@
                                                                 <tr>
                                                                 <th scope="row">3</th>
                                                                     <td>
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="padding-top:7px;">
                                                                             <input type="number" step="any" min="0" max="5" class="form-control" id="nota3" name="nota3" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
@@ -147,7 +170,7 @@
                                                                 <tr>
                                                                     <th scope="row">4</th>
                                                                     <td>
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="padding-top:7px;">
                                                                             <input type="number" step="any" min="0" max="5" type="text" class="form-control" id="nota4" name="nota4" placeholder="Ejm. 3.5" required>
                                                                         </div>
                                                                     </td>
@@ -188,6 +211,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
                 <!--end tabla-->
             </div>
         </div>
