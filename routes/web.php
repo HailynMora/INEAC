@@ -19,6 +19,7 @@ use App\Http\Controllers\RolesController\Roles;
 use App\Http\Controllers\Resportes\ReportesController;
 use App\Http\Controllers\Docentes\ReporteAsigController;
 use App\Http\Controllers\Calificaciones\CalificacionesController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -353,4 +354,8 @@ Route::get('/reporte/notas/tecnico/{id}',[CalificacionesController::class, 'vern
 Route::post('/actualizar/nota/tecnico', [CalificacionesController::class, 'actunotastec'])->middleware(['auth', 'secretaria_docente'])->name('actualizarNotaTec');
 
 
+Route::get('/reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);
+Route::get('/generar/pdf/notas/{id}', [PDFController::class, 'generatePDF'])->name('pdf');
+Route::get('/pdf/vista/{id}', [PDFController::class, 'vista']);
+>>>>>>> refs/remotes/origin/main
 require __DIR__.'/auth.php';

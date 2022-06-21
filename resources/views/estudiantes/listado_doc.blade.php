@@ -46,7 +46,7 @@
         <td>{{$d->estadoes}}</td>
         <td><!-- Button trigger modal -->
                 <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>" data-placement="bottom"  title="Ver Estudiante">
-                <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
+                <img src="{{asset('dist/img/card.png')}}" class="img-fluid" ></a>
                 <!-- Modal -->
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
