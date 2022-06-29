@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Inicio\InicioController;
 use App\Http\Controllers\Docentes\DocenteController;
 use App\Http\Controllers\Estudiantes\EstudiantesController;
+use App\Http\Controllers\Estudiantes\EstudiosController;
 use App\Http\Controllers\Programas\ProgramasController;
 use App\Http\Controllers\Estudiantes\ConsultarController;
 use App\Http\Controllers\PostController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\RolesController\Roles;
 use App\Http\Controllers\Resportes\ReportesController;
 use App\Http\Controllers\Docentes\ReporteAsigController;
 use App\Http\Controllers\Calificaciones\CalificacionesController;
+use App\Http\Controllers\Calificaciones\HabilitacionesController;
 use App\Http\Controllers\PDFController;
 
 /*
@@ -348,6 +350,23 @@ Route::post('/calcular/nota', [CalificacionesController::class, 'prom'])->middle
 Route::post('/actualizar/nota', [CalificacionesController::class, 'actunotas'])->middleware(['auth', 'secretaria_docente'])->name('actualizarNota');
 
 Route::get('/reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);
-Route::get('/generar/pdf/notas/{id}', [PDFController::class, 'generatePDF'])->name('pdf');
-Route::get('/pdf/vista/{id}', [PDFController::class, 'vista']);
+Route::post('/generar/pdf/notas', [PDFController::class, 'generatePDF'])->middleware(['auth', 'secretaria_docente'])->name('pdf');
+Route::get('/pdf/vista', [PDFController::class, 'vista'])->middleware(['auth', 'secretaria_docente']);
+
+
+//escel de notas bachillerato
+Route::post('/reporte/notas/excel', [ReportesController::class, 'excelNotas'])->middleware(['auth', 'secretaria_docente'])->name('excelnotas');
+//filtrar notas
+Route::post('/filtrar/notas', [CalificacionesController::class, 'filtrar'])->middleware(['auth', 'secretaria_docente'])->name('filtroNotas');
+
+//valor habilitacion para docentes
+Route::get('/valor/habilitaciones', [HabilitacionesController::class, 'vista'])->middleware(['auth', 'secretaria_docente'])->name('valorHab');
+//generar certificado laboral
+Route::get('/generar/certificado/laboral', [HabilitacionesController::class, 'laboral'])->middleware(['auth', 'secretaria_docente'])->name('certifLaboral');
+
+//generar pdf laboral docentes
+Route::get('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->middleware(['auth', 'secretaria_docente'])->name('pdfLaboral');
+//plan de estudios estudiante
+Route::get('/plan/estudios', [EstudiosController::class, 'principal'])->middleware(['auth', 'estudiante'])->name('planEstudios');
+
 require __DIR__.'/auth.php';

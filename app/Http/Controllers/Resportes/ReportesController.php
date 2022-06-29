@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Exports\EstudiantesBachiExport;
 use App\Exports\TecniosExcel;
 use App\Models\MatriculasModel\Matricula;
+use App\Exports\NotasBachiExcel;
 use DB;
 
 
@@ -50,6 +51,9 @@ class ReportesController extends Controller
 
     }
 
-   
-
+    public function excelNotas(Request $request){
+         $id = $request->idcurso;
+         $idnota = $request->idexcel;
+         return Excel::download(new NotasBachiExcel($id, $idnota), 'listado_notas_bach.xlsx');
+     }
 }

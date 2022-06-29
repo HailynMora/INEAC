@@ -294,11 +294,73 @@ class CalificacionesController extends Controller
                                 'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 
                                 'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'cursos.anio', 
                                 'cursos.periodo', 'notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
-                                'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'desempenos.descripcion as desem')
+                                'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'desempenos.descripcion as desem', 'notas.id_curso as idcur')
                         ->get();
              $objetivos = DB::table('objetivos')->where('objetivos.id_asignaturas', $id)->select('descripcion')->get();
              
             //return $consulta;
+            return view('calificaciones.reportenota')->with('consulta', $consulta)->with('objetivos', $objetivos);
+        }
+
+        //filtrar notas
+        public function filtrar(Request $request){
+            $res = $request->filnota;
+            $idcur = $request->idcurso;
+            if($res == 1){
+                $consulta = DB::table('notas')->where('notas.id_curso', $idcur)
+                ->where('notas.definitiva', '>=', '3.0')
+                ->join('cursos','notas.id_curso', '=', 'cursos.id')
+                ->join('asignaturas','cursos.id_asignatura', '=', 'asignaturas.id')
+                ->join('tipo_curso','cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                ->join('docente','cursos.id_docente', '=', 'docente.id')
+                ->join('estudiante','notas.id_estudiante', '=', 'estudiante.id')
+                ->join('desempenos','notas.id_desempenio', '=', 'desempenos.id')
+                ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
+                        'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
+                        'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 
+                        'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'cursos.anio', 
+                        'cursos.periodo', 'notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
+                        'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'desempenos.descripcion as desem', 'notas.id_curso as idcur')
+                ->get();
+
+            }else{
+                if($res==2){
+
+                        $consulta = DB::table('notas')->where('notas.id_curso', $idcur)
+                        ->where('notas.definitiva', '<', '3.0')
+                        ->join('cursos','notas.id_curso', '=', 'cursos.id')
+                        ->join('asignaturas','cursos.id_asignatura', '=', 'asignaturas.id')
+                        ->join('tipo_curso','cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                        ->join('docente','cursos.id_docente', '=', 'docente.id')
+                        ->join('estudiante','notas.id_estudiante', '=', 'estudiante.id')
+                        ->join('desempenos','notas.id_desempenio', '=', 'desempenos.id')
+                        ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
+                                'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
+                                'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 
+                                'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'cursos.anio', 
+                                'cursos.periodo', 'notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
+                                'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'desempenos.descripcion as desem', 'notas.id_curso as idcur')
+                        ->get();
+
+                }else{
+                        $consulta = DB::table('notas')->where('notas.id_curso', $idcur)
+                        ->join('cursos','notas.id_curso', '=', 'cursos.id')
+                        ->join('asignaturas','cursos.id_asignatura', '=', 'asignaturas.id')
+                        ->join('tipo_curso','cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                        ->join('docente','cursos.id_docente', '=', 'docente.id')
+                        ->join('estudiante','notas.id_estudiante', '=', 'estudiante.id')
+                        ->join('desempenos','notas.id_desempenio', '=', 'desempenos.id')
+                        ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
+                                'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
+                                'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 
+                                'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'cursos.anio', 
+                                'cursos.periodo', 'notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva',
+                                'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'desempenos.descripcion as desem', 'notas.id_curso as idcur')
+                        ->get();
+
+                }
+            }
+            $objetivos = DB::table('objetivos')->where('objetivos.id_asignaturas', $idcur)->select('descripcion')->get();
             return view('calificaciones.reportenota')->with('consulta', $consulta)->with('objetivos', $objetivos);
         }
 
