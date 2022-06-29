@@ -357,5 +357,5 @@ Route::post('/actualizar/nota/tecnico', [CalificacionesController::class, 'actun
 Route::get('/reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);
 Route::get('/generar/pdf/notas/{id}', [PDFController::class, 'generatePDF'])->name('pdf');
 Route::get('/pdf/vista/{id}', [PDFController::class, 'vista']);
->>>>>>> refs/remotes/origin/main
+
 require __DIR__.'/auth.php';
