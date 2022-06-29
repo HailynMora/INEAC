@@ -140,20 +140,54 @@ class CalificacionesController extends Controller
         $p3 = $request->porcentaje3;
         $n4 = $request->nota4;
         $p4 = $request->porcentaje4;
-        $final = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
-        $category = new NotasTecnico();
-        $category->nota1= $request->input('nota1');
-        $category->por1= $request->input('porcentaje1');
-        $category->nota2= $request->input('nota2');
-        $category->por2= $request->input('porcentaje2');
-        $category->nota3= $request->input('nota3');
-        $category->por3= $request->input('porcentaje3');
-        $category->nota4= $request->input('nota4');
-        $category->por4= $request->input('porcentaje4');
-        $category->definitiva= $final;
-        $category->id_tecnicos = $request->input('idcur');
-        $category->id_estudiante = $request->input('idest');
-        $category->save();
+        //validar el porcentaje
+        $porval = ($p1)+($p2)+($p3)+($p4);
+        $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
+        $final = round($val, 1);
+        //validar el desempenio
+        if($final >= 1 && $final < 3){
+                $desempenio = 4;
+        }else{
+                if($final >= 3 && $final < 4){
+                        $desempenio = 2;
+                }else{
+                        if($final >= 4 && $final < 4.7){
+                                $desempenio = 3;
+
+                        }else{
+                                if($final >= 4.7 && $final <= 5){
+                                        $desempenio = 1;  
+                                }else{
+                                        $desempenio = 5;
+                                }
+                        }
+                }
+        }
+        //validar si la nota de un estudiante ya se encuentra para una materia
+        if($porval==1){
+                $valnotas = DB::table('notas')->where('id_curso', $request->idcur)->where('id_estudiante', $request->idcur)->count();
+              if($valnotas == 0){
+                        $category = new NotasTecnico();
+                        $category->nota1= $request->input('nota1');
+                        $category->por1= $request->input('porcentaje1');
+                        $category->nota2= $request->input('nota2');
+                        $category->por2= $request->input('porcentaje2');
+                        $category->nota3= $request->input('nota3');
+                        $category->por3= $request->input('porcentaje3');
+                        $category->nota4= $request->input('nota4');
+                        $category->por4= $request->input('porcentaje4');
+                        $category->definitiva= $final;
+                        $category->id_tecnicos = $request->input('idcur');
+                        $category->id_estudiante = $request->input('idest');
+                        $category->id_desempenio = $desempenio;
+                        $category->save();
+                        Session::flash('notare','Calificaciones registradas exitosamente.');
+                }else{
+                        Session::flash('notaval','Calificaciones ya se encuentran registradas.');
+                }
+        }else{
+                Session::flash('notaval','Error!. El porcentaje debe sumar 100%');
+        }
         return back();
     }
 
@@ -182,13 +216,14 @@ class CalificacionesController extends Controller
                 ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
                 ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
                 ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                ->join('desempenos','notas_tecnico.id_desempenio', '=', 'desempenos.id')
                 ->select('estudiante.first_nom as nomes', 'estudiante.second_nom', 
                          'estudiante.firts_ape as apes', 'estudiante.second_ape', 
                          'asig_tecnicos.nombreasig as asignatura', 'programa_tecnico.nombretec as curso', 
                          'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'asignaturas_tecnicos.anio', 
                          'asignaturas_tecnicos.periodo','notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 
                          'notas_tecnico.nota4', 'notas_tecnico.definitiva','notas_tecnico.por1', 'notas_tecnico.por2', 
-                         'notas_tecnico.por3', 'notas_tecnico.por4')
+                         'notas_tecnico.por3', 'notas_tecnico.por4','desempenos.descripcion as desem')
                 ->get();
         return view('calificaciones.vernotatec')->with('nota',$nota);
        }
@@ -265,17 +300,48 @@ class CalificacionesController extends Controller
                 $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
                 $final = round($val, 1);
                 //actualizar
-                $category = NotasTecnico::findOrfail($request->idnota);
-                $category->nota1= $request->input('nota1');
-                $category->por1= $request->input('porcentaje1');
-                $category->nota2= $request->input('nota2');
-                $category->por2= $request->input('porcentaje2');
-                $category->nota3= $request->input('nota3');
-                $category->por3= $request->input('porcentaje3');
-                $category->nota4= $request->input('nota4');
-                $category->por4= $request->input('porcentaje4');
-                $category->definitiva= $final;
-                $category->save();
+                if($final >= 1 && $final < 3){
+                        $desempenio = 4;
+                }else{
+                        if($final >= 3 && $final < 4){
+                                $desempenio = 2;
+                        }else{
+                                if($final >= 4 && $final < 4.7){
+                                        $desempenio = 3;
+        
+                                }else{
+                                        if($final >= 4.7 && $final <= 5){
+                                                $desempenio = 1;  
+                                        }else{
+                                                $desempenio = 5;
+        
+                                        }
+                                }
+                        }
+                }
+                //validar porcentaje
+                $porval = ($p1)+($p2)+($p3)+($p4);
+                if($porval == 1){
+                        $category = NotasTecnico::findOrfail($request->idnota);
+                        $category->nota1= $request->input('nota1');
+                        $category->por1= $request->input('porcentaje1');
+                        $category->nota2= $request->input('nota2');
+                        $category->por2= $request->input('porcentaje2');
+                        $category->nota3= $request->input('nota3');
+                        $category->por3= $request->input('porcentaje3');
+                        $category->nota4= $request->input('nota4');
+                        $category->por4= $request->input('porcentaje4');
+                        $category->definitiva= $final;
+                        $category->id_desempenio = $desempenio;
+                        $category->save();
+                        Session::flash('notac','Actualización realizada exitosamente.');
+
+                }else{
+
+                        Session::flash('erroractu','Error!. El porcentaje debe sumar 100%');
+
+                }
+                
               return back();
             //return response()->json(['res' => $request]);
         }
@@ -363,5 +429,23 @@ class CalificacionesController extends Controller
             $objetivos = DB::table('objetivos')->where('objetivos.id_asignaturas', $idcur)->select('descripcion')->get();
             return view('calificaciones.reportenota')->with('consulta', $consulta)->with('objetivos', $objetivos);
         }
+        public function vernotastec($id){
+                $consulta = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$id)
+                        ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
+                        ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                        ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
+                        ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                        ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                        ->join('desempenos','notas_tecnico.id_desempenio', '=', 'desempenos.id')
+                        ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
+                                'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
+                                'asig_tecnicos.nombreasig as asignatura', 'programa_tecnico.nombretec as curso', 
+                                'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'asignaturas_tecnicos.anio', 
+                                'asignaturas_tecnicos.periodo', 'notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva',
+                                'notas_tecnico.por1', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
+                        ->get();
+                //return $consulta;
+                return view('calificaciones.reportenotatec')->with('consulta', $consulta);
+            }
 
 }
