@@ -11,11 +11,11 @@
             <div class="row">
                 <div class="col-6">
                     <div class="conatiner">
-                        <a href="/reporte/notas/tecnico/{{$asig[0]->idastec}}"><img src="{{asset('dist/img/informe.png')}}" class="img-fluid" ></a>
+                        <a href="/reporte/notas/tecnico/{{$asig[0]->idastec}}"><img src="{{asset('dist/img/informe_c.png')}}" class="img-fluid" ></a>
                     </div>
                 </div>
                 <div class="col-6">
-                    <a href="/asignatura/reporte" type="button" class="float-right"><i class="fas fa-long-arrow-alt-left"></i> Regresar</a>
+                    <a  href="/asignatura/reporte" class="btn float-right"><i class="fas fa-backward"></i>&nbsp;Regresar</a>
                 </div>
             </div>
         </div>
@@ -199,7 +199,7 @@
                                                         <input id="idest" name="idest" value="{{$t->idest}}"  hidden>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
                                                         <button type="submit" class="btn btn-primary">enviar</button>
                                                     </div>
                                                 </div>

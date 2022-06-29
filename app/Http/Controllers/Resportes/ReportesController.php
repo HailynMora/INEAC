@@ -9,6 +9,7 @@ use App\Exports\EstudiantesBachiExport;
 use App\Exports\TecniosExcel;
 use App\Models\MatriculasModel\Matricula;
 use App\Exports\NotasBachiExcel;
+use App\Exports\NotasTecnicoExcel;
 use DB;
 
 
@@ -56,4 +57,12 @@ class ReportesController extends Controller
          $idnota = $request->idexcel;
          return Excel::download(new NotasBachiExcel($id, $idnota), 'listado_notas_bach.xlsx');
      }
+
+
+     public function  exNotasTecnico(Request $request){
+        $id = $request->idcurso;
+        $idnota = $request->idexcel;
+        return Excel::download(new NotasTecnicoExcel($id, $idnota), 'listado_notas_tecnico.xlsx');
+    }
+    
 }

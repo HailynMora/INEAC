@@ -165,7 +165,7 @@ class CalificacionesController extends Controller
         }
         //validar si la nota de un estudiante ya se encuentra para una materia
         if($porval==1){
-                $valnotas = DB::table('notas')->where('id_curso', $request->idcur)->where('id_estudiante', $request->idcur)->count();
+                $valnotas = DB::table('notas_tecnico')->where('id_tecnicos', $request->idcur)->where('id_estudiante', $request->idcur)->count();
               if($valnotas == 0){
                         $category = new NotasTecnico();
                         $category->nota1= $request->input('nota1');
@@ -442,10 +442,78 @@ class CalificacionesController extends Controller
                                 'asig_tecnicos.nombreasig as asignatura', 'programa_tecnico.nombretec as curso', 
                                 'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'asignaturas_tecnicos.anio', 
                                 'asignaturas_tecnicos.periodo', 'notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva',
-                                'notas_tecnico.por1', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
+                                'notas_tecnico.por1', 'notas_tecnico.id_tecnicos as idcur', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
                         ->get();
+                //objetivos
+                $objetivos = DB::table('objetivostec')->where('id_asignaturas', $id)->select('descripcion as obj')->get();
                 //return $consulta;
-                return view('calificaciones.reportenotatec')->with('consulta', $consulta);
+                return view('calificaciones.reportenotatec')->with('consulta', $consulta)->with('objetivos', $objetivos);
             }
+
+            //filtrar notas tecnicos
+            public function filtrarNotaTec(Request $request){
+                $res = $request->filnota;
+                $idcur = $request->idcurso;
+                if($res == 1){
+                        $consulta = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
+                        ->where('notas_tecnico.definitiva', '>=', '3')
+                         ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
+                         ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                         ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
+                         ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                         ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                         ->join('desempenos','notas_tecnico.id_desempenio', '=', 'desempenos.id')
+                         ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
+                                 'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
+                                 'asig_tecnicos.nombreasig as asignatura', 'programa_tecnico.nombretec as curso', 
+                                 'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'asignaturas_tecnicos.anio', 
+                                 'asignaturas_tecnicos.periodo', 'notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva',
+                                 'notas_tecnico.por1', 'notas_tecnico.id_tecnicos as idcur', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
+                         ->get();
+                }else{
+                    if($res==2){
+                        $consulta = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
+                       ->where('notas_tecnico.definitiva', '<', '3')
+                        ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
+                        ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                        ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
+                        ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                        ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                        ->join('desempenos','notas_tecnico.id_desempenio', '=', 'desempenos.id')
+                        ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
+                                'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
+                                'asig_tecnicos.nombreasig as asignatura', 'programa_tecnico.nombretec as curso', 
+                                'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'asignaturas_tecnicos.anio', 
+                                'asignaturas_tecnicos.periodo', 'notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva',
+                                'notas_tecnico.por1', 'notas_tecnico.id_tecnicos as idcur', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
+                        ->get();
+                           
+    
+                    }else{
+                        $consulta = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
+                         ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
+                         ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                         ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
+                         ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                         ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                         ->join('desempenos','notas_tecnico.id_desempenio', '=', 'desempenos.id')
+                         ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
+                                 'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
+                                 'asig_tecnicos.nombreasig as asignatura', 'programa_tecnico.nombretec as curso', 
+                                 'docente.nombre as nomdoc', 'docente.apellido as apedoc', 'asignaturas_tecnicos.anio', 
+                                 'asignaturas_tecnicos.periodo', 'notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva',
+                                 'notas_tecnico.por1', 'notas_tecnico.id_tecnicos as idcur', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
+                         ->get();
+                          
+    
+                    }
+                }
+
+                $objetivos = DB::table('objetivostec')->where('id_asignaturas', $idcur)->select('objetivostec.descripcion as objetivo')->get();
+                return view('calificaciones.reportenotatec')->with('consulta', $consulta)->with('objetivos', $objetivos);
+              
+            }
+
+          
 
 }

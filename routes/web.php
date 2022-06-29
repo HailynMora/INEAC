@@ -359,12 +359,18 @@ Route::post('/actualizar/nota/tecnico', [CalificacionesController::class, 'actun
 Route::get('/reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);
 Route::post('/generar/pdf/notas', [PDFController::class, 'generatePDF'])->middleware(['auth', 'secretaria_docente'])->name('pdf');
 Route::get('/pdf/vista', [PDFController::class, 'vista'])->middleware(['auth', 'secretaria_docente']);
-
+//pdf notas tecnicos
+Route::post('/generar/pdf/notas/tecnico', [PDFController::class, 'pdfTec'])->middleware(['auth', 'secretaria_docente'])->name('pdftecniconotas');
 
 //escel de notas bachillerato
 Route::post('/reporte/notas/excel', [ReportesController::class, 'excelNotas'])->middleware(['auth', 'secretaria_docente'])->name('excelnotas');
 //filtrar notas
 Route::post('/filtrar/notas', [CalificacionesController::class, 'filtrar'])->middleware(['auth', 'secretaria_docente'])->name('filtroNotas');
+//excel tecnico notas
+Route::post('/reporte/notas/excel/tecnico', [ReportesController::class, 'exNotasTecnico'])->middleware(['auth', 'secretaria_docente'])->name('excelnotastecnico');
+//filtrar notas tecnicos
+Route::post('/filtrar/notas/tecnico', [CalificacionesController::class, 'filtrarNotaTec'])->middleware(['auth', 'secretaria_docente'])->name('filtroNotastec');
+
 
 //valor habilitacion para docentes
 Route::get('/valor/habilitaciones', [HabilitacionesController::class, 'vista'])->middleware(['auth', 'secretaria_docente'])->name('valorHab');
@@ -376,7 +382,6 @@ Route::get('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->mi
 //plan de estudios estudiante
 Route::get('/plan/estudios', [EstudiosController::class, 'principal'])->middleware(['auth', 'estudiante'])->name('planEstudios');
 
-Route::get('/generar/pdf/notas/{id}', [PDFController::class, 'generatePDF'])->name('pdf');
-Route::get('/pdf/vista/{id}', [PDFController::class, 'vista']);
+
 
 require __DIR__.'/auth.php';
