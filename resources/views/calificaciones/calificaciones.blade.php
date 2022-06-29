@@ -12,8 +12,6 @@
                 <div class="col-6">
                    <div class="conatiner">
                    <a href="/reporte/notas/{{$as[0]->idcur}}"><img src="{{asset('dist/img/informe_c.png')}}" class="img-fluid" ></a>
-                   <a href="/generar/pdf/notas/{{$as[0]->idcur}}"><img src="{{asset('dist/img/pdf.png')}}" class="img-fluid" ></a>
-                   <a href="/reporte/notas/{{$as[0]->idcur}}"><img src="{{asset('dist/img/excel.png')}}" class="img-fluid" ></a>
                 </div>
                 </div>
                 <div class="col-6">

@@ -41,32 +41,15 @@
                     </p>
                   </a>
               </li>
-              <li class="nav-item">
-                <!--instanciar la ruta de nav link-->
-                  <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Contactos</p>
-                   </a>
-                <!--end instancia-->
-              </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('planEstudios')}}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Programas 
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('reporte_pro')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -108,35 +91,6 @@
               </li>
             </ul>
           </li>                
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                Consultas
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Est. por Programa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Doc. por Programa</p> <!--para historia-->
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mailbox/read-mail.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Asig. por Programa</p>
-                </a>
-              </li>
-            </ul>
-          </li>
          
           <li class="nav-item">
             <a href="#" class="nav-link">

@@ -6,8 +6,8 @@
     <div class="card-header" id="headingOne">
       <div class="row">
            <div class="col-6">
-              <a class="btn float-left d-none d-sm-none d-md-block"  href="javascript: history.go(-1)"><i class="fas fa-backward" style="color:black; font-size:17px;"></i>&nbsp;Regresar</a>
-              <a class="btn float-left d-block d-sm-block d-md-none"  href="javascript: history.go(-1)"><i class="fas fa-backward"></i>&nbsp;Regresar</a>
+              <a class="btn float-left d-none d-sm-none d-md-block"  href="/asignatura/reporte_c"><i class="fas fa-backward" style="color:black; font-size:17px;"></i>&nbsp;Regresar</a>
+              <a class="btn float-left d-block d-sm-block d-md-none"  href="/asignatura/reporte_c"><i class="fas fa-backward"></i>&nbsp;Regresar</a>
             </div>
             <div class="col-6">
               <!--modal-->
