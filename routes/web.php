@@ -382,6 +382,4 @@ Route::get('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->mi
 //plan de estudios estudiante
 Route::get('/plan/estudios', [EstudiosController::class, 'principal'])->middleware(['auth', 'estudiante'])->name('planEstudios');
 
-
-
 require __DIR__.'/auth.php';
