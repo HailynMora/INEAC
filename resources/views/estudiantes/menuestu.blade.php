@@ -53,20 +53,20 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-tie"></i>
+              <i class="nav-icon fas fa-book-open"></i>
               <p>
-                Docentes
+                Asignaturas
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('listado_docente')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listado</p>
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('lis_docente')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-tie"></i>
+              <p>
+                Docentes
+              </p>
+            </a>
           </li>                
          
           <li class="nav-item">
@@ -98,21 +98,13 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('certifEstu')}}" class="nav-link">
               <i class="nav-icon fas fa-folder-open"></i>
               <p>
-                Certificados
+                Certificado
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/search/simple.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Estdiantil</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <br>
           

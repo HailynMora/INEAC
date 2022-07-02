@@ -104,7 +104,34 @@ class PDFController extends Controller
         $pdf = PDF::loadView('docente.pdfLaboral', $data);
         return $pdf->download('certificado_laboral.pdf');
     }
-
+    public function cerEstudiantil()
+    {   
+        $idl=auth()->id();
+        $estudiante= DB::table('estudiante')->where('estudiante.id_usuario', '=', $idl)
+                    ->join('matriculas','estudiante.id','=','matriculas.id_estudiante')
+                    ->join('tipo_curso','matriculas.id_curso','=','tipo_curso.id')
+                    ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
+                    ->select('estudiante.id as ides','matriculas.anio','matriculas.periodo','tipo_curso.codigo','tipo_curso.descripcion','tipo_curso.jornada','tipo_curso.cursodes','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo')
+                    ->first();
+        $asig = DB::table('notas')->where('notas.id_estudiante',$estudiante->ides)
+                    ->join('cursos','notas.id_curso','=','cursos.id')
+                    ->join('desempenos','notas.id_desempenio','=','desempenos.id')
+                    ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                    ->select('definitiva','asignaturas.nombre','desempenos.descripcion as desem')
+                    ->get();
+        $cont = DB::table('notas')->where('notas.id_estudiante',$estudiante->ides)
+                    ->join('cursos','notas.id_curso','=','cursos.id')
+                    ->join('desempenos','notas.id_desempenio','=','desempenos.id')
+                    ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                    ->count();
+        $data = [
+            'estudiante' => $estudiante,
+            'asig' => $asig,
+            'cont' => $cont,
+        ];     
+        $pdf = PDF::loadView('estudiantes.pdfEstudiantil', $data);
+        return $pdf->download('certificado_estudiantil.pdf');
+    }
     public function pdfTec(Request $request){
         $idat = $request->idpdf;
         $idcur = $request->idcurso;
