@@ -376,10 +376,13 @@ Route::post('/filtrar/notas/tecnico', [CalificacionesController::class, 'filtrar
 Route::get('/valor/habilitaciones', [HabilitacionesController::class, 'vista'])->middleware(['auth', 'secretaria_docente'])->name('valorHab');
 //generar certificado laboral
 Route::get('/generar/certificado/laboral', [HabilitacionesController::class, 'laboral'])->middleware(['auth', 'secretaria_docente'])->name('certifLaboral');
-
+Route::get('/generar/certificado/estudiantil', [HabilitacionesController::class, 'estudiantil'])->middleware(['auth'])->name('certifEstu');
 //generar pdf laboral docentes
 Route::get('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->middleware(['auth', 'secretaria_docente'])->name('pdfLaboral');
+//generar pdf certificado estudiantil
+Route::get('/generar/certificado_es/pdf', [PDFController::class, 'cerEstudiantil'])->middleware(['auth'])->name('pdfEstudiantil');
 //plan de estudios estudiante
 Route::get('/plan/estudios', [EstudiosController::class, 'principal'])->middleware(['auth', 'estudiante'])->name('planEstudios');
-
+//RUTA LISTADO DOCENTES VISTA ESTUDIANTE
+Route::get('/listado/docente', [DocenteController::class, 'lis_docente'])->middleware(['auth'])->name('lis_docente');
 require __DIR__.'/auth.php';
