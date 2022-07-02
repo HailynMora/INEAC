@@ -124,6 +124,12 @@ class PDFController extends Controller
                     ->join('desempenos','notas.id_desempenio','=','desempenos.id')
                     ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
                     ->count();
+                    //debe llegar un periodo y un año y se debe validar en el count 
+                    //debes de colocar un select 
+                    //una una vez obtenido el numero de materias tambien se debe sacar el id_curso 
+                    //una vez obtenido el idcurso se debe validar que cada asignatura debe tener nota mayor o igual a 3.0
+                    //para saber si es promovido 
+       // return $cont;
         $data = [
             'estudiante' => $estudiante,
             'asig' => $asig,
@@ -211,5 +217,9 @@ class PDFController extends Controller
         
             return $pdf->download('notas_inesur_tecnicos.pdf');
 
+    }
+
+    public function cervista(){
+        return view('estudiantes.pdfEstudiantil');
     }
 }
