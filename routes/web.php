@@ -22,6 +22,7 @@ use App\Http\Controllers\Docentes\ReporteAsigController;
 use App\Http\Controllers\Calificaciones\CalificacionesController;
 use App\Http\Controllers\Calificaciones\HabilitacionesController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\EstudiantesNotas\EstudiantesNotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -382,4 +383,6 @@ Route::get('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->mi
 //plan de estudios estudiante
 Route::get('/plan/estudios', [EstudiosController::class, 'principal'])->middleware(['auth', 'estudiante'])->name('planEstudios');
 
+//notas estudiantes Modulo estudiantes
+Route::post('/estudiante/notas/periodo', [EstudiantesNotController::class, 'vista'])->middleware(['auth', 'estudiante'])->name('calificacionesEstudiante');
 require __DIR__.'/auth.php';

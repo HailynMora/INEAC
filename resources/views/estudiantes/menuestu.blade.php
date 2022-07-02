@@ -53,29 +53,6 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book-open"></i>
-              <p>
-                Asignaturas
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('reporte')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Reporte</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('conasignatura')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Docentes
@@ -93,23 +70,9 @@
           </li>                
          
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Calificaciones
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/examples/e-commerce.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Reporte Calificaciones</p>
-                </a>
-              </li>
-              
-            </ul>
+           @include('estudiantes.calificaciones')
           </li>
+          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
