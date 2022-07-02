@@ -40,7 +40,11 @@
         <div class="row">
            <div class="col-12"> <br>
             <h6 style="text-align:justify;">
-            Que, <b>{{strtoupper($idc->nombre)}} {{strtoupper($idc->segundonom)}} {{strtoupper($idc->primerape)}} {{strtoupper($idc->segundoape)}}</b>, identificado con {{$idc->destipo}} No. <b>{{$idc->num_doc}}</b>, curso y aprobó en esta institución el <b>{{strtoupper($idc->descripcion)}}</b> correspondiente al <b>{{$idc->cursodes}}</b> del bachillerato por ciclos, Calendario {{$idc->periodo}}. las valoraciones se relacionan a continuación:
+            Que, <b>
+            @if(isset($idc))
+              {{strtoupper($idc->nombre)}} {{strtoupper($idc->segundonom)}} {{strtoupper($idc->primerape)}} {{strtoupper($idc->segundoape)}}</b>, 
+              identificado con {{$idc->destipo}} No. <b>{{$idc->num_doc}}</b>, curso y aprobó en esta institución el <b>{{strtoupper($idc->descripcion)}}</b> correspondiente al <b>{{$idc->cursodes}}</b> del bachillerato por ciclos, Calendario {{$idc->periodo}}. las valoraciones se relacionan a continuación:
+            @endif
             </h6><br>
            </div>
         </div>
@@ -55,6 +59,7 @@
               </tr>
             </thead>
             <tbody>
+              @if(isset($asig))
               @foreach($asig as $a)
               <tr>
                 <th scope="row"></th>
@@ -63,6 +68,7 @@
                 <td>{{$a->desem}}</td>
               </tr>
               @endforeach
+              @endif
             </tbody>
           </table>
         </div>
