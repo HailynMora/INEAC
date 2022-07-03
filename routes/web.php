@@ -392,5 +392,4 @@ Route::post('/estudiante/notas/periodo', [EstudiantesNotController::class, 'vist
 Route::get('/listado/docente', [DocenteController::class, 'lis_docente'])->middleware(['auth'])->name('lis_docente');
 
 
-
 require __DIR__.'/auth.php';
