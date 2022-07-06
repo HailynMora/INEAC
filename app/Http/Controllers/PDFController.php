@@ -221,7 +221,8 @@ class PDFController extends Controller
     }
 
     public function cervista(){
-        return view('estudiantes.pdfEstudiantil');
+        return view('estudiantes.pdfEstudiantil'); 
+
     }
 
     public function matEstudiantil(Request $request)

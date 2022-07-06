@@ -23,15 +23,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book-open"></i>
-              <p>
-                Asignaturas
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="{{route('lis_docente')}}" class="nav-link">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
@@ -41,6 +32,12 @@
           </li>                
          
           <li class="nav-item">
+          <a type="button" data-toggle="modal" data-target="#exampleModalnotas" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+              <p>
+                  Calificaciones      
+            </p>
+          </a>
            @include('estudiantes.calificaciones')
           </li>
           
