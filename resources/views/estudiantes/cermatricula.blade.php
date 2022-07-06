@@ -4,12 +4,18 @@
         <meta charset="UTF-8">
         <title>Certificado de Matricula Estudiantil </title>
     </head>
-    <body>
-        <div >
-            <div>
+    <body  style=" width:100%;  height: 100%;">
+        <br><br>
+        <div style="background-image:url({{ public_path('/img/pdf_inesur2.jpg')}}); background-position:center;  background-repeat: no-repeat; background-size:cover; margin-top:-5rem; margin-left:-4.1rem; margin-right:-3rem;  margin-bottom:-2rem;">
+        <div  style="padding-top: 90px;">
+           <!-- <div>
                 <img src="{{ public_path('/img/pdf_i.jpg')}}" style="width:100%; height: 100px;">
-            </div>
-           <div>
+            </div>-->
+            <br><br> <br><br> <br><br>
+            <div style="padding-left: 4rem; padding-right: 4rem;">
+            <br>
+            <div>
+                <br><br>
                 <h4 style="text-align:center;">
                     <b>EL SUSCRITO DIRECTOR GENERAL DE LA INSTITUCION EDUCATIVA DEL SUR INESUR<b>
                 </h4>
@@ -41,7 +47,7 @@
               <p>Para constancia se firma en San Juan de Pasto el día <div id="current_date"></p>
             </div>
             <div > 
-            <br><br><br><br><br><br>
+            <br><br><br>
             <p  style="text-align:center;">
              ____________________________________________<br>
              <b>ALEXANDER SARCHI GRIJALBA</b><br>
@@ -49,27 +55,23 @@
             </p>
            </div>
            <br><br><br>
-           <div>
+          <!-- <div>
                 <img src="{{ public_path('/img/pdf_in.jpg')}}" style="width:100%; height: 100px;">
-            </div>
+            </div>-->
         <!-- html -->
      </div>
-
+     <br><br><br>
+   </div>
+   </div>
     </body>
 <style>
 table {
   text-align:center;
-  width: 100%;
+  width: 50%;
 }
 
 th {
   height: 70px;
-}
-#fondo{
-    background-image:url({{ public_path('/img/pdf_inesur2.jpg')}});
-    background-position: center;
-    background-repeat: no-repeat;  
-    background-size: cover; 
 }
 </style>
 
