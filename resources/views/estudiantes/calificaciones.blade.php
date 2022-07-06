@@ -4,19 +4,11 @@
    
   $anio = DB::table('cursos')->select('anio')->distinct()->get();
   
-
 ?>
 <!-- Button trigger modal -->
-<a type="button" data-toggle="modal" data-target="#exampleModalnotas" class="nav-link">
-   <i class="nav-icon fas fa-book"></i>
-    <p>
-        Calificaciones      
-   </p>
-</a>
-
 <!-- Modal -->
 <form action="{{route('calificacionesEstudiante')}}" method="POST">
-  @csrf
+ @csrf
 <div class="modal fade" id="exampleModalnotas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

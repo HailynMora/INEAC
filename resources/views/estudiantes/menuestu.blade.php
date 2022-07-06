@@ -6,57 +6,19 @@
          
           <li class="nav-item">
              <!--instanciar la ruta de nav link-->   
-                  <a href="#" class="nav-link active">
+                  <a href="{{route('inicio')}}"  class="nav-link active">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                       Inicio
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
                 <!--end instancia-->
-            <ul class="nav nav-treeview">
-            <li class="nav-item">
-                  <a href="{{route('inicio')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>
-                    Principal
-                    </p>
-                  </a>
-
-              </li>
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>
-                    Mision y Visión
-                    </p>
-                  </a>
-
-              </li>
-              <li class="nav-item">
-              <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-                    <p>
-                    Historia
-                    </p>
-                  </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="{{route('planEstudios')}}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Programas 
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book-open"></i>
-              <p>
-                Asignaturas
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
           </li>
@@ -70,6 +32,12 @@
           </li>                
          
           <li class="nav-item">
+          <a type="button" data-toggle="modal" data-target="#exampleModalnotas" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+              <p>
+                  Calificaciones      
+            </p>
+          </a>
            @include('estudiantes.calificaciones')
           </li>
           

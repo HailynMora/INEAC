@@ -220,6 +220,7 @@ class PDFController extends Controller
     }
 
     public function cervista(){
-        return view('estudiantes.pdfEstudiantil');
+        return view('estudiantes.pdfEstudiantil'); 
+
     }
 }
