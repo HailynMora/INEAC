@@ -377,19 +377,30 @@ Route::post('/filtrar/notas/tecnico', [CalificacionesController::class, 'filtrar
 Route::get('/valor/habilitaciones', [HabilitacionesController::class, 'vista'])->middleware(['auth', 'secretaria_docente'])->name('valorHab');
 //generar certificado laboral
 Route::get('/generar/certificado/laboral', [HabilitacionesController::class, 'laboral'])->middleware(['auth', 'secretaria_docente'])->name('certifLaboral');
-Route::get('/generar/certificado/estudiantil', [HabilitacionesController::class, 'estudiantil'])->middleware(['auth'])->name('certifEstu');
+Route::get('/generar/certificado/estudiantil/{id}', [HabilitacionesController::class, 'estudiantil'])->middleware(['auth','secretaria'])->name('certifEstu');
 //generar pdf laboral docentes
 Route::get('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->middleware(['auth', 'secretaria_docente'])->name('pdfLaboral');
-//generar pdf certificado estudiantil
-Route::get('/generar/certificado_es/pdf', [PDFController::class, 'cerEstudiantil'])->middleware(['auth'])->name('pdfEstudiantil');
+//generar pdf certificado estudiantil notas
+Route::post('/generar/certificado_es/pdf', [PDFController::class, 'cerEstudiantil'])->middleware(['auth'])->name('pdfEstudiantil');
+//generar pdf certificado estudiantil matricula
+Route::post('/generar/certificado_ma/pdf', [PDFController::class, 'matEstudiantil'])->middleware(['auth'])->name('pdfEstudiantilmat');
 Route::get('/generar/certificado_es/pdf/vista', [PDFController::class, 'cervista'])->middleware(['auth'])->name('pdfprueba');
 //plan de estudios estudiante
 Route::get('/plan/estudios', [EstudiosController::class, 'principal'])->middleware(['auth', 'estudiante'])->name('planEstudios');
 
 //notas estudiantes Modulo estudiantes
 Route::post('/estudiante/notas/periodo', [EstudiantesNotController::class, 'vista'])->middleware(['auth', 'estudiante'])->name('calificacionesEstudiante');
-//RUTA LISTADO DOCENTES VISTA ESTUDIANTE
-Route::get('/listado/docente', [DocenteController::class, 'lis_docente'])->middleware(['auth'])->name('lis_docente');
 
+//certificados estudiantes Modulo estudiantes
+Route::post('/estudiante/certificado', [EstudiantesNotController::class, 'certificados'])->middleware(['auth', 'estudiante'])->name('certificadosEstudiante');
+//certificados matriucla estudiantes Modulo estudiantes
+Route::post('/estudiante/certificado/matricula', [EstudiantesNotController::class, 'certificadom'])->middleware(['auth', 'estudiante'])->name('matriculaEstudiante');
+
+//RUTA LISTADO DOCENTES VISTA ESTUDIANTE
+Route::get('/listado/docente', [DocenteController::class, 'lis_docente'])->middleware(['auth', 'estudiante'])->name('lis_docente');
+//ruta boletin academico
+Route::post('/estudiante/boletin', [EstudiantesNotController::class, 'boletin'])->middleware(['auth', 'secretaria'])->name('boletin');
+//ruta boletin academico pdf
+Route::post('/estudiante/boletin/pdf', [PDFController::class, 'boletin_es'])->middleware(['auth', 'secretaria'])->name('boletin_es');
 
 require __DIR__.'/auth.php';

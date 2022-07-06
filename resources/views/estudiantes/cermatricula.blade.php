@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Certificado Estudiantil</title>
+        <title>Certificado de Matricula Estudiantil </title>
     </head>
     <body>
         <div >
@@ -19,60 +19,36 @@
                     CERTIFICA
                 </h4>
             </div>
+            <br><br>
             <div>
                 <p style="text-align:justify;">
                 Que, 
                 @if(isset($estudiante))
-                <b>{{strtoupper($estudiante->nombre)}} {{strtoupper($estudiante->segundonom)}} {{strtoupper($estudiante->primerape)}} {{strtoupper($estudiante->segundoape)}}</b>, identificado con {{$estudiante->destipo}} No. <b>{{$estudiante->num_doc}}</b>, curso y 
-                 @if($not!=0)
-                no aprobó
-                @endif
-                @if($not==0)
-                aprobó
-                @endif
-                 en esta institución el <b>{{strtoupper($estudiante->descripcion)}}</b> correspondiente al <b>{{$estudiante->cursodes}}</b> del bachillerato por ciclos, Calendario {{$estudiante->periodo}}. las valoraciones se relacionan a continuación:
+                <b>{{strtoupper($estudiante->nombre)}} {{strtoupper($estudiante->segundonom)}} {{strtoupper($estudiante->primerape)}} {{strtoupper($estudiante->segundoape)}}</b>, identificado con {{$estudiante->destipo}} No. <b>{{$estudiante->num_doc}}</b>, se encuentra matriculado y {{$estudiante->apo}} el <b>{{strtoupper($estudiante->descripcion)}}</b> correspondiente al <b>{{$estudiante->cursodes}}</b> del bachillerato por ciclos en la sede del municipio de Potosi.
+
+                <br><br>
+                Correspondiente al Periodo {{$estudiante->periodo}}.
                 </p>
+
                 @endif
-            </div>
-            <div>
-               <table>
-                  <tr>
-                    <th>MATERIA</th>
-                    <th>CALIFICACIÓN</th>
-                    <th>CONCEPTO</th>
-                  </tr>
-                @if(isset($asig))
-                @foreach($asig as $a)
-                  <tr>
-                    <td>{{$a->nombre}}</td>
-                    <td>{{$a->definitiva}}</td>
-                    <td>{{$a->desem}}</td>
-                  </tr>
-                @endforeach
-                @endif
-                </table>
             </div>
             <br>
             <div>
-                @if($not!=0)
-                <p>NO SE PROMUEVE.</p>
-                @endif
-                @if($not==0)
-                <p>SE PROMUEVE.</p>
-                @endif
+                <p>Este certificado se expide a solicitud del interesado.</p>
             </div>
+            <br><br>
            <div>
               <p>Para constancia se firma en San Juan de Pasto el día <div id="current_date"></p>
             </div>
             <div > 
-            <br><br><br>
+            <br><br><br><br><br><br>
             <p  style="text-align:center;">
              ____________________________________________<br>
              <b>ALEXANDER SARCHI GRIJALBA</b><br>
              Director
             </p>
            </div>
-           <br><br>
+           <br><br><br>
            <div>
                 <img src="{{ public_path('/img/pdf_in.jpg')}}" style="width:100%; height: 100px;">
             </div>
@@ -98,5 +74,3 @@ th {
 </style>
 
 </html>
-
-

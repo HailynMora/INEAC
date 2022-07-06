@@ -6,42 +6,13 @@
          
           <li class="nav-item">
              <!--instanciar la ruta de nav link-->   
-                  <a href="#" class="nav-link active">
+                  <a href="{{route('inicio')}}" class="nav-link active">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                       Inicio
-                      <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
                 <!--end instancia-->
-            <ul class="nav nav-treeview">
-            <li class="nav-item">
-                  <a href="{{route('inicio')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>
-                    Principal
-                    </p>
-                  </a>
-
-              </li>
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>
-                    Mision y Visión
-                    </p>
-                  </a>
-
-              </li>
-              <li class="nav-item">
-              <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-                    <p>
-                    Historia
-                    </p>
-                  </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="{{route('planEstudios')}}" class="nav-link">
@@ -96,15 +67,6 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('certifEstu')}}" class="nav-link">
-              <i class="nav-icon fas fa-folder-open"></i>
-              <p>
-                Certificado
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
           </li>
           <br>
           
