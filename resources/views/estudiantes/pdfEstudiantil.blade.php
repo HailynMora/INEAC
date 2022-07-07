@@ -4,12 +4,19 @@
         <meta charset="UTF-8">
         <title>Certificado Estudiantil</title>
     </head>
-    <body>
-        <div >
-            <div>
+    <body  style=" width:100%;  height: 100%;">
+        <br><br>
+        @if(isset($estudiante->nombre))
+        <div style="background-image:url({{ public_path('/img/pdf_inesur2.jpg')}}); background-position:center;  background-repeat: no-repeat; background-size:cover; margin-top:-5rem; margin-left:-4.1rem; margin-right:-3rem;  margin-bottom:-2rem;">
+        <div  style="padding-top: 90px;">
+           <!-- <div>
                 <img src="{{ public_path('/img/pdf_i.jpg')}}" style="width:100%; height: 100px;">
-            </div>
-           <div>
+            </div>-->
+            <br><br>
+            <div style="padding-left: 4rem; padding-right: 4rem;">
+            <br>
+            <div>
+                <br><br>
                 <h4 style="text-align:center;">
                     <b>EL SUSCRITO DIRECTOR GENERAL DE LA INSTITUCION EDUCATIVA DEL SUR INESUR<b>
                 </h4>
@@ -19,8 +26,9 @@
                     CERTIFICA
                 </h4>
             </div>
+            <br><br>
             <div>
-                <p style="text-align:justify;">
+                <p style="text-align:justify;  line-height:1.3;">
                 Que, 
                 @if(isset($estudiante))
                 <b>{{strtoupper($estudiante->nombre)}} {{strtoupper($estudiante->segundonom)}} {{strtoupper($estudiante->primerape)}} {{strtoupper($estudiante->segundoape)}}</b>, identificado con {{$estudiante->destipo}} No. <b>{{$estudiante->num_doc}}</b>, curso y 
@@ -31,10 +39,12 @@
                 aprobó
                 @endif
                  en esta institución el <b>{{strtoupper($estudiante->descripcion)}}</b> correspondiente al <b>{{$estudiante->cursodes}}</b> del bachillerato por ciclos, Calendario {{$estudiante->periodo}}. las valoraciones se relacionan a continuación:
-                </p>
                 @endif
+               </p>
             </div>
+            <br>
             <div>
+               <!--tabla-->
                <table>
                   <tr>
                     <th>MATERIA</th>
@@ -51,6 +61,7 @@
                 @endforeach
                 @endif
                 </table>
+               <!--end table-->
             </div>
             <br>
             <div>
@@ -62,7 +73,7 @@
                 @endif
             </div>
            <div>
-              <p>Para constancia se firma en San Juan de Pasto el día <div id="current_date"></p>
+              <p>Para constancia se firma en Potosi </p>
             </div>
             <div > 
             <br><br><br>
@@ -72,31 +83,26 @@
              Director
             </p>
            </div>
-           <br><br>
-           <div>
+           <br><br><br>
+          <!-- <div>
                 <img src="{{ public_path('/img/pdf_in.jpg')}}" style="width:100%; height: 100px;">
-            </div>
+            </div>-->
         <!-- html -->
      </div>
-
+     <br><br><br>
+   </div>
+   </div>
+     @endif
     </body>
 <style>
 table {
   text-align:center;
-  width: 100%;
+  width: 50%;
 }
 
 th {
   height: 70px;
 }
-#fondo{
-    background-image:url({{ public_path('/img/pdf_inesur2.jpg')}});
-    background-position: center;
-    background-repeat: no-repeat;  
-    background-size: cover; 
-}
 </style>
 
 </html>
-
-

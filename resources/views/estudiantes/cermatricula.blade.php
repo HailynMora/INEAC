@@ -6,6 +6,7 @@
     </head>
     <body  style=" width:100%;  height: 100%;">
         <br><br>
+        @if(isset($estudiante->nombre))
         <div style="background-image:url({{ public_path('/img/pdf_inesur2.jpg')}}); background-position:center;  background-repeat: no-repeat; background-size:cover; margin-top:-5rem; margin-left:-4.1rem; margin-right:-3rem;  margin-bottom:-2rem;">
         <div  style="padding-top: 90px;">
            <!-- <div>
@@ -27,10 +28,10 @@
             </div>
             <br><br>
             <div>
-                <p style="text-align:justify;">
+                <p style="text-align:justify;  line-height:1.3;">
                 Que, 
                 @if(isset($estudiante))
-                <b>{{strtoupper($estudiante->nombre)}} {{strtoupper($estudiante->segundonom)}} {{strtoupper($estudiante->primerape)}} {{strtoupper($estudiante->segundoape)}}</b>, identificado con {{$estudiante->destipo}} No. <b>{{$estudiante->num_doc}}</b>, se encuentra matriculado y {{$estudiante->apo}} el <b>{{strtoupper($estudiante->descripcion)}}</b> correspondiente al <b>{{$estudiante->cursodes}}</b> del bachillerato por ciclos en la sede del municipio de Potosi.
+                <b>{{strtoupper($estudiante->nombre)}} {{strtoupper($estudiante->segundonom)}} {{strtoupper($estudiante->primerape)}} {{strtoupper($estudiante->segundoape)}}</b>, identificado con {{$estudiante->destipo}} No. <b>{{$estudiante->num_doc}}</b>, se encuentra matriculado y {{$estudiante->apo}} el <b>{{strtoupper($estudiante->descripcion)}}</b> correspondiente al <b>{{$estudiante->cursodes}}</b> del <b>BACHILLERATO POR CICLOS</b> en la sede del municipio de Potosi.
 
                 <br><br>
                 Correspondiente al Periodo {{$estudiante->periodo}}.
@@ -44,7 +45,7 @@
             </div>
             <br><br>
            <div>
-              <p>Para constancia se firma en San Juan de Pasto el día <div id="current_date"></p>
+              <p>Para constancia se firma en Potosi el dia {{$dia}} del mes {{$mes}}  del año {{$anio}}</p>
             </div>
             <div > 
             <br><br><br>
@@ -63,6 +64,7 @@
      <br><br><br>
    </div>
    </div>
+     @endif
     </body>
 <style>
 table {
