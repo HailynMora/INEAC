@@ -49,12 +49,12 @@
                   <tr>
                     <th>MATERIA</th>
                     <th>CALIFICACIÓN</th>
-                    <th>CONCEPTO</th>
+                    <th>&nbsp;CONCEPTO</th>
                   </tr>
                 @if(isset($asig))
                 @foreach($asig as $a)
                   <tr>
-                    <td>{{$a->nombre}}</td>
+                    <td >{{$a->nombre}}</td>
                     <td>{{$a->definitiva}}</td>
                     <td>{{$a->desem}}</td>
                   </tr>
