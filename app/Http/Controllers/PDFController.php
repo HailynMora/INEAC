@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\EstudianteModel\Estudiante;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use PDF;
 use DB;
 
@@ -224,9 +225,16 @@ class PDFController extends Controller
         return view('estudiantes.pdfEstudiantil'); 
 
     }
-
+    
+    //aqui modificar 
     public function matEstudiantil(Request $request)
     {   
+        //fecha
+        $dia = date('d', time()); 
+        $mes = date('m', time()); 
+        $anio = date('Y', time()); 
+        
+        //
         $estudiante= DB::table('matriculas')
                     ->where('matriculas.id_estudiante', '=', $request->ides)
                     ->where('matriculas.anio', '=', $request->anio)
@@ -239,6 +247,9 @@ class PDFController extends Controller
                     ->first();
         $data = [
             'estudiante' => $estudiante,
+            'dia' => $dia,
+            'mes' => $mes,
+            'anio' => $anio,
         ];     
         $pdf = PDF::loadView('estudiantes.cermatricula', $data);
         return $pdf->download('certificado_estudiantil_matricula.pdf');
