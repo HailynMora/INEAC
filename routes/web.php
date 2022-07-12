@@ -380,12 +380,15 @@ Route::get('/valor/habilitaciones', [HabilitacionesController::class, 'vista'])-
 //generar certificado laboral
 Route::get('/generar/certificado/laboral', [HabilitacionesController::class, 'laboral'])->middleware(['auth', 'secretaria_docente'])->name('certifLaboral');
 Route::get('/generar/certificado/estudiantil/{id}', [HabilitacionesController::class, 'estudiantil'])->middleware(['auth','secretaria'])->name('certifEstu');
+Route::get('/generar/certificado/estudiantil_tec/{id}', [HabilitacionesController::class, 'estudiantiltec'])->middleware(['auth','secretaria'])->name('certifEstuTec');
 //generar pdf laboral docentes
 Route::get('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->middleware(['auth', 'secretaria_docente'])->name('pdfLaboral');
 //generar pdf certificado estudiantil notas
 Route::post('/generar/certificado_es/pdf', [PDFController::class, 'cerEstudiantil'])->middleware(['auth'])->name('pdfEstudiantil');
+Route::post('/generar/certificado_not/pdf', [PDFController::class, 'cerNota'])->middleware(['auth'])->name('pdfEstudiantilNot');
 //generar pdf certificado estudiantil matricula
 Route::post('/generar/certificado_ma/pdf', [PDFController::class, 'matEstudiantil'])->middleware(['auth'])->name('pdfEstudiantilmat');
+Route::post('/generar/certificado_matec/pdf', [PDFController::class, 'mattecEstudiantil'])->middleware(['auth','secretaria'])->name('pdfEstudiantilmattec');
 Route::get('/generar/certificado_es/pdf/vista', [PDFController::class, 'cervista'])->middleware(['auth'])->name('pdfprueba');
 //plan de estudios estudiante
 Route::get('/plan/estudios', [EstudiosController::class, 'principal'])->middleware(['auth', 'estudiante'])->name('planEstudios');
@@ -402,7 +405,11 @@ Route::post('/estudiante/certificado/matricula', [EstudiantesNotController::clas
 Route::get('/listado/docente', [DocenteController::class, 'lis_docente'])->middleware(['auth', 'estudiante'])->name('lis_docente');
 //ruta boletin academico
 Route::post('/estudiante/boletin', [EstudiantesNotController::class, 'boletin'])->middleware(['auth', 'secretaria'])->name('boletin');
+Route::post('/estudiantetec/boletin', [EstudiantesNotController::class, 'boletintec'])->middleware(['auth', 'secretaria'])->name('boletintec');
 //ruta boletin academico pdf
 Route::post('/estudiante/boletin/pdf', [PDFController::class, 'boletin_es'])->middleware(['auth', 'secretaria'])->name('boletin_es');
+
+//nivelaciones secretaria
+Route::post('/nivelaciones', [EstudiantesNotController::class, 'nivelacion'])->middleware(['auth', 'secretaria'])->name('nivelacionEstudiante');
 
 require __DIR__.'/auth.php';

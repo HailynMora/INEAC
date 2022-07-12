@@ -70,6 +70,7 @@ class ReporteAsigController extends Controller
         'tipo_curso.descripcion as curso', 'cursos.anio',
         'cursos.periodo', 'cursos.id as ida', 'cursos.id_tipo_curso as idcurso')
         ->get();
+        return $rep;
         //consultar si existe objetivos
         $val=DB::table('objetivos')->count();
         if($val!=0){

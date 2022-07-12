@@ -62,9 +62,11 @@ class EstudiantesController extends Controller
         else{
             $b=0;
             $estudiante=array('datos');
+            $pro=array('datos');
+            $tec=array('datos');
         }
 
-        return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b);
+        return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b)->with('pro', $pro)->with('tec', $tec);
     }
 
     public function cambiar_estado($id){
