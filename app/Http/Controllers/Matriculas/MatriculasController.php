@@ -63,8 +63,9 @@ class MatriculasController extends Controller
         $estudiante =Estudiante::findOrfail($request->estu);
         $r=$request->cur;
         $validarMat= DB::table('matriculas')->where('matriculas.id_estudiante', '=', $id)->where('id_aprobado', 1)->count();
-        //return $validarMat;
-        if($validarMat==0){
+        $fin = DB::table('matriculas')->where('matriculas.id_estudiante', '=', $id)->where('id_aprobado', 5)->count();
+ 
+        if($validarMat==0 && $fin == 0 ){
                 $curso = Programas::findOrFail($r);
                 $category = new Matricula();
                 $category->id_estudiante = $request->input('estu');
@@ -74,6 +75,14 @@ class MatriculasController extends Controller
                 $category->id_aprobado= 1;
                 $category->fec_matricula = $request->input('fecha');
                 $category->save();
+
+                $actu = Matricula::where('id_estudiante', '=', $id)->where('id_aprobado', 2)->count();
+                if($actu!=0){
+                    $actu = Matricula::where('id_estudiante', '=', $id)->where('id_aprobado', 2)->first();
+                    $actu-> id_aprobado = 5;
+                    $actu-> save();
+                }
+
                 Session::flash('matec','Estudiante Registrado Exitosamente!');
                //Session::flash('validacion','Estudiante Ya Esta Registrado');
                return back();
@@ -92,39 +101,69 @@ class MatriculasController extends Controller
                 $category->fec_matricula = $request->input('fecha');
                 $category->save();
                 Session::flash('matec','Estudiante Registrado Exitosamente!');
+
+                $actu = Matricula::where('id_estudiante', '=', $id)->where('id_aprobado', 2)->first();
+                $actu-> id_aprobado = 5;
+                $actu-> save();
+
                 return back();
 
             }
             else{
-                $b=0;
-                Session::flash('validacion','Estudiante ya registrado!');
-                return back();
+                $aprob= DB::table('matriculas')->where('matriculas.id_estudiante', '=', $id)->where('id_aprobado', 2)->count();
+               
+                if($aprob==1){
+                   
+                    $category = new Matricula();
+                    $category->id_estudiante = $request->input('estu');
+                    $category->id_curso = $request->input('cur');
+                    $category->anio = $request->input('anioba');
+                    $category->periodo= $request->input('perbachiller');
+                    $category->id_aprobado= 1;
+                    $category->fec_matricula = $request->input('fecha');
+                    $category->save();
+                    
+                    $actu = Matricula::where('id_estudiante', '=', $id)->where('id_aprobado', 2)->first();
+                    $actu-> id_aprobado = 5;
+                    $actu-> save();
+
+                    Session::flash('matec','Estudiante Registrado Exitosamente!');
+                    //Session::flash('validacion','Estudiante Ya Esta Registrado');
+                    return back();
+
+                }else{
+
+                    $b=0;
+                    Session::flash('validacion','Estudiante ya registrado!');
+                    return back();
+
+                }
             }
 
         }
-       
+       return back();
         
     }
 
     public function listado(){
         $es="Activo";
         $val=DB::table('matriculas')->count();
-
         if($val=0){
             $b=0;
             $estumat=array('dato1', 'dato2', 'dato3');
         }else{
             $b=1;
-            $estumat=DB::table('matriculas')->where('id_aprobado', '!=', 4)->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+            $estumat=DB::table('matriculas')->where('id_aprobado', '!=', 4)->where('id_aprobado', '!=', 5)->where('id_aprobado', '!=', 3)->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
             ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
             ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+            ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
             ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
             'matriculas.id_curso as idcur', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
             'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
             'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
-            'tipo_curso.descripcion as nomcurso')
+            'tipo_curso.descripcion as nomcurso', 'aprobado.nombre as estadoes')
             ->paginate(7);
-        
+           
         }
 
         $program=DB::table('tipo_curso')->join('estado', 'tipo_curso.id_estado', '=', 'estado.id')
@@ -278,14 +317,15 @@ class MatriculasController extends Controller
     }
 
     public function estudiantesbachillerato(Request $request){
-        $bachi=DB::table('matriculas')->where('matriculas.id_curso', '=', $request->idbachi)->where('id_aprobado', '!=', 4)->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+        $bachi=DB::table('matriculas')->where('matriculas.id_curso', '=', $request->idbachi) ->where('id_aprobado', '!=', 4)->where('id_aprobado', '!=', 5)->where('id_aprobado', '!=', 3)->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
         ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
         ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+        ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
         ->select('matriculas.id as idmat', 'matriculas.id_estudiante as idest', 
         'matriculas.id_curso as idcur', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
         'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
         'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
-        'tipo_curso.descripcion as nomcurso')
+        'tipo_curso.descripcion as nomcurso', 'aprobado.nombre as estadoes')
         ->get();
         return response(json_decode($bachi),200)->header('Content-type', 'text/plain');
     }

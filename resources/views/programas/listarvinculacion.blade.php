@@ -3,10 +3,12 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3> Asignaturas Vinculadas a Programas </h3>
 </div>
-<div class="container">
+<div class="container table-responsive">
     <table class="table">
         <thead style="background-color:#FFCC00;">
             <tr>
+            <th scope="col">Año</th>
+            <th scope="col">Periodo</th>
             <th scope="col">Cód. Programa</th>
             <th scope="col">Programa</th>
             <th scope="col">Cód. Asignatura</th>
@@ -18,7 +20,10 @@
         <tbody>
         
         @foreach($asigpro as $s)
+        @if(isset($s->anio))
         <tr style="background-color: #dcedc8;">
+            <td>{{$s->anio}}</td>
+            <td>{{$s->periodo}}</td>
             <td>{{$s->codcur}}</td>
             <td>{{$s->curso}}</td>
             <td>{{$s->codas}}</td>
@@ -52,6 +57,7 @@
                 </div>
             </div>
             <!---fin ventana eliminar--->
+            @endif
         @endforeach
         
         </tbody>

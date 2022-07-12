@@ -72,7 +72,9 @@
                 </div>
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
-                <a href="{{url('/programas/listado_vinculacion')}}" class="btn btn-info">Listar</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalListar">
+                  Listar
+                </button>
                 <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Cancelar</a>
 
               </form>
@@ -82,6 +84,40 @@
       </div>
     </div>
   </div>
+  <!--modal listar-->
+  <form action="{{route('listado_asig')}}" method="POST">
+    @csrf
+  <div class="modal fade" id="modalListar" tabindex="-1" aria-labelledby="modalListarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalListarLabel">Ingrese Datos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--formulario-->
+        <div class="form-group">
+          <label for="anio">Año</label>
+          <input type="text" class="form-control" id="anio" name="anio" placeholder="Ejm. 2022" required>
+        </div>
+        <div class="form-group">
+          <label for="periodo">Periodo</label>
+          <input type="text" class="form-control" id="periodo" name="periodo" placeholder="Ejm. A" required>
+        </div>
+        <input type="text" class="form-control" id="cursoid" name="cursoid" required value="{{$curso->id}}" hidden>
+        <!--end formulario-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+        <button type="submit" class="btn btn-primary">Ver</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+  <!--end modal-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script>
   $('#forvincular').submit(function(e){

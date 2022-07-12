@@ -2,21 +2,19 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Certificado Estudiantil</title>
+        <title>Certificado De Notas</title>
     </head>
     <body  style=" width:100%;  height: 100%;">
         <br><br>
         @if(isset($estudiante->nombre))
         <div style="background-image:url({{ public_path('/img/pdf_inesur2.jpg')}}); background-position:center;  background-repeat: no-repeat; background-size:cover; margin-top:-5rem; margin-left:-4.1rem; margin-right:-3rem;  margin-bottom:-2rem;">
-        <div  style="padding-top: 90px;">
+        <div  style="padding-top: 95px;">
            <!-- <div>
                 <img src="{{ public_path('/img/pdf_i.jpg')}}" style="width:100%; height: 100px;">
             </div>-->
-            <br><br>
             <div style="padding-left: 4rem; padding-right: 4rem;">
             <br>
             <div>
-                <br><br>
                 <h4 style="text-align:center;">
                     <b>EL SUSCRITO DIRECTOR GENERAL DE LA INSTITUCION EDUCATIVA DEL SUR INESUR<b>
                 </h4>
@@ -26,7 +24,6 @@
                     CERTIFICA
                 </h4>
             </div>
-            <br><br>
             <div>
                 <p style="text-align:justify;  line-height:1.3;">
                 Que, 
@@ -54,9 +51,9 @@
                 @if(isset($asig))
                 @foreach($asig as $a)
                   <tr>
-                    <td >{{$a->nombre}}</td>
-                    <td>{{$a->definitiva}}</td>
-                    <td>{{$a->desem}}</td>
+                    <td style="text-align:left;">{{$a->nombre}}</td>
+                    <td style="text-align:center;">{{$a->definitiva}}</td>
+                    <td style="text-align:left;">{{$a->desem}}</td>
                   </tr>
                 @endforeach
                 @endif
@@ -73,23 +70,22 @@
                 @endif
             </div>
            <div>
-              <p>Para constancia se firma en Potosi </p>
+             <p>Para constancia se firma en Potosi el dia {{$dia}} del mes {{$mes}}  del año {{$anio}}</p>
             </div>
             <div > 
-            <br><br><br>
+            <br>
             <p  style="text-align:center;">
              ____________________________________________<br>
              <b>ALEXANDER SARCHI GRIJALBA</b><br>
              Director
             </p>
            </div>
-           <br><br><br>
+           <br><br><br><br><br>
           <!-- <div>
                 <img src="{{ public_path('/img/pdf_in.jpg')}}" style="width:100%; height: 100px;">
             </div>-->
         <!-- html -->
      </div>
-     <br><br><br>
    </div>
    </div>
      @endif

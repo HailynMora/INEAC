@@ -72,63 +72,63 @@
                     <h4 class="text-centers">Datos Personales</h4>
                     <hr>
                     <div class="row">
-                        <div class="col-md-3">Tipo Identificacion</div>
+                        <div class="col-md-3"><b>Tipo Identificacion</b></div>
                         <div class="col-md-3 ml-auto">{{$d->tdoces}}</div>
-                        <div class="col-md-3">Número</div>
+                        <div class="col-md-3"><b>Número</b></div>
                         <div class="col-md-3 ml-auto">{{$d->num_doc}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Dpt Expedición</div>
+                        <div class="col-md-3"><b>Dpt Expedición</b></div>
                         <div class="col-md-3 ml-auto">{{$d->dpt_expedicion}}</div>
-                        <div class="col-md-3">Mpio. Expedición</div>
+                        <div class="col-md-3"><b>Mpio. Expedición</b></div>
                         <div class="col-md-3 ml-auto">{{$d->mun_expedicion}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Genero</div>
+                        <div class="col-md-3"><b>Genero</b></div>
                         <div class="col-md-3 ml-auto">{{$d->generoestu}}</div>
-                        <div class="col-md-3">Fecha Nac</div>
+                        <div class="col-md-3"><b>Fecha Nac</b></div>
                         <div class="col-md-3 ml-auto">{{$d->fecnacimiento}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Dpt Nacimiento</div>
+                        <div class="col-md-3"><b>Dpt Nacimiento</b></div>
                         <div class="col-md-3 ml-auto">{{$d->dpt_nacimiento}}</div>
-                        <div class="col-md-3">Mpio. Nacimiento</div>
+                        <div class="col-md-3"><b>Mpio. Nacimiento</b></div>
                         <div class="col-md-3 ml-auto">{{$d->mun_nacimiento}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Primer Apellido</div>
+                        <div class="col-md-3"><b>Primer Apellido</b></div>
                         <div class="col-md-3 ml-auto">{{$d->firts_ape}}</div>
-                        <div class="col-md-3">Segundo Apellido</div>
+                        <div class="col-md-3"><b>Segundo Apellido</b></div>
                         <div class="col-md-3 ml-auto">{{$d->second_ape}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Primer Nombre</div>
+                        <div class="col-md-3"><b>Primer Nombre</b></div>
                         <div class="col-md-3 ml-auto">{{$d->first_nom}}</div>
-                        <div class="col-md-3">Segundo Nombre</div>
+                        <div class="col-md-3"><b>Segundo Nombre</b></div>
                         <div class="col-md-3 ml-auto">{{$d->second_nom}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Dir. Residencia</div>
+                        <div class="col-md-3"><b>Dir. Residencia</b></div>
                         <div class="col-md-3 ml-auto">{{$d->dirresidencia}}</div>
-                        <div class="col-md-3">Barrio</div>
+                        <div class="col-md-3"><b>Barrio</b></div>
                         <div class="col-md-3 ml-auto">{{$d->barrio}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Dpt. Residencia</div>
+                        <div class="col-md-3"><b>Dpt. Residencia</b></div>
                         <div class="col-md-3 ml-auto">{{$d->dptresidencia}}</div>
-                        <div class="col-md-3">Mpio. Residencia</div>
+                        <div class="col-md-3"><b>Mpio. Residencia</b></div>
                         <div class="col-md-3 ml-auto">{{$d->munresidencia}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Zona</div>
+                        <div class="col-md-3"><b>Zona</b></div>
                         <div class="col-md-3 ml-auto">{{$d->zona}}</div>
-                        <div class="col-md-3">Telefono/Celular</div>
+                        <div class="col-md-3"><b>Telefono/Celular</b></div>
                         <div class="col-md-3 ml-auto">{{$d->telefono}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">Estrato</div>
+                        <div class="col-md-3"><b>Estrato</b></div>
                         <div class="col-md-3 ml-auto">{{$d->estrato}}</div>
-                        <div class="col-md-3">Tipo Sangre</div>
+                        <div class="col-md-3"><b>Tipo Sangre</b></div>
                         <div class="col-md-3 ml-auto">{{$d->tiposangre}}</div>
                     </div>
                     <!--end mostrar datos-->
@@ -138,21 +138,21 @@
                         <h4 class="text-centers">Sistema De Salud</h4>
                       <hr>
                       <div class="row">
-                        <div class="col-md-3">Regimen Salud</div>
+                        <div class="col-md-3"><b>Regimen Salud</b></div>
                         <div class="col-md-3 ml-auto">{{$d->regimen}}</div>
-                        <div class="col-md-3">Carnet/EPS</div>
+                        <div class="col-md-3"><b>Carnet/EPS</b></div>
                         <div class="col-md-3 ml-auto">{{$d->eps}}</div>
                      </div>
                      <div class="row">
-                        <div class="col-md-3">Nivel Formación</div>
+                        <div class="col-md-3"><b>Nivel Formación</b></div>
                         <div class="col-md-3 ml-auto">{{$d->nivelformacion}}</div>
-                        <div class="col-md-3">Ocupación</div>
+                        <div class="col-md-3"><b>Ocupación</b></div>
                         <div class="col-md-3 ml-auto">{{$d->ocupacion}}</div>
                      </div>
                      <div class="row">
-                        <div class="col-md-3">Discapacidad</div>
+                        <div class="col-md-3"><b>Discapacidad</b></div>
                         <div class="col-md-3 ml-auto">{{$d->discapacidad}}</div>
-                        <div class="col-md-3">Multiculturidad</div>
+                        <div class="col-md-3"><b>Multiculturidad</b></div>
                         <div class="col-md-3 ml-auto">{{$d->etniades}}</div>
                      </div>
                     <!--#####################fin sistema salud---->
@@ -162,28 +162,26 @@
                         <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
                       <hr>
                       <div class="row">
-                        <div class="col-md-3">Tipo Identificacion</div>
+                        <div class="col-md-3"><b>Tipo Identificacion</b></div>
                         <div class="col-md-3 ml-auto">{{$d->tdocacu}}</div>
-                        <div class="col-md-3">Número</div>
+                        <div class="col-md-3"><b>Número</b></div>
                         <div class="col-md-3 ml-auto">{{$d->numacu}}</div>
                       </div>
                       <div class="row">
-                        <div class="col-md-3">Nombres y Apellido</div>
+                        <div class="col-md-3"><b>Nombres y Apellido</b></div>
                         <div class="col-md-3 ml-auto">{{$d->nomacu}}</div>
-                        <div class="col-md-3">Parentesco</div>
+                        <div class="col-md-3"><b>Parentesco</b></div>
                         <div class="col-md-3 ml-auto">{{$d->paren}}</div>
                       </div>
                       <div class="row">
-                        <div class="col-md-3">Dirección Residencia</div>
+                        <div class="col-md-3"><b>Dirección Residencia</b></div>
                         <div class="col-md-3 ml-auto">{{$d->diracu}}</div>
-                        <div class="col-md-3">Telefono/Celular</div>
+                        <div class="col-md-3"><b>Telefono/Celular</b></div>
                         <div class="col-md-3 ml-auto">{{$d->telacu}}</div>
                       </div>
                     <!---############End Datos Acudiente-->
                     <br>
-                      <hr>
-                        <h4 class="text-centers">Datos Del Programa</h4>
-                      <hr>
+                     
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -215,7 +213,7 @@
    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header" style="background-color:#ffc107;">
                 <h5 class="modal-title" id="exampleModalLabel">Información Estudiante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -336,11 +334,6 @@
                       </div>
                     <!---############End Datos Acudiente-->
                     <br>
-                      <hr>
-                        <h4 class="text-start">Datos Del Programa</h4>
-                      <hr>
-                    
-
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -361,7 +354,7 @@
     console.log(nombre);
     var _token = $('input[name=_token]').val();
     $.ajax({
-      url:"{{route('buscarest')}}",
+      url:"{{route('searchEstu')}}",
       type: "POST",
       data:{
         nombre:nombre,
@@ -395,6 +388,7 @@
           '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
                     '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp'+
                     '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>&nbsp&nbsp&nbsp'+
+                    '<a href="/generar/certificado/estudiantil/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
         
            '</td>' +//agregar los botones
           '</tr>';
@@ -409,8 +403,9 @@
               '<td>' +  arreglo[x].estadoes + '</td>' +
               '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
                         '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp'+
-                        '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>&nbsp&nbsp&nbsp'+
-               '</td>' +//agregar los botones
+                        '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>&nbsp&nbsp&nbsp'+'<a href="/generar/certificado/estudiantil/' + arreglo[x].id + '"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'
+                        '<a href="/generar/certificado/estudiantil/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
+              '</td>' +//agregar los botones
               '</tr>';
                 $('#datos').append(valor);
            

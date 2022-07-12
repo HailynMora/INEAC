@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center"  role="alert">
- Ingresar Perfil Profesional
+<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+ <h3>Registar Perfil Profesional</h3>
 </div>
 
 <div class="accordion" id="accordionExample">
@@ -26,8 +26,12 @@
             <form id="forprogramas" name="forprogramas" method="POST">
               @csrf
                 <div class="form-row">
-                  <div class="form-group col-md-12">
-                  <label for="nivel">Nivel de Estudios</label>
+                  <div class="form-group col-md-6">
+                   <label for="nivel">Subir Foto</label>
+                  <input type="file" class="form-control" id="nivel" name="nivel" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                   <label for="nivel">Nivel de Estudios</label>
                   <input type="text" class="form-control" id="nivel" name="nivel" required>
                   </div>
               </div>

@@ -63,6 +63,8 @@ Route::post('/registro/estudiante', [EstudiantesController::class, 'matricula'])
 //buscar ESTUDIANTE POR ajax
 Route::post('/buscar/estudiante', [EstudiantesController::class, 'busquedares_est'])->middleware(['auth', 'secretaria_docente'])->name('buscarest');
 
+Route::post('/buscar/estudiante/admin', [EstudiantesController::class, 'searchEstuCon'])->middleware(['auth', 'secretaria_docente'])->name('searchEstu');
+
 //RUTA PARA ACTUALIZAR ESTUDIANTES
 Route::get('/estudiante/actualizar/{id}', [EstudiantesController::class, 'form_actualizar'])->middleware(['auth', 'secretaria'])->name('actualizar_est');
 
@@ -197,7 +199,7 @@ Route::post('/registro/programas_tecnicos', [ProgramasController::class, 'regist
 Route::post('/buscar/tecnico', [ProgramasController::class, 'busquedares_pro'])->middleware(['auth', 'secretaria'])->name('buscartecpro');
 
 //RUTA LISTADO DE VINCULACION DE AIGNATURAS A UN CURSO BACHILLERATOS
-Route::get('/programas/listado_vinculacion', [ProgramasController::class, 'listarvinculacion'])->middleware(['auth', 'secretaria'])->name('listado_asig');
+Route::post('/programas/listado_vinculacion', [ProgramasController::class, 'listarvinculacion'])->middleware(['auth', 'secretaria'])->name('listado_asig');
 
 //RUTA DESVINCULAR ASIGNATURA DE UN PROGRAMA BACHILLERATO
 Route::get('desvincular/{id}', [ProgramasController::class, 'desvincular'])->middleware(['auth', 'secretaria'])->name('desvincular'); 
@@ -315,7 +317,7 @@ Route::get('/asignatura/reporte_c', [AsignaturaController::class, 'asig_docc'])-
 Route::get('/docente/listado', [DocenteController::class, 'listado_doc'])->middleware(['auth','secretaria_docente'])->name('listado_doc');
 
 //RUTA REPORTE DE ESTUDIANTES
-Route::get('listar/estudiantes',[EstudiantesController::class, 'listar_estudo'])->middleware(['auth', 'secretaria_docente'])->name('listarestudo');
+Route::post('listar/estudiantes',[EstudiantesController::class, 'listar_estudo'])->middleware(['auth', 'secretaria_docente'])->name('listarestudo');
 
 //buscar ASIGNATURAS BACHILLERATO POR ajax
 Route::post('/buscar/asinatura_b', [ReporteAsigController::class, 'busquedares_asigc'])->middleware(['auth', 'secretaria_docente'])->name('busasigb');

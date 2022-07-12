@@ -55,6 +55,9 @@ class EstudiantesController extends Controller
             'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
             'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
 	        ->get();
+
+            //consultar programa
+
         }
         else{
             $b=0;
@@ -63,6 +66,7 @@ class EstudiantesController extends Controller
 
         return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b);
     }
+
     public function cambiar_estado($id){
         $estu= Estudiante::find($id);
         $es = $estu->id_estado;
@@ -265,7 +269,35 @@ class EstudiantesController extends Controller
 
     //////////////////buscar estudiante////////////////////////
     public function busquedares_est(Request $request){
-        $busest = $estudiante=DB::table('estudiante')->where('estudiante.num_doc','=',$request->nombre)
+         $busest =   DB::table('matriculas')
+                    ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+                    ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
+                    ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+                    ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
+                    ->join('genero', 'id_genero', '=', 'genero.id')
+                    ->join('users', 'id_usuario', '=', 'users.id')
+                    ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+                    ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+                    ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+                    ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+                    ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                    ->where('estudiante.num_doc', '=', $request->nombre)
+                    ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
+                    'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
+                    'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
+                    'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'tipo_documento.descripcion as tdoces',
+                    'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
+                    'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
+                    'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu', 'matriculas.anio', 'matriculas.periodo', 'aprobado.nombre as apro', 'tipo_curso.descripcion as curso', 'tipo_curso.cursodes as descur')
+                    ->get(); 
+     return response(json_decode($busest,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+    }
+    ////////////////////////////////////////cambiar el estado del estudianet por ajax
+
+
+    //buscar estudianres desde admin por ajax
+    public function searchEstuCon(Request $request){
+        $estudiantecon=DB::table('estudiante')
                     ->join('estado', 'id_estado', '=', 'estado.id')
                     ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
                     ->join('genero', 'id_genero', '=', 'genero.id')
@@ -275,6 +307,7 @@ class EstudiantesController extends Controller
                     ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
                     ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
                     ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                    ->where('estudiante.num_doc', '=', $request->nombre)
                     ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
                     'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
                     'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
@@ -283,9 +316,9 @@ class EstudiantesController extends Controller
                     'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
                     'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
                     ->get();
-     return response(json_decode($busest,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
-    }
-    ////////////////////////////////////////cambiar el estado del estudianet por ajax
+              return response(json_decode($estudiantecon,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+      }
+    //end buscar estudiante desde admin por ajax
 
     
     public function cambiarestado(Request $request){
@@ -300,29 +333,39 @@ class EstudiantesController extends Controller
         }        
         return back();
     }
-    public function listar_estudo(){
-        $res=DB::table('estudiante')->count(); //validar datos cuando no hay estudiantes
+
+    public function listar_estudo(Request $request){
+        
+        $res=DB::table('matriculas')->count(); //validar datos cuando no hay estudiantes
         if($res!=0){
             $b=1;
-            $estudiante=DB::table('estudiante')
-            ->join('estado', 'id_estado', '=', 'estado.id')
-            ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
-            ->join('genero', 'id_genero', '=', 'genero.id')
-            ->join('users', 'id_usuario', '=', 'users.id')
+            $estudiante=DB::table('matriculas')
+            ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+            ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
+            ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+            ->join('estado', 'estudiante.id_estado', '=', 'estado.id')
+            ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+            ->join('genero', 'estudiante.id_genero', '=', 'genero.id')
+            ->join('users', 'estudiante.id_usuario', '=', 'users.id')
             ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
             ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
             ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
             ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
             ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+            ->where('matriculas.anio', $request->anio)
+            ->where('matriculas.periodo', $request->periodo)
+            ->where('matriculas.id_curso', $request->cursoba)
             ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
             'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
             'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
             'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
             'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
             'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
-            'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
+            'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu', 'matriculas.anio', 'matriculas.periodo', 'tipo_curso.descripcion', 
+            'tipo_curso.cursodes', 'aprobado.nombre as estamat')
 	        ->get();
-        }
+           
+        } 
         else{
             $b=0;
             $estudiante=array('datos');
