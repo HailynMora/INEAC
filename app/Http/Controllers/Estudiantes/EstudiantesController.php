@@ -59,6 +59,7 @@ class EstudiantesController extends Controller
                     ->join('aprobado','matriculas.id_aprobado','=','aprobado.id')
                     ->join('cursos','matriculas.id_curso','=','cursos.id')
                     ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                    ->select('tipo_curso.codigo','tipo_curso.descripcion','matriculas.anio','matriculas.periodo','matriculas.id_estudiante','id_aprobado','id_estudiante')
                     ->get();
             $te = DB::table('matricula_tecnico')->count();
             if($te!=0){
@@ -66,6 +67,7 @@ class EstudiantesController extends Controller
                 ->join('aprobado','matricula_tecnico.id_aprobado','=','aprobado.id')
                 ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
                 ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                ->select('programa_tecnico.codigotec','programa_tecnico.nombretec','trimestre_tecnicos.nombretri','id_aprobado','id_estudiante')
                 ->get();
             }else{
                 $tec=array('datos');
