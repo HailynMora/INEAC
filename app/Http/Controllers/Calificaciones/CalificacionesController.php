@@ -104,9 +104,9 @@ class CalificacionesController extends Controller
         }
         //validar si la nota de un estudiante ya se encuentra para una materia
         if($porval==1){
-          $valnotas = DB::table('notas')->where('id_curso', $request->idcur)->where('id_estudiante', $request->idcur)->count();
-        if($valnotas == 0){
-                $category = new Notas();
+          $valnotas = DB::table('notas')->where('id_curso', $request->idcur)->where('id_estudiante', $request->idest)->count();
+          if($valnotas == 0){
+              $category = new Notas();
                 $category->nota1= $request->input('nota1');
                 $category->por1= $request->input('porcentaje1');
                 $category->nota2= $request->input('nota2');
@@ -122,6 +122,49 @@ class CalificacionesController extends Controller
                 $category->save();
                 Session::flash('notare','Calificaciones registradas exitosamente.');
 
+                //consular el periodo, el año y el id de la materia que se esta registrando y segun 
+                //eso se obtiene el total de materias que tiene ese curso  
+               $per = DB::table('cursos')->where('cursos.id', '=', $request->idcur)->select('anio', 'periodo', 'id_tipo_curso')->first();
+
+               //una vez obtenido el periodo y año y curso se busca todos los id que estan vinculados con 
+               //esa asignatura y curso 
+               $concur = DB::table('cursos')->where('cursos.anio', '=', $per->anio)
+                        ->where('cursos.periodo', '=', $per->periodo)
+                        ->where('cursos.id_tipo_curso', '=', $per->id_tipo_curso)
+                        ->select('cursos.id as idcurso')->get();
+
+
+                //una vez obtenido el id de materias asignadas(cursos) como son unicos se debe enviar a buscar 
+                //en la tabla notas para mirar si tiene todas las materias con nota>=3
+                for($i=0; $i<count($concur); $i++){
+                        $comparar[$i] =DB::table('notas')->where('id_curso', $concur[$i]->idcurso)
+                        ->where('notas.id_Estudiante', '=', $request->idest)
+                        ->where('notas.definitiva', '>=', '3')
+                        ->count();
+
+                }
+                //como retorna desde un count se debe comparar si todas las materias estan una vez en la base de datos
+                //con los ids obtenidos si aparece un 0 significa que aun falta materias por registrar
+                //si aparece 1 significa que todas las materias estan registradas y con notas mayor a 3
+                for($j=0; $j<count($comparar); $j++){
+                  if($comparar[$j]==0){
+                        $m=0;
+                  }else{
+                        $m=1;
+                  }
+                  
+                }
+                //Si todas las materias tienen nota con mayor a 3 entonces cambia de estado en matriculas
+               
+                if($m==1){
+                  DB::table('matriculas')->where('id_estudiante', $request->idest)
+                    ->where('id_aprobado', 1)
+                    ->update(['id_aprobado' => 2]);
+                    //->where('anio', $per->anio)
+                    //->where('anio', $per->periodo)
+                }
+                //end validacion
+                
                 }else{
                         Session::flash('notaval','Calificaciones ya se encuentran registradas.');
                 }
@@ -278,6 +321,48 @@ class CalificacionesController extends Controller
                         $category->definitiva= $final;
                         $category->id_desempenio = $desempenio;
                         $category->save();
+                           //consular el periodo, el año y el id de la materia que se esta registrando y segun 
+                           //eso se obtiene el total de materias que tiene ese curso  
+                                $per = DB::table('cursos')->where('cursos.id', '=', $category->id_curso)->select('anio', 'periodo', 'id_tipo_curso')->first();
+                                
+                                //una vez obtenido el periodo y año y curso se busca todos los id que estan vinculados con 
+                                //esa asignatura y curso 
+                                $concur = DB::table('cursos')->where('cursos.anio', '=', $per->anio)
+                                                ->where('cursos.periodo', '=', $per->periodo)
+                                                ->where('cursos.id_tipo_curso', '=', $per->id_tipo_curso)
+                                                ->select('cursos.id as idcurso')->get();
+
+
+                                        //una vez obtenido el id de materias asignadas(cursos) como son unicos se debe enviar a buscar 
+                                        //en la tabla notas para mirar si tiene todas las materias con nota>=3
+                                        for($i=0; $i<count($concur); $i++){
+                                                $comparar[$i] =DB::table('notas')->where('id_curso', $concur[$i]->idcurso)
+                                                ->where('notas.id_Estudiante', '=', $category->id_estudiante)
+                                                ->where('notas.definitiva', '>=', '3')
+                                                ->count();
+
+                                        }
+                                        //como retorna desde un count se debe comparar si todas las materias estan una vez en la base de datos
+                                        //con los ids obtenidos si aparece un 0 significa que aun falta materias por registrar
+                                        //si aparece 1 significa que todas las materias estan registradas y con notas mayor a 3
+                                        for($j=0; $j<count($comparar); $j++){
+                                        if($comparar[$j]==0){
+                                                $m=0;
+                                        }else{
+                                                $m=1;
+                                        }
+                                        
+                                        }
+                                        //Si todas las materias tienen nota con mayor a 3 entonces cambia de estado en matriculas
+                                
+                                        if($m==1){
+                                        DB::table('matriculas')->where('id_estudiante', $category->id_estudiante)
+                                        ->where('id_aprobado', 1)
+                                        ->update(['id_aprobado' => 2]);
+                                        //->where('anio', $per->anio)
+                                        //->where('anio', $per->periodo)
+                                        }
+                                        //end validacion
                         Session::flash('notac','Actualización realizada exitosamente.');
 
                 }else{

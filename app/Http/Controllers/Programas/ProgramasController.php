@@ -134,17 +134,21 @@ class ProgramasController extends Controller
 
     }
     
-    public function listarvinculacion(){
+    public function listarvinculacion(Request $request){
+    
         $asigpro=DB::table('cursos')
-        ->select('cursos.id','id_asignatura','id_tipo_curso','asignaturas.codigo as codas',
-                 'asignaturas.nombre as asig','tipo_curso.codigo as codcur',
-                 'tipo_curso.descripcion as curso','docente.nombre as nomdoc',
-                 'docente.apellido as apedoc')
-        ->join('asignaturas','id_asignatura','=','asignaturas.id')
-        ->join('tipo_curso','id_tipo_curso','=','tipo_curso.id')
-        ->join('docente','id_docente','=','docente.id')
-        ->orderBy('cursos.id_tipo_curso', 'ASC')
-        ->paginate(5); //hacer paginacion de las vistas
+                ->select('cursos.id','id_asignatura','id_tipo_curso','asignaturas.codigo as codas',
+                        'asignaturas.nombre as asig','tipo_curso.codigo as codcur',
+                        'tipo_curso.descripcion as curso','docente.nombre as nomdoc',
+                        'docente.apellido as apedoc', 'cursos.anio', 'cursos.periodo')
+                ->join('asignaturas','id_asignatura','=','asignaturas.id')
+                ->join('tipo_curso','id_tipo_curso','=','tipo_curso.id')
+                ->join('docente','id_docente','=','docente.id')
+                ->where('cursos.anio', $request->anio)
+                ->where('cursos.periodo', $request->periodo)
+                ->where('cursos.id_tipo_curso', $request->cursoid)
+                 ->paginate(5); //hacer paginacion de las vistas
+       
         return view('programas.listarvinculacion')->with('asigpro',$asigpro);
 
     }

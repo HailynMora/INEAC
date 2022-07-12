@@ -98,7 +98,14 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('dist/img/img_user.jpeg')}}" class="img-circle elevation-2" alt="User Image">
+          <?php
+          use Illuminate\Support\Facades\DB;
+          use Illuminate\Support\Facades\Auth;
+
+           $id=auth()->id();
+           $im= DB::table('perfil_docente')->where('id_usuario', '=', $id)->select('imagen')->first();
+          ?>
+           <img src="{{asset('dist/perfil/'.$im->imagen)}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="{{route('actuperfil')}}" class="d-block"><h6 style="color:white;">{{ Auth::user()->name }}</h6></a>

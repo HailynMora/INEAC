@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Certificado Estudiantil</title>
+        <title>Certificado De Notas</title>
     </head>
     <body  style=" width:100%;  height: 100%;">
         <br><br>
@@ -52,7 +52,7 @@
                 @foreach($asig as $a)
                   <tr>
                     <td style="text-align:left;">{{$a->nombre}}</td>
-                    <td style="text-align:left;">{{$a->definitiva}}</td>
+                    <td style="text-align:center;">{{$a->definitiva}}</td>
                     <td style="text-align:left;">{{$a->desem}}</td>
                   </tr>
                 @endforeach
@@ -70,7 +70,7 @@
                 @endif
             </div>
            <div>
-              <p>Para constancia se firma en Potosi </p>
+             <p>Para constancia se firma en Potosi el dia {{$dia}} del mes {{$mes}}  del año {{$anio}}</p>
             </div>
             <div > 
             <br>

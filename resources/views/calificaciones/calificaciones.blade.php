@@ -81,7 +81,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="container text-center" style="background-color: #283593; color:#ffffff; padding-top:10px; padding-bottom:10px;">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Registro de notas</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Ingresar Valores</h5>
                                                         </div>
                                                         <div class="modal-body">
                                                         <!--table-->

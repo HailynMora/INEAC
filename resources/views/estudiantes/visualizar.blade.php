@@ -184,6 +184,7 @@
                         <h4 class="text-centers">Datos Del Programa</h4>
                       <hr>
                       @foreach($pro as $p)
+                      @if(isset($p->id_estudiante))
                       @if($d->id==$p->id_estudiante && $p->id_aprobado==1)
                       <div class="row">
                         <div class="col-md-3">Codigo</div>
@@ -198,9 +199,11 @@
                         <div class="col-md-3 ml-auto">{{$p->anio}}</div>
                       </div>
                       @endif
+                      @endif
                       @endforeach
                       <hr>
                       @foreach($tec as $t)
+                      @if(isset($t->id_estudiante))
                       @if($d->id==$t->id_estudiante && $t->id_aprobado==1)
                       <div class="row">
                         <div class="col-md-3">Codigo</div>
@@ -222,6 +225,7 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-3 ml-auto"></div>
                       </div>
+                      @endif
                       @endif
                       @endforeach
                     </div>
@@ -508,6 +512,3 @@
   });
 </script>
 @endsection
-
-
-

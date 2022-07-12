@@ -42,12 +42,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('listarestudo')}}" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Estudiantes
+            <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+                <p>
+                   Estudiantes    
               </p>
             </a>
+            @include('docente.listadoEstu')
           </li>                  
           <li class="nav-item">
             <a href="#" class="nav-link">

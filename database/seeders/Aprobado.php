@@ -27,6 +27,9 @@ class Aprobado extends Seeder
             ],
             [
              'nombre' => 'Retirado'
+            ],
+            [
+             'nombre' => 'Finalizado'
             ]
 
         ];

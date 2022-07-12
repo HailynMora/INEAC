@@ -105,8 +105,14 @@ class PDFController extends Controller
         $pdf = PDF::loadView('docente.pdfLaboral', $data);
         return $pdf->download('certificado_laboral.pdf');
     }
+
+    //certificado de notas
     public function cerEstudiantil(Request $request)
     {   
+        $dia = date('d', time()); 
+        $mes = date('m', time()); 
+        $anio = date('Y', time()); 
+
         $estudiante= DB::table('matriculas')
                     ->where('matriculas.id_estudiante', '=', $request->ides)
                     ->where('matriculas.anio', '=', $request->anio)
@@ -136,6 +142,9 @@ class PDFController extends Controller
             'estudiante' => $estudiante,
             'asig' => $asig,
             'not' => $not,
+            'dia' => $dia,
+            'mes' => $mes,
+            'anio' => $anio,
         ];     
         $pdf = PDF::loadView('estudiantes.pdfEstudiantil', $data);
         return $pdf->download('certificado_estudiantil.pdf');

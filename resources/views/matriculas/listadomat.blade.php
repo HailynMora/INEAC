@@ -27,6 +27,7 @@
             <th scope="col">No Documento</th>
             <th scope="col">Telefono</th>
             <th scope="col">Curso</th>
+            <th scope="col">Estado</th>
             <th scope="col">Opciones</th>
             </tr>
         </thead>
@@ -44,6 +45,7 @@
         <td>{{$e->num_doc}}</td>
         <td>{{$e->telefono}}</td>
         <td>{{$e->nomcurso}}</td>
+        <td>{{$e->estadoes}}</td>
        <!-- idest
         idcur-->
         
@@ -149,6 +151,8 @@
             '<td>' +  ar[i].num_doc  + '</td>' +
             '<td>' +  ar[i].telefono  + '</td>' +
             '<td>' +  ar[i].nomcurso + '</td>' +
+            '<td>' +  ar[i].estadoes + '</td>' +
+            '<td>' 
             '<td>' +'&nbsp&nbsp&nbsp <a href="/generar/certificado/estudiantil/'+ ar[i].idest +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'
               + '<a href="/matricula/estudiante/bachillerato/actualizar/' + ar[i].idmat + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp&nbsp;'+ 
                 '<a type="button" data-toggle="modal" data-target="#estado'+ar[i].idmat+'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
