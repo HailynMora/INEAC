@@ -24,6 +24,7 @@ class PerfilController extends Controller
     }
     
     public function  regdatos(Request $request){
+           
             $idl=auth()->id();
             $perfil = new Perfil();
             $perfil->nivel_estudios = $request->input('nivel');
@@ -34,6 +35,16 @@ class PerfilController extends Controller
             $perfil->id_usuario = $idl; //cada docente va a registrar su perfil por lo tanto 
             //se captura el id de logeado y se almacena en la base de datos
             //se debe validar que el usuario solamente tenga un perfil
+            //###########################################
+            if($request->hasFile('foto')){                 
+                $file = $request->file('foto');
+                $val = "perfil".time().".".$file->guessExtension();
+                $ruta = public_path("dist/perfil/".$val);
+               // if($file->guessExtension()=="pdf"){
+                copy($file, $ruta);//ccopia el archivo de una ruta cualquiera a donde este
+                $perfil->imagen= $val;//ingresa el nombre de la ruta a la base de datos
+               }
+            ############################################
             $perfil->save();
             return back();
     }

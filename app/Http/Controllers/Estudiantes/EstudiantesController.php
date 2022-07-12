@@ -33,41 +33,59 @@ class EstudiantesController extends Controller
         ->with('user', $user)->with('paren', $paren);
     }
 
-    public function listar(){
-        $res=DB::table('estudiante')->count(); //validar datos cuando no hay estudiantes
-        if($res!=0){
-            $b=1;
-            $estudiante=DB::table('estudiante')
-            ->join('estado', 'id_estado', '=', 'estado.id')
-            ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
-            ->join('genero', 'id_genero', '=', 'genero.id')
-            ->join('users', 'id_usuario', '=', 'users.id')
-            ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
-            ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
-            ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
-            ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
-            ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
-            ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
-            'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
-            'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
-            'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
-            'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
-            'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
-            'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
-	        ->get();
+     //cambios hailyn
+        public function listar(){
+            $res=DB::table('estudiante')->count(); //validar datos cuando no hay estudiantes
+            if($res!=0){
+                $b=1;
+                $estudiante=DB::table('estudiante')
+                ->join('estado', 'id_estado', '=', 'estado.id')
+                ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
+                ->join('genero', 'id_genero', '=', 'genero.id')
+                ->join('users', 'id_usuario', '=', 'users.id')
+                ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+                ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+                ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+                ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+                ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
+                'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
+                'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
+                'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
+                'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
+                'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
+                'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
+                ->get();
+                $pro = DB::table('matriculas')
+                        ->join('aprobado','matriculas.id_aprobado','=','aprobado.id')
+                        ->join('cursos','matriculas.id_curso','=','cursos.id')
+                        ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                        ->get();
+                return $pro;
+                $te = DB::table('matricula_tecnico')->count();
+                if($te!=0){
+                    $tec = DB::table('matricula_tecnico')
+                    ->join('aprobado','matricula_tecnico.id_aprobado','=','aprobado.id')
+                    ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
+                    ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                    ->get();
+                   
+                }else{
+                    $tec=array('datos');
+                }
+                
+            }
+            else{
+                $b=0;
+                $estudiante=array('datos');
+                $pro=array('datos');
+                $tec=array('datos');
+            }
 
-            //consultar programa
-
+            return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b)->with('pro', $pro)->with('tec', $tec);
         }
-        else{
-            $b=0;
-            $estudiante=array('datos');
-            $pro=array('datos');
-            $tec=array('datos');
-        }
 
-        return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b)->with('pro', $pro)->with('tec', $tec);
-    }
+     //end cambios hailyn
 
     public function cambiar_estado($id){
         $estu= Estudiante::find($id);

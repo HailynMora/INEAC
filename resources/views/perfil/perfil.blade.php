@@ -23,12 +23,12 @@
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-            <form id="forprogramas" name="forprogramas" method="POST">
+            <form  action="{{route('regperfil')}}" method="POST" enctype="multipart/form-data">
               @csrf
                 <div class="form-row">
                   <div class="form-group col-md-6">
                    <label for="nivel">Subir Foto</label>
-                  <input type="file" class="form-control" id="nivel" name="nivel" required>
+                  <input type="file" class="form-control" id="foto" name="foto" required>
                   </div>
                   <div class="form-group col-md-6">
                    <label for="nivel">Nivel de Estudios</label>
@@ -67,7 +67,7 @@
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script>
-  $('#forprogramas').submit(function(e){
+  /*$('#forprogramas').submit(function(e){
     e.preventDefault();
     var nivel=$('#nivel').val();
     var descripcion=$('#descripcion').val();
@@ -94,7 +94,7 @@
         }
       }
     });
-  })
+  })*/
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });
      $("form input[type=text]").each(function() { this.value = '' });
