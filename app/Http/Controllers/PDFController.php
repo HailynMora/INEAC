@@ -281,4 +281,71 @@ class PDFController extends Controller
         $pdf = PDF::loadView('estudiantes.pdfBoletin', $data);
         return $pdf->download('boletin_academico.pdf');
     }
+
+     public function cerNota(Request $request)
+    {   
+        $estudiante= DB::table('matricula_tecnico')
+                    ->where('matricula_tecnico.id_estudiante', '=', $request->ides)
+                    ->where('matricula_tecnico.anio', '=', $request->anio)
+                    ->where('matricula_tecnico.periodo', '=', $request->periodo)
+                    ->where('matricula_tecnico.id_trimestre', '=', $request->trimestre)
+                    ->join('estudiante','estudiante.id','=','matricula_tecnico.id_estudiante')
+                    ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
+                    ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
+                    ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                    ->select('estudiante.id as ides','matricula_tecnico.anio','matricula_tecnico.periodo','programa_tecnico.codigotec','programa_tecnico.nombretec','programa_tecnico.jornada','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo','trimestre_tecnicos.nombretri')
+                    ->first();
+        $asig = DB::table('notas_tecnico')
+                    ->where('notas_tecnico.id_estudiante',$request->ides)
+                    ->where('asignaturas_tecnicos.anio', '=', $request->anio)
+                    ->where('asignaturas_tecnicos.periodo', '=', $request->periodo)
+                    ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                    ->join('desempenos','notas_tecnico.id_desempenio','=','desempenos.id')
+                    ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                    ->select('definitiva','asig_tecnicos.nombreasig','desempenos.descripcion as desem','id_tecnicos')
+                    ->get();
+        $not = DB::table('notas_tecnico')->where('notas_tecnico.id_estudiante',$request->ides)
+                    ->where('notas_tecnico.definitiva','<',3)
+                    ->where('asignaturas_tecnicos.anio', '=', $request->anio)
+                    ->where('asignaturas_tecnicos.periodo', '=', $request->periodo)
+                    ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                    ->join('desempenos','notas_tecnico.id_desempenio','=','desempenos.id')
+                    ->join('asig_tecnicos','asignaturas_tecnicos.id_tecnico','=','asig_tecnicos.id')
+                    ->count();
+        $data = [
+            'estudiante' => $estudiante,
+            'asig' => $asig,
+            'not' => $not,
+        ];     
+        $pdf = PDF::loadView('tecnico.cernotas', $data);
+        return $pdf->download('certificado_estudiantil.pdf');
+    }
+    public function mattecEstudiantil(Request $request)
+    {   
+        //fecha
+        $dia = date('d', time()); 
+        $mes = date('m', time()); 
+        $anio = date('Y', time()); 
+        
+        //
+        $estudiante= DB::table('matricula_tecnico')
+                    ->where('matricula_tecnico.id_estudiante', '=', $request->ides)
+                    ->where('matricula_tecnico.anio', '=', $request->anio)
+                    ->where('matricula_tecnico.periodo', '=', $request->periodo)
+                    ->join('estudiante','estudiante.id','=','matricula_tecnico.id_estudiante')
+                    ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
+                    ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
+                    ->join('aprobado','matricula_tecnico.id_aprobado','=','aprobado.id')
+                    ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                    ->select('estudiante.id as ides','matricula_tecnico.anio','matricula_tecnico.periodo','programa_tecnico.codigotec','programa_tecnico.nombretec','programa_tecnico.jornada','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo','aprobado.nombre as apo','trimestre_tecnicos.nombretri')
+                    ->first();
+        $data = [
+            'estudiante' => $estudiante,
+            'dia' => $dia,
+            'mes' => $mes,
+            'anio' => $anio,
+        ];     
+        $pdf = PDF::loadView('tecnico.cermatricula', $data);
+        return $pdf->download('certificado_estudiantil_matricula.pdf');
+    }
 }

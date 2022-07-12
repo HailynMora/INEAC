@@ -274,7 +274,7 @@ class asignaturaController extends Controller
                  'asig_tecnicos.nombreasig as asig','intensidad_horaria',
                  'val_habilitacion','programa_tecnico.id as idtec','programa_tecnico.nombretec', 'asignaturas_tecnicos.anio', 
                  'asignaturas_tecnicos.periodo','trimestre_tecnicos.id as idtri', 'trimestre_tecnicos.nombretri as trimestre')
-        ->orderBy('asignaturas_tecnicos.periodo', 'ASC')
+        ->orderBy('asignaturas_tecnicos.id_trimestre', 'ASC')
         ->get();
         $val=DB::table('objetivostec')->count();
         if($val!=0){

@@ -193,7 +193,7 @@ class MatriculasController extends Controller
             ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
             ->join('aprobado', 'matricula_tecnico.id_aprobado', '=', 'aprobado.id')
             ->join('trimestre_tecnicos', 'matricula_tecnico.id_trimestre', '=', 'trimestre_tecnicos.id')
-            ->select('matricula_tecnico.id', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
+            ->select('matricula_tecnico.id', 'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom','estudiante.id as idest', 
             'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape',
             'estudiante.telefono', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo', 
             'programa_tecnico.nombretec', 'programa_tecnico.descripcion as destec',

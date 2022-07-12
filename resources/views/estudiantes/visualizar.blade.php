@@ -51,8 +51,7 @@
                 <a href="{{route('actualizar_est',$d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
                 <a href="{{route('matricularadmin', $d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp
                 <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>" data-placement="bottom"  title="Ver Estudiante">
-                <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>&nbsp&nbsp&nbsp
-                <a href="{{route('certifEstu',$d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
+                <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
                 <!-- Modal -->
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -184,7 +183,49 @@
                       <hr>
                         <h4 class="text-centers">Datos Del Programa</h4>
                       <hr>
+                      @foreach($pro as $p)
+                      @if($d->id==$p->id_estudiante && $p->id_aprobado==1)
+                      <div class="row">
+                        <div class="col-md-3">Codigo</div>
+                        <div class="col-md-3 ml-auto">{{$p->codigo}}</div>
+                        <div class="col-md-3">Programa</div>
+                        <div class="col-md-3 ml-auto">{{$p->descripcion}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">Periodo</div>
+                        <div class="col-md-3 ml-auto">{{$p->periodo}}</div>
+                        <div class="col-md-3">Año</div>
+                        <div class="col-md-3 ml-auto">{{$p->anio}}</div>
+                      </div>
+                      @endif
+                      @endforeach
+                      <hr>
+                      @foreach($tec as $t)
+                      @if($d->id==$t->id_estudiante && $t->id_aprobado==1)
+                      <div class="row">
+                        <div class="col-md-3">Codigo</div>
+                        <div class="col-md-3 ml-auto">{{$t->codigotec}}</div>
+                        <div class="col-md-3">Programa</div>
+                        <div class="col-md-3 ml-auto">{{$t->nombretec}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">Periodo</div>
+                        <div class="col-md-3 ml-auto">{{$p->periodo}}</div>
+                        <div class="col-md-3">Año</div>
+                        <div class="col-md-3 ml-auto">{{$p->anio}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">Trimestre</div>
+                        <div class="col-md-3 ml-auto">{{$t->nombretri}}</div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3 ml-auto"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3 ml-auto"></div>
+                      </div>
+                      @endif
+                      @endforeach
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>

@@ -64,7 +64,6 @@
             <thead style="background-color:#FFCC00;">
               <tr>
                 <th scope="col">Año</th>
-                <th scope="col">Periodo</th>
                 <th scope="col">Trimestre</th>
                 <th scope="col">Programa</th>
                 <th scope="col">Código</th>
@@ -77,8 +76,7 @@
             <tbody id="tabla1">
               @foreach($repe as $d) <!--idtec nombretec codigotec estades idasig nombreasig horas trimestre--> 
               <tr style="background-color: #dcedc8;">
-                <td>{{$d->anio}}</td>
-                <td>{{$d->periodo}}</td>
+                <td>{{$d->anio}} - {{$d->periodo}}</td>
                 <td>{{$d->trimestre}}</td>
                 <td>{{$d->nombretec}}</td>
                 <td>{{$d->codigoasig}}</td>

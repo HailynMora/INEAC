@@ -55,13 +55,31 @@ class EstudiantesController extends Controller
             'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
             'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
 	        ->get();
+            $pro = DB::table('matriculas')
+                    ->join('aprobado','matriculas.id_aprobado','=','aprobado.id')
+                    ->join('cursos','matriculas.id_curso','=','cursos.id')
+                    ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                    ->get();
+            $te = DB::table('matricula_tecnico')->count();
+            if($te!=0){
+                $tec = DB::table('matricula_tecnico')
+                ->join('aprobado','matricula_tecnico.id_aprobado','=','aprobado.id')
+                ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
+                ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                ->get();
+            }else{
+                $tec=array('datos');
+            }
+            
         }
         else{
             $b=0;
             $estudiante=array('datos');
+            $pro=array('datos');
+            $tec=array('datos');
         }
 
-        return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b);
+        return view('estudiantes.visualizar')->with('estudiante', $estudiante)->with('b', $b)->with('pro', $pro)->with('tec', $tec);
     }
     public function cambiar_estado($id){
         $estu= Estudiante::find($id);

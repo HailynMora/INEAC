@@ -43,4 +43,9 @@ class HabilitacionesController extends Controller
         $ide = $id;
         return view('estudiantes.certificadoes')->with('idc', $idc)->with('asig', $asig)->with('ide', $ide);
     }
+
+    public function estudiantiltec($id){
+        $ides=$id;
+        return view('tecnico.certificados')->with('ides',$ides);
+    }
 }

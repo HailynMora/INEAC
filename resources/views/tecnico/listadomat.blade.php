@@ -31,6 +31,7 @@
             </tr>
         </thead>
         <tbody id="tabla1">
+          
         @if($b==1)
         @php
         $con = 1;
@@ -48,6 +49,7 @@
         idcur-->
          <!-- aprobado-->
         <td>
+        <a href="{{route('certifEstuTec',$e->idest)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
         <a href="/matricula/estudiante/actualizar/{{$e->id}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
         &nbsp&nbsp
         <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$e->id}}"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>
@@ -183,7 +185,7 @@
             '<td>' +  ar[i].num_doc  + '</td>' +
             '<td>' +  ar[i].aprobado + '</td>' +
             '<td>' +  ar[i].nombretec + '</td>' +
-            '<td>' 
+            '<td>' +'<a href="#"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'
               + '<a href="/matricula/estudiante/actualizar/' + ar[i].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp&nbsp;'+ 
                 '<a type="button" data-toggle="modal" data-target="#cambiarEstado'+ar[i].id+'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
                ' <div class="modal fade" id="cambiarEstado'+ar[i].id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
