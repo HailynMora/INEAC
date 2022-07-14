@@ -104,9 +104,23 @@
 
            $id=auth()->id();
            $im= DB::table('perfil_docente')->where('id_usuario', '=', $id)->select('imagen')->first();
+           $es= DB::table('estudiante')->where('id_usuario', '=', $id)->select('foto')->first();
           ?>
-           <img src="{{asset('dist/perfil/'.$im->imagen)}}" class="img-circle elevation-2" alt="User Image">
-        </div>
+          @if(Auth::user()->id_rol==1) <!--Logeado como administrador-->
+            @include('admin.menuadmin')
+          @endif
+          @if(Auth::user()->id_rol==2) <!--Logeado como usuario-->
+              @if(isset($im->imagen))
+              <img src="{{asset('dist/perfil/'.$im->imagen)}}" class="img-circle elevation-2" alt="User Image">
+              @endif
+           @endif
+          @if(Auth::user()->id_rol==3) <!--Logeado como jefe-->
+             @if(isset($es->foto))
+               <img src="{{asset('dist/perfil/'.$es->foto)}}" class="img-circle elevation-2" alt="User Image">
+              @endif
+          @endif
+         
+          </div>
         <div class="info">
           <a href="{{route('actuperfil')}}" class="d-block"><h6 style="color:white;">{{ Auth::user()->name }}</h6></a>
         </div>
@@ -126,7 +140,7 @@
         </div>
       </div>
     <!--Funcionar los roles--->
-      @if(Auth::user()->id_rol==1) <!--Logeado como administrador-->
+        @if(Auth::user()->id_rol==1) <!--Logeado como administrador-->
             @include('admin.menuadmin')
         @endif
         @if(Auth::user()->id_rol==2) <!--Logeado como usuario-->

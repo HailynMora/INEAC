@@ -412,4 +412,9 @@ Route::post('/estudiante/boletin/pdf', [PDFController::class, 'boletin_es'])->mi
 //nivelaciones secretaria
 Route::post('/nivelaciones', [EstudiantesNotController::class, 'nivelacion'])->middleware(['auth', 'secretaria'])->name('nivelacionEstudiante');
 
+//perfil estudiante
+Route::get('/perfil/estudiante/ver', [PerfilController::class, 'estudiantePEr'])->middleware(['auth', 'estudiante'])->name('perfilEstu');
+
+Route::post('/perfil/estudiante/actualizar', [PerfilController::class, 'actuEstuPerfil'])->middleware(['auth', 'estudiante'])->name('actuPerfil_Estu');
+
 require __DIR__.'/auth.php';

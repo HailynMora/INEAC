@@ -15,6 +15,14 @@
                 <!--end instancia-->
           </li>
           <li class="nav-item">
+            <a href="{{route('perfilEstu')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-circle"></i>
+              <p>
+                Perfil 
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('planEstudios')}}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>

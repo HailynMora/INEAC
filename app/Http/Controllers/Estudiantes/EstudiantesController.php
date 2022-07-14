@@ -16,7 +16,7 @@ use App\Models\EstadoModel\Estado;
 use App\Models\SaludModel\SistemaSalud;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class EstudiantesController extends Controller
 {
@@ -61,7 +61,6 @@ class EstudiantesController extends Controller
                         ->join('cursos','matriculas.id_curso','=','cursos.id')
                         ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
                         ->get();
-                return $pro;
                 $te = DB::table('matricula_tecnico')->count();
                 if($te!=0){
                     $tec = DB::table('matricula_tecnico')
@@ -259,7 +258,6 @@ class EstudiantesController extends Controller
             $Registrar->id_genero = $request->input('genero');
             $Registrar->id_tipo_doc  = $request->input('tipodoc');
             $Registrar->id_estado = $request->input('estado');
-            $Registrar->id_usuario  = 1;
             $Registrar->save(); 
             //////////////////////////#################consultar el id del estudiante ingresado
             $Salud=SistemaSalud::where('id_estudiante', '=', $id)->first();
