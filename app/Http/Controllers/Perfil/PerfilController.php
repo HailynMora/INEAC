@@ -69,6 +69,7 @@ class PerfilController extends Controller
     
 
     public function actu(Request $request){
+        
         $idl=auth()->id();
         $iden=$request->iden;
         $perfil = Perfil::FindOrFail($iden);
@@ -78,10 +79,18 @@ class PerfilController extends Controller
         $perfil->cursos_realizados = $request->input('cur');
         $perfil->experiencia = $request->input('exp');
         $perfil->id_usuario = $idl;
+        if($request->hasFile('img')){                 
+            $file = $request->file('img');
+            $val = "secre".time().".".$file->guessExtension();
+            $ruta = public_path("dist/perfil/".$val);
+           // if($file->guessExtension()=="pdf"){
+            copy($file, $ruta);//ccopia el archivo de una ruta cualquiera a donde este
+            $perfil->imagen= $val;//ingresa el nombre de la ruta a la base de datos
+        }
         $perfil->save();
         
         $datosper = Perfil::FindOrFail($iden);
-        return response()->json(['datosper' => $datosper]);
+        return back()->with('datosper', $datosper);
     }
 
     public function estudiantePEr(){

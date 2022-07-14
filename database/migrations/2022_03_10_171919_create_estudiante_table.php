@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('mun_nacimiento')->nullable();
             $table->string('correo',100)->unique();
             $table->string('estrato',100);
+            $table->string('foto')->nullable();
             $table->unsignedBigInteger('id_genero');//atributo para referenciar a categoria
             $table->foreign('id_genero')->references('id')->on('genero');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_tipo_doc');//atributo para referenciar a categoria
