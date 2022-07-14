@@ -76,7 +76,6 @@
                   <br>
                   @endif
                 @endforeach
-
               @endforeach
             </tbody>
         </table>
