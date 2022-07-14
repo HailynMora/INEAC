@@ -107,9 +107,8 @@
            $es= DB::table('estudiante')->where('id_usuario', '=', $id)->select('foto')->first();
           ?>
           @if(Auth::user()->id_rol==1) <!--Logeado como administrador-->
-            @include('admin.menuadmin')
           @endif
-          @if(Auth::user()->id_rol==2) <!--Logeado como usuario-->
+          @if(Auth::user()->id_rol==2 || Auth::user()->id_rol==1) <!--Logeado como usuario-->
               @if(isset($im->imagen))
               <img src="{{asset('dist/perfil/'.$im->imagen)}}" class="img-circle elevation-2" alt="User Image">
               @endif
