@@ -106,13 +106,11 @@
            $im= DB::table('perfil_docente')->where('id_usuario', '=', $id)->select('imagen')->first();
            $es= DB::table('estudiante')->where('id_usuario', '=', $id)->select('foto')->first();
           ?>
-          @if(Auth::user()->id_rol==1) <!--Logeado como administrador-->
-          @endif
           @if(Auth::user()->id_rol==2 || Auth::user()->id_rol==1) <!--Logeado como usuario-->
               @if(isset($im->imagen))
               <img src="{{asset('dist/perfil/'.$im->imagen)}}" class="img-circle elevation-2" alt="User Image">
               @endif
-           @endif
+          @endif
           @if(Auth::user()->id_rol==3) <!--Logeado como jefe-->
              @if(isset($es->foto))
                <img src="{{asset('dist/perfil/'.$es->foto)}}" class="img-circle elevation-2" alt="User Image">
