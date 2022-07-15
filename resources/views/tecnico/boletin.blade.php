@@ -30,34 +30,35 @@
         <table>
             <tr>
                 <td>
-                    <p>Nombre: {{$estudiante->nombre}} {{$estudiante->segundonom}} {{$estudiante->primerape}} {{$estudiante->segundoape}}</p>
+                    <p><b> Nombre:</b> {{$estudiante->nombre}} {{$estudiante->segundonom}} {{$estudiante->primerape}} {{$estudiante->segundoape}}</p>
                 </td>
                 <td>
-                    <p>Identificación: {{$estudiante->num_doc}}</p>
+                    <p style="padding-left: 2rem; padding-right: 2rem;"><b>Identificación:</b> {{$estudiante->num_doc}}</p>
+                </td>
+                <td>
+                    <p><b>Tecnico:</b> {{$estudiante->nombretec}}</p>
                 </td>
             </tr>
             <tr>
+                
                 <td>
-                    <p>Tecnico: {{$estudiante->nombretec}}</p>
+                    <p><b>Trimestre:</b> {{$estudiante->nombretri}}</p> 
                 </td>
                 <td>
-                    <p>Trimestre: {{$estudiante->nombretri}}</p> 
+                    <p><b>Año:</b> {{$estudiante->anio}}</p>
                 </td>
                 <td>
-                    <p>Año: {{$estudiante->anio}}</p>
-                </td>
-                <td>
-                    <p>Perido: {{$estudiante->periodo}}</p>
+                    <p><b>Perido:</b> {{$estudiante->periodo}}</p>
                 </td>
             </tr>
         </table>
         <table>
             <thead>
               <tr>
-                <th>Código</th>
-                <th>Asignatura</th>
-                <th>Calificación</th>
-                <th>Concepto</th>
+                <th  style="padding-left: 5rem; padding-right: 5rem;">Código</th>
+                <th  style="padding-left: 5rem; padding-right: 5rem;">Asignatura</th>
+                <th  style="padding-left: 5rem; padding-right: 5rem;">Calificación</th>
+                <th  style="padding-left: 5rem; padding-right: 5rem;">Concepto</th>
               </tr>
             </thead>
             <tbody>
@@ -68,10 +69,10 @@
                 @foreach($cur as $s)
                   @if($s->id==$idc)
                   <tr>
-                    <td>{{$s->codigoasig}}</td>
-                    <td>{{$s->nombreasig}}</td> 
-                    <td>{{$a->definitiva}}</td>
-                    <td>{{$a->desem}}</td>
+                    <td style="padding-left: 5rem; padding-right: 5rem;">{{$s->codigoasig}}</td>
+                    <td style="padding-left: 2rem; padding-right: 2rem;">{{$s->nombreasig}}</td> 
+                    <td style="padding-left: 8rem; padding-right: 8rem;">{{$a->definitiva}}</td>
+                    <td style="padding-left: 5rem; padding-right: 5rem;">{{$a->desem}}</td>
                   </tr>
                   <br>
                   @endif

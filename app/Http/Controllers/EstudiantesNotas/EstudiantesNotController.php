@@ -5,6 +5,8 @@ namespace App\Http\Controllers\EstudiantesNotas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\EstudianteModel\Estudiante;
+use PDF;
 use DB;
 
 class EstudiantesNotController extends Controller
@@ -140,6 +142,12 @@ class EstudiantesNotController extends Controller
                     ->select('definitiva','asig_tecnicos.nombreasig','asig_tecnicos.codigoasig','desempenos.descripcion as desem','id_tecnicos')
                     ->get();
                 $cur = DB::table('asignaturas_tecnicos')->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')->get();
-        return view('tecnico.boletin')->with('estudiante',$estudiante)->with('asig',$asig);
+                $data = [
+            'estudiante' => $estudiante,
+            'asig' => $asig,
+            'cur' => $cur,
+        ];     
+        $pdf = PDF::loadView('tecnico.boletin', $data);
+        return $pdf->download('boletin_academico.pdf');
     }
 }
