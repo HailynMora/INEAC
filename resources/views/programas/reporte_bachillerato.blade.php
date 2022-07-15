@@ -1,22 +1,22 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Programas Bachillerato Registrados</h3>
+<div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
+ <h3 class="letra1"> Programas De Bachillerato Registrados</h3>
 </div>
 <div class="row">
   <div class="col-6">
-    <button type="button"class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#RegBac">
+    <button type="button"class="btn btn-outline-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegBac">
       Registrar
     </button>
     <!--BOTON REGISTRO ASIGNATURAS-->
-      <a href="{{route('reporte')}}"  class="btn btn-outline-warning my-2 my-sm-0" >Asig. Bachillerato</a>
+      <a href="{{route('reporte')}}"  class="btn btn-outline-warning my-2 my-sm-0 alerta" >Asig. Bachillerato</a>
     <!--FIN BOTON REGISTRO ASIG-->
   </div>
   <div class="col-6">
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
       @csrf
-      <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
-      <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+      <input id="nombre" name="nombre" class="form-control mr-sm-2 alerta" placeholder="Ejm. Ciclo III" aria-label="Search">
+      <button type="submit" class="btn btn-outline-success my-2 my-sm-0 alerta">Buscar</button>
     </form>
     <br><br>
   </div>
@@ -87,10 +87,11 @@
       </div>
     </form>
   <!--FIN MODAL-->
-</div>   
-<div class="container">
+</div>  
+<br> 
+<div class="container table-responsive">
     <table class="table">
-        <thead style="background-color:#FFCC00;">
+        <thead style="background-color:#0f468e; color:white;" class="alerta">
             <tr>
             <th scope="col">Código</th>
             <th scope="col">Programas</th>
@@ -100,30 +101,30 @@
             <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody id="tabla1">
+        <tbody id="tabla1" class="letraf">
         @foreach($rep as $d)
-        <tr style="background-color: #dcedc8;">
+        <tr style="background-color:#E3E3E3;">
         <td>{{$d->codigo}}</td>
         <td>{{$d->programa}}</td>
         <td>{{$d->jornada}}</td>
         <td>{{$d->cursodes}}</td>
         <td>{{$d->estado}}</td>
         <td>
-        <a href="{{route('actualizar_prog',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>
+        <a href="{{route('actualizar_prog',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i></a>
         &nbsp&nbsp
         <?php
         if($d->estado == 'Activo'){
             ?>
-            <a type="button" data-toggle="modal" data-target="#cambiarPro{{$d->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+            <a type="button" data-toggle="modal" data-target="#cambiarPro{{$d->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i></a>
             <?php
         }else{
             ?>
-            <a type="button" data-toggle="modal" data-target="#cambiarPro{{$d->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+            <a type="button" data-toggle="modal" data-target="#cambiarPro{{$d->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i></a>
             <?php
         }
         ?>
         &nbsp&nbsp
-        <a href="{{route('vincular_a', $d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308;" ></i></a>        
+        <a href="{{route('vincular_a', $d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>        
         </td>
         </tr>
         <!--Ventana Modal para la Alerta de Eliminar--->

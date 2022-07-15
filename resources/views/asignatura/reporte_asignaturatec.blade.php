@@ -1,12 +1,12 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Reporte Asignaturas Técnicos</h3>
+<div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
+ <h3 class="letra1"> Reporte Asignaturas Técnicos</h3>
 </div>
 <div class="row">
   <div class="col-6">
     <!--BOTON MODAL-->
-      <button type="button"class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#RegTecAsig">
+      <button type="button" class="btn btn-outline-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegTecAsig">
         Registrar
       </button>
     <!--FIN BOTON MODAL-->
@@ -15,17 +15,18 @@
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
       @csrf
       <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
-      <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+      <button type="submit" class="btn btn-outline-success my-2 my-sm-0 alerta">Buscar</button>
     </form>
     <br><br>
   </div>
   <!--INICIO MODAL-->
+  <br>
     <form id="formudatos" name="formudatos" method="post">
       @csrf
       <div class="modal fade" id="RegTecAsig" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            <h3 class="text-center" style="background-color: #283593; color:#ffffff; padding-top:15px; padding-bottom:15px;">
+            <h3 class="text-center letra1" style="background-color: #FFC107; color:#ffffff; padding-top:15px; padding-bottom:15px;">
               Registro de Asignaturas Técnicos
             </h3>
             <div class="modal-body">
@@ -34,13 +35,13 @@
                   <div class="card">
                     <div class="card-header" id="headingOne">
                       <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           <i class="fas fa-edit"></i> Datos Asignatura
                         </button>
                       </h2>
                     </div>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                      <div class="card-body">
+                      <div class="card-body letraf">
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="codigo">Código</label>
@@ -73,7 +74,7 @@
                 </div>
               <!--FIN REGISTRAR MODAL--->
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer alerta">
               <!--botones -->
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
@@ -90,7 +91,7 @@
 
 <div class="container">
     <table class="table">
-        <thead style="background-color:#FFCC00;">
+        <thead style="background-color:#0f468e; color:white;" class="alerta">
             <tr>
             <th scope="col">Código</th>
             <th scope="col">Asignatura</th>
@@ -100,24 +101,24 @@
             <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody id="tabla1">
+        <tbody id="tabla1" class="letraf">
         @foreach($rep as $d)
-        <tr style="background-color: #dcedc8;">
+        <tr style="background-color: #E3E3E3;">
         <td>{{$d->codigoasig}}</td>
         <td>{{$d->asig}}</td>
         <td>{{$d->intensidad_horaria}}</td>
         <td>{{$d->val_habilitacion}}</td>
         <td>{{$d->estado}}</td>
         <td>
-        <a href="{{route('actualizar_asigtec',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>&nbsp&nbsp&nbsp
+        <a href="{{route('actualizar_asigtec',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;"></i></a>&nbsp&nbsp&nbsp
         <?php
         if($d->estado == 'Activo'){
             ?>
-            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i></a>
             <?php
         }else{
             ?>
-            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i></a>
             <?php
         }
         ?>
@@ -128,8 +129,8 @@
         <!-- Ventana modal para cambiar -->
         <div class="modal fade" id="cambiarAsig{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #563d7c !important;">
+                <div class="modal-content alerta">
+                    <div class="modal-header" style="background-color: #FFC107 !important;">
                         <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
                             <span>¿Cambiar el estado {{$d->estado}} de la asignatura? </span>
                         </h4>
@@ -154,7 +155,7 @@
        <div class="modal fade" id="cambiarEstado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <div class="modal-header" style="background-color: #283593; color:#ffffff;!important;">
+                  <div class="modal-header" style="background-color: #FFC107; color:#ffffff;!important;">
                     <h4 class="modal-title text-center" style=" text-align: center;">
                      <div id="nomdoc" class="reset"></div>
                     </h4>
@@ -162,7 +163,7 @@
                       <span aria-hidden="true">&times;</span>
                     </button> 
                   </div>
-                  <div class="modal-body mt-2 text-center">
+                  <div class="modal-body mt-2 text-center alerta">
                     <strong style="text-align: center !important"> 
                       <h4 class="modal-title text-center" style=" text-align: center;">
                         <span>¿Cambiar estado de la asignatura? </span>
@@ -173,8 +174,8 @@
                     <form action="{{route('deshasigtec')}}" method="POST">
                       @csrf
                     <input id="idasig" name="idasig" hidden> 
-                    <button type="submit" class="btn btn-success">Cambiar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success alerta">Cambiar</button>
+                    <button type="button" class="btn btn-default alerta" data-dismiss="modal">Cerrar</button>
                      </form>
                   </div>
                 </div>
@@ -201,8 +202,8 @@
       </div>
       <div class="col-md-2">
         <h2 class="mb-0">
-          <a class="btn btn-link  float-right" type="button" href="{{route('reporte_tecnico')}}">
-          <i class="fas fa-arrow-circle-left"></i> Volver
+          <a class="btn btn-link float-right alerta" type="button" href="{{route('reporte_tecnico')}}">
+          <i class="fas fa-arrow-circle-left" style="font-size:20px;"></i> Volver
           </a>
         </h2>
       </div>

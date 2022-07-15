@@ -1,23 +1,23 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Programas Tecnicos Registrados</h3>
+<div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
+ <h3 class="letra1"> Programas Tecnicos Registrados</h3>
 </div>
 <!--MODAL-->
 <div class="row">
   <div class="col-6">
-    <button type="button"class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#RegTec">
+    <button type="button"class="btn btn-outline-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegTec">
       Registrar
     </button>
     <!--BOTON REGISTRO ASIGNATURAS--->
-    <a href="{{route('reportetec')}}" class="btn btn-outline-warning my-2 my-sm-0" >Asig. Técnicos</a>
+    <a href="{{route('reportetec')}}" class="btn btn-outline-warning my-2 my-sm-0 alerta" >Asig. Técnicos</a>
     <!--FIN REGISTRAR ASIGNATURAS--->
   </div>
   <div class="col-6">
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
       @csrf
-      <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
-      <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+      <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Ejm. Técnico en sistemas" aria-label="Search">
+      <button type="submit" class="btn btn-outline-success my-2 my-sm-0 alerta">Buscar</button>
     </form>
     <br><br><br>
   </div>
@@ -27,7 +27,7 @@
       <div class="modal fade" id="RegTec" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            <h3 class="text-center" style="background-color: #283593; color:#ffffff; padding-top:15px; padding-bottom:15px;">
+            <h3 class="text-center letra1" style="background-color: #FFC107; color:#ffffff; padding-top:15px; padding-bottom:15px;">
               Registro  Programas Tecnicos
             </h3>
             <div class="modal-body">
@@ -36,13 +36,13 @@
                   <div class="card">
                     <div class="card-header" id="headingOne">
                       <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           <i class="fas fa-edit"></i> Programa Tecnico
                         </button>
                       </h2>
                     </div>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                      <div class="card-body">
+                      <div class="card-body letraf">
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="nombre">Nombre</label>
@@ -75,7 +75,7 @@
                 </div>
               <!--FIN REGISTRAR MODAL--->
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer letraf">
               <!--botones -->
                 <button type="submit" class="btn btn-success">Registrar</button>
                 <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
@@ -89,78 +89,91 @@
     </form>
   <!--FIN MODAL-->
 </div>
-    
-<div class="container">
-    <table class="table">
-        <thead style="background-color:#FFCC00;">
-            <tr>
-            <th scope="col">Código</th>
-            <th scope="col">Programa</th>
-            <th scope="col">Jornada</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Opciones</th>
-            </tr>
-        </thead>
-        <tbody id="tabla1">
-        @foreach($rep as $d)
-        <tr style="background-color: #dcedc8;">
-        <td>{{$d->codigotec}}</td>
-        <td>{{$d->nombretec}}</td>
-        <td>{{$d->jornada}}</td>
-        <td>{{$d->descripcion}}</td>
-        <td>{{$d->estado}}</td>
-        <td>
-        <a href="{{route('actualizar_prog_tec',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>
-        &nbsp&nbsp
-        <?php
-        if($d->estado == 'Activo'){
-            ?>
-            <a type="button" data-toggle="modal" data-target="#cambiarPro{{$d->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
-            <?php
-        }else{
-            ?>
-            <a type="button" data-toggle="modal" data-target="#cambiarPro{{$d->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
-            <?php
-        }
-        ?>
-        &nbsp&nbsp
-        <a href="{{route('vincular_asig', $d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308;" ></i></a>        
-        </td>
-        </tr>
-        <!-- Ventana modal para deshabilitar -->
-        <div class="modal fade" id="cambiarPro{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #283593; !important;">
-                        <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
-                            <span>¿Cambiar el estado {{$d->estado}} del programa? </span>
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button> 
-                    </div>
-                    <div class="modal-body mt-2 text-center">
-                        <strong style="text-align: left !important"> 
-                            <h4>Programa: {{ $d->codigotec }} - {{ $d->nombretec }}</h4>
-                        </strong>
-                    </div>
-                    <div class="modal-footer">
-                        <a  class="btn btn-success" href="{{ route('cambiarProTec', $d->id) }}">Cambiar</a>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-             </div>
-        </div>
-        <!---fin ventana deshabilitar--->
-        @endforeach
-        </tbody>
-        <!--##################datos de la busqueda ##########################3-->
-        <tbody id="datos" style="background-color: #dcedc8;">
-        </tbody>
-      <!--##########################################33-->
-    </table>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+       <!--tabla-->
+       <div class="container table-responsive">
+          <table class="table">
+              <thead class="alerta" style="background-color:#0f468e; color:white;">
+                  <tr>
+                  <th scope="col">Código</th>
+                  <th scope="col">Programa</th>
+                  <th scope="col">Jornada</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Opciones</th>
+                  </tr>
+              </thead>
+              <tbody class="letraf" id="tabla1">
+              @foreach($rep as $d)
+              <tr style="background-color:#E3E3E3;">
+              <td>{{$d->codigotec}}</td>
+              <td>{{$d->nombretec}}</td>
+              <td>{{$d->jornada}}</td>
+              <td>{{$d->descripcion}}</td>
+              <td>{{$d->estado}}</td>
+              <td>
+              <a href="{{route('actualizar_prog_tec',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i></a>
+              &nbsp&nbsp
+              <?php
+              if($d->estado == 'Activo'){
+                  ?>
+                  <a type="button" data-toggle="modal" data-target="#cambiarPro{{$d->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i></a>
+                  <?php
+              }else{
+                  ?>
+                  <a type="button" data-toggle="modal" data-target="#cambiarPro{{$d->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i></a>
+                  <?php
+              }
+              ?>
+              &nbsp&nbsp
+              <a href="{{route('vincular_asig', $d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>        
+              </td>
+              </tr>
+              <!-- Ventana modal para deshabilitar -->
+              <div class="modal fade" id="cambiarPro{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header alerta" style="background-color: #FFC107; color:white;">
+                              <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
+                                  <span>¿Cambiar el estado {{$d->estado}} del programa? </span>
+                              </h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button> 
+                          </div>
+                          <div class="modal-body mt-2 text-center alerta">
+                              <strong style="text-align: left !important"> 
+                                  <h4>Programa: {{ $d->codigotec }} - {{ $d->nombretec }}</h4>
+                              </strong>
+                          </div>
+                          <div class="modal-footer letraf">
+                              <a  class="btn btn-success" href="{{ route('cambiarProTec', $d->id) }}">Cambiar</a>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!---fin ventana deshabilitar--->
+              @endforeach
+              </tbody>
+              <!--##################datos de la busqueda ##########################3-->
+              <tbody id="datos" style="background-color: #dcedc8;">
+              </tbody>
+            <!--##########################################33-->
+          </table>
+      </div>
+       <!--end table-->
+      </div>
+    </div>
+  </div>
 </div>
+    
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>

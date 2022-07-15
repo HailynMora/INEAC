@@ -1,17 +1,17 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center"  role="alert">
- Actualizar Perfil Profesional 
+<div class="alert text-center"  role="alert" style="background-color:#ffc107; color:#FFFFFF;">
+ <h3 class="letra1">Actualizar Perfil Profesional </h3>
 </div>
 
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Perfil</a>
-    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Actualizar</a>
+    <a class="nav-link active alerta" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Perfil</a>
+    <a class="nav-link alerta" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Actualizar</a>
     
   </div>
 </nav>
-<div class="tab-content" id="nav-tabContent">
+<div class="tab-content letraf" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <br>
     <div id="table_cargar">
@@ -21,7 +21,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-12">
 
-                  <div class="alert" role="alert" style="background-color:#8EEDF3;">
+                  <div class="alert" role="alert">
                         <h4 class="alert-heading">Nivel de Estudios</h4>
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <p>
@@ -33,7 +33,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
 
-                    <div class="alert" role="alert" style="background-color:#8EEDF3;">
+                    <div class="alert" role="alert" >
                         <h4 class="alert-heading">Descripción</h4>
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <p>
@@ -42,7 +42,7 @@
                     </div>                  
                   </div>
                   <div class="form-group col-md-6">
-                  <div class="alert " role="alert" style="background-color:#8EEDF3;">
+                  <div class="alert " role="alert">
                         <h4 class="alert-heading">Cursos Realizados</h4>
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <p>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-row">
                 <div class="form-group col-md-6">
-                <div class="alert" role="alert" style="background-color:#8EEDF3;">
+                <div class="alert" role="alert" >
                         <h4 class="alert-heading">Intereses</h4>
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <p>
@@ -63,7 +63,7 @@
                   </div>
                   <div class="form-group col-md-6">
 
-                  <div class="alert" role="alert" style="background-color:#8EEDF3;">
+                  <div class="alert" role="alert" >
                         <h4 class="alert-heading">Experiencia</h4>
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <p>
@@ -77,8 +77,8 @@
               <div id="respuesta"></div>
               @endif
               @if($b==0)
-              <div class="alert alert-success" role="alert">
-                No hay Información Disponible! Registra tu perfil
+              <div class="alert" role="alert" style="background-color:#C4C4C4; color:black;">
+                <h4 class="alerta">No hay Información Disponible! Registra tu perfil</h4>
               </div>
               @endif
           </div>
@@ -128,8 +128,8 @@
               @endif
               <div id="nuevoactu"></div>
               @if($b==0)
-              <div class="alert alert-success" role="alert">
-                No hay Información Disponible! Registra tu perfil
+              <div class="alert" role="alert" style="background-color:#C4C4C4; color:black;">
+                <h4 class="alerta">No hay Información Disponible! Registra tu perfil</h4>
               </div>
               @endif
          </div>

@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Vincular Asignatura a un Programa Técnico</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:white;">
+ <h3 class="letra1">Vincular Asignatura a un Programa Técnico</h3>
 </div>
 <div>
 </div>          
@@ -9,8 +9,8 @@
 <!---############################33-->
 @if(Session::has('mensaje'))
         <br>
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <strong>{{Session::get('mensaje')}}</strong> 
+        <div class="alert alert-info alert-dismissible fade show alerta" role="alert">
+        <strong >{{Session::get('mensaje')}}</strong> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -25,14 +25,14 @@
         <div class="row">
            <div class="col-md-10">
               <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   <i class="fas fa-edit"></i> Vincular Asignaturas a un Programa Técnico 
                 </button>
               </h2>
           </div>
           <div class="col-md-2">
               <h2 class="mb-0">
-                <a class="btn btn-link btn-block text-left float-right" type="button" href="/programas/reporte_programas_tecnicos">
+                <a class="btn btn-link btn-block text-left float-right alerta" type="button" href="/programas/reporte_programas_tecnicos">
                 <i class="fas fa-arrow-circle-left"></i> Volver
                 </a>
               </h2>
@@ -42,7 +42,7 @@
       </div>
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
+        <div class="card-body letraf">
             <form id="forvincular" name="forvincular" method="POST" >
               @csrf
                 <div class="form-row">
@@ -121,9 +121,9 @@
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header">
-        <div class="modal-title alert text-center" role="alert" style="color:black;">
-          <h3> Asignaturas Vinculadas a Programas Técnicos</h3>
+      <div class="modal-header" style="color:black;">
+        <div class="modal-title alert text-center" role="alert">
+          <h3 class="letra1"> Asignaturas Vinculadas a Programas Técnicos</h3>
         </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -133,7 +133,7 @@
      <!---###################-->
         <div class="container">
             <table class="table">
-                <thead style="background-color:#FFCC00;">
+                <thead style="background-color:#0f468e; color:white;" class="alerta">
                     <tr>
                     <th scope="col">Año</th>
                     <th scope="col">Periodo</th>
@@ -146,10 +146,10 @@
                     <th scope="col">Opciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="letraf">
                 
                 @foreach($asigpro as $s)
-                <tr style="background-color: #dcedc8;">
+                <tr style="background-color:#E3E3E3;;">
                     <td>{{$s->anio}}</td>
                     <td>{{$s->periodo}}</td>
                     <td>{{$s->codigotec}}</td>
@@ -169,13 +169,13 @@
                               <div class="modal fade" id="eliminarAsig{{$s->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog  modal-dialog-centered">
                                   <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Eliminar asignatura vinculada</h5>
+                                    <div class="modal-header" style="background-color:#FFC107;">
+                                      <h5 class="modal-title letra1" id="exampleModalLabel">Eliminar asignatura vinculada</h5>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body alerta">
                                       ¿Desea eliminar la materia Vinculada de forma permanente?
                 
                                     </div>
@@ -202,7 +202,7 @@
       
      <!---####################--->   
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer alerta">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>

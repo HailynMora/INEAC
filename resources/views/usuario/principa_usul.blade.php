@@ -6,6 +6,27 @@
   <title>INESUR</title>
   @include('usuario.stylecss')
 </head>
+<style>
+  .letra1{
+      /* font-family: 'Roboto Slab', serif;*/
+       font-family: 'Roboto Condensed', sans-serif;
+       font-size:32px;
+       font-weight: 700;
+       text-align:center; 
+  }
+  .alerta{
+       font-family: 'Roboto Condensed', sans-serif;
+       font-size:18px;
+       font-weight:400;
+       text-align:left; 
+  }
+  .letraf{
+       font-family: 'Roboto Condensed', sans-serif;
+       font-size:16px;
+       font-weight:400;
+       text-align:left; 
+  }
+</style>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   <!-- Preloader -->
@@ -85,12 +106,12 @@
       
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar elevation-4" style="background-color:#161154;">
     <!-- Brand Logo -->
     <!--<a href="index3.html" class="brand-link">-->
      <!-- <img src="img/inesur_logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>-->
-     <a href="#"><img src="/img/inesur_logo.jpg" class="img-fluid" width="100%" height="40%"></a> 
+     <a href="#"><img src="/img/Imagen_logo.png" class="img-fluid" width="100%" height="40%"></a> 
     <!--</a>-->
 
     <!-- Sidebar -->
@@ -153,7 +174,7 @@
   </div>
   <!-- Content Wrapper. Contains page content -->
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  <footer class="main-footer" style="color:black;">
     <strong>INEAC 2021 - 2022</strong>
     
     <div class="float-right d-none d-sm-inline-block">

@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Registar Perfil Profesional</h3>
+<div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
+ <h3 class="letra1">Registar Perfil Profesional</h3>
 </div>
 
 <div class="accordion" id="accordionExample">
@@ -10,11 +10,11 @@
         <h6 class="mb-0">
           <div class="row">
             <div class="col-6">
-              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               <i class="fas fa-file-alt"></i>&nbsp;Datos De Perfil
               </button>
             </div>
-            <div class="col-6 text-right" style="padding-top:10px;">
+            <div class="col-6 text-right alerta" style="padding-top:10px;">
              <a href="{{route('actuperfil')}}"><i class="fas fa-edit"></i>&nbsp;Actualizar</a>
             </div>
           </div>
@@ -22,7 +22,7 @@
       </div>
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
+        <div class="card-body letraf">
             <form  action="{{route('regperfil')}}" method="POST" enctype="multipart/form-data">
               @csrf
                 <div class="form-row">

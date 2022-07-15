@@ -4,8 +4,8 @@
 ?>
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Bienvenid@ {{Auth::user()->name}}</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:white;">
+ <h2 class="letra1">Bienvenid@ {{Auth::user()->name}}</h2>
 </div>
 <br>
 

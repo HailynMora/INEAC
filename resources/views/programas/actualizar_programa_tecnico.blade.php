@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Actualizar Programa Técnico</h3>
+<div class="alert text-center " role="alert" style="background-color: #ffc107; color:white;">
+ <h3 class="letra1">Actualizar Programa Técnico</h3>
 </div>
 <br><br>
 <div class="accordion" id="accordionExample">
@@ -11,14 +11,14 @@
         <div class="row">
            <div class="col-md-10">
               <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   <i class="fas fa-edit"></i> Actualizar Programa Técnico 
                 </button>
               </h2>
           </div>
           <div class="col-md-2">
               <h2 class="mb-0">
-                <a class="btn btn-link btn-block text-left float-right" type="button" href="/programas/reporte_programas_tecnicos">
+                <a class="btn btn-link btn-block text-left float-right alerta" type="button" href="/programas/reporte_programas_tecnicos">
                 <i class="fas fa-arrow-circle-left"></i> Volver
                 </a>
               </h2>
@@ -28,7 +28,7 @@
       </div>
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
+        <div class="card-body letraf">
             <form action="{{route('actualizar_programa_tec',$prog[0]->id)}}" method="post">
                 @csrf
                 <div class="form-row">

@@ -1,3 +1,4 @@
+
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -6,7 +7,7 @@
          
           <li class="nav-item">
              <!--instanciar la ruta de nav link-->   
-                  <a href="{{route('inicio')}}" class="nav-link active">
+                  <a href="{{route('inicio')}}" class="nav-link active" style="background-color:#6D6D6D;">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                       Inicio
@@ -16,7 +17,7 @@
           </li>
          <!--perfil-->
          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link" style="color:#FFFFFF;" >
               <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Perfil 
@@ -25,13 +26,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('regisperfil')}}" class="nav-link">
+                <a href="{{route('regisperfil')}}" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar</p>
                 </a>
               </li>  
               <li class="nav-item">
-                <a href="{{route('actuperfil')}}" class="nav-link">
+                <a href="{{route('actuperfil')}}" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Actualizar Perfil</p>
                 </a>
@@ -40,7 +41,7 @@
           </li>
          <!--end perfil-->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Programas 
@@ -55,13 +56,13 @@
                 </a>
               </li>-->
               <li class="nav-item">
-                <a href="{{route('reporte_tecnico')}}" class="nav-link">
+                <a href="{{route('reporte_tecnico')}}" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Técnicos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('reporte_pro')}}" class="nav-link">
+                <a href="{{route('reporte_pro')}}" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bachillerato</p>
                 </a>
@@ -98,7 +99,7 @@
             </ul>
           </li>-->
           <li class="nav-item">
-            <a href="{{route('listado_docente')}}" class="nav-link">
+            <a href="{{route('listado_docente')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Docentes
@@ -126,7 +127,7 @@
             </ul>
           </li>-->
           <li class="nav-item">
-            <a href="{{route('listarestu')}}" class="nav-link">
+            <a href="{{route('listarestu')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Estudiantes
@@ -165,7 +166,7 @@
             </a>
           </li>-->
           <li class="nav-item">
-            <a href="{{route('matriculados_bach')}}" class="nav-link">
+            <a href="{{route('matriculados_bach')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Reporte
@@ -173,37 +174,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Calificaciones
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/examples/invoice.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/profile.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Actualizar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/e-commerce.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Reporte Calificaciones</p>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a type="button" data-toggle="modal" data-target="#exampleModalnotas" class="nav-link">
+            <a type="button" data-toggle="modal" data-target="#exampleModalnotas" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Nivelaciones
@@ -212,7 +183,7 @@
             @include('nivelaciones.nivelacionesadm')
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-folder-open"></i>
               <p>
                 Certificados
@@ -221,13 +192,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/search/simple.html" class="nav-link">
+                <a href="pages/search/simple.html" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Laboral</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/search/enhanced.html" class="nav-link">
+                <a href="pages/search/enhanced.html" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Estudiante</p><!--agregar descripcion para el certificados-->
                 </a>
@@ -236,7 +207,7 @@
           </li>
           <!---manejo de usuarios--->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link" style="color:white;">
             <i class="fas fa-users"></i>
               <p>
                &nbsp Usuarios
@@ -245,13 +216,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('listausu')}}" class="nav-link">
+                <a href="{{route('listausu')}}" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reporte</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('rolesvis')}}" class="nav-link">
+                <a href="{{route('rolesvis')}}" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Roles</p><!--agregar descripcion para el certificados-->
                 </a>
