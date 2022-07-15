@@ -7,7 +7,7 @@
     <body  style=" width:100%;  height: 100%;">
         <br><br>
         @if(isset($estudiante->nombre))
-        <div style="background-image:url({{ public_path('/img/pdf_inesur2.jpg')}}); background-position:center;  background-repeat: no-repeat; background-size:cover; margin-top:-5rem; margin-left:-4.1rem; margin-right:-3rem;  margin-bottom:-2rem;">
+        <div style="background-image:url({{ public_path('/img/pdf_inesur2.jpg')}}); background-position:center;  background-repeat: no-repeat; background-size:cover; margin-top:-4rem; margin-left:-3.1rem; margin-right:-2rem;  margin-bottom:-1rem;">
         <div  style="padding-top: 95px;">
            <!-- <div>
                 <img src="{{ public_path('/img/pdf_i.jpg')}}" style="width:100%; height: 100px;">
@@ -44,16 +44,16 @@
                <!--tabla-->
                <table>
                   <tr>
-                    <th>MATERIA</th>
-                    <th>CALIFICACIÓN</th>
-                    <th>&nbsp;CONCEPTO</th>
+                    <th style="padding-left: 3rem; padding-right: 3rem;">MATERIA</th>
+                    <th style="padding-left: 3rem; padding-right: 3rem;">CALIFICACIÓN</th>
+                    <th style="padding-left: 3rem; padding-right: 3rem;">CONCEPTO</th>
                   </tr>
                 @if(isset($asig))
                 @foreach($asig as $a)
                   <tr>
-                    <td style="text-align:left;">{{$a->nombreasig}}</td>
-                    <td style="text-align:left;">{{$a->definitiva}}</td>
-                    <td style="text-align:left;">{{$a->desem}}</td>
+                    <td style="padding-left: 3rem; padding-right: 3rem;">{{$a->nombreasig}}</td>
+                    <td style="padding-left: 3rem; padding-right: 3rem;">{{$a->definitiva}}</td>
+                    <td style="padding-left: 3rem; padding-right: 3rem;">{{$a->desem}}</td>
                   </tr>
                 @endforeach
                 @endif

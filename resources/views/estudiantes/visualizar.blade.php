@@ -213,9 +213,9 @@
                       </div>
                       <div class="row">
                         <div class="col-md-3">Periodo</div>
-                        <div class="col-md-3 ml-auto">{{$p->periodo}}</div>
+                        <div class="col-md-3 ml-auto">{{$t->periodo}}</div>
                         <div class="col-md-3">Año</div>
-                        <div class="col-md-3 ml-auto">{{$p->anio}}</div>
+                        <div class="col-md-3 ml-auto">{{$t->anio}}</div>
                       </div>
                       <div class="row">
                         <div class="col-md-3">Trimestre</div>
