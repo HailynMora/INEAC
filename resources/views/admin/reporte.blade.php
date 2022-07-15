@@ -1,12 +1,13 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Listado De Usuario</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Listado De Usuario</h3>
 </div>
+<br>
 <div class="container-fluid">
     <table class="table">
         <tr>
-            <thead class="table-warning">
+            <thead class="alerta" style="background-color:#0f468e;color: #ffffff;">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Usuario</th>
@@ -16,7 +17,7 @@
                 <th scope="col">Descripcion</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="letraf" style="background-color: #e3e3e3;">
                 @php
                 $cont = 1;
                 @endphp

@@ -1,13 +1,13 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Reporte Asignaturas Bachillerato</h3>
+<div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
+ <h3 class="letra1">  Reporte Asignaturas Bachillerato</h3>
 </div>
   <!--modal-->
    <!-- Button trigger modal-->
    <div class="row">
      <div class="col-6">
-        <button type="button"class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#RegAsig">
+        <button type="button"class="btn btn-outline-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegAsig">
           Registrar
         </button>
       </div>
@@ -17,7 +17,7 @@
       <div class="modal fade" id="RegAsig" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-              <h3 class="text-center" style="background-color: #283593; color:#ffffff; padding-top:15px; padding-bottom:15px;">
+              <h3 class="text-center letra1" style="background-color: #ffc107; color:#ffffff; padding-top:15px; padding-bottom:15px;">
                     Registro de Asignaturas
               </h3>
             <div class="modal-body">
@@ -26,13 +26,13 @@
                     <div class="card">
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                          <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <i class="fas fa-edit"></i> Asignaturas
                           </button>
                         </h2>
                       </div>
                   
-                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div id="collapseOne" class="collapse show letraf" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -69,7 +69,7 @@
 
               <!--##########################3--->
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer letraf">
               <!--botones -->
                <button type="submit" class="btn btn-success">Registrar</button>
                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
@@ -82,7 +82,7 @@
       </form>
 <!--##########end modal--########-->
      <div class="col-6">
-        <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+        <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6 alerta">
         @csrf
         <input id="nombrebus" name="nombrebus" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
         <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
@@ -91,8 +91,8 @@
   </div>
 <br><br>
 <div class="container">
-    <table class="table">
-        <thead style="background-color:#FFCC00;">
+    <table class="table letraf">
+        <thead style="background-color:#0f468e; color:#ffffff;">
             <tr>
             <th scope="col">Código</th>
             <th scope="col">Asignatura</th>
@@ -104,7 +104,7 @@
         </thead>
         <tbody id="tabla1">
         @foreach($rep as $d)
-        <tr style="background-color: #dcedc8;">
+        <tr style="background-color: #E3E3E3;">
         <td>{{$d->codigo}}</td>
         <td>{{$d->asig}}</td>
         <td>{{$d->intensidad_horaria}}</td>
@@ -202,8 +202,8 @@
       </div>
       <div class="col-md-2">
         <h2 class="mb-0">
-          <a class="btn btn-link float-right" type="button" href="{{route('reporte_pro')}}">
-          <i class="fas fa-arrow-circle-left"></i> Volver
+          <a class="btn btn-link float-right alerta" type="button" href="{{route('reporte_pro')}}">
+          <i class="fas fa-arrow-circle-left "></i> Volver
           </a>
         </h2>
       </div>

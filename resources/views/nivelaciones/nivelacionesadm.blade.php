@@ -9,7 +9,7 @@
 <!-- Modal -->
 <form action="{{route('nivelacionEstudiante')}}" method="POST">
  @csrf
-<div class="modal fade" id="exampleModalnotas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade alerta" id="exampleModalnotas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

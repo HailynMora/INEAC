@@ -1,11 +1,11 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Listado de Estudiantes Para Nivelacion Bachillerato</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Listado de Estudiantes Para Nivelacion Bachillerato</h3>
 </div>
 <div class="container">
 	<table class="table">
-	  <thead>
+	  <thead style="background-color:#0f468e; color:white;" class="alerta">
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col">N° Documento</th>
@@ -17,7 +17,7 @@
 	      <th scope="col">Docente</th>
 	    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody style="background-color:#e3e3e3;" class="letraf">
 	  	<?php
 	  		$cont = 1;
 	  	?>

@@ -9,10 +9,10 @@
 ?>
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Certificados Estudiantiles</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Certificados Estudiantiles</h3>
 </div>
-<div class="container">
+<div class="container alerta">
   <div class="row">
     <div class="col-4" style="padding-top: 5%;">
       <div class="card" style="width: 18rem;">
@@ -44,7 +44,7 @@
 <!-- Modal -->
 <form action="{{route('pdfEstudiantilNot')}}" method="POST">
   @csrf
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade alerta" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -103,7 +103,7 @@
 </form>
 <form action="{{route('pdfEstudiantilmattec')}}" method="POST">
   @csrf
-  <div class="modal fade" id="matricula" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade alerta" id="matricula" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -152,7 +152,7 @@
 </form>
 <form action="{{route('boletintec')}}" method="POST">
   @csrf
-  <div class="modal fade" id="boletin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade alerta" id="boletin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

@@ -186,7 +186,7 @@
         @endforeach
         </tbody>
         <!--##################datos de la busqueda ##########################3-->
-        <tbody id="datos" style="background-color: #dcedc8;">
+        <tbody id="datos" style="background-color: #E3E3E3;" class="letraf">
         </tbody>
       <!--##########################################33-->
     </table>
@@ -247,8 +247,8 @@
           '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
           '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
           '<td>' +  arreglo[x].estado + '</td>' +
-          '<td>'+ ' <a href="/asignatura_tecnicos/actualizar/'+ arreglo[x].id +' "  data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>' + 
-                  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>'+
+          '<td>'+ ' <a href="/asignatura_tecnicos/actualizar/'+ arreglo[x].id +' "  data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;"></i></a>' + 
+                  '&nbsp&nbsp&nbsp; <a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;font-size:20px;"></i></a>'+
           '</td>' +//agregar los botones
           '</tr>';
           $('#datos').append(valor);

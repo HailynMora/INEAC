@@ -1,10 +1,10 @@
 @extends('usuario.principa_usul')
 @section('content')
 <!--Tabla de informacion-->
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Listado de Estudiantes</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Listado de Estudiantes</h3>
 </div>
-<div class="row">
+<div class="row alerta">
     <div class="col-md-1">
         <a href="{{route('registro_es')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
     </div>
@@ -27,8 +27,8 @@
 <br><br>
 <div class="container table-responsive">
 
-<table class="table" style="background-color:#FFCC00;" >
-       <thead>
+<table class="table">
+       <thead  style="background-color:#0f468e; color:white;"" class="alerta">
         <tr>
         <th scope="col">N° Identificacion</th>
         <th scope="col">Nombre</th>
@@ -38,7 +38,7 @@
         <th scope="col">Acciones</th>
         </tr>
     </thead>
-    <tbody id="tabla1">
+    <tbody id="tabla1" style="background-color:e3e3e3;" class="letraf">
     @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
         <tr class="table-success" >
@@ -48,15 +48,15 @@
         <td>{{$d->correo}}</td>
         <td>{{$d->estadoes}}</td>
         <td><!-- Button trigger modal -->
-                <a href="{{route('actualizar_est',$d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
-                <a href="{{route('matricularadmin', $d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp
+                <a href="{{route('actualizar_est',$d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp
+                <a href="{{route('matricularadmin', $d->id)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;font-size:20px;"></i></a>&nbsp&nbsp&nbsp
                 <a type="button" data-toggle="modal" data-target="#estudiante<?php echo $d->id;?>" data-placement="bottom"  title="Ver Estudiante">
-                <i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>
+                <i class="nav-icon fas fa-eye" style="color: #66b62b;font-size:20px;"></i></a>
                 <!-- Modal -->
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
-                    <div class="modal-header alert alert-warning">
+                    <div class="modal-header alert" style="background-color:#ffc107; color:white;">
                         <h5 class="modal-title" id="staticBackdropLabel">
                        
                           Datos Estudiante: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}
@@ -261,17 +261,17 @@
           <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Información Estudiante</h5>
+                <h5 class="modal-title alerta" id="exampleModalLabel">Información Estudiante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body letraf">
                 
                <!---Mostrar datos--> 
                <h4 class="text-centers">Datos Personales</h4>
                     <hr>
-                    <div class="row">
+                    <div class="row ">
                         <div class="col-md-3"><b>Tipo Identificacion</b></div>
                         <div class="col-md-3 ml-auto iden" id="limpiar1"> </div>
                         <div class="col-md-3"><b>Número</b></div>
@@ -387,7 +387,7 @@
                     
 
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer letraf">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
               </div>
             </div>
@@ -437,9 +437,9 @@
           '<td>' +  arreglo[x].telefono  + '</td>' +
           '<td>' +  arreglo[x].correo  + '</td>' +
           '<td>' +  arreglo[x].estadoes + '</td>' +
-          '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
-                    '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp'+
-                    '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>&nbsp&nbsp&nbsp'+
+          '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp'+
+                    '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;font-size:20px;"></i></a>&nbsp&nbsp&nbsp'+
+                    '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b;font-size:20px;"></i></a>&nbsp&nbsp&nbsp'+
         
            '</td>' +//agregar los botones
           '</tr>';
@@ -452,9 +452,9 @@
               '<td>' +  arreglo[x].telefono  + '</td>' +
               '<td>' +  arreglo[x].correo  + '</td>' +
               '<td>' +  arreglo[x].estadoes + '</td>' +
-              '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'+
-                        '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;"></i></a>&nbsp&nbsp&nbsp'+
-                        '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b"></i></a>&nbsp&nbsp&nbsp'+'<a href="/generar/certificado/estudiantil/' + arreglo[x].id + '"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'
+              '<td>' +  '<a href="/estudiante/actualizar/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp'+
+                        '<a href="/admin/matricular/' + arreglo[x].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Matricular Estudiante"><i class="fas fa-user-plus" style="color:#6D6D6D;font-size:20px;"></i></a>&nbsp&nbsp&nbsp'+
+                        '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"><i class="nav-icon fas fa-eye" style="color: #66b62b;font-size:20px;"></i></a>&nbsp&nbsp&nbsp'+
                '</td>' +//agregar los botones
               '</tr>';
                 $('#datos').append(valor);

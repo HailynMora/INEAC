@@ -1,11 +1,11 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Registro de Estudiantes</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Registro de Estudiantes</h3>
 </div>
 <form id="matricula" name="matricula">
  @csrf
-<div class="accordion" id="accordionExample">
+<div class="accordion letraf" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
       <!---->
@@ -305,9 +305,9 @@
 <div class="container-fluid">
 
 </div>
-<button type="submit" class="btn btn-primary">Registrar</button>
-<button type="button"  id="miboton" class="btn btn-success">Visualizar</button>
-<button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+<button type="submit" class="btn btn-primary letraf">Registrar</button>
+<button type="button"  id="miboton" class="btn btn-success letraf">Visualizar</button>
+<button type="submit" class="btn btn-warning letraf"  onclick="resetform()">Limpiar</button>
 <a  class="btn btn-danger" href="{{url('/visualizar/estudiante')}}">Cancelar</a>
 </form>
 <!--Modal de visualizar--->

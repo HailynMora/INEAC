@@ -1,14 +1,14 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Roles De Usuario</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Roles De Usuario</h3>
 </div>
 <!--cards--->
    <!--idrol
     idper
     id_estado-->
 
-<div class="card-deck"> 
+<div class="card-deck letraf"> 
 @foreach($rol as $r)
 <div class="card" style="width: 18rem;">
   <img src="{{asset('dist/img/img_user.jpeg')}}" class="card-img-top" alt="...">
@@ -25,7 +25,6 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rol<?php echo $r->idrol ?>">
     Editar
     </button>
-    <a href="#" class="card-link">Another link</a>
   </div>
 </div>
 

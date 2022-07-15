@@ -182,7 +182,7 @@
             </a>
             @include('nivelaciones.nivelacionesadm')
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="#" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-folder-open"></i>
               <p>
@@ -200,11 +200,11 @@
               <li class="nav-item">
                 <a href="pages/search/enhanced.html" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Estudiante</p><!--agregar descripcion para el certificados-->
+                  <p>Estudiante</p>agregar descripcion para el certificados
                 </a>
               </li>
             </ul>
-          </li>
+          </li>--->
           <!---manejo de usuarios--->
           <li class="nav-item">
             <a href="#" class="nav-link" style="color:white;">

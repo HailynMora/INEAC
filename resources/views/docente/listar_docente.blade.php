@@ -1,15 +1,15 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Listado de Docentes</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Listado de Docentes</h3>
 </div>
 <div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-6 alerta">
   <a href="{{route('regdocente')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
   </div>
   <div class="col-md-6">
-  <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
+  <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6 alerta">
       @csrf
       <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="No. Identificación" aria-label="Search" required>
       <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
@@ -18,8 +18,8 @@
 </div>
     <br><br>
     <div class="container">
-      <table class="table table-striped"style="background-color:#FFCC00;">
-      <thead>
+      <table class="table table-striped "style="background-color:#0f468e; color: #fffff;">
+      <thead class="alerta"style="background-color:#0f468e; color:white;">
           <tr>
           <th scope="col">Tipo Doc</th>
           <th scope="col">Documento</th>
@@ -29,28 +29,28 @@
           <th scope="col">Opciones</th>
           </tr>
       </thead>
-      <tbody id="tabla1">
+      <tbody id="tabla1" class="letraf">
         @if($b == 1)
           @foreach($doc as $d)
-          <tr style="background-color: #dcedc8;">
+          <tr style="background-color: #E3E3E3;">
             <td>{{$d->descripcion}}</td>
             <td>{{$d->num_doc}}</td>
             <td>{{$d->nombre}}  {{$d->apellido}}</td>
             <td>{{date("Y-m-d", strtotime($d->fec_vinculacion))}}</td>
             <td>{{$d->estado}}</td>
             <td>
-              <a href="{{route('actualizar_doc',$d->id)}}"  data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
-              <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d->id;?>" style="color: #66b62b"  data-placement="bottom"  title="Visualizar">
+              <a href="{{route('actualizar_doc',$d->id)}}"  data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp
+              <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d->id;?>" style="color: #66b62b;font-size:20px;"  data-placement="bottom"  title="Visualizar">
               <i class="nav-icon fas fa-eye"></i></a>
               &nbsp&nbsp
               <?php
               if($d->estado == 'Activo'){
                   ?>
-                  <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+                  <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;font-size:20px;"></i></a>
                   <?php
               }else{
                   ?>
-                  <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+                  <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$d->id}}"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;font-size:20px;"></i></a>
                   <?php
               }
               ?>
@@ -61,7 +61,7 @@
                   <div class="modal-body">
                     <br>
                     <!---Mostrar datos-->
-                    <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+                    <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
                      <h4>Docente: {{$d->nombre}}  {{$d->apellido}}</h4>
                     </div>
                     <!--ACORDEON-->
@@ -174,7 +174,7 @@
             <div class="modal fade" id="cambiarEstado{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <div class="modal-header" style="background-color: #283593; color:#ffffff;!important;">
+                  <div class="modal-header" style="background-color: #ffc107; color:#ffffff;!important;">
                     <h4 class="modal-title text-center" style=" text-align: center;">
                       <span>Docente: {{$d->nombre}}  {{$d->apellido}} </span>
                     </h4>
@@ -207,7 +207,7 @@
         @endif
       </tbody>
       <!--##################datos de la busqueda ##########################3-->
-        <tbody id="datos" style="background-color: #dcedc8;">
+        <tbody id="datos" style="background-color: #e3e3e3;" class="letraf">
         </tbody>
       <!--##########################################33-->
     </table>
@@ -226,12 +226,12 @@
                   <div class="modal-body">
                     <br>
                     <!---Mostrar datos-->
-                    <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
+                    <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
                      <h4 id="nomdocente" class="reset"></h4>
                     </div>
                     <!--ACORDEON-->
                     <div id="accordion">
-                      <div class="card">
+                      <div class="card alerta">
                         <div class="card-header" id="headingOne">
                           <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -326,9 +326,9 @@
               <!--FIN MODAL VER-->
               <!--Modal deshabilitar y habilitar-->
               <div class="modal fade" id="cambiarEstado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
+              <div class="modal-dialog alerta" role="document">
                 <div class="modal-content">
-                  <div class="modal-header" style="background-color: #283593; color:#ffffff;!important;">
+                  <div class="modal-header" style="background-color: #ffc107; color:#ffffff;!important;">
                     <h4 class="modal-title text-center" style=" text-align: center;">
                      <div id="nomdoc" class="reset"></div>
                     </h4>
@@ -391,9 +391,9 @@
           '<td>' +  dateFormat(arreglo.busdocente[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
           '<td>' +  arreglo.busdocente[x].estado + '</td>' +
           '<td>' +   
-          '<a  href="/docente/actualizar/' + arreglo.busdocente[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
-          '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
-          '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>'
+          '<a  href="/docente/actualizar/' + arreglo.busdocente[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp' + 
+          '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b;font-size:20px;"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
+          '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;font-size:20px;"></i></a>'
           '</td>' + //agregar los botones
           ' </tr>';
             
@@ -406,9 +406,9 @@
           '<td>' +  dateFormat(arreglo.busdocente[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
           '<td>' +  arreglo.busdocente[x].estado + '</td>' +
           '<td>' +   
-          '<a  href="/docente/actualizar/' + arreglo.busdocente[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp' + 
-          '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
-          '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>'
+          '<a  href="/docente/actualizar/' + arreglo.busdocente[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp' + 
+          '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b;font-size:20px;"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
+          '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;font-size:20px;"></i></a>'
           '</td>' + //agregar los botones
           ' </tr>';
            

@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center"  role="alert">
-  <h4> Matricula Estudiante</h4>
+<div class="alert text-center"  role="alert" style="background-color:#ffc107;color: #ffffff;">
+  <h3 class="letra1"> Matricula Estudiante</h3>
 </div>
 <!--mensajes-->
        <!---Mensaje-->
@@ -23,7 +23,7 @@
 <!--navs de matricula bachillerato y matricula tecnicos-->
 
 <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+  <div class="nav nav-tabs letraf" id="nav-tab" role="tablist">
     <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" style="font-size: 120%;">&nbsp;Bachillerato</a>
     <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" style="font-size: 120%;">&nbsp;Técnicos</a>
   </div>
@@ -32,9 +32,9 @@
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
   <!--texto matriculas bachillerato-->
   <br>
-        <div class="container-fluid">
+        <div class="container-fluid letraf">
         <div class="row">
-            <div class="col-md-12" style="background-color:#28afc2;">
+            <div class="col-md-12" style="background-color:#e3e3e3;">
                 <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
                 <div class="container-fluid">
@@ -59,9 +59,9 @@
         </div>
 
         <br>
-        <div class="container-fluid">
+        <div class="container-fluid letraf">
         <div class="row">
-            <div class="col-md-12" style="background-color:#28afc2;">
+            <div class="col-md-12" style="background-color:#e3e3e3;">
             <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#FFC300;"></i> Buscar Curso</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                 <div class="col-md-12">
@@ -146,10 +146,10 @@
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
    <!---matriculas tecnicos-->
    <br>
-        <div class="container-fluid">
+        <div class="container-fluid letraf">
      
         <div class="row">
-            <div class="col-md-12" style="background-color:#8FA1FF;">
+            <div class="col-md-12" style="background-color:#e3e3e3;">
                 <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#3843D0;"></i> Datos Estudiante</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
                 <div class="container-fluid">
@@ -174,9 +174,9 @@
         </div>
 
         <br>
-        <div class="container-fluid">
+        <div class="container-fluid letraf">
         <div class="row">
-            <div class="col-md-12" style="background-color:#8FA1FF;">
+            <div class="col-md-12" style="background-color:#e3e3e3;">
             <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#3843D0;"></i> Seleccionar Programa</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                 <form id="formtec" action="{{route('matriculatecnico')}}" method="post">

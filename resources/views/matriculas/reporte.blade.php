@@ -1,10 +1,10 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Matriculados a Programa </h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1"> Matriculados a Programa </h3>
 </div>
 <!----collapse--->
-    <div class="accordion" id="accordionExample">
+    <div class="accordion letraf" id="accordionExample">
     <div class="card">
         <div class="card-header" id="headingOne">
         <h2 class="mb-0">
@@ -20,27 +20,27 @@
         </h2>
         </div>
 
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseOne letraf" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
         <!--tabla-->
         <div class="container">
-            <table class="table table-bordered">
-                <thead style="background-color:#FFCC00;">
+            <table class="table">
+                <thead style="background-color:#0f468e;color: #ffffff;">
                     <tr>
                     <th scope="col">Código Programa</th>
                     <th scope="col">Programa</th>
                     <th scope="col">Reportes</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="background-color:#e3e3e3;">
                     @foreach ($mat as $m)
                 <tr>
                     <td>{{$m->codigo}}</td>
                     <td>{{$m->nomcurso}}</td>
                     <td>
                      <!-- Button trigger modal -->
-                        <a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop{{$m->idcur}}" style="background-color:#00FFFF;">
-                          <i class="fas fa-file-excel fa-lg" style="background-color:#FBFF00;"></i>
+                        <a type="button" class="btn" data-toggle="modal" data-target="#staticBackdrop{{$m->idcur}}">
+                          <i class="fas fa-file-excel fa-lg" style="color:green;font-size: 25px;"></i>
                         </a>
                          
                         <form action="{{route('filtrarper')}}" id="formudatos" method="post">
@@ -99,8 +99,8 @@
                     <td>{{$ma->codigotec}}</td>
                     <td>{{$ma->nombretec}}</td> 
                     <td>
-                        <a type="button" class="btn" data-toggle="modal" data-target="#modaltec{{$ma->idtec}}" style="background-color:#00FFFF;">
-                            <i class="fas fa-file-excel fa-lg" style="background-color:#FBFF00;"></i>
+                        <a type="button" class="btn" data-toggle="modal" data-target="#modaltec{{$ma->idtec}}">
+                            <i class="fas fa-file-excel fa-lg" style="color:green;font-size: 25px;"></i>
                         </a>
                         <!--modal -->
                             <form action="{{route('filtrartecnicos')}}"  method="post">

@@ -1,10 +1,10 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert alert-primary text-center"  role="alert">
-  <h4> Listado De Estudiantes Matriculados En Bachillerato</h4>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+  <h3 class="letra1"> Listado De Estudiantes Matriculados En Bachillerato</h3>
 </div>
 <br>
-<div class="container">
+<div class="container alerta">
      <form id="formu" method="POST">
        @csrf
        <select class="form-select form-select-lg mb-3 form-control" aria-label=".form-select-lg example" name="idbachi" id="idbachi">
@@ -18,7 +18,7 @@
   </div>
     <br><br>
     <table class="table ">
-        <thead style="background-color:#F9FF79;">
+        <thead style="background-color:#0f468e; color: #ffffff;" class="alerta">
             <tr>
             <th scope="col">No</th>
             <th scope="col">Nombre</th>
@@ -31,13 +31,13 @@
             <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody id="tabla1">
+        <tbody id="tabla1" class="letraf">
         @if($b==1)
         @php
         $con = 1;
         @endphp
         @foreach($estumat as $e)
-        <tr style="background-color: #B5F2FF;">
+        <tr style="background-color: #e3e3e3;">
         <td>{{$con++}}</td>
         <td>{{$e->nombre}} {{$e->segundonom}}</td>
         <td>{{$e->primerape}} {{$e->segundoape}}</td>
@@ -51,11 +51,11 @@
         
         <td>
           &nbsp&nbsp&nbsp
-                <a href="{{route('certifEstu',$e->idest)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp
-        <a href="/matricula/estudiante/bachillerato/actualizar/{{$e->idmat}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
+                <a href="{{route('certifEstu',$e->idest)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp
+        <a href="/matricula/estudiante/bachillerato/actualizar/{{$e->idmat}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
         &nbsp&nbsp
         <!---deshabilitar un estudiante-->
-          <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$e->idmat}}"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>
+          <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$e->idmat}}"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>
                 <div class="modal fade" id="cambiarEstado{{$e->idmat}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">

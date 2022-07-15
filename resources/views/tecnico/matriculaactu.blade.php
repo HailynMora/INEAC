@@ -11,8 +11,8 @@
             <!-- end mensaje-->
             <!---Mensaje-->
             <!-- end mensaje-->
-        <div class="row">
-            <div class="col-md-12" style="background-color:#8FA1FF;">
+        <div class="row alerta">
+            <div class="col-md-12" style="background-color:#e3e3e3;">
                 <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#3843D0;"></i> Datos Estudiante</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
                 <div class="container-fluid">
@@ -37,9 +37,9 @@
         </div>
 
         <br>
-        <div class="container-fluid">
+        <div class="container-fluid alerta">
         <div class="row">
-            <div class="col-md-12" style="background-color:#8FA1FF;">
+            <div class="col-md-12" style="background-color:#e3e3e3;">
             <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#3843D0;"></i> Seleccionar Programa</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                 <form id="formtec" action="{{route('actualizar_matricula_tecnico')}}" method="post">
