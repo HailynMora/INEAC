@@ -70,7 +70,7 @@ class ReporteAsigController extends Controller
         'tipo_curso.descripcion as curso', 'cursos.anio',
         'cursos.periodo', 'cursos.id as ida', 'cursos.id_tipo_curso as idcurso')
         ->get();
-        return $rep;
+       
         //consultar si existe objetivos
         $val=DB::table('objetivos')->count();
         if($val!=0){
@@ -87,10 +87,11 @@ class ReporteAsigController extends Controller
     }
 
     public function filtrar_tec_as(Request $request){
+          
             $idlog=auth()->id();
-            $doc=DB::table('docente')->where('docente.id_usuario', '=', $idlog)->select('docente.id')->first();
+            $doc=DB::table('docente')->where('docente.id_usuario', '=', $idlog)->select('docente.id as iddoc')->first();
             $tri = DB::table('trimestre_tecnicos')->where('nombretri', $request->trimestre)->select('id')->first();
-            $d= $doc->id;
+            $d= $doc->iddoc;
             $repe=DB::table('asignaturas_tecnicos')
             ->where('asignaturas_tecnicos.id_docente',$d)
             ->where('asignaturas_tecnicos.periodo',$request->periodo)
@@ -100,12 +101,14 @@ class ReporteAsigController extends Controller
             ->join('estado','asig_tecnicos.id_estado','=','estado.id')
             ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
             ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
-            ->select('asignaturas_tecnicos.id',
-                     'programa_tecnico.nombretec', 'programa_tecnico.codigotec', 'estado.descripcion as as estades',
-                     'asig_tecnicos.id', 'asig_tecnicos.codigoasig', 'asig_tecnicos.nombreasig as asig', 'asig_tecnicos.intensidad_horaria',
-                     'asig_tecnicos.val_habilitacion', 'trimestre_tecnicos.nombretri as trimestre', 'asignaturas_tecnicos.anio', 'asignaturas_tecnicos.periodo')
+            ->select('asignaturas_tecnicos.id as idastec','asig_tecnicos.codigoasig','asig_tecnicos.id as idasig',
+                 'asig_tecnicos.nombreasig as asig','intensidad_horaria',
+                 'val_habilitacion','programa_tecnico.id as idtec','programa_tecnico.nombretec', 'asignaturas_tecnicos.anio', 
+                 'asignaturas_tecnicos.periodo','trimestre_tecnicos.id as idtri', 'trimestre_tecnicos.nombretri as trimestre')
             ->get();
+
             $val=DB::table('objetivostec')->count();
+           
             if($val!=0){
                 $b=1;
                 $ob = DB::table('objetivostec')->get();
