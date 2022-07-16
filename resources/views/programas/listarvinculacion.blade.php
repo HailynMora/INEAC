@@ -1,11 +1,12 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Asignaturas Vinculadas a Programas </h3>
+<div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
+ <h3 class="letra1"> Asignaturas Vinculadas a Programas </h3>
 </div>
+<br>
 <div class="container table-responsive">
     <table class="table">
-        <thead style="background-color:#FFCC00;">
+        <thead style="background-color:#0f468e; color:white;" class="alerta">
             <tr>
             <th scope="col">Año</th>
             <th scope="col">Periodo</th>
@@ -21,7 +22,7 @@
         
         @foreach($asigpro as $s)
         @if(isset($s->anio))
-        <tr style="background-color: #dcedc8;">
+        <tr style="background-color:#E3E3E3;" class="letraf">
             <td>{{$s->anio}}</td>
             <td>{{$s->periodo}}</td>
             <td>{{$s->codcur}}</td>
@@ -31,7 +32,7 @@
             <td>{{$s->nomdoc}} {{$s->apedoc}}</td>
             <td>
                 &nbsp&nbsp
-                <a type="button" data-toggle="modal" data-target="#eliminarAsig{{$s->id}}" data-placement="bottom"  title="Eliminar"><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
+                <a type="button" data-toggle="modal" data-target="#eliminarAsig{{$s->id}}" data-placement="bottom"  title="Eliminar"><i class="nav-icon fas fa-trash" style="color: red; font-size:20px;"></i></a>
             </td>
         </tr>
             <!-- Ventana modal para eliminar -->
@@ -46,10 +47,10 @@
                         </div>
                         <div class="modal-body mt-2 text-center">
                         <h4 class="modal-title text-center" style=" text-align: center;">
-                                <span>¿Esta seguro que desea desvincular la asignatura {{$s->asig}} del programa {{$s->curso}}? </span>
+                                <span class="alerta">¿Esta seguro que desea desvincular la asignatura {{$s->asig}} del programa {{$s->curso}}? </span>
                             </h4>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer alerta">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             <a  class="btn btn-success" href="{{ route('desvincular', $s->id) }}">Aceptar</a>
                         </div>
@@ -66,9 +67,9 @@
     <div class="row">
         <div class="col-md-10"></div>
         <div class="col-md-2">
-          <h2 class="mb-0">
+          <h2 class="mb-0 alerta">
             <a class="btn btn-link float-right" type="button" href="/programas/reporte_programas">
-            <i class="fas fa-arrow-circle-left"></i> Volver
+            <i class="fas fa-arrow-circle-left" style="font-size:20px;"></i> Volver
             </a>
           </h2>
         </div>

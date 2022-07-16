@@ -133,25 +133,38 @@
                                 $id=$d->id;
                               ?>
                               <div class="form-group justify-content-center col-md-12 " id="docente">
-                                <label for="asig_dictadas">Asignaturas a Cargo</label>
                                 <table class="table table-striped">
                                   <thead>
                                     <tr>
                                       <th scope="col">Codigo</th>
                                       <th scope="col">Asignatura</th>
                                       <th scope="col">Intensidad Horaria</th>
+                                      <th scope="col">Curso</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                  @foreach($condoc as $c)
-                                    @if($c->id_docente==$id)
-                                      <tr>
-                                        <td>{{$c->codigo}} </td>
-                                        <td>{{$c->nombre}}</td>
-                                        <td>{{$c->intensidad_horaria}}</td>  
-                                      </tr>                     
+                                  <!--asignaturas a cargo-->
+                                  @if(isset($condoc[0][0]))
+                                  <?php
+                                         
+                                         $con=1;
+                                         for($i=0;$i<count($condoc);$i++) {
+                                             for($j=0;$j<count($condoc[$i]);$j++) {
+                                              if($d->id == $condoc[$i][$j]->id_docente){
+                                                echo '<tr style="background-color:white;">
+                                                     <td>'.$condoc[$i][$j]->cod.'</td>
+                                                     <td>'.$condoc[$i][$j]->asig.'</td>
+                                                     <td>'.$condoc[$i][$j]->horas.'</td>
+                                                     <td>'.$condoc[$i][$j]->cur.'</td>
+                                                 </tr>';
+
+                                              }
+
+                                           }
+                                         }
+                                         ?>
                                     @endif
-                                  @endforeach
+                                  <!--end asignaturas-->
                                   </tbody>
                                 </table>
                               </div>
@@ -211,9 +224,6 @@
         </tbody>
       <!--##########################################33-->
     </table>
-    @if($b==1)
-    {{$doc->links()}}
-    @endif
     </div>
 </div>
 <!--modal para datos-->
@@ -295,16 +305,16 @@
                             <div class="form-group col-md-12">
                               <!---asignaturas a cargo-->
                               <div class="form-group justify-content-center col-md-12 " id="docente">
-                                <label for="asig_dictadas">Asignaturas a Cargo</label>
                                 <table class="table table-striped">
-                                  <thead>
+                                  <thead class="alerta">
                                     <tr>
                                       <th scope="col">Codigo</th>
                                       <th scope="col">Asignatura</th>
                                       <th scope="col">Intensidad Horaria</th>
+                                      <th scope="col">Curso</th>
                                     </tr>
                                   </thead>
-                                  <tbody id="asignatura">
+                                  <tbody id="asignatura" class="letraf">
                                    
                                   </tbody>
                                 </table>
@@ -442,15 +452,19 @@
           document.getElementsByName("idocente")[0].value = idoc; //colocar valores en los inputs
           
           //////////////////////////////////////asignaturas imprimirs
-          for(var x=0; x<arreglo.datos.length; x++){
-            var d = '<tr>' +
-            '<td>' +  arreglo.datos[x].codigo +'</td>' +
-            '<td>' +  arreglo.datos[x].asig +'</td>' + 
-            '<td>' +  arreglo.datos[x].intensidad_horaria +'</td>' +
-            '</tr>';
-            $('#asignatura').append(d);//imprime los datos en la tabla
+          for(var i=0; i<arreglo.datos.length; i++){
+            for(var j=0; j<arreglo.datos[i].length; j++) {
+                var d = '<tr>' +
+                '<td>' +  arreglo.datos[i][j].cod+'</td>' +
+                '<td>' +  arreglo.datos[i][j].asig +'</td>' + 
+                '<td>' +  arreglo.datos[i][j].horas +'</td>' +
+                '<td>' +  arreglo.datos[i][j].cur +'</td>' +
+                '</tr>';
+                $('#asignatura').append(d);//imprime los datos en la tabla
+              
              
           }
+        }
          
           //////////////////////////////////////////////
 

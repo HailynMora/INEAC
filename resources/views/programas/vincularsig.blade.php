@@ -12,14 +12,14 @@
            <div class="col-md-10">
             <h2 class="mb-0">
               <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <i class="fas fa-edit"></i> Vincular Asignaturas a un Programa
+                <i class="fas fa-edit" style="font-size:20px;"></i> <span class="alerta">Vincular Asignaturas a un Programa</span>
               </button>
             </h2>
           </div>
           <div class="col-md-2">
               <h2 class="mb-0">
                 <a class="btn btn-link btn-block text-left float-right" type="button" href="/programas/reporte_programas">
-                <i class="fas fa-arrow-circle-left"></i> Volver
+                <i class="fas fa-arrow-circle-left" style="font-size:20px;"></i> <span class="alerta">Volver</span>
                 </a>
               </h2>
           </div>
@@ -90,13 +90,13 @@
   <div class="modal fade" id="modalListar" tabindex="-1" aria-labelledby="modalListarLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header letra1" style="background-color: #ffc107; color:#ffffff;">
         <h5 class="modal-title" id="modalListarLabel">Ingrese Datos</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body alerta">
         <!--formulario-->
         <div class="form-group">
           <label for="anio">Año</label>
@@ -109,7 +109,7 @@
         <input type="text" class="form-control" id="cursoid" name="cursoid" required value="{{$curso->id}}" hidden>
         <!--end formulario-->
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer alerta">
         <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
         <button type="submit" class="btn btn-primary">Ver</button>
       </div>

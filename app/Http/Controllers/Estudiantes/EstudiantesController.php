@@ -289,6 +289,7 @@ class EstudiantesController extends Controller
     public function busquedares_est(Request $request){
          $busest =   DB::table('matriculas')
                     ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+                    ->join('estado', 'estudiante.id_estado', '=', 'estado.id')
                     ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
                     ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
                     ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
@@ -306,7 +307,7 @@ class EstudiantesController extends Controller
                     'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'tipo_documento.descripcion as tdoces',
                     'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
                     'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
-                    'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu', 'matriculas.anio', 'matriculas.periodo', 'aprobado.nombre as apro', 'tipo_curso.descripcion as curso', 'tipo_curso.cursodes as descur')
+                    'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu', 'matriculas.anio', 'matriculas.periodo', 'aprobado.nombre as apro', 'tipo_curso.descripcion as curso', 'tipo_curso.cursodes as descur', 'estado.descripcion as estadoes')
                     ->get(); 
      return response(json_decode($busest,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
     }

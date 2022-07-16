@@ -366,6 +366,7 @@ class ProgramasController extends Controller
                         ->join('estado','id_estado','=','estado.id')
                         ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','programa_tecnico.jornada','estado.descripcion as estado')
                         ->get();
+        
      return response(json_decode($bustecnico,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
     }
     ////////////////////////////////////////
