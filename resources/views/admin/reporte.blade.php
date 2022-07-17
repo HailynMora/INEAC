@@ -33,6 +33,7 @@
                 <th scope="col">Permiso</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col">Estado</th>
+                <th scope="col">Rol</th>
               </tr>
             </thead>
             <tbody class="letraf" style="background-color: #e3e3e3;">
@@ -47,12 +48,9 @@
                   <td>{{$usu->rol}}</td>
                   <td>{{$usu->permiso}}</td>
                   <td>{{$usu->despre}}</td>
-                  <td>
+                  <td class="text-right" style="padding-top:20px;">
                     <!--deshabilitar-->
                        <!--#######################################3-->
-                       <a type="button" class="btn" data-toggle="modal" data-target="#exampleModalCambio{{$usu->id}}">
-                         <i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;"></i>
-                        </a>
                         @if($usu->estado == 1)
                           <a type="button" data-toggle="modal" data-target="#cambiarPro{{$usu->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i></a>
                         @endif   
@@ -60,6 +58,7 @@
                             <a type="button" data-toggle="modal" data-target="#cambiarPro{{$usu->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i></a>
                         @endif
                         <!-- Button trigger modal -->
+                       
                      
                          <!-- Ventana modal para deshabilitar -->
                          <div class="modal fade" id="cambiarPro{{$usu->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -90,6 +89,11 @@
                  
                     <!--actualizar rol-->
                       <!-- Modal -->
+                      </td>
+                      <td class="text-center">
+                      <a type="button" class="btn" data-toggle="modal" data-target="#exampleModalCambio{{$usu->id}}">
+                         <i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;"></i>
+                        </a>
                       <form action="{{route('cambioRol')}}" method="POST">
                         @csrf
                       <div class="modal fade" id="exampleModalCambio{{$usu->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

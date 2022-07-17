@@ -89,34 +89,37 @@ class docenteController extends Controller
         $res = DB::table('docente')->count();
         if($res!=0){
             $b=1;
-            $doc = DB::table('cursos')->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
-            ->join('docente', 'cursos.id_docente', '=', 'docente.id')
-            ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
-            ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
-            ->join('genero','docente.id_genero','=','genero.id')
-            ->join('estado','docente.id_estado','=','estado.id')
-            ->select('docente.id as id', 'docente.nombre', 'apellido', 'num_doc', 'fec_vinculacion',
-                     'correo', 'telefono', 'direccion', 'genero.descripcion as genero', 'tipo_documento.descripcion',
-                     'estado.descripcion as estado')
-            
-            ->distinct()
-            ->get();
+            $doc = DB::table('docente')
+                    ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
+                    ->join('genero','docente.id_genero','=','genero.id')
+                    ->join('estado','docente.id_estado','=','estado.id')
+                    ->select('docente.id as id', 'docente.nombre', 'apellido', 'num_doc', 'fec_vinculacion',
+                            'correo', 'telefono', 'direccion', 'genero.descripcion as genero', 'tipo_documento.descripcion',
+                            'estado.descripcion as estado')
+                    
+                    ->distinct()
+                    ->get();
 
             }else{
                 $b=0;
                 $doc=0;
                 
             }
-        
-            for($i=0; $i<count($doc); ++$i){
-                $condoc[$i]= DB::table('cursos')->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
-                            ->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
-                            ->where('cursos.id_docente', '=', $doc[$i]->id)
-                            ->select('asignaturas.nombre as asig', 'tipo_curso.descripcion as cur', 'id_docente', 'asignaturas.intensidad_horaria as horas', 'asignaturas.codigo as cod')
-                            ->distinct()
-                            ->get();
+            
+            $contar =DB::table('cursos')->count();
+            if($contar!=0){
+                for($i=0; $i<count($doc); ++$i){
+                    $condoc[$i]= DB::table('cursos')->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                                ->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                                ->where('cursos.id_docente', '=', $doc[$i]->id)
+                                ->select('asignaturas.nombre as asig', 'tipo_curso.descripcion as cur', 'id_docente', 'asignaturas.intensidad_horaria as horas', 'asignaturas.codigo as cod')
+                                ->distinct()
+                                ->get();
+                }
+            }else{
+                $condoc[0]=0;
             }
-        
+            
         ///////////////////////////////////////////
         //////////////////////////////////////////
         return view('docente.listar_docente')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc);
@@ -207,16 +210,14 @@ class docenteController extends Controller
             $datos=[];
             return response()->json(['busdocente' => $busdocente, 'datos' => $datos]);
         }else{
-            $busdocente = DB::table('cursos')->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
-            ->join('docente', 'cursos.id_docente', '=', 'docente.id')
-            ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
+            $busdocente = DB::table('docente')
             ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
             ->join('genero','docente.id_genero','=','genero.id')
             ->join('estado','docente.id_estado','=','estado.id')
             ->where('docente.num_doc', $request->nombre)
             ->select('docente.id as id', 'docente.nombre', 'apellido', 'num_doc', 'fec_vinculacion',
-                     'correo', 'telefono', 'direccion', 'genero.descripcion as genero', 'tipo_documento.descripcion',
-                     'estado.descripcion as estado')
+                    'correo', 'telefono', 'direccion', 'genero.descripcion as genero', 'tipo_documento.descripcion',
+                    'estado.descripcion as estado')
             
             ->distinct()
             ->get();
