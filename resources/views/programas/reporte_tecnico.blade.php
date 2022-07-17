@@ -162,7 +162,7 @@
               @endforeach
               </tbody>
               <!--##################datos de la busqueda ##########################3-->
-              <tbody id="datos" style="background-color: #dcedc8;">
+              <tbody class="letraf" id="datos" style="background-color:#E3E3E3;">
               </tbody>
             <!--##########################################33-->
           </table>
@@ -204,19 +204,41 @@
         //$("#datosdos").empty();
         for(var x=0; x<arreglo.length; x++){
           conta+=1;
-          var valor = '<tr>' +
-          '<td>' +  arreglo[x].codigotec +'</td>' +
-          '<td>' +  arreglo[x].nombretec + '</td>' +
-          '<td>' +  arreglo[x].jornada + '</td>' +
-          '<td>' + arreglo[x].descripcion +'</td>' +
-          '<td>' +  arreglo[x].estado + '</td>' +
-          '<td>' +  arreglo[x].id + '</td>' +
-          '<td>' +  
+          if( arreglo[x].estado == "Activo"){
+            var valor = '<tr>' +
+                        '<td>' +  arreglo[x].codigotec +'</td>' +
+                        '<td>' +  arreglo[x].nombretec + '</td>' +
+                        '<td>' +  arreglo[x].jornada + '</td>' +
+                        '<td>' + arreglo[x].descripcion +'</td>' +
+                        '<td>' +  arreglo[x].estado + '</td>' +
+                        '<td>' +  
 
-          '<a href="{{route("actualizar_prog_tec",'+arreglo[x].id+')}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>'
+                        '<a href="/programastecnicos/actualizar/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'+
+                        '<a type="button" data-toggle="modal" data-target="#cambiarPro'+ arreglo[x].id +'" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'+
+                        '<a href="/vincularasig/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>'
+                        
+                        + '</td>' + //agregar los botones
+                        '</tr>';
+           }else{
+              
+                var valor = '<tr>' +
+                            '<td>' +  arreglo[x].codigotec +'</td>' +
+                            '<td>' +  arreglo[x].nombretec + '</td>' +
+                            '<td>' +  arreglo[x].jornada + '</td>' +
+                            '<td>' + arreglo[x].descripcion +'</td>' +
+                            '<td>' +  arreglo[x].estado + '</td>' +
+                            '<td>' +  
 
-          + '</td>' + //agregar los botones
-          '</tr>';
+                            '<a href="/programastecnicos/actualizar/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'+
+                            '<a type="button" data-toggle="modal" data-target="#cambiarPro'+ arreglo[x].id +'" data-placement="bottom" title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a> '+
+                            '<a href="/vincularasig/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>'
+                            
+                            + '</td>' + //agregar los botones
+                            '</tr>';
+
+
+           }
+           
           console.log(valor);
           $('#datos').append(valor);
         }

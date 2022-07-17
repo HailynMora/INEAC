@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert  text-center"  role="alert" style="background-color: #ffc107; color:#ffffff;">
-  <h3 class="letra1"> Listado De Estudiantes Matriculados en Tecnicos </h3>
+  <h3 class="letra1"> Listado De Estudiantes Matriculados en Técnicos </h3>
 </div>
 <br>
 <div class="container alerta">
@@ -37,7 +37,7 @@
         $con = 1;
         @endphp
         @foreach($estutec as $e)
-        <tr style="background-color: #B5F2FF;">
+        <tr style="background-color: #E3E3E3;">
         <td>{{$con++}}</td>
         <td>{{$e->nombre}} {{$e->segundonom}}</td>
         <td>{{$e->primerape}} {{$e->segundoape}}</td>
@@ -110,7 +110,7 @@
       <div class="col-md-2 alerta">
         <h2 class="mb-0">
           <a class="btn btn-link float-right" type="button" href="/visualizar/estudiante">
-          <i class="fas fa-arrow-circle-left"></i> Volver
+          <i class="fas fa-arrow-circle-left" style="font-size:20px;"></i> <span class="alerta">Volver</span>
           </a>
         </h2>
       </div>
@@ -175,7 +175,8 @@
 
         var conta=0;
         for(var i=0; i<ar.length; i++){
-          if(ar[i].aprobado!="Retirado"){
+        
+          if(ar[i].aprobado != "Retirado"){
             conta++;
             var respuesta = '<tr>' +
             '<td>' +  conta + '</td>' +
@@ -185,13 +186,13 @@
             '<td>' +  ar[i].num_doc  + '</td>' +
             '<td>' +  ar[i].aprobado + '</td>' +
             '<td>' +  ar[i].nombretec + '</td>' +
-            '<td>' +'<a href="#"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'
-              + '<a href="/matricula/estudiante/actualizar/' + ar[i].id + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp&nbsp;'+ 
-                '<a type="button" data-toggle="modal" data-target="#cambiarEstado'+ar[i].id+'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
-               ' <div class="modal fade" id="cambiarEstado'+ar[i].id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
+            '<td>' +'<a href="#"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>'
+              + '<a href="/matricula/estudiante/actualizar/' + ar[i].id + '" type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'+ 
+                '<a type="button" data-toggle="modal" data-target="#cambiar'+ ar[i].id +'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red; font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
+               ' <div class="modal fade" id="cambiar'+ ar[i].id +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
               '<div class="modal-dialog" role="document">'+
                ' <div class="modal-content">'+
-                 '<div class="modal-header" style="color:#ffffff;!important;">'+
+                 '<div class="modal-header" style="background-color:FFC107; color:#ffffff;!important;">'+
                     '<h4 class="modal-title text-center" style=" text-align: center;">'+
                      '<div id="nomdoc" class="reset"></div>'+
                     '</h4>'+

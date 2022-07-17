@@ -192,19 +192,34 @@
         //$("#datosdos").empty();
         for(var x=0; x<arreglo.length; x++){
           conta+=1;
+        if(arreglo[x].estado == "Activo"){
           var valor = '<tr>' +
-          '<td>' +  arreglo[x].codigo +'</td>' +
-          '<td>' +  arreglo[x].descripcion + '</td>' +
-          '<td>' +  arreglo[x].jornada + '</td>' +
-          '<td>' + arreglo[x].cursodes +'</td>' +
-          '<td>' +  arreglo[x].estado + '</td>' +
-          '<td>' +  '<a href="{{route("actualizar_prog_tec",'+arreglo[x].id+')}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a> &nbsp&nbsp'+ 
-                '<a type="button" data-toggle="modal" data-target="#cambiarPro'+arreglo[x].codigo+'" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i></a>'
-            
-          +'&nbsp&nbsp <a href="{{route("vincular_a",'+arreglo[x].id+')}}" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308;" ></i></a>'
+                      '<td>' +  arreglo[x].codigo +'</td>' +
+                      '<td>' +  arreglo[x].descripcion + '</td>' +
+                      '<td>' +  arreglo[x].jornada + '</td>' +
+                      '<td>' + arreglo[x].cursodes +'</td>' +
+                      '<td>' +  arreglo[x].estado + '</td>' +
+                      '<td>' +  '<a href="/programas/actualizar/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i> &nbsp;&nbsp;&nbsp;</a>'+
+                                '<a type="button" data-toggle="modal" data-target="#cambiarPro'+ arreglo[x].id +'" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i>&nbsp;&nbsp;&nbsp;</a>'+
+                                '<a href="/vincular/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>'
 
-          + '</td>' + //agregar los botones
-          '</tr>';
+                      + '</td>' + //agregar los botones
+                      '</tr>';
+         }else{
+            
+            var valor = '<tr>' +
+                        '<td>' +  arreglo[x].codigo +'</td>' +
+                        '<td>' +  arreglo[x].descripcion + '</td>' +
+                        '<td>' +  arreglo[x].jornada + '</td>' +
+                        '<td>' + arreglo[x].cursodes +'</td>' +
+                        '<td>' +  arreglo[x].estado + '</td>' +
+                        '<td>' +  '<a href="/programas/actualizar/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i> &nbsp;&nbsp;&nbsp;</a>'+
+                                  '<a type="button" data-toggle="modal"  data-target="#cambiarPro'+ arreglo[x].id +'" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i>&nbsp;&nbsp;&nbsp;</a>'
+                                  '<a href="/vincular/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>'
+
+                        + '</td>' + //agregar los botones
+                        '</tr>';
+         }
           console.log(valor);
           $('#datos').append(valor);
         }

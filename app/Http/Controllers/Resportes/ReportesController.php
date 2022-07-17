@@ -40,7 +40,7 @@ class ReportesController extends Controller
            $id = $request->idc;
            $per =  $request->periodo;
            $anio =  $request->anio;
-              return Excel::download(new EstudiantesBachiExport($id, $anio, $per), 'listado.xlsx');
+            return Excel::download(new EstudiantesBachiExport($id, $anio, $per), 'listado.xlsx');
     }
 
     public function filtrartec(Request $request){

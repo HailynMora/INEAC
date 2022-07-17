@@ -102,7 +102,7 @@
             <th scope="col">Opciones</th>
             </tr>
         </thead>
-        <tbody id="tabla1">
+        <tbody id="tabla1" class="letraf">
         @foreach($rep as $d)
         <tr style="background-color: #E3E3E3;">
         <td>{{$d->codigo}}</td>
@@ -111,15 +111,15 @@
         <td>{{$d->val_habilitacion}}</td>
         <td>{{$d->estado}}</td>
         <td>
-        <a href="{{route('actualizar_asig',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>&nbsp&nbsp&nbsp
+        <a href="{{route('actualizar_asig',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;"></i></a>&nbsp&nbsp&nbsp
         <?php
         if($d->estado == 'Activo'){
             ?>
-            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>
+            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}" data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i></a>
             <?php
         }else{
             ?>
-            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>
+            <a type="button" data-toggle="modal" data-target="#cambiarAsig{{$d->id}}" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i></a>
             <?php
         }
         ?>
@@ -131,20 +131,20 @@
         <div class="modal fade" id="cambiarAsig{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header" style="background-color: #563d7c !important;">
+                    <div class="modal-header" style="background-color: #FFC107 !important;">
                         <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
-                            <span>¿Cambiar el estado {{$d->estado}} de la asignatura? </span>
+                            <span class="alerta">¿Cambiar el estado {{$d->estado}} de la asignatura? </span>
                         </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button> 
                     </div>
-                    <div class="modal-body mt-2 text-center">
+                    <div class="modal-body mt-2 text-center alerta">
                         <strong style="text-align: center !important"> 
                         {{ $d->codigo }} - {{ $d->asig }}
                         </strong>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer alerta">
                         <a  class="btn btn-success" href="{{ route('cambiarAsig', $d->id) }}">Cambiar</a>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         
@@ -156,7 +156,7 @@
        <div class="modal fade" id="cambiarEstado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                  <div class="modal-header" style="background-color: #283593; color:#ffffff;!important;">
+                  <div class="modal-header" style="background-color: #FFC107; color:#ffffff;!important;">
                     <h4 class="modal-title text-center" style=" text-align: center;">
                      <div id="nomdoc" class="reset"></div>
                     </h4>
@@ -167,11 +167,11 @@
                   <div class="modal-body mt-2 text-center">
                     <strong style="text-align: center !important"> 
                       <h4 class="modal-title text-center" style=" text-align: center;">
-                        <span>¿Cambiar estado de la asignatura? </span>
+                        <span class="alerta">¿Cambiar estado de la asignatura? </span>
                       </h4>
                     </strong>
                   </div>
-                  <div class="modal-footer">
+                  <div class="modal-footer alerta">
                     <form action="{{route('deshasignatura')}}" method="POST">
                       @csrf
                     <input id="idasig" name="idasig" hidden> 
@@ -186,7 +186,7 @@
         @endforeach
         </tbody>
         <!--##################datos de la busqueda ##########################3-->
-        <tbody id="datos" style="background-color: #dcedc8;">
+        <tbody id="datos" style="background-color:#E3E3E3;" class="letraf">
         </tbody>
       <!--##########################################33-->
     </table>
@@ -203,7 +203,7 @@
       <div class="col-md-2">
         <h2 class="mb-0">
           <a class="btn btn-link float-right alerta" type="button" href="{{route('reporte_pro')}}">
-          <i class="fas fa-arrow-circle-left "></i> Volver
+          <i class="fas fa-arrow-circle-left " style="font-size:20px;"></i> <span class="alerta">Volver</span>
           </a>
         </h2>
       </div>
@@ -247,8 +247,8 @@
           '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
           '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
           '<td>' +  arreglo[x].estado + '</td>' +
-          '<td>'+ ' <a href="/asignatura/actualizar/'+ arreglo[x].id +' "  data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>' + 
-                  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108;"></i></a>'+
+          '<td>'+ ' <a href="/asignatura/actualizar/'+ arreglo[x].id +' "  data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;"></i></a>' + 
+                  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Deshabilitar"><i class="nav-icon fas fa-toggle-on" style="color: #64e108; font-size:20px;"></i></a>'+
           '</td>' +//agregar los botones
           '</tr>';
           $('#datos').append(valor);
@@ -260,8 +260,8 @@
             '<td>' +  arreglo[x].intensidad_horaria  + '</td>' +
             '<td>' +  arreglo[x].val_habilitacion  + '</td>' +
             '<td>' +  arreglo[x].estado + '</td>' +
-            '<td>'+ ' <a href="/asignatura/actualizar/'+ arreglo[x].id +' "  data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308;"></i></a>' + 
-                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;"></i></a>'+
+            '<td>'+ ' <a href="/asignatura/actualizar/'+ arreglo[x].id +' "  data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;"></i></a>' + 
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i></a>'+
             '</td>' +//agregar los botones
             '</tr>';
             $('#datos').append(valor);
