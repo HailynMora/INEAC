@@ -10,4 +10,7 @@ class EstudiosController extends Controller
     public function principal(){
         return view('estudiantes.planEstudios');
     }
+    public function tecnico(){
+        return view('estudiantes.planEstudiosTec');
+    }
 }

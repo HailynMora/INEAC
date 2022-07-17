@@ -1,13 +1,13 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Listado de Docentes</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Listado de Docentes</h3>
 </div>
 <div>
   <br><br>
   <div class="container table-responsive">
-    <table class="table table-striped"style="background-color:#FFCC00;">
-      <thead>
+    <table class="table table-striped">
+      <thead style="background-color:#0f468e;color:#ffffff;" class="alerta">
         <tr>
           <th scope="col">No</th>
           <th scope="col">Nombres</th>
@@ -16,13 +16,13 @@
           <th scope="col">Opciones</th>
         </tr>
       </thead>
-      <tbody id="tabla1">
+      <tbody id="tabla1" style="background-color:#e3e3e3;" class="letraf">
         <?php
          $acum=1;
         ?>
          @if(isset($doc[0]))
           @foreach($doc as $d)
-          <tr style="background-color: #dcedc8;">
+          <tr>
              <td>{{$acum++}}</td>
             <td>{{$d->nombre}}  {{$d->apellido}}</td>
             <td>{{$d->correo}}</td>

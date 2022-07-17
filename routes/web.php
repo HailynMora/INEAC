@@ -392,7 +392,7 @@ Route::post('/generar/certificado_matec/pdf', [PDFController::class, 'mattecEstu
 Route::get('/generar/certificado_es/pdf/vista', [PDFController::class, 'cervista'])->middleware(['auth'])->name('pdfprueba');
 //plan de estudios estudiante
 Route::get('/plan/estudios', [EstudiosController::class, 'principal'])->middleware(['auth', 'estudiante'])->name('planEstudios');
-
+Route::get('/plan/estudios/tecnicos', [EstudiosController::class, 'tecnico'])->middleware(['auth', 'estudiante'])->name('planEstudiosTec');
 //notas estudiantes Modulo estudiantes
 Route::post('/estudiante/notas/periodo', [EstudiantesNotController::class, 'vista'])->middleware(['auth', 'estudiante'])->name('calificacionesEstudiante');
 
@@ -411,7 +411,8 @@ Route::post('/estudiante/boletin/pdf', [PDFController::class, 'boletin_es'])->mi
 
 //nivelaciones secretaria
 Route::post('/nivelaciones', [EstudiantesNotController::class, 'nivelacion'])->middleware(['auth', 'secretaria'])->name('nivelacionEstudiante');
-
+Route::post('/nivelaciones/estudiantes', [EstudiantesNotController::class, 'nivelaciones'])->middleware(['auth', 'secretaria_docente'])->name('nivelacionEstudiantedoc');
+Route::get('/estudiantes/nivelaciones', [EstudiantesNotController::class, 'nivel'])->middleware(['auth', 'estudiante'])->name('nivelacionEstudiantes');
 //perfil estudiante
 Route::get('/perfil/estudiante/ver', [PerfilController::class, 'estudiantePEr'])->middleware(['auth', 'estudiante'])->name('perfilEstu');
 

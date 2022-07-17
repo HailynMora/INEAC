@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Registro Calificaciones</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Registro Calificaciones</h3>
 </div>
 <br>
 <!--collapsed-->
@@ -15,7 +15,7 @@
                 </div>
                 </div>
                 <div class="col-6">
-                    <a  href="/asignatura/reporte_c" class="btn float-right"><i class="fas fa-backward"></i>&nbsp;Regresar</a>
+                    <a  href="/asignatura/reporte_c" class="btn float-right"> <i class="fas fa-arrow-circle-left"></i> Volver
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
                 <!--end mensajes-->
                 <br>
                 <div class="table-responsive">
-                    <table class="table" style="background-color:#FFCC00;">
-                        <thead>
+                    <table class="table" >
+                        <thead style="background-color:#0f468e;color: #ffffff;" class="alerta">
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nombres</th>
@@ -54,7 +54,7 @@
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="background-color:#e3e3e3;" class="letraf">
                             <?php $conta=1; ?>
                             @foreach($estumat as $t)
                                 <tr style="background-color: #dcedc8;">
@@ -94,7 +94,7 @@
                                                                     <th scope="col">Porcentaje</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody style="background-color: #7FFFD4;">
+                                                            <tbody style="background-color: #e3e3e3;">
                                                                 <tr>
                                                                     <th scope="row">1</th>
                                                                     <td>

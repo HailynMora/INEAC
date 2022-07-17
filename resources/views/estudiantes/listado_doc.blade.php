@@ -1,10 +1,10 @@
 @extends('usuario.principa_usul')
 @section('content')
 <!--Tabla de informacion-->
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Listado de Estudiantes</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Listado de Estudiantes</h3>
 </div>
-<div class="row">
+<div class="row alerta">
     <div class="col-md-1">
     </div>
     <div class="col-md-1">
@@ -19,13 +19,11 @@
         </form>
     </div>
 </div>
-
-
 <br><br>
 <div class="container table-responsive">
 
-<table class="table" style="background-color:#FFCC00;" >
-       <thead>
+<table class="table">
+       <thead style="background-color:#0f468e; color: #ffffff;" class="alerta" >
         <tr>
         <th scope="col">N° Identificacion</th>
         <th scope="col">Nombre</th>
@@ -35,10 +33,10 @@
         <th scope="col">Acciones</th>
         </tr>
     </thead>
-    <tbody id="tabla1">
+    <tbody id="tabla1" style="background-color:#e3e3e3;" class="letraf">
     @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
-        <tr class="table-success" >
+        <tr>
         <td>{{$d->num_doc}}</td>
         <td>{{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}</td>
         <td>{{$d->telefono}}</td>
@@ -51,7 +49,7 @@
                 <div class="modal fade" id="estudiante<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
-                    <div class="modal-header alert alert-warning">
+                    <div class="modal-header alert" style="background-color:#0f468e; color:#ffffff;">
                         <h5 class="modal-title" id="staticBackdropLabel">
                        
                           Datos Estudiante: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}
@@ -210,7 +208,7 @@
         @endif
     </tbody>
     <!--##################datos de la busqueda ##########################3-->
-        <tbody id="datos" class="table-success">
+        <tbody id="datos" class="letraf" style="background-color:#e3e3e3;">
         </tbody>
       <!--##########################################33-->
     </table>
@@ -219,9 +217,9 @@
  <!--finalizar Tabla de informacion-->
    <!-- Modal -->
    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-dialog modal-lg modal-dialog-scrollable letraf">
             <div class="modal-content">
-              <div class="modal-header" style="background-color:#ffc107;">
+              <div class="modal-header" style="background-color:#0f468e;color: #ffffff;">
                 <h5 class="modal-title" id="exampleModalLabel">Información Estudiante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>

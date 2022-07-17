@@ -40,7 +40,7 @@
                                     <th scope="col">Porcentaje</th>
                                 </tr>
                             </thead>
-                            <tbody style="background-color: #7FFFD4;">
+                            <tbody style="background-color: #e3e3e3;">
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>
@@ -190,16 +190,16 @@
       <div class="card-body">
        <!--table-->
        @foreach($nota as $n) 
-               <div class="container text-center" style="padding-top:10px; padding-bottom:10px; background-color:#31FEFB;">
-                <h5><b>Calificaciones</b></h5>
+               <div class="container text-center" style="padding-top:10px; padding-bottom:10px; background-color:#ffc107;">
+                <h5 class="alerta" style="text-align:center;"><b>Calificaciones</b></h5>
                 <div class="d-none d-sm-none d-md-block">
-                 <div class="row">
+                 <div class="row letraf">
                      <div class="col-2 text-left"><b>Estudiante:</b></div>
                      <div class="col-4 text-center">{{$n->nomes}}&nbsp;{{$n->second_nom}}&nbsp;{{$n->apes}}&nbsp;{{$n->second_ape}}</div>
                      <div class="col-3"><b>Curso:</b></div>
                      <div class="col-3">{{$n->curso}}</div>
                  </div>
-                 <div class="row">
+                 <div class="row letraf">
                      <div class="col-2 text-left"><b>Asignatura:</b></div>
                      <div class="col-4 text-center">{{$n->asignatura}}</div>
                      <div class="col-3"><b>Perido:</b></div>
@@ -207,7 +207,7 @@
                  </div>
                  </div>
                </div><br>
-                        <div style="background-color:#CDFFEB; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px;" >
+                        <div style="background-color:#e3e3e3; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px;" class="letraf" >
                             <div class="row">
                                 <div class="col-3">
                                     <b>N°</b>

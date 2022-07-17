@@ -1,11 +1,11 @@
 @extends('usuario.principa_usul')
 @section('content')
 
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Perfil Estudiante</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1">Perfil Estudiante</h3>
 </div>
 <br><br>
-<div class="container">
+<div class="container letraf">
 <form action="{{route('actuPerfil_Estu')}}" method="post" enctype='multipart/form-data'>
  @csrf
     <!---#####################################################################3----->

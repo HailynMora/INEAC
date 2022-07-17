@@ -3,12 +3,12 @@
 <div class="accordion">
   <div class="card">
     <div class="card-header">
-        <div class="alert alert-warning" role="alert">
-          <h5 class="text-center"> PLAN DE ESTUDIOS </h5>
+        <div class="alert" role="alert" style="background-color:#ffc107;color: #ffffff;">
+          <h5 class="text-center letra1"> Plan de Estudios </h5>
         </div>
     </div>
 
-    <div  class="collapse show" aria-labelledby="cabecera1">
+    <div  class="collapse show letraf" aria-labelledby="cabecera1">
       <div class="card-body">
        <!--cuerpo-->
        <div class="card-deck">

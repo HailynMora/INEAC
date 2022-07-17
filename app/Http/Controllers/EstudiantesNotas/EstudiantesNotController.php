@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EstudianteModel\Estudiante;
+use App\Exports\NivelacionesExport;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use DB;
 
@@ -150,4 +152,42 @@ class EstudiantesNotController extends Controller
         $pdf = PDF::loadView('tecnico.boletin', $data);
         return $pdf->download('boletin_academico.pdf');
     }
+    public function nivelaciones(Request $request){
+        $anio = $request->anio;
+        $periodo = $request->periodo;
+        $programa = $request->programa;
+        $idlog=auth()->id();
+        $doc = DB::table('docente')->where('id_usuario', $idlog)->select('docente.id as idoc')->first();
+        $docc=$doc->idoc;
+        return Excel::download(new NivelacionesExport($docc, $anio, $periodo,$programa), 'nivelaciones.xlsx');
+    }
+    public function nivel(){
+        $idlog=auth()->id();
+        $est = DB::table('estudiante')->where('id_usuario', $idlog)->select('estudiante.id as ides')->first();
+        $idest=$est->ides;
+
+        $bac = DB::table('notas')
+                ->where('id_estudiante','=',$idest)
+                ->where('notas.definitiva','<',3)
+                ->join('cursos','notas.id_curso','=','cursos.id')
+                ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                ->join('docente','cursos.id_docente','=','docente.id')
+                ->select('asignaturas.nombre as nombreasig','asignaturas.val_habilitacion','tipo_curso.descripcion as descur','docente.nombre as nomdoc','docente.apellido as apedoc','anio','periodo','notas.definitiva')
+                ->orderby('descur','asc')
+                ->get();
+            $tec = DB::table('notas_tecnico')
+                ->where('id_estudiante','=',$idest)
+                ->where('definitiva','<',3)
+                ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+                ->select('programa_tecnico.nombretec','docente.nombre as nomdoc','docente.apellido as apedoc','asig_tecnicos.nombreasig','asig_tecnicos.val_habilitacion','trimestre_tecnicos.nombretri','anio','periodo','notas_tecnico.definitiva')
+                ->orderby('nombretec','asc')
+                ->get();
+        return view('nivelaciones.nivelacionesest')->with('bac',$bac)->with('tec',$tec);
+    }
+    
 }

@@ -392,5 +392,6 @@ class EstudiantesController extends Controller
         return view('estudiantes.listado_doc')->with('estudiante', $estudiante)->with('b', $b);
     }
 
+    
 
 }

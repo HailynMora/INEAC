@@ -61,7 +61,7 @@
         <!--table-->
         <div class="container">
           <table class="table">
-            <thead style="background-color:#FFCC00;">
+            <thead style="background-color:#0f468e; color: #ffffff;" class="alerta">
               <tr>
                 <th scope="col">Año</th>
                 <th scope="col">Trimestre</th>
@@ -73,7 +73,7 @@
                 <th scope="col">Acción</th>
               </tr>
             </thead>
-            <tbody id="tabla1">
+            <tbody id="tabla1" style="background-color:#e3e3e3;" class="letraf">
               @foreach($repe as $d) <!--idtec nombretec codigotec estades idasig nombreasig horas trimestre--> 
               <tr style="background-color: #dcedc8;">
                 <td>{{$d->anio}} - {{$d->periodo}}</td>
@@ -203,7 +203,7 @@
             </div>
             <div class="col-md-2">
               <h2 class="mb-0">
-                <a class="btn btn-link  float-right" type="button" href="/asignatura/reporte_c">
+                <a class="btn btn-link  float-right letraf" type="button" href="/asignatura/reporte_c">
                   <i class="fas fa-arrow-circle-left"></i> Volver
                 </a>
               </h2>
