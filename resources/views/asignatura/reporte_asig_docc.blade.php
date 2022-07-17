@@ -1,11 +1,11 @@
 @extends('usuario.principa_usul')
 @section('content')
 
-<div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Reporte Asignaturas Bachillerato</h3>
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+ <h3 class="letra1"> Reporte Asignaturas Bachillerato</h3>
 </div>
 <!--collapsed-->
-<div class="accordion" id="accordionExample">
+<div class="accordion letraf" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
@@ -83,7 +83,7 @@
         <!--tabla-->
             <div class="table-responsive">
                 <table class="table">
-                    <thead style="background-color:#FFCC00;">
+                    <thead style="background-color:#0f468e;color: #ffffff;">
                         <tr>
                         <th scope="col">Anio</th>
                         <th scope="col">Periodo</th>
@@ -96,7 +96,7 @@
                         <th scope="col">Opciones</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla1">
+                    <tbody id="tabla1" style="background-color:#e3e3e3;">
                     @foreach($rep as $d)
                     <tr style="background-color: #dcedc8;">
                     <td>{{$d->anio}}</td>
@@ -166,7 +166,7 @@
                               $contador=1;
                             ?>
                             @if($b!=0)
-                              <div style="background-color:#CDFFEB; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px;" >
+                              <div style="background-color:#0f468e;color: #ffffff; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px;" >
                               <div class="row">
                                     <div class="col-2">
                                       No

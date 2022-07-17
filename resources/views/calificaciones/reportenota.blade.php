@@ -20,9 +20,9 @@
 @endif
 
 @if(isset($consulta[0]->asignatura))
-<div class="container" style="background-color:white;">
+<div class="container letraf" style="background-color:white;">
   <div class="container" style="padding-top:10px;">
-   <div class="row">
+   <div class="row letraf">
         <div class="col-6">
         <button type="button" class="btn" data-toggle="modal" data-target="#filtrarPDF">
           <img src="{{asset('dist/img/pdf.png')}}" class="img-fluid" >
@@ -161,8 +161,8 @@
         </div>
     </div>
 </div>
-<div class="table-responsive">
-<table class="table table-bordered">
+<div class="table-responsive letraf">
+<table class="table table-bordered letraf">
   <thead style="background-color:white;">
     <tr>
       <th scope="col">No</th>
@@ -206,7 +206,7 @@
 </div>
 <br>
 
-<div class="container" style="background-color:white;">
+<div class="container letraf" style="background-color:white;">
   <?php 
    $contador=1;
   ?>
@@ -224,7 +224,7 @@
 @endforeach
 </div>
 <br>
-<div class="container" style="background-color:white;">
+<div class="container letraf" style="background-color:white;">
    <div class="row">
         <div class="col-12">
             <h6 class="text-left">Docente: {{$consulta[0]->nomdoc}} {{$consulta[0]->apedoc}}</h6>

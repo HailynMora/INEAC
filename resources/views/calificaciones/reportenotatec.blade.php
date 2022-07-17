@@ -20,7 +20,7 @@
 @endif
 
 @if(isset($consulta[0]))
-<div class="container" style="background-color:white;">
+<div class="container alerta" style="background-color:white;">
   <div class="container" style="padding-top:10px;">
    <div class="row">
         <div class="col-6">
@@ -161,7 +161,7 @@
         </div>
     </div>
 </div>
-<div class="table-responsive">
+<div class="table-responsive letraf">
 <table class="table table-bordered">
   <thead style="background-color:white;">
     <tr>
@@ -206,7 +206,7 @@
 </div>
 <br>
 
-<div class="container" style="background-color:white;">
+<div class="container letraf" style="background-color:white;">
   <?php 
    $contador=1;
   ?>
@@ -224,7 +224,7 @@
 @endforeach
 </div>
 <br>
-<div class="container" style="background-color:white;">
+<div class="container letraf" style="background-color:white;">
    <div class="row">
         <div class="col-12">
             <h6 class="text-left">Docente: {{$consulta[0]->nomdoc}} {{$consulta[0]->apedoc}}</h6>

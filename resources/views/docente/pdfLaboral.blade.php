@@ -43,8 +43,7 @@
     <td style="width:90%;"><br>
     <hr style="background-color:black; width:100%;">
             <p style="text-align:justify;"><br><br><br>
-            Que el (la) señor(a) <b> {{strtoupper($docente->nombre)}} {{strtoupper($docente->apellido)}} </b> identificado(a) con cédula de ciudadania No. <b> {{strtoupper($docente->num_doc)}}  </b> Expedida en ____
-            , docente de tiempo completo de esta institución desde el <b> {{strtoupper($docente->fec_vinculacion)}}, </b> cargo que viene desempeñando hasta la 
+            Que el (la) señor(a) <b> {{strtoupper($docente->nombre)}} {{strtoupper($docente->apellido)}} </b> identificado(a) con cédula de ciudadania No. <b> {{strtoupper($docente->num_doc)}}</b>, docente de tiempo completo de esta institución desde el <b> {{date('Y-m-d', strtotime($docente->fec_vinculacion))}}, </b> cargo que viene desempeñando hasta la 
             presente fecha sin ninguna interrupción.
           </p><br>
     </td>
@@ -59,8 +58,8 @@
     <td style="width:90%;"><br>
          <p  style="text-align:center;">
              ____________________________________________<br>
-             Esp. nombre<br>
-             C.C No 123456788
+             <b>ALEXANDER SARCHI GRIJALBA</b><br>
+             Director
           </p><br>
     </td>
     <td style="width:5%;">

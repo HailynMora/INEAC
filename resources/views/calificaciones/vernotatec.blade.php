@@ -4,7 +4,7 @@
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
-      <div class="row">
+      <div class="row alerta">
         <div class="col-4">
             <a  href="/asignatura/reporte" class="btn"><i class="fas fa-backward"></i>&nbsp;Regresar</a>
         </div>
@@ -37,7 +37,7 @@
                                                 <th scope="col">Porcentaje</th>
                                             </tr>
                                         </thead>
-                                        <tbody style="background-color: #7FFFD4;">
+                                        <tbody style="background-color: #e3e3e3;">
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>
@@ -160,7 +160,7 @@
       <div class="card-body">
        <!--table-->
        @foreach($nota as $n) 
-               <div class="container text-center" style="padding-top:10px; padding-bottom:10px; background-color:#31FEFB;">
+               <div class="container text-center alerta" style="padding-top:10px; padding-bottom:10px; background-color:#ffc107;">
                 <h5><b>Calificaciones</b></h5>
                  <div class="row">
                      <div class="col-2 text-left"><b>Estudiante:</b></div>
@@ -175,7 +175,7 @@
                      <div class="col-3">{{$n->anio}} {{$n->periodo}}</div>
                  </div>
                </div><br>
-                        <div style="background-color:#CDFFEB; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px;" >
+                        <div style="background-color:#e3e3e3; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:10px;" class="letraf" >
                             <div class="row">
                                 <div class="col-3">
                                     <b>N°</b>
