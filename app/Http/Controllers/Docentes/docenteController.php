@@ -43,6 +43,7 @@ class docenteController extends Controller
         $usu->name = $request->input('nombre');
         $usu->email = $request->input('email');
         $usu->password = Hash::make($request->pass);
+        $usu->estado = 1;
         $usu->id_rol = $idrol->id;
         $usu->save();
         /*

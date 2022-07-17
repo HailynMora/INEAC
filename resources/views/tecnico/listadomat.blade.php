@@ -186,7 +186,7 @@
             '<td>' +  ar[i].num_doc  + '</td>' +
             '<td>' +  ar[i].aprobado + '</td>' +
             '<td>' +  ar[i].nombretec + '</td>' +
-            '<td>' +'<a href="#"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>'
+            '<td>' +'<a href="/generar/certificado/estudiantil_tec/'+ ar[i].id +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>'
               + '<a href="/matricula/estudiante/actualizar/' + ar[i].id + '" type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'+ 
                 '<a type="button" data-toggle="modal" data-target="#cambiar'+ ar[i].id +'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red; font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
                ' <div class="modal fade" id="cambiar'+ ar[i].id +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+

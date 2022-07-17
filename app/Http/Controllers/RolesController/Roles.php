@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RolesModal\Rol;
 use DB;
+Use Session;
 
 class Roles extends Controller
 {
@@ -29,10 +30,44 @@ class Roles extends Controller
         $u = DB::table('users')
             ->join('roles','users.id_rol','=','roles.id')
             ->join('permisos','roles.id_permiso','permisos.id')
-            ->select('users.id','users.name','users.email','users.id_rol',
+            ->select('users.id','users.name','users.email','users.id_rol', 'users.estado',
                     'roles.id as idrol','roles.descripcion as rol','roles.id_permiso',
                     'permisos.id as idper','permisos.nombre as permiso','permisos.descripcion as despre')
-            ->paginate(5);
-        return view('admin.reporte')->with('u', $u);
+            ->paginate(10);
+
+
+        //consultar el rol para poder editarlo a cada usuario
+        $rol = DB::table('roles')
+                ->select('roles.id as idrol', 'roles.descripcion as nomrol')->get();
+
+        return view('admin.reporte')->with('u', $u)->with('rol', $rol);
     }
+  
+    //desactivar o activar users
+   public function userEstado($id){
+    
+    $usu = DB::table('users')->where('users.id', $id)->where('users.estado', '=', '1')->select('users.estado as esta')->count();
+      if($usu != 0){
+
+        DB::table('users')->where('users.id', $id)->update(['estado' => 2]); //el estado 2 se desactiva
+
+      }else{
+
+        DB::table('users')->where('users.id', $id)->update(['estado' => 1]);
+
+      }
+      Session::flash('infoEs','Se cambio el estado del usuario satisfactoriamente.');
+      return back();
+
+   }
+
+   //cambiar el rol del usuario en admin en docente en estudiante
+   public function userRolCambio(Request $request){
+
+        DB::table('users')->where('users.id', $request->idusuario)->update(['id_rol' => $request->newrol]);
+        Session::flash('infoRol','Usuario actualizado exitosamente.');
+        return back();
+
+   }
+   
 }

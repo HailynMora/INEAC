@@ -17,7 +17,7 @@
     </div>
 </div>
     <br><br>
-    <div class="container">
+    <div class="container table-responsive">
       <table class="table table-striped "style="background-color:#0f468e; color: #fffff;">
       <thead class="alerta"style="background-color:#0f468e; color:white;">
           <tr>

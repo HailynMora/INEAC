@@ -7,11 +7,11 @@
    <!--idrol
     idper
     id_estado-->
-
+<br><br>
+<div class="container">
 <div class="card-deck letraf"> 
 @foreach($rol as $r)
 <div class="card" style="width: 18rem;">
-  <img src="{{asset('dist/img/img_user.jpeg')}}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title"><b>Nombre Rol:</b> {{$r->nomrol}}</h5>
   </div>
@@ -32,7 +32,7 @@
 <div class="modal fade" id="rol<?php echo $r->idrol ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color:#FFC107;">
         <h5 class="modal-title" id="staticBackdropLabel">Cambiar Permisos</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -80,6 +80,7 @@
 </div>
 
 @endforeach
+</div>
 </div>
 <!---end cards-->
 

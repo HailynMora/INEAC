@@ -58,8 +58,9 @@ class EstudiantesController extends Controller
                 ->get();
                 $pro = DB::table('matriculas')
                         ->join('aprobado','matriculas.id_aprobado','=','aprobado.id')
-                        ->join('cursos','matriculas.id_curso','=','cursos.id')
-                        ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                        ->join('tipo_curso','matriculas.id_curso','=','tipo_curso.id')
+                        ->select('matriculas.id_estudiante', 'matriculas.periodo', 'matriculas.anio', 'matriculas.id_aprobado',
+                                 'tipo_curso.codigo', 'tipo_curso.descripcion')
                         ->get();
                 $te = DB::table('matricula_tecnico')->count();
                 if($te!=0){
@@ -67,6 +68,8 @@ class EstudiantesController extends Controller
                     ->join('aprobado','matricula_tecnico.id_aprobado','=','aprobado.id')
                     ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
                     ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                    ->select('matricula_tecnico.id_estudiante', 'matricula_tecnico.anio', 'matricula_tecnico.periodo', 'id_aprobado', 
+                             'programa_tecnico.nombretec',  'programa_tecnico.codigotec')
                     ->get();
                    
                 }else{
@@ -135,6 +138,7 @@ class EstudiantesController extends Controller
         $usu->email = $request->input('email');
         $usu->password = Hash::make($request->pass);
         $usu->id_rol = $idrol->id;
+        $usu->estado = 1;
         $usu->save();
         //end crear user
 
@@ -287,7 +291,8 @@ class EstudiantesController extends Controller
 
     //////////////////buscar estudiante////////////////////////
     public function busquedares_est(Request $request){
-         $busest =   DB::table('matriculas')
+
+       /*  $busest =   DB::table('matriculas')
                     ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
                     ->join('estado', 'estudiante.id_estado', '=', 'estado.id')
                     ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
@@ -308,35 +313,72 @@ class EstudiantesController extends Controller
                     'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
                     'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
                     'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu', 'matriculas.anio', 'matriculas.periodo', 'aprobado.nombre as apro', 'tipo_curso.descripcion as curso', 'tipo_curso.cursodes as descur', 'estado.descripcion as estadoes')
-                    ->get(); 
-     return response(json_decode($busest,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+                    ->get(); */
+                    $busest=DB::table('estudiante')
+                            ->join('estado', 'id_estado', '=', 'estado.id')
+                            ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
+                            ->join('genero', 'id_genero', '=', 'genero.id')
+                            ->join('users', 'id_usuario', '=', 'users.id')
+                            ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+                            ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+                            ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+                            ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+                            ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                            ->where('estudiante.num_doc', '=', $request->nombre)
+                            ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
+                            'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
+                            'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
+                            'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
+                            'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
+                            'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
+                            'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
+                            ->get();
+
+                    $bac = DB::table('matriculas')
+                                ->join('aprobado','matriculas.id_aprobado','=','aprobado.id')
+                                ->join('tipo_curso','matriculas.id_curso','=','tipo_curso.id')
+                                ->where('matriculas.id_aprobado', '=', '1')
+                                ->select('matriculas.id_estudiante as ides', 'matriculas.periodo', 'matriculas.anio', 'matriculas.id_aprobado',
+                                        'tipo_curso.codigo', 'tipo_curso.descripcion') 
+                                ->get();
+    
+                    $tec = DB::table('matricula_tecnico')
+                                ->join('aprobado','matricula_tecnico.id_aprobado','=','aprobado.id')
+                                ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
+                                ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                                ->where('matricula_tecnico.id_aprobado', '=', '1')
+                                ->select('matricula_tecnico.id_estudiante', 'matricula_tecnico.anio', 'matricula_tecnico.periodo', 'id_aprobado', 
+                                         'programa_tecnico.nombretec',  'programa_tecnico.codigotec')
+                                ->get();
+
+                     return response()->json(['busest' => $busest, 'bac' => $bac, 'tec' => $tec]);
     }
     ////////////////////////////////////////cambiar el estado del estudianet por ajax
 
 
-    //buscar estudianres desde admin por ajax
-    public function searchEstuCon(Request $request){
-        $estudiantecon=DB::table('estudiante')
-                    ->join('estado', 'id_estado', '=', 'estado.id')
-                    ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
-                    ->join('genero', 'id_genero', '=', 'genero.id')
-                    ->join('users', 'id_usuario', '=', 'users.id')
-                    ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
-                    ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
-                    ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
-                    ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
-                    ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
-                    ->where('estudiante.num_doc', '=', $request->nombre)
-                    ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
-                    'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
-                    'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
-                    'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
-                    'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
-                    'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
-                    'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
-                    ->get();
-              return response(json_decode($estudiantecon,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
-      }
+        //buscar estudianres desde admin por ajax
+        public function searchEstuCon(Request $request){
+            $estudiantecon=DB::table('estudiante')
+                        ->join('estado', 'id_estado', '=', 'estado.id')
+                        ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
+                        ->join('genero', 'id_genero', '=', 'genero.id')
+                        ->join('users', 'id_usuario', '=', 'users.id')
+                        ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+                        ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+                        ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+                        ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+                        ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                        ->where('estudiante.num_doc', '=', $request->nombre)
+                        ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
+                        'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
+                        'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
+                        'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
+                        'genero.descripcion as generoestu', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 
+                        'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
+                        'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu')
+                        ->get();
+                return response(json_decode($estudiantecon,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
+        }
     //end buscar estudiante desde admin por ajax
 
     

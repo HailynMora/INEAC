@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1"> Matriculados a Programa </h3>
+ <h3 class="letra1">Estudiantes Matriculados a Programas </h3>
 </div>
 <!----collapse--->
     <div class="accordion letraf" id="accordionExample">
@@ -49,7 +49,7 @@
                         <div class="modal fade" id="staticBackdrop{{$m->idcur}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                            <div class="modal-header" style="background-color:#28F8FF;">
+                            <div class="modal-header" style="background-color:#FFC107; color:white;">
                                 <h5 class="modal-title" id="staticBackdropLabel">Seleccione el año y el periodo académico</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>

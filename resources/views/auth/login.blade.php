@@ -16,6 +16,13 @@
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+       
+        @if(Session::has('errorInicio'))
+                <div style="background-color:#FFE527;">
+                {{Session::get('errorInicio')}}
+                </div>
+                <br><br>
+        @endif
 
         <form method="POST" action="{{ route('login') }}">
             @csrf

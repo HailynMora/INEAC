@@ -417,4 +417,11 @@ Route::get('/perfil/estudiante/ver', [PerfilController::class, 'estudiantePEr'])
 
 Route::post('/perfil/estudiante/actualizar', [PerfilController::class, 'actuEstuPerfil'])->middleware(['auth', 'estudiante'])->name('actuPerfil_Estu');
 
+
+//desactivar user
+Route::get('/estado/usuario/{id}', [Roles::class, 'userEstado'])->middleware(['auth', 'secretaria'])->name('cambiarestadoUsu');
+
+//actualizar rol
+Route::post('/cambio/rol/user', [Roles::class, 'userRolCambio'])->middleware(['auth', 'secretaria'])->name('cambioRol');
+
 require __DIR__.'/auth.php';

@@ -2,7 +2,7 @@
 @section('content')
 <!--Tabla de informacion-->
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3>Listado de Estudiantes</h3>
+ <h3>Listado De Estudiantes</h3>
 </div>
 <div class="row">
     <div class="col-md-1">

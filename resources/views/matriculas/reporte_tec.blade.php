@@ -1,9 +1,9 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
- <h3> Matriculados a Programa </h3>
+ <h3>Estudiantes Matriculados a Programas </h3>
 </div>
-<div class="container">
+<div class="container table-responsive">
     <table class="table">
         <thead style="background-color:#FFCC00;">
             <tr>

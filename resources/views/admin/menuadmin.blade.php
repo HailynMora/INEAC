@@ -1,5 +1,15 @@
 
     <!-- Sidebar Menu -->
+<?php
+
+  use Illuminate\Support\Facades\DB;
+  use Illuminate\Support\Facades\Auth;
+
+  $idusu = auth()->id();
+   
+  $per = DB::table('perfil_docente')->where('perfil_docente.id_usuario', '=', $idusu)->count();
+  
+?>
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
@@ -25,15 +35,17 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @if($per==0) <!--valida si la persona ya tiene perfil o no -->
               <li class="nav-item">
                 <a href="{{route('regisperfil')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar</p>
+                <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                 <p>Registrar</p>
                 </a>
-              </li>  
+              </li> 
+              @endif 
               <li class="nav-item">
                 <a href="{{route('actuperfil')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
                   <p>Actualizar Perfil</p>
                 </a>
               </li>   
@@ -57,13 +69,13 @@
               </li>-->
               <li class="nav-item">
                 <a href="{{route('reporte_tecnico')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
                   <p>Técnicos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('reporte_pro')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
                   <p>Bachillerato</p>
                 </a>
               </li>
@@ -217,13 +229,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('listausu')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
                   <p>Reporte</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('rolesvis')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
                   <p>Roles</p><!--agregar descripcion para el certificados-->
                 </a>
               </li>
