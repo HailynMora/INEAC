@@ -10,7 +10,7 @@
 <!-- ################################################################################################ -->
 
 <!-- Top Background Image Wrapper -->
-<div class="bgded" style="background-image:url('img/fondo_apli.jpg');"> 
+<div class="bgded" style="background-image:url('img/fondo_mod.png'); background-repeat: no-repeat;  background-size: cover;   text-align: center; margin: 10px 10px 10px 10px; " > 
   <!-- ################################################################################################ -->
   <div class="wrapper row1">
     <header id="header" class="hoc clear">

@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\PerfilModel\Perfil;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ParentescoModel\Acudiente;
+use Illuminate\Support\Facades\Hash;
 use App\Models\EstudianteModel\Estudiante;
+use App\Models\User;
 
 class PerfilController extends Controller
 {
@@ -19,7 +21,8 @@ class PerfilController extends Controller
         if($val!=0){
             $b=1;
             $perfil = DB::table('perfil_docente')->where('id_usuario', $idl)->get();
-           return view('perfil.actualizar')->with('perfil', $perfil)->with('b', $b);;
+            $usu = DB::table('users')->where('users.id', '=', $idl)->get();
+            return view('perfil.actualizar')->with('perfil', $perfil)->with('b', $b)->with('usu', $usu);
         }else{
             return view('perfil.perfil');
         }
@@ -58,18 +61,20 @@ class PerfilController extends Controller
         if($val!=0){
           $b=1;
            $perfil = DB::table('perfil_docente')->where('id_usuario', $idl)->get();
-           return view('perfil.actualizar')->with('perfil', $perfil)->with('b', $b);
+           $usu = DB::table('users')->where('users.id', '=', $idl)->get();
+           return view('perfil.actualizar')->with('perfil', $perfil)->with('b', $b)->with('usu', $usu);
         }else{
             $b=0;
             $perfil="no hay datos";
-            return view('perfil.actualizar')->with('perfil', $perfil)->with('mensaje', 'No hay Datos almacenados')->with('b', $b);
+            $usu = DB::table('users')->where('users.id', '=', $idl)->get();
+            return view('perfil.actualizar')->with('perfil', $perfil)->with('usu', $usu)->with('mensaje', 'No hay Datos almacenados')->with('b', $b);
         }
        
     }
     
 
     public function actu(Request $request){
-        
+
         $idl=auth()->id();
         $iden=$request->iden;
         $perfil = Perfil::FindOrFail($iden);
@@ -88,9 +93,25 @@ class PerfilController extends Controller
             $perfil->imagen= $val;//ingresa el nombre de la ruta a la base de datos
         }
         $perfil->save();
-        
+
+        //usuario
+        $idac=$request->idusu;
+        $usuario = User::FindOrFail($idac);
+        $contra = $usuario->password;
+        $usuario->name = $request->input('nomusu');
+        if( $request->pass!=null ){
+           
+            $usuario->password = Hash::make($request->pass); 
+        }else{
+            $usuario->password = $contra;
+        }
+        $usuario->save();
+      
+        //end usuario
+
+        $usu = DB::table('users')->where('users.id', '=', $idac)->get();
         $datosper = Perfil::FindOrFail($iden);
-        return back()->with('datosper', $datosper);
+        return back()->with('datosper', $datosper)->with('usu', $usu);
     }
 
     public function estudiantePEr(){
@@ -106,20 +127,21 @@ class PerfilController extends Controller
                     ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
                     ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
                     ->where('id_usuario', $ides)
-                    ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
+                    ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',  'estudiante.foto',
                     'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
                     'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
                     'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'estado.descripcion as estadoes', 'tipo_documento.descripcion as tdoces',
                     'genero.descripcion as generoestu',  'genero.id as idgenero', 'users.name as usuestu', 'acudiente.lastname as nomacu', 'parentezco.descripcion as paren', 'parentezco.id as idparentezco', 
                     'acudiente.telefono as telacu', 'acudiente.num_doc as numacu', 'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion',
-                    'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu', 'tipo.id as idparen' )
+                    'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu', 'tipo.id as idparen')
                     ->get();
 
             $gen = DB::table('genero')->where('id', '!=', $datos[0]->idgenero)->select('genero.descripcion as gene', 'genero.id as idgen')->get();
             $tipodoc = DB::table('tipo_documento')->get();
             $paren = DB::table('parentezco')->get();
+            $usu = DB::table('users')->where('users.id', '=', $ides)->first();
             
-        return view('estudiantes.perfilES')->with('est', $datos)->with('gen', $gen)->with('doc', $tipodoc)->with('paren', $paren);
+        return view('estudiantes.perfilES')->with('est', $datos)->with('gen', $gen)->with('doc', $tipodoc)->with('paren', $paren)->with('usu', $usu);
     }
 
    public function actuEstuPerfil(Request $request){
@@ -151,6 +173,18 @@ class PerfilController extends Controller
         $Acu->id_parentesco = $request->input('parentezco');
         $Acu->id_tipo_doc =$request->input('tipoAcu');
         $Acu->save(); 
+
+        //usuario
+        $idu=auth()->id();
+        $estu = User::FindOrFail($idu);
+        $contrasenia = $estu->password;
+        $estu->name = $request->input('nomusu');
+        if( $request->pass!=null ){
+            $estu->password = Hash::make($request->pass); 
+        }else{
+            $estu->password = $contrasenia;
+        }
+        $estu->save();
         return back();
    }
    

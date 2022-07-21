@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EstudianteModel\Estudiante;
 use App\Exports\NivelacionesExport;
+use App\Exports\NivelacionesTecExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use DB;
@@ -152,6 +153,7 @@ class EstudiantesNotController extends Controller
         $pdf = PDF::loadView('tecnico.boletin', $data);
         return $pdf->download('boletin_academico.pdf');
     }
+
     public function nivelaciones(Request $request){
         $anio = $request->anio;
         $periodo = $request->periodo;
@@ -161,6 +163,17 @@ class EstudiantesNotController extends Controller
         $docc=$doc->idoc;
         return Excel::download(new NivelacionesExport($docc, $anio, $periodo,$programa), 'nivelaciones.xlsx');
     }
+
+    //reporte nivelaciones tecnicos
+    public function nivelTec(Request $request){
+        $anio = $request->anio;
+        $programa = $request->programa;
+        $idlog=auth()->id();
+        $doc = DB::table('docente')->where('id_usuario', $idlog)->select('docente.id as idoc')->first();
+        $docc=$doc->idoc;
+        return Excel::download(new NivelacionesTecExport($docc, $anio, $programa), 'nivelaciones_tecnicos.xlsx');
+    }
+    //
     public function nivel(){
         $idlog=auth()->id();
         $est = DB::table('estudiante')->where('id_usuario', $idlog)->select('estudiante.id as ides')->first();

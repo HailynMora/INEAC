@@ -413,6 +413,8 @@ Route::post('/estudiante/boletin/pdf', [PDFController::class, 'boletin_es'])->mi
 Route::post('/nivelaciones', [EstudiantesNotController::class, 'nivelacion'])->middleware(['auth', 'secretaria'])->name('nivelacionEstudiante');
 Route::post('/nivelaciones/estudiantes', [EstudiantesNotController::class, 'nivelaciones'])->middleware(['auth', 'secretaria_docente'])->name('nivelacionEstudiantedoc');
 Route::get('/estudiantes/nivelaciones', [EstudiantesNotController::class, 'nivel'])->middleware(['auth', 'estudiante'])->name('nivelacionEstudiantes');
+
+Route::post('/nivelaciones/estudiantes/tecnicos', [EstudiantesNotController::class, 'nivelTec'])->middleware(['auth', 'secretaria_docente'])->name('reporteNivelTec');
 //perfil estudiante
 Route::get('/perfil/estudiante/ver', [PerfilController::class, 'estudiantePEr'])->middleware(['auth', 'estudiante'])->name('perfilEstu');
 
@@ -424,5 +426,7 @@ Route::get('/estado/usuario/{id}', [Roles::class, 'userEstado'])->middleware(['a
 
 //actualizar rol
 Route::post('/cambio/rol/user', [Roles::class, 'userRolCambio'])->middleware(['auth', 'secretaria'])->name('cambioRol');
+//listar tecnicos estudiantes
+Route::post('/reporte/tecnico/estudiantes/docente', [ReportesController::class, 'listadoEsTec'])->middleware(['auth', 'secretaria_docente'])->name('listaEsTecnicos');
 
 require __DIR__.'/auth.php';

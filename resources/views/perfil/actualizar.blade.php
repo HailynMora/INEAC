@@ -18,6 +18,37 @@
     @if($b==1)
     <form id="ocultar">
               @csrf
+              <div class="form-row">
+                 <div class="form-group col-md-4">
+                    <div class="alert" role="alert">
+                          
+                          <div class="container" style="border-radius: 50%;">
+                              <img src="{{asset('dist/perfil/'.$perfil[0]->imagen)}}" class="img-fluid" alt="cargando imagen..." style="border-radius: 50%; width:40%; height:40%;" >
+                           </div>
+                            
+                      </div>   
+                    </div>
+                  <div class="form-group col-md-4">
+
+                  <div class="alert" role="alert">
+                        <h4 class="alert-heading">Nombre</h4>
+                        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                        <p>
+                        {{$usu[0]->name}}
+                        </p>    
+                    </div>   
+                  </div>
+                  <div class="form-group col-md-4">
+
+                    <div class="alert" role="alert">
+                          <h4 class="alert-heading">Correo</h4>
+                          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                          <p>
+                          {{$usu[0]->email}}
+                          </p>    
+                      </div>   
+                    </div>
+              </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
 
@@ -91,6 +122,24 @@
     @if($b==1)
     <form id="actuperfil" action="{{route('actuperfiluser')}}" method="POST" enctype='multipart/form-data'>
               @csrf 
+              <!--usuario-->
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="email">Correo</label>
+                  <input type="email" class="form-control" id="correo" name="correo" value="{{$usu[0]->email}}"  disabled>
+                  <input type="text" class="form-control" id="idusu" name="idusu" value="{{$usu[0]->id}}"  hidden>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nomusu" name="nomusu"  value="{{$usu[0]->name}}"> 
+                </div>
+                
+                <div class="form-group col-md-4">
+                  <label for="áss">Contraseña</label>
+                  <input type="password" class="form-control" id="pass" name="pass" placeholder="**********">
+                </div>
+              </div>
+              <!--end usuario-->
               <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nivel">Nivel de Estudios</label>

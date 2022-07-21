@@ -4,7 +4,19 @@
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
  <h3 class="letra1">Perfil Estudiante</h3>
 </div>
-<br><br>
+<div class="row">
+  <div class="col-md-4">
+    <div class="alert" role="alert">
+          
+          <div class="container" style="border-radius: 50%;">
+              <img src="{{asset('dist/perfil/'.$est[0]->foto)}}" class="img-fluid" alt="cargando imagen..." style="border-radius: 50%; width:30%; height:30%;" >
+            </div>
+            
+      </div>   
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+</div>
 <div class="container letraf">
 <form action="{{route('actuPerfil_Estu')}}" method="post" enctype='multipart/form-data'>
  @csrf
@@ -128,32 +140,40 @@
           <!---##################33-->
            <!---###############--->
            <div class="form-row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="genero">Zona</label>
             <input type="text" class="form-control" id="zona" name="zona" value="{{$est[0]->zona}}">
                
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label for="estrato">Estrato</label>
               <input type="number" class="form-control" id="estrato" name="estrato" value="{{$est[0]->estrato}}" readonly="readonly">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="estrato">Tipo Sanguineo</label>
                 <input type="text" class="form-control" id="sangre" name="sangre" value=" {{$est[0]->tiposangre}}" readonly="readonly">
           </div>
+           <div class="form-group col-md-3">
+             <label for="telefono">Telefono</label>
+             <input type="text" class="form-control" id="telefono" name="telefono" value="{{$est[0]->telefono}}">
+            </div>
           </div>
           <!---##################33-->
             <!---###############--->
             <div class="form-row">
-            <div class="form-group col-md-4">
-             <label for="telefono">Telefono</label>
-             <input type="text" class="form-control" id="telefono" name="telefono" value="{{$est[0]->telefono}}">
-            </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label for="correo">Correo</label>
               <input type="email" class="form-control" id="correo" name="correo" value="{{$est[0]->correo}}" readonly="readonly">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
+             <label for="nomusu">Usuario</label>
+             <input type="text" class="form-control" id="nomusu" name="nomusu" value="{{$usu->name}}">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="correo">Contraseña</label>
+              <input type="password" class="form-control" id="pass" name="pass" placeholder="*********" >
+            </div>
+            <div class="form-group col-md-3">
               <label for="img">Foto</label>
               <input type="file" class="form-control" id="img" name="img">
             </div>

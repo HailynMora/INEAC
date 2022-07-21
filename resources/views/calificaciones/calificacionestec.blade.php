@@ -11,7 +11,9 @@
             <div class="row alerta">
                 <div class="col-6">
                     <div class="conatiner">
+                    @if(isset($asig[0]->idastec))
                         <a href="/reporte/notas/tecnico/{{$asig[0]->idastec}}"><img src="{{asset('dist/img/informe_c.png')}}" class="img-fluid" ></a>
+                    @endif
                     </div>
                 </div>
                 <div class="col-6">
@@ -57,6 +59,7 @@
                         <tbody style="background-color:#e3e3e3;" class="letraf">
                             <?php $conta=1; ?>
                             @foreach($mates as $t)
+                             @if(isset($t->nombre))
                                 <tr style="background-color: #dcedc8;">
                                     <th scope="row">{{$conta++}}</th>
                                     <td>{{$t->nombre}}&nbsp;{{$t->segundonom}}</td>
@@ -208,6 +211,7 @@
                                         <!--end modal-->
                                     </td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

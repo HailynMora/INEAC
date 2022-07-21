@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1"> Reporte Asignaturas Técnicos</h3>
+ <h3 class="letra1"> Reporte Asignaturas Técnicos </h3>
 </div>
 <!--collapsed-->
 <div class="accordion" id="accordionExample">

@@ -1,3 +1,13 @@
+<?php
+  use Illuminate\Support\Facades\DB;
+  use Illuminate\Support\Facades\Auth;
+   
+  $idoc = auth()->user()->id;
+  $valdoc= DB::table('docente')->where('id_usuario', '=', $idoc)->select('docente.id as idocente')->first();
+  $asigbachi = DB::table('cursos')->where('cursos.id_docente', '=', $valdoc->idocente)->count();
+  $asigtec = DB::table('asignaturas_tecnicos')->where('asignaturas_tecnicos.id_docente', '=', $valdoc->idocente)->count();
+  
+?>
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -41,6 +51,7 @@
               </p>
             </a>
           </li>
+         @if($asigbachi!=0)
           <li class="nav-item">
             <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-book"></i>
@@ -49,7 +60,20 @@
               </p>
             </a>
             @include('docente.listadoEstu')
-          </li>                  
+          </li> 
+         @endif 
+         @if($asigtec !=0)
+         <li class="nav-item">
+            <a type="button" data-toggle="modal" data-target="#listaTec" class="nav-link" style="color:white;">
+              <i class="nav-icon fas fa-university"></i>
+                <p>
+                   Estudiantes Técnico  
+              </p>
+            </a>
+            @include('docente.listadoEstuTecnico')
+          </li>
+         @endif  
+         @if($asigbachi!=0)
           <li class="nav-item">
             <a type="button" data-toggle="modal" data-target="#exampleModalnive" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-edit"></i>
@@ -59,6 +83,19 @@
             </a>
             @include('nivelaciones.nivelacionesdoc')
           </li>
+          @endif
+          @if($asigtec !=0)
+          <li class="nav-item">
+              <a type="button" data-toggle="modal" data-target="#nivTec" class="nav-link" style="color:white;">
+                <i class="nav-icon fas fa-file-signature"></i>
+                  <p>
+                    Nivelaciones Técnico  
+                </p>
+              </a>
+              @include('nivelaciones.nivelacionesTec')
+            </li>
+         @endif  
+          
           <li class="nav-item">
             <a href="{{route('certifLaboral')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-folder-open"></i>

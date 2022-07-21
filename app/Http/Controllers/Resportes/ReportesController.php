@@ -10,6 +10,7 @@ use App\Exports\TecniosExcel;
 use App\Models\MatriculasModel\Matricula;
 use App\Exports\NotasBachiExcel;
 use App\Exports\NotasTecnicoExcel;
+use App\Models\MatriculasModel\MatriculaTec;
 use DB;
 
 
@@ -63,6 +64,37 @@ class ReportesController extends Controller
         $id = $request->idcurso;
         $idnota = $request->idexcel;
         return Excel::download(new NotasTecnicoExcel($id, $idnota), 'listado_notas_tecnico.xlsx');
+    }
+    
+    public function listadoEsTec(Request $request){
+       
+        $datos = MatriculaTec::where('id_tecnico', $request->cursoba)
+                    ->where('anio', $request->anio)
+                    ->where('periodo', $request->periodo)
+                    ->where('id_trimestre', $request->trim)
+                    ->join('estudiante', 'id_estudiante', '=', 'estudiante.id')
+                    ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+                    ->join('genero', 'estudiante.id_genero', '=', 'genero.id')
+                    ->join('programa_tecnico', 'id_tecnico', '=', 'programa_tecnico.id')
+                    ->join('aprobado', 'id_aprobado', '=', 'aprobado.id')
+                    ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+                    ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+                    ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+                    ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+                    ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                    ->join('trimestre_tecnicos', 'id_trimestre', '=', 'trimestre_tecnicos.id')
+                    ->select('estudiante.id as idest', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as priape',
+                    'estudiante.second_ape as segape', 'estudiante.num_doc', 'estudiante.telefono', 'programa_tecnico.codigotec', 'programa_tecnico.nombretec',
+                    'anio', 'periodo', 'fec_matricula', 'trimestre_tecnicos.nombretri', 'aprobado.nombre', 
+                    'estudiante.tiposangre', 'estudiante.dirresidencia', 'estudiante.dptresidencia', 'estudiante.munresidencia', 'estudiante.zona',
+                    'estudiante.barrio', 'estudiante.telefono', 'estudiante.num_doc', 'estudiante.dpt_expedicion', 'estudiante.mun_expedicion', 'estudiante.fecnacimiento',
+                    'estudiante.dpt_nacimiento', 'estudiante.mun_nacimiento',  'estudiante.correo', 'estudiante.estrato', 'tipo_documento.descripcion as tdoces',
+                    'genero.descripcion as generoestu',  'acudiente.lastname as nomacu', 'parentezco.descripcion as paren',  'acudiente.telefono as telacu', 'acudiente.num_doc as numacu',
+                    'acudiente.direccion as diracu', 'sistema_salud.regimen', 'sistema_salud.eps', 'sistema_salud.nivelformacion', 'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades',
+                     'tipo.descripcion as tdocacu', )
+                    ->paginate(10);
+                   
+        return view('docente.vistaListadoEsTecnicos')->with('datos', $datos);
     }
     
 }

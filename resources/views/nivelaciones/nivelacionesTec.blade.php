@@ -3,13 +3,14 @@
   use Illuminate\Support\Facades\Auth;
    
   $anio = DB::table('cursos')->select('anio')->distinct()->get();
+  $tec = DB::table('programa_tecnico')->get();
   
 ?>
 <!-- Button trigger modal -->
 <!-- Modal -->
-<form action="{{route('nivelacionEstudiantedoc')}}" method="POST">
+<form action="{{route('reporteNivelTec')}}" method="POST">
  @csrf
-<div class="modal fade alerta" id="exampleModalnive" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade alerta" id="nivTec" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -20,8 +21,20 @@
       </div>
       <div class="modal-body">
         <!--periodo academico-->
-        <div class="row">
-        <div class="col-4">
+    <div class="row">
+        <div class="col-6">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Programa</label>
+          <select class="form-control" id="programa" name="programa">
+            @foreach($tec as $p)
+              @if(isset($p->id))
+             <option value="{{$p->id}}">{{$p->nombretec}}</option>
+             @endif
+             @endforeach
+          </select>
+        </div>
+       </div>
+        <div class="col-6">
           <div class="form-group">
             <label for="exampleFormControlSelect1">Año</label>
             <select class="form-control" id="anio" name="anio">
@@ -33,23 +46,7 @@
             </select>
           </div> 
         </div>
-        <div class="col-4">
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Periodo</label>
-          <select class="form-control" id="periodo" name="periodo">
-             <option value="A">A</option>
-             <option value="B">B</option>
-          </select>
-        </div>
-       </div>
-       <div class="col-4">
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Programa</label>
-          <select class="form-control" id="programa" name="programa">
-             <option value="1">Bachillerato</option>
-          </select>
-        </div>
-       </div>
+     
        </div>
         <!-- end per acdemico-->
       </div>
