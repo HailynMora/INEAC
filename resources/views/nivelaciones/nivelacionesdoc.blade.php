@@ -3,6 +3,7 @@
   use Illuminate\Support\Facades\Auth;
    
   $anio = DB::table('cursos')->select('anio')->distinct()->get();
+  $cur = DB::table('tipo_curso')->select('descripcion', 'tipo_curso.id as idcur')->get();
   
 ?>
 <!-- Button trigger modal -->
@@ -46,7 +47,11 @@
         <div class="form-group">
           <label for="exampleFormControlSelect1">Programa</label>
           <select class="form-control" id="programa" name="programa">
-             <option value="1">Bachillerato</option>
+            @foreach($cur as $c)
+             @if(isset($c->idcur))
+             <option value="{{$c->idcur}}">{{$c->descripcion}}</option>
+             @endif
+            @endforeach
           </select>
         </div>
        </div>

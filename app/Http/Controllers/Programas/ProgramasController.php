@@ -292,6 +292,7 @@ class ProgramasController extends Controller
     }
 
     public function asig_tec(Request $request){
+        
         $r=$request->curso; 
         $r1=$request->asig; 
         $r2=$request->tri;
@@ -305,9 +306,9 @@ class ProgramasController extends Controller
                   ->count();
 
         if($resdatos!=0){
-               return \Response::json([
-                'error'  => 'Error datos'
-            ],422);
+
+            Session::flash('mensaje', 'Datos Repetidos! Asignatura ya esta vinculada.');
+              
             
         }else{
            
@@ -319,16 +320,21 @@ class ProgramasController extends Controller
             $category->anio = $request->input('anio');
             $category->periodo = $request->input('periodo');
             $category->save();
-            return back();   
+            Session::flash('mensajeconf', 'Asignatura Vinculada exitosamente!.');
             
         }
+
+        return back();   
 
     }
     
 
     public function desvincular($id){
-        AsigProgram::find($id)->delete();
-        return redirect('/programas/listado_vinculacion');
+        $val = DB::table('notas')->where('id_curso', $id)->count();
+        if($val==0){
+            AsigProgram::find($id)->delete();
+        }
+        return redirect('/programas/reporte_programas');
     }
     public function listarvinculaciontec(){
         $asigpro=DB::table('asignaturas_tecnicos')

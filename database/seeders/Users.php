@@ -23,6 +23,7 @@ class Users extends Seeder
             'email' => 'adm@gmail.com',
             'password'=>Hash::make($pass),
             'id_rol'=>1,
+            'estado'=>1,
              ]
         ];
         DB::table('users')->insert($datos);//inserta los datos a la tabla roles

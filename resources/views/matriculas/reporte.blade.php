@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Estudiantes Matriculados a Programas </h3>
+ <h3 class="letra1">Estudiantes Matriculados a Programas</h3>
 </div>
 <!----collapse--->
     <div class="accordion letraf" id="accordionExample">
@@ -29,7 +29,8 @@
                     <tr>
                     <th scope="col">Código Programa</th>
                     <th scope="col">Programa</th>
-                    <th scope="col">Reportes</th>
+                    <th scope="col">Estudiantes</th>
+                    <th scope="col">Notas</th>
                     </tr>
                 </thead>
                 <tbody style="background-color:#e3e3e3;">
@@ -88,6 +89,68 @@
                         <!--end modal-->
                        </form>
                 
+                   </td>
+                   <td>
+                    <!--aqui modal de reporte de notas-->
+                    <a type="button" class="btn" data-toggle="modal" data-target="#modalnotas{{$m->idcur}}">
+                          <i class="fas fa-file-excel fa-lg" style="color:blue;font-size: 25px;"></i>
+                    </a>
+                    <form action="{{route('filtrarNotasSec')}}" id="formudatos" method="post">
+                         @csrf
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalnotas{{$m->idcur}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header" style="background-color:#FFC107; color:white;">
+                                <h5 class="modal-title" id="staticBackdropLabel">Seleccione el año y el periodo académico</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            <!---formulario-->
+            
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Periodo Académico</label>
+                                        <select id="pernot" class="form-control" name="pernot">
+                                            <option selected>Elegir...</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Año</label>
+                                        <select id="anionot" class="form-control" name="anionot">
+                                               <option selected>Elegir...</option>
+                                                @foreach($res as $a)
+                                                <option value="{{$a->anio}}">{{$a->anio}}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Asignatura</label>
+                                        <select id="asig" class="form-control" name="asig">
+                                               <option selected>Elegir...</option>
+                                                @foreach($asig as $asi)
+                                                @if(isset($asi->idasig))
+                                                 <option value="{{$asi->idasig}}">{{$asi->nombre}}</option>
+                                                @endif
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                    <input type="text" name="idcur" id="idcur" value="{{$m->idcur}}" hidden>
+                            <!---end formulario-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <!--end modal-->
+                       </form>
+                    <!--end modal-->
                    </td>
                    <!-- <td><a href="/reporte/estudiantes/bachillerato/{{$m->idcur}}" class="btn"  style="background-color:#00FFFF;"><i class="fas fa-file-excel fa-lg" style="background-color:#FBFF00;"></i></button></a>-->
                 </tr>

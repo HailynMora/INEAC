@@ -17,6 +17,7 @@
     </form>
   </div>
     <br><br>
+    <div class="table-responsive">
     <table class="table ">
         <thead style="background-color:#0f468e; color: #ffffff;" class="alerta">
             <tr>
@@ -91,9 +92,10 @@
         @endforeach
        @endif
         </tbody>
-        <tbody id="tabla2" style="background-color: #B5F2FF;">
+        <tbody id="tabla2" class="letraf" style="background-color:#e3e3e3;">
         </tbody>
     </table>
+    </div>
     <div class="row">
       <div class="col-md-4">
       </div>
@@ -109,7 +111,7 @@
       <div class="col-md-2">
         <h2 class="mb-0">
           <a class="btn btn-link float-right" type="button" href="/visualizar/estudiante">
-          <i class="fas fa-arrow-circle-left"></i> Volver
+          <i class="fas fa-arrow-circle-left" style="font-size:20px;"></i> Volver
           </a>
         </h2>
       </div>
@@ -152,10 +154,9 @@
             '<td>' +  ar[i].telefono  + '</td>' +
             '<td>' +  ar[i].nomcurso + '</td>' +
             '<td>' +  ar[i].estadoes + '</td>' +
-            '<td>' 
-            '<td>' +'&nbsp&nbsp&nbsp <a href="/generar/certificado/estudiantil/'+ ar[i].idest +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp'
-              + '<a href="/matricula/estudiante/bachillerato/actualizar/' + ar[i].idmat + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308;" ></i></a>&nbsp&nbsp&nbsp&nbsp;'+ 
-                '<a type="button" data-toggle="modal" data-target="#estado'+ar[i].idmat+'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
+            '<td>' +'&nbsp&nbsp&nbsp <a href="/generar/certificado/estudiantil/'+ ar[i].idest +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:#e1b308; font-size:20px;" ></i></a>&nbsp;&nbsp;&nbsp;'
+              + '<a href="/matricula/estudiante/bachillerato/actualizar/' + ar[i].idmat + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:#e1b308; font-size:20px;" ></i></a>&nbsp;&nbsp;'+ 
+                '<a type="button" data-toggle="modal" data-target="#estado'+ar[i].idmat+'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red; font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
                ' <div class="modal fade" id="estado'+ar[i].idmat+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
               '<div class="modal-dialog" role="document">'+
                ' <div class="modal-content">'+

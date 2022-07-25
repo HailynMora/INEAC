@@ -81,35 +81,6 @@
               </li>
             </ul>
           </li>
-          <!--<li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book-open"></i>
-              <p>
-                Asignaturas
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('reporte')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Asig. Bachillerato</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('reportetec')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Asig. Técnicos</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('datosasignar')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Vincular Docente</p>
-                </a>
-              </li>
-            </ul>
-          </li>-->
           <li class="nav-item">
             <a href="{{route('listado_docente')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-user-tie"></i>
@@ -117,27 +88,6 @@
                 Docentes
               </p>
             </a>
-           <!-- <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('regdocente')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('listado_docente')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listado</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('condocente')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
-                </a>
-              </li>
-            </ul>
-          </li>-->
           <li class="nav-item">
             <a href="{{route('listarestu')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-table"></i>
@@ -145,38 +95,6 @@
                 Estudiantes
               </p>
             </a>
-           <!--<ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('registro_es')}}"  class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href ="{{route('listarestu')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('conestudiante')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Consultar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('registro_acu')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Acudiente</p>
-                </a>
-              </li>
-            </ul>-->
-        <!--  </li><li class="nav-item">
-            <a href="{{route('matricularestu')}}" class="nav-link">
-              <i class="nav-icon fas fa-file-alt"></i>
-              <p>Matriculas</p>
-            </a>
-          </li>-->
           <li class="nav-item">
             <a href="{{route('matriculados_bach')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-user-tie"></i>
@@ -185,38 +103,37 @@
               </p>
             </a>
           </li>
+          <!--manejo de nivelaciones-->
           <li class="nav-item">
-            <a type="button" data-toggle="modal" data-target="#exampleModalnotas" class="nav-link" style="color:white;">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Nivelaciones
-              </p>
-            </a>
-            @include('nivelaciones.nivelacionesadm')
-          </li>
-          <!--<li class="nav-item">
             <a href="#" class="nav-link" style="color:white;">
-              <i class="nav-icon fas fa-folder-open"></i>
+            <i class="nav-icon fas fa-edit"></i>
               <p>
-                Certificados
+               Nivelaciones
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/search/simple.html" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Laboral</p>
+              <a type="button" data-toggle="modal" data-target="#exampleModalnotas" class="nav-link" style="color:white;">
+               <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                  <p>
+                    Bachillerato
+                  </p>
                 </a>
+                @include('nivelaciones.nivelacionesadm')
               </li>
               <li class="nav-item">
-                <a href="pages/search/enhanced.html" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Estudiante</p>agregar descripcion para el certificados
-                </a>
-              </li>
+                <a type="button" data-toggle="modal" data-target="#tecnicoRec" class="nav-link" style="color:white;">
+                <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                    <p>
+                      Técnicos
+                    </p>
+                  </a>
+                  @include('nivelaciones.nivelacionTecnico')
+                </li>
             </ul>
-          </li>--->
+          </li>
+          <!--end nivelaciones-->
           <!---manejo de usuarios--->
           <li class="nav-item">
             <a href="#" class="nav-link" style="color:white;">
