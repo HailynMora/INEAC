@@ -13,11 +13,12 @@ class NotasCurso implements FromView
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function __construct($idcur, $anio, $per)
+    public function __construct($idcur, $anio, $per, $asig)
     {
         $this->idcur = $idcur;
         $this->anio = $anio;
         $this->per = $per;
+        $this->asig = $asig;
     }
 
    
@@ -31,7 +32,7 @@ class NotasCurso implements FromView
             ->join('desempenos','notas.id_desempenio', '=', 'desempenos.id')
             ->where('cursos.id_tipo_curso', '=', $this->idcur)
             ->where('cursos.anio', '=', $this->anio)
-            ->where('cursos.periodo', '=', $this->per)
+            ->where('cursos.id_asignatura', '=', $this->asig)
             ->select('estudiante.first_nom as nomes', 'estudiante.second_nom as segnom', 
                     'estudiante.firts_ape as apes', 'estudiante.second_ape as sedape', 
                     'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 

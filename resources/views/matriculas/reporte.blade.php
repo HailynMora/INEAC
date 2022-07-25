@@ -133,7 +133,9 @@
                                                <option selected>Elegir...</option>
                                                 @foreach($asig as $asi)
                                                 @if(isset($asi->idasig))
-                                                 <option value="{{$asi->idasig}}">{{$asi->nombre}}</option>
+                                                    @if($asi->idcurso==$m->idcur)
+                                                        <option value="{{$asi->idasig}}">{{$asi->nombre}}{{$asi->idcurso}}{{$m->idcur}}</option>
+                                                    @endif
                                                 @endif
                                                 @endforeach
                                         </select>
