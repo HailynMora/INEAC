@@ -258,9 +258,7 @@ class docenteController extends Controller
         $res = DB::table('docente')->count();
         if($res!=0){
             $b=1;
-            $doc = DB::table('cursos')->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
-                   ->join('docente', 'cursos.id_docente', '=', 'docente.id')
-                   ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
+            $doc = DB::table('docente')
                    ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
                    ->join('genero','docente.id_genero','=','genero.id')
                    ->join('estado','docente.id_estado','=','estado.id')
@@ -270,24 +268,39 @@ class docenteController extends Controller
                    
                    ->distinct()
                    ->get();
-                }else{
+                   //validar el for
+                   for($i=0; $i<count($doc); ++$i){
+                    $condoc[$i]= DB::table('cursos')->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                                ->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                                ->where('cursos.id_docente', '=', $doc[$i]->idoc)
+                                ->select('asignaturas.nombre as asig', 'tipo_curso.descripcion as cur', 'id_docente', 'asignaturas.intensidad_horaria as horas', 'asignaturas.codigo as cod')
+                                ->distinct()
+                                ->get();
+                    }
+                    //end foreach
+                    //validar el for en tecnicos
+                    for($j=0; $j<count($doc); ++$j){
+                        $asigtec[$j]= DB::table('asignaturas_tecnicos')->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                                    ->join('asig_tecnicos', 'asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                                    ->where('asignaturas_tecnicos.id_docente', '=', $doc[$j]->idoc)
+                                    ->select('asig_tecnicos.nombreasig as asig', 'programa_tecnico.nombretec as cur', 'id_docente', 'asig_tecnicos.intensidad_horaria as horas', 'asig_tecnicos.codigoasig as cod')
+                                    ->distinct()
+                                    ->get();
+                        }
+                    //end tecnicos
+                   
+                    
+                 }else{
                     $b=0;
                     $doc=0;
+                    $condoc=0;
+                    $asigtec=0;
                     
                 }
-        
-               for($i=0; $i<count($doc); ++$i){
-                $condoc[$i]= DB::table('cursos')->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
-                            ->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
-                            ->where('cursos.id_docente', '=', $doc[$i]->idoc)
-                            ->select('asignaturas.nombre as asig', 'tipo_curso.descripcion as cur', 'id_docente', 'asignaturas.intensidad_horaria as horas', 'asignaturas.codigo as cod')
-                            ->distinct()
-                            ->get();
-                   }
-            
-        
+                //return $doc;       
+           //  return $condoc;
       
-        return view('docente.lista')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc);
+        return view('docente.lista')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc)->with('asigtec',$asigtec);
         //////////////////////////////////////////
     }
     //LISTADO DODENTE ESTUDIANTES
@@ -295,36 +308,45 @@ class docenteController extends Controller
         $res = DB::table('docente')->count();
         if($res!=0){
             $b=1;
-            $doc = DB::table('cursos')->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
-                   ->join('docente', 'cursos.id_docente', '=', 'docente.id')
-                   ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
-                   ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
-                   ->join('genero','docente.id_genero','=','genero.id')
-                   ->join('estado','docente.id_estado','=','estado.id')
-                   ->select('docente.id as idoc', 'docente.nombre', 'apellido', 'num_doc', 'fec_vinculacion',
+            $doc = DB::table('docente')
+                    ->join('tipo_documento','docente.id_tipo_doc','=','tipo_documento.id')
+                    ->join('genero','docente.id_genero','=','genero.id')
+                    ->join('estado','docente.id_estado','=','estado.id')
+                    ->select('docente.id as idoc', 'docente.nombre', 'apellido', 'num_doc', 'fec_vinculacion',
                             'correo', 'telefono', 'direccion', 'genero.descripcion as genero', 'tipo_documento.descripcion',
                             'estado.descripcion as estado')
-                   
-                   ->distinct()
-                   ->get();
-            }else{
-                $b=0;
-                $doc=0;
-                
-            }
-        
-        for($i=0; $i<count($doc); ++$i){
+                    
+                    ->distinct()
+                    ->get();
+
+            for($i=0; $i<count($doc); ++$i){
                 $condoc[$i]= DB::table('cursos')->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
                              ->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
                              ->where('cursos.id_docente', '=', $doc[$i]->idoc)
                              ->select('asignaturas.nombre as asig', 'tipo_curso.descripcion as cur', 'id_docente', 'asignaturas.intensidad_horaria as horas', 'asignaturas.codigo as cod')
                              ->distinct()
                              ->get();
+                  }
+              //validar el for en tecnicos
+              for($j=0; $j<count($doc); ++$j){
+                $asigtec[$j]= DB::table('asignaturas_tecnicos')->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                            ->join('asig_tecnicos', 'asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                            ->where('asignaturas_tecnicos.id_docente', '=', $doc[$j]->idoc)
+                            ->select('asig_tecnicos.nombreasig as asig', 'programa_tecnico.nombretec as cur', 'id_docente', 'asig_tecnicos.intensidad_horaria as horas', 'asig_tecnicos.codigoasig as cod')
+                            ->distinct()
+                            ->get();
+                }
+            //end tecnicos
+
+            }else{
+                $b=0;
+                $doc=0;
+                $condoc=0;
+                $asigtec=0;
             }
-            
         
         ///////////////////////////////////////////
         //////////////////////////////////////////
-        return view('estudiantes.listado_docentes')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc);
+        return view('estudiantes.listado_docentes')->with('condoc',$condoc)->with('b',$b)->with('doc',$doc)->with('asigtec',$asigtec);
     }
 }

@@ -73,29 +73,43 @@
             @include('docente.listadoEstuTecnico')
           </li>
          @endif  
-         @if($asigbachi!=0)
-          <li class="nav-item">
-            <a type="button" data-toggle="modal" data-target="#exampleModalnive" class="nav-link" style="color:white;">
-              <i class="nav-icon fas fa-edit"></i>
-                <p>
-                   Nivelaciones    
+          <!---aqui-->
+           <!--manejo de nivelaciones-->
+           <li class="nav-item">
+            <a href="#" class="nav-link" style="color:white;">
+            <i class="nav-icon fas fa-edit"></i>
+              <p>
+               Nivelaciones
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            @include('nivelaciones.nivelacionesdoc')
+            <ul class="nav nav-treeview">
+            @if($asigbachi!=0)
+              <li class="nav-item">
+                  <a type="button" data-toggle="modal" data-target="#exampleModalnive" class="nav-link" style="color:white;">
+                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                    <p>
+                      Bachillerato   
+                  </p>
+                </a>
+                @include('nivelaciones.nivelacionesdoc')
+              </li>
+              @endif
+              @if($asigtec !=0)
+                <li class="nav-item">
+                    <a type="button" data-toggle="modal" data-target="#nivTec" class="nav-link" style="color:white;">
+                    <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                        <p>
+                          Técnico  
+                      </p>
+                    </a>
+                    @include('nivelaciones.nivelacionesTec')
+                  </li>
+              @endif  
+            </ul>
           </li>
-          @endif
-          @if($asigtec !=0)
-          <li class="nav-item">
-              <a type="button" data-toggle="modal" data-target="#nivTec" class="nav-link" style="color:white;">
-                <i class="nav-icon fas fa-file-signature"></i>
-                  <p>
-                    Nivelaciones Técnico  
-                </p>
-              </a>
-              @include('nivelaciones.nivelacionesTec')
-            </li>
-         @endif  
-          
+          <!--end nivelaciones-->
+          <!--end aqui-->
           <li class="nav-item">
             <a href="{{route('certifLaboral')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-folder-open"></i>

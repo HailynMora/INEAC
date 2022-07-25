@@ -70,15 +70,16 @@
         margin: 2em 0 0 0;
       }
     </style>
-
+<!--style="background-image:url('img/fondo_mod.png'); background-repeat: no-repeat;  background-size: cover; margin: 10px 10px 10px 10px; " -->
 <div class="overlay">
-    <div id="pageintro" class="hoc clear"> 
+    <div id="pageintro" class="hoc clear" > 
       <!-- ################################################################################################ -->
-      <article>
+     <!-- <article>
         <h3 class="heading">INESUR SEDE POTOSI</h3>
         <p>A massa etiam augue nunc lectus duis eget libero non nisi lobortis suscipit praesent viverra nam dapibus orci non erat aliquam erat volutpat.</p>
         <footer><a class="btn" href="#">Gravida sem neque</a></footer>
-      </article>
+      </article>-->
+      <br><br><br><br><br><br><br>
       <!-- ################################################################################################ -->
     </div>
   </div>
@@ -88,14 +89,14 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper row3">
+<<div class="wrapper row3">
   <main class="hoc container clear"> 
     <!-- main body -->
     <!-- ################################################################################################ -->
     <section id="introblocks">
       <ul class="nospace group btmspace-80">
         <li class="one_third first">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
+          <figure><a class="imgover" href="#"><img src="images/demo/est1.png" alt=""></a>
             <figcaption>
               <h6 class="heading">Mollis suscipit</h6>
               <div>
@@ -105,7 +106,7 @@
           </figure>
         </li>
         <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
+          <figure><a class="imgover" href="#"><img src="images/demo/est2.png" alt=""></a>
             <figcaption>
               <h6 class="heading">Vestibulum maecenas</h6>
               <div>
@@ -115,7 +116,7 @@
           </figure>
         </li>
         <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/348x400.png" alt=""></a>
+          <figure><a class="imgover" href="#"><img src="images/demo/est3.png" alt=""></a>
             <figcaption>
               <h6 class="heading">Pellentesque enim</h6>
               <div>
@@ -163,26 +164,7 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
-  <figure class="hoc container clear imgroup"> 
-    <!-- ################################################################################################ -->
-    <figcaption class="sectiontitle">
-      <p class="nospace font-xs">Pulvinar sem eu tincidunt magna</p>
-      <p class="heading underline font-x2">Nulla eu turpis curabitur</p>
-    </figcaption>
-    <ul class="nospace group">
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-    </ul>
-    <!-- ################################################################################################ -->
-  </figure>
-  <!-- ################################################################################################ -->
-  </section>
-</div>
+
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
@@ -221,24 +203,5 @@
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper row3">
-  <figure class="hoc container clear clients"> 
-    <!-- ################################################################################################ -->
-    <figcaption class="sectiontitle">
-      <p class="nospace font-xs">Nisl donec eu neque nisi molestie</p>
-      <p class="heading underline font-x2">Pellentesque donec ut dolor</p>
-    </figcaption>
-    <ul class="nospace group">
-      <li class="one_quarter first"><a class="imgover" href="#"><img src="images/demo/249x100.png" alt=""></a></li>
-      <li class="one_quarter"><a class="imgover" href="#"><img src="images/demo/249x100.png" alt=""></a></li>
-      <li class="one_quarter"><a class="imgover" href="#"><img src="images/demo/249x100.png" alt=""></a></li>
-      <li class="one_quarter"><a class="imgover" href="#"><img src="images/demo/249x100.png" alt=""></a></li>
-      <li class="one_quarter first"><a class="imgover" href="#"><img src="images/demo/249x100.png" alt=""></a></li>
-      <li class="one_quarter"><a class="imgover" href="#"><img src="images/demo/249x100.png" alt=""></a></li>
-      <li class="one_quarter"><a class="imgover" href="#"><img src="images/demo/249x100.png" alt=""></a></li>
-      <li class="one_quarter"><a class="imgover" href="#"><img src="images/demo/249x100.png" alt=""></a></li>
-    </ul>
-    <!-- ################################################################################################ -->
-  </figure>
-</div>
+
 @endsection

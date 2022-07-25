@@ -284,7 +284,6 @@ Route::post('/actualizar/matricula/tecnico', [MatriculasController::class, 'actu
 Route::get('/cambiar/estado/matricula', [MatriculasController::class, 'estado_mat'])->middleware(['auth', 'secretaria'])->name('cambiar_estado_mat');
 
 
-//Route::post('/vicular/asignaturas/tecnicos', [ProgramasController::class, 'asig_tec'])->middleware(['auth', 'secretaria'])->name('regvincularasigtec');
 Route::get('/programas/listado_vinculacion_tec', [ProgramasController::class, 'listarvinculaciontec'])->middleware(['auth', 'secretaria'])->name('asigtec');
 
 //ruta elimar asigtecnico vinculada
@@ -429,4 +428,10 @@ Route::post('/cambio/rol/user', [Roles::class, 'userRolCambio'])->middleware(['a
 //listar tecnicos estudiantes
 Route::post('/reporte/tecnico/estudiantes/docente', [ReportesController::class, 'listadoEsTec'])->middleware(['auth', 'secretaria_docente'])->name('listaEsTecnicos');
 
+//ver tecnicos en secretaria 
+Route::post('/reporte/tecnico/estudiantes/admin', [ReportesController::class, 'nivelTecnicos'])->middleware(['auth', 'secretaria'])->name('nivelTecnicosVer');
+
+Route::post('/filtrar/reporte/notas/sec', [ReportesController::class, 'notasSec'])->middleware(['auth', 'secretaria'])->name('filtrarNotasSec');
+
 require __DIR__.'/auth.php';
+

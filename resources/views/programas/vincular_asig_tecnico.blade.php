@@ -9,13 +9,23 @@
 <!---############################33-->
 @if(Session::has('mensaje'))
         <br>
-        <div class="alert alert-info alert-dismissible fade show alerta" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show alerta" role="alert">
         <strong >{{Session::get('mensaje')}}</strong> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
   @endif
+  @if(Session::has('mensajeconf'))
+        <br>
+        <div class="alert alert-info alert-dismissible fade show alerta" role="alert">
+        <strong >{{Session::get('mensajeconf')}}</strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+  @endif
+
 <!----############################-->
 <br>
 <div class="accordion" id="accordionExample">
@@ -43,7 +53,7 @@
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body letraf">
-            <form id="forvincular" name="forvincular" method="POST" >
+            <form action="{{route('regvincularasigtec')}}" id="forvincular" name="forvincular" method="POST" >
               @csrf
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -214,42 +224,6 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script>
-  $('#forvincular').submit(function(e){
-    e.preventDefault();
-    var curso=$('#curso').val();
-    var asig=$('#asig').val();
-    var tri=$('#tri').val();
-    var docente=$('#docente').val();
-    var anio=$('#anio').val();
-    var periodo=$('#periodo').val();
-    var _token = $('input[name=_token]').val(); //token de seguridad
-
-    $.ajax({
-      type: "POST",
-      url: "{{route('regvincularasigtec')}}",
-      data:{
-        curso:curso,
-        asig:asig,
-        tri:tri,
-        docente:docente,
-        anio:anio,
-        periodo:periodo,
-        _token:_token
-      },
-      success: function (response) {
-        if(response){
-          $('#forvincular')[0].reset();
-          toastr.success('El registro se ingreso correctamente.', 'Nuevo Registro', {timeOut:3000});
-          setTimeout(refrescar, 1500);
-        }
-      },
-      error:function(jqXHR, response){
-          if(jqXHR.status==422){
-            toastr.warning('Datos Repetidos!.', 'Asignatura ya esta vinculada!', {timeOut:3000});
-          }
-          }
-    });
-  })
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });
      $("form input[type=date]").each(function() { this.value = '' });

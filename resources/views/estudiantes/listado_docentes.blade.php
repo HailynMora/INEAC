@@ -90,6 +90,28 @@
                                          }
                                          ?>
                                     @endif
+                                    @if(isset($asigtec[0][0]))
+                                  <?php
+                                         
+                                         $con=1;
+                                         for($i=0;$i<count($asigtec);$i++) {
+                                             for($j=0;$j<count($asigtec[$i]);$j++) {
+                                              if($d->idoc == $asigtec[$i][$j]->id_docente){
+                                                echo '<tr style="background-color:white;">
+                                                     <td>'.$con++.'</td>
+                                                     <td>'.$asigtec[$i][$j]->cod.'</td>
+                                                     <td>'.$asigtec[$i][$j]->asig.'</td>
+                                                     <td>'.$asigtec[$i][$j]->horas.'</td>
+                                                     <td>'.$asigtec[$i][$j]->cur.'</td>
+                                                 </tr>';
+
+                                              }
+
+                                           }
+                                         }
+                                         ?>
+                                    @endif
+                                    <!--end array tecnicos-->
                                   </tbody>
                                 </table>
                                </div>

@@ -10,6 +10,7 @@ use App\Exports\TecniosExcel;
 use App\Models\MatriculasModel\Matricula;
 use App\Exports\NotasBachiExcel;
 use App\Exports\NotasTecnicoExcel;
+use App\Exports\NotasCurso;
 use App\Models\MatriculasModel\MatriculaTec;
 use DB;
 
@@ -34,7 +35,11 @@ class ReportesController extends Controller
         $resanio =DB::table('matricula_tecnico')->select('matricula_tecnico.anio')->distinct()->get();
         //consultar el trimestre
         $trimestre =DB::table('trimestre_tecnicos')->select('trimestre_tecnicos.id', 'trimestre_tecnicos.nombretri as nombre')->get();
-        return view('matriculas.reporte')->with('mat', $mat)->with('matec', $matec)->with('res', $res)->with('resanio', $resanio)->with('trimestre', $trimestre);
+
+        //reporte de asignaturas bachi
+        $asig = DB::table('asignaturas')->select('asignaturas.id as idasig', 'asignaturas.nombre')->get();
+        
+        return view('matriculas.reporte')->with('mat', $mat)->with('matec', $matec)->with('res', $res)->with('resanio', $resanio)->with('trimestre', $trimestre)->with('asig', $asig);
     }
     
     public function filtrar(Request $request){
@@ -43,6 +48,13 @@ class ReportesController extends Controller
            $anio =  $request->anio;
             return Excel::download(new EstudiantesBachiExport($id, $anio, $per), 'listado.xlsx');
     }
+
+    public function notasSec(Request $request){
+        $idcur = $request->idcur;
+        $per =  $request->pernot;
+        $anio =  $request->anionot;
+         return Excel::download(new NotasCurso($idcur, $anio, $per), 'listado_notas.xlsx');
+   }
 
     public function filtrartec(Request $request){
         $idtec = $request->idtecni;
@@ -95,6 +107,32 @@ class ReportesController extends Controller
                     ->paginate(10);
                    
         return view('docente.vistaListadoEsTecnicos')->with('datos', $datos);
+    }
+
+    public function nivelTecnicos(Request $request){
+
+        $p= $request->programa;
+        $a =$request->anio;
+        $pe = $request->periodo;
+            $mat= DB::table('notas_tecnico')
+            ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+            ->join('estudiante','notas_tecnico.id_estudiante','=','estudiante.id')
+            ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+            ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+            ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+            ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+            ->where('definitiva','<','3')
+            ->where('asignaturas_tecnicos.anio','=',$a)
+            ->where('asignaturas_tecnicos.id_tecnico','=',$p)
+            ->select('asig_tecnicos.val_habilitacion as valor','asig_tecnicos.nombreasig as nomasig',
+                      'docente.nombre as nomdoc','docente.apellido as apedoc','programa_tecnico.nombretec as descu',
+                      'estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1',
+                      'estudiante.second_ape as ape2','estudiante.num_doc','notas_tecnico.definitiva','notas_tecnico.nota1',
+                      'notas_tecnico.nota2','notas_tecnico.nota3','notas_tecnico.nota4','trimestre_tecnicos.nombretri')
+            ->orderby('descu','asc')
+            ->get();
+            return view('nivelaciones.listaTec')->with('re',$mat);
+
     }
     
 }

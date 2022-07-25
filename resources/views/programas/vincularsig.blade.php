@@ -58,8 +58,8 @@
                   </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="docente">Año</label>
-                    <input type="text" style="background-color:white;" class="form-control" id="anio" name="anio" value="{{$date}}" disabled>
+                    <label for="anio">Año</label>
+                    <input type="text" style="background-color:white;" class="form-control" id="aniofec" name="aniofec" value="{{$date}}">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="docente">Periodo</label>
@@ -126,10 +126,10 @@
     var asig=$('#asig').val();
     var docente=$('#docente').val();
     var fecha=$('#fecha').val();
-    var anio=$('#anio').val();
+    var anio=$('#aniofec').val();
     var periodo=$('#periodo').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
-
+    console.log(anio);
     $.ajax({
       type: "POST",
       url: "{{route('regvincularasig')}}",
