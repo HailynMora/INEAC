@@ -134,7 +134,7 @@
                                                 @foreach($asig as $asi)
                                                 @if(isset($asi->idasig))
                                                     @if($asi->idcurso==$m->idcur)
-                                                        <option value="{{$asi->idasig}}">{{$asi->nombre}}{{$asi->idcurso}}{{$m->idcur}}</option>
+                                                        <option value="{{$asi->idasig}}">{{$asi->nombre}}</option>
                                                     @endif
                                                 @endif
                                                 @endforeach
