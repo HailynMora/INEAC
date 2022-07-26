@@ -12,14 +12,13 @@
            <th scope="col" colspan="5">Municipio: Potosi</th>
          </tr>
          <tr>
-           <th scope="col" colspan="4">Docente:</th>
+           <th scope="col" colspan="4">Docente: {{$res[0]->nomdoc}} {{$$res[0]->apedoc}}</th>
+           <th scope="col" colspan="4">Asignatura: {{$res[0]->asignatura}}</th>
          </tr> 
          <tr>
          <th scope="col" style="background-color:#3DA3F7;">No</th>
          <th scope="col" style="background-color:#3DA3F7;">Apellidos</th>
          <th scope="col" style="background-color:#3DA3F7;">Nombres</th>
-         <th scope="col" style="background-color:#3DA3F7;">Asignatura</th>
-         <th scope="col" style="background-color:#3DA3F7;">Docente</th>
          <th scope="col" style="background-color:#3DA3F7;">Nota 1</th>
          <th scope="col" style="background-color:#3DA3F7;">{{$res[0]->por1*100}} %</th>
          <th scope="col" style="background-color:#3DA3F7;">Nota 2</th>
@@ -41,8 +40,6 @@
             <td>{{$conta++}}</td>
             <td>{{$r->apes}} {{$r->sedape}}</td>
             <td>{{$r->nomes}} {{$r->segnom}}</td>
-            <td>{{$r->asignatura}}</td>
-            <td>{{$r->nomdoc}} {{$r->apedoc}}</td>
             <td>{{$r->nota1}}</td>
             <td>{{$r->por1}}</td>
             <td>{{$r->nota2}}</td>
