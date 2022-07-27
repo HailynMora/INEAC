@@ -41,8 +41,11 @@ class ReportesController extends Controller
                 ->join('cursos','asignaturas.id','=','cursos.id_asignatura')
                 ->join('tipo_curso','cursos.id_tipo_curso','tipo_curso.id')
         ->select('asignaturas.id as idasig', 'asignaturas.nombre','cursos.id_tipo_curso as idcurso')->get();
-        
-        return view('matriculas.reporte')->with('mat', $mat)->with('matec', $matec)->with('res', $res)->with('resanio', $resanio)->with('trimestre', $trimestre)->with('asig', $asig);
+        $asi = DB::table('asig_tecnicos')
+                ->join('asignaturas_tecnicos','asig_tecnicos.id','=','asignaturas_tecnicos.id_asignaturas')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','programa_tecnico.id')
+        ->select('asig_tecnicos.id as ida', 'asig_tecnicos.nombreasig','asignaturas_tecnicos.id_tecnico as idte')->get();
+        return view('matriculas.reporte')->with('mat', $mat)->with('matec', $matec)->with('res', $res)->with('resanio', $resanio)->with('trimestre', $trimestre)->with('asig', $asig)->with('asi',$asi);
     }
     
     public function filtrar(Request $request){
@@ -54,6 +57,13 @@ class ReportesController extends Controller
 
     public function notasSec(Request $request){
         $idcur = $request->idcur;
+        $per =  $request->pernot;
+        $anio =  $request->anionot;
+        $asig =  $request->asig;
+         return Excel::download(new NotasCurso($idcur, $anio, $per, $asig), 'listado_notas.xlsx');
+   }
+   public function notasTec(Request $request){
+        $idtec = $request->idtec;
         $per =  $request->pernot;
         $anio =  $request->anionot;
         $asig =  $request->asig;
