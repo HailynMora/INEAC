@@ -12,7 +12,7 @@
            <th scope="col" colspan="5">Municipio: Potosi</th>
          </tr>
          <tr>
-           <th scope="col" colspan="4">Docente: {{$res[0]->nomdoc}} {{$$res[0]->apedoc}}</th>
+           <th scope="col" colspan="4">Docente: {{$res[0]->nomdoc}} {{$res[0]->apedoc}}</th>
            <th scope="col" colspan="4">Asignatura: {{$res[0]->asignatura}}</th>
          </tr> 
          <tr>
