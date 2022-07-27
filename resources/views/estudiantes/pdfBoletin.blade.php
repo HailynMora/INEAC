@@ -3,80 +3,121 @@
     <head>
         <meta charset="UTF-8">
         <title>Certificado Estudiantil</title>
+        <style>
+            /* spacing */
+                table {
+                width: 100%;
+                border: 0px;
+                }
+                .espa{
+                   padding:3px;
+                   /*para los th y td opcional */
+                }
+        </style>
     </head>
-    <body>
-        <table>
+    <body style="margin-top:-2rem;">
+       <!---tabla-->
+       <table>
             <tr>
-                <td>
+                <td >
                     <img src="{{ public_path('/img/logoin.jpg')}}" style="width:60px; height: 80px;">
                 </td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
                 <td>
-                    <h5 style="text-align:center;">
-                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSTITUTO DE EDUCACIÓN TECNICA INESUR<b>
+                    <h5 style="text-align:center; padding-top:-50px;">
+                    <b>INSTITUTO DE EDUCACIÓN TECNICA INESUR<b>
                     </h5>
-                    <p style="text-align:center;">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creado mediante Resolución No. 3128 del 31 Diciembre de 2010<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emanada por Secretaría de Educación Municipal de Pasto<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sede Principal Pasto calle 17 No. 26 - 66 Centro<br>
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Potosi - Nariño
+                    <p style="text-align:center; padding-top:-50px;">
+                        Creado mediante Resolución No. 3128 del 31 Diciembre de 2010<br>
+                        Emanada por Secretaría de Educación Municipal de Pasto<br>
+                        Sede Principal Pasto calle 17 No. 26 - 66 Centro<br>
+                        Potosi - Nariño
                     </p>
                 </td>
-                <td></td>
             </tr>
         </table>
-        <table>
+        <table style="border: black 1px solid; border-collapse: collapse;">
             <tr>
-                <td>
-                    <p>Nombre: {{$estudiante->nombre}} {{$estudiante->segundonom}} {{$estudiante->primerape}} {{$estudiante->segundoape}}</p>
+                <td colspan="4" style="border: black 1px solid; border-collapse: collapse;">
+                  Estudiante
                 </td>
-                <td>
-                    <p>Identificación: {{$estudiante->num_doc}}</p>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                   Doc
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                   Curso
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                   Periodo
+                  
                 </td>
             </tr>
             <tr>
-                <td>
-                    <p>Ciclo: {{$estudiante->descripcion}}</p>
+                <td colspan="4" style="border: black 1px solid; border-collapse: collapse;">
+                  <span>{{$estudiante->nombre}} {{$estudiante->segundonom}} {{$estudiante->primerape}} {{$estudiante->segundoape}}</span>
                 </td>
-                <td>
-                    <p>Año: {{$estudiante->anio}}</p>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  <span> {{$estudiante->num_doc}}</span>
                 </td>
-                <td>
-                    <p>Perido: {{$estudiante->periodo}}</p>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  <span>{{$estudiante->descripcion}}</span>
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  <span>{{$estudiante->anio}} - {{$estudiante->periodo}}</span>
                 </td>
             </tr>
         </table>
-        <table>
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Asignatura</th>
-                <th>Calificación</th>
-                <th>Concepto</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($notas as $a)
-                <?php
-                  $idc = $a->id_curso;
-                ?>
-                @foreach($cur as $s)
-                  @if($s->id==$idc)
-                  <tr>
-                    <td>{{$s->codigo}}</td>
-                    <td>{{$s->nombre}}</td> 
-                    <td>{{$a->definitiva}}</td>
-                    <td>{{$a->desem}}</td>
-                  </tr>
-                  <br>
-                  @endif
-                @endforeach
-
-              @endforeach
-            </tbody>
+       
+    @foreach($notas as $a)
+          <?php
+             $idc = $a->id_curso;
+           ?>
+     @foreach($cur as $s)
+     @if($a->id_curso ==  $s->id )
+        <br>
+        <!--asignaturas-->
+        <table style="border: black 1px solid; border-collapse: collapse;">
+            <tr>
+                <td  colspan="4" style="border: black 1px solid; border-collapse: collapse;">
+                  <span>{{$s->nombre}}</span>
+                </td>
+                <td style="border:  black 1px solid; border-collapse: collapse;">
+                   IHS(sesiones)
+                </td>
+                <td style="border:  black 1px solid; border-collapse: collapse;">
+                  Def.
+                </td>
+                <td style="border:  black 1px solid; border-collapse: collapse;">
+                  Desempeño
+                </td>
+            </tr>
+            <tr>
+                <td  colspan="4" style="border: black 1px solid; border-collapse: collapse;">
+                 Doc: Pedro Cuasquer
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  10
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                <span>{{$a->definitiva}}</span>
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                {{$a->desem}}
+                </td>
+            </tr>
+            <tr>
+                <td  colspan="7" style="border: black 1px solid; border-collapse: collapse;">
+                 Conceptos:
+                </td>
+            </tr>
+            <tr>
+                <td  colspan="7" style="border: black 1px solid; border-collapse: collapse;">   
+                </td>
+            </tr>
         </table>
+         @endif
+         @endforeach
+        @endforeach
+       <!--end tabla-->
     </body>
 </html>
 

@@ -80,8 +80,8 @@
           <!-- end per acdemico-->
         </div>
         <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
           <button type="submit" class="btn btn-primary">Aceptar</button>
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
         </div>
       </div>
     </div>
@@ -127,8 +127,9 @@
           <!-- end per acdemico-->
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Ver</button>
           <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-primary">Ver</button>
+         
         </div>
       </div>
     </div>
@@ -174,8 +175,9 @@
           <!-- end per acdemico-->
         </div>
         <div class="modal-footer">
+         <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
           <button type="submit" class="btn btn-primary">Ver</button>
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+         
         </div>
       </div>
     </div>
