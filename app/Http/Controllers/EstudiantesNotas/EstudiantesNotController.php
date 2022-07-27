@@ -135,20 +135,21 @@ class EstudiantesNotController extends Controller
                     ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
                     ->select('estudiante.id as ides','matricula_tecnico.anio','matricula_tecnico.periodo','programa_tecnico.codigotec','programa_tecnico.nombretec','programa_tecnico.jornada','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo','trimestre_tecnicos.nombretri')
                     ->first();
-                $asig = DB::table('notas_tecnico')
+                $notas = DB::table('notas_tecnico')
                     ->where('notas_tecnico.id_estudiante',$request->ides)
                     ->where('asignaturas_tecnicos.anio', '=', $request->anio)
                     ->where('asignaturas_tecnicos.periodo', '=', $request->periodo)
                     ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
                     ->join('desempenos','notas_tecnico.id_desempenio','=','desempenos.id')
                     ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
-                    ->select('definitiva','asig_tecnicos.nombreasig','asig_tecnicos.codigoasig','desempenos.descripcion as desem','id_tecnicos')
+                    ->join('docente', 'asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                    ->select('definitiva','asig_tecnicos.nombreasig','asig_tecnicos.codigoasig','desempenos.descripcion as desem','docente.nombre', 'docente.apellido','id_tecnicos','asig_tecnicos.intensidad_horaria as ih')
                     ->get();
-                $cur = DB::table('asignaturas_tecnicos')->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')->get();
+                $ob = DB::table('objetivostec')->select('objetivostec.descripcion as desob', 'objetivostec.id_asignaturas as idasig')->get();
                 $data = [
             'estudiante' => $estudiante,
-            'asig' => $asig,
-            'cur' => $cur,
+            'notas' => $notas,
+            'ob' => $ob,
         ];     
         $pdf = PDF::loadView('tecnico.boletin', $data);
         return $pdf->download('boletin_academico.pdf');
