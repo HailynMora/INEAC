@@ -15,7 +15,7 @@
                 }
         </style>
     </head>
-    <body style="margin-top:-2rem;">
+    <body style="margin-top:-2.5rem;">
        <!---tabla-->
        <table>
             <tr>
@@ -23,10 +23,10 @@
                     <img src="{{ public_path('/img/logoin.jpg')}}" style="width:60px; height: 80px;">
                 </td>
                 <td>
-                    <h5 style="text-align:center; padding-top:-50px;">
-                    <b>INSTITUTO DE EDUCACIÓN TECNICA INESUR<b>
-                    </h5>
-                    <p style="text-align:center; padding-top:-50px;">
+                    <p style="text-align:center;  font-size:18px;">
+                      <b>INSTITUTO DE EDUCACIÓN TECNICA INESUR<b>
+                     </p>
+                    <p  style="text-align:center; font-size:15px;">
                         Creado mediante Resolución No. 3128 del 31 Diciembre de 2010<br>
                         Emanada por Secretaría de Educación Municipal de Pasto<br>
                         Sede Principal Pasto calle 17 No. 26 - 66 Centro<br>
@@ -35,19 +35,19 @@
                 </td>
             </tr>
         </table>
-        <table style="border: black 1px solid; border-collapse: collapse;">
+        <table style="border: black 1px solid; border-collapse: collapse; font-size:14px;">
             <tr>
                 <td colspan="4" style="border: black 1px solid; border-collapse: collapse;">
-                  Estudiante
+                  <b>Estudiante</b>
                 </td>
                 <td style="border: black 1px solid; border-collapse: collapse;">
-                   Doc
+                  <b> Doc</b>
                 </td>
                 <td style="border: black 1px solid; border-collapse: collapse;">
-                   Curso
+                <b> Curso </b>
                 </td>
                 <td style="border: black 1px solid; border-collapse: collapse;">
-                   Periodo
+                <b> Periodo</b>
                   
                 </td>
             </tr>
@@ -66,36 +66,31 @@
                 </td>
             </tr>
         </table>
-       
     @foreach($notas as $a)
-          <?php
-             $idc = $a->id_curso;
-           ?>
-     @foreach($cur as $s)
-     @if($a->id_curso ==  $s->id )
-        <br>
+    @if(isset($a->nomasig))
+       <br>
         <!--asignaturas-->
-        <table style="border: black 1px solid; border-collapse: collapse;">
+        <table style="border: black 1px solid; border-collapse: collapse; font-size:14px;">
             <tr>
                 <td  colspan="4" style="border: black 1px solid; border-collapse: collapse;">
-                  <span>{{$s->nombre}}</span>
+                  <b>{{$a->nomasig}}</b>
                 </td>
                 <td style="border:  black 1px solid; border-collapse: collapse;">
-                   IHS(sesiones)
+                <b>  IHS(sesiones) </b>
                 </td>
                 <td style="border:  black 1px solid; border-collapse: collapse;">
-                  Def.
+                <b> Def. </b>
                 </td>
                 <td style="border:  black 1px solid; border-collapse: collapse;">
-                  Desempeño
+                <b> Desempeño </b>
                 </td>
             </tr>
             <tr>
                 <td  colspan="4" style="border: black 1px solid; border-collapse: collapse;">
-                 Doc: Pedro Cuasquer
+                <b> Doc: </b> {{$a->nombre}} {{$a->apellido}}
                 </td>
                 <td style="border: black 1px solid; border-collapse: collapse;">
-                  10
+                  {{$a->ih}}
                 </td>
                 <td style="border: black 1px solid; border-collapse: collapse;">
                 <span>{{$a->definitiva}}</span>
@@ -105,17 +100,22 @@
                 </td>
             </tr>
             <tr>
-                <td  colspan="7" style="border: black 1px solid; border-collapse: collapse;">
-                 Conceptos:
+            </tr>
+            @foreach($cur as $c)
+             @if($a->id_curso == $c->idasig)
+            <tr>
+                <td  colspan="7" style="border: black 1px solid; border-collapse: collapse; text-align:justify;">
+                 {{$c->desob}}
                 </td>
             </tr>
+             @endif
+           @endforeach
             <tr>
                 <td  colspan="7" style="border: black 1px solid; border-collapse: collapse;">   
                 </td>
             </tr>
         </table>
-         @endif
-         @endforeach
+        @endif
         @endforeach
        <!--end tabla-->
     </body>

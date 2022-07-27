@@ -274,19 +274,27 @@ class PDFController extends Controller
                     ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
                     ->select('estudiante.id as ides','matriculas.anio','matriculas.periodo','tipo_curso.codigo','tipo_curso.descripcion','tipo_curso.jornada','tipo_curso.cursodes','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo')
                     ->first();
+       
         $notas = DB::table('notas')->where('notas.id_estudiante',$request->ides)
+                    ->join('cursos','notas.id_curso','=','cursos.id')
+                    ->join('docente', 'cursos.id_docente', '=', 'docente.id')
+                    ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
+                    ->join('desempenos','notas.id_desempenio','=','desempenos.id')
                     ->where('cursos.anio', '=', $request->anio)
                     ->where('cursos.periodo', '=', $request->periodo)
-                    ->join('cursos','notas.id_curso','=','cursos.id')
-                    ->join('desempenos','notas.id_desempenio','=','desempenos.id')
-                    ->select('definitiva','desempenos.descripcion as desem','id_curso')
+                    ->select('definitiva', 'desempenos.descripcion as desem', 'notas.id_curso', 'docente.nombre', 'docente.apellido', 'asignaturas.nombre as nomasig', 'asignaturas.intensidad_horaria as ih')
                     ->get();
-        $cur = DB::table('cursos')->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')->get();
+        
+       
+       // return $notas;
+        $cur = DB::table('objetivos')->select('objetivos.descripcion as desob', 'objetivos.id_asignaturas as idasig')->get();
+        
         $data = [
             'estudiante' => $estudiante,
             'notas' => $notas,
             'cur' => $cur,
         ];     
+
         $pdf = PDF::loadView('estudiantes.pdfBoletin', $data);
         return $pdf->download('boletin_academico.pdf');
     }
