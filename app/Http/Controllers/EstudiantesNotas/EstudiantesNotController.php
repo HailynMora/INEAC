@@ -125,6 +125,7 @@ class EstudiantesNotController extends Controller
         
     }
     public function boletintec(Request $request){
+               
                 $estudiante= DB::table('matricula_tecnico')
                     ->where('matricula_tecnico.id_estudiante', '=', $request->ides)
                     ->where('matricula_tecnico.anio', '=', $request->anio)
@@ -135,6 +136,7 @@ class EstudiantesNotController extends Controller
                     ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
                     ->select('estudiante.id as ides','matricula_tecnico.anio','matricula_tecnico.periodo','programa_tecnico.codigotec','programa_tecnico.nombretec','programa_tecnico.jornada','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo','trimestre_tecnicos.nombretri')
                     ->first();
+                    
                 $notas = DB::table('notas_tecnico')
                     ->where('notas_tecnico.id_estudiante',$request->ides)
                     ->where('asignaturas_tecnicos.anio', '=', $request->anio)
@@ -145,15 +147,18 @@ class EstudiantesNotController extends Controller
                     ->join('docente', 'asignaturas_tecnicos.id_docente', '=', 'docente.id')
                     ->select('definitiva','asig_tecnicos.nombreasig','asig_tecnicos.codigoasig','desempenos.descripcion as desem','docente.nombre', 'docente.apellido','id_tecnicos','asig_tecnicos.intensidad_horaria as ih')
                     ->get();
+                
                 $ob = DB::table('objetivostec')->select('objetivostec.descripcion as desob', 'objetivostec.id_asignaturas as idasig')->get();
+                
                 $data = [
-            'estudiante' => $estudiante,
-            'notas' => $notas,
-            'ob' => $ob,
-        ];     
-        $pdf = PDF::loadView('tecnico.boletin', $data);
-        return $pdf->download('boletin_academico.pdf');
-    }
+                    'estudiante' => $estudiante,
+                    'notas' => $notas,
+                    'ob' => $ob
+                ];   
+                
+                $pdf = PDF::loadView('tecnico.boletin', $data);
+                return $pdf->download('boletin_academico_tecnico.pdf');
+       }
 
     public function nivelaciones(Request $request){
         $anio = $request->anio;

@@ -9,7 +9,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Certificados Estudiantiles</h3>
+ <h3 class="letra1">Certificados Estudiantiles Bachillerato</h3>
 </div>
 <div class="container alerta">
   <div class="row">

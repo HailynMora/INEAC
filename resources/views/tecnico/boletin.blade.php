@@ -67,7 +67,7 @@
             </tr>
         </table>
     @foreach($notas as $a)
-    @if(isset($a->nomasig))
+    @if(isset($a->nombreasig))
        <br>
         <!--asignaturas-->
         <table style="border: black 1px solid; border-collapse: collapse; font-size:14px;">

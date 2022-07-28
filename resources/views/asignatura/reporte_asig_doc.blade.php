@@ -219,5 +219,4 @@
 <br><br>
 
 <!--instanciar el ajax para quitar el error no definido-->
-
 @endsection
