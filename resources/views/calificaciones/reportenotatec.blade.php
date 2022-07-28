@@ -138,7 +138,7 @@
         <!--end filtrar-->
         </div>
         <div class="col-6">
-            <a href="/asignatura/reporte_c" class="btn float-right"> <img src="{{asset('dist/img/back1.png')}}" class="img-fluid" ></a>
+            <a href="/asignatura/reporte" class="btn float-right"> <img src="{{asset('dist/img/back1.png')}}" class="img-fluid" ></a>
         </div>
    </div>
 </div>
@@ -154,7 +154,7 @@
             <h5 class="text-left">Materia: {{$consulta[0]->asignatura}} </h5>
         </div>
         <div class="col-4">
-            <h5 class="text-center">Jornada: Sabado</h5>
+            <h5 class="text-center">Jornada: Domingo</h5>
         </div>
         <div class="col-4">
             <h5 class="text-center">Municipio: Potosi</h5>

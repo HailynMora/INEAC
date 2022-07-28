@@ -208,7 +208,8 @@ class CalificacionesController extends Controller
         }
         //validar si la nota de un estudiante ya se encuentra para una materia
         if($porval==1){
-                $valnotas = DB::table('notas_tecnico')->where('id_tecnicos', $request->idcur)->where('id_estudiante', $request->idcur)->count();
+                $valnotas = DB::table('notas_tecnico')->where('id_tecnicos', '=', $request->idcur)->where('id_estudiante', '=', $request->idest)->count();
+                //  return $request;
               if($valnotas == 0){
                         $category = new NotasTecnico();
                         $category->nota1= $request->input('nota1');

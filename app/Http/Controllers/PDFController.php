@@ -261,7 +261,8 @@ class PDFController extends Controller
             'anio' => $anio,
         ];     
         $pdf = PDF::loadView('estudiantes.cermatricula', $data);
-        return $pdf->download('certificado_estudiantil_matricula.pdf');
+      //  $pdf->setPaper('A4', 'portrait');
+        return $pdf->download('certificado_estudiantil_matricula.pdf'); 
     }
 
     public function boletin_es(Request $request){

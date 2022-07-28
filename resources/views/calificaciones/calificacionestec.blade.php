@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Registro Calificaciones</h3>
+ <h3 class="letra1">Registro Calificaciones Técnicos</h3>
 </div>
 <br>
 <!--collapsed-->
