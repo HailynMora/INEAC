@@ -11,6 +11,7 @@ use App\Models\MatriculasModel\Matricula;
 use App\Exports\NotasBachiExcel;
 use App\Exports\NotasTecnicoExcel;
 use App\Exports\NotasCurso;
+use App\Exports\NotasTec;
 use App\Models\MatriculasModel\MatriculaTec;
 use DB;
 
@@ -68,7 +69,7 @@ class ReportesController extends Controller
         $per =  $request->pernot;
         $anio =  $request->anionot;
         $asig =  $request->asig;
-         return Excel::download(new NotasCurso($idcur, $anio, $per, $asig), 'listado_notas.xlsx');
+         return Excel::download(new NotasTec($idtec, $anio, $per, $asig), 'listado_notas.xlsx');
    }
 
     public function filtrartec(Request $request){

@@ -263,10 +263,14 @@
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">Asignatura</label>
                                                             <select id="asig" class="form-control" name="asig">
-                                                                   <option selected>Elegir...</option>
-                                                                   @foreach($asigtec as $tec)
-                                                                     <option value="{{$tec->ida}}">{{$tec->nombreasig}}</option>
-                                                                   @endforeach
+                                                                <option selected>Elegir...</option>
+                                                                @foreach($asigtec as $tec)
+                                                                    @if(isset($tec))
+                                                                        @if($tec->idte==$ma->idtec)
+                                                                            <option value="{{$tec->ida}}">{{$tec->nombreasig}}</option>
+                                                                        @endif
+                                                                    @endif
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                         <input type="text" name="idtec" id="idtec" value="{{$ma->idtec}}" hidden>

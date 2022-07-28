@@ -3,82 +3,121 @@
     <head>
         <meta charset="UTF-8">
         <title>Certificado Estudiantil</title>
+        <style>
+            /* spacing */
+                table {
+                width: 100%;
+                border: 0px;
+                }
+                .espa{
+                   padding:3px;
+                   /*para los th y td opcional */
+                }
+        </style>
     </head>
-    <body>
-        <table>
+    <body style="margin-top:-2.5rem;">
+       <!---tabla-->
+       <table>
             <tr>
-                <td>
+                <td >
                     <img src="{{ public_path('/img/logoin.jpg')}}" style="width:60px; height: 80px;">
                 </td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
                 <td>
-                    <h5 style="text-align:center;">
-                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSTITUTO DE EDUCACIÓN TECNICA INESUR<b>
-                    </h5>
-                    <p style="text-align:center;">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creado mediante Resolución No. 3128 del 31 Diciembre de 2010<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emanada por Secretaría de Educación Municipal de Pasto<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sede Principal Pasto calle 17 No. 26 - 66 Centro<br>
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Potosi - Nariño
+                    <p style="text-align:center;  font-size:18px;">
+                      <b>INSTITUTO DE EDUCACIÓN TECNICA INESUR<b>
+                     </p>
+                    <p  style="text-align:center; font-size:15px;">
+                        Creado mediante Resolución No. 3128 del 31 Diciembre de 2010<br>
+                        Emanada por Secretaría de Educación Municipal de Pasto<br>
+                        Sede Principal Pasto calle 17 No. 26 - 66 Centro<br>
+                        Potosi - Nariño
                     </p>
                 </td>
-                <td></td>
             </tr>
         </table>
-        <table>
+        <table style="border: black 1px solid; border-collapse: collapse; font-size:14px;">
             <tr>
-                <td>
-                    <p><b> Nombre:</b> {{$estudiante->nombre}} {{$estudiante->segundonom}} {{$estudiante->primerape}} {{$estudiante->segundoape}}</p>
+                <td colspan="4" style="border: black 1px solid; border-collapse: collapse;">
+                  <b>Estudiante</b>
                 </td>
-                <td>
-                    <p style="padding-left: 2rem; padding-right: 2rem;"><b>Identificación:</b> {{$estudiante->num_doc}}</p>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  <b> Doc</b>
                 </td>
-                <td>
-                    <p><b>Tecnico:</b> {{$estudiante->nombretec}}</p>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                <b> Curso </b>
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                <b> Periodo</b>
+                  
                 </td>
             </tr>
             <tr>
-                
-                <td>
-                    <p><b>Trimestre:</b> {{$estudiante->nombretri}}</p> 
+                <td colspan="4" style="border: black 1px solid; border-collapse: collapse;">
+                  <span>{{$estudiante->nombre}} {{$estudiante->segundonom}} {{$estudiante->primerape}} {{$estudiante->segundoape}}</span>
                 </td>
-                <td>
-                    <p><b>Año:</b> {{$estudiante->anio}}</p>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  <span> {{$estudiante->num_doc}}</span>
                 </td>
-                <td>
-                    <p><b>Perido:</b> {{$estudiante->periodo}}</p>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  <span>{{$estudiante->nombretec}} - {{$estudiante->nombretri}}</span>
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  <span>{{$estudiante->anio}} - {{$estudiante->periodo}}</span>
                 </td>
             </tr>
         </table>
-        <table>
-            <thead>
-              <tr>
-                <th  style="padding-left: 5rem; padding-right: 5rem;">Código</th>
-                <th  style="padding-left: 5rem; padding-right: 5rem;">Asignatura</th>
-                <th  style="padding-left: 5rem; padding-right: 5rem;">Calificación</th>
-                <th  style="padding-left: 5rem; padding-right: 5rem;">Concepto</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($asig as $a)
-                <?php
-                  $idc = $a->id_tecnicos;
-                ?>
-                @foreach($cur as $s)
-                  @if($s->id==$idc)
-                  <tr>
-                    <td style="padding-left: 5rem; padding-right: 5rem;">{{$s->codigoasig}}</td>
-                    <td style="padding-left: 2rem; padding-right: 2rem;">{{$s->nombreasig}}</td> 
-                    <td style="padding-left: 8rem; padding-right: 8rem;">{{$a->definitiva}}</td>
-                    <td style="padding-left: 5rem; padding-right: 5rem;">{{$a->desem}}</td>
-                  </tr>
-                  <br>
-                  @endif
-                @endforeach
-              @endforeach
-            </tbody>
+    @foreach($notas as $a)
+    @if(isset($a->nomasig))
+       <br>
+        <!--asignaturas-->
+        <table style="border: black 1px solid; border-collapse: collapse; font-size:14px;">
+            <tr>
+                <td  colspan="4" style="border: black 1px solid; border-collapse: collapse;">
+                  <b>{{$a->nombreasig}}</b>
+                </td>
+                <td style="border:  black 1px solid; border-collapse: collapse;">
+                <b>  IHS(sesiones) </b>
+                </td>
+                <td style="border:  black 1px solid; border-collapse: collapse;">
+                <b> Def. </b>
+                </td>
+                <td style="border:  black 1px solid; border-collapse: collapse;">
+                <b> Desempeño </b>
+                </td>
+            </tr>
+            <tr>
+                <td  colspan="4" style="border: black 1px solid; border-collapse: collapse;">
+                <b> Doc: </b> {{$a->nombre}} {{$a->apellido}}
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                  {{$a->ih}}
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                <span>{{$a->definitiva}}</span>
+                </td>
+                <td style="border: black 1px solid; border-collapse: collapse;">
+                {{$a->desem}}
+                </td>
+            </tr>
+            <tr>
+            </tr>
+            @foreach($ob as $c)
+             @if($a->id_tecnicos == $c->idasig)
+            <tr>
+                <td  colspan="7" style="border: black 1px solid; border-collapse: collapse; text-align:justify;">
+                 {{$c->desob}}
+                </td>
+            </tr>
+             @endif
+           @endforeach
+            <tr>
+                <td  colspan="7" style="border: black 1px solid; border-collapse: collapse;">   
+                </td>
+            </tr>
         </table>
+        @endif
+        @endforeach
+       <!--end tabla-->
     </body>
 </html>
+
