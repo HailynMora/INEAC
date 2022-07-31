@@ -81,6 +81,17 @@
             </p>
            </div>
            <br><br><br><br><br>
+
+           <?php
+            $conta = count($asig);
+            ?>
+
+            @if($conta==3)
+              <br><br><br>
+            @endif
+            @if($conta==2)
+              <br><br><br><br><br>
+            @endif
           <!-- <div>
                 <img src="{{ public_path('/img/pdf_in.jpg')}}" style="width:100%; height: 100px;">
             </div>-->

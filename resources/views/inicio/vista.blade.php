@@ -4,6 +4,16 @@
 ?>
 @extends('usuario.principa_usul')
 @section('content')
+<style>
+  .borde {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 2px;
+  padding-left: 2px;
+  border-radius: 10px;
+  background-color: #0f468e;
+}
+</style>
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:white;">
  <h2 class="letra1">Bienvenid@ {{Auth::user()->name}}</h2>
 </div>

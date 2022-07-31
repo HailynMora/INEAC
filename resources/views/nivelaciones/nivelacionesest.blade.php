@@ -4,11 +4,11 @@
  <h3 class="letra1">Nivelaciones</h3>
 </div>
 <br><br>
-<div class="container">
+<div class="container table-responsive">
     <table class="table">
       <thead style="background-color:#0f468e; color:white;" class="alerta">
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">No</th>
           <th scope="col">Programa</th>
           <th scope="col">Asignatura</th>
           <th scope="col">Definitiva</th>

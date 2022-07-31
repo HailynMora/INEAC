@@ -97,10 +97,16 @@ class PDFController extends Controller
 
     public function cerLaboral()
     {   
+        $dia = date('d', time()); 
+        $mes = date('m', time()); 
+        $anio = date('Y', time()); 
         $idl=auth()->id();
         $docente = DB::table('docente')->where('docente.id_usuario', '=', $idl)->first();
         $data = [
             'docente' => $docente,
+            'dia' => $dia,
+            'mes' => $mes,
+            'anio' => $anio,
         ];     
         $pdf = PDF::loadView('docente.pdfLaboral', $data);
         return $pdf->download('certificado_laboral.pdf');
@@ -109,6 +115,7 @@ class PDFController extends Controller
     //certificado de notas
     public function cerEstudiantil(Request $request)
     {   
+       
         $dia = date('d', time()); 
         $mes = date('m', time()); 
         $anio = date('Y', time()); 
@@ -122,14 +129,19 @@ class PDFController extends Controller
                     ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
                     ->select('estudiante.id as ides','matriculas.anio','matriculas.periodo','tipo_curso.codigo','tipo_curso.descripcion','tipo_curso.jornada','tipo_curso.cursodes','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo')
                     ->first();
-        $asig = DB::table('notas')->where('notas.id_estudiante',$request->ides)
-                    ->where('cursos.anio', '=', $request->anio)
-                    ->where('cursos.periodo', '=', $request->periodo)
+        $asig = DB::table('notas')
                     ->join('cursos','notas.id_curso','=','cursos.id')
                     ->join('desempenos','notas.id_desempenio','=','desempenos.id')
                     ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
-                    ->select('definitiva','asignaturas.nombre','desempenos.descripcion as desem','id_curso')
+                    ->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                    ->join('matriculas','tipo_curso.id','=','matriculas.id_curso')
+                    ->where('notas.id_estudiante',$request->ides)
+                    ->where('cursos.anio', '=', $request->anio)
+                    ->where('cursos.periodo', '=', $request->periodo)
+                    ->where('matriculas.id_aprobado', '=', '5')
+                    ->select('notas.definitiva','asignaturas.nombre','desempenos.descripcion as desem','notas.id_curso', 'cursos.anio', 'cursos.periodo', 'tipo_curso.descripcion')
                     ->get();
+        
         $not = DB::table('notas')->where('notas.id_estudiante',$request->ides)
                     ->where('notas.definitiva','<',3)
                     ->where('cursos.anio', '=', $request->anio)
@@ -238,6 +250,7 @@ class PDFController extends Controller
     //aqui modificar 
     public function matEstudiantil(Request $request)
     {   
+        
         //fecha
         $dia = date('d', time()); 
         $mes = date('m', time()); 
@@ -248,6 +261,7 @@ class PDFController extends Controller
                     ->where('matriculas.id_estudiante', '=', $request->ides)
                     ->where('matriculas.anio', '=', $request->anio)
                     ->where('matriculas.periodo', '=', $request->periodo)
+                    ->where('matriculas.id_aprobado', '=', '1')
                     ->join('estudiante','estudiante.id','=','matriculas.id_estudiante')
                     ->join('tipo_curso','matriculas.id_curso','=','tipo_curso.id')
                     ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
@@ -262,14 +276,17 @@ class PDFController extends Controller
         ];     
         $pdf = PDF::loadView('estudiantes.cermatricula', $data);
       //  $pdf->setPaper('A4', 'portrait');
+
         return $pdf->download('certificado_estudiantil_matricula.pdf'); 
     }
 
     public function boletin_es(Request $request){
+       
         $estudiante= DB::table('matriculas')
                     ->where('matriculas.id_estudiante', '=', $request->ides)
                     ->where('matriculas.anio', '=', $request->anio)
                     ->where('matriculas.periodo', '=', $request->periodo)
+                    ->where('matriculas.id_aprobado', '=', '5')
                     ->join('estudiante','estudiante.id','=','matriculas.id_estudiante')
                     ->join('tipo_curso','matriculas.id_curso','=','tipo_curso.id')
                     ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
@@ -281,8 +298,11 @@ class PDFController extends Controller
                     ->join('docente', 'cursos.id_docente', '=', 'docente.id')
                     ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
                     ->join('desempenos','notas.id_desempenio','=','desempenos.id')
+                    ->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                    ->join('matriculas', 'tipo_curso.id', '=', 'matriculas.id_curso')
                     ->where('cursos.anio', '=', $request->anio)
                     ->where('cursos.periodo', '=', $request->periodo)
+                    ->where('matriculas.id_aprobado', '=', '5')
                     ->select('definitiva', 'desempenos.descripcion as desem', 'notas.id_curso', 'docente.nombre', 'docente.apellido', 'asignaturas.nombre as nomasig', 'asignaturas.intensidad_horaria as ih')
                     ->get();
         

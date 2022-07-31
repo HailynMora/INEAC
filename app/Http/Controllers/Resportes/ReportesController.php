@@ -150,5 +150,42 @@ class ReportesController extends Controller
             return view('nivelaciones.listaTec')->with('re',$mat);
 
     }
+
+    //reporte de notas de tecnicos estudiante
+    public function notasEsTec(Request $request){
+        $ides = auth()->user()->id;
+        $val= DB::table('estudiante')->where('id_usuario', '=', $ides)->select('estudiante.id as idestu')->first();
+
+        $estudiante= DB::table('matricula_tecnico')
+                    ->where('matricula_tecnico.id_estudiante', '=', $val->idestu)
+                    ->where('matricula_tecnico.anio', '=', $request->anio)
+                    ->where('matricula_tecnico.periodo', '=', $request->periodo)
+                    ->join('estudiante','estudiante.id','=','matricula_tecnico.id_estudiante')
+                    ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
+                    ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
+                    ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                    ->select('estudiante.id as ides','matricula_tecnico.anio','matricula_tecnico.periodo','programa_tecnico.codigotec',
+                            'programa_tecnico.nombretec','programa_tecnico.jornada','estudiante.first_nom as nombre',
+                            'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 
+                            'estudiante.num_doc', 'tipo_documento.descripcion as destipo','trimestre_tecnicos.nombretri')
+                    ->first();
+                    
+                $notas = DB::table('notas_tecnico')
+                    ->where('notas_tecnico.id_estudiante',$val->idestu)
+                    ->where('asignaturas_tecnicos.anio', '=', $request->anio)
+                    ->where('asignaturas_tecnicos.periodo', '=', $request->periodo)
+                    ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                    ->join('desempenos','notas_tecnico.id_desempenio','=','desempenos.id')
+                    ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                    ->join('docente', 'asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                    ->select('definitiva','asig_tecnicos.nombreasig','asig_tecnicos.codigoasig','desempenos.descripcion as desem',
+                    'docente.nombre', 'docente.apellido','id_tecnicos','asig_tecnicos.intensidad_horaria as ih')
+                    ->get();
+                
+                $ob = DB::table('objetivostec')->select('objetivostec.descripcion as desob', 'objetivostec.id_asignaturas as idasig')->get();
+                
+                
+                return view('tecnico.notastec')->with('estudiante', $estudiante)->with('notas', $notas)->with('ob', $ob);
+    }
     
 }

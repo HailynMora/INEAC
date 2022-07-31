@@ -128,9 +128,10 @@
       </ul>
     </section>
     <!-- ################################################################################################ -->
-    <hr class="btmspace-80">       
-          <h1 style=" text-align: center; font-size: 50px;">NUESTROS PROGRAMAS</h1>
-    <br>
+     <div style="background-color:#144659; color:#FFFFFF; margin-left:-7.5em; margin-right:-7.5em; padding-top:1.2em; padding-bottom:0.3em;"> 
+          <h1 class="titulo" style=" text-align: center; font-size: 40px; ">NUESTROS PROGRAMAS</h1> 
+    </div>
+    <br><br>
     <section class="group">
       <!---######################--->
 

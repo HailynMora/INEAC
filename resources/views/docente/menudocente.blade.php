@@ -111,7 +111,7 @@
           <!--end nivelaciones-->
           <!--end aqui-->
           <li class="nav-item">
-            <a href="{{route('certifLaboral')}}" class="nav-link" style="color:white;">
+            <a href="{{route('pdfLaboral')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-folder-open"></i>
               <p>
                 Certificado Laboral

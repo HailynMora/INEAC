@@ -433,5 +433,8 @@ Route::post('/reporte/tecnico/estudiantes/admin', [ReportesController::class, 'n
 
 Route::post('/filtrar/reporte/notas/sec', [ReportesController::class, 'notasSec'])->middleware(['auth', 'secretaria'])->name('filtrarNotasSec');
 Route::post('/filtrar/reporte/notas/tec', [ReportesController::class, 'notasTec'])->middleware(['auth', 'secretaria'])->name('filtrarNotasTec');
+
+Route::post('/reporte/estudiantes/notas/tecnico', [ReportesController::class, 'notasEsTec'])->middleware(['auth', 'estudiante'])->name('tecnicoCalf');
+
 require __DIR__.'/auth.php';
 

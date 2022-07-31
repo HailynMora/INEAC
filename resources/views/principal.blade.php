@@ -24,6 +24,37 @@
        letter-spacing: 0.1em;
        text-align:center; 
   }
+  .letras_log{
+       font-family: 'Roboto Condensed', sans-serif;
+       font-size:20px;
+       font-weight: 700;
+       letter-spacing: 0.1em;
+      
+  }
+
+  .letra_peq{
+       font-family: 'Roboto Condensed', sans-serif;
+       font-size:16px;
+       font-weight: 700;
+       letter-spacing: 0.1em;
+      
+  }
+  .letra_peq1{
+       font-family: 'Roboto Condensed', sans-serif;
+       font-size:16px;
+       font-weight: 700;
+       letter-spacing: 0.2em;
+       text-align:center; 
+      
+  }
+  .letra_but{
+       font-family: 'Roboto Condensed', sans-serif;
+       font-size:12px;
+       font-weight: 700;
+       letter-spacing: 0.1em;
+       color: #FFFFFF;
+
+  }
 </style>
 <body id="top">
 <!-- ################################################################################################ -->
@@ -41,16 +72,13 @@
       <nav id="mainav" class="fl_right"> 
         <!-- ################################################################################################ -->
         <ul class="clear">
-          <li class="active letras"><a href="{{ url('/') }}">Home</a></li>
+          <li class="active letras"><a href="{{ url('/') }}">Inicio</a></li>
           <!--login-->
           @if (Route::has('login'))
            @auth
              <li><a class="letras" href="{{ url('/dashboard') }}">Regresar</a></li>
             @else
              <li><a class="letras" href="{{url('/reg') }}">Iniciar</a></li>
-              @if (Route::has('register'))
-               <li><a class="letras" href="{{ route('register') }}">Registrar</a></li>
-               @endif
            @endauth
           @endif
         </ul>
@@ -68,16 +96,16 @@
     <!-- ################################################################################################ -->
     <ul class="nospace clear">
       <li class="one_quarter first">
-        <div class="block clear"><a href="#"><i class="fas fa-phone"></i></a> <span><strong>Soporte Técnico:</strong> (+57) 3178916679</span> <span><br> (+57) 3196672188</span></div>
+        <div class="block clear letra_peq"><a href="#"><i class="fas fa-phone"></i></a> <span><strong>Soporte Técnico:</strong><br> (+57) 3178916679</span> <span><br> (+57) 3196672188</span></div>
       </li>
       <li class="one_quarter">
-        <div class="block clear"><a href="#"><i class="fas fa-envelope"></i></a> <span><strong>Correo Institucional:</strong> support@domain.com</span></div>
+        <div class="block clear letra_peq"><a href="mailto:inesurpot@gmail.com"><i class="fas fa-envelope"></i></a> <span><strong>Correo Institucional:</strong><br>inesurpot@gmail.com</span></div>
       </li>
       <li class="one_quarter">
-        <div class="block clear"><a href="#"><i class="fas fa-clock"></i></a> <span><strong> Lunes  - Domingo:</strong> 08.00am - 6.00pm</span></div>
+        <div class="block clear letra_peq"><a href="#"><i class="fas fa-clock"></i></a> <span><strong> Sabado  - Domingo:</strong><br> 08:00 am - 5:00 pm</span></div>
       </li>
       <li class="one_quarter">
-        <div class="block clear"><a href="#"><i class="fas fa-map-marker-alt"></i></a> <span><strong>Visitanos:</strong> Dirección <a href="#">INESUR - Potosi</a></span></div>
+        <div class="block clear letra_peq"><a href="https://goo.gl/maps/g1E1FGYmj2CjkBqMA"><i class="fas fa-map-marker-alt"></i></a> <span><strong>Visitanos:</strong><br><a href="https://goo.gl/maps/g1E1FGYmj2CjkBqMA">INESUR - Potosi</a></span></div>
       </li>
     </ul>
     <!-- ################################################################################################ -->
@@ -88,7 +116,7 @@
 <div style="background-color:#022859; color:#FFFFFF;" >
   <div id="copyright" class="hoc clear"> 
     <!-- ################################################################################################ -->
-    <p class="fl_left">Copyright &copy; 2022 - Todos los derechos reservados - <a href="#" style="color:#FFFFFF;">Universidad De Nariño</a></p>
+    <p class="letra_peq1">Copyright &copy; 2022 - Todos los derechos reservados - <a href="#" style="color:#FFFFFF;">Universidad De Nariño</a></p>
     <!-- ################################################################################################ -->
   </div>
 </div>

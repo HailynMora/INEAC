@@ -311,7 +311,7 @@ body{color:#A5A6AA; background-color:#161C21;}
 a{color:#B946AD;}
 a:active, a:focus{background:transparent !important;}/* IE10 + 11 Bugfix - prevents grey background */
 hr, .borderedbox{border-color:#D7D7D7;}
-label span{color:#FF0000; background-color:inherit;}
+label span{color:#022859; background-color:inherit;}
 input:focus, textarea:focus, *:required:focus{border-color:#B946AD !important;}
 
 .overlay{color:#FFFFFF; background-color:inherit;}
@@ -382,7 +382,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#B946AD !important;}
 
 /* Contact Details */
 #ctdetails ul li div a{color:#FFFFFF;}
-#ctdetails ul li div a i{color:rgba(255,255,255,.5); border-color:rgba(255,255,255,.5);}
+#ctdetails ul li div a i{color:rgba(111,255,240); border-color:rgba(111,255,240);}
 #ctdetails ul li div:hover a i{color:inherit; border-color:rgba(255,255,255,1);}
 #ctdetails ul li div strong{color:#FFFFFF;}
 

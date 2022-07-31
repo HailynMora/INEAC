@@ -20,7 +20,7 @@
         <div id="collapseOne letraf" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 <!--tabla-->
-                <div class="container">
+                <div class="container table-responsive">
                     <table class="table">
                         <thead style="background-color:#0f468e;color: #ffffff;">
                             <tr>

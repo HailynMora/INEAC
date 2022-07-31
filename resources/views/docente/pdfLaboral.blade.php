@@ -1,91 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-
- <head>
-   <meta charset="UTF-8">
-   <title>Titulo del Documento</title>
- </head>
-
- <body>
- <table style="border-collapse: collapse; width: 100%;">
-<tbody>
-<tr>
-<td style="width:10%;">
-  <img src="{{ public_path('/img/logoin.jpg')}}" style="width:60px; height: 80px;">
-</td>
-<td style="width:90%;">&nbsp;
-  <h4 style="text-align:center;">INSTITUTO DE EDUCACIÓN TECNICA INESUR</h4>
-    <p style="text-align:center;"> Creado mediante Resolución No. 3128 del 31 Diciembre de 2010<br>
-        Emanada por Secretaría de Educación Municipal de Pasto<br>
-        Sede Principal Pasto calle 17 No. 26 - 66 Centro<br>
-    </p>
-</td>
-</tr>
-<tr> 
-    <td style="width:5%;">
-    </td>
-    <td style="width:90%;"><br>
-    <hr style="background-color:black; width:100%;">
-           <h4 style="text-align:center;">
-              EL SUSCRITO RECTOR DEL INSTITUTO DE EDUCACIÓN TECNICA INESUR, DEL MUNICIPIO PASTO - NARIÑO 
-            </h4><br><br>
-            <h5 style="text-align:center;">
-                HACE CONSTAR
-            </h5>
-    </td>
-    <td style="width:5%;">
-    
-    </td>
- </tr>
- <tr> 
-    <td style="width:5%;">
-    </td>
-    <td style="width:90%;"><br>
-    <hr style="background-color:black; width:100%;">
-            <p style="text-align:justify;"><br><br><br>
-            Que el (la) señor(a) <b> {{strtoupper($docente->nombre)}} {{strtoupper($docente->apellido)}} </b> identificado(a) con cédula de ciudadania No. <b> {{strtoupper($docente->num_doc)}}</b>, docente de tiempo completo de esta institución desde el <b> {{date('Y-m-d', strtotime($docente->fec_vinculacion))}}, </b> cargo que viene desempeñando hasta la 
-            presente fecha sin ninguna interrupción.
-          </p><br>
-    </td>
-    <td style="width:5%;">
-      &nbsp;
-    </td>
- </tr>
- <br><br><br>
- <tr> 
-    <td style="width:5%;">
-    </td>
-    <td style="width:90%;"><br>
-         <p  style="text-align:center;">
+    <head>
+        <meta charset="UTF-8">
+        <title>Certificado Laboral</title>
+    </head>
+    <body  style=" width:100%;  height: 100%;">
+        <br><br>
+        @if(isset($docente->nombre))
+        <div style="background-image:url({{ public_path('/img/pdf_inesur2.jpg')}}); background-position:center;  background-repeat: no-repeat; background-size:cover; margin-top:-4rem; margin-left:-4rem; margin-right:-3rem;  margin-bottom:-2rem;">
+        <div  style="padding-top: 95px;">
+           <!-- <div>
+                <img src="{{ public_path('/img/pdf_i.jpg')}}" style="width:100%; height: 100px;">
+            </div>-->
+            <div style="padding-left:1em; padding-right:1em;">
+            <br>
+            <div>
+            <br><br><br>
+                <h4 style="text-align:center;">
+                    <b>EL SUSCRITO DIRECTOR GENERAL DEL INSTITUTO DE EDUCACIÓN TéCNICA INESUR<b>
+                </h4>
+                <p style="text-align:center;">RESOLUCION 0071 DE 20 DE ENERO DE 2014</p>
+                <p style="text-align:center;">Código DANE No. 352001006791</p><br>
+                <h4 style="text-align:center;"> <br>
+                   HACE CONSTAR
+                </h4>
+                <br>
+            </div>
+            <div>
+                <p style="text-align:justify;  line-height:1.5; padding-left: 4rem; padding-right: 4rem;">
+                Que el (la) señor(a) <b> {{strtoupper($docente->nombre)}} {{strtoupper($docente->apellido)}} </b> identificado(a) con cédula de ciudadania No. <b> {{strtoupper($docente->num_doc)}}</b>, docente de esta institución desde el <b> {{date('Y-m-d', strtotime($docente->fec_vinculacion))}}, </b> cargo que viene desempeñando hasta la 
+                presente fecha.
+               </p>
+            </div>  
+            <div>
+            <br><br><br><br><br>
+            </div>
+            <br>
+           <div style="padding-left: 4rem; padding-right: 4rem;">
+             <p>Para constancia se firma en Potosi el dia {{$dia}} del mes {{$mes}}  del año {{$anio}}</p>
+            </div>
+            <br><br><br><br><br><br><br><br>
+            <div > 
+            <br>
+            <p  style="text-align:center;">
              ____________________________________________<br>
              <b>ALEXANDER SARCHI GRIJALBA</b><br>
              Director
-          </p><br>
-    </td>
-    <td style="width:5%;">
-      &nbsp;
-    </td>
- </tr>
-
-</tbody>
-</table>
-<!-- html -->
-<div id="esto">
-    <p style="text-align:center;">
-            Dirección: Pasto calle 17 No. 26 - 66 Centro<br>
-            Teléfono: 3143317164 Email: girardotjurado@yahoo.es – girardotjurado@hotmail.com
-     </p><br>
-</div>
+            </p>
+            <br><br><br><br><br><br><br>
+           </div>
+           
+          <!-- <div>
+                <img src="{{ public_path('/img/pdf_in.jpg')}}" style="width:100%; height: 100px;">
+            </div>-->
+        <!-- html -->
+     </div>
+   </div>
+   </div>
+     @endif
+    </body>
 <style>
-/* css */
-#esto{
-    position:absolute; 
-    bottom:1px; width:100%; 
-     text-align:center; 
-     }
+table {
+  text-align:center;
+  width: 50%;
+}
+
+th {
+  height: 70px;
+}
 </style>
 
- </body>
 </html>
-
-

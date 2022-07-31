@@ -1,4 +1,17 @@
 <!-- Sidebar Menu -->
+<?php
+  use Illuminate\Support\Facades\DB;
+  use Illuminate\Support\Facades\Auth;
+   
+  $ides = auth()->user()->id;
+  $val= DB::table('estudiante')->where('id_usuario', '=', $ides)->select('estudiante.id as idestu')->first();
+   
+  //si esta matriculado en ciclos
+  $ciclo =DB::table('matriculas')->where('id_estudiante', '=', $val->idestu)->count();
+
+  //si esta matriculado en tecnicos
+  $tec =DB::table('matricula_tecnico')->where('id_estudiante', '=', $val->idestu)->count();
+?>
 <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
@@ -53,17 +66,28 @@
               </p>
             </a>
           </li>                
-         
+         @if($ciclo!=0)
           <li class="nav-item">
           <a type="button" data-toggle="modal" data-target="#exampleModalnotas" class="nav-link" style="color:white;">
             <i class="nav-icon fas fa-book"></i>
               <p>
-                  Calificaciones      
+                  Calificaciones
             </p>
           </a>
            @include('estudiantes.calificaciones')
           </li>
-          
+          @endif
+          @if($tec!=0)
+            <li class="nav-item">
+            <a type="button" data-toggle="modal" data-target="#notasTec" class="nav-link" style="color:white;">
+              <i class="nav-icon fas fa-book"></i>
+                <p>
+                    Calificaciones Técnicos
+              </p>
+            </a>
+            @include('estudiantes.califTecnicos')
+            </li>
+          @endif
           <li class="nav-item">
             <a href="{{route('nivelacionEstudiantes')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-edit"></i>
