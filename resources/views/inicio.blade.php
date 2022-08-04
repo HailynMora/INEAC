@@ -69,6 +69,23 @@
         letter-spacing: .05em;
         margin: 2em 0 0 0;
       }
+
+    .imagen {
+        margin: 20px;
+        border: 5px solid #eee;
+        -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+        -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+        box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+        -webkit-transition: all 0.5s ease-out;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+    }
+    
+    img:hover {
+        -webkit-transform: rotate(-7deg);
+        -moz-transform: rotate(-7deg);
+        -o-transform: rotate(-7deg);
+    }
     </style>
 <!--style="background-image:url('img/fondo_mod.png'); background-repeat: no-repeat;  background-size: cover; margin: 10px 10px 10px 10px; " -->
 <div class="overlay">
@@ -134,75 +151,94 @@
     <br><br>
     <section class="group">
       <!---######################--->
-
-        @if($b==1)
+      <h1 class="titulo" style=" text-align: center; font-size: 30px; ">BACHILLERATO POR CICLOS</h1> 
         <div class="band"> 
-        @foreach($prog as $p)
             <div class="item-4">
-                  <a href="#" class="card">
-                    <div class="thumb"></div>
-                    <article>
-                     <div style=" font-size: 20px; text-align: center;"><br><b>{{$p->descripcion}}</b><br></div>
-                      <p>We’ll be putting things together so that as you scroll down from the top of the page you’ll see an “Alien Lander” making its way to touch down.</p>
-                      <span>Kezz Bracey</span>
-                    </article>
-                  </a>
+              <figure><img class="imagen" src="images/demo/ciclo_3.png" alt="" style="border-radius:50%;">
+                <figcaption>
+                  <div style="padding-left:25px;">
+                  <p class="titulo" style="font-size:18px; text-align:justify;">
+                    Ciclo correspondiente a los grados 6° y 7°.
+                  </p>
+                </div>
+                </figcaption>
+            </figure>
             </div>
-            @endforeach
+            <!----tabla2-->
+            <div class="item-4">
+            <figure><img class="imagen" src="images/demo/ciclo_iv.png" alt="" style="border-radius:50%;">
+                <figcaption>
+                <div style="padding-left:30px;">
+                 <p class="titulo" style="font-size:18px; text-align:justify;">
+                    Ciclo correspondiente a los grados 8° y 9°.
+                  </p>
+                  </div>
+                </figcaption>
+            </figure>
+            </div>
+             <!--end--tabla2-->
+
+            <!--tabla 3-->
+            <div class="item-4">
+              <figure><img class="imagen" src="images/demo/ciclov.png" alt="" style="border-radius:50%;">
+                <figcaption>
+                    <div style="padding-left:30px;">
+                    <p class="titulo" style="font-size:18px; text-align:justify;">
+                      Ciclo correspondiente al grado 10°.
+                    </p>
+                  </div>
+                  </figcaption>
+              </figure>
+            </div>
+
+            <!--end tabla 3-->
+                 <!--tabla 3-->
+                 <div class="item-4">
+                 <figure><img class="imagen" src="images/demo/ciclovi.png" alt="" style="border-radius:50%;">
+                    <figcaption>
+                      <div style="padding-left:28px;">
+                      <p class="titulo" style="font-size:18px; text-align:justify;">
+                        Ciclo correspondiente al grado 11°.
+                      </p>
+                    </div>
+                    </figcaption>
+                </figure>
+                </div>
+
+                
+            <!--end tabla 3-->            
           </div>
-          @endif
-          @if($b==0)
-          <h3 style=" text-align: center; font-size: 50px;">NO HAY PROGRAMAS OFERTADOS</h3>
-          @endif
       <!------##################---->
     </div>
+    <!--TECNICOS-->
+    <div class="wrapper row3">
+    <h1 class="titulo" style=" text-align: center; font-size: 30px; ">TÉCNICOS</h1>  
+                 <!--tabla 3-->
+
+                 <div style="margin:5px 5px 5px 5px;">
+                     <div style="padding:0em 22em 0em 37em;">
+                    <figure><img class="imagen" src="images/demo/tecSis.png" alt="" style="width:50%; height:50%; border-radius:50%;">
+                        <figcaption>
+                          <div style="padding-left:28px;">
+                          <p class="titulo" style="font-size:18px; text-align:justify;">
+                            
+                          </p>
+                        </div>
+                        </figcaption>
+                    </figure>
+                   </div>
+                 </div>
+
+            <!--end tabla 3-->            
+      <!------##################---->
+    </div>
+    </div>
+    <br><br>
+
+    <!--END TECNICOS-->
     </section>
     <!-- ################################################################################################ -->
     <!-- / main body -->
-    <div class="clear"></div>
   </main>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row2">
-  <div class="hoc container clear"> 
-    <!-- ################################################################################################ -->
-    <div class="sectiontitle">
-      <p class="nospace font-xs">Vel lorem quis arcu euismod faucibus</p>
-      <p class="heading underline font-x2">Quisque luctus nullam eget</p>
-    </div>
-    <ul class="nospace group team">
-      <li class="one_quarter first">
-        <figure><a class="imgover" href="#"><img src="images/demo/300x300.png" alt=""></a>
-          <figcaption><strong>A. Doe</strong> <em>Job Title Here</em></figcaption>
-        </figure>
-      </li>
-      <li class="one_quarter">
-        <figure><a class="imgover" href="#"><img src="images/demo/300x300.png" alt=""></a>
-          <figcaption><strong>B. Doe</strong> <em>Job Title Here</em></figcaption>
-        </figure>
-      </li>
-      <li class="one_quarter">
-        <figure><a class="imgover" href="#"><img src="images/demo/300x300.png" alt=""></a>
-          <figcaption><strong>C. Doe</strong> <em>Job Title Here</em></figcaption>
-        </figure>
-      </li>
-      <li class="one_quarter">
-        <figure><a class="imgover" href="#"><img src="images/demo/300x300.png" alt=""></a>
-          <figcaption><strong>D. Doe</strong> <em>Job Title Here</em></figcaption>
-        </figure>
-      </li>
-    </ul>
-    <!-- ################################################################################################ -->
   </div>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-
 @endsection

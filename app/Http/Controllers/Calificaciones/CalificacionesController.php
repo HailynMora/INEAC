@@ -143,20 +143,21 @@ class CalificacionesController extends Controller
                         ->count();
 
                 }
+                $indice = count(array_unique($comparar))===1;
                 //como retorna desde un count se debe comparar si todas las materias estan una vez en la base de datos
                 //con los ids obtenidos si aparece un 0 significa que aun falta materias por registrar
                 //si aparece 1 significa que todas las materias estan registradas y con notas mayor a 3
-                for($j=0; $j<count($comparar); $j++){
+               /*  for($j=0; $j<count($comparar); $j++){
                   if($comparar[$j]==0){
                         $m=0;
                   }else{
                         $m=1;
                   }
                   
-                }
+                }*/
                 //Si todas las materias tienen nota con mayor a 3 entonces cambia de estado en matriculas
                
-                if($m==1){
+                if($indice==1 && $comparar[0]==1){
                   DB::table('matriculas')->where('id_estudiante', $request->idest)
                     ->where('id_aprobado', 1)
                     ->update(['id_aprobado' => 2]);
@@ -346,22 +347,31 @@ class CalificacionesController extends Controller
                                         //como retorna desde un count se debe comparar si todas las materias estan una vez en la base de datos
                                         //con los ids obtenidos si aparece un 0 significa que aun falta materias por registrar
                                         //si aparece 1 significa que todas las materias estan registradas y con notas mayor a 3
-                                        for($j=0; $j<count($comparar); $j++){
+                                      /*  for($j=0; $j<count($comparar); $j++){
                                         if($comparar[$j]==0){
                                                 $m=0;
                                         }else{
                                                 $m=1;
                                         }
                                         
-                                        }
+                                        }*/
                                         //Si todas las materias tienen nota con mayor a 3 entonces cambia de estado en matriculas
                                 
-                                        if($m==1){
+                                       /* if($m==1){
                                         DB::table('matriculas')->where('id_estudiante', $category->id_estudiante)
                                         ->where('id_aprobado', 1)
                                         ->update(['id_aprobado' => 2]);
                                         //->where('anio', $per->anio)
                                         //->where('anio', $per->periodo)
+                                        }*/
+                                        $indice = count(array_unique($comparar))===1;
+                                
+                                        if($indice==1 && $comparar[0]==1){
+                                                DB::table('matriculas')->where('id_estudiante', $category->id_estudiante)
+                                                ->where('id_aprobado', 1)
+                                                ->update(['id_aprobado' => 2]);
+                                            //->where('anio', $per->anio)
+                                            //->where('anio', $per->periodo)
                                         }
                                         //end validacion
                         Session::flash('notac','Actualización realizada exitosamente.');

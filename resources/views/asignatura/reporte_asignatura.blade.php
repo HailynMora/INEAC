@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1">  Reporte Asignaturas Bachillerato</h3>
+ <h3 class="letra1">Reporte Asignaturas Bachillerato</h3>
 </div>
   <!--modal-->
    <!-- Button trigger modal-->
@@ -90,7 +90,7 @@
      </div>
   </div>
 <br><br>
-<div class="container">
+<div class="container table-responsive">
     <table class="table letraf">
         <thead style="background-color:#0f468e; color:#ffffff;">
             <tr>
@@ -192,16 +192,14 @@
     </table>
     <div class="row">
       <div class="col-md-4">
-      </div>
-      <div class="col-md-2">
-        <div class="container-fluid">
+      <div class="container-fluid">
         {{$rep->links()}}
        </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
       </div>
       <div class="col-md-2">
-        <h2 class="mb-0">
+        <h2 class="mb-0 d-none d-sm-none d-md-block">
           <a class="btn btn-link float-right alerta" type="button" href="{{route('reporte_pro')}}">
           <i class="fas fa-arrow-circle-left " style="font-size:20px;"></i> <span class="alerta">Volver</span>
           </a>
