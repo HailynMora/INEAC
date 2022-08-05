@@ -20,7 +20,8 @@
        <table>
             <tr>
                 <td >
-                    <img src="{{ public_path('/img/logoin.jpg')}}" style="width:60px; height: 80px;">
+                    <!--<img src="{{ public_path('/img/logoin.jpg')}}" style="width:60px; height: 80px;">-->
+                    <img src="{{ asset('https://ineacpotosi.com/dist/img/logoin.jpg')}}" style="width:60px; height: 80px;">  
                 </td>
                 <td>
                     <p style="text-align:center;  font-size:18px;">
@@ -51,6 +52,7 @@
                   
                 </td>
             </tr>
+            @if(isset($estudiante->nombre))
             <tr>
                 <td colspan="4" style="border: black 1px solid; border-collapse: collapse;">
                   <span>{{$estudiante->nombre}} {{$estudiante->segundonom}} {{$estudiante->primerape}} {{$estudiante->segundoape}}</span>
@@ -65,6 +67,7 @@
                   <span>{{$estudiante->anio}} - {{$estudiante->periodo}}</span>
                 </td>
             </tr>
+            @endif
         </table>
     @foreach($notas as $a)
     @if(isset($a->nomasig))

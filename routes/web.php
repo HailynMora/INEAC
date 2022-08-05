@@ -358,7 +358,7 @@ Route::get('/reporte/notas/tecnico/{id}',[CalificacionesController::class, 'vern
 Route::post('/actualizar/nota/tecnico', [CalificacionesController::class, 'actunotastec'])->middleware(['auth', 'secretaria_docente'])->name('actualizarNotaTec');
 
 
-Route::get('/reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);
+//Route::get('/reporte/notas/{id}',[CalificacionesController::class, 'vernotas'])->middleware(['auth', 'secretaria_docente']);
 Route::post('/generar/pdf/notas', [PDFController::class, 'generatePDF'])->middleware(['auth', 'secretaria_docente'])->name('pdf');
 Route::get('/pdf/vista', [PDFController::class, 'vista'])->middleware(['auth', 'secretaria_docente']);
 //pdf notas tecnicos

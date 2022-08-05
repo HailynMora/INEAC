@@ -2,7 +2,7 @@
 @section('content')
 <!--Tabla de informacion-->
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado de Estudiantes</h3>
+ <h3 class="letra1">Listado de Estudiantes hh</h3>
 </div>
 <div class="row alerta">
     <div class="col-md-1">
@@ -14,7 +14,7 @@
     <div class="col-md-9">
         <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
           @csrf
-          <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Número Identificación" aria-label="Search">
+          <input id="cedula" name="cedula" class="form-control mr-sm-2" placeholder="Número Identificación" aria-label="Search">
           <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
         </form>
     </div>
@@ -33,7 +33,7 @@
         <th scope="col">Acciones</th>
         </tr>
     </thead>
-    <tbody id="tabla1" style="background-color:#e3e3e3;" class="letraf">
+    <tbody id="tablanueva" style="background-color:#e3e3e3;" class="letraf tablanueva">
     @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
         <tr>
@@ -339,7 +339,7 @@
                         <div class="col-md-3 ml-auto telacu" id="limpiar32"> </div>
                       </div>
                     <!---############End Datos Acudiente-->
-                    <br>
+                    <br>     
                       <hr>
                         <h4 class="text-start">Datos Del Programa</h4>
                         <div class="row">
@@ -352,7 +352,7 @@
                           <div class="col-md-3"><b>Año</b></div>
                           <div class="col-md-3 ml-auto anio" id="limpiar35"> </div>
                           <div class="col-md-3"><b>Periodo</b></div>
-                          <div class="col-md-3 ml-auto periodo" id="limpiar36"> </div>
+                          <div class="col-md-3 ml-auto per" id="limpiar36"> </div>
                         </div>
                       <hr>
               </div>
@@ -371,7 +371,7 @@
 <script>
    $('#buscar').submit(function(e){
     e.preventDefault();
-    var nombre=$('#nombre').val();
+    var nombre=$('#cedula').val();
     console.log(nombre);
     var _token = $('input[name=_token]').val();
     $.ajax({
@@ -387,26 +387,28 @@
         }
      }
     }).done(function(res){
-      var arreglo = JSON.parse(res);
      
-      if(arreglo.length!=0){
+     // var arreglo = JSON.parse(res);
+      var arreglo = res;
+      if(arreglo.busest.length!=0){
         var conta=0;
         $('#buscar')[0].reset();
         $("#datos").empty();
-        $("#tabla1").hide(); 
+        $("#tablanueva").hide(); 
         for(var i=1; i<=36; i++){//limpia los datos de los divs para que no salgan uno sobre otro 
           $('#limpiar'+[i]).empty();
         }
         //$("#datosdos").empty();
-      for(var x=0; x<arreglo.length; x++){
+      for(var x=0; x<arreglo.busest.length; x++){
           conta+=1;
-          if ( arreglo[x].estadoes == "Activo") { // true
+          console.log(arreglo);
+          if ( arreglo.busest[x].estadoes == "Activo") { // true
           var valor = '<tr>' +
-          '<td>' +  arreglo[x].num_doc +'</td>' +
-          '<td>' +  arreglo[x].first_nom + ' ' +  arreglo[x].second_nom + ' ' +  arreglo[x].firts_ape + ' ' +  arreglo[x].second_ape +'</td>' +
-          '<td>' +  arreglo[x].telefono  + '</td>' +
-          '<td>' +  arreglo[x].correo  + '</td>' +
-          '<td>' +  arreglo[x].apro + '</td>' +
+          '<td>' +  arreglo.busest[x].num_doc +'</td>' +
+          '<td>' +  arreglo.busest[x].first_nom + ' ' +  arreglo.busest[x].second_nom + ' ' +  arreglo.busest[x].firts_ape + ' ' +  arreglo.busest[x].second_ape +'</td>' +
+          '<td>' +  arreglo.busest[x].telefono  + '</td>' +
+          '<td>' +  arreglo.busest[x].correo  + '</td>' +
+          '<td>' +  arreglo.busest[x].estadoes + '</td>' +
           '<td>' +  '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"> <img src="/dist/img/card.png" class="img-fluid" ></a>&nbsp&nbsp&nbsp'+
         
            '</td>' +//agregar los botones
@@ -415,72 +417,72 @@
 
           }else{
                 var valor = '<tr>' +
-              '<td>' +  arreglo[x].num_doc +'</td>' +
-              '<td>' +  arreglo[x].first_nom + ' ' +  arreglo[x].second_nom + ' ' +  arreglo[x].firts_ape + ' ' +  arreglo[x].second_ape +'</td>' +
-              '<td>' +  arreglo[x].telefono  + '</td>' +
-              '<td>' +  arreglo[x].correo  + '</td>' +
-              '<td>' +  arreglo[x].apro + '</td>' +
+              '<td>' +  arreglo.busest[x].num_doc +'</td>' +
+              '<td>' +  arreglo.busest[x].first_nom + ' ' +  arreglo.busest[x].second_nom + ' ' +  arreglo.busest[x].firts_ape + ' ' +  arreglo.busest[x].second_ape +'</td>' +
+              '<td>' +  arreglo.busest[x].telefono  + '</td>' +
+              '<td>' +  arreglo.busest[x].correo  + '</td>' +
+              '<td>' +  arreglo.busest[x].estadoes + '</td>' +
               '<td>' +  '<a type="button" data-toggle="modal" data-target="#exampleModal" data-placement="bottom"  title="Ver Estudiante"> <img src="/dist/img/card.png" class="img-fluid" ></a>&nbsp&nbsp&nbsp'+
                '</td>' +//agregar los botones
               '</tr>';
                 $('#datos').append(valor);
            
-          }
-          //estudiante info    
-          $('.iden').append(arreglo[x].tdoces);
-          $('.num').append(arreglo[x].num_doc);
-          $('.dtoex').append(arreglo[x].dpt_expedicion);
-          $('.mpioex').append(arreglo[x].mun_expedicion);
-          $('.gen').append(arreglo[x].generoestu);
-          $('.fecna').append(arreglo[x].fecnacimiento);
-          $('.dtona').append(arreglo[x].dpt_nacimiento);
-          $('.mpionac').append(arreglo[x].mun_nacimiento);
-          $('.primerape').append(arreglo[x].firts_ape);
-          $('.segundoape').append(arreglo[x].second_ape);
-          $('.primernom').append(arreglo[x].first_nom);
-          $('.segundonom').append(arreglo[x].second_nom);
-          $('.dires ').append(arreglo[x].dirresidencia);
-          $('.barrio').append(arreglo[x].barrio);
-          $('.dtores').append(arreglo[x].dptresidencia);
-          $('.mpiores').append(arreglo[x].munresidencia);
-          $('.zona').append(arreglo[x].zona);
-          $('.celular').append(arreglo[x].telefono);
-          $('.estrato ').append(arreglo[x].estrato);
-          $('.tsangre').append(arreglo[x].tiposangre);
-          //end estudiante info
-            
-          $('.regimen').append(arreglo[x].regimen);
-          $('.carnet').append(arreglo[x].eps);
-          $('.formacion').append(arreglo[x].nivelformacion);
-          $('.ocupacion').append(arreglo[x].ocupacion);
-          $('.discap').append(arreglo[x].discapacidad );
-          $('.etnia').append(arreglo[x].etniades);
-          //estuante sistema salud
+             }
 
-          //Datos acudiente           
-          $('.idenacu').append(arreglo[x].tdocacu);
-          $('.numacu').append(arreglo[x].numacu);
-          $('.nomacu').append(arreglo[x].nomacu);
-          $('.paren').append(arreglo[x].paren);
-          $('.diracu').append(arreglo[x].diracu);
-          $('.telacu').append(arreglo[x].telacu);
-          //end datos acudiente
+              //estudiante info    
+              $('.iden').append(arreglo.busest[x].tdoces);
+              $('.num').append(arreglo.busest[x].num_doc);
+              $('.dtoex').append(arreglo.busest[x].dpt_expedicion);
+              $('.mpioex').append(arreglo.busest[x].mun_expedicion);
+              $('.gen').append(arreglo.busest[x].generoestu);
+              $('.fecna').append(arreglo.busest[x].fecnacimiento);
+              $('.dtona').append(arreglo.busest[x].dpt_nacimiento);
+              $('.mpionac').append(arreglo.busest[x].mun_nacimiento);
+              $('.primerape').append(arreglo.busest[x].firts_ape);
+              $('.segundoape').append(arreglo.busest[x].second_ape);
+              $('.primernom').append(arreglo.busest[x].first_nom);
+              $('.segundonom').append(arreglo.busest[x].second_nom);
+              $('.dires ').append(arreglo.busest[x].dirresidencia);
+              $('.barrio').append(arreglo.busest[x].barrio);
+              $('.dtores').append(arreglo.busest[x].dptresidencia);
+              $('.mpiores').append(arreglo.busest[x].munresidencia);
+              $('.zona').append(arreglo.busest[x].zona);
+              $('.celular').append(arreglo.busest[x].telefono);
+              $('.estrato ').append(arreglo.busest[x].estrato);
+              $('.tsangre').append(arreglo.busest[x].tiposangre);
+              //end estudiante info
+                
+              $('.regimen').append(arreglo.busest[x].regimen);
+              $('.carnet').append(arreglo.busest[x].eps);
+              $('.formacion').append(arreglo.busest[x].nivelformacion);
+              $('.ocupacion').append(arreglo.busest[x].ocupacion);
+              $('.discap').append(arreglo.busest[x].discapacidad );
+              $('.etnia').append(arreglo.busest[x].etniades);
+              //estuante sistema salud
 
-          //datos del curso  
-          $('.curso').append(arreglo[x].curso);
-          $('.descur').append(arreglo[x].descur);
-          $('.anio').append(arreglo[x].anio);
-          $('.periodo').append(arreglo[x].periodo);
-         
+              //Datos acudiente           
+              $('.idenacu').append(arreglo.busest[x].tdocacu);
+              $('.numacu').append(arreglo.busest[x].numacu);
+              $('.nomacu').append(arreglo.busest[x].nomacu);
+              $('.paren').append(arreglo.busest[x].paren);
+              $('.diracu').append(arreglo.busest[x].diracu);
+              $('.telacu').append(arreglo.busest[x].telacu);
+              //end datos acudiente
+
+              //datos de programas bachillerato
+              $('.curso').append(arreglo.bac[x].codigo);
+              $('.anio').append(arreglo.bac[x].anio);
+              $('.descur').append(arreglo.bac[x].descripcion);
+              $('.per').append(arreglo.bac[x].periodo);
+
         }
 
       }else{
         toastr.warning('Lo sentimos!', 'Datos no encontrados', {timeOut:3000});
         $('#buscar')[0].reset();
         $("#datos").empty();
-        $("#tabla1").show();
+        $("#tablanueva").show();
       }
-    
     });
   });
 </script>

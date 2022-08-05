@@ -261,7 +261,7 @@ class PDFController extends Controller
                     ->where('matriculas.id_estudiante', '=', $request->ides)
                     ->where('matriculas.anio', '=', $request->anio)
                     ->where('matriculas.periodo', '=', $request->periodo)
-                    ->where('matriculas.id_aprobado', '=', '1')
+                    //->where('matriculas.id_aprobado', '=', '1')
                     ->join('estudiante','estudiante.id','=','matriculas.id_estudiante')
                     ->join('tipo_curso','matriculas.id_curso','=','tipo_curso.id')
                     ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
@@ -281,6 +281,8 @@ class PDFController extends Controller
     }
 
     public function boletin_es(Request $request){
+
+
        
         $estudiante= DB::table('matriculas')
                     ->where('matriculas.id_estudiante', '=', $request->ides)
@@ -290,7 +292,11 @@ class PDFController extends Controller
                     ->join('estudiante','estudiante.id','=','matriculas.id_estudiante')
                     ->join('tipo_curso','matriculas.id_curso','=','tipo_curso.id')
                     ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
-                    ->select('estudiante.id as ides','matriculas.anio','matriculas.periodo','tipo_curso.codigo','tipo_curso.descripcion','tipo_curso.jornada','tipo_curso.cursodes','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo')
+                    ->select('estudiante.id as ides','matriculas.anio','matriculas.periodo','tipo_curso.codigo',
+                            'tipo_curso.descripcion','tipo_curso.jornada','tipo_curso.cursodes',
+                            'estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 
+                            'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 
+                            'estudiante.num_doc', 'tipo_documento.descripcion as destipo')
                     ->first();
        
         $notas = DB::table('notas')->where('notas.id_estudiante',$request->ides)

@@ -489,7 +489,7 @@ class CalificacionesController extends Controller
                 if($res==2){
 
                         $consulta = DB::table('notas')->where('notas.id_curso', $idcur)
-                        ->where('notas.definitiva', '<', '3.0')
+                        ->where('notas.definitiva', '<=', '2.9')
                         ->join('cursos','notas.id_curso', '=', 'cursos.id')
                         ->join('asignaturas','cursos.id_asignatura', '=', 'asignaturas.id')
                         ->join('tipo_curso','cursos.id_tipo_curso', '=', 'tipo_curso.id')

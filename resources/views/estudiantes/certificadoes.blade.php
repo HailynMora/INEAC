@@ -11,11 +11,11 @@
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
  <h3 class="letra1">Certificados Estudiantiles Bachillerato</h3>
 </div>
-<div class="container alerta">
+<div class="container-fluid alerta d-none d-sm-none d-md-block">
   <div class="row">
     <div class="col-4" style="padding-top: 5%;">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('dist/img/nota.png')}}" alt="Card image cap">
+        <img class="card-img-top img-fluid" src="{{asset('dist/img/nota.png')}}" alt="Card image cap">
         <div class="card-body" style="display: flex;justify-content: center;align-items: center;">
           <a class="btn btn-warning" type="button" data-toggle="modal" data-target="#exampleModal" class="nav-link">Generar</a>
         </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="col-4" style="padding-top: 5%;">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('dist/img/matricula.png')}}" alt="Card image cap">
+        <img class="card-img-top img-fluid" src="{{asset('dist/img/matricula.png')}}" alt="Card image cap">
         <div class="card-body" style="display: flex;justify-content: center;align-items: center;">
           <a class="btn btn-warning" type="button" data-toggle="modal" data-target="#exampleModal2" class="nav-link">Generar</a>
         </div>
@@ -31,7 +31,7 @@
     </div>
     <div class="col-4" style="padding-top: 5%;">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('dist/img/boletin.png')}}" alt="Card image cap">
+        <img class="card-img-top img-fluid" src="{{asset('dist/img/boletin.png')}}" alt="Card image cap">
         <div class="card-body" style="display: flex;justify-content: center;align-items: center;">
           <a class="btn btn-warning" type="button" data-toggle="modal" data-target="#exampleModal3" class="nav-link">Generar</a>
         </div>
@@ -39,6 +39,43 @@
     </div>
   </div>
 </div>
+
+<!--imagenes para celular-->
+<div class="container d-block d-sm-block d-md-none">
+  <div class="row">
+    <div class="col-12">
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top img-fluid" src="{{asset('dist/img/nota.png')}}" alt="Card image cap">
+          <div class="card-body" style="display: flex;justify-content: center;align-items: center;">
+            <a class="btn btn-warning" type="button" data-toggle="modal" data-target="#exampleModal" class="nav-link">Generar</a>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top img-fluid" src="{{asset('dist/img/matricula.png')}}" alt="Card image cap">
+          <div class="card-body" style="display: flex;justify-content: center;align-items: center;">
+            <a class="btn btn-warning" type="button" data-toggle="modal" data-target="#exampleModal2" class="nav-link">Generar</a>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top img-fluid" src="{{asset('dist/img/boletin.png')}}" alt="Card image cap">
+        <div class="card-body" style="display: flex;justify-content: center;align-items: center;">
+          <a class="btn btn-warning" type="button" data-toggle="modal" data-target="#exampleModal3" class="nav-link">Generar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--end imagenes para celular-->
 <!-- Modal -->
 <form action="{{route('pdfEstudiantil')}}" method="POST">
   @csrf
