@@ -436,5 +436,7 @@ Route::post('/filtrar/reporte/notas/tec', [ReportesController::class, 'notasTec'
 
 Route::post('/reporte/estudiantes/notas/tecnico', [ReportesController::class, 'notasEsTec'])->middleware(['auth', 'estudiante'])->name('tecnicoCalf');
 
+//eliminar objetivos tecnicos
+Route::get('/eliminar/objetivostec/{id}',[ReporteAsigController::class, 'elim_objtec'])->middleware(['auth', 'secretaria_docente']);
 require __DIR__.'/auth.php';
 

@@ -1,14 +1,13 @@
 @extends('usuario.principa_usul')
 @section('content')
-
 <div class="accordion">
-  <div class="card">
+  <div class="card" style="background-color:#EBEDF0;">
     <div class="card-header">
         @if(isset($datos[0]))
         <div class="row">
                 <div class="col-12 text-center">
                  <h4>{{$datos[0]->primernom}} {{$datos[0]->segnom}} {{$datos[0]->primerape}} {{$datos[0]->segape}}</h4>
-                 <h4>Doc: {{$datos[0]->numdoc}}</h4>  
+                 <h4>Doc: {{$datos[0]->numes}}</h4>  
                 </div>
         </div>
         <div class="row">

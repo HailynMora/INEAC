@@ -25,7 +25,7 @@ class EstudiantesNotController extends Controller
                      ->join('docente', 'cursos.id_docente', '=', 'docente.id')
                      ->select('notas.id as idnota', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.por1', 'notas.por2', 'notas.por3', 'notas.por4', 'notas.definitiva', 
                               'asignaturas.nombre as asignatura', 'tipo_curso.descripcion as curso', 'tipo_curso.cursodes as descur', 'docente.nombre as nomdoc', 'docente.apellido as apedoc',
-                              'docente.num_doc as numdoc', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as primerape', 'estudiante.second_ape as segape')
+                              'docente.num_doc as numdoc', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as primerape', 'estudiante.second_ape as segape', 'estudiante.num_doc as numes')
                      ->where('notas.id_estudiante', $idestu->ides)
                      ->where('cursos.anio', $request->anio)
                      ->where('cursos.periodo', $request->periodo)->get();

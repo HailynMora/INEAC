@@ -92,7 +92,7 @@
                     <i class="fas fa-list-alt" style="color:#FFC107; font-size:22px;"></i>&nbsp;
                   </a>
                   <!-- vemtana de registrar notas -->
-                  <a href="/registro/notas/tecnico/{{$d->idtec}}/{{$d->anio}}/{{$d->periodo}}/{{$d->idastec}}/{{$d->idtri}}" title="Ingresar notas" style="color: #678a3f;">
+                  <a href="/registro/notas/tecnico/{{$d->idtec}}/{{$d->anio}}/{{$d->periodo}}/{{$d->idasig}}/{{$d->idtri}}" title="Ingresar notas" style="color: #678a3f;">
                     <i class="fas fa-sticky-note" style="color:#219F9C; font-size:22px;"></i>
                   </a>
                   <!-- Modal -->
@@ -114,7 +114,7 @@
                               <label for="exampleFormControlTextarea1">Objetivo</label>
                               <textarea class="form-control" id="objetivo" name="objetivo" rows="3"></textarea>
                             </div>
-                            <input type="text" id="idasigna" name="idasigna" value="{{$d->idasig}}" hidden>
+                            <input type="number" id="idasigna" name="idasigna" value="{{$d->idastec}}" hidden>
                             <!---###############################--> 
                           </div>
                           <div class="modal-footer">
@@ -157,7 +157,7 @@
                             </div>
                             <hr style="background-color:black;">
                             @foreach($ob as $j)
-                              @if($j->id_asignaturas==$d->idasig)
+                              @if($j->id_asignaturas==$d->idastec)
                               <div class="row">
                                 <div class="col-2" style="padding-left:15px;">
                                   {{$contador++}}
@@ -166,7 +166,7 @@
                                   {{$j->descripcion}}
                                 </div>
                                 <div class="col-2">
-                                  <a href="/eliminar/objetivos/{{$j->id}}" class="btn btn-success" type="button"><i class="fas fa-trash-alt"></i></a>
+                                  <a href="/eliminar/objetivostec/{{$j->id}}" class="btn btn-success" type="button"><i class="fas fa-trash-alt"></i></a>
                                 </div>
                               </div>
                               <hr style="background-color:black;">

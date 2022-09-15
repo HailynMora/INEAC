@@ -289,20 +289,20 @@ class CalificacionesController extends Controller
                 $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
                 $final = round($val, 1);
                 //actualizar
-                if($final >= 1 && $final < 3){
+                if($final >= 0 && $final <= 2.9){
                         $desempenio = 4;
                 }else{
-                        if($final >= 3 && $final < 4){
-                                $desempenio = 2;
+                        if($final >= 3 && $final <= 3.9){
+                                $desempenio = 3;
                         }else{
-                                if($final >= 4 && $final < 4.7){
-                                        $desempenio = 3;
+                                if($final >= 4 && $final <= 4.5){
+                                        $desempenio = 2;
         
                                 }else{
-                                        if($final >= 4.7 && $final <= 5){
+                                        if($final >= 4.6 && $final <= 5){
                                                 $desempenio = 1;  
                                         }else{
-                                                $desempenio = 5;
+                                                $desempenio = 4;
         
                                         }
                                 }
@@ -396,20 +396,20 @@ class CalificacionesController extends Controller
                 $val = ($n1*$p1)+($n2*$p2)+($n3*$p3)+($n4*$p4);
                 $final = round($val, 1);
                 //actualizar
-                if($final >= 1 && $final < 3){
+                if($final >= 0 && $final <= 2.9){
                         $desempenio = 4;
                 }else{
-                        if($final >= 3 && $final < 4){
-                                $desempenio = 2;
+                        if($final >= 3 && $final <= 3.9){
+                                $desempenio = 3;
                         }else{
-                                if($final >= 4 && $final < 4.7){
-                                        $desempenio = 3;
+                                if($final >= 4 && $final <= 4.5){
+                                        $desempenio = 2;
         
                                 }else{
-                                        if($final >= 4.7 && $final <= 5){
+                                        if($final >= 4.6 && $final <= 5){
                                                 $desempenio = 1;  
                                         }else{
-                                                $desempenio = 5;
+                                                $desempenio = 4;
         
                                         }
                                 }

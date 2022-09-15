@@ -21,7 +21,8 @@
             <tr>
                 <td >
                     <img src="{{ public_path('/img/logoin.jpg')}}" style="width:60px; height: 80px;">
-                </td>
+                    
+                  </td>
                 <td>
                     <p style="text-align:center;  font-size:18px;">
                       <b>INSTITUTO DE EDUCACIÓN TECNICA INESUR<b>

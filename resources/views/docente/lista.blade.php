@@ -69,7 +69,10 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                  @if(isset($condoc[0][0]))
+                                  <?php
+                                    $ndatos = count($condoc);
+                                    ?>
+                                     @if($ndatos != 0)
                                   <?php
                                          
                                          $con=1;
@@ -91,7 +94,10 @@
                                          ?>
                                     @endif
                                     <!--aqui el array de asignaturas tecnicos-->
-                                    @if(isset($asigtec[0][0]))
+                                    <?php
+                                     $num = count($asigtec);
+                                     ?>
+                                    @if($num != 0)
                                   <?php
                                          
                                          $con=1;

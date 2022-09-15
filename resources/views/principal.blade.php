@@ -61,15 +61,15 @@
 <!-- ################################################################################################ -->
 
 <!-- Top Background Image Wrapper -->
-<div class="bgded" style="background-image:url('img/fon.jpg');"> 
+<div class="bgded" style="background-image:url('dist/fondo/iglesia.png');"> 
   <!-- ################################################################################################ -->
   <div class="wrapper row1">
     <header id="header" class="hoc clear">
-      <div id="logo" class="fl_left"> 
+      <div id="logo" class="fl_left" style="margin-top:10px; margin-bottom:3px;"> 
         <!-- ################################################################################################ -->
-        <h1><a href="index.html" class="titulo">INESUR</a></h1>
+        <div class="block clear"><img src="{{asset('dist/fondo/logoinesur1.png')}}" alt="cargando imagen ,,,"></div>
         <!-- ################################################################################################ -->
-      </div>
+      </div>  
       <nav id="mainav" class="fl_right"> 
         <!-- ################################################################################################ -->
         <ul class="clear">

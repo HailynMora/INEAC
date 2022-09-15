@@ -111,11 +111,11 @@
     <!-- main body -->
     <!-- ################################################################################################ -->
     <section id="introblocks">
-      <ul class="nospace group btmspace-80">
+      <ul class="nospace group btmspace-80" style="padding-top:3rem;">
         <li class="one_third first">
-          <figure><a class="imgover" href="#"><img src="images/demo/est1.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Mollis suscipit</h6>
+          <figure><a class="imgover" href="#"><img src="{{asset('dist/fondo/estu.png')}}" alt="cargando imagen ..." style=" border: 2px; border-radius: 25px; background-color:white;"></a>
+            <figcaption style="border: 2px;  padding: 10px; border-radius: 25px;">
+              <h6 class="heading">Estudiantes</h6>
               <div>
                 <p>Eu adipiscing sit amet ante donec vulputate magna duis posuere tellus vel fringilla auctor nisi arcu.</p>
               </div>
@@ -123,9 +123,9 @@
           </figure>
         </li>
         <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/est2.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Vestibulum maecenas</h6>
+          <figure><a class="imgover" href="#"><img src="{{asset('dist/fondo/doc.png')}}" alt="cargando imagen ..." style=" border: 2px; border-radius: 25px; background-color:white;"></a>
+            <figcaption style="border: 2px;  padding: 10px; border-radius: 25px;">
+              <h6 class="heading">Docentes</h6>
               <div>
                 <p>Urna at congue lectus nisi ac neque suspendisse vitae sapien eu mi placerat tincidunt sed eget elit in.</p>
               </div>
@@ -133,9 +133,9 @@
           </figure>
         </li>
         <li class="one_third">
-          <figure><a class="imgover" href="#"><img src="images/demo/est3.png" alt=""></a>
-            <figcaption>
-              <h6 class="heading">Pellentesque enim</h6>
+          <figure><a class="imgover" href="#"><img src="{{asset('dist/fondo/sec.png')}}" alt="cargando imagen ..." style=" border: 2px; border-radius: 25px; background-color:white;"></a>
+            <figcaption style="border: 2px;  padding: 10px; border-radius: 25px;">
+              <h6 class="heading">Secretaria</h6>
               <div>
                 <p>Imperdiet pede sit amet elit aenean sollicitudin eros quis cursus feugiat lacus diam tempor tortor vel.</p>
               </div>

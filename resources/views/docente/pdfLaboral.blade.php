@@ -8,6 +8,9 @@
         <br><br>
         @if(isset($docente->nombre))
         <div style="background-image:url({{ public_path('/img/pdf_inesur2.jpg')}}); background-position:center;  background-repeat: no-repeat; background-size:cover; margin-top:-4rem; margin-left:-4rem; margin-right:-3rem;  margin-bottom:-2rem;">
+        <!--para vincular en el servidor-->
+       <!-- style="background-image:url({{' https://ineacpotosi.com/dist/img/pdf_inesur2.jpg'}});-->
+       
         <div  style="padding-top: 95px;">
            <!-- <div>
                 <img src="{{ public_path('/img/pdf_i.jpg')}}" style="width:100%; height: 100px;">

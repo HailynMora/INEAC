@@ -121,11 +121,19 @@ class ReporteAsigController extends Controller
     }
 
     public function regobtec(Request $request){
+       // return $request;
         $category = new ObjetivosTec();
-        $category->id_asignaturas= $request->input('idasigna');
+        $category->id_asignaturas = $request->input('idasigna');
         $category->descripcion = $request->input('objetivo');
         $category->save();
         Session::flash('msjobjetivo','Objetivos registrados de manera exitosa!');
+        return back();
+    }
+
+    //eliminar objetivos de la asignatura tecnicos
+    public function elim_objtec($id){
+        DB::table('objetivostec')->where('objetivostec.id', $id)->delete();
+        Session::flash('elimi','Objetivo eliminado de manera exitosa!');
         return back();
     }
 

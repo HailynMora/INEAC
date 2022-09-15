@@ -17,6 +17,7 @@
     </form>
    </div>
     <br><br>
+    <div class="table-responsive">
     <table class="table">
         <thead style="background-color:#0f468e; color:#ffffff" class="alerta">
             <tr>
@@ -95,6 +96,7 @@
         </tbody>
         <!--end respuesta-->
     </table>
+   </div>
     <div class="row">
       <div class="col-md-4">
       </div>
