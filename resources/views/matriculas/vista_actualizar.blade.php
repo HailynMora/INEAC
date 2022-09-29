@@ -95,8 +95,8 @@
                             <div class="form-group col-md-12 text-center">
                                 <br>
                                 <div class="form-group col-md-12 text-center">
-                                    <a href="/admin/reporte/estudiante" id="cancelar" type="button" class="btn" style="background-color:#FED615; color:white;">Cancelar</a>
-                                    <button type="submit" class="btn btn-success">Actualizar</button>
+                                    <a href="/admin/reporte/estudiante" id="cancelar" type="button" class="btn btn-warning" >Cancelar</a>
+                                    <button type="submit" class="btn btn-primary">Actualizar</button>
                                         
                                 </div>
                             </div>

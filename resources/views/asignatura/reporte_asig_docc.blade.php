@@ -13,7 +13,7 @@
          <div class="row">
             <div class="col-md-6">
             @if($boton!=0)
-             <a href="{{route('reporte_asigdoc')}}" class="btn btn-outline-success" >Asignaturas Técnicos</a>
+             <a href="{{route('reporte_asigdoc')}}" class="btn btn-success" >Asignaturas Técnicos</a>
             @endif
             <!---filtrar-->
             <!-- Button trigger modal -->
@@ -46,8 +46,8 @@
                     <!--end filtrar-->
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color:#33FFDD; color:black;">Salir</button>
-                      <a href="{{route('reporte_asigdocc')}}" type="button" class="btn" style="background-color:#FFCC00;">Deshacer</a>
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                      <a href="{{route('reporte_asigdocc')}}" type="button" class="btn btn-info">Deshacer</a>
                       <button type="submit" class="btn btn-primary">Filtrar</button>
                     </div>
                   </div>
@@ -141,7 +141,7 @@
 
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
                               <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                           </div>
@@ -200,7 +200,7 @@
                           <!---###############################--> 
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                              <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
                             </div>
                           </div>
                         </div>

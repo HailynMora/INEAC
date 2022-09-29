@@ -95,13 +95,13 @@ class PDFController extends Controller
     }
     //generar constancia
 
-    public function cerLaboral()
+    public function cerLaboral(Request $request)
     {   
         $dia = date('d', time()); 
         $mes = date('m', time()); 
         $anio = date('Y', time()); 
         $idl=auth()->id();
-        $docente = DB::table('docente')->where('docente.id_usuario', '=', $idl)->first();
+        $docente = DB::table('docente')->where('docente.num_doc', '=', $request->docu)->first();
         $data = [
             'docente' => $docente,
             'dia' => $dia,

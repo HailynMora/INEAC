@@ -36,8 +36,8 @@
             </select>
         </div>
     </div>
-    <button type="submit" class="btn btn-success">Actualizar</button>
     <a href="{{route('reporte_pro')}}"type="submit" class="btn btn-warning">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
     
     </form>
 </div>

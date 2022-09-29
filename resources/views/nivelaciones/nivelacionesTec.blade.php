@@ -52,7 +52,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-        <button type="submit" class="btn btn-primary">Ver</button>
+        <button type="submit" class="btn btn-primary">Generar</button>
       </div>
     </div>
   </div>

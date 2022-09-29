@@ -71,8 +71,8 @@
             </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-success">Enviar</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
       </div>
      </form>
     </div>

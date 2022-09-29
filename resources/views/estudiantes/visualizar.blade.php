@@ -2,23 +2,23 @@
 @section('content')
 <!--Tabla de informacion-->
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado De Estudiantes </h3>
+ <h3 class="letra1">Listado De Estudiantes</h3>
 </div>
 <div class="row alerta">
     <div class="col-md-1">
-        <a href="{{route('registro_es')}}" class="btn btn-outline-success my-2 my-sm-0" >Registrar</a>
+        <a href="{{route('registro_es')}}" class="btn btn-success my-2 my-sm-0" >Registrar</a>
     </div>
     <div class="col-md-1">
-        <a href="{{route('listadomatricula')}}" class="btn btn-outline-info my-2 my-sm-0" >Bto.Ciclo</a>
+        <a href="{{route('listadomatricula')}}" class="btn btn-warning my-2 my-sm-0" >Bto.Ciclo</a>
     </div>
     <div class="col-md-1">
-        <a href="/listado/matricula/tecnico" class="btn btn-outline-info my-2 my-sm-0" >Técnicos</a>
+        <a href="/listado/matricula/tecnico" class="btn btn-info my-2 my-sm-0" >Técnicos</a>
     </div>
     <div class="col-md-9">
         <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
           @csrf
           <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Número Identificación" aria-label="Search">
-          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+          <button type="submit" class="btn btn-primary my-2 my-sm-0">Buscar</button>
         </form>
     </div>
 </div>
@@ -223,7 +223,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                     </div>
                     </div>
                 </div>
@@ -408,7 +408,7 @@
 
               </div>
               <div class="modal-footer letraf">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
               </div>
             </div>
           </div>

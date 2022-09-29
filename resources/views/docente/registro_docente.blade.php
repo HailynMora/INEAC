@@ -99,9 +99,9 @@
                         <input type="password" class="form-control" id="pass" name="pass">
                       </div>
                 </div>
-                <button type="submit" class="btn btn-success">Registrar</button>
-                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
                 <a  class="btn btn-danger" href="{{url('/docente/listado_docente')}}">Cancelar</a>
+                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+                <button type="submit" class="btn btn-primary">Registrar</button>
               </form>
         </div>
       </div>
@@ -187,7 +187,7 @@
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });
      $("form input[type=text],form input[type=number] ,form input[type=date] , form input[type=email]").each(function() { this.value = '' });
-     toastr.success('Campos Vacios', {timeOut:1000});
+     toastr.info('Campos Vacios', {timeOut:1000});
   }
 </script>
 @endsection

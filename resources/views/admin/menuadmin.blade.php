@@ -27,31 +27,39 @@
           </li>
          <!--perfil-->
          <li class="nav-item">
-            <a href="#" class="nav-link" style="color:#FFFFFF;" >
+            <a href="{{route('regisperfil')}}" class="nav-link" style="color:#FFFFFF;" >
               <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Perfil 
-                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+         <!--end perfil-->
+          <!---manejo de usuarios--->
+          <li class="nav-item">
+            <a href="#" class="nav-link" style="color:white;">
+            <i class="fas fa-users" style="margin-left:2px;"></i>
+              <p>
+               &nbsp Usuarios
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              @if($per==0) <!--valida si la persona ya tiene perfil o no -->
               <li class="nav-item">
-                <a href="{{route('regisperfil')}}" class="nav-link" style="color:white;">
-                <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
-                 <p>Registrar</p>
+                <a href="{{route('listausu')}}" class="nav-link" style="color:white;">
+                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                  <p>Reporte</p>
                 </a>
-              </li> 
-              @endif 
+              </li>
               <li class="nav-item">
-                <a href="{{route('actuperfil')}}" class="nav-link" style="color:white;">
-                <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
-                  <p>Actualizar Perfil</p>
+                <a href="{{route('rolesvis')}}" class="nav-link" style="color:white;">
+                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                  <p>Roles</p><!--agregar descripcion para el certificados-->
                 </a>
-              </li>   
+              </li>
             </ul>
           </li>
-         <!--end perfil-->
+          <!---end manejo de usuarios--->
           <li class="nav-item">
             <a href="#" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-chart-pie"></i>
@@ -133,32 +141,17 @@
                 </li>
             </ul>
           </li>
-          <!--end nivelaciones-->
-          <!---manejo de usuarios--->
           <li class="nav-item">
-            <a href="#" class="nav-link" style="color:white;">
-            <i class="fas fa-users"></i>
+              <a type="button" data-toggle="modal" data-target="#exampleModalcerti" class="nav-link" style="color:white;">
+              <i class="nav-icon fas fa-folder-open"></i>
               <p>
-               &nbsp Usuarios
-                <i class="fas fa-angle-left right"></i>
+                Certificado Laboral
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('listausu')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
-                  <p>Reporte</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('rolesvis')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
-                  <p>Roles</p><!--agregar descripcion para el certificados-->
-                </a>
-              </li>
-            </ul>
+            @include('docente.modalcertificado')
           </li>
-          <!---end manejo de usuarios--->
+          <!--end nivelaciones-->
+         
           <br>
           
 

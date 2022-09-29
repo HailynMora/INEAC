@@ -13,7 +13,7 @@
         <option value="{{$tec->id}}">{{$tec->nombretec}}</option>
         @endforeach
       </select>
-      <button type="submit" class="btn btn-info">Filtrar</button>
+      <button type="submit" class="btn btn-primary">Filtrar</button>
     </form>
    </div>
     <br><br>
@@ -50,9 +50,9 @@
         idcur-->
          <!-- aprobado-->
         <td>
-        <a href="{{route('certifEstuTec',$e->idest)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp
-        <a href="/matricula/estudiante/actualizar/{{$e->id}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
-        &nbsp&nbsp
+        <a href="/matricula/estudiante/actualizar/{{$e->id}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>&nbsp;
+        <a href="{{route('certifEstuTec',$e->idest)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp;
+        &nbsp;
         <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$e->id}}"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>
                <div class="modal fade" id="cambiarEstado{{$e->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
@@ -76,8 +76,8 @@
                     <form action="/cambiar/estado/matricula" method="GET">
                      @csrf
                     <input id="idestudiante" name="idestudiante" value="{{$e->id}}" hidden>
-                    <button type="submit" class="btn btn-success">Cambiar</button>&nbsp;&nbsp;
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>&nbsp;&nbsp;
                      </form>
                   </div>
                 </div>
@@ -145,8 +145,8 @@
                     <form action="{{route('deshaestudiante')}}" method="POST">
                       @csrf
                     <input id="idestudiante" name="idestudiante"> 
-                    <button type="submit" class="btn btn-success">Cambiar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                      </form>
                   </div>
                 </div>
@@ -188,8 +188,9 @@
             '<td>' +  ar[i].num_doc  + '</td>' +
             '<td>' +  ar[i].aprobado + '</td>' +
             '<td>' +  ar[i].nombretec + '</td>' +
-            '<td>' +'<a href="/generar/certificado/estudiantil_tec/'+ ar[i].id +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>'
-              + '<a href="/matricula/estudiante/actualizar/' + ar[i].id + '" type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'+ 
+            '<td>'
+            +'<a href="/matricula/estudiante/actualizar/' + ar[i].id + '" type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'
+             +'<a href="/generar/certificado/estudiantil_tec/'+ ar[i].id +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>'+
                 '<a type="button" data-toggle="modal" data-target="#cambiar'+ ar[i].id +'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red; font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
                ' <div class="modal fade" id="cambiar'+ ar[i].id +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
               '<div class="modal-dialog" role="document">'+
@@ -213,8 +214,8 @@
                     '<form action="/cambiar/estado/matricula" method="GET">'+
                      '@csrf'+
                     '<input id="idestudiante" name="idestudiante" value="'+ ar[i].id +'" hidden>'+ 
-                    '<button type="submit" class="btn btn-success">Cambiar</button>&nbsp;&nbsp;'+
-                    '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>'+
+                    '<button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>&nbsp;&nbsp;'+
+                    '<button type="submit" class="btn btn-primary">Guardar</button>'+
                      '</form>'+
                   '</div>'+
                 '</div>'+

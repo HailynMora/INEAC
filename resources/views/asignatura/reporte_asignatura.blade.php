@@ -7,7 +7,7 @@
    <!-- Button trigger modal-->
    <div class="row">
      <div class="col-6">
-        <button type="button"class="btn btn-outline-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegAsig">
+        <button type="button"class="btn btn-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegAsig">
           Registrar
         </button>
       </div>
@@ -71,9 +71,9 @@
             </div>
             <div class="modal-footer letraf">
               <!--botones -->
-               <button type="submit" class="btn btn-success">Registrar</button>
-               <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
               <a  class="btn btn-danger" href="{{url('/asignatura/reporte_asignatura')}}">Cancelar</a>
+               <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+              <button type="submit" class="btn btn-primary">Registrar</button>
               <!--end botones-->
             </div>
           </div>
@@ -85,7 +85,7 @@
         <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6 alerta">
         @csrf
         <input id="nombrebus" name="nombrebus" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
-        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+        <button type="submit" class="btn btn-primary my-2 my-sm-0">Buscar</button>
       </form>
      </div>
   </div>
@@ -145,8 +145,9 @@
                         </strong>
                     </div>
                     <div class="modal-footer alerta">
-                        <a  class="btn btn-success" href="{{ route('cambiarAsig', $d->id) }}">Cambiar</a>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                       <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                        <a  class="btn btn-primary" href="{{ route('cambiarAsig', $d->id) }}">Guardar</a>
+                       
                         
                     </div>
                 </div>
@@ -175,9 +176,9 @@
                     <form action="{{route('deshasignatura')}}" method="POST">
                       @csrf
                     <input id="idasig" name="idasig" hidden> 
-                    <button type="submit" class="btn btn-success">Cambiar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                     </form>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
                   </div>
                 </div>
               </div>

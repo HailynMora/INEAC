@@ -36,11 +36,13 @@ class ReporteAsigController extends Controller
     }
     
     public function reg(Request $request){
+        if($request->objetivo != null){
         $category = new Objetivos();
         $category->id_asignaturas= $request->input('idasigna');
         $category->descripcion = $request->input('objetivo');
         $category->save();
         Session::flash('msjobjetivo','Objetivos registrados de manera exitosa!');
+        }
         return back();
     }
 
@@ -121,13 +123,16 @@ class ReporteAsigController extends Controller
     }
 
     public function regobtec(Request $request){
-       // return $request;
+        //return $request;
+        if($request->objetivo != null){
         $category = new ObjetivosTec();
         $category->id_asignaturas = $request->input('idasigna');
         $category->descripcion = $request->input('objetivo');
         $category->save();
         Session::flash('msjobjetivo','Objetivos registrados de manera exitosa!');
+        }
         return back();
+
     }
 
     //eliminar objetivos de la asignatura tecnicos

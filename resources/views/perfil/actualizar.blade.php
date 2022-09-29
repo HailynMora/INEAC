@@ -171,7 +171,7 @@
                   <input class="form-control" id="exp" name="exp" rows="2" value="{{$perfil[0]->Experiencia}}">
                   </div>
                 </div>
-                <button type="submit" class="btn btn-success">Guardar Cambios
+                <button type="submit" class="btn btn-success">Actualizar
                 </button>
               </form>
               @endif

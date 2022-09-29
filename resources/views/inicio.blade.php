@@ -117,7 +117,8 @@
             <figcaption style="border: 2px;  padding: 10px; border-radius: 25px;">
               <h6 class="heading">Estudiantes</h6>
               <div>
-                <p>Eu adipiscing sit amet ante donec vulputate magna duis posuere tellus vel fringilla auctor nisi arcu.</p>
+                <p>
+                </p>
               </div>
             </figcaption>
           </figure>
@@ -127,7 +128,7 @@
             <figcaption style="border: 2px;  padding: 10px; border-radius: 25px;">
               <h6 class="heading">Docentes</h6>
               <div>
-                <p>Urna at congue lectus nisi ac neque suspendisse vitae sapien eu mi placerat tincidunt sed eget elit in.</p>
+                <p></p>
               </div>
             </figcaption>
           </figure>
@@ -137,7 +138,7 @@
             <figcaption style="border: 2px;  padding: 10px; border-radius: 25px;">
               <h6 class="heading">Secretaria</h6>
               <div>
-                <p>Imperdiet pede sit amet elit aenean sollicitudin eros quis cursus feugiat lacus diam tempor tortor vel.</p>
+                <p></p>
               </div>
             </figcaption>
           </figure>

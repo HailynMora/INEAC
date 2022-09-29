@@ -381,7 +381,7 @@ Route::get('/generar/certificado/laboral', [HabilitacionesController::class, 'la
 Route::get('/generar/certificado/estudiantil/{id}', [HabilitacionesController::class, 'estudiantil'])->middleware(['auth','secretaria'])->name('certifEstu');
 Route::get('/generar/certificado/estudiantil_tec/{id}', [HabilitacionesController::class, 'estudiantiltec'])->middleware(['auth','secretaria'])->name('certifEstuTec');
 //generar pdf laboral docentes
-Route::get('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->middleware(['auth', 'secretaria_docente'])->name('pdfLaboral');
+Route::post('/generar/certificado/pdf', [PDFController::class, 'cerLaboral'])->middleware(['auth', 'secretaria_docente'])->name('pdfLaboral');
 //generar pdf certificado estudiantil notas
 Route::post('/generar/certificado_es/pdf', [PDFController::class, 'cerEstudiantil'])->middleware(['auth'])->name('pdfEstudiantil');
 Route::post('/generar/certificado_not/pdf', [PDFController::class, 'cerNota'])->middleware(['auth'])->name('pdfEstudiantilNot');

@@ -70,12 +70,13 @@
                   </select>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-success">Registrar</button>
+                <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Cancelar</a>
                 <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalListar">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalListar">
                   Listar
                 </button>
-                <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Cancelar</a>
+               
 
               </form>
               <br>

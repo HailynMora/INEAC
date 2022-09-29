@@ -28,8 +28,8 @@ return new class extends Migration
             $table->foreign('id_tipo_doc')->references('id')->on('tipo_documento');//llave foranea para referenciar a la tabla categorias
             $table->unsignedBigInteger('id_genero');//atributo para referenciar a categoria
             $table->foreign('id_genero')->references('id')->on('genero');//llave foranea para referenciar a la tabla categorias
-            $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
-            $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
+           //desactive  $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
+          //desactive   $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }

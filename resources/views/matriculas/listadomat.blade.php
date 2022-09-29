@@ -13,7 +13,7 @@
         <option value="{{$p->idcur}}">{{$p->nomcur}}</option>
         @endforeach
       </select>
-      <button type="submit" class="btn btn-info">Filtrar</button>
+      <button type="submit" class="btn btn-primary">Filtrar</button>
     </form>
   </div>
     <br><br>
@@ -51,9 +51,9 @@
         idcur-->
         
         <td>
+        <a href="/matricula/estudiante/bachillerato/actualizar/{{$e->idmat}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
           &nbsp&nbsp&nbsp
                 <a href="{{route('certifEstu',$e->idest)}}"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp
-        <a href="/matricula/estudiante/bachillerato/actualizar/{{$e->idmat}}" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Editar"></i></a>
         &nbsp&nbsp
         <!---deshabilitar un estudiante-->
           <a type="button" data-toggle="modal" data-target="#cambiarEstado{{$e->idmat}}"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red;font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>
@@ -79,9 +79,9 @@
                       <form action="/cambiar/estado/matricula/bachillerato" method="GET">
                       @csrf
                       <input id="idestudiante" name="idestudiante" value="{{$e->idmat}}" hidden>
-                      <button type="submit" class="btn btn-success">Cambiar</button>&nbsp;&nbsp;
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                      </form>
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                      <button type="submit" class="btn btn-primary">Guardar</button>&nbsp;&nbsp;
+                    </form>
                     </div>
                   </div>
                 </div>
@@ -154,8 +154,9 @@
             '<td>' +  ar[i].telefono  + '</td>' +
             '<td>' +  ar[i].nomcurso + '</td>' +
             '<td>' +  ar[i].estadoes + '</td>' +
-            '<td>' +'&nbsp&nbsp&nbsp <a href="/generar/certificado/estudiantil/'+ ar[i].idest +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:#e1b308; font-size:20px;" ></i></a>&nbsp;&nbsp;&nbsp;'
-              + '<a href="/matricula/estudiante/bachillerato/actualizar/' + ar[i].idmat + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:#e1b308; font-size:20px;" ></i></a>&nbsp;&nbsp;'+ 
+            '<td>'
+            + '<a href="/matricula/estudiante/bachillerato/actualizar/' + ar[i].idmat + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:#e1b308; font-size:20px;" ></i></a>&nbsp;&nbsp;'
+              +'&nbsp&nbsp&nbsp <a href="/generar/certificado/estudiantil/'+ ar[i].idest +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:#e1b308; font-size:20px;" ></i></a>&nbsp;&nbsp;&nbsp;'+
                 '<a type="button" data-toggle="modal" data-target="#estado'+ar[i].idmat+'"  data-placement="bottom"  title="Retirar"> <i class="fas fa-user-times" style="color:red; font-size:20px;" data-toggle="tooltip" data-placement="bottom" title="Deshabilitar" ></i></a>'+
                ' <div class="modal fade" id="estado'+ar[i].idmat+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'+
               '<div class="modal-dialog" role="document">'+
@@ -179,8 +180,9 @@
                     '<form action="/cambiar/estado/matricula/bachillerato" method="GET">'+
                      '@csrf'+
                     '<input id="idestudiante" name="idestudiante" value="'+ ar[i].idmat +'" hidden>'+ 
-                    '<button type="submit" class="btn btn-success">Cambiar</button>&nbsp;&nbsp;'+
-                    '<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>'+
+                    '<button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>&nbsp;&nbsp;'+
+                    '<button type="submit" class="btn btn-primary">Guardar</button>'+
+                    
                      '</form>'+
                   '</div>'+
                 '</div>'+

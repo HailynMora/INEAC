@@ -165,7 +165,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Ver</button>
+          <button type="submit" class="btn btn-primary">Aceptar</button>
          
         </div>
       </div>
@@ -213,7 +213,7 @@
         </div>
         <div class="modal-footer">
          <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Ver</button>
+          <button type="submit" class="btn btn-primary">Aceptar</button>
          
         </div>
       </div>

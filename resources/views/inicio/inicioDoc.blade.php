@@ -20,14 +20,6 @@
               <div class="col-4"></div>
               <div class="col-4">
                 <!--card-->
-                @if($asigbachi!=0)
-                  <div class="borde" style="width: 12rem;">
-                    <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link" style="color:white;">
-                     <img src="{{asset('dist/img/docente/estudiante.png')}}" class="card-img-top" alt="...">
-                    </a>
-                    @include('docente.listadoEstu')
-                  </div>
-                  @endif 
                 <!--end card-->
               </div>
               <div class="col-4"></div>
@@ -77,10 +69,15 @@
               <div class="col-4">
                   <!--card-->
                 <div class="container" style="padding-left:30px; padding-top:30px;">
-                <div class="borde" style="width: 12rem;">
-                   <a href="{{route('pdfLaboral')}}"> <img src="{{asset('dist/img/docente/constancia.png')}}" class="card-img-top" alt="..."> </a>
+                @if($asigbachi!=0)
+                  <div class="borde" style="width: 12rem;">
+                    <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link" style="color:white;">
+                     <img src="{{asset('dist/img/docente/estudiante.png')}}" class="card-img-top" alt="...">
+                    </a>
+                    @include('docente.listadoEstu')
+                  </div>
+                  @endif 
                 </div>
-              </div>
                 <!--end card-->
               </div>
             </div>
@@ -147,15 +144,6 @@
             <div class="borde" style="width: 12rem;">
               <a href="/asignatura/reporte_c"> <img src="{{asset('dist/img/docente/asignatura.png')}}" class="card-img-top" alt="..."> </a>
             </div>
-          </div>
-        </div>
-     </div>
-     <div class="row">
-        <div class="col-12">
-        <div class="container"  style="padding-left:2.5rem; padding-top: 15px; padding-bottom:15px;">
-            <div class="borde"  style="width: 12rem;">
-              <a href="{{route('pdfLaboral')}}"> <img src="{{asset('dist/img/docente/constancia.png')}}" class="card-img-top" alt="..."> </a>
-            </div> 
           </div>
         </div>
      </div>

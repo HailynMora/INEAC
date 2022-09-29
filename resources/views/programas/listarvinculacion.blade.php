@@ -51,8 +51,8 @@
                             </h4>
                         </div>
                         <div class="modal-footer alerta">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <a  class="btn btn-success" href="{{ route('desvincular', $s->id) }}">Aceptar</a>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                            <a  class="btn btn-primary" href="{{ route('desvincular', $s->id) }}">Guardar</a>
                         </div>
                     </div>
                 </div>

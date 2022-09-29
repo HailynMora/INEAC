@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-6">
     <!--BOTON MODAL-->
-      <button type="button" class="btn btn-outline-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegTecAsig">
+      <button type="button" class="btn btn-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegTecAsig">
         Registrar
       </button>
     <!--FIN BOTON MODAL-->
@@ -15,7 +15,7 @@
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
       @csrf
       <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Nombre Asignatura" aria-label="Search">
-      <button type="submit" class="btn btn-outline-success my-2 my-sm-0 alerta">Buscar</button>
+      <button type="submit" class="btn btn-primary my-2 my-sm-0 alerta">Buscar</button>
     </form>
     <br><br>
   </div>
@@ -76,10 +76,10 @@
             </div>
             <div class="modal-footer alerta">
               <!--botones -->
-                <button type="submit" class="btn btn-success">Registrar</button>
-                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
                 <a  class="btn btn-danger" href="{{url('/asignatura_tecnicos/reporte_asignatura')}}">Cancelar</a>
-              <!--end botones-->
+                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <!--end botones-->
             </div>
             </div>
           </div>

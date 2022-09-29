@@ -6,18 +6,18 @@
 <!--MODAL-->
 <div class="row">
   <div class="col-6">
-    <button type="button"class="btn btn-outline-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegTec">
+    <button type="button"class="btn btn-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegTec">
       Registrar
     </button>
     <!--BOTON REGISTRO ASIGNATURAS--->
-    <a href="{{route('reportetec')}}" class="btn btn-outline-warning my-2 my-sm-0 alerta" >Asig. Técnicos</a>
+    <a href="{{route('reportetec')}}" class="btn btn-warning my-2 my-sm-0 alerta" style="color:white;" >Asig. Técnicos</a>
     <!--FIN REGISTRAR ASIGNATURAS--->
   </div>
   <div class="col-6">
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
       @csrf
       <input id="nombre" name="nombre" class="form-control mr-sm-2" placeholder="Ejm. Técnico en sistemas" aria-label="Search">
-      <button type="submit" class="btn btn-outline-success my-2 my-sm-0 alerta">Buscar</button>
+      <button type="submit" class="btn btn-primary my-2 my-sm-0 alerta">Buscar</button>
     </form>
     <br><br><br>
   </div>
@@ -77,9 +77,9 @@
             </div>
             <div class="modal-footer letraf">
               <!--botones -->
-                <button type="submit" class="btn btn-success">Registrar</button>
-                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
                 <a  class="btn btn-danger" href="{{url('/programas/reporte_programas_tecnicos')}}">Cancelar</a>
+                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
+                <button type="submit" class="btn btn-primary">Registrar</button>
               <!--end botones-->
             </div>
             </div>
@@ -152,8 +152,8 @@
                               </strong>
                           </div>
                           <div class="modal-footer letraf">
-                              <a  class="btn btn-success" href="{{ route('cambiarProTec', $d->id) }}">Cambiar</a>
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                              <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                              <a  class="btn btn-primary" href="{{ route('cambiarProTec', $d->id) }}">Guardar</a>
                           </div>
                       </div>
                   </div>

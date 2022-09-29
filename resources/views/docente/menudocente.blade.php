@@ -51,28 +51,42 @@
               </p>
             </a>
           </li>
-         @if($asigbachi!=0)
+
+          <!--estudiantes-->
           <li class="nav-item">
-            <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link" style="color:white;">
-              <i class="nav-icon fas fa-book"></i>
-                <p>
-                   Estudiantes    
+            <a href="#" class="nav-link" style="color:white;">
+            <i class="nav-icon fas fa-university"></i>
+              <p>
+                Estudiantes
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            @include('docente.listadoEstu')
-          </li> 
-         @endif 
-         @if($asigtec !=0)
-         <li class="nav-item">
-            <a type="button" data-toggle="modal" data-target="#listaTec" class="nav-link" style="color:white;">
-              <i class="nav-icon fas fa-university"></i>
-                <p>
-                   Estudiantes Técnico  
-              </p>
-            </a>
-            @include('docente.listadoEstuTecnico')
+            <ul class="nav nav-treeview">
+            @if($asigbachi!=0)
+              <li class="nav-item">
+                <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link" style="color:white;">
+                <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                    <p>
+                      Bachillerato   
+                  </p>
+                </a>
+                @include('docente.listadoEstu')
+              </li> 
+            @endif 
+            @if($asigtec !=0)
+            <li class="nav-item">
+                <a type="button" data-toggle="modal" data-target="#listaTec" class="nav-link" style="color:white;">
+                <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                    <p>
+                      Técnico  
+                  </p>
+                </a>
+                @include('docente.listadoEstuTecnico')
+              </li>
+            @endif  
+            </ul>
           </li>
-         @endif  
+          <!--end estudiantes-->
           <!---aqui-->
            <!--manejo de nivelaciones-->
            <li class="nav-item">
@@ -110,14 +124,6 @@
           </li>
           <!--end nivelaciones-->
           <!--end aqui-->
-          <li class="nav-item">
-            <a href="{{route('pdfLaboral')}}" class="nav-link" style="color:white;">
-              <i class="nav-icon fas fa-folder-open"></i>
-              <p>
-                Certificado Laboral
-              </p>
-            </a>
-          </li>
           <br>
           
 

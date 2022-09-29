@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('codigo',200)->unique();
             $table->Integer('intensidad_horaria');
             $table->Integer('val_habilitacion')->nullable();
-            $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
-            $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
+           //desactive  $table->unsignedBigInteger('id_estado');//atributo para referenciar a categoria
+           //desactive  $table->foreign('id_estado')->references('id')->on('estado');//llave foranea para referenciar a la tabla categorias
             $table->timestamps();
         });
     }

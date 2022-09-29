@@ -2,7 +2,7 @@
 @section('content')
 <!--Tabla de informacion-->
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado de Estudiantes hh</h3>
+ <h3 class="letra1">Listado de Estudiantes</h3>
 </div>
 <div class="row alerta">
     <div class="col-md-1">
@@ -15,7 +15,7 @@
         <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
           @csrf
           <input id="cedula" name="cedula" class="form-control mr-sm-2" placeholder="Número Identificación" aria-label="Search">
-          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+          <button type="submit" class="btn btn-primary my-2 my-sm-0">Buscar</button>
         </form>
     </div>
 </div>
@@ -190,7 +190,7 @@
                       <hr>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
                     </div>
                     </div>
                 </div>
@@ -357,7 +357,7 @@
                       <hr>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
               </div>
             </div>
           </div>

@@ -55,9 +55,9 @@
                   <textarea class="form-control" id="exp" name="exp" rows="2" required></textarea>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-success">Registrar</button>
-                <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
                 <a  class="btn btn-danger" href="{{url('/')}}">Cancelar</a>
+                <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
+                <button type="submit" class="btn btn-success">Registrar</button>
               </form>
               <br>
              

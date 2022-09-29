@@ -305,10 +305,10 @@
 <div class="container-fluid">
 
 </div>
+<a  class="btn btn-danger" href="{{url('/visualizar/estudiante')}}">Cancelar</a>
+<button type="submit" class="btn btn-warning letraf"  onclick="resetform()">Limpiar</button>
 <button type="submit" class="btn btn-primary letraf">Registrar</button>
 <button type="button"  id="miboton" class="btn btn-success letraf">Visualizar</button>
-<button type="submit" class="btn btn-warning letraf"  onclick="resetform()">Limpiar</button>
-<a  class="btn btn-danger" href="{{url('/visualizar/estudiante')}}">Cancelar</a>
 </form>
 <!--Modal de visualizar--->
 <!-- Button trigger modal -->

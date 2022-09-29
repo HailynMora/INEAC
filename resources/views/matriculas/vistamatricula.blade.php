@@ -126,9 +126,8 @@
                             <br>
                             <div class="form-group col-md-12 text-center">
                                 <a href="/visualizar/estudiante" type="button" class="btn btn-warning">Cancelar</a>
-                                <a id="listado" type="button" class="btn"  style="background-color:#8852FF; color:white;">Visualizar</a>
-                                    <button type="submit" class="btn btn-success">Matricular</button>
-                                    
+                                <button type="submit" class="btn btn-primary">Matricular</button>
+                                <a id="listado" type="button" class="btn btn-success">Visualizar</a> 
                             </div>
                             
                                                     
@@ -239,10 +238,9 @@
                                     <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
                                 <br>
                                 <div class="form-group col-md-12 text-center">
-                                    <a href="/visualizar/estudiante" id="cancelar" type="button" class="btn" style="background-color:#FED615; color:white;">Cancelar</a>
-                                    <a  href="{{route('listado_tecnico')}}" id="listado" type="button" class="btn" style="background-color:#8852FF; color:white;">Visualizar</a>
-                                    <button type="submit" class="btn btn-success">Matricular</button>
-                                        
+                                    <a href="/visualizar/estudiante" id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary">Matricular</button>
+                                    <a  href="{{route('listado_tecnico')}}" id="listado" type="button" class="btn btn-success">Visualizar</a>                                       
                                 </div>
                             
                                                     

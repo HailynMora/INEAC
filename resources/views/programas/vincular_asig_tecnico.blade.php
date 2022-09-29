@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:white;">
- <h3 class="letra1">Vincular Asignatura a un Programa Técnico</h3>
+ <h3 class="letra1">Vincular Asignatura A Un Programa Técnico</h3>
 </div>
 <div>
 </div>          
@@ -25,7 +25,6 @@
         </button>
         </div>
   @endif
-
 <!----############################-->
 <br>
 <div class="accordion" id="accordionExample">
@@ -110,10 +109,10 @@
                   </div>          
                 </div>
                 <!---end periodo y anio--->
-                <button type="submit" class="btn btn-success">Registrar</button>
-                <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
                 <a  class="btn btn-danger" href="{{url('/programas/reporte_programas_tecnicos')}}">Cancelar</a>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
                   Listar
                 </button>
               </form>
@@ -167,8 +166,7 @@
                     <td>{{$s->nombretri}}</td>
                     <td>{{$s->asig}}</td>
                     <td>{{$s->horas}}</td>
-                    <td>{{$s->nomdoc}} {{$s->apedoc}}</td>
-                    
+                    <td>{{$s->nomdoc}} {{$s->apedoc}}</td>            
                     <td>
                         &nbsp&nbsp
                         <a type="button" data-toggle="modal" data-target="#eliminarAsig{{$s->id}}" data-placement="bottom"  title="Eliminar"><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
@@ -190,7 +188,7 @@
                 
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                      <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
                                       <a type="submit" href="{{route('elimasig', $s->id)}}" class="btn btn-primary">Si</a>
                                     </div>
                                   </div>
@@ -213,7 +211,7 @@
      <!---####################--->   
       </div>
       <div class="modal-footer alerta">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
       </div>
     </div>
   </div>

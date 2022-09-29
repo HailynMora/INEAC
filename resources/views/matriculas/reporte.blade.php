@@ -76,7 +76,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
-                                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                                        <button type="submit" class="btn btn-primary">Generar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,7 +139,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
-                                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                                        <button type="submit" class="btn btn-primary">Generar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -211,7 +211,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                                <button type="submit" class="btn btn-primary">Generar</button>
                                             </div>
                                             </div>
                                         </div>
@@ -278,7 +278,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
-                                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                                        <button type="submit" class="btn btn-primary">Generar</button>
                                                     </div>
                                                 </div>
                                             </div>

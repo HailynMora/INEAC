@@ -131,7 +131,7 @@
                     <!--FIN ACORDEON-->
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
                     </div>
                 </div>                
               </div>

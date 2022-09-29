@@ -290,9 +290,9 @@
 <div class="container-fluid">
 
         </div>
+        <a href="{{route('listarestu')}}"type="submit" class="btn btn-warning">Cancelar</a>
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a href="{{url('/visualizar/estudiante')}}" type="button"   id="miboton" class="btn btn-success">Visualizar</a>
-        <a href="{{route('listarestu')}}"type="submit" class="btn btn-warning">Cancelar</a>
    <!---############################################################################--->
     </form>
 </div>
