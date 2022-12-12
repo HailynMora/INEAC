@@ -44,7 +44,7 @@
             @foreach($consulta as $con)
             <tr>
             <th scope="row"><span style="font-size:14px;">{{$conta++}}</span></th>
-            <td colspan="2"><span style="font-size:14px;">{{$con->apes}}&nbsp;{{$con->sedape}}&nbsp;{{$con->segnom}}&nbsp;{{$con->nomes}}</span></td>
+            <td colspan="2"><span style="font-size:14px;">{{$con->apes}}&nbsp;{{$con->sedape}}&nbsp;{{$con->nomes}}</span></td>
             <td><span style="font-size:14px;">{{$con->nota1}}</span></td>
             <td><span style="font-size:14px;">{{$con->nota2}}</span></td>
             <td><span style="font-size:14px;">{{$con->nota3}}</span></td>

@@ -116,6 +116,20 @@ class PerfilController extends Controller
 
     public function estudiantePEr(){
         $ides=auth()->id();
+        //validar
+        $val = DB::table('estudiante')
+                ->join('estado', 'id_estado', '=', 'estado.id')
+                ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
+                ->join('genero', 'id_genero', '=', 'genero.id')
+                ->join('users', 'id_usuario', '=', 'users.id')
+                ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+                ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+                ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+                ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+                ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                ->where('id_usuario', $ides)
+                ->count();
+          if($val != 0){
           $datos  =DB::table('estudiante')
                     ->join('estado', 'id_estado', '=', 'estado.id')
                     ->join('tipo_documento', 'id_tipo_doc', '=', 'tipo_documento.id')
@@ -140,7 +154,13 @@ class PerfilController extends Controller
             $tipodoc = DB::table('tipo_documento')->get();
             $paren = DB::table('parentezco')->get();
             $usu = DB::table('users')->where('users.id', '=', $ides)->first();
-            
+      }else{
+        $datos = 0;
+        $gen = 0;
+        $tipodoc = 0;
+        $paren = 0;
+        $usu = 0;
+      }
         return view('estudiantes.perfilES')->with('est', $datos)->with('gen', $gen)->with('doc', $tipodoc)->with('paren', $paren)->with('usu', $usu);
     }
 

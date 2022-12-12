@@ -21,7 +21,7 @@
     <table class="table table-bordered">
     <thead>
         <tr>
-            <th colspan="3"></th>
+            <th colspan="4"></th>
             <th><span style="font-size:small;">Nota 1</span></th>
             <th><span style="font-size:small;">Nota 2</span></th>
             <th><span style="font-size:small;">Nota 3</span></th>
@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <th>No</th>
-            <th colspan="2"><span style="font-size:small;">APELLIDOS Y NOMBRES</span></th>
+            <th colspan="3"><span style="font-size:small;">APELLIDOS Y NOMBRES</span></th>
             <th><span style="font-size:small;">{{$consulta[0]->por1 *100}}%</span></th>
             <th><span style="font-size:small;">{{$consulta[0]->por2 *100}}%</span></th>
             <th><span style="font-size:small;">{{$consulta[0]->por3 *100}}%</span></th>
@@ -44,7 +44,7 @@
             @foreach($consulta as $con)
             <tr>
             <th scope="row"><span style="font-size:14px;">{{$conta++}}</span></th>
-            <td colspan="2"><span style="font-size:14px;">{{$con->apes}}&nbsp;{{$con->sedape}}&nbsp;{{$con->segnom}}&nbsp;{{$con->nomes}}</span></td>
+            <td colspan="3"><span style="font-size:14px;">{{$con->apes}}&nbsp;{{$con->sedape}}&nbsp;{{$con->segnom}}&nbsp;{{$con->nomes}}</span></td>
             <td><span style="font-size:14px;">{{$con->nota1}}</span></td>
             <td><span style="font-size:14px;">{{$con->nota2}}</span></td>
             <td><span style="font-size:14px;">{{$con->nota3}}</span></td>

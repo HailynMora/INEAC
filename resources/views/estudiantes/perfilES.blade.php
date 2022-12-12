@@ -4,6 +4,15 @@
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
  <h3 class="letra1">Perfil Estudiante</h3>
 </div>
+@if(!isset($est[0]))
+<div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">Te damos la bienvenida!</h4>
+  <p>El administrador de la plataforma cambio el rol a estudiante, por favor para continuar con este rol pidele al administrador que te registre como estudiante.</p>
+  <hr>
+  <p class="mb-0">Gracias</p>
+</div>
+@endif
+@if(isset($est[0]))
 <div class="row">
   <div class="col-md-4">
     <div class="alert" role="alert">
@@ -299,4 +308,5 @@
    <!---############################################################################--->
     </form>
 </div>
+@endif
 @endsection

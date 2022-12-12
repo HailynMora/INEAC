@@ -1,9 +1,28 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert  text-center"  role="alert" style="background-color: #ffc107; color:#ffffff;">
-  <h3 class="letra1"> Listado De Estudiantes De Técnico </h3>
+  <h3 class="letra1"> Listado De Estudiantes De Técnico</h3>
 </div>
-<br>
+@if(!isset($datos[0]))
+@if(Session::has('info'))
+       <br>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{Session::get('info')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  @endif
+  @endif
+  @if(isset($datos[0]))
+  <!---generar-->
+    <div class="row alerta">
+      <div class="col-md-12 text-left">
+      <a href="/docente/generar/listado/tecnico/{{$dat['anio']}}/{{$dat['per']}}/{{$dat['curso']}}" type="button" class="btn btn-primary">Generar </a>
+      </div>
+  </div>
+  <br>
+  <!-- end generar-->
    <div class="table-responsive">
     <table class="table">
         <thead style="background-color:#0f468e; color:#ffffff" class="alerta">
@@ -192,6 +211,7 @@
         </tr>
         @endif
         @endforeach
+        @endif
         </tbody>
         <!---respuesta de ajax-->
         <tbody id="tabla2"   style="background-color:#e3e3e3;" class="letraf">
@@ -212,9 +232,9 @@
       </div>
       <div class="col-md-2 alerta">
         <h2 class="mb-0">
-          <a class="btn btn-link float-right" type="button" href="/visualizar/estudiante">
+          <!--<a class="btn btn-link float-right" type="button" href="/visualizar/estudiante">
           <i class="fas fa-arrow-circle-left" style="font-size:20px;"></i> <span class="alerta">Volver</span>
-          </a>
+          </a>-->
         </h2>
       </div>
     </div>

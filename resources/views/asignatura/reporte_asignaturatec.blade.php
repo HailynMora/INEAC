@@ -45,28 +45,23 @@
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="codigo">Código</label>
-                            <input type="number" class="form-control" id="codigo" name="codigo" placeholder="12345678" required>
+                            <input type="number" class="form-control" id="codigo" name="codigo" placeholder="1234" min="0"  minlength="4" maxlength="6" required>
                           </div>
                           <div class="form-group col-md-6">
                             <label for="nomas">Nombre</label>
                             <input type="text" class="form-control" id="nomas" name="nomas" required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-6">
                             <label for="intensidad_horaria">Intensidad Horaria</label>
-                            <input type="number" class="form-control" id="intensidad_horaria" name="intensidad_horaria" placeholder="12345678" required>
+                            <input type="number" class="form-control" id="intensidad_horaria" name="intensidad_horaria" placeholder="5" min="1" max="10" required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-6">
                             <label for="val_habilitacion">Valor Habilitación</label>
-                            <input type="number" class="form-control" id="val_habilitacion" name="val_habilitacion" placeholder="12345678">
+                            <input type="number" class="form-control" id="val_habilitacion" name="val_habilitacion" placeholder="1000" min="10000" max="60000">
                           </div>
-                          <div class="form-group col-md-4" >
-                            <label for="estado">Estado</label>
-                            <select id="estado" class="form-control" name="estado" required>
-                              <option selected>Seleccionar</option>
-                              <option value="1">Activo</option>
-                              <option value="2">Inactivo</option>
-                            </select>
-                          </div>
+                          
+                            <input type="number" id="estado" class="form-control" name="estado" value="1" hidden>
+                        
                         </div>
                       </div>
                     </div>
@@ -288,7 +283,7 @@
     var nomas=$('#nomas').val();
     var intensidad_horaria=$('#intensidad_horaria').val();
     var val_habilitacion=$('#val_habilitacion').val();
-    var estado=$('#estado').val();
+    var estado='1';
     var _token = $('input[name=_token]').val(); //token de seguridad
 
     $.ajax({

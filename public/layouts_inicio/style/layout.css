@@ -309,7 +309,7 @@ td{border-width:0 1px;}
 --------------------------------------------------------------------------------------------------------------- */
 body{color:#A5A6AA; background-color:#fff;}
 a{color:#B946AD;}
-a:active, a:focus{background:transparent !important;}/* IE10 + 11 Bugfix - prevents grey background */
+/*a:active, a:focus{background:transparent !important;}*//* IE10 + 11 Bugfix - prevents grey background */
 hr, .borderedbox{border-color:#D7D7D7;}
 label span{color:#022859; background-color:inherit;}
 input:focus, textarea:focus, *:required:focus{border-color:#B946AD !important;}
@@ -327,7 +327,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#B946AD !important;}
 .btn, .btn.inverse:hover{color:#FFFFFF; background-color:#B946AD; border-color:#B946AD;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
 
-.imgover:hover::before{background-color:rgba(4,96,217,.5);/* #B946AD */}
+/*.imgover:hover::before{background-color:rgba(4,96,217,.5);}*/
 .imgover, .imgover:hover::after{color:#FFFFFF;}
 
 .heading.underline::after{background-color:#A032AB;}

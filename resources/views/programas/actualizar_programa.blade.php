@@ -14,7 +14,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="codigo">Codigo</label>
-            <input type="text" class="form-control" id="codigo" name="codigo" required  value="{{$prog[0]->codigo}}">
+            <input type="number" class="form-control" id="codigo" name="codigo" required  value="{{$prog[0]->codigo}}" min="0">
         </div>
     </div>
     <div class="form-row">
@@ -24,16 +24,19 @@
         </div>
         <div class="form-group col-md-4">
             <label for="jornada">Jornada</label>
-            <input type="text" class="form-control" id="jornada" name="jornada" required value="{{$prog[0]->jornada}}">
+            <select  id="jornada" name="jornada" class="form-control" required>
+            @if($prog[0]->jornada == 'Sabado')
+            <option value="{{$prog[0]->jornada}}" selected>{{$prog[0]->jornada}}</option>
+            <option value="Domingo">Domingo</option>
+            @endif
+            @if($prog[0]->jornada == 'Domingo')
+            <option value="{{$prog[0]->jornada}}">{{$prog[0]->jornada}}</option>
+            <option value="Sabado">Sabado</option>
+            @endif
+            </select>
         </div>
         <div class="form-group col-md-4">
-            <label for="estado">Estado</label>
-            <select id="estado" class="form-control" name="estado" required>
-            <option value="{{$prog[0]->id_estado}}" selected>{{$prog[0]->estado}}</option>
-            @foreach($estado as $d)
-                <option value="{{$d->id}}">{{$d->descripcion}}</option>
-            @endforeach
-            </select>
+            <input type="number" class="form-control" id="estado" name="estado" value="1" hidden>
         </div>
     </div>
     <a href="{{route('reporte_pro')}}"type="submit" class="btn btn-warning">Cancelar</a>

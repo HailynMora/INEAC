@@ -43,7 +43,7 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="numerodoc">Numero Documento</label>
-                    <input type="number" class="form-control" id="numerodoc" name="numerodoc" placeholder="12345678" required>
+                    <input type="text" class="form-control" id="numerodoc" name="numerodoc" placeholder="12345678" minlength="5" maxlength="12" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nombre">Nombre</label>
@@ -63,7 +63,7 @@
                   
                   <div class="form-group col-md-3">
                     <label for="telefono">Telefono</label>
-                    <input type="number" class="form-control" id="telefono" name="telefono">
+                    <input type="text" class="form-control" id="telefono" name="telefono" minlength="10" maxlength="10">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="direccion">Direccion</label>

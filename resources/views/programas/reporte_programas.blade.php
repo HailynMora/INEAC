@@ -3,6 +3,7 @@
 <div class="alert text-center" role="alert" style="background-color: #283593; color:#ffffff;">
  <h3> Programas Bachillerato Registrados</h3>
 </div>
+
 <div class="container">
     <table class="table">
         <thead style="background-color:#FFCC00;">

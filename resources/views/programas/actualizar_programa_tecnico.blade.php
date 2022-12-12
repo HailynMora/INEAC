@@ -38,26 +38,26 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="codigo">Codigo</label>
-                        <input type="text" class="form-control" id="codigo" name="codigo" required  value="{{$prog[0]->codigotec}}">
+                        <input type="number" class="form-control" id="codigo" name="codigo" required  value="{{$prog[0]->codigotec}}" min="0">
                     </div>
                 </div>
                 <div class="form-row">
-                     <div class="form-group col-md-4">
+                     <div class="form-group col-md-6">
                         <label for="descripcion">Descripcion</label>
                         <input type="text" class="form-control" id="descripcion" name="descripcion" required value="{{$prog[0]->descripcion}}">
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="jornada">Jornada</label>
-                        <input type="text" class="form-control" id="jornada" name="jornada" required value="{{$prog[0]->jornada}}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="estado">Estado</label>
-                        <select id="estado" class="form-control" name="estado" required>
-                        <option value="{{$prog[0]->id_estado}}" selected>{{$prog[0]->estado}}</option>
-                        @foreach($estado as $d)
-                            <option value="{{$d->id}}">{{$d->descripcion}}</option>
-                        @endforeach
-                        </select>
+                        <select  id="jornada" name="jornada" class="form-control" required>
+                        @if($prog[0]->jornada == 'Sabado')
+                        <option value="{{$prog[0]->jornada}}" selected>{{$prog[0]->jornada}}</option>
+                        <option value="Domingo">Domingo</option>
+                        @endif
+                        @if($prog[0]->jornada == 'Domingo')
+                        <option value="{{$prog[0]->jornada}}">{{$prog[0]->jornada}}</option>
+                        <option value="Sabado">Sabado</option>
+                        @endif
+                        <input type="text" class="form-control" id="estado" name="estado" required value="1" hidden>
                     </div>
                 </div>
                 <a href="{{route('reporte_tecnico')}}"type="submit" class="btn btn-warning">Cancelar</a>

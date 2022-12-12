@@ -289,19 +289,21 @@ class asignaturaController extends Controller
     public function asig_docc(){
         //'asignaturas.id as ida' se quito
         $idlog=auth()->id();
-        $doc=DB::table('docente')->where('docente.id_usuario', '=', $idlog)->select('docente.id')->first();
-        $d= $doc->id;
-        $rep=DB::table('cursos')
-        ->where('cursos.id_docente',$d)
-        ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
-        ->join('estado','id_estado','=','estado.id')
-        ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
-        ->select('asignaturas.id as idasig', 'asignaturas.codigo',
-        'asignaturas.nombre as asig','intensidad_horaria',
-        'val_habilitacion','estado.descripcion as estado',
-        'tipo_curso.descripcion as curso', 'cursos.anio',
-        'cursos.periodo', 'cursos.id as ida', 'cursos.id_tipo_curso as idcurso')
-        ->get();
+        $validar=DB::table('docente')->where('docente.id_usuario', '=', $idlog)->select('docente.id')->count();
+        if($validar != 0){
+            $doc=DB::table('docente')->where('docente.id_usuario', '=', $idlog)->select('docente.id')->first();
+            $d= $doc->id;
+            $rep=DB::table('cursos')
+                ->where('cursos.id_docente',$d)
+                ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                ->join('estado','id_estado','=','estado.id')
+                ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                ->select('asignaturas.id as idasig', 'asignaturas.codigo',
+                'asignaturas.nombre as asig','intensidad_horaria',
+                'val_habilitacion','estado.descripcion as estado',
+                'tipo_curso.descripcion as curso', 'cursos.anio',
+                'cursos.periodo', 'cursos.id as ida', 'cursos.id_tipo_curso as idcurso')
+                ->get();
         //consultar si existe objetivos
         $val=DB::table('objetivos')->count();
         if($val!=0){
@@ -315,5 +317,9 @@ class asignaturaController extends Controller
         $ver=DB::table('asignaturas_tecnicos')->where('asignaturas_tecnicos.id_docente', $d)->count();
          //return $rep;
         return view('asignatura.reporte_asig_docc')->with('rep',$rep)->with('ob',$ob)->with('b',$b)->with('boton',$ver);
+    }else{
+        $r = 0;
+        return view('inicio.vista')->with('r', $r);
+    }
     }
 }

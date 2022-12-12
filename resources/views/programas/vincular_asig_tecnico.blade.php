@@ -63,7 +63,7 @@
                   <div class="form-group col-md-6">
                   <label for="asig">Asignatura</label>
                   <select id="asig" class="form-control" name="asig" required>
-                    <option selected>Seleccionar</option>
+                    <option value="0" selected>Seleccionar</option>
                         @foreach($asignatura as $a)
                            <option value="{{$a->id}}">{{$a->nombreasig}}</option>
                         @endforeach
@@ -75,7 +75,7 @@
                 <div class="form-group col-md-6">
                   <label for="docente">Docente</label>
                   <select id="docente" class="form-control" name="docente" required>
-                    <option selected>Seleccionar</option>
+                    <option value="0" selected>Seleccionar</option>
                         @foreach($docente as $d)
                            <option value="{{$d->id}}">{{$d->nombre}} {{$d->apellido}}</option>
                         @endforeach
@@ -84,7 +84,7 @@
                 <div class="form-group col-md-6">
                   <label for="tri">Trimestre</label>
                   <select id="tri" class="form-control" name="tri" required>
-                    <option selected>Seleccionar</option>
+                    <option value="0" selected>Seleccionar</option>
                         @foreach($trimestre as $t)
                            <option value="{{$t->id}}">{{$t->nombretri}}</option>
                         @endforeach
@@ -100,7 +100,7 @@
                 <div class="form-group col-md-6">
                   <label for="periodo">Periodo</label>
                   <select id="periodo" class="form-control" name="periodo" required>
-                    <option selected>Seleccionar</option> 
+                    <option value="0" selected>Seleccionar</option> 
                       <option value="A">A</option>
                       <option value="B">B</option>
                       <option value="C">C</option>

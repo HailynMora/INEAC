@@ -15,6 +15,7 @@ use App\Models\AsignaturaModel\AsigTecnicos;
 use App\Models\AsignacionDoModel\AsignacionDoTec;
 use App\Models\DocenteModel\Docente;
 use App\Models\AsignaturaModel\AsignaturaTecnicos;
+use App\Models\Archivo;
 use Carbon\Carbon;
 use Session;
 
@@ -176,7 +177,7 @@ class ProgramasController extends Controller
         ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','estado.descripcion as estado','tipo_curso.jornada')
         ->join('estado','id_estado','=','estado.id')
         ->orderBy('tipo_curso.id', 'ASC')
-        ->paginate(5); //hacer paginacion de las vistas
+        ->paginate(10); //hacer paginacion de las vistas
         return view('programas.reporte_bachillerato')->with('rep',$rep);
     }
 
@@ -260,17 +261,18 @@ class ProgramasController extends Controller
     public function vincu($id){
         $date = Carbon::now()->locale('es')->translatedFormat('Y');
         $curso=Programas::find($id);
-        $asig=Asignatura::all();
-        $docente=Docente::all();
+        //$asig=Asignatura::all();
+        $asig=DB::table('asignaturas')->where('id_estado', '=', '1')->get();
+        $docente=DB::table('docente')->where('id_estado', '=', '1')->get();
         return view('programas.vincularsig')->with('curso', $curso)->with('asignatura', $asig)->with('docente', $docente)->with('date', $date);
 
     }
     public function vincu_asig($id){
         $date = Carbon::now()->locale('es')->translatedFormat('Y');
         $curso=ProgramasTecnicos::find($id);
-        $asig=AsignaturaTecnicos::all();
+        $asig=DB::table('asig_tecnicos')->where('id_estado', '=', '1')->get();
         $tri=TrimestresTecnicos::all();
-        $docente=Docente::all();
+        $docente=DB::table('docente')->where('id_estado', '=', '1')->get();
         ////////////////////////////
         $asigpro=DB::table('asignaturas_tecnicos')
         ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
@@ -297,6 +299,8 @@ class ProgramasController extends Controller
         $r1=$request->asig; 
         $r2=$request->tri;
         $r3=$request->docente;
+        $r4 = $request->anio;
+     if($r1 != 0 && $r2 != 0 && $r3 != 0 && $r4 != NULL){
         $resdatos=DB::table('asignaturas_tecnicos')
                   ->where('id_asignaturas', '=', $r1)
                   ->where('id_tecnico', '=', $r)
@@ -323,19 +327,26 @@ class ProgramasController extends Controller
             Session::flash('mensajeconf', 'Asignatura Vinculada exitosamente!.');
             
         }
+    }else{
+        Session::flash('mensaje', 'Campos vacios! Por favor seleccione todos los campos.');
+    }
 
         return back();   
 
     }
     
-
     public function desvincular($id){
         $val = DB::table('notas')->where('id_curso', $id)->count();
         if($val==0){
             AsigProgram::find($id)->delete();
+            Session::flash('mensaje', 'Registro eliminado de manera exitosa!.');
+        }else{
+            Session::flash('mensaje', 'No se puede eliminar este campo, la asignatura ya tiene notas.');
         }
         return redirect('/programas/reporte_programas');
     }
+
+
     public function listarvinculaciontec(){
         $asigpro=DB::table('asignaturas_tecnicos')
         ->select('asignaturas_tecnicos.id','id_asignaturas','id_trimestre','asignaturas.codigo as codas','asignaturas.nombre as asig','programa_tecnico.codigotec','programa_tecnico.nombretec','trimestre_tecnicos.nombretri','docente.nombre as nomdoc','docente.apellido as apedoc')
@@ -350,8 +361,13 @@ class ProgramasController extends Controller
     }
 
     public function eliminartec($id){
-        DB::table('asignaturas_tecnicos')->where('id','=',$id)->delete();
-        Session::flash('mensaje', 'Dato eliminado con éxito!');
+        $val = DB::table('notas_tecnico')->where('id_tecnicos', '=', $id)->count();
+        if($val == 0){
+            DB::table('asignaturas_tecnicos')->where('id','=',$id)->delete();
+            Session::flash('mensaje', 'Registro eliminado de manera exitosa!.');
+        }else{
+            Session::flash('mensaje', 'No se puede eliminar este campo, la asignatura ya tiene notas.');
+        }
         return back();
     }
 
@@ -376,5 +392,62 @@ class ProgramasController extends Controller
      return response(json_decode($bustecnico,JSON_UNESCAPED_UNICODE),200)->header('Content-type', 'text/plain');
     }
     ////////////////////////////////////////
+    //publicidad se debe copiar al server
+    public function publi(){
+       return view('programas.publicidad');
+    }
+
+    public function savepubli(Request $request){
+          if($request->val == 1){
+            $archivo = Archivo::FindOrFail(1);
+            if($request->hasFile('img')){                 
+                $file = $request->file('img');
+                $val = "publicidad".time().".".$file->guessExtension();
+                $ruta = public_path("dist/perfil/".$val);
+                copy($file, $ruta);//ccopia el archivo de una ruta cualquiera a donde este
+                $archivo->archivo = $val;//ingresa el nombre de la ruta a la base de datos
+            }
+            $archivo->descrip = $request->input('info'); 
+            $archivo->estado = 1; 
+        }else{
+
+            $archivo = Archivo::FindOrFail(2);
+            if($request->hasFile('img')){                 
+                $file = $request->file('img');
+                $val = "publicidadtec".time().".".$file->guessExtension();
+                $ruta = public_path("dist/perfil/".$val);
+                copy($file, $ruta);//ccopia el archivo de una ruta cualquiera a donde este
+                $archivo->archivo = $val;//ingresa el nombre de la ruta a la base de datos
+            }
+            $archivo->descrip = $request->input('info');
+            $archivo->estado = 1; 
+        }
+        $archivo->save(); 
+        Session::flash('mensajepub', 'Información cargada de manera exitosa!.');
+        $estado = DB::table('publicidad')->where('estado', '=', '1')->count();
+        return view('programas.publicidad')->with('estado', $estado);
+     }
+
+     public function camestado($id){
+        if($id == 1){
+           $ar = Archivo::FindOrFail(1);
+            $ar->estado = 1; 
+            $ar->save();
+            $ar2 = Archivo::FindOrFail(2);
+            $ar2->estado = 1; 
+            $ar2->save();
+        }else{
+            $ar = Archivo::FindOrFail(1);
+            $ar->estado = 2; 
+            $ar->save();
+            $ar2 = Archivo::FindOrFail(2);
+            $ar2->estado = 2; 
+            $ar2->save();
+        }
+        Session::flash('mensajepub', 'Estado se actualizó de manera exitosa!.');
+        $estado = DB::table('publicidad')->where('estado', '=', '1')->count();
+        return view('programas.publicidad')->with('estado', $estado);
+     }
+   
 
 }

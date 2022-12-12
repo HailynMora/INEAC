@@ -56,7 +56,7 @@ class Roles extends Controller
         DB::table('users')->where('users.id', $id)->update(['estado' => 1]);
 
       }
-      Session::flash('infoEs','Se cambio el estado del usuario satisfactoriamente.');
+      Session::flash('infoEs','Se cambió el estado del usuario satisfactoriamente.');
       return back();
 
    }

@@ -11,11 +11,19 @@
       </div>
       <div class="modal-body">
         <!--periodo academico-->
+        @if(Session::has('pdf'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{Session::get('pdf')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
         <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="exampleFormControlInput1">Ingrese número de documento</label>
-                <input type="text" class="form-control" id="docu" name="docu" required>
+                <input type="text" class="form-control" id="docu" name="docu" min="0" minlength="5" maxlength="12" required>
             </div>
         </div>
        </div>

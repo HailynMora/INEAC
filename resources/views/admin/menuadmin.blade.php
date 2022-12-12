@@ -37,27 +37,12 @@
          <!--end perfil-->
           <!---manejo de usuarios--->
           <li class="nav-item">
-            <a href="#" class="nav-link" style="color:white;">
+            <a href="{{route('listausu')}}" class="nav-link" style="color:white;">
             <i class="fas fa-users" style="margin-left:2px;"></i>
               <p>
                &nbsp Usuarios
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('listausu')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
-                  <p>Reporte</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('rolesvis')}}" class="nav-link" style="color:white;">
-                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
-                  <p>Roles</p><!--agregar descripcion para el certificados-->
-                </a>
-              </li>
-            </ul>
           </li>
           <!---end manejo de usuarios--->
           <li class="nav-item">
@@ -85,6 +70,12 @@
                 <a href="{{route('reporte_pro')}}" class="nav-link" style="color:white;">
                   <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
                   <p>Bachillerato</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('publicidad')}}" class="nav-link" style="color:white;">
+                  <i class="far fa-circle nav-icon" style="margin-left:15px;"></i>
+                  <p>Publicidad</p>
                 </a>
               </li>
             </ul>

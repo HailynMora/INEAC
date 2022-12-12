@@ -15,6 +15,8 @@ class CalificacionesController extends Controller
         $estumat = DB::table('matriculas')
                 ->where('id_curso', $id)
                 ->where('anio', $anio)->where('periodo', $per)
+                ->where('matriculas.id_aprobado', '!=', '4') 
+                ->where('matriculas.id_aprobado', '!=', '5')
                 ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
                 ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
                 ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
@@ -44,6 +46,8 @@ class CalificacionesController extends Controller
                 ->where('anio',$anio)
                 ->where('periodo',$per)
                 ->where('id_trimestre',$tri)
+                ->where('matricula_tecnico.id_aprobado', '!=', '4')
+                ->where('matricula_tecnico.id_aprobado', '!=', '5')
                 ->join('estudiante','matricula_tecnico.id_estudiante','=','estudiante.id')
                 ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
                 ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
@@ -551,6 +555,17 @@ class CalificacionesController extends Controller
                 $res = $request->filnota;
                 $idcur = $request->idcurso;
                 if($res == 1){
+                        $conv = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
+                                        ->where('notas_tecnico.definitiva', '>=', '3')
+                                        ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
+                                        ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                                        ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
+                                        ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                                        ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                                        ->join('desempenos','notas_tecnico.id_desempenio', '=', 'desempenos.id')
+                                        ->count();
+
+                        if($conv != 0){
                         $consulta = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
                         ->where('notas_tecnico.definitiva', '>=', '3')
                          ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
@@ -566,8 +581,19 @@ class CalificacionesController extends Controller
                                  'asignaturas_tecnicos.periodo', 'notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva',
                                  'notas_tecnico.por1', 'notas_tecnico.id_tecnicos as idcur', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
                          ->get();
+                        }
                 }else{
                     if($res==2){
+                        $conv = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
+                                        ->where('notas_tecnico.definitiva', '<', '3')
+                                        ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
+                                        ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                                        ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
+                                        ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                                        ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                                        ->join('desempenos','notas_tecnico.id_desempenio', '=', 'desempenos.id')
+                                        ->count();
+                        if($conv != 0){
                         $consulta = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
                        ->where('notas_tecnico.definitiva', '<', '3')
                         ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
@@ -583,9 +609,18 @@ class CalificacionesController extends Controller
                                 'asignaturas_tecnicos.periodo', 'notas_tecnico.id as idnota', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva',
                                 'notas_tecnico.por1', 'notas_tecnico.id_tecnicos as idcur', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
                         ->get();
-                           
+                        }
     
                     }else{
+                        $conv = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
+                                        ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
+                                        ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
+                                        ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico', '=', 'programa_tecnico.id')
+                                        ->join('docente','asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                                        ->join('estudiante','notas_tecnico.id_estudiante', '=', 'estudiante.id')
+                                        ->join('desempenos','notas_tecnico.id_desempenio', '=', 'desempenos.id')
+                                        ->count();
+                        if($conv != 0){
                         $consulta = DB::table('notas_tecnico')->where('notas_tecnico.id_tecnicos','=',$idcur)
                          ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
                          ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas', '=', 'asig_tecnicos.id')
@@ -601,12 +636,18 @@ class CalificacionesController extends Controller
                                  'notas_tecnico.por1', 'notas_tecnico.id_tecnicos as idcur', 'notas_tecnico.por2', 'notas_tecnico.por3', 'notas_tecnico.por4', 'desempenos.descripcion as desem')
                          ->get();
                           
-    
+                        }
                     }
                 }
-
-                $objetivos = DB::table('objetivostec')->where('id_asignaturas', $idcur)->select('objetivostec.descripcion as objetivo')->get();
-                return view('calificaciones.reportenotatec')->with('consulta', $consulta)->with('objetivos', $objetivos);
+                
+                if($conv != 0){
+                        $objetivos = DB::table('objetivostec')->where('id_asignaturas', $idcur)->select('objetivostec.descripcion as objetivo')->get();
+                        return view('calificaciones.reportenotatec')->with('consulta', $consulta)->with('objetivos', $objetivos);
+                }else{
+                        Session::flash('pdft','Lo sentimos! No se encontró información para la solicitud.');
+                        return back();
+                }
+              
               
             }
 

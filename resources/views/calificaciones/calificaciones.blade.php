@@ -105,6 +105,7 @@
                                                                     <td>
                                                                         <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje1" name="porcentaje1">
+                                                                                <option value="0">Elegir</option>
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
                                                                                 <option value="0.3">30%</option>
@@ -130,6 +131,7 @@
                                                                     <td>
                                                                         <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje2" name="porcentaje2">
+                                                                                <option value="0">Elegir</option>
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
                                                                                 <option value="0.3">30%</option>
@@ -155,6 +157,7 @@
                                                                     <td>
                                                                         <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje3" name="porcentaje3">
+                                                                                <option value="0">Elegir</option>
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
                                                                                 <option value="0.3">30%</option>
@@ -180,6 +183,7 @@
                                                                     <td>
                                                                         <div class="form-group" style="padding-top:7px;">
                                                                             <select id="porcentaje4" name="porcentaje4">
+                                                                                <option value="0">Elegir</option>
                                                                                 <option value="0.1">10%</option>
                                                                                 <option value="0.2">20%</option>
                                                                                 <option value="0.3">30%</option>
@@ -204,7 +208,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn"  style="background-color:#FFCC00;" data-dismiss="modal">Salir</button>
-                                                        <button type="submit" class="btn btn-primary">enviar</button>
+                                                        <button type="submit" class="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div>
                                             </div>

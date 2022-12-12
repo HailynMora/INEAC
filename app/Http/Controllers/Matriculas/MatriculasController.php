@@ -40,8 +40,8 @@ class MatriculasController extends Controller
         $estu=Estudiante::findOrfail($id);
         $tri =DB::table('trimestre_tecnicos')->get();
         $anio=$date;
-       
-        return view('matriculas.vistamatricula', compact('estu', 'prog', 'tri','anio'));
+        $bach = DB::table('tipo_curso')->where('id_estado','=',1)->select('tipo_curso.id as idbachi', 'tipo_curso.descripcion as curso')->get();
+        return view('matriculas.vistamatricula', compact('estu', 'prog', 'tri','anio', 'bach'));
     }
     
     //buscar cursos a matricular

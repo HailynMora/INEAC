@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado De Estudiantes Para Nivelacion Bachillerato</h3>
+ <h3 class="letra1">Listado De Estudiantes Pendientes De Nivelación En Bachillerato</h3>
 </div>
 <div class="container">
 	<table class="table">
@@ -21,6 +21,7 @@
 	  	<?php
 	  		$cont = 1;
 	  	?>
+		@if(isset($re))
 	  	@foreach($re as $m)
 	    <tr>
 	      <th scope="row">{{$cont++}}</th>
@@ -33,7 +34,17 @@
 	      <td>{{$m->nomdoc}} {{$m->apedoc}}</td>
 	    </tr>
 	    @endforeach
+		@endif
 	  </tbody>
 	</table>
+	@if(Session::has('niv'))
+			<br>
+				<div class="letraf alert alert-info alert-dismissible fade show" role="alert">
+					{{Session::get('niv')}}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				</div>
+		@endif
 </div>
 @endsection

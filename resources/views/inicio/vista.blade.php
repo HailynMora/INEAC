@@ -28,5 +28,17 @@
 @if(Auth::user()->id_rol==3) <!--Logeado estudiante-->
     @include('inicio.inicioestu')
 @endif
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if(isset($r))
+@if($r == 0)
+  <script>
+    swal({
+    title: "Lo sentimos!",
+    text: "No se encontró información para la solicitud",
+    icon: "warning",
+    button: "Salir",
+  });
+  </script>
+  @endif
+@endif
 @endsection

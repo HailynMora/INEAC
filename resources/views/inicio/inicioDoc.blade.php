@@ -3,10 +3,12 @@
   use Illuminate\Support\Facades\Auth;
    
   $idoc = auth()->user()->id;
+  $validar= DB::table('docente')->where('id_usuario', '=', $idoc)->select('docente.id as idocente')->count();
+  if($validar != 0){
   $valdoc= DB::table('docente')->where('id_usuario', '=', $idoc)->select('docente.id as idocente')->first();
   $asigbachi = DB::table('cursos')->where('cursos.id_docente', '=', $valdoc->idocente)->count();
   $asigtec = DB::table('asignaturas_tecnicos')->where('asignaturas_tecnicos.id_docente', '=', $valdoc->idocente)->count();
-  
+  }
 ?>
 <!--pantallas grandes-->
 <div class="d-none d-sm-none d-md-block">
@@ -55,6 +57,7 @@
               </div>
               <div class="col-4">
               <div class="container" style="padding-left:0px; padding-top:30px;">
+               @if(isset($asigtec))
                  @if($asigtec !=0)
                  <br><br><br><br>
                   <div class="borde" style="width: 12rem;">
@@ -64,18 +67,21 @@
                     @include('docente.listadoEstuTecnico')
                   </div>
                   @endif 
+                  @endif 
                   </div>
               </div>
               <div class="col-4">
                   <!--card-->
                 <div class="container" style="padding-left:30px; padding-top:30px;">
-                @if($asigbachi!=0)
+                @if(isset($asigbachi))
+                @if($asigbachi != 0)
                   <div class="borde" style="width: 12rem;">
                     <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link" style="color:white;">
                      <img src="{{asset('dist/img/docente/estudiante.png')}}" class="card-img-top" alt="...">
                     </a>
                     @include('docente.listadoEstu')
                   </div>
+                  @endif 
                   @endif 
                 </div>
                 <!--end card-->
@@ -113,6 +119,7 @@
      <div class="row">
         <div class="col-12">
          <div class="container"  style="padding-left:2.5rem; padding-top: 15px;">
+         @if(isset($asigbachi))
             @if($asigbachi!=0)
                   <div class="borde" style="width: 12rem;">
                     <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link" style="color:white;">
@@ -120,6 +127,7 @@
                     </a>
                     @include('docente.listadoEstu')
                   </div>
+              @endif 
               @endif  
           </div>
         </div>
@@ -127,6 +135,7 @@
      <div class="row">
         <div class="col-12">
          <div class="container"  style="padding-left:2.5rem; padding-top: 15px;">
+         @if(isset($asigtec))
            @if($asigtec !=0)
                   <div class="borde" style="width: 12rem;">
                   <a type="button" data-toggle="modal" data-target="#listaTec" class="nav-link" style="color:white;">
@@ -134,6 +143,7 @@
                     </a>
                     @include('docente.listadoEstuTecnico')
                   </div>
+             @endif 
              @endif 
           </div>
         </div>

@@ -4,6 +4,15 @@
  <h3 class="letra1">Estudiantes Matriculados a Programas</h3>
 </div>
 <!----collapse--->
+@if(Session::has('excel'))
+       <br>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{Session::get('excel')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+ @endif
 <div class="accordion letraf" id="accordionExample">
     <div class="card">
         <div class="card-header" id="headingOne">

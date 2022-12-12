@@ -3,6 +3,17 @@
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
  <h3 class="letra1"> Programas De Bachillerato Registrados</h3>
 </div>
+<!--mensaje-->
+@if(Session::has('mensaje'))
+        <br>
+        <div class="alert alert-info alert-dismissible fade show alerta" role="alert">
+        <strong >{{Session::get('mensaje')}}</strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div><br>
+  @endif
+<!--end mensaje-->
 <div class="row">
   <div class="col-6">
     <button type="button"class="btn btn-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegBac">
@@ -49,22 +60,18 @@
                           </div>
                           <div class="form-group col-md-6">
                             <label for="codigo">Codigo</label>
-                            <input type="text" class="form-control" id="codigo" name="codigo" required>
+                            <input type="number" class="form-control" id="codigo" name="codigo" min="0" required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-6">
                             <label for="des">Descripcion</label>
                             <input type="text" class="form-control" id="des" name="des" required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-6">
                             <label for="jornada">Jornada</label>
-                            <input type="text" class="form-control" id="jornada" name="jornada" required>
-                          </div>
-                          <div class="form-group col-md-4" >
-                            <label for="estado">Estado</label>
-                            <select id="estado" class="form-control" name="estado" required>
+                            <select class="form-control" id="jornada" name="jornada" required>
                               <option selected>Seleccionar</option>
-                              <option value="1">Activo</option>
-                              <option value="2">Inactivo</option>
+                              <option value="Sabado">Sabado</option>
+                              <option value="Domingo">Domingo</option>
                             </select>
                           </div>
                         </div>
@@ -110,8 +117,10 @@
         <td>{{$d->cursodes}}</td>
         <td>{{$d->estado}}</td>
         <td>
+        @if($d->estado == 'Activo')
         <a href="{{route('actualizar_prog',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i></a>
-        &nbsp&nbsp
+        &nbsp;&nbsp;
+        @endif
         <?php
         if($d->estado == 'Activo'){
             ?>
@@ -123,9 +132,11 @@
             <?php
         }
         ?>
-        &nbsp&nbsp
+        @if($d->estado == 'Activo')
+        &nbsp;&nbsp;
         <a href="{{route('vincular_a', $d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>        
-        </td>
+        @endif
+       </td>
         </tr>
         <!--Ventana Modal para la Alerta de Eliminar--->
         <!-- Ventana modal para eliminar -->
@@ -214,11 +225,9 @@
                         '<td>' +  arreglo[x].jornada + '</td>' +
                         '<td>' + arreglo[x].cursodes +'</td>' +
                         '<td>' +  arreglo[x].estado + '</td>' +
-                        '<td>' +  '<a href="/programas/actualizar/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i> &nbsp;&nbsp;&nbsp;</a>'+
+                        '<td>' + 
                                   '<a type="button" data-toggle="modal"  data-target="#cambiarPro'+ arreglo[x].id +'" data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i>&nbsp;&nbsp;&nbsp;</a>'
-                                  '<a href="/vincular/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>'
-
-                        + '</td>' + //agregar los botones
+                                + '</td>' + //agregar los botones
                         '</tr>';
          }
           console.log(valor);
@@ -240,7 +249,7 @@
     e.preventDefault();
     var nombac=$('#nombac').val();
     var codigo=$('#codigo').val();
-    var estado=$('#estado').val();
+    var estado='1';
     var des=$('#des').val();
     var jornada=$('#jornada').val();
     var _token = $('input[name=_token]').val(); //token de seguridad

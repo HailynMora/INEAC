@@ -17,7 +17,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="codigo">Código</label>
-                        <input type="number" class="form-control" id="codigo" name="codigo" value="{{$asig[0]->codigoasig}}">
+                        <input type="number" class="form-control" id="codigo" name="codigo" value="{{$asig[0]->codigoasig}}" min="0">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="nombre">Nombre</label>
@@ -25,20 +25,12 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="intensidad_horaria">Intensidad Horaria</label>
-                        <input type="number" class="form-control" id="intensidad_horaria" name="intensidad_horaria" value="{{$asig[0]->intensidad_horaria}}">
+                        <input type="number" class="form-control" id="intensidad_horaria" name="intensidad_horaria" value="{{$asig[0]->intensidad_horaria}}" min="1" max="10">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="val_habilitacion">Valor Habilitación</label>
-                        <input type="number" class="form-control" id="val_habilitacion" name="val_habilitacion" value="{{$asig[0]->val_habilitacion}}">
-                    </div>
-                    <div class="form-group col-md-6" >
-                        <label for="id_estado">Estados</label>
-                        <select id="id_estado" class="form-control" name="id_estado">
-                            <option value="{{$asig[0]->id_estado}}" selected>{{$asig[0]->estado}}</option>
-                            @foreach($estado as $es)
-                            <option value="{{$es->id}}">{{$es->descripcion}}</option>
-                            @endforeach
-                        </select>
+                        <input type="number" class="form-control" id="val_habilitacion" name="val_habilitacion" value="{{$asig[0]->val_habilitacion}}" min="10000" max="60000">
+                        <input id="id_estado" class="form-control" name="id_estado" value="1" hidden>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Actualizar</button>

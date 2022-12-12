@@ -6,7 +6,8 @@
 <div>
 <div class="row">
   <div class="col-md-6 alerta">
-  <a href="{{route('regdocente')}}" class="btn btn-success my-2 my-sm-0" >Registrar</a>
+   <a href="{{route('regdocente')}}" class="btn btn-success my-2 my-sm-0" >Registrar</a>&nbsp;
+   <a href="{{route('listapdf')}}" class="btn btn-warning"  style="color:white;">Generar Listado</a>
   </div>
   <div class="col-md-6">
   <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6 alerta">
@@ -16,6 +17,16 @@
     </form>
     </div>
 </div>
+ <!--periodo academico-->
+   @if(Session::has('pdf'))
+       <br>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{Session::get('pdf')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
     <br><br>
     <div class="container table-responsive">
       <table class="table table-striped "style="background-color:#0f468e; color: #fffff;">
@@ -39,7 +50,9 @@
             <td>{{date("Y-m-d", strtotime($d->fec_vinculacion))}}</td>
             <td>{{$d->estado}}</td>
             <td>
+            @if($d->estado == 'Activo')
               <a href="{{route('actualizar_doc',$d->id)}}"  data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp
+             @endif
               <a type="button"  data-toggle="modal" data-target="#docente<?php echo $d->id;?>" style="color: #66b62b;font-size:20px;"  data-placement="bottom"  title="Visualizar">
               <i class="nav-icon fas fa-eye"></i></a>
               &nbsp&nbsp
@@ -418,7 +431,6 @@
           '<td>' +  dateFormat(arreglo.busdocente[x].fec_vinculacion, 'yyyy-MM-dd')  + '</td>' +
           '<td>' +  arreglo.busdocente[x].estado + '</td>' +
           '<td>' +   
-          '<a  href="/docente/actualizar/' + arreglo.busdocente[x].id + '" ' + ' data-toggle="tooltip"  data-placement="bottom"  title="Editar Docente" ><i class="nav-icon fas fa-edit" style="color:  #e1b308;font-size:20px;" ></i></a>&nbsp&nbsp&nbsp' + 
           '<a type="button"  data-toggle="modal" data-target="#exampleModal" style="color: #66b62b;font-size:20px;"  data-placement="bottom"  title="Visualizar"><i class="nav-icon fas fa-eye"></i></a>&nbsp&nbsp&nbsp'+
           '<a type="button" data-toggle="modal" data-target="#cambiarEstado"  data-placement="bottom"  title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82;font-size:20px;"></i></a>'
           '</td>' + //agregar los botones

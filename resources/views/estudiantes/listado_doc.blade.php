@@ -4,8 +4,21 @@
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
  <h3 class="letra1">Listado de Estudiantes</h3>
 </div>
+@if($b != 1)
+@if(Session::has('consulta'))
+       <br>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{Session::get('consulta')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  @endif
+  @endif
+@if($b == 1)<!--valida si hay datos los imprime-->
 <div class="row alerta">
-    <div class="col-md-1">
+    <div class="col-md-1 text-center">
+     <a href="/docente/generar/listado/{{$dat['anio']}}/{{$dat['per']}}/{{$dat['curso']}}" type="button" class="btn btn-primary">Generar </a>
     </div>
     <div class="col-md-1">
     </div>
@@ -19,7 +32,8 @@
         </form>
     </div>
 </div>
-<br><br>
+<br>
+
 <div class="container table-responsive">
 
 <table class="table">
@@ -27,14 +41,13 @@
         <tr>
         <th scope="col">N° Identificacion</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Telefono</th>
+        <th scope="col">Teléfono</th>
         <th scope="col">Correo</th>
         <th scope="col">Estado</th>
         <th scope="col">Acciones</th>
         </tr>
     </thead>
     <tbody id="tablanueva" style="background-color:#e3e3e3;" class="letraf tablanueva">
-    @if($b == 1)<!--valida si hay datos los imprime-->
       @foreach($estudiante as $d)
         <tr>
         <td>{{$d->num_doc}}</td>
@@ -201,10 +214,6 @@
         </tr>
         
         @endforeach
-        @else
-        <div class="alert alert-warning text-center" role="alert">
-               No Hay Registros
-            </div>
         @endif
     </tbody>
     <!--##################datos de la busqueda ##########################3-->

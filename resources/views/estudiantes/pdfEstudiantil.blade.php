@@ -16,7 +16,7 @@
             <br>
             <div>
                 <h4 style="text-align:center;">
-                    <b>EL SUSCRITO DIRECTOR GENERAL DE LA INSTITUCION EDUCATIVA DEL SUR INESUR<b>
+                    <b>EL SUSCRITO DIRECTOR GENERAL DEL INSTITUTO DE EDUCACIÓN TECNICA INESUR</b>
                 </h4>
                 <p style="text-align:center;">RESOLUCION 0071 DE 20 DE ENERO DE 2014</p>
                 <p style="text-align:center;">Código DANE No. 352001006791</p><br>

@@ -12,11 +12,17 @@ use App\Models\ParentescoModel\Acudiente;
 use App\Models\ParentescoModel\EtniaModel;
 use App\Models\EstudianteModel\Estudiante;
 use App\Models\CertificadoModel\Certificado;
+use App\Models\Archivos\Cargarchivo;
 use App\Models\EstadoModel\Estado;
 use App\Models\SaludModel\SistemaSalud;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
+use Carbon\Carbon;
+use Session;
+use PDF;
 
 class EstudiantesController extends Controller
 {
@@ -27,10 +33,11 @@ class EstudiantesController extends Controller
         $estado=Estado::all();
         $user=User::all();
         $paren=Parentesco::all();
+        $listado = Cargarchivo::all();
         return view('estudiantes.registroestu')->with('tipodoc', $tipodoc)
         ->with('genero', $genero)->with('etnia', $etnia)
         ->with('estado', $estado)
-        ->with('user', $user)->with('paren', $paren);
+        ->with('user', $user)->with('paren', $paren)->with('listado', $listado);
     }
 
      //cambios hailyn
@@ -400,6 +407,26 @@ class EstudiantesController extends Controller
         $res=DB::table('matriculas')->count(); //validar datos cuando no hay estudiantes
         if($res!=0){
             $b=1;
+            //#########################################
+            $estval=DB::table('matriculas')
+                    ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+                    ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
+                    ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+                    ->join('estado', 'estudiante.id_estado', '=', 'estado.id')
+                    ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+                    ->join('genero', 'estudiante.id_genero', '=', 'genero.id')
+                    ->join('users', 'estudiante.id_usuario', '=', 'users.id')
+                    ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+                    ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+                    ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+                    ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+                    ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                    ->where('matriculas.anio', $request->anio)
+                    ->where('matriculas.periodo', $request->periodo)
+                    ->where('matriculas.id_curso', $request->cursoba)
+                    ->count();
+            if($estval != 0){
+            //#######################################3
             $estudiante=DB::table('matriculas')
             ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
             ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
@@ -425,16 +452,222 @@ class EstudiantesController extends Controller
             'sistema_salud.ocupacion', 'sistema_salud.discapacidad', 'etnia.descripcion as etniades', 'tipo.descripcion as tdocacu', 'matriculas.anio', 'matriculas.periodo', 'tipo_curso.descripcion', 
             'tipo_curso.cursodes', 'aprobado.nombre as estamat')
 	        ->get();
-           
+            }else{
+                $b=0;
+                $estudiante=array('datos');
+                Session::flash('consulta','Lo sentimos! no se encontró información para los datos seleccionados.');
+            }
         } 
         else{
             $b=0;
             $estudiante=array('datos');
         }
+        $dat = ['anio' => $request->anio, 
+                'per' => $request->periodo,
+                'curso' => $request->cursoba];
+       // return $dat['anio'];
 
-        return view('estudiantes.listado_doc')->with('estudiante', $estudiante)->with('b', $b);
+        return view('estudiantes.listado_doc')->with('estudiante', $estudiante)->with('dat', $dat)->with('b', $b);
     }
 
+     //importacion
+    public function archivoimpor(Request $request){
+          // return $request->hasFile('uploadedfile');
+            if($request->hasFile('uploadedfile')){
+                $category = new Cargarchivo();
+                $file = $request->file('uploadedfile');//guarda la variable id en un file
+                //$d = count($file);
+                $name = $file->getClientOriginalName();
+                $limpiarnombre = str_replace(array("#",".",";"," "), '', $name);
+                $val = $limpiarnombre.".".$file->guessExtension();//renombra el archivo subido
+                $ruta = public_path("csv/".$val);//ruta para guardar el archivo pdf/ es la carpeta
+                
+                //if($file->guessExtension()=="txt"){
+                 copy($file, $ruta);
+                 $category->descripcion = $request->input('nombre');
+                 $category->ruta = $val;//ingresa el nombre de la ruta a la base de datos
+                 $category->save();//guarda los datos
+                   // return redirect()->route('cargamasiva')->with('mensaje', 'Archivo cargado con exito');
+                   Session::flash('msj','El archivo subido con exito.');
+                   return back();
+              
+        }
+    }
+
+    //#############################################3
+    public function archivoselect($id){
+      $buscar = Cargarchivo::FindOrFail($id);
+      //normalizar
+       $contador=0;
+       $c=0;
+       $f=0;
+       $rut = public_path('csv/'.$buscar->ruta);
+       $lines = file($rut);
+       $utf= array_map('utf8_encode', $lines);
+       $array = array_map('str_getcsv', $utf);
+       //guardar
+       $d = sizeof($array);
+       if($d > 1){
+        for($k=1; $k<sizeof($array); ++$k){
+            for($j=0; $j<=31; ++$j){
+             if(!isset($array[$k][$j])){
+                Session::flash('msj','Lo sentimos! El archivo debe tener todos los campos completos o verifique que este delimitado por comas.');
+                return back();
+             }
+            }
+        }
+       for($i=1; $i<sizeof($array); ++$i){
+            //validar la cedula y el correo
+            $valcedula = DB::table('estudiante')->where('num_doc', '=', $array[$i][5])->count();
+            $valemail = DB::table('users')->where('email', '=', $array[$i][17])->count();
+            if($valcedula==0 && $valemail==0){
+            //end validar cedula y correo
+           //#######################################
+            $usu = new User();
+            $usu->name = $array[$i][0];
+            $usu->email = $array[$i][17];
+            $usu->password = Hash::make('123456789');
+            $usu->id_rol = 3;
+            $usu->estado = 1;
+            $usu->save();
+            //###################################
+            $category = new Estudiante();
+            $category->first_nom=$array[$i][0];
+            $category->second_nom=$array[$i][1];
+            $category->firts_ape=$array[$i][2];
+            $category->second_ape=$array[$i][3];
+            $category->tiposangre= $array[$i][11];
+            $category->dirresidencia= $array[$i][12];
+            $category->dptresidencia=$array[$i][14];
+            $category->munresidencia= $array[$i][13];
+            $category->zona= $array[$i][15];
+            $category->barrio= "N/A";
+            $category->telefono=$array[$i][16];
+            $category->num_doc= $array[$i][5];
+            $category->dpt_expedicion= $array[$i][6];
+            $category->mun_expedicion= $array[$i][7];
+            $category->fecnacimiento=date("Y-m-d", strtotime($array[$i][8]));
+            $category->dpt_nacimiento= $array[$i][9];
+            $category->mun_nacimiento= $array[$i][10];
+            $category->correo= $array[$i][17];
+            $category->estrato=$array[$i][18];
+            if($array[$i][19] == 'Masculino'){
+                $category->id_genero= 1;
+            }else{
+                $category->id_genero= 2;
+            }
     
+            if($array[$i][4] == 'Cedula de ciudadania'){
+               $category->id_tipo_doc= 1;
+            }else{
+                $category->id_tipo_doc= 2;
+            }
+            $category->id_estado= 1;
+            $category->id_usuario=  $usu->id;
+            $category->save();
+            //###########################################
+             //sistema de salud
+            $Salud =new SistemaSalud();
+            $Salud->regimen	= $array[$i][20];
+            $Salud->eps	= $array[$i][21];
+            $Salud->nivelformacion= $array[$i][22];
+            $Salud->ocupacion = $array[$i][23];
+            $Salud->discapacidad = $array[$i][24];	
+            if($array[$i][25] == 'Indigena'){
+                $Salud->id_etnia = 2;
+            }else{
+                $Salud->id_etnia = 1;
+            }
+            $Salud->id_estudiante = $category->id;
+            $Salud->save();
+            //acudientes
+            $Acu = new Acudiente();
+            $Acu->lastname = $array[$i][26];
+            $Acu->direccion = $array[$i][27];
+            $Acu->telefono = $array[$i][28];
+            $Acu->num_doc = $array[$i][31];
+            if($array[$i][29] == 'Madre de familia'){
+                $Acu->id_parentesco = 2;
+            }else{
+                $Acu->id_parentesco = 5;
+            }
+           
+            if($array[$i][30] == 'Cedula de ciudadania'){
+                $Acu->id_tipo_doc=1;
+            }else{
+                $Acu->id_tipo_doc=2;
+            }
+            $Acu->id_estudiante	=$category->id;
+            $Acu->save();
+            Session::flash('msj','Registro Exitoso! Usuarios registrados.');
+       }else{
+        Session::flash('msj','Lo sentimos! Usuarios duplicados.');
+       }
+            
+      }
+
+    }else{
+        Session::flash('msj','Lo sentimos! El archivo esta vacio.');
+    }
+    return back();
+    }
+
+    //eliminar archivos
+    public function archivoelmin($id){
+        //$category = new Cargarchivo();
+        $elim = Cargarchivo::findOrfail($id);
+        $nom=$elim->ruta;
+        $elim->delete();
+        Session::flash('msjalert','Eliminación Exitosa! El archivo se ha eliminado de forma exitosa.');
+        return back();
+      }
+
+      //######################
+      public function archivopdflista($anio, $per, $cur){
+        //##########
+        $dia = date('d', time()); 
+        $mes = date('m', time()); 
+        $anio = date('Y', time());
+
+        $idlog=auth()->id();
+        $doc = DB::table('docente')->where('id_usuario', '=', $idlog)->select('nombre', 'apellido')->get();
+        //#########
+        $estudiante=DB::table('matriculas')
+                    ->join('estudiante', 'matriculas.id_estudiante', '=', 'estudiante.id')
+                    ->join('aprobado', 'matriculas.id_aprobado', '=', 'aprobado.id')
+                    ->join('tipo_curso', 'matriculas.id_curso', '=', 'tipo_curso.id')
+                    ->join('estado', 'estudiante.id_estado', '=', 'estado.id')
+                    ->join('tipo_documento', 'estudiante.id_tipo_doc', '=', 'tipo_documento.id')
+                    ->join('genero', 'estudiante.id_genero', '=', 'genero.id')
+                    ->join('users', 'estudiante.id_usuario', '=', 'users.id')
+                    ->join('acudiente', 'estudiante.id', '=', 'acudiente.id_estudiante')
+                    ->join('parentezco', 'acudiente.id_parentesco', '=', 'parentezco.id')
+                    ->join('sistema_salud', 'estudiante.id', '=', 'sistema_salud.id_estudiante')
+                    ->join('etnia', 'sistema_salud.id_etnia', '=', 'etnia.id')
+                    ->join('tipo_documento as tipo', 'acudiente.id_tipo_doc', '=', 'tipo.id')
+                    ->where('matriculas.anio', $anio)
+                    ->where('matriculas.periodo', $per)
+                    ->where('matriculas.id_curso', $cur)
+                    ->where('matriculas.id_aprobado', '!=', '4')
+                    ->where('matriculas.id_aprobado', '!=', '5')
+                    ->select('estudiante.id', 'estudiante.first_nom', 'estudiante.second_nom', 'estudiante.firts_ape', 'estudiante.second_ape',
+                    'estudiante.telefono', 'estudiante.num_doc',   
+                    'estudiante.correo',   'estado.descripcion as estadoes',
+                    'sistema_salud.discapacidad', 'matriculas.anio', 'matriculas.periodo', 'tipo_curso.descripcion', 
+                    'tipo_curso.cursodes', 'aprobado.nombre as estamat')
+                    ->get();
+        //###############################
+
+        $data = [
+            'estudiante' => $estudiante,
+            'dia' => $dia,
+            'mes' => $mes,
+            'anio' => $anio,
+            'doc' => $doc,
+        ];  
+        //###########################
+        $pdf = PDF::loadView('docente.pdflista_estu', $data);
+        return $pdf->download('listado_estudiantes.pdf');
+      }
 
 }

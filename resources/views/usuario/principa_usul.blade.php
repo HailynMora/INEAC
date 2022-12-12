@@ -10,19 +10,16 @@
 <style>
   .letra1{
       /* font-family: 'Roboto Slab', serif;*/
-       font-family: 'Roboto Condensed', sans-serif;
        font-size:32px;
        font-weight: 700;
        text-align:center; 
   }
   .alerta{
-       font-family: 'Roboto Condensed', sans-serif;
        font-size:18px;
        font-weight:400;
        text-align:left; 
   }
   .letraf{
-       font-family: 'Roboto Condensed', sans-serif;
        font-size:16px;
        font-weight:400;
        text-align:left; 
@@ -42,7 +39,6 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-
     </ul>
 
     <!-- Right navbar links -->
@@ -76,6 +72,13 @@
         </div>
       </li>-->
       <!--end notificaciones-->
+      <li class="nav-item">
+        <!--tool-->
+        <a href="https://drive.google.com/file/d/1XNVwLAV9smJarseBI8JawahHWJ5UxQKH/view?usp=sharing" target="_blank" class="btn nav-link" data-toggle="tooltip" data-placement="bottom" title="Manual de usuario">
+           <i class="fas fa-book-open" style="font-size:20px; color:#819092;"></i>
+        </a>
+        <!--end-->
+      </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -192,6 +195,5 @@
   <!-- /.control-sidebar -->
 </div>
 @include('usuario.stylejs')
-
 </body>
 </html>

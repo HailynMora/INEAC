@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Vincular Asignatura a un Programa</h3>
+ <h3 class="letra1">Vincular Asignaturas a un Programa</h3>
 </div>
 <br><br>
 <div class="accordion letraf" id="accordionExample">
@@ -40,7 +40,7 @@
                   <div class="form-group col-md-6">
                   <label for="asig">Asignatura</label>
                   <select id="asig" class="form-control" name="asig" required>
-                    <option selected>Seleccionar</option>
+                    <option value="0" selected>Seleccionar</option>
                         @foreach($asignatura as $a)
                            <option value="{{$a->id}}">{{$a->nombre}}</option>
                         @endforeach
@@ -51,7 +51,7 @@
                   <div class="form-group col-md-6">
                     <label for="docente">Docente</label>
                     <select id="docente" class="form-control" name="docente" required>
-                    <option selected>Seleccionar</option>
+                    <option value="0" selected>Seleccionar</option>
                         @foreach($docente as $d)
                            <option value="{{$d->id}}">{{$d->nombre}} {{$d->apellido}}</option>
                         @endforeach
@@ -64,7 +64,7 @@
                   <div class="form-group col-md-3">
                     <label for="docente">Periodo</label>
                     <select id="periodo"  class="form-control" name="periodo" required>
-                           <option selected>Seleccionar</option>
+                           <option value="0" selected>Seleccionar</option>
                            <option value="A">A</option>
                            <option value="B">B</option>
                   </select>
@@ -126,18 +126,18 @@
     var curso=$('#curso').val();
     var asig=$('#asig').val();
     var docente=$('#docente').val();
-    var fecha=$('#fecha').val();
+    //var fecha=$('#fecha').val();
     var anio=$('#aniofec').val();
     var periodo=$('#periodo').val();
     var _token = $('input[name=_token]').val(); //token de seguridad
-    console.log(anio);
+    if( asig != 0 && docente != 0 && periodo != 0 && anio != ''){
     $.ajax({
       type: "POST",
       url: "{{route('regvincularasig')}}",
       data:{
         curso:curso,
         asig:asig,
-        fecha:fecha,
+       // fecha:fecha,
         docente:docente,
         anio:anio,
         periodo:periodo,
@@ -151,11 +151,17 @@
       },
       error:function(jqXHR, response){
           if(jqXHR.status==422){
-            toastr.warning('Datos Repetidos!.', 'Asignatura ya esta vinculada!', {timeOut:3000});
+            toastr.info('Datos Repetidos!.', 'Asignatura ya esta vinculada!', {timeOut:3000});
           }
           }
     });
+    //cerrar llave if
+   }else{
+    toastr.info('Por favor seleccione todos los campos.', 'Campos vacios!', {timeOut:3000});
+   }
+   //end llave
   })
+
   function resetform() {
      $("form select").each(function() { this.selectedIndex = 0 });
      $("form input[type=date]").each(function() { this.value = '' });

@@ -48,9 +48,30 @@
         </div>
        </div>
        </div>
+        <!--collapsed-->
+        <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#info" aria-expanded="false" aria-controls="collapseOne">
+                Nota
+              </button>
+            </h2>
+          </div>
+
+          <div id="info" class="collapse hidden" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body alert alert-primary" >
+              <p>Si el año o curso no estan disponibles en el formulario,<br> se debe a que aun falta registrar programas y vincular<br> asignaturas.<br>
+              <a href="/programas/reporte_programas_tecnicos" style="color:black;"><b>ir al registro</b></a>
+             </p>
+            </div>
+          </div>
+        </div>
+      </div>
         <!-- end per acdemico-->
       </div>
       <div class="modal-footer">
+        <input val="2" name="val" id="val" hidden>
         <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
         <button type="submit" class="btn btn-primary">Ver</button>
       </div>

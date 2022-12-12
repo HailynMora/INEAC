@@ -7,6 +7,7 @@
             </div>
             <br>
             <div class="container alerta">
+              @if(isset($estudiante))
                 <div class="row">
                      <div class="col-4">
                        <span><b>Nombre: </b></span> <span>{{$estudiante->nombre}} {{$estudiante->segundonom}} {{$estudiante->primerape}} {{$estudiante->segundoape}}</span>
@@ -21,6 +22,7 @@
                        <span><b>Periodo:</b> {{$estudiante->anio}} - {{$estudiante->periodo}}</span>
                      </div>
                 </div>
+               @endif
             </div>
             <br>
             <div class="container table-responsive">
@@ -55,5 +57,18 @@
                 </table>
             </div>
         <!--end notas-->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      @if(isset($res))
+      @if($res == 0)
+        <script>
+          swal({
+          title: "Lo sentimos!",
+          text: "No se encontró información para la solicitud!",
+          icon: "warning",
+          button: "Salir!",
+        });
+        </script>
+        @endif
+      @endif
 @endsection
 

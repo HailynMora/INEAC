@@ -50,22 +50,18 @@
                           </div>
                           <div class="form-group col-md-6">
                             <label for="codigo">Codigo</label>
-                            <input type="text" class="form-control" id="codigo" name="codigo" required>
+                            <input type="number" class="form-control" id="codigo" name="codigo" min="0" minlength="4" maxlength="6"  required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-6">
                             <label for="descripcion">Descripcion</label>
                             <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-6">
                             <label for="jornada">Jornada</label>
-                            <input type="text" class="form-control" id="jornada" name="jornada" required>
-                          </div>
-                          <div class="form-group col-md-4" >
-                            <label for="estado">Estado</label>
-                            <select id="estado" class="form-control" name="estado" required>
+                            <select id="jornada" class="form-control" name="jornada" required>
                               <option selected>Seleccionar</option>
-                              <option value="1">Activo</option>
-                              <option value="2">Inactivo</option>
+                              <option value="Sabado">Sabado</option>
+                              <option value="Domingo">Domingo</option>
                             </select>
                           </div>
                         </div>
@@ -117,7 +113,9 @@
               <td>{{$d->descripcion}}</td>
               <td>{{$d->estado}}</td>
               <td>
+              @if($d->estado == 'Activo')
               <a href="{{route('actualizar_prog_tec',$d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i></a>
+              @endif
               &nbsp&nbsp
               <?php
               if($d->estado == 'Activo'){
@@ -131,8 +129,10 @@
               }
               ?>
               &nbsp&nbsp
+              @if($d->estado == 'Activo')
               <a href="{{route('vincular_asig', $d->id)}}" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>        
-              </td>
+              @endif
+            </td>
               </tr>
               <!-- Ventana modal para deshabilitar -->
               <div class="modal fade" id="cambiarPro{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -228,11 +228,7 @@
                             '<td>' + arreglo[x].descripcion +'</td>' +
                             '<td>' +  arreglo[x].estado + '</td>' +
                             '<td>' +  
-
-                            '<a href="/programastecnicos/actualizar/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Editar"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'+
-                            '<a type="button" data-toggle="modal" data-target="#cambiarPro'+ arreglo[x].id +'" data-placement="bottom" title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a> '+
-                            '<a href="/vincularasig/'+arreglo[x].id+'" data-toggle="tooltip" data-placement="bottom"  title="Vincular Asignatura"><i class="nav-icon fas fa-file-alt" style="color:  #e1b308; font-size:20px;" ></i></a>'
-                            
+                            '<a type="button" data-toggle="modal" data-target="#cambiarPro'+ arreglo[x].id +'" data-placement="bottom" title="Habilitar"><i class="nav-icon fas fa-toggle-off" style="color: #9cbe82; font-size:20px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;</a> '
                             + '</td>' + //agregar los botones
                             '</tr>';
 
@@ -258,7 +254,7 @@
     e.preventDefault();
     var nomtec=$('#nomtec').val();
     var codigo=$('#codigo').val();
-    var estado=$('#estado').val();
+    var estado='1';
     var descripcion=$('#descripcion').val();
     var jornada=$('#jornada').val();
     var _token = $('input[name=_token]').val(); //token de seguridad

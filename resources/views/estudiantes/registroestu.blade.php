@@ -3,6 +3,24 @@
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
  <h3 class="letra1">Registro de Estudiantes</h3>
 </div>
+<!--mensajes-->
+@if(Session::has('msj'))
+        <div class="alert alert-info alert-dismissible fade show alerta" role="alert">
+            {{Session::get('msj')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+ @endif
+ @if(Session::has('msjalert'))
+        <div class="alert alert-success alert-dismissible fade show alerta" role="alert">
+            {{Session::get('msjalert')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+ @endif
+ <!--end mensajes-->
 <form id="matricula" name="matricula">
  @csrf
 <div class="accordion letraf" id="accordionExample">
@@ -42,7 +60,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="numero_doc">Número Documento</label>
-              <input type="number" class="form-control" id="numero_doc" name="numero_doc" required>
+              <input type="text" class="form-control" id="numero_doc" name="numero_doc"  minlength="5"  maxlength="12" required>
             </div>
             <div class="form-group col-md-4">
             <label for="correo">Dpt. Expedición</label>
@@ -133,7 +151,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="estrato">Estrato</label>
-              <input type="number" class="form-control" id="estrato" name="estrato" required>
+              <input type="number" class="form-control" id="estrato" name="estrato" min="0" max="5" required>
             </div>
             <div class="form-group col-md-4">
             <label for="genero">Tipo Sanguineo</label>
@@ -155,7 +173,7 @@
             <div class="form-row">
             <div class="form-group col-md-6">
              <label for="telefono">Telefono</label>
-             <input type="text" class="form-control" id="telefono" name="telefono" >
+             <input type="text" class="form-control" id="telefono" name="telefono"  minlength="10"  maxlength="10" >
             </div>
             <div class="form-group col-md-6">
               <label for="correo">Correo</label>
@@ -265,7 +283,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="numero_doc">Número Documento</label>
-              <input type="number" class="form-control" id="numdocacu" name="numdocacu" required>
+              <input type="text" class="form-control" id="numdocacu" name="numdocacu" minlength="5"  maxlength="12" required>
             </div>
             <div class="form-group col-md-4">
             <label for="correo">Nombres y Apellidos</label>
@@ -288,7 +306,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="numero_doc">Telefono/Celular</label>
-              <input type="number" class="form-control" id="telacu" name="telacu" required>
+              <input type="text" class="form-control" id="telacu" name="telacu" minlength="10"  maxlength="10" required>
             </div>
           </div>
           <!---###############################3-->
@@ -309,8 +327,121 @@
 <button type="submit" class="btn btn-warning letraf"  onclick="resetform()">Limpiar</button>
 <button type="submit" class="btn btn-primary letraf">Registrar</button>
 <button type="button"  id="miboton" class="btn btn-success letraf">Visualizar</button>
+<!--carga masiva-->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#carga">
+          <i class="fas fa-users" style="font-size:20px;"></i>
+        </button>
+<!--carga-->
+<!--carga masiva-->
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#listadoar">
+          <i class="fas fa-file-excel" style="font-size:20px;"></i>
+        </button>
+<!--carga-->
 </form>
 <!--Modal de visualizar--->
+     <!-- Modal -->
+     <form action="{{route('usuariosImport')}}"  method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="modal fade" id="carga" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title letraf" id="exampleModalLabel">Carga Masiva De Usuarios</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body letraform">
+               <!--formulario-->
+               <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="form-control" name="uploadedfile" id="uploadedfile" placeholder="elegir"  accept=".csv" required>
+                        <br>
+                    </div>
+                 </div>
+                 <div class="form-group">
+                      <label for="nombre">Descripciòn</label>
+                     <input type="text" name="nombre" id="nombre" class="form-control-file" required>
+                </div>
+               <!--formulario de carga-->
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+               <!--boton info-->
+               <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Nota
+                </a>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body" style="text-align:justify;">
+                 1. Para descargar el archivo Excel del registro de solicitudes dirijase a Google Drive, las credenciales son: <br>
+                    Correo: inesurpotosi2022@gmail.com<br>
+                    Contraseña: potosi2022.*<br>
+                 2. Una vez descargado el archivo convierta a CSV delimitado por comas. Asegurese que este delimitado por comas antes de subirlo.
+                </div>
+              </div>
+               <!--end info-->
+                <a href="/archivo/formato.xlsx" type="button" class="btn btn-success" download="formato_estudiantes">Formato Excel</a>
+                <button type="submit" class="btn btn-info">Importar</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        </form>
+<!-- Button trigger modal -->
+     <!-- Modal -->
+        <div class="modal fade" id="listadoar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title letraf" id="exampleModalLabel">Listado De Archivos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body letraform">
+               <!--table-->
+               <div class="table-responsive">
+               <table class="table">
+                <thead style="background-color: #ffc107;">
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Archivo</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    $conta=1;
+                    ?>
+                    @if(isset($listado))
+                    @foreach($listado as $p)
+                      <tr>
+                        <th scope="row">{{$conta++}}</th>
+                        <td>{{$p->ruta}}</td>
+                        <td>{{$p->descripcion}}</td>
+                        <td><a href="{{route('cargausu', $p->id)}}" class="btn btn-success">Guardar</a>
+                            <a href="{{route('eliminararchivo', $p->id)}}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                      </tr>
+                      @endforeach
+                    @endif
+                </tbody>
+              </table>
+               <!--end table-->
+               </div>
+               <!--table-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+        </div>
+        </div>
+       
+      <!--mensajes-->
 <!-- Button trigger modal -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

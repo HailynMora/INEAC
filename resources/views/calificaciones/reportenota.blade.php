@@ -18,7 +18,15 @@
         </div>
     </div>
 @endif
-
+@if(Session::has('notas'))
+       <br>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{Session::get('notas')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
 @if(isset($consulta[0]->asignatura))
 <div class="container letraf" style="background-color:white;">
   <div class="container" style="padding-top:10px;">

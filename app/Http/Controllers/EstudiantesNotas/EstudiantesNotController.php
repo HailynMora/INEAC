@@ -9,6 +9,7 @@ use App\Models\EstudianteModel\Estudiante;
 use App\Exports\NivelacionesExport;
 use App\Exports\NivelacionesTecExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Session;
 use PDF;
 use DB;
 
@@ -18,6 +19,17 @@ class EstudiantesNotController extends Controller
         $idlog=auth()->id();
         $idestu = DB::table('estudiante')->where('id_usuario', $idlog)->select('estudiante.id as ides')->first();
        
+        //validar Datos
+        $v = DB::table('notas')->join('cursos', 'notas.id_curso', '=', 'cursos.id')
+                ->join('estudiante', 'notas.id_estudiante', '=', 'estudiante.id')
+                ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
+                ->join('tipo_curso', 'cursos.id_tipo_curso', '=', 'tipo_curso.id')
+                ->join('docente', 'cursos.id_docente', '=', 'docente.id')
+                ->where('notas.id_estudiante', $idestu->ides)
+                ->where('cursos.anio', $request->anio)
+                ->where('cursos.periodo', $request->periodo)->count();
+        //end validar
+        if($v != 0){
         $datos = DB::table('notas')->join('cursos', 'notas.id_curso', '=', 'cursos.id')
                      ->join('estudiante', 'notas.id_estudiante', '=', 'estudiante.id')
                      ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
@@ -31,7 +43,13 @@ class EstudiantesNotController extends Controller
                      ->where('cursos.periodo', $request->periodo)->get();
                      
         return view('estudiantes.notas')->with('datos', $datos);
+        }else{
+            $res=0;
+            $datos=array();
+            return view('estudiantes.notas')->with('datos', $datos)->with('res', $res);
+        }
     }
+
     public function certificados(Request $request){
         $idc = DB::table('matriculas')
                     ->where('matriculas.id_estudiante', '=', $ide)
@@ -88,24 +106,44 @@ class EstudiantesNotController extends Controller
         $obj = DB::table('objetivos')->get();
                 return view('estudiantes.boletin')->with('estudiante',$estudiante)->with('notas',$notas)->with('cur',$cur)->with('obj',$obj);
     }
+
     public function nivelacion(Request $request){
         $p= $request->programa;
         $a =$request->anio;
         $pe = $request->periodo;
-        if($p==1){
-            $mat= DB::table('notas')
-            ->join('cursos','notas.id_curso','=','cursos.id')
-            ->join('estudiante','notas.id_estudiante','=','estudiante.id')
-            ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
-            ->join('docente','cursos.id_docente','=','docente.id')
-            ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
-            ->where('definitiva','<','3')
-            ->where('cursos.anio','=',$a)
-            ->where('cursos.periodo','=',$pe)
-            ->select('asignaturas.codigo as codasig','asignaturas.val_habilitacion as valor','asignaturas.nombre as nomasig','docente.nombre as nomdoc','docente.apellido as apedoc','tipo_curso.codigo as codcu','tipo_curso.descripcion as descu','estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1','estudiante.second_ape as ape2','estudiante.num_doc','notas.definitiva','notas.nota1','notas.nota2','notas.nota3','notas.nota4')
-            ->orderby('descu','asc')
-            ->get();
-            return view('nivelaciones.lista')->with('re',$mat);
+        
+        if($request->val == 1){
+            //validar
+            $valmat= DB::table('notas')
+                        ->join('cursos','notas.id_curso','=','cursos.id')
+                        ->join('estudiante','notas.id_estudiante','=','estudiante.id')
+                        ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                        ->join('docente','cursos.id_docente','=','docente.id')
+                        ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                        ->where('definitiva','<','3')
+                        ->where('cursos.anio','=',$a)
+                        ->where('cursos.periodo','=',$pe)
+                        ->count();
+            //end validar
+            if($valmat != 0){
+
+                $mat= DB::table('notas')
+                ->join('cursos','notas.id_curso','=','cursos.id')
+                ->join('estudiante','notas.id_estudiante','=','estudiante.id')
+                ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                ->join('docente','cursos.id_docente','=','docente.id')
+                ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                ->where('definitiva','<','3')
+                ->where('cursos.anio','=',$a)
+                ->where('cursos.periodo','=',$pe)
+                ->select('asignaturas.codigo as codasig','asignaturas.val_habilitacion as valor','asignaturas.nombre as nomasig','docente.nombre as nomdoc','docente.apellido as apedoc','tipo_curso.codigo as codcu','tipo_curso.descripcion as descu','estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1','estudiante.second_ape as ape2','estudiante.num_doc','notas.definitiva','notas.nota1','notas.nota2','notas.nota3','notas.nota4')
+                ->orderby('descu','asc')
+                ->get();
+                return view('nivelaciones.lista')->with('re',$mat);
+            }else{
+                Session::flash('niv', 'Lo sentimos! No se encontró información para la solicitud.');
+                return view('nivelaciones.lista');
+            }
         }else{
             $mat= DB::table('notas_tecnico')
             ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
@@ -126,6 +164,30 @@ class EstudiantesNotController extends Controller
     }
     public function boletintec(Request $request){
                
+        //validar estudiante
+        $estuval= DB::table('matricula_tecnico')
+                    ->where('matricula_tecnico.id_estudiante', '=', $request->ides)
+                    ->where('matricula_tecnico.anio', '=', $request->anio)
+                    ->where('matricula_tecnico.periodo', '=', $request->periodo)
+                    ->join('estudiante','estudiante.id','=','matricula_tecnico.id_estudiante')
+                    ->join('programa_tecnico','matricula_tecnico.id_tecnico','=','programa_tecnico.id')
+                    ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
+                    ->join('trimestre_tecnicos','matricula_tecnico.id_trimestre','=','trimestre_tecnicos.id')
+                    ->select('estudiante.id as ides','matricula_tecnico.anio','matricula_tecnico.periodo','programa_tecnico.codigotec','programa_tecnico.nombretec','programa_tecnico.jornada','estudiante.first_nom as nombre', 'estudiante.second_nom as segundonom', 'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 'estudiante.num_doc', 'tipo_documento.descripcion as destipo','trimestre_tecnicos.nombretri')
+                    ->count();
+        //validar notas
+        $valnot = DB::table('notas_tecnico')
+                    ->where('notas_tecnico.id_estudiante',$request->ides)
+                    ->where('asignaturas_tecnicos.anio', '=', $request->anio)
+                    ->where('asignaturas_tecnicos.periodo', '=', $request->periodo)
+                    ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                    ->join('desempenos','notas_tecnico.id_desempenio','=','desempenos.id')
+                    ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                    ->join('docente', 'asignaturas_tecnicos.id_docente', '=', 'docente.id')
+                    ->select('definitiva','asig_tecnicos.nombreasig','asig_tecnicos.codigoasig','desempenos.descripcion as desem','docente.nombre', 'docente.apellido','id_tecnicos','asig_tecnicos.intensidad_horaria as ih')
+                    ->count();
+        //###########################################
+        if($estuval != 0 && $valnot != 0){
                 $estudiante= DB::table('matricula_tecnico')
                     ->where('matricula_tecnico.id_estudiante', '=', $request->ides)
                     ->where('matricula_tecnico.anio', '=', $request->anio)
@@ -158,6 +220,16 @@ class EstudiantesNotController extends Controller
                 
                 $pdf = PDF::loadView('tecnico.boletin', $data);
                 return $pdf->download('boletin_academico_tecnico.pdf');
+            }else{
+                if($estuval == 0){
+                    Session::flash('est','Lo sentimos! no se encontro información en el año y periodo académico seleccionado.');
+                }else{
+                    if($valnot == 0){
+                        Session::flash('est','Lo sentimos! el estudiante no tiene notas vinculadas.');
+                    }
+                }
+                return back();
+            }
        }
 
     public function nivelaciones(Request $request){
@@ -167,7 +239,28 @@ class EstudiantesNotController extends Controller
         $idlog=auth()->id();
         $doc = DB::table('docente')->where('id_usuario', $idlog)->select('docente.id as idoc')->first();
         $docc=$doc->idoc;
-        return Excel::download(new NivelacionesExport($docc, $anio, $periodo,$programa), 'nivelaciones.xlsx');
+        /////#################################################################
+        $resv = DB::table('cursos')
+                ->where('cursos.id_docente','=',$docc)
+                ->where('cursos.anio','=',$anio)
+                ->where('cursos.periodo','=',$periodo)
+                ->where('cursos.id_tipo_curso','=',$programa)
+                ->where('notas.definitiva','<',3)
+                ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                ->join('notas','cursos.id','=','notas.id_curso')
+                ->join('estudiante','notas.id_estudiante','=','estudiante.id')
+                ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
+                ->join('docente','cursos.id_docente','=','docente.id')
+                ->count();
+         ////##################################################################
+        if($resv != 0){
+            return Excel::download(new NivelacionesExport($docc, $anio, $periodo,$programa), 'nivelaciones.xlsx');
+        }else{
+            $r = 0;
+            return view('inicio.vista')->with('r',$r);
+        }
+       
     }
 
     //reporte nivelaciones tecnicos
@@ -175,16 +268,66 @@ class EstudiantesNotController extends Controller
         $anio = $request->anio;
         $programa = $request->programa;
         $idlog=auth()->id();
+        $validar = DB::table('docente')->where('id_usuario', $idlog)->select('docente.id as idoc')->count();
+        if($validar != 0){
         $doc = DB::table('docente')->where('id_usuario', $idlog)->select('docente.id as idoc')->first();
         $docc=$doc->idoc;
-        return Excel::download(new NivelacionesTecExport($docc, $anio, $programa), 'nivelaciones_tecnicos.xlsx');
+        //###########################################################
+        $resv = DB::table('asignaturas_tecnicos')
+                ->where('asignaturas_tecnicos.id_docente','=',$docc)
+                ->where('asignaturas_tecnicos.anio','=',$anio)
+                ->where('asignaturas_tecnicos.id_tecnico','=',$programa)
+                ->where('notas_tecnico.definitiva','<',3)
+                ->join('notas_tecnico','asignaturas_tecnicos.id','=','notas_tecnico.id')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','asig_tecnicos.id')
+                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','trimestre_tecnicos.id')
+                ->join('estudiante','notas_tecnico.id_estudiante','=','estudiante.id')
+                ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
+                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                ->count(); 
+        //##########################################################
+        if($resv != 0){
+            return Excel::download(new NivelacionesTecExport($docc, $anio, $programa), 'nivelaciones_tecnicos.xlsx');
+        }else{
+            $r = 0;
+            return view('inicio.vista')->with('r',$r);
+        }
+      }else{
+            $r = 0;
+            return view('inicio.vista')->with('r',$r);
+      }
+      
     }
-    //
+    //nivelaciones
     public function nivel(){
         $idlog=auth()->id();
+        $validar = DB::table('estudiante')->where('id_usuario', $idlog)->select('estudiante.id as ides')->count();
+        if($validar != 0){
         $est = DB::table('estudiante')->where('id_usuario', $idlog)->select('estudiante.id as ides')->first();
         $idest=$est->ides;
 
+        //validar nivelaciones bach
+        $valnb = DB::table('notas')
+                ->where('id_estudiante','=',$idest)
+                ->where('notas.definitiva','<',3)
+                ->join('cursos','notas.id_curso','=','cursos.id')
+                ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                ->join('docente','cursos.id_docente','=','docente.id')
+                ->count();
+        //validar tecnicos
+        $valtec = DB::table('notas_tecnico')
+                ->where('id_estudiante','=',$idest)
+                ->where('definitiva','<',3)
+                ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+                ->count();
+        //##############
+        if($valnb != 0 || $valtec != 0){
         $bac = DB::table('notas')
                 ->where('id_estudiante','=',$idest)
                 ->where('notas.definitiva','<',3)
@@ -206,7 +349,15 @@ class EstudiantesNotController extends Controller
                 ->select('programa_tecnico.nombretec','docente.nombre as nomdoc','docente.apellido as apedoc','asig_tecnicos.nombreasig','asig_tecnicos.val_habilitacion','trimestre_tecnicos.nombretri','anio','periodo','notas_tecnico.definitiva')
                 ->orderby('nombretec','asc')
                 ->get();
-        return view('nivelaciones.nivelacionesest')->with('bac',$bac)->with('tec',$tec);
+         return view('nivelaciones.nivelacionesest')->with('bac',$bac)->with('tec',$tec);
+        }else{
+            $res=0;
+            return view('nivelaciones.nivelacionesest')->with('res',$res);
+        }
+    }else{
+        $res=0;
+        return view('nivelaciones.nivelacionesest')->with('res',$res);
+    }
     }
     
 }

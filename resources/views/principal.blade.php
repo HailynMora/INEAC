@@ -10,49 +10,36 @@
 </head>
 <style>
   .titulo{
-      /* font-family: 'Roboto Slab', serif;*/
-       font-family: 'Roboto Condensed', sans-serif;
+      /* font-family: 'Roboto Condensed', sans-serif;*/
        font-size:32px;
        font-weight: 700;
-       letter-spacing: 0.1em;
        text-align:center; 
   }
   .letras{
-      /* font-family: 'Roboto Slab', serif;*/
-       font-family: 'Roboto Condensed', sans-serif;
        font-size:20px;
        font-weight: 700;
-       letter-spacing: 0.1em;
        text-align:center; 
   }
   .letras_log{
-       font-family: 'Roboto Condensed', sans-serif;
        font-size:20px;
        font-weight: 700;
-       letter-spacing: 0.1em;
       
   }
 
   .letra_peq{
-       font-family: 'Roboto Condensed', sans-serif;
        font-size:16px;
        font-weight: 700;
-       letter-spacing: 0.1em;
       
   }
   .letra_peq1{
-       font-family: 'Roboto Condensed', sans-serif;
        font-size:16px;
        font-weight: 700;
-       letter-spacing: 0.2em;
        text-align:center; 
       
   }
   .letra_but{
-       font-family: 'Roboto Condensed', sans-serif;
        font-size:12px;
        font-weight: 700;
-       letter-spacing: 0.1em;
        color: #FFFFFF;
 
   }
@@ -74,12 +61,13 @@
         <!-- ################################################################################################ -->
         <ul class="clear">
           <li class="active letras"><a href="{{ url('/') }}">Inicio</a></li>
+          <li class="letras"><a href="https://forms.gle/h6nUM7j3kyyZsVbW7" target="_blank">Solicitud</a></li>
           <!--login-->
           @if (Route::has('login'))
            @auth
              <li><a class="letras" href="{{ url('/dashboard') }}">Regresar</a></li>
             @else
-             <li><a class="letras" href="{{url('/reg') }}">Iniciar</a></li>
+             <li><a class="letras" href="{{url('/reg') }}">Ingresar</a></li>
            @endauth
           @endif
         </ul>

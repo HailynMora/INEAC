@@ -172,6 +172,11 @@ Route::get('desvincular/docente/{id}', [AsignaturaController::class, 'desvincula
 //RUTA REPORTE PROGRAMAS BACHILLER
 Route::get('/programas/reporte_programas', [ProgramasController::class, 'reporte'])->middleware(['auth'])->name('reporte_pro');
 
+//ruta de publidad
+Route::get('/programas/publicidad', [ProgramasController::class, 'publi'])->middleware(['auth', 'secretaria'])->name('publicidad');
+Route::post('/programas/publicidad/guardar', [ProgramasController::class, 'savepubli'])->middleware(['auth', 'secretaria'])->name('publicidadg');
+Route::get('/estado/publicidad/{id}', [ProgramasController::class, 'camestado'])->middleware(['auth', 'secretaria'])->name('cambiarpub'); 
+
 //RUTA REPORTE PROGRAMAS TECNICOS
 Route::get('/programas/reporte_programas_tecnicos', [ProgramasController::class, 'reporte_tecnico'])->middleware(['auth'])->name('reporte_tecnico');
 
@@ -436,6 +441,17 @@ Route::post('/filtrar/reporte/notas/tec', [ReportesController::class, 'notasTec'
 
 Route::post('/reporte/estudiantes/notas/tecnico', [ReportesController::class, 'notasEsTec'])->middleware(['auth', 'estudiante'])->name('tecnicoCalf');
 
+//listado docentes
+Route::get('/generar/listado/docentes/pdf', [PDFController::class, 'listapdf'])->middleware(['auth'])->name('listapdf');
+//carga masiva
+//importar usuarios
+Route::post('/admin/importar/usuarios', [EstudiantesController::class, 'archivoimpor'])->middleware(['auth', 'secretaria'])->name('usuariosImport');
+Route::get('/admin/importar/usuarios/{id}', [EstudiantesController::class, 'archivoselect'])->middleware(['auth', 'secretaria'])->name('cargausu');
+Route::get('/admin/eliminar/arc/usuarios/{id}', [EstudiantesController::class, 'archivoelmin'])->middleware(['auth', 'secretaria'])->name('eliminararchivo');
+//pdfs
+
+Route::get('/docente/generar/listado/{anio}/{per}/{cur}', [EstudiantesController::class, 'archivopdflista'])->middleware(['auth', 'secretaria_docente'])->name('pdfestudoc');
+Route::get('/docente/generar/listado/tecnico/{anio}/{per}/{cur}', [ReportesController::class, 'pdfestutec'])->middleware(['auth', 'secretaria_docente']);
 //eliminar objetivos tecnicos
 Route::get('/eliminar/objetivostec/{id}',[ReporteAsigController::class, 'elim_objtec'])->middleware(['auth', 'secretaria_docente']);
 require __DIR__.'/auth.php';

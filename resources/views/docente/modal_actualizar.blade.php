@@ -19,7 +19,7 @@
             </div>
             <div class="form-group col-md-3">
             <label for="numerodoc">Numero Documento</label>
-            <input type="number" class="form-control" id="numerodoc" name="numerodoc" value="{{$doc[0]->num_doc}}" required>
+            <input type="text" class="form-control" id="numerodoc" name="numerodoc" value="{{$doc[0]->num_doc}}" minlength="5" maxlength="12" required>
             </div>
             <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group col-md-3">
             <label for="telefono">Telefono</label>
-            <input type="number" class="form-control" id="telefono" name="telefono" value="{{$doc[0]->telefono}}">
+            <input type="text" class="form-control" id="telefono" name="telefono" value="{{$doc[0]->telefono}}" minlength="10" maxlength="10">
             </div>
             <div class="form-group col-md-3">
             <label for="direccion">Direccion</label>
@@ -53,7 +53,9 @@
             <select id="tipogen" class="form-control" name="tipogen" required>
             <option value="{{$doc[0]->id_genero}}" selected>{{$doc[0]->gendoc}}</option>
             @foreach($gen as $g)
+            @if($doc[0]->id_genero != $g->id)
             <option value="{{$g->id}}">{{$g->descripcion}}</option>
+            @endif
             @endforeach
             </select>
             </div>
@@ -62,7 +64,9 @@
                 <select id="estado" class="form-control" name="estado" required>
                 <option value="{{$doc[0]->id_estado}}" selected>{{$doc[0]->estado}}</option>
                 @foreach($es as $e)
+                  @if($doc[0]->id_estado != $e->id)
                     <option value="{{$e->id}}">{{$e->descripcion}}</option>
+                 @endif
                 @endforeach
                 </select>
             </div>

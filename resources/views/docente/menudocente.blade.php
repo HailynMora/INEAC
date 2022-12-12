@@ -3,10 +3,12 @@
   use Illuminate\Support\Facades\Auth;
    
   $idoc = auth()->user()->id;
+  $valida = DB::table('docente')->where('id_usuario', '=', $idoc)->select('docente.id as idocente')->count();
+  if($valida != 0){
   $valdoc= DB::table('docente')->where('id_usuario', '=', $idoc)->select('docente.id as idocente')->first();
   $asigbachi = DB::table('cursos')->where('cursos.id_docente', '=', $valdoc->idocente)->count();
   $asigtec = DB::table('asignaturas_tecnicos')->where('asignaturas_tecnicos.id_docente', '=', $valdoc->idocente)->count();
-  
+  }
 ?>
     <!-- Sidebar Menu -->
     <nav class="mt-2">
@@ -53,7 +55,7 @@
           </li>
 
           <!--estudiantes-->
-          <li class="nav-item">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link" style="color:white;">
             <i class="nav-icon fas fa-university"></i>
               <p>
@@ -62,6 +64,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            @if(isset($asigbachi))
             @if($asigbachi!=0)
               <li class="nav-item">
                 <a type="button" data-toggle="modal" data-target="#exampleModalListaB" class="nav-link" style="color:white;">
@@ -73,6 +76,8 @@
                 @include('docente.listadoEstu')
               </li> 
             @endif 
+            @endif 
+            @if(isset($asigtec))
             @if($asigtec !=0)
             <li class="nav-item">
                 <a type="button" data-toggle="modal" data-target="#listaTec" class="nav-link" style="color:white;">
@@ -83,6 +88,7 @@
                 </a>
                 @include('docente.listadoEstuTecnico')
               </li>
+            @endif  
             @endif  
             </ul>
           </li>
@@ -98,6 +104,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            @if(isset($asigbachi))
             @if($asigbachi!=0)
               <li class="nav-item">
                   <a type="button" data-toggle="modal" data-target="#exampleModalnive" class="nav-link" style="color:white;">
@@ -109,6 +116,8 @@
                 @include('nivelaciones.nivelacionesdoc')
               </li>
               @endif
+              @endif
+              @if(isset($asigtec))
               @if($asigtec !=0)
                 <li class="nav-item">
                     <a type="button" data-toggle="modal" data-target="#nivTec" class="nav-link" style="color:white;">
@@ -119,6 +128,7 @@
                     </a>
                     @include('nivelaciones.nivelacionesTec')
                   </li>
+              @endif
               @endif  
             </ul>
           </li>

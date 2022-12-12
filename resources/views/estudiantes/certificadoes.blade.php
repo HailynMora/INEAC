@@ -9,8 +9,18 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Certificados Estudiantiles Bachillerato</h3>
+ <h3 class="letra1">Certificados Estudiantiles De Bachillerato</h3>
 </div>
+<!--mensajes-->
+      @if(Session::has('est'))
+        <div class="alert alert-info alert-dismissible fade show alerta" role="alert">
+            {{Session::get('est')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        @endif
+<!--mensajes-->
 <div class="container-fluid alerta d-none d-sm-none d-md-block">
   <div class="row">
     <div class="col-4" style="padding-top: 5%;">
@@ -73,8 +83,25 @@
     </div>
   </div>
 
+  <!--end nota-->
 </div>
-
+   <!--nota-->
+   <!--notas-->
+   <div class="container alerta">
+   <p>
+    <a class="btn btn-info" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <u>Nota</u>
+    </a>
+  </p>
+  <div class="collapse" id="collapseExample1">
+    <div class="card card-body">
+      <div class="alert alert-primary" role="alert">
+         Si el año de selección no esta disponible se debe a que no existen asignaturas vinculadas a un curso.
+      </div>
+    </div>
+  </div>
+</div>
+  <!--end notas-->
 <!--end imagenes para celular-->
 <!-- Modal -->
 <form action="{{route('pdfEstudiantil')}}" method="POST">

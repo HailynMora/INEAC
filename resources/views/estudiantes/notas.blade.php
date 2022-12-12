@@ -72,4 +72,17 @@
     </div>
   </div>
 </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if(isset($res))
+@if($res == 0)
+  <script>
+    swal({
+    title: "Lo sentimos!",
+    text: "No se encontró información para la solicitud!",
+    icon: "warning",
+    button: "Salir!",
+  });
+  </script>
+  @endif
+@endif
 @endsection

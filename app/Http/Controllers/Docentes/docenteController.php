@@ -14,6 +14,7 @@ use App\Models\EstadoModel\Estado;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
+
 class docenteController extends Controller
 {
     public $documento;
@@ -184,6 +185,7 @@ class docenteController extends Controller
         $docente->id_tipo_doc = $request->input('tipodoc');
         $docente->id_genero = $request->input('tipogen');
         $docente->save();
+        Session::flash('pdf','Docente actualizado exitosamente.');
         return redirect('/docente/listado_docente');
 
     }
@@ -193,9 +195,17 @@ class docenteController extends Controller
         if($es==2){
             $doces->id_estado = 1;
             $doces->save();
+            
+            $u = User::find($doces->id_usuario);
+            $u->estado=1;
+            $u->save();
+
         }else{
             $doces->id_estado = 2;
             $doces->save();
+            $u = User::find($doces->id_usuario);
+            $u->estado=2;
+            $u->save();
         }        
         return redirect('/docente/listado_docente');
     }
