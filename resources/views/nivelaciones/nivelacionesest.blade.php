@@ -1,9 +1,12 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Nivelaciones</h3>
+ <h3 class="letra1">Nivelaciones </h3>
 </div>
-<br><br>
+<div class="container">
+<a href="{{route('listanestu')}}" class="btn btn-info">Listado</a>
+<p></p>
+</div>
 <div class="container table-responsive">
     <table class="table">
       <thead style="background-color:#0f468e; color:white;" class="alerta">
@@ -58,7 +61,7 @@
     title: "Lo sentimos!",
     text: "No se encontró información para la solicitud!",
     icon: "warning",
-    button: "Salir!",
+    button: "Salir",
   });
   </script>
   @endif

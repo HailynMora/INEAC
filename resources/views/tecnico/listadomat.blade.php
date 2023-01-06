@@ -7,16 +7,38 @@
 <div class="container alerta">
      <form id="formu" method="POST">
        @csrf
-       <select class="form-select form-select-lg mb-3 form-control" aria-label=".form-select-lg example" name="idtec" id="idtec">
-        <option selected>Seleccione un curso</option>
-        @foreach($tecnico as $tec)
-        <option value="{{$tec->id}}">{{$tec->nombretec}}</option>
-        @endforeach
-      </select>
-      <button type="submit" class="btn btn-primary">Filtrar</button>
+      <div class="row">
+       <div class="col-md-4">
+        <label>Elegir curso</label>
+          <select class="form-select form-select-lg mb-3 form-control" aria-label=".form-select-lg example" name="idtec" id="idtec">
+            @foreach($tecnico as $tec)
+            <option value="{{$tec->id}}">{{$tec->nombretec}}</option>
+            @endforeach
+          </select>
+          </div>
+          <div class="col-md-4">
+          <label>Elegir trimestre</label>
+            <select class="form-select form-select-lg mb-3 form-control" aria-label=".form-select-lg example" name="tri" id="tri">
+            <option value="1">Trimestre I</option>
+            <option value="2">Trimestre II</option>
+            <option value="3">Trimestre III</option>
+            <option value="4">Trimestre IV</option>
+            <option value="5">Trimestre V</option>
+            <option value="6">Trimestre VI</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>Ingrese año</label>
+            <input type="number" min="2000" class="form-select form-select-lg mb-3 form-control" placeholder="Ejemplo 2022" name="aniot" id="aniot" required> 
+          </div>
+          <div class="col-md-1">
+            <div class="container text-center" style="margin-top:32px;">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+          </div>
+          </div>
+        </div>
     </form>
    </div>
-    <br><br>
     <div class="table-responsive">
     <table class="table">
         <thead style="background-color:#0f468e; color:#ffffff" class="alerta">
@@ -24,10 +46,11 @@
             <th scope="col">No</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
-            <th scope="col">Tipo Doc</th>
             <th scope="col">No Documento</th>
-            <th scope="col">Estado</th>
             <th scope="col">Curso</th>
+            <th scope="col">Trimestre</th>
+            <th scope="col">Periodo</th>
+            <th scope="col">Estado</th>
             <th scope="col">Opciones</th>
             </tr>
         </thead>
@@ -42,10 +65,11 @@
         <td>{{$con++}}</td>
         <td>{{$e->nombre}} {{$e->segundonom}}</td>
         <td>{{$e->primerape}} {{$e->segundoape}}</td>
-        <td>{{$e->destipo}}</td>
         <td>{{$e->num_doc}}</td>
-        <td>{{$e->aprobado}}</td>
         <td>{{$e->nombretec}}</td>
+        <td>{{$e->nomtri}} </td>
+        <td>{{$e->anio}} - {{$e->periodo}} </td>
+        <td>{{$e->aprobado}}</td>
        <!-- idest
         idcur-->
          <!-- aprobado-->
@@ -161,12 +185,16 @@
    $('#formu').submit(function(e){
     e.preventDefault();
     var idtec=$('#idtec').val();
+    var tri = $('#tri').val();
+    var anio = $('#aniot').val();
     var _token = $('input[name=_token]').val();
     $.ajax({
       url:"{{route('estutec')}}",
       type: "POST",
       data:{
-        idtec:idtec,
+         tri:tri,
+         anio:anio,
+         idtec:idtec,
         _token:_token,
       }
     }).done(function(response){
@@ -184,10 +212,11 @@
             '<td>' +  conta + '</td>' +
             '<td>' +  ar[i].nombre + ' '+ar[i].segundonom +'</td>' +
             '<td>' +  ar[i].primerape + ' ' +  ar[i].segundoape  +'</td>' +
-            '<td>' +  ar[i].destipo  + '</td>' +
             '<td>' +  ar[i].num_doc  + '</td>' +
-            '<td>' +  ar[i].aprobado + '</td>' +
             '<td>' +  ar[i].nombretec + '</td>' +
+            '<td>' +  ar[i].nomtri +  '</td>' +
+            '<td>' +  ar[i].anio + '-' +  ar[i].periodo + '</td>' +
+            '<td>' +  ar[i].aprobado + '</td>' +
             '<td>'
             +'<a href="/matricula/estudiante/actualizar/' + ar[i].id + '" type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;</a>'
              +'<a href="/generar/certificado/estudiantil_tec/'+ ar[i].id +'"  type="button" data-toggle="tooltip" data-placement="bottom"  title="Certificados"><i class="nav-icon fas fa-book" style="color:  #e1b308; font-size:20px;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>'+

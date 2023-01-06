@@ -30,9 +30,9 @@
 <table class="table">
        <thead  style="background-color:#0f468e; color:white;"" class="alerta">
         <tr>
-        <th scope="col">N° Identificacion</th>
+        <th scope="col">N° Identificación</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Telefono</th>
+        <th scope="col">Teléfono</th>
         <th scope="col">Correo</th>
         <th scope="col">Estado</th>
         <th scope="col">Acciones</th>
@@ -71,7 +71,7 @@
                     <h4 class="text-centers">Datos Personales</h4>
                     <hr>
                     <div class="row">
-                        <div class="col-md-3"><b>Tipo Identificacion</b></div>
+                        <div class="col-md-3"><b>Tipo Identificación</b></div>
                         <div class="col-md-3 ml-auto">{{$d->tdoces}}</div>
                         <div class="col-md-3"><b>Número</b></div>
                         <div class="col-md-3 ml-auto">{{$d->num_doc}}</div>
@@ -83,7 +83,7 @@
                         <div class="col-md-3 ml-auto">{{$d->mun_expedicion}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><b>Genero</b></div>
+                        <div class="col-md-3"><b>Género</b></div>
                         <div class="col-md-3 ml-auto">{{$d->generoestu}}</div>
                         <div class="col-md-3"><b>Fecha Nac</b></div>
                         <div class="col-md-3 ml-auto">{{$d->fecnacimiento}}</div>
@@ -121,7 +121,7 @@
                     <div class="row">
                         <div class="col-md-3"><b>Zona</b></div>
                         <div class="col-md-3 ml-auto">{{$d->zona}}</div>
-                        <div class="col-md-3"><b>Telefono/Celular</b></div>
+                        <div class="col-md-3"><b>Teléfono/Celular</b></div>
                         <div class="col-md-3 ml-auto">{{$d->telefono}}</div>
                     </div>
                     <div class="row">
@@ -137,7 +137,7 @@
                         <h4 class="text-centers">Sistema De Salud</h4>
                       <hr>
                       <div class="row">
-                        <div class="col-md-3"><b>Regimen Salud</b></div>
+                        <div class="col-md-3"><b>Régimen Salud</b></div>
                         <div class="col-md-3 ml-auto">{{$d->regimen}}</div>
                         <div class="col-md-3"><b>Carnet/EPS</b></div>
                         <div class="col-md-3 ml-auto">{{$d->eps}}</div>
@@ -161,7 +161,7 @@
                         <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
                       <hr>
                       <div class="row">
-                        <div class="col-md-3"><b>Tipo Identificacion</b></div>
+                        <div class="col-md-3"><b>Tipo Identificación</b></div>
                         <div class="col-md-3 ml-auto">{{$d->tdocacu}}</div>
                         <div class="col-md-3"><b>Número</b></div>
                         <div class="col-md-3 ml-auto">{{$d->numacu}}</div>
@@ -264,7 +264,7 @@
                <h4 class="text-centers">Datos Personales</h4>
                     <hr>
                     <div class="row ">
-                        <div class="col-md-3"><b>Tipo Identificacion</b></div>
+                        <div class="col-md-3"><b>Tipo Identificación</b></div>
                         <div class="col-md-3 ml-auto iden" id="limpiar1"> </div>
                         <div class="col-md-3"><b>Número</b></div>
                         <div class="col-md-3 ml-auto num" id="limpiar2"> </div>
@@ -276,7 +276,7 @@
                         <div class="col-md-3 ml-auto mpioex" id="limpiar4"> </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><b>Genero</b></div>
+                        <div class="col-md-3"><b>Género</b></div>
                         <div class="col-md-3 ml-auto gen" id="limpiar5"> </div>
                         <div class="col-md-3"><b>Fecha Nac</b></div>
                         <div class="col-md-3 ml-auto fecna" id="limpiar6"> </div>
@@ -314,7 +314,7 @@
                     <div class="row">
                         <div class="col-md-3"><b>Zona</b></div>
                         <div class="col-md-3 ml-auto zona" id="limpiar17"> </div>
-                        <div class="col-md-3"><b>Telefono/Celular</b></div>
+                        <div class="col-md-3"><b>Teléfono/Celular</b></div>
                         <div class="col-md-3 ml-auto celular" id="limpiar18"> </div>
                     </div>
                     <div class="row">
@@ -330,7 +330,7 @@
                         <h4 class="text-centers">Sistema De Salud</h4>
                       <hr>
                       <div class="row">
-                        <div class="col-md-3"><b>Regimen Salud</b></div>
+                        <div class="col-md-3"><b>Régimen Salud</b></div>
                         <div class="col-md-3 ml-auto regimen" id="limpiar21"> </div>
                         <div class="col-md-3"><b>Carnet/EPS</b></div>
                         <div class="col-md-3 ml-auto carnet" id="limpiar22"> </div>
@@ -354,7 +354,7 @@
                         <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
                       <hr>
                       <div class="row">
-                        <div class="col-md-3"><b>Tipo Identificacion</b></div>
+                        <div class="col-md-3"><b>Tipo Identificación</b></div>
                         <div class="col-md-3 ml-auto idenacu" id="limpiar27"> </div>
                         <div class="col-md-3"><b>Número</b></div>
                         <div class="col-md-3 ml-auto numacu" id="limpiar28"> </div>
@@ -368,7 +368,7 @@
                       <div class="row">
                         <div class="col-md-3"><b>Dirección Residencia</b></div>
                         <div class="col-md-3 ml-auto diracu" id="limpiar31"> </div>
-                        <div class="col-md-3"><b>Telefono/Celular</b></div>
+                        <div class="col-md-3"><b>Teléfono/Celular</b></div>
                         <div class="col-md-3 ml-auto telacu" id="limpiar32"> </div>
                       </div>
                     <!---############End Datos del programa-->

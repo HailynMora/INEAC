@@ -74,7 +74,7 @@
               <input type="text" class="form-control" id="mpioex" name="mpioex" >
             </div>
             <div class="form-group col-md-4">
-              <label for="genero">Genero</label>
+              <label for="genero">Género</label>
                 <select id="genero" class="form-control" name="genero" required>
                 <option selected>Seleccionar</option>
                   @foreach($genero as $g)
@@ -156,7 +156,6 @@
             <div class="form-group col-md-4">
             <label for="genero">Tipo Sanguineo</label>
                 <select id="sangre" class="form-control" name="sangre" >
-                <option selected>Elegir ...</option>
                   <option value="A+">A+</option>
                   <option value="B+">B+</option>
                   <option value="O+">O+</option>
@@ -172,7 +171,7 @@
             <!---###############--->
             <div class="form-row">
             <div class="form-group col-md-6">
-             <label for="telefono">Telefono</label>
+             <label for="telefono">Teléfono</label>
              <input type="text" class="form-control" id="telefono" name="telefono"  minlength="10"  maxlength="10" >
             </div>
             <div class="form-group col-md-6">
@@ -223,7 +222,7 @@
          <!----##########################-->
          <div class="form-row">
           <div class="form-group col-md-4">
-              <label for="tipodoc">Regimen salud</label>
+              <label for="tipodoc">Régimen salud</label>
               <input type="text" class="form-control" id="regimen" name="regimen" required>
             </div>
             <div class="form-group col-md-4">
@@ -305,7 +304,7 @@
               <input type="text" class="form-control" id="diracu" name="diracu" required>
             </div>
             <div class="form-group col-md-4">
-              <label for="numero_doc">Telefono/Celular</label>
+              <label for="numero_doc">Teléfono/Celular</label>
               <input type="text" class="form-control" id="telacu" name="telacu" minlength="10"  maxlength="10" required>
             </div>
           </div>
@@ -505,6 +504,15 @@
         $('#miboton').click(function() {
           location.href ="{{route('listarestu')}}";
         });
+    });
+
+    //validar fecha
+      /* Esperamos a la carga del DOM */
+      window.addEventListener('DOMContentLoaded', (evento) => {
+        /* Obtenemos la fecha de hoy en formato ISO */
+        const hoy_fecha = new Date().toISOString().substring(0, 10);
+        /* Buscamos la etiqueta, ya sea por ID (que no tiene) o por su selector */
+        document.querySelector("input[name='fecnac']").max = hoy_fecha;
     });
 </script>
 @endsection

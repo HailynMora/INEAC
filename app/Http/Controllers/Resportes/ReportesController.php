@@ -15,6 +15,26 @@ use App\Exports\NotasTec;
 use App\Models\MatriculasModel\MatriculaTec;
 use App\Models\CalificacionesModel\Notas;
 use App\Models\CalificacionesModel\NotasTecnico;
+use App\Models\Niveltec; //se agrego
+//#####################3
+use App\Models\SaludModel\SistemaSalud; //se agrego para borrar
+use App\Models\ParentescoModel\Acudiente; //se agrego para borrar
+use App\Models\Nivelacion;
+use App\Models\ObjetivosModel\ObjetivosTec;
+use App\Models\ObjetivosModel\Objetivos;
+use App\Models\EstudianteModel\Estudiante;
+use App\Models\AsignaturaModel\AsigProgram;
+use App\Models\AsignaturaModel\AsigTecnicos;
+use App\Models\DocenteModel\Docente;
+use App\Models\AsignaturaModel\Asignatura;
+use App\Models\AsignaturaModel\AsignaturaTecnicos;
+use App\Models\Archivos\Cargarchivo;
+use App\Models\PerfilModel\Perfil;
+use App\Models\AsignaturaModel\ProgramasTecnicos;
+use App\Models\Archivo;
+use App\Models\AsignaturaModel\Programas;
+use App\Models\User;
+//###################### 
 use PDF;
 use Session;
 use DB;
@@ -355,7 +375,7 @@ class ReportesController extends Controller
     //########################
 
     public function nivelTecnicos(Request $request){
-
+        
         $p= $request->programa;
         $a =$request->anio;
         $pe = $request->periodo;
@@ -384,17 +404,17 @@ class ReportesController extends Controller
             ->where('definitiva','<','3')
             ->where('asignaturas_tecnicos.anio','=',$a)
             ->where('asignaturas_tecnicos.id_tecnico','=',$p)
-            ->select('asig_tecnicos.val_habilitacion as valor','asig_tecnicos.nombreasig as nomasig',
-                      'docente.nombre as nomdoc','docente.apellido as apedoc','programa_tecnico.nombretec as descu',
+            ->select('notas_tecnico.id as idnot', 'asig_tecnicos.val_habilitacion as valor','asig_tecnicos.nombreasig as nomasig',
+                      'docente.nombre as nomdoc','docente.apellido as apedoc','programa_tecnico.nombretec as descu', 'estudiante.id as idest',
                       'estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1',
                       'estudiante.second_ape as ape2','estudiante.num_doc','notas_tecnico.definitiva','notas_tecnico.nota1',
                       'notas_tecnico.nota2','notas_tecnico.nota3','notas_tecnico.nota4','trimestre_tecnicos.nombretri')
             ->orderby('descu','asc')
             ->get();
-            return view('nivelaciones.listaTec')->with('re',$mat);
+            return view('nivelaciones.listaTec')->with('re',$mat)->with('anio',$a)->with('programa',$p); //agregar
         }else{
             Session::flash('niv', 'Lo sentimos! No se encontró información para la solicitud.');
-            return view('nivelaciones.listaTec');
+            return view('nivelaciones.listaTec')->with('anio',$a)->with('programa',$p);
         }
 
     }
@@ -454,5 +474,180 @@ class ReportesController extends Controller
                     return view('tecnico.notastec')->with('notas', $notas)->with('ob', $ob)->with('res', $res);
                  }
     }
+
+    //###############################33333
+    public function recibotecnico(Request $request){
+        $a=$request->anio;
+        $p=$request->programa;
+        //######################################################
+        $val = DB::table('nivelacionestec')->where('numrecibo','=',$request->numrecibo)->count();
+        if($val == 0){
+            $recibo = New Niveltec();
+            $recibo->id_nota = $request->input('idnota');
+            $recibo->descripcion = $request->input('desrecibo');
+            $recibo->numrecibo = $request->input('numrecibo');
+            $recibo->nota = $request->input('nota');
+            if($request->hasFile('img')){             
+                $file = $request->file('img');
+                $val = "tecnico".time().".".$file->guessExtension();
+                $ruta = public_path("dist/archivo/".$val);
+               // if($file->guessExtension()=="pdf"){
+                copy($file, $ruta);//ccopia el archivo de una ruta cualquiera a donde este
+                $recibo->imgrecibo = $val;//ingresa el nombre de la ruta a la base de datos
+               }
+              $recibo->save();
+              Session::flash('alerta','Datos registrados exitosamente');
+        }else{
+            Session::flash('alerta','Lo sentimos! el recibo ingresado ya se encuentra registrado.');
+        }
+        //consultar los datos para regresar al estado inicial
+        $mat= DB::table('notas_tecnico')
+                ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                ->join('estudiante','notas_tecnico.id_estudiante','=','estudiante.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+                ->where('definitiva','<','3')
+                ->where('asignaturas_tecnicos.anio','=', $a)
+                ->where('asignaturas_tecnicos.id_tecnico','=',$p)
+                ->select('notas_tecnico.id as idnot', 'asig_tecnicos.val_habilitacion as valor','asig_tecnicos.nombreasig as nomasig',
+                        'docente.nombre as nomdoc','docente.apellido as apedoc','programa_tecnico.nombretec as descu', 'estudiante.id as idest',
+                        'estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1',
+                        'estudiante.second_ape as ape2','estudiante.num_doc','notas_tecnico.definitiva','notas_tecnico.nota1',
+                        'notas_tecnico.nota2','notas_tecnico.nota3','notas_tecnico.nota4','trimestre_tecnicos.nombretri')
+                ->orderby('descu','asc')
+                ->get();
+        
+        return view('nivelaciones.listaTec')->with('re',$mat)->with('anio',$a)->with('programa',$p);
+    }
     
+    //consultar recibos en tecnicos
+    public function consulrecibos($a, $p){
+        $val = DB::table('nivelacionestec')->count();
+        $niv = 0;
+        if($val != 0){
+          $niv = DB::table('nivelacionestec')
+                ->join('notas_tecnico','nivelacionestec.id_nota','=','notas_tecnico.id')
+                ->join('estudiante','notas_tecnico.id_estudiante','=','estudiante.id')
+                ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+                ->where('asignaturas_tecnicos.anio','=',$a)
+                ->where('asignaturas_tecnicos.id_tecnico','=',$p)
+                ->select('nivelacionestec.id as idniv', 'nivelacionestec.descripcion', 'nivelacionestec.numrecibo', 'nivelacionestec.nota as notantigua',
+                        'nivelacionestec.imgrecibo', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as primerape', 
+                        'estudiante.second_ape as segape', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva', 'notas_tecnico.por1', 'notas_tecnico.por2', 'notas_tecnico.por3', 
+                        'notas_tecnico.por4', 'programa_tecnico.nombretec as cursonom', 'asig_tecnicos.nombreasig as nomasig', 'docente.nombre', 'docente.apellido', 'trimestre_tecnicos.nombretri', 'asignaturas_tecnicos.anio', 'asignaturas_tecnicos.periodo')
+                ->get();
+        }
+     return view('nivelaciones.listarchivotec')->with('niv', $niv);
+    
+    }
+
+    //actualizar 
+   public function recibotecnicoactu(Request $request){
+    $recibo = Niveltec::findOrfail($request->idniv);    
+    $recibo->descripcion = $request->input('desrecibo');
+    $recibo->numrecibo = $request->input('numrecibo');
+    if($request->hasFile('img')){             
+        $file = $request->file('img');
+        $val = "tecnico".time().".".$file->guessExtension();
+        $ruta = public_path("dist/archivo/".$val);
+       // if($file->guessExtension()=="pdf"){
+        copy($file, $ruta);//ccopia el archivo de una ruta cualquiera a donde este
+        $recibo->imgrecibo = $val;//ingresa el nombre de la ruta a la base de datos
+       }
+    $recibo->save();
+    Session::flash('inf','El registro se actualizó de manera exitosa.');
+    return back();
+   }
+
+   public function elimrecibotec($id){
+        $elim = Niveltec::findOrfail($id);   
+        $elim->delete();
+        Session::flash('inf','El registro se eliminó de manera exitosa.');
+        return back();
+   }
+
+   //lista de archivos
+   public function consultecarchivo($id, $a){
+    $val = DB::table('nivelacionestec')
+           ->join('notas_tecnico','nivelacionestec.id_nota','=','notas_tecnico.id')
+           ->where('notas_tecnico.id_estudiante','=',$id)
+           ->count();
+        $niv = 0;
+        if($val != 0){
+          $niv = DB::table('nivelacionestec')
+                ->join('notas_tecnico','nivelacionestec.id_nota','=','notas_tecnico.id')
+                ->join('estudiante','notas_tecnico.id_estudiante','=','estudiante.id')
+                ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+                ->where('asignaturas_tecnicos.anio','=',$a)
+                ->where('notas_tecnico.id_estudiante','=',$id)
+                ->select('nivelacionestec.id as idniv', 'nivelacionestec.descripcion', 'nivelacionestec.numrecibo', 'nivelacionestec.nota as notantigua',
+                        'nivelacionestec.imgrecibo', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as primerape', 
+                        'estudiante.second_ape as segape', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva', 'notas_tecnico.por1', 'notas_tecnico.por2', 'notas_tecnico.por3', 
+                        'notas_tecnico.por4', 'programa_tecnico.nombretec as cursonom', 'asig_tecnicos.nombreasig as nomasig', 'docente.nombre', 'docente.apellido', 'trimestre_tecnicos.nombretri', 'asignaturas_tecnicos.anio', 'asignaturas_tecnicos.periodo')
+                ->get();
+        }
+      return view('nivelaciones.listarchivotec')->with('niv', $niv);
+   }
+
+   //vaciar base de datos
+   public function vaciardb(){
+    SistemaSalud::all()->each->delete();
+
+    Acudiente::all()->each->delete();
+
+    Matricula::all()->each->delete();
+
+    MatriculaTec::all()->each->delete();
+    
+    Nivelacion::all()->each->delete();
+
+    Niveltec::all()->each->delete();
+    
+    Objetivos::all()->each->delete();
+   
+    ObjetivosTec::all()->each->delete();
+
+    NotasTecnico::all()->each->delete();
+
+    Notas::all()->each->delete();
+
+    Estudiante::all()->each->delete();
+
+    //###docentes
+    AsigProgram::all()->each->delete();
+
+    AsigTecnicos::all()->each->delete();
+
+    Docente::all()->each->delete();
+    
+    Asignatura::all()->each->delete();
+
+    AsignaturaTecnicos::all()->each->delete();
+
+    Cargarchivo::all()->each->delete();
+
+    Perfil::all()->each->delete();
+
+    ProgramasTecnicos::all()->each->delete();
+
+    Archivo::all()->each->delete();
+
+    Programas::all()->each->delete();
+
+    User::all()->where('id_rol', '!=', '1')->each->delete();
+
+    Session::flash('db','La base de datos se limpió de manera exitosa!.');
+    return back();
+   }
+
 }

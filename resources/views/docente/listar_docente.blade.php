@@ -105,19 +105,19 @@
                                   <input type="text" class="form-control" id="correo" name="correo" disabled value="{{$d->correo}}">
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="telefono">Telefono</label>
+                                  <label for="telefono">Teléfono</label>
                                   <input type="text" class="form-control" id="telefono" name="telefono" disabled value="{{$d->telefono}}">
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="direccion">Direccion</label>
+                                  <label for="direccion">Dirección</label>
                                   <input type="text" class="form-control" id="direccion" name="direccion" disabled value="{{$d->direccion}}">
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="genero">Genero</label>
+                                  <label for="genero">Género</label>
                                   <input type="text" class="form-control" id="genero" name="genero" disabled value="{{$d->genero}}">
                                 </div>
                                 <div class="form-group col-md-6">
-                                  <label for="fec_vinculacion">Fecha de Vinculacion</label>
+                                  <label for="fec_vinculacion">Fecha de Vinculación</label>
                                   <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($d->fec_vinculacion))}}">
                                 </div>
                                 <div class="form-group col-md-6">
@@ -149,7 +149,7 @@
                                 <table class="table table-striped">
                                   <thead>
                                     <tr>
-                                      <th scope="col">Codigo</th>
+                                      <th scope="col">Código</th>
                                       <th scope="col">Asignatura</th>
                                       <th scope="col">Intensidad Horaria</th>
                                       <th scope="col">Curso</th>
@@ -281,15 +281,15 @@
                                   <div class="form-control reset" id="fecdocente"> </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="telefono">Telefono</label>
+                                  <label for="telefono">Teléfono</label>
                                   <div class="form-control reset" id="telefonodocente"> </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="direccion">Direccion</label>
+                                  <label for="direccion">Dirección</label>
                                   <div class="form-control reset" id="direcciondocente"> </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="genero">Genero</label>
+                                  <label for="genero">Género</label>
                                   <div class="form-control reset" id="generodocente"> </div>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -322,7 +322,7 @@
                                 <table class="table table-striped">
                                   <thead class="alerta">
                                     <tr>
-                                      <th scope="col">Codigo</th>
+                                      <th scope="col">Código</th>
                                       <th scope="col">Asignatura</th>
                                       <th scope="col">Intensidad Horaria</th>
                                       <th scope="col">Curso</th>

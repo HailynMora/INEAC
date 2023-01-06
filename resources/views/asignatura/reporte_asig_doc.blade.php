@@ -4,6 +4,15 @@
  <h3 class="letra1"> Reporte Asignaturas Técnicos </h3>
 </div>
 <!--collapsed-->
+@if(!isset($repe[0]->anio))
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+            Lo sentimos! No se encontró información para la solicitud.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+ </div>
+ <br>
+@endif
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -33,10 +42,24 @@
                         <input type="text" name="anio" class="form-control" placeholder="Año ejm. 2022"  aria-describedby="addon-wrapping" required>
                       </div>
                       <div class="col-4">
-                        <input type="text"  name="periodo" class="form-control" placeholder="Periodo ejm. A"  aria-describedby="addon-wrapping" required>
+                         <select id="periodo" class="form-control" aria-describedby="addon-wrapping" name="periodo">
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                         </select>
                       </div>
                       <div class="col-4">
-                        <input type="text"  name="trimestre" class="form-control" placeholder="ejm. Trimestre II"  aria-describedby="addon-wrapping" required>
+                        <!--trimestre-->
+                        <select class="form-control" id="trimestre"  name="trimestre">
+                          <option value="Trimestre I">Trimestre I</option>
+                          <option value="Trimestre II">Trimestre II</option>
+                          <option value="Trimestre III">Trimestre III</option>
+                          <option value="Trimestre IV">Trimestre IV</option>
+                          <option value="Trimestre V">Trimestre V</option>
+                          <option value="Trimestre VI">Trimestre VI</option>
+                        </select>
+                        <!--trimestre-->
                       </div>
                     </div>
                     <!--end filtrar-->

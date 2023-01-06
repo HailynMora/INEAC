@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EstudianteModel\Estudiante;
+use App\Models\Nivelacion;
 use App\Exports\NivelacionesExport;
 use App\Exports\NivelacionesTecExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -108,6 +109,7 @@ class EstudiantesNotController extends Controller
     }
 
     public function nivelacion(Request $request){
+        
         $p= $request->programa;
         $a =$request->anio;
         $pe = $request->periodo;
@@ -123,6 +125,7 @@ class EstudiantesNotController extends Controller
                         ->where('definitiva','<','3')
                         ->where('cursos.anio','=',$a)
                         ->where('cursos.periodo','=',$pe)
+                        ->where('cursos.id_tipo_curso','=',$p)
                         ->count();
             //end validar
             if($valmat != 0){
@@ -136,13 +139,14 @@ class EstudiantesNotController extends Controller
                 ->where('definitiva','<','3')
                 ->where('cursos.anio','=',$a)
                 ->where('cursos.periodo','=',$pe)
-                ->select('asignaturas.codigo as codasig','asignaturas.val_habilitacion as valor','asignaturas.nombre as nomasig','docente.nombre as nomdoc','docente.apellido as apedoc','tipo_curso.codigo as codcu','tipo_curso.descripcion as descu','estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1','estudiante.second_ape as ape2','estudiante.num_doc','notas.definitiva','notas.nota1','notas.nota2','notas.nota3','notas.nota4')
+                ->where('cursos.id_tipo_curso','=',$p)
+                ->select('estudiante.id as idest', 'notas.id as idnota', 'asignaturas.codigo as codasig','asignaturas.val_habilitacion as valor','asignaturas.nombre as nomasig','docente.nombre as nomdoc','docente.apellido as apedoc','tipo_curso.codigo as codcu','tipo_curso.descripcion as descu','estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1','estudiante.second_ape as ape2','estudiante.num_doc','notas.definitiva','notas.nota1','notas.nota2','notas.nota3','notas.nota4')
                 ->orderby('descu','asc')
                 ->get();
-                return view('nivelaciones.lista')->with('re',$mat);
+                return view('nivelaciones.lista')->with('re',$mat)->with('p', $p)->with('a', $a)->with('pe', $pe);
             }else{
                 Session::flash('niv', 'Lo sentimos! No se encontró información para la solicitud.');
-                return view('nivelaciones.lista');
+                return view('nivelaciones.lista')->with('p', $p)->with('a', $a)->with('pe', $pe);//copiar esta linea 2023
             }
         }else{
             $mat= DB::table('notas_tecnico')
@@ -158,7 +162,7 @@ class EstudiantesNotController extends Controller
             ->select('asig_tecnicos.val_habilitacion as valor','asig_tecnicos.nombreasig as nomasig','docente.nombre as nomdoc','docente.apellido as apedoc','programa_tecnico.nombretec as descu','estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1','estudiante.second_ape as ape2','estudiante.num_doc','notas_tecnico.definitiva','notas_tecnico.nota1','notas_tecnico.nota2','notas_tecnico.nota3','notas_tecnico.nota4','trimestre_tecnicos.nombretri')
             ->orderby('descu','asc')
             ->get();
-            return view('nivelaciones.listaTec')->with('re',$mat);
+            return view('nivelaciones.listaTec')->with('re',$mat)->with('p', $p)->with('a', $a)->with('pe', $pe);
         }
         
     }
@@ -349,6 +353,7 @@ class EstudiantesNotController extends Controller
                 ->select('programa_tecnico.nombretec','docente.nombre as nomdoc','docente.apellido as apedoc','asig_tecnicos.nombreasig','asig_tecnicos.val_habilitacion','trimestre_tecnicos.nombretri','anio','periodo','notas_tecnico.definitiva')
                 ->orderby('nombretec','asc')
                 ->get();
+               
          return view('nivelaciones.nivelacionesest')->with('bac',$bac)->with('tec',$tec);
         }else{
             $res=0;
@@ -359,5 +364,188 @@ class EstudiantesNotController extends Controller
         return view('nivelaciones.nivelacionesest')->with('res',$res);
     }
     }
-    
+
+    //################funcion de recibo
+    public function guardar_recibo(Request $request){
+        //variables 
+        $p= $request->programa;
+        $a =$request->anio;
+        $pe = $request->periodo;
+        //######################################################
+        $val = DB::table('nivelaciones')->where('numrecibo','=',$request->numrecibo)->count();
+        if($val == 0){
+            $recibo = New Nivelacion();
+            $recibo->id_estudiante = $request->input('idest');
+            $recibo->id_nota = $request->input('idnota');
+            $recibo->descripcion = $request->input('desrecibo');
+            $recibo->numrecibo = $request->input('numrecibo');
+            $recibo->nota = $request->input('nota');
+            if($request->hasFile('img')){             
+                $file = $request->file('img');
+                $val = "recibo".time().".".$file->guessExtension();
+                $ruta = public_path("dist/archivo/".$val);
+               // if($file->guessExtension()=="pdf"){
+                copy($file, $ruta);//ccopia el archivo de una ruta cualquiera a donde este
+                $recibo->imgrecibo = $val;//ingresa el nombre de la ruta a la base de datos
+               }
+            $recibo->save();
+        }else{
+            Session::flash('rep','Lo sentimos! el recibo ingresado ya se encuentra registrado.');
+        }
+        //regresar datos
+        $valmat= DB::table('notas')
+                    ->join('cursos','notas.id_curso','=','cursos.id')
+                    ->join('estudiante','notas.id_estudiante','=','estudiante.id')
+                    ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                    ->join('docente','cursos.id_docente','=','docente.id')
+                    ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                    ->where('definitiva','<','3')
+                    ->where('cursos.anio','=',$request->anio)
+                    ->where('cursos.periodo','=',$request->periodo)
+                    ->where('cursos.id_tipo_curso','=',$request->programa)
+                    ->count();
+                    //end validar
+        if($valmat != 0){
+
+        $mat= DB::table('notas')
+                ->join('cursos','notas.id_curso','=','cursos.id')
+                ->join('estudiante','notas.id_estudiante','=','estudiante.id')
+                ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+                ->join('docente','cursos.id_docente','=','docente.id')
+                ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+                ->where('definitiva','<','3')
+                ->where('cursos.anio','=',$request->anio)
+                ->where('cursos.periodo','=',$request->periodo)
+                ->where('cursos.id_tipo_curso','=',$request->programa)
+                ->select('estudiante.id as idest', 'notas.id as idnota', 'asignaturas.codigo as codasig','asignaturas.val_habilitacion as valor','asignaturas.nombre as nomasig','docente.nombre as nomdoc','docente.apellido as apedoc','tipo_curso.codigo as codcu','tipo_curso.descripcion as descu','estudiante.first_nom as nom1','estudiante.second_nom as nom2','estudiante.firts_ape as ape1','estudiante.second_ape as ape2','estudiante.num_doc','notas.definitiva','notas.nota1','notas.nota2','notas.nota3','notas.nota4')
+                ->orderby('descu','asc')
+                ->get();
+        return view('nivelaciones.lista')->with('re',$mat)->with('p', $p)->with('a', $a)->with('pe', $pe);
+        }else{
+            return redirect('/inicio');
+        }
+    }
+
+    //vista archivo 
+   public function verarchivo($id, $a){
+    $val = DB::table('nivelaciones')->where('id_estudiante','=',$id)->count();
+    $niv = 0;
+    if($val != 0){
+      $niv = DB::table('nivelaciones')
+            ->join('estudiante','nivelaciones.id_estudiante','=','estudiante.id')
+            ->join('notas','nivelaciones.id_nota','=','notas.id')
+            ->join('cursos','notas.id_curso','=','cursos.id')
+            ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+            ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+            ->join('docente','cursos.id_docente','=','docente.id')
+            ->where('nivelaciones.id_estudiante','=',$id)
+            ->where('cursos.anio','=',$a)
+            ->select('nivelaciones.id as idniv', 'nivelaciones.descripcion', 'nivelaciones.numrecibo', 'nivelaciones.nota as notantigua',
+                    'nivelaciones.imgrecibo', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as primerape', 
+                    'estudiante.second_ape as segape', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva', 'notas.por1', 'notas.por2', 'notas.por3', 
+                    'notas.por4', 'tipo_curso.descripcion as cursonom', 'asignaturas.nombre as nomasig', 'docente.nombre', 'docente.apellido', 'cursos.anio', 'cursos.periodo')
+            ->get();
+           
+    }
+    return view('nivelaciones.listarchivo')->with('niv', $niv);
+   }
+
+   //actualizar informacion recibo
+   public function actualizar_recibo(Request $request){
+      $recibo = Nivelacion::findOrfail($request->idniv);    
+      $recibo->descripcion = $request->input('desrecibo');
+      $recibo->numrecibo = $request->input('numrecibo');
+      if($request->hasFile('img')){             
+          $file = $request->file('img');
+          $val = "recibo".time().".".$file->guessExtension();
+          $ruta = public_path("dist/archivo/".$val);
+         // if($file->guessExtension()=="pdf"){
+          copy($file, $ruta);//ccopia el archivo de una ruta cualquiera a donde este
+          $recibo->imgrecibo = $val;//ingresa el nombre de la ruta a la base de datos
+         }
+      $recibo->save();
+      Session::flash('inf','El registro se actualizó de manera exitosa.');
+      return back();
+   }
+
+   public function eliminararchivo($id){
+    $elim = Nivelacion::findOrfail($id);   
+    $elim->delete();
+    Session::flash('inf','El registro se eliminó de manera exitosa.');
+    return back();
+   }
+   //listado archivos
+   public function listaarchi($p, $a, $pe){
+
+    $val = DB::table('nivelaciones')->count();
+    $niv = 0;
+    if($val != 0){
+      $niv = DB::table('nivelaciones')
+            ->join('estudiante','nivelaciones.id_estudiante','=','estudiante.id')
+            ->join('notas','nivelaciones.id_nota','=','notas.id')
+            ->join('cursos','notas.id_curso','=','cursos.id')
+            ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+            ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+            ->join('docente','cursos.id_docente','=','docente.id')
+            ->where('cursos.id_tipo_curso','=',$p)
+            ->where('cursos.anio','=',$a)
+            ->where('cursos.periodo','=',$pe)
+            ->select('nivelaciones.id as idniv', 'nivelaciones.descripcion', 'nivelaciones.numrecibo', 'nivelaciones.nota as notantigua',
+                    'nivelaciones.imgrecibo', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as primerape', 
+                    'estudiante.second_ape as segape', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva', 'notas.por1', 'notas.por2', 'notas.por3', 
+                    'notas.por4', 'tipo_curso.descripcion as cursonom', 'asignaturas.nombre as nomasig',  'docente.nombre', 'docente.apellido', 'cursos.anio', 'cursos.periodo')
+            ->get();
+           
+    }
+    return view('nivelaciones.listarchivo')->with('niv', $niv); 
+
+   }
+
+   //################## funcion para estudiantes
+   public function listanivestu(){
+      $idlog=auth()->id();
+      $validar = DB::table('estudiante')->where('id_usuario', $idlog)->select('estudiante.id as ides')->count();
+    if($validar != 0){
+      $est = DB::table('estudiante')->where('id_usuario', $idlog)->select('estudiante.id as ides')->first();
+      $idest=$est->ides;
+       //consultar datos
+       $val = DB::table('nivelaciones')->where('id_estudiante','=',$idest)->count();
+       $niv = 0;
+       if($val != 0){
+         $niv = DB::table('nivelaciones')
+               ->join('estudiante','nivelaciones.id_estudiante','=','estudiante.id')
+               ->join('notas','nivelaciones.id_nota','=','notas.id')
+               ->join('cursos','notas.id_curso','=','cursos.id')
+               ->join('asignaturas','cursos.id_asignatura','=','asignaturas.id')
+               ->join('tipo_curso','cursos.id_tipo_curso','=','tipo_curso.id')
+               ->join('docente','cursos.id_docente','=','docente.id')
+               ->where('nivelaciones.id_estudiante','=',$idest)
+               ->select('nivelaciones.id as idniv', 'nivelaciones.descripcion', 'nivelaciones.numrecibo', 'nivelaciones.nota as notantigua',
+                       'nivelaciones.imgrecibo', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as primerape', 
+                       'estudiante.second_ape as segape', 'notas.nota1', 'notas.nota2', 'notas.nota3', 'notas.nota4', 'notas.definitiva', 'notas.por1', 'notas.por2', 'notas.por3', 
+                       'notas.por4', 'tipo_curso.descripcion as cursonom', 'asignaturas.nombre as nomasig', 'docente.nombre', 'docente.apellido', 'cursos.anio', 'cursos.periodo')
+               ->get();
+              
+       }
+       $nivtec = DB::table('nivelacionestec')
+                ->join('notas_tecnico','nivelacionestec.id_nota','=','notas_tecnico.id')
+                ->join('estudiante','notas_tecnico.id_estudiante','=','estudiante.id')
+                ->join('asignaturas_tecnicos','notas_tecnico.id_tecnicos','=','asignaturas_tecnicos.id')
+                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+                ->where('notas_tecnico.id_estudiante','=',$idest)
+                ->select('nivelacionestec.id as idniv', 'nivelacionestec.descripcion', 'nivelacionestec.numrecibo', 'nivelacionestec.nota as notantigua',
+                        'nivelacionestec.imgrecibo', 'estudiante.first_nom as primernom', 'estudiante.second_nom as segnom', 'estudiante.firts_ape as primerape', 
+                        'estudiante.second_ape as segape', 'notas_tecnico.nota1', 'notas_tecnico.nota2', 'notas_tecnico.nota3', 'notas_tecnico.nota4', 'notas_tecnico.definitiva', 'notas_tecnico.por1', 'notas_tecnico.por2', 'notas_tecnico.por3', 
+                        'notas_tecnico.por4', 'programa_tecnico.nombretec as cursonom', 'asig_tecnicos.nombreasig as nomasig', 'docente.nombre', 'docente.apellido', 'trimestre_tecnicos.nombretri', 'asignaturas_tecnicos.anio', 'asignaturas_tecnicos.periodo')
+                ->get();
+       //####################
+      return view('nivelaciones.listanivarchivadas')->with('niv', $niv)->with('nivtec', $nivtec);
+    }else{
+     return redirect('/inicio');
+    }
+ }
+
 }

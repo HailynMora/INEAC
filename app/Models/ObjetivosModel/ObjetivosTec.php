@@ -10,3 +10,4 @@ class ObjetivosTec extends Model
     protected $table = 'objetivostec';
     protected $primaryKey = 'id';//tiene que hacer referencia a la llave primaria  
 }
+

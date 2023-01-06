@@ -59,11 +59,11 @@
                             <input type="text" class="form-control" id="nombac" name="nombac" required>
                           </div>
                           <div class="form-group col-md-6">
-                            <label for="codigo">Codigo</label>
+                            <label for="codigo">Código</label>
                             <input type="number" class="form-control" id="codigo" name="codigo" min="0" required>
                           </div>
                           <div class="form-group col-md-6">
-                            <label for="des">Descripcion</label>
+                            <label for="des">Descripción</label>
                             <input type="text" class="form-control" id="des" name="des" required>
                           </div>
                           <div class="form-group col-md-6">

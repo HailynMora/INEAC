@@ -74,6 +74,7 @@ class CalificacionesController extends Controller
     }
 
     public function regnotas(Request $request){
+        $id = $request->idest;
         $n1 = $request->nota1;
         $p1 = $request->porcentaje1;
         $n2 = $request->nota2;

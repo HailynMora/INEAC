@@ -79,7 +79,7 @@
             </div>
             <div class="form-group col-md-4">
                <div class="form-group">
-                  <label for="genero">Genero</label>
+                  <label for="genero">Género</label>
                   <select class="form-control" id="genero" name="genero">
                   <option value="{{$est[0]->idgenero}}">{{$est[0]->generoestu}}</option>
                     @foreach($gen as $g)
@@ -131,19 +131,19 @@
           <div class="form-row">
           <div class="form-group col-md-3">
               <label for="apellido">Dtp. Residencia</label>
-              <input type="text" class="form-control" id="dptres" name="dptres" value="{{$est[0]->dptresidencia}}"  onkeypress="return soloLetras(event)">
+              <input type="text" class="form-control" id="dptres" name="dptres" value="{{$est[0]->dptresidencia}}"  onkeypress="return soloLetras(event)" required>
             </div>
             <div class="form-group col-md-3">
               <label for="apellido">Mpio. Residencia</label>
-              <input type="text" class="form-control" id="mpiores" name="mpiores" value="{{$est[0]->munresidencia}}"  onkeypress="return soloLetras(event)">
+              <input type="text" class="form-control" id="mpiores" name="mpiores" value="{{$est[0]->munresidencia}}"  onkeypress="return soloLetras(event)" required>
             </div>
             <div class="form-group col-md-3">
             <label for="apellido">Dir. Residencia</label>
-              <input type="text" class="form-control" id="dirres" name="dirres" value="{{$est[0]->dirresidencia}}" >
+              <input type="text" class="form-control" id="dirres" name="dirres" value="{{$est[0]->dirresidencia}}" required >
             </div>
             <div class="form-group col-md-3">
              <label for="nombre">Barrio</label>
-              <input type="text" class="form-control" id="barrio" name="barrio" value="{{$est[0]->barrio}}">
+              <input type="text" class="form-control" id="barrio" name="barrio" value="{{$est[0]->barrio}}" required>
             </div>
           </div>
           <!---##################33-->
@@ -151,7 +151,7 @@
            <div class="form-row">
           <div class="form-group col-md-3">
             <label for="genero">Zona</label>
-            <input type="text" class="form-control" id="zona" name="zona" value="{{$est[0]->zona}}">
+            <input type="text" class="form-control" id="zona" name="zona" value="{{$est[0]->zona}}" required>
                
             </div>
             <div class="form-group col-md-3">
@@ -163,8 +163,8 @@
                 <input type="text" class="form-control" id="sangre" name="sangre" value=" {{$est[0]->tiposangre}}" readonly="readonly">
           </div>
            <div class="form-group col-md-3">
-             <label for="telefono">Telefono</label>
-             <input type="text" class="form-control" id="telefono" name="telefono" value="{{$est[0]->telefono}}">
+             <label for="telefono">Teléfono</label>
+             <input type="text" class="form-control" id="telefono" name="telefono" value="{{$est[0]->telefono}}" required>
             </div>
           </div>
           <!---##################33-->
@@ -176,7 +176,7 @@
             </div>
             <div class="form-group col-md-3">
              <label for="nomusu">Usuario</label>
-             <input type="text" class="form-control" id="nomusu" name="nomusu" value="{{$usu->name}}">
+             <input type="text" class="form-control" id="nomusu" name="nomusu" value="{{$usu->name}}" required>
             </div>
             <div class="form-group col-md-3">
               <label for="correo">Contraseña</label>
@@ -207,7 +207,7 @@
          <!----##########################-->
          <div class="form-row">
           <div class="form-group col-md-4">
-              <label for="tipodoc">Regimen salud</label>
+              <label for="tipodoc">Régimen salud</label>
               <input type="text" class="form-control" id="regimen" name="regimen" value="{{$est[0]->regimen}}" readonly="readonly">
             </div>
             <div class="form-group col-md-4">
@@ -265,11 +265,11 @@
             </div>
             <div class="form-group col-md-4">
               <label for="numero_doc">Número Documento</label>
-              <input type="number" class="form-control" id="numdocacu" name="numdocacu" value="{{$est[0]->numacu}}" >
+              <input type="number" class="form-control" id="numdocacu" name="numdocacu" value="{{$est[0]->numacu}}" required>
             </div>
             <div class="form-group col-md-4">
             <label for="correo">Nombres y Apellidos</label>
-            <input type="text" class="form-control" id="nombresacu" name="nombresacu" value="{{$est[0]->nomacu}}" >
+            <input type="text" class="form-control" id="nombresacu" name="nombresacu" value="{{$est[0]->nomacu}}" required>
             </div>
           </div>
           <!--################################3-->
@@ -287,11 +287,11 @@
           </div>
            <div class="form-group col-md-4">
               <label for="tipodoc">Dir. Residencia</label>
-              <input type="text" class="form-control" id="diracu" name="diracu" value="{{$est[0]->diracu}}">
+              <input type="text" class="form-control" id="diracu" name="diracu" value="{{$est[0]->diracu}}" required>
             </div>
             <div class="form-group col-md-4">
-              <label for="numero_doc">Telefono/Celular</label>
-              <input type="number" class="form-control" id="telacu" name="telacu" value="{{$est[0]->telacu}}" >
+              <label for="numero_doc">Teléfono/Celular</label>
+              <input type="number" class="form-control" id="telacu" name="telacu" value="{{$est[0]->telacu}}" required>
             </div>
           </div>
           <!---###############################3-->

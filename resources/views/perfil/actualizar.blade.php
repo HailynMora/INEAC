@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center"  role="alert" style="background-color:#ffc107; color:#FFFFFF;">
- <h3 class="letra1">Actualizar Perfil Profesional </h3>
+ <h3 class="letra1">Actualizar Perfil Profesional</h3>
 </div>
 
 <nav>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nomusu" name="nomusu"  value="{{$usu[0]->name}}"> 
+                    <input type="text" class="form-control" id="nomusu" name="nomusu"  value="{{$usu[0]->name}}" required> 
                 </div>
                 
                 <div class="form-group col-md-4">
@@ -154,21 +154,21 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                   <label for="descripcion">Descripción</label>
-                  <input class="form-control" id="des" name="des" rows="2" value="{{$perfil[0]->descripcion}}">  
+                  <input class="form-control" id="des" name="des" rows="2" value="{{$perfil[0]->descripcion}}" required>  
                   </div>
                   <div class="form-group col-md-6">
                   <label for="cur">Cursos Realizados</label>
-                  <input class="form-control" id="cur" name="cur" rows="2" value="{{$perfil[0]->cursos_realizados}}">
+                  <input class="form-control" id="cur" name="cur" rows="2" value="{{$perfil[0]->cursos_realizados}}" required>
                   </div>
                 </div>
                 <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inter">Intereses</label>
-                  <input class="form-control" id="inter" rows="2" name="inter" value="{{$perfil[0]->intereses}}"> 
+                  <input class="form-control" id="inter" rows="2" name="inter" value="{{$perfil[0]->intereses}}" required> 
                   </div>
                   <div class="form-group col-md-6">
                   <label for="exp">Experiencia</label>
-                  <input class="form-control" id="exp" name="exp" rows="2" value="{{$perfil[0]->Experiencia}}">
+                  <input class="form-control" id="exp" name="exp" rows="2" value="{{$perfil[0]->Experiencia}}" required>
                   </div>
                 </div>
                 <button type="submit" class="btn btn-success">Actualizar

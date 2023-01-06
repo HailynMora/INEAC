@@ -7,16 +7,34 @@
 <div class="container alerta">
      <form id="formu" method="POST">
        @csrf
+       <div class="row">
+       <div class="col-md-4">
+       <label>Elegir curso</label>
        <select class="form-select form-select-lg mb-3 form-control" aria-label=".form-select-lg example" name="idbachi" id="idbachi">
-        <option selected>Seleccione un curso</option>
         @foreach($program as $p)
         <option value="{{$p->idcur}}">{{$p->nomcur}}</option>
         @endforeach
       </select>
-      <button type="submit" class="btn btn-primary">Filtrar</button>
+      </div>
+       <div class="col-md-4">
+       <label>Elegir periodo</label>
+        <select class="form-select form-select-lg mb-3 form-control" aria-label=".form-select-lg example" name="per" id="per">
+          <option value="A">A</option>
+          <option value="B">B</option>
+        </select>
+       </div>
+       <div class="col-md-3">
+        <label>Ingrese año</label>
+        <input type="number" min="2000" class="form-select form-select-lg mb-3 form-control" placeholder="Ejemplo 2022" name="aniot" id="aniot" required> 
+       </div> 
+       <div class="col-md-1">
+        <div class="container text-center" style="margin-top:32px;">
+         <button type="submit" class="btn btn-primary">Filtrar</button>
+       </div>
+       </div>
+      </div>
     </form>
   </div>
-    <br><br>
     <div class="table-responsive">
     <table class="table ">
         <thead style="background-color:#0f468e; color: #ffffff;" class="alerta">
@@ -26,8 +44,8 @@
             <th scope="col">Apellido</th>
             <th scope="col">Tipo Doc</th>
             <th scope="col">No Documento</th>
-            <th scope="col">Telefono</th>
             <th scope="col">Curso</th>
+            <th scope="col">Periodo</th>
             <th scope="col">Estado</th>
             <th scope="col">Opciones</th>
             </tr>
@@ -44,8 +62,8 @@
         <td>{{$e->primerape}} {{$e->segundoape}}</td>
         <td>{{$e->destipo}}</td>
         <td>{{$e->num_doc}}</td>
-        <td>{{$e->telefono}}</td>
         <td>{{$e->nomcurso}}</td>
+        <td>{{$e->anio}} - {{$e->periodo}} </td>
         <td>{{$e->estadoes}}</td>
        <!-- idest
         idcur-->
@@ -118,21 +136,23 @@
     </div>
    
 </div>
-@if($b=0)
-         hola
-@endif
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
    $('#formu').submit(function(e){
     e.preventDefault();
     var idbachi=$('#idbachi').val();
+    var per = $('#per').val();
+    var anio = $('#aniot').val();
     var _token = $('input[name=_token]').val();
-    console.log(idbachi);
+    console.log(anio);
     $.ajax({
       url:"{{route('estubachillerato')}}",
       type: "POST",
       data:{
         idbachi:idbachi,
+        per:per,
+        anio:anio,
         _token:_token,
       }
     }).done(function(response){
@@ -151,8 +171,8 @@
             '<td>' +  ar[i].primerape + ' ' +  ar[i].segundoape  +'</td>' +
             '<td>' +  ar[i].destipo  + '</td>' +
             '<td>' +  ar[i].num_doc  + '</td>' +
-            '<td>' +  ar[i].telefono  + '</td>' +
             '<td>' +  ar[i].nomcurso + '</td>' +
+            '<td>' +  ar[i].anio + '-' +  ar[i].periodo + '</td>' +
             '<td>' +  ar[i].estadoes + '</td>' +
             '<td>'
             + '<a href="/matricula/estudiante/bachillerato/actualizar/' + ar[i].idmat + '" ' + 'type="button" data-toggle="tooltip" data-placement="bottom"  title="Editar Estudiante"><i class="nav-icon fas fa-edit" style="color:#e1b308; font-size:20px;" ></i></a>&nbsp;&nbsp;'

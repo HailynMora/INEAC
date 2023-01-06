@@ -65,7 +65,7 @@
           title: "Lo sentimos!",
           text: "No se encontró información para la solicitud!",
           icon: "warning",
-          button: "Salir!",
+          button: "Salir",
         });
         </script>
         @endif

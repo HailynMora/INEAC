@@ -47,7 +47,7 @@
                             <div class="container-fluid row">
                                 <div  class="col-md-4">
                                   <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Elegir Tecnico</label>
+                                        <label for="exampleFormControlSelect1">Elegir Técnico</label>
                                         <select class="form-control" id="programatec" name="programatec">
                                         <option value="{{$tecmat[0]->idtec}}" >{{$tecmat[0]->nombretec}}</option>
                                         @foreach($progtec as $pro)
@@ -94,7 +94,7 @@
                                    <br>
                                 </div><!--retorna la informacion-->  
                                 <br>
-                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha Matricula</b></h4></label>
+                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha Matrícula</b></h4></label>
                                      <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                                 <div class="form-group col-md-4">
                                         <input type="date" class="form-control" name="fecha" id="fecha" value="{{date('Y-m-d', strtotime($tecmat[0]->fec_matricula))}}" required>
@@ -116,5 +116,15 @@
 
 
    <!---end matriculas tecnicos-->
+<script>
+    //validar fecha
+      /* Esperamos a la carga del DOM */
+      window.addEventListener('DOMContentLoaded', (evento) => {
+        /* Obtenemos la fecha de hoy en formato ISO */
+        const hoy_fecha = new Date().toISOString().substring(0, 10);
+        /* Buscamos la etiqueta, ya sea por ID (que no tiene) o por su selector */
+        document.querySelector("input[name='fecha']").max = hoy_fecha;
+    });
 
+</script>
 @endsection

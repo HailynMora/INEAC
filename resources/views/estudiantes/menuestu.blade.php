@@ -15,14 +15,20 @@
   $tec =DB::table('matricula_tecnico')->where('id_estudiante', '=', $val->idestu)->count();
   }
 ?>
+<style>
+  nav ul li a:hover {
+      /*background-color: #eca023;*/
+      background-color:#6D6D6D;
+    }
+</style>
 <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-         
+               <div style="background-color:#eca023; margin-left:-6px; margin-right:-6px; margin-bottom:5px;"><br></div>
           <li class="nav-item">
              <!--instanciar la ruta de nav link-->   
-                  <a href="{{route('inicio')}}" class="nav-link active" style="background-color:#6D6D6D; color: white;">
+                  <a href="{{route('inicio')}}" class="nav-link" style="color: white;">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                       Inicio
@@ -70,7 +76,7 @@
             </a>
           </li>   
         <!--validar calif-->   
-        <li class="nav-item">
+        <li class="nav-item menu-open">
             <a href="#" class="nav-link" style="color:white;">
             <i class="nav-icon fas fa-book"></i>
               <p>

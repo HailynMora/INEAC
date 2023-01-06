@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc103; color:#ffffff;">
- <h3 class="letra1">Registro de Docentes</h3>
+ <h3 class="letra1">Registro de Docentes hh</h3>
 </div>
 <br><br>
 <div class="accordion" id="accordionExample">
@@ -33,7 +33,7 @@
               @csrf
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="tipodoc">Tipo de Documento</label>
+                    <label for="tipodoc">Tipo de documento</label>
                     <select id="tipodoc" class="form-control" name="tipodoc" required>
                       <option selected>Seleccionar</option>
                       @foreach($tipodoc as $t)
@@ -42,7 +42,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="numerodoc">Numero Documento</label>
+                    <label for="numerodoc">Número de documento</label>
                     <input type="text" class="form-control" id="numerodoc" name="numerodoc" placeholder="12345678" minlength="5" maxlength="12" required>
                   </div>
                   <div class="form-group col-md-3">
@@ -56,17 +56,17 @@
               </div>
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="correo">Correo Electronico</label>
+                    <label for="correo">Correo Electrónico</label>
                     <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" required>
                     <div id="respuesta" class="col-lg-5"></div>
                   </div>
                   
                   <div class="form-group col-md-3">
-                    <label for="telefono">Telefono</label>
+                    <label for="telefono">Teléfono</label>
                     <input type="text" class="form-control" id="telefono" name="telefono" minlength="10" maxlength="10">
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="direccion">Direccion</label>
+                    <label for="direccion">Dirección</label>
                     <input type="text" class="form-control" id="direccion" name="direccion">
                   </div>
                   <div class="form-group col-md-3">
@@ -74,7 +74,7 @@
                      <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="tipogen">Genero</label>
+                    <label for="tipogen">Género</label>
                     <select id="tipogen" class="form-control" name="tipogen" required>
                     @foreach($genero as $g)
                     <option value="{{$g->id}}">{{$g->descripcion}}</option>
@@ -189,5 +189,14 @@
      $("form input[type=text],form input[type=number] ,form input[type=date] , form input[type=email]").each(function() { this.value = '' });
      toastr.info('Campos Vacios', {timeOut:1000});
   }
+
+  //validar fecha
+      /* Esperamos a la carga del DOM */
+    window.addEventListener('DOMContentLoaded', (evento) => {
+        /* Obtenemos la fecha de hoy en formato ISO */
+        const hoy_fecha = new Date().toISOString().substring(0, 10);
+        /* Buscamos la etiqueta, ya sea por ID (que no tiene) o por su selector */
+        document.querySelector("input[name='fec_vinculacion']").max = hoy_fecha;
+    });
 </script>
 @endsection

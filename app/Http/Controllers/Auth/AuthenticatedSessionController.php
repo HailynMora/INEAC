@@ -46,7 +46,7 @@ class AuthenticatedSessionController extends Controller
     
          }else{
 
-             Session::flash('errorInicio','Lo sentimos! Tu usuario ha sido deshabilitado');
+             Session::flash('errorInicio','Lo sentimos! Tu usuario ha sido deshabilitado o no se encuentra registrado');
              return back();
          }
 

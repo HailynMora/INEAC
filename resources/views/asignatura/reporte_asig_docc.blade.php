@@ -5,6 +5,15 @@
  <h3 class="letra1"> Reporte Asignaturas Bachillerato</h3>
 </div>
 <!--collapsed-->
+@if(!isset($rep[0]->anio))
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+            Lo sentimos! No se encontró información para la solicitud.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+ </div>
+ <br>
+@endif
 <div class="accordion letraf" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -40,7 +49,11 @@
                             <input type="text" name="anio" class="form-control" placeholder="Año ejm. 2022"  aria-describedby="addon-wrapping" required>
                           </div>
                           <div class="col-6">
-                            <input type="text"  name="periodo" class="form-control" placeholder="Periodo ejm. A"  aria-describedby="addon-wrapping" required>
+                            <select id="periodo" class="form-control" aria-describedby="addon-wrapping" name="periodo">
+                                <option selected="1">Elegir ...</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                            </select>
                           </div>
                         </div>
                     <!--end filtrar-->

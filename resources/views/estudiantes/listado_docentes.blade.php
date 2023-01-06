@@ -12,7 +12,7 @@
           <th scope="col">No</th>
           <th scope="col">Nombres</th>
           <th scope="col">Correo</th>
-          <th scope="col">Telefono</th>
+          <th scope="col">Teléfono</th>
           <th scope="col">Opciones</th>
         </tr>
       </thead>
@@ -62,7 +62,7 @@
                                   <thead>
                                     <tr style="background-color:white;">
                                       <th scope="col">No</th>
-                                      <th scope="col">Codigo</th>
+                                      <th scope="col">Código</th>
                                       <th scope="col">Asignatura</th>
                                       <th scope="col">Intensidad Horaria</th>
                                       <th scope="col">Curso</th>

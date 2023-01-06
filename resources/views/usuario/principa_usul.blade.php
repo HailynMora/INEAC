@@ -37,7 +37,7 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button" style="background-color:white;"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
 
@@ -74,20 +74,20 @@
       <!--end notificaciones-->
       <li class="nav-item">
         <!--tool-->
-        <a href="https://drive.google.com/file/d/1XNVwLAV9smJarseBI8JawahHWJ5UxQKH/view?usp=sharing" target="_blank" class="btn nav-link" data-toggle="tooltip" data-placement="bottom" title="Manual de usuario">
+        <a href="https://drive.google.com/file/d/1XNVwLAV9smJarseBI8JawahHWJ5UxQKH/view?usp=sharing" target="_blank" class="btn nav-link" data-toggle="tooltip" data-placement="bottom" title="Manual de usuario" style="background-color:white;">
            <i class="fas fa-book-open" style="font-size:20px; color:#819092;"></i>
         </a>
         <!--end-->
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button" style="background-color:white;">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
       <!---cerrar sesion-->
         <!--cerrar sesion-->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#" style="background-color:white;">
         <i class="fas fa-user-circle fa-lg"></i>
         <!--pantallas pequeñas <span class="d-none d-lg-block"> --> 
       </a>
@@ -123,7 +123,8 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="user-panel mt-3 d-flex">
+        <!--<div class="user-panel mt-3 pb-3 mb-3 d-flex">-->
         <div class="image">
           <?php
           use Illuminate\Support\Facades\DB;

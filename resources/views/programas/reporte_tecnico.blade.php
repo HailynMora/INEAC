@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1"> Programas Tecnicos Registrados</h3>
+ <h3 class="letra1"> Programas Técnicos Registrados</h3>
 </div>
 <!--MODAL-->
 <div class="row">
@@ -28,7 +28,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <h3 class="text-center letra1" style="background-color: #FFC107; color:#ffffff; padding-top:15px; padding-bottom:15px;">
-              Registro  Programas Tecnicos
+              Registro  Programas Técnicos
             </h3>
             <div class="modal-body">
               <!--registrar modal-->
@@ -37,7 +37,7 @@
                     <div class="card-header" id="headingOne">
                       <h2 class="mb-0">
                         <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          <i class="fas fa-edit"></i> Programa Tecnico
+                          <i class="fas fa-edit"></i> Programa Técnico
                         </button>
                       </h2>
                     </div>
@@ -49,11 +49,11 @@
                             <input type="text" class="form-control" id="nomtec" name="nomtec" required>
                           </div>
                           <div class="form-group col-md-6">
-                            <label for="codigo">Codigo</label>
+                            <label for="codigo">Código</label>
                             <input type="number" class="form-control" id="codigo" name="codigo" min="0" minlength="4" maxlength="6"  required>
                           </div>
                           <div class="form-group col-md-6">
-                            <label for="descripcion">Descripcion</label>
+                            <label for="descripcion">Descripción</label>
                             <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                           </div>
                           <div class="form-group col-md-6">
@@ -99,7 +99,7 @@
                   <th scope="col">Código</th>
                   <th scope="col">Programa</th>
                   <th scope="col">Jornada</th>
-                  <th scope="col">Descripcion</th>
+                  <th scope="col">Descripción</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Opciones</th>
                   </tr>

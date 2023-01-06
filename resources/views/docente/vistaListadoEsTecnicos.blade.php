@@ -73,7 +73,7 @@
                         <h4 class="text-centers">Datos Personales</h4>
                         <hr>
                         <div class="row">
-                            <div class="col-md-3"><b>Tipo Identificacion</b></div>
+                            <div class="col-md-3"><b>Tipo Identificación</b></div>
                             <div class="col-md-3 ml-auto">{{$e->tdoces}}</div>
                             <div class="col-md-3"><b>Número</b></div>
                             <div class="col-md-3 ml-auto">{{$e->num_doc}}</div>
@@ -85,7 +85,7 @@
                             <div class="col-md-3 ml-auto">{{$e->mun_expedicion}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3"><b>Genero</b></div>
+                            <div class="col-md-3"><b>Género</b></div>
                             <div class="col-md-3 ml-auto">{{$e->generoestu}}</div>
                             <div class="col-md-3"><b>Fecha Nac</b></div>
                             <div class="col-md-3 ml-auto">{{$e->fecnacimiento}}</div>
@@ -123,7 +123,7 @@
                         <div class="row">
                             <div class="col-md-3"><b>Zona</b></div>
                             <div class="col-md-3 ml-auto">{{$e->zona}}</div>
-                            <div class="col-md-3"><b>Telefono/Celular</b></div>
+                            <div class="col-md-3"><b>Teléfono/Celular</b></div>
                             <div class="col-md-3 ml-auto">{{$e->telefono}}</div>
                         </div>
                         <div class="row">
@@ -139,7 +139,7 @@
                             <h4 class="text-centers">Sistema De Salud</h4>
                         <hr>
                         <div class="row">
-                            <div class="col-md-3"><b>Regimen Salud</b></div>
+                            <div class="col-md-3"><b>Régimen Salud</b></div>
                             <div class="col-md-3 ml-auto">{{$e->regimen}}</div>
                             <div class="col-md-3"><b>Carnet/EPS</b></div>
                             <div class="col-md-3 ml-auto">{{$e->eps}}</div>
@@ -163,7 +163,7 @@
                             <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
                         <hr>
                         <div class="row">
-                            <div class="col-md-3"><b>Tipo Identificacion</b></div>
+                            <div class="col-md-3"><b>Tipo Identificación</b></div>
                             <div class="col-md-3 ml-auto">{{$e->tdocacu}}</div>
                             <div class="col-md-3"><b>Número</b></div>
                             <div class="col-md-3 ml-auto">{{$e->numacu}}</div>
@@ -177,7 +177,7 @@
                         <div class="row">
                             <div class="col-md-3"><b>Dirección Residencia</b></div>
                             <div class="col-md-3 ml-auto">{{$e->diracu}}</div>
-                            <div class="col-md-3"><b>Telefono/Celular</b></div>
+                            <div class="col-md-3"><b>Teléfono/Celular</b></div>
                             <div class="col-md-3 ml-auto">{{$e->telacu}}</div>
                         </div>
                         <!---############End Datos Acudiente-->

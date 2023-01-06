@@ -72,7 +72,6 @@
                                <div  class="col-md-12">
                                   <div class="form-group">
                                         <select class="form-control" id="cur" name="cur">
-                                        <option >Elegir ...</option>
                                         @foreach($bach as $bachi)
                                             @if(isset($bachi->idbachi))
                                             <option value="{{$bachi->idbachi}}">{{$bachi->curso}}</option>
@@ -103,7 +102,6 @@
                                     <div class="form-group col-md-4">
                                             <label for="exampleFormControlSelect1">Periodo</label>
                                             <select class="form-control" id="perbachiller" name="perbachiller">
-                                            <option active>Elegir ...</option>
                                             <option value="A">A</option>  
                                             <option value="B">B</option>                    
                                             </select>
@@ -175,7 +173,6 @@
                                   <div class="form-group">
                                         <label for="exampleFormControlSelect1">Elegir Curso</label>
                                         <select class="form-control" id="programatec" name="programatec">
-                                        <option >Elegir ...</option>
                                         @foreach($prog as $pro)
                                         <option value="{{$pro->idtec}}">{{$pro->nombretec}}</option>
                                         @endforeach
@@ -187,7 +184,6 @@
                                   <div class="form-group">
                                         <label for="exampleFormControlSelect1">Trimestre</label>
                                         <select class="form-control" id="tri" name="tri">
-                                        <option >Elegir ...</option>
                                         @foreach($tri as $t)
                                         <option value="{{$t->id}}">{{$t->nombretri}}</option>
                                         @endforeach
@@ -208,7 +204,6 @@
                                   <div class="form-group">
                                         <label for="exampleFormControlSelect1">Periodo</label>
                                         <select class="form-control" id="per" name="per">
-                                        <option active>Elegir ...</option>
                                         <option value="A">A</option>  
                                         <option value="B">B</option>     
                                         <option value="C">C</option> 
@@ -220,10 +215,10 @@
                                    <br>
                                 </div><!--retorna la informacion-->  
                                 <br>
-                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha Matricula</b></h4></label>
+                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha Matrícula</b></h4></label>
                                      <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                                 <div class="form-group col-md-4">
-                                        <input type="date" class="form-control" name="fecha" id="fecha" required>
+                                        <input type="date" class="form-control" name="fecha2" id="fecha2" required>
                                 </div>
                                     <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
                                 <br>
@@ -257,6 +252,17 @@
             event.preventDefault(); //esto cancela el comportamiento del click
             setTimeout(()=> location.href="{{route('listadomatricula')}}");
             });
+
+            //validar fecha
+            /* Esperamos a la carga del DOM */
+            window.addEventListener('DOMContentLoaded', (evento) => {
+                /* Obtenemos la fecha de hoy en formato ISO */
+                const hoy_fecha = new Date().toISOString().substring(0, 10);
+                /* Buscamos la etiqueta, ya sea por ID (que no tiene) o por su selector */
+                document.querySelector("input[name='fecha']").max = hoy_fecha;
+                document.querySelector("input[name='fecha2']").max = hoy_fecha;
+            });
+
         </script>
        <!--https://www.fucsalud.edu.co/themes/custom/fucs/Manua-Academusoft-Docente/contenidos1.html-->
 @endsection

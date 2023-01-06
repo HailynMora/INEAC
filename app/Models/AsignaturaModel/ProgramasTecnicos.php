@@ -10,3 +10,4 @@ class ProgramasTecnicos extends Model
     protected $table = 'programa_tecnico';
     protected $primaryKey = "id";//tiene que hacer referencia a la llave primaria 
 }
+

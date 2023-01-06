@@ -10,3 +10,4 @@ class Asignatura extends Model
     protected $table = 'asignaturas';
     protected $primaryKey = "id";//tiene que hacer referencia a la llave primaria 
 }
+

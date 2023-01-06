@@ -454,5 +454,24 @@ Route::get('/docente/generar/listado/{anio}/{per}/{cur}', [EstudiantesController
 Route::get('/docente/generar/listado/tecnico/{anio}/{per}/{cur}', [ReportesController::class, 'pdfestutec'])->middleware(['auth', 'secretaria_docente']);
 //eliminar objetivos tecnicos
 Route::get('/eliminar/objetivostec/{id}',[ReporteAsigController::class, 'elim_objtec'])->middleware(['auth', 'secretaria_docente']);
+//recibo de pago desde aqui se debe copiar
+Route::post('/estudiante/nivelaciones/recibo', [EstudiantesNotController::class, 'guardar_recibo'])->middleware(['auth', 'secretaria_docente'])->name('recibo');
+Route::get('/recibos/estudiante/{id}/{a}', [EstudiantesNotController::class, 'verarchivo'])->middleware(['auth', 'secretaria_docente']);
+Route::post('/recibos/estudiante/actualizar', [EstudiantesNotController::class, 'actualizar_recibo'])->middleware(['auth', 'secretaria_docente'])->name('reciboactualizar');
+Route::get('/archivo/estudiante/elim/{id}', [EstudiantesNotController::class, 'eliminararchivo'])->middleware(['auth', 'secretaria_docente']);
+Route::get('/listado/nivelacion/recibos/{p}/{a}/{pr}', [EstudiantesNotController::class, 'listaarchi'])->middleware(['auth', 'secretaria_docente']);
+//nivelaciones estudiantes
+Route::get('/listado/nivelacion/estu', [EstudiantesNotController::class, 'listanivestu'])->middleware(['auth'])->name('listanestu');
+
+//recibo de tecnicos
+Route::post('/estudiante/tecnico/nivelaciones/recibo', [ReportesController::class, 'recibotecnico'])->middleware(['auth', 'secretaria_docente'])->name('recibotec');
+Route::get('/tecnico/nivelacion/recibos/{a}/{p}', [ReportesController::class, 'consulrecibos'])->middleware(['auth', 'secretaria_docente']);
+Route::post('/estudiante/tecnico/nivelaciones/recibo/act', [ReportesController::class, 'recibotecnicoactu'])->middleware(['auth', 'secretaria_docente'])->name('reciboactualizartec');
+Route::get('/archivo/estudiante/elim/tec/{id}', [ReportesController::class, 'elimrecibotec'])->middleware(['auth', 'secretaria_docente']);
+//###########3
+Route::get('/recibos/estudiante/tecnico/{id}/{a}', [ReportesController::class, 'consultecarchivo'])->middleware(['auth', 'secretaria_docente']);
+//###########eliminar db
+Route::get('/vaciar/db', [ReportesController::class, 'vaciardb'])->middleware(['auth', 'secretaria_docente'])->name('eliminardb');
+
 require __DIR__.'/auth.php';
 

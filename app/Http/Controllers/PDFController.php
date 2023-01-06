@@ -474,8 +474,8 @@ class PDFController extends Controller
                             'estudiante.second_ape as segundoape', 'estudiante.firts_ape as primerape', 
                             'estudiante.num_doc', 'tipo_documento.descripcion as destipo')
                     ->first();
-       
-        $notas = DB::table('notas')->where('notas.id_estudiante',$request->ides)
+
+        $notas = DB::table('notas')->where('notas.id_estudiante', '=', $request->ides)
                     ->join('cursos','notas.id_curso','=','cursos.id')
                     ->join('docente', 'cursos.id_docente', '=', 'docente.id')
                     ->join('asignaturas', 'cursos.id_asignatura', '=', 'asignaturas.id')
@@ -485,10 +485,10 @@ class PDFController extends Controller
                     ->where('cursos.anio', '=', $request->anio)
                     ->where('cursos.periodo', '=', $request->periodo)
                     //->where('matriculas.id_aprobado', '=', '5')
-                    ->select('definitiva', 'desempenos.descripcion as desem', 'notas.id_curso', 'docente.nombre', 'docente.apellido', 'asignaturas.nombre as nomasig', 'asignaturas.intensidad_horaria as ih')
+                    ->select('notas.id', 'definitiva', 'desempenos.descripcion as desem', 'notas.id_curso', 'docente.nombre', 'docente.apellido', 'asignaturas.nombre as nomasig', 'asignaturas.intensidad_horaria as ih')
+                    ->distinct()
                     ->get();
         
-       
        // return $notas;
         $cur = DB::table('objetivos')->select('objetivos.descripcion as desob', 'objetivos.id_asignaturas as idasig')->get();
         

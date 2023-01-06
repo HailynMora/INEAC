@@ -10,3 +10,4 @@ class Programas extends Model
     protected $table = 'tipo_curso';
     protected $primaryKey = "id";//tiene que hacer referencia a la llave primaria 
 }
+

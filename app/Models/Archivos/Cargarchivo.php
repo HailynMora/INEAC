@@ -11,3 +11,4 @@ class Cargarchivo extends Model
     //protected $primarykey = 'id';//cambia el nombre de la llame primaria tal cual esta en la tabla no es obligatorio 
     //public $timestamps = false; //en caso de que no quiera utilizar para llenar datos con fecha y hora
 }
+
