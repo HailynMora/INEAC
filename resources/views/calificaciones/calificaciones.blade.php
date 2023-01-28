@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Registro Calificaciones</h3>
+ <h3 class="letra1">Registro calificaciones</h3>
 </div>
 <br>
 <!--collapsed-->
@@ -81,7 +81,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="container text-center" style="background-color: #283593; color:#ffffff; padding-top:10px; padding-bottom:10px;">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Ingresar Valores </h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Ingresar valores </h5>
                                                         </div>
                                                         <div class="modal-body">
                                                         <!--table-->
@@ -177,8 +177,8 @@
                                                         <input id="idest" name="idest" value="{{$t->idest}}"  hidden>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn"  style="background-color:#FFCC00;" data-dismiss="modal">Salir</button>
-                                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                                        <button type="submit" class="btn btn-success">Guardar</button>
                                                     </div>
                                                 </div>
                                             </div>

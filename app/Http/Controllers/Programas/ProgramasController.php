@@ -174,21 +174,31 @@ class ProgramasController extends Controller
 
     public function reporte(){
         $rep=DB::table('tipo_curso')
-        ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','estado.descripcion as estado','tipo_curso.jornada')
-        ->join('estado','id_estado','=','estado.id')
-        ->orderBy('tipo_curso.id', 'ASC')
-        ->paginate(10); //hacer paginacion de las vistas
-        return view('programas.reporte_bachillerato')->with('rep',$rep);
+            ->select('tipo_curso.id','tipo_curso.codigo','tipo_curso.descripcion as programa','tipo_curso.cursodes','estado.descripcion as estado','tipo_curso.jornada')
+            ->join('estado','id_estado','=','estado.id')
+            ->orderBy('tipo_curso.id', 'ASC')
+            ->paginate(10); //hacer paginacion de las vistas
+            //##################### listado
+            $anio=DB::table('cursos')
+                     ->select('cursos.anio')->distinct()->get();
+            $period=DB::table('cursos')
+                     ->select('cursos.periodo')->distinct()->get();         
+        return view('programas.reporte_bachillerato')->with('rep',$rep)->with('anio',$anio)->with('period',$period);
     }
 
     public function reporte_tecnico(){
         $rep=DB::table('programa_tecnico')
-        ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','programa_tecnico.jornada','estado.descripcion as estado')
-        ->join('estado','id_estado','=','estado.id')
-        ->orderBy('programa_tecnico.id', 'ASC')
-        //->paginate(5); //hacer paginacion de las vistas
-        ->get();
-        return view('programas.reporte_tecnico')->with('rep',$rep);
+            ->select('programa_tecnico.id','programa_tecnico.codigotec','programa_tecnico.descripcion','programa_tecnico.nombretec','programa_tecnico.jornada','estado.descripcion as estado')
+            ->join('estado','id_estado','=','estado.id')
+            ->orderBy('programa_tecnico.id', 'ASC')
+            //->paginate(5); //hacer paginacion de las vistas
+            ->get();
+        $anio=DB::table('asignaturas_tecnicos')->select('asignaturas_tecnicos.anio')->distinct()->get(); //hacer paginacion de las vistas
+        $tri=DB::table('asignaturas_tecnicos')
+                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+                ->select('asignaturas_tecnicos.id_trimestre', 'trimestre_tecnicos.nombretri')
+                ->distinct()->get(); //hacer paginacion de las vistas
+        return view('programas.reporte_tecnico')->with('rep',$rep)->with('anio',$anio)->with('tri',$tri);
     }
 
     public function form_actualizar($id){
@@ -293,6 +303,27 @@ class ProgramasController extends Controller
 
     }
 
+    public function vinculacion_tec(Request $request){
+        $valores=DB::table('asignaturas_tecnicos')
+                    ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','=','asig_tecnicos.id')
+                    ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','=','trimestre_tecnicos.id')
+                    ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
+                    ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
+                    ->where('asignaturas_tecnicos.id_tecnico', '=', $request->cursoid)
+                    ->where('asignaturas_tecnicos.id_trimestre', '=', $request->trim)
+                    ->where('asignaturas_tecnicos.anio', '=', $request->aniot)
+                    ->select('asignaturas_tecnicos.id','id_asignaturas','id_trimestre','asig_tecnicos.codigoasig as codas',
+                            'asig_tecnicos.nombreasig as asig', 'asig_tecnicos.intensidad_horaria as horas', 
+                            'programa_tecnico.codigotec','programa_tecnico.nombretec',
+                            'trimestre_tecnicos.nombretri','docente.nombre as nomdoc','docente.apellido as apedoc',
+                            'asignaturas_tecnicos.anio', 'asignaturas_tecnicos.periodo')
+                    ->orderBy('asignaturas_tecnicos.periodo', 'ASC')
+                    ->get(); //hacer paginacion de las vistas
+        ///////////////////////////
+        return view('programas.asignaturasvintec')->with('asigpro',$valores);
+
+    } 
+
     public function asig_tec(Request $request){
         
         $r=$request->curso; 
@@ -368,7 +399,7 @@ class ProgramasController extends Controller
         }else{
             Session::flash('mensaje', 'No se puede eliminar este campo, la asignatura ya tiene notas.');
         }
-        return back();
+        return redirect('/programas/reporte_programas_tecnicos');
     }
 
     //////////////////buscar ciclo////////////////////////

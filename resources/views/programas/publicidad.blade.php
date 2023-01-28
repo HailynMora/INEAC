@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Agregar Publicidad A Los Programas</h3>
+ <h3 class="letra1">Agregar publicidad a los programas</h3>
 </div>
-<br><br>
+<br>
 <div class="container letraf">
   <div class="card">
   <div class="card-header">
@@ -55,19 +55,21 @@ use Illuminate\Support\Facades\DB;
             </div>
             </div>
         <!--end--radius-->
-         <button type="submit" class="btn btn-primary">Guardar</button>
+        <div class="modal-footer">
          @if(isset($estado))
             @if($estado != 0)
-                <button  type="button" class="btn btn-warning" data-toggle="modal" data-target="#estadopub" style="color:white;">
+                <button  type="button" class="btn btn-warning" data-toggle="modal" data-target="#estadopub" style="color:black;">
                 Desactivar
                 </button>
             @endif
             @if($estado == 0)
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#estadopub" style="color:white;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#estadopub" style="color:white;">
                  Activar
                </button>
             @endif
          @endif
+         <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
         </form>
         <!--boton de cambiar el estado-->
         <!-- Button trigger modal -->
@@ -84,14 +86,14 @@ use Illuminate\Support\Facades\DB;
                         ¿Desea cambiar el estado de la publicidad en la página de inicio del aplicativo?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="color:white;">Cancelar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="color:white;">Salir</button>
                         <!--botones-->
                         @if(isset($estado))
                             @if($estado != 0)
-                             <a href="{{route('cambiarpub',2)}}" type="button" class="btn btn-primary" style="color:white;">Cambiar</a>
+                             <a href="{{route('cambiarpub',2)}}" type="button" class="btn btn-success" style="color:white;">Guardar</a>
                             @endif
                             @if($estado == 0)
-                            <a href="{{route('cambiarpub',1)}}" type="button" class="btn btn-primary" style="color:white;">Cambiar</a>
+                            <a href="{{route('cambiarpub',1)}}" type="button" class="btn btn-success" style="color:white;">Guardar</a>
                             @endif
                         @endif
                         <!--end botones-->

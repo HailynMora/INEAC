@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1"> Reporte Asignaturas Técnicos </h3>
+ <h3 class="letra1"> Reporte asignaturas técnicos</h3>
 </div>
 <!--collapsed-->
 @if(!isset($repe[0]->anio))
@@ -28,7 +28,7 @@
           @csrf
             <div class="modal fade" id="exampleModalTec" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" style="background-color: #F1F1F1;">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Filtro de asignaturas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -65,9 +65,9 @@
                     <!--end filtrar-->
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                       <a href="/asignatura/reporte" type="button" class="btn btn-info">Deshacer</a>
-                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                    <button type="submit" class="btn btn-success">Filtrar</button>
                   </div>
                 </div>
               </div>
@@ -124,9 +124,9 @@
                     @csrf
                     <div class="modal fade" id="staticBackdrop{{$d->idasig}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                       <div class="modal-dialog">
-                        <div class="modal-content">
+                        <div class="modal-content" style="background-color: #F1F1F1;">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Registrar Objetivos de la asignatura: <span style="background-color:Yellow;">{{$d->asig}}</span></h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Registrar objetivos de la asignatura: <span style="background-color:Yellow;">{{$d->asig}}</span></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -141,8 +141,8 @@
                             <!---###############################--> 
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                            <button type="submit" class="btn btn-success">Guardar</button>
                           </div>
                         </div>
                       </div>
@@ -152,7 +152,7 @@
                   <!---modal de objetivos visualizar-->
                   <div class="modal fade" id="listaModalT{{$d->idasig}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
-                      <div class="modal-content">
+                      <div class="modal-content" style="background-color: #F1F1F1;">
                         <div class="modal-header">
                           <h5 class="modal-title" id="staticBackdropLabel">Objetivos de la asignatura: <span style="background-color:Yellow;">{{$d->asig}}</span></h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -199,7 +199,7 @@
                           <!---###############################--> 
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                         </div>
                       </div>
                     </div>

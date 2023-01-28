@@ -61,12 +61,9 @@
             </div>
             <br>
             <div>
-                @if($not!=0)
-                <p>NO SE PROMUEVE.</p>
-                @endif
-                @if($not==0)
-                <p>SE PROMUEVE.</p>
-                @endif
+                
+                <p>SE PROMUEVE: SI  NO</p>
+
             </div>
            <div>
              <p>Para constancia se firma en Potosi el dia {{$dia}} del mes {{$mes}}  del año {{$anio}}</p>

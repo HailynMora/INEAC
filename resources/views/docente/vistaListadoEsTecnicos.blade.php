@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert  text-center"  role="alert" style="background-color: #ffc107; color:#ffffff;">
-  <h3 class="letra1"> Listado De Estudiantes De Técnico</h3>
+  <h3 class="letra1"> Listado de estudiantes de programas técnicos</h3>
 </div>
 @if(!isset($datos[0]))
 @if(Session::has('info'))
@@ -61,7 +61,7 @@
                         <div class="modal-header alert" style="background-color:#0f468e; color:#ffffff;">
                             <h5 class="modal-title" id="staticBackdropLabel">
                         
-                            Datos Estudiante: {{$e->primernom}} {{$e->segnom}} {{$e->priape}} {{$e->segape}}
+                            Datos del estudiante: {{$e->primernom}} {{$e->segnom}} {{$e->priape}} {{$e->segape}}
                         
                         </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -70,7 +70,7 @@
                         </div>
                         <div class="modal-body">
                         <!---Mostrar datos--> 
-                        <h4 class="text-centers">Datos Personales</h4>
+                        <h4 class="text-centers">Datos personales</h4>
                         <hr>
                         <div class="row">
                             <div class="col-md-3"><b>Tipo Identificación</b></div>
@@ -136,7 +136,7 @@
                         <!---#########################################sistema salud----->
                         <br>
                         <hr>
-                            <h4 class="text-centers">Sistema De Salud</h4>
+                            <h4 class="text-centers">Sistema de salud</h4>
                         <hr>
                         <div class="row">
                             <div class="col-md-3"><b>Régimen Salud</b></div>
@@ -160,7 +160,7 @@
                         <!--#############Datos del acudiente-->
                         <br>
                         <hr>
-                            <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
+                            <h4 class="text-centers">Datos de padre y/o acudiente</h4>
                         <hr>
                         <div class="row">
                             <div class="col-md-3"><b>Tipo Identificación</b></div>
@@ -183,7 +183,7 @@
                         <!---############End Datos Acudiente-->
                         <br>
                         <hr>
-                            <h4 class="text-centers">Datos Del Programa</h4> 
+                            <h4 class="text-centers">Datos del programa</h4> 
                             <div class="row">
                             <div class="col-md-3"><b>Curso</b></div>
                             <div class="col-md-3 ml-auto">{{$e->nombretec}}</div>
@@ -199,7 +199,7 @@
                         <hr>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                         </div>
                         </div>
                     </div>

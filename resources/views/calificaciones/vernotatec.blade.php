@@ -112,8 +112,8 @@
                                 @endforeach
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                <button type="submit" class="btn btn-success">Guardar</button>
                             </div>
                         </div>
                     </div>

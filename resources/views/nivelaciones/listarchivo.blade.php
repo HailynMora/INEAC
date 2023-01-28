@@ -1,16 +1,8 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Información De Nivelaciones</h3>
+ <h3 class="letra1">Información de nivelaciones</h3>
 </div>
-@if(Session::has('inf'))
-  <div class="alert alert-dismissible fade show" role="alert" style="background-color:#33A9B7; color:white;">
-    <strong class="alerta"> {{Session::get('inf')}} </strong> 
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  @endif
   <div class="table-responsive">
 	<table class="table">
 	  <thead style="background-color:#0f468e; color:white;" class="alerta">
@@ -106,7 +98,7 @@
                     </div>
                     </div>
                     <div class="modal-footer" style="background-color:#E0FCFF;">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                     </div>
                 </div>
@@ -120,7 +112,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header" style="background-color:#ffc107; color:white;">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Información</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar información</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -147,8 +139,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-						<button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+						<button type="submit" class="btn btn-success">Guardar</button>
                     </div>
                </form>
                 </div>
@@ -169,8 +161,8 @@
                         </button>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                        <a href="/archivo/estudiante/elim/{{$m->idniv}}" type="button" class="btn btn-primary">Confirmar</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                        <a href="/archivo/estudiante/elim/{{$m->idniv}}" type="button" class="btn btn-success">Confirmar</a>
                     </div>
                     </div>
                 </div>
@@ -187,6 +179,14 @@
             </button>
         </div>
 		@endif
+    @if(Session::has('inf'))
+        <div class="alert alert-dismissible fade show" role="alert" style="background-color:#33A9B7; color:white;">
+          <strong class="alerta"> {{Session::get('inf')}} </strong> 
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  @endif
 	  </tbody>
 	</table>
    </div>

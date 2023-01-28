@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado de Docentes</h3>
+ <h3 class="letra1">Listado de docentes</h3>
 </div>
 <div>
   <br><br>
@@ -133,7 +133,7 @@
                     <!--FIN ACORDEON-->
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                 </div>                
               </div>

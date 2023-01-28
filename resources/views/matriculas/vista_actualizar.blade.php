@@ -1,7 +1,10 @@
 @extends('usuario.principa_usul')
 @section('content')
  <!--texto matriculas bachillerato-->
-  <br>
+ <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+  <h3 class="letra1">Actualizar matrícula</h3>
+</div>
+<br>
         <div class="container-fluid">
             <!---Mensaje-->
             @if(Session::has('validacion'))
@@ -21,12 +24,12 @@
             <!-- end mensaje-->
         <div class="row alerta">
             <div class="col-md-12" style="background-color:#e3e3e3;">
-                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
+                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos del estudiante</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
                 <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-                        <label><h5><b><i class="fas fa-address-card" style="color:#FFC300;"></i>&nbsp Número de Documento</b></h5></label><br>
+                        <label><h5><b><i class="fas fa-address-card" style="color:#FFC300;"></i>&nbsp Número de documento</b></h5></label><br>
                     <h5> {{$bachi[0]->num_doc}} </h5>
                     </div>
                     <div class="col-md-4">
@@ -94,9 +97,9 @@
                             <br>
                             <div class="form-group col-md-12 text-center">
                                 <br>
-                                <div class="form-group col-md-12 text-center">
-                                    <a href="/admin/reporte/estudiante" id="cancelar" type="button" class="btn btn-warning" >Cancelar</a>
-                                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                                <div class="form-group col-md-12 modal-footer">
+                                    <a href="/admin/reporte/estudiante" id="cancelar" type="button" class="btn btn-danger" >Salir</a>
+                                    <button type="submit" class="btn btn-success">Guardar</button>
                                         
                                 </div>
                             </div>
@@ -109,4 +112,14 @@
         </div>
         </div>
   <!---end matriculas bachillerato-->
+  <script>
+     //validar fecha
+            /* Esperamos a la carga del DOM */
+            window.addEventListener('DOMContentLoaded', (evento) => {
+                /* Obtenemos la fecha de hoy en formato ISO */
+                const hoy_fecha = new Date().toISOString().substring(0, 10);
+                /* Buscamos la etiqueta, ya sea por ID (que no tiene) o por su selector */
+                document.querySelector("input[name='fecha']").max = hoy_fecha;
+            });
+  </script>
   @endsection

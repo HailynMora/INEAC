@@ -2,7 +2,7 @@
 @section('content')
 <!--Tabla de informacion-->
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado de Estudiantes</h3>
+ <h3 class="letra1">Listado de estudiantes</h3>
 </div>
 @if($b != 1)
 @if(Session::has('consulta'))
@@ -65,7 +65,7 @@
                     <div class="modal-header alert" style="background-color:#0f468e; color:#ffffff;">
                         <h5 class="modal-title" id="staticBackdropLabel">
                        
-                          Datos Estudiante: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}
+                          Datos del estudiante: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}
                        
                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -74,7 +74,7 @@
                     </div>
                     <div class="modal-body">
                     <!---Mostrar datos--> 
-                    <h4 class="text-centers">Datos Personales</h4>
+                    <h4 class="text-centers">Datos personales</h4>
                     <hr>
                     <div class="row">
                         <div class="col-md-3"><b>Tipo Identificación</b></div>
@@ -140,7 +140,7 @@
                     <!---#########################################sistema salud----->
                      <br>
                       <hr>
-                        <h4 class="text-centers">Sistema De Salud</h4>
+                        <h4 class="text-centers">Sistema de salud</h4>
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Régimen Salud</b></div>
@@ -164,7 +164,7 @@
                     <!--#############Datos del acudiente-->
                       <br>
                       <hr>
-                        <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
+                        <h4 class="text-centers">Datos de padre y/o acudiente</h4>
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Tipo Identificación</b></div>
@@ -187,7 +187,7 @@
                     <!---############End Datos Acudiente-->
                     <br>
                       <hr>
-                        <h4 class="text-centers">Datos Del Programa</h4> 
+                        <h4 class="text-centers">Datos del programa</h4> 
                         <div class="row">
                           <div class="col-md-3"><b>Curso</b></div>
                           <div class="col-md-3 ml-auto">{{$d->descripcion}}</div>
@@ -203,7 +203,7 @@
                       <hr>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
           <div class="modal-dialog modal-lg modal-dialog-scrollable letraf">
             <div class="modal-content">
               <div class="modal-header" style="background-color:#0f468e;color: #ffffff;">
-                <h5 class="modal-title" id="exampleModalLabel">Información Estudiante</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Información del estudiante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -237,7 +237,7 @@
               <div class="modal-body">
                 
                <!---Mostrar datos--> 
-               <h4 class="text-centers">Datos Personales</h4>
+               <h4 class="text-centers">Datos personales</h4>
                     <hr>
                     <div class="row">
                         <div class="col-md-3"><b>Tipo Identificación</b></div>
@@ -303,7 +303,7 @@
                     <!---#########################################sistema salud----->
                      <br>
                       <hr>
-                        <h4 class="text-centers">Sistema De Salud</h4>
+                        <h4 class="text-centers">Sistema de salud</h4>
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Régimen Salud</b></div>
@@ -327,7 +327,7 @@
                     <!--#############Datos del acudiente-->
                       <br>
                       <hr>
-                        <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
+                        <h4 class="text-centers">Datos de padre y/o acudiente</h4>
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Tipo Identificación</b></div>
@@ -350,7 +350,7 @@
                     <!---############End Datos Acudiente-->
                     <br>     
                       <hr>
-                        <h4 class="text-start">Datos Del Programa</h4>
+                        <h4 class="text-start">Datos del programa</h4>
                         <div class="row">
                           <div class="col-md-3"><b>Curso</b></div>
                           <div class="col-md-3 ml-auto curso" id="limpiar33"> </div>
@@ -366,7 +366,7 @@
                       <hr>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
               </div>
             </div>
           </div>

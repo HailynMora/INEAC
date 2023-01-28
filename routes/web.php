@@ -473,5 +473,8 @@ Route::get('/recibos/estudiante/tecnico/{id}/{a}', [ReportesController::class, '
 //###########eliminar db
 Route::get('/vaciar/db', [ReportesController::class, 'vaciardb'])->middleware(['auth', 'secretaria_docente'])->name('eliminardb');
 
+//RUTA LISTADO DE VINCULACION DE AIGNATURAS A UN tecnico
+Route::post('/programas/listado_vinculacion/tecnicos', [ProgramasController::class, 'vinculacion_tec'])->middleware(['auth', 'secretaria'])->name('listado_asig_tec');
+
 require __DIR__.'/auth.php';
 

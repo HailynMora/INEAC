@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Perfil Estudiante</h3>
+ <h3 class="letra1">Perfil estudiantil</h3>
 </div>
 @if(!isset($est[0]))
 <div class="alert alert-info" role="alert">
@@ -38,7 +38,7 @@
            <div class="col-md-10">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="fas fa-edit"></i> Datos Personales
+                  <i class="fas fa-edit"></i> Datos personales
                 </button>
               </h2>
           </div>
@@ -198,7 +198,7 @@
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-         Sistema De Salud
+         Sistema de salud
         </button>
       </h2>
     </div>
@@ -302,9 +302,9 @@
   </div>
 </div>
 <div class="container-fluid">
-
-        </div>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+  <button type="submit" class="btn btn-success float-right">Guardar</button>
+</div>
+<br><br>
    <!---############################################################################--->
     </form>
 </div>

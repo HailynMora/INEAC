@@ -50,8 +50,8 @@
                 <input value="{{$consulta[0]->idcur}}" id="idcurso" name="idcurso" hidden>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn  btn-warning" data-dismiss="modal">Salir</button>
-                <button type="submit" class="btn btn-primary">Generar</button>
+                <button type="button" class="btn  btn-danger" data-dismiss="modal">Salir</button>
+                <button type="submit" class="btn btn-success">Generar</button>
               </div>
             </div>
           </div>
@@ -84,8 +84,8 @@
                 <input value="{{$consulta[0]->idcur}}" id="idcurso" name="idcurso" hidden>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn  btn-warning" data-dismiss="modal">Salir</button>
-                <button type="submit" class="btn btn-primary">Generar</button>
+                <button type="button" class="btn  btn-danger" data-dismiss="modal">Salir</button>
+                <button type="submit" class="btn btn-success">Generar</button>
               </div>
             </div>
           </div>
@@ -119,8 +119,8 @@
                 <input value="{{$consulta[0]->idcur}}" id="idcurso" name="idcurso" hidden>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                <button type="submit" class="btn btn-success">Filtrar</button>
               </div>
             </div>
           </div>
@@ -135,8 +135,8 @@
 </div>
     <div class="row">
         <div class="col-12">
-            <h5 class="text-center"> Planilla De Notas h</h5>
-            <h5 class="text-center"> Instituto De Educación Técnica INESUR</h5>
+            <h5 class="text-center"> PLANILLA DE NOTAS</h5>
+            <h5 class="text-center"> INSTITUTO DE EDUCACIÓN TÉCNICA INESUR</h5>
             <h5 class="text-center"> Programa: {{$consulta[0]->curso}} {{$consulta[0]->anio}} {{$consulta[0]->periodo}} </h5>
         </div>
     </div>
@@ -201,7 +201,7 @@
   <?php 
    $contador=1;
   ?>
- <h6 class="text-center">Criterios De Evaluación </h6>
+ <h6 class="text-center">Criterios de evaluación </h6>
  <hr style="background-color:black;">
 @foreach($objetivos as $ob)
   @if(isset($ob->obj))

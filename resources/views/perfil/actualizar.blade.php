@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center"  role="alert" style="background-color:#ffc107; color:#FFFFFF;">
- <h3 class="letra1">Actualizar Perfil Profesional</h3>
+ <h3 class="letra1">Actualizar perfil profesional</h3>
 </div>
 
 <nav>
@@ -53,7 +53,7 @@
                   <div class="form-group col-md-12">
 
                   <div class="alert" role="alert">
-                        <h4 class="alert-heading">Nivel de Estudios</h4>
+                        <h4 class="alert-heading">Nivel de estudios</h4>
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <p>
                         {{$perfil[0]->nivel_estudios}}
@@ -74,7 +74,7 @@
                   </div>
                   <div class="form-group col-md-6">
                   <div class="alert " role="alert">
-                        <h4 class="alert-heading">Cursos Realizados</h4>
+                        <h4 class="alert-heading">Cursos realizados</h4>
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <p>
                         {{$perfil[0]->cursos_realizados}}
@@ -109,7 +109,7 @@
               @endif
               @if($b==0)
               <div class="alert" role="alert" style="background-color:#C4C4C4; color:black;">
-                <h4 class="alerta">No hay Información Disponible! Registra tu perfil</h4>
+                <h4 class="alerta">No hay información disponible! Registra tu perfil</h4>
               </div>
               @endif
           </div>
@@ -142,7 +142,7 @@
               <!--end usuario-->
               <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="nivel">Nivel de Estudios</label>
+                    <label for="nivel">Nivel de estudios</label>
                     <input type="text" class="form-control" id="nivel" name="nivel"  value="{{$perfil[0]->nivel_estudios}}" required>
                     <input type="text" class="form-control" id="iden" name="iden"  value="{{$perfil[0]->id}}" hidden> 
                 </div>
@@ -157,7 +157,7 @@
                   <input class="form-control" id="des" name="des" rows="2" value="{{$perfil[0]->descripcion}}" required>  
                   </div>
                   <div class="form-group col-md-6">
-                  <label for="cur">Cursos Realizados</label>
+                  <label for="cur">Cursos realizados</label>
                   <input class="form-control" id="cur" name="cur" rows="2" value="{{$perfil[0]->cursos_realizados}}" required>
                   </div>
                 </div>
@@ -171,8 +171,8 @@
                   <input class="form-control" id="exp" name="exp" rows="2" value="{{$perfil[0]->Experiencia}}" required>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-success">Actualizar
-                </button>
+              <button type="submit" class="btn btn-success float-right">Guardar</button>
+              <br>
               </form>
               @endif
               <div id="nuevoactu"></div>

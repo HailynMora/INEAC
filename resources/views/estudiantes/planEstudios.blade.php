@@ -4,7 +4,7 @@
   <div class="card">
     <div class="card-header">
         <div class="alert" role="alert" style="background-color:#ffc107;color: #ffffff;">
-          <h5 class="text-center letra1"> Plan de Estudios </h5>
+          <h5 class="text-center letra1"> Plan de estudios </h5>
         </div>
     </div>
 

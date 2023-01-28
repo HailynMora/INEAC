@@ -3,7 +3,7 @@
        <!---tabla-->
         <!--notas-->
         <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
-            <h3 class="letra1">Reporte De Notas</h3>
+            <h3 class="letra1">Reporte de notas</h3>
             </div>
             <br>
             <div class="container alerta">

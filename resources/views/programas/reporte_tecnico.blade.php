@@ -1,17 +1,82 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1"> Programas Técnicos Registrados</h3>
+ <h3 class="letra1"> Programas técnicos registrados</h3>
 </div>
 <!--MODAL-->
+@if(Session::has('mensaje'))
+        <div class="alert alert-info alert-dismissible fade show alerta" role="alert">
+        <strong >{{Session::get('mensaje')}}</strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+  @endif
 <div class="row">
   <div class="col-6">
     <button type="button"class="btn btn-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegTec">
-      Registrar
+      Registro
     </button>
     <!--BOTON REGISTRO ASIGNATURAS--->
-    <a href="{{route('reportetec')}}" class="btn btn-warning my-2 my-sm-0 alerta" style="color:white;" >Asig. Técnicos</a>
+    <a href="{{route('reportetec')}}" class="btn btn-warning my-2 my-sm-0 alerta" style="color:white;" >Asig. técnicos</a>
     <!--FIN REGISTRAR ASIGNATURAS--->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalListartec">Listar</button>
+      <!--modal listar-->
+    <form action="{{route('listado_asig_tec')}}" method="POST">
+      @csrf
+    <div class="modal fade" id="modalListartec" tabindex="-1" aria-labelledby="modalListarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header letra1" style="background-color: #ffc107; color:#ffffff;">
+          <h5 class="modal-title" id="modalListarLabel">Ingrese datos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body alerta">
+          <!--formulario-->
+          <div class="form-group">
+            <label for="curso">Programa</label>
+            <select id="cursoid" name="cursoid" class="form-control" required>
+            <option value="0" selected>Seleccionar</option>
+            @if(isset($rep[0]))
+                @foreach($rep as $per)
+                    <option value="{{$per->id}}">{{$per->nombretec}}</option>
+                @endforeach
+              @else
+               <option value="0" selected>Sin datos</option>
+              @endif
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="periodo">Trimestre</label>
+            <select id="trim" name="trim" class="form-control" required>
+            <option value="0" selected>Seleccionar</option>
+              @foreach($tri as $tr)
+                    <option value="{{$tr->id_trimestre}}">{{$tr->nombretri}}</option>
+                @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="anio">Año</label>
+            <select id="aniot" name="aniot" class="form-control" required>
+            <option value="0" selected>Seleccionar</option>
+               @foreach($anio as $an)
+                    <option value="{{$an->anio}}">{{$an->anio}}</option>
+                @endforeach
+            </select>
+          </div>
+          <!--end formulario-->
+        </div>
+        <div class="modal-footer alerta">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+    <!--end modal-->
   </div>
   <div class="col-6">
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
@@ -28,7 +93,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <h3 class="text-center letra1" style="background-color: #FFC107; color:#ffffff; padding-top:15px; padding-bottom:15px;">
-              Registro  Programas Técnicos
+              Registro  de programas técnicos
             </h3>
             <div class="modal-body">
               <!--registrar modal-->
@@ -37,7 +102,7 @@
                     <div class="card-header" id="headingOne">
                       <h2 class="mb-0">
                         <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          <i class="fas fa-edit"></i> Programa Técnico
+                          <i class="fas fa-edit"></i> Programa técnico
                         </button>
                       </h2>
                     </div>
@@ -60,7 +125,7 @@
                             <label for="jornada">Jornada</label>
                             <select id="jornada" class="form-control" name="jornada" required>
                               <option selected>Seleccionar</option>
-                              <option value="Sabado">Sabado</option>
+                              <option value="Sabado">Sábado</option>
                               <option value="Domingo">Domingo</option>
                             </select>
                           </div>
@@ -73,9 +138,9 @@
             </div>
             <div class="modal-footer letraf">
               <!--botones -->
-                <a  class="btn btn-danger" href="{{url('/programas/reporte_programas_tecnicos')}}">Cancelar</a>
-                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a  class="btn btn-danger" href="{{url('/programas/reporte_programas_tecnicos')}}">Salir</a>
+                <button type="submit" class="btn btn-info"  onclick="resetform()">Limpiar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
               <!--end botones-->
             </div>
             </div>
@@ -140,7 +205,7 @@
                       <div class="modal-content">
                           <div class="modal-header alerta" style="background-color: #FFC107; color:white;">
                               <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
-                                  <span>¿Cambiar el estado {{$d->estado}} del programa? </span>
+                                  <span>¿Cambiar el estado <span style="color:black;">{{$d->estado}}</span> del programa? </span>
                               </h4>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
@@ -152,8 +217,8 @@
                               </strong>
                           </div>
                           <div class="modal-footer letraf">
-                              <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                              <a  class="btn btn-primary" href="{{ route('cambiarProTec', $d->id) }}">Guardar</a>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                              <a  class="btn btn-success" href="{{ route('cambiarProTec', $d->id) }}">Guardar</a>
                           </div>
                       </div>
                   </div>

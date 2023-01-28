@@ -133,21 +133,13 @@ class EstudiantesController extends Controller
 
     public function matricula(Request $request){
 
-        $r= $request->input('numerodoc');
+       // $r= $request->input('numerodoc');
+        $vr = $request->input('numero_doc');
         $co= $request->input('correo');
-        $res=DB::table('estudiante')->where('num_doc', '=', $r)->count();
+        $res=DB::table('estudiante')->where('num_doc', '=', $vr)->count();
         $c=DB::table('estudiante')->where('correo', '=', $co)->count();
         //consultar id del rol
         $idrol = DB::table('roles')->where('roles.descripcion', 'like', 'Estudiante')->select('roles.id')->first();
-        //crear el user
-        $usu = new User();
-        $usu->name = $request->input('firstname');
-        $usu->email = $request->input('email');
-        $usu->password = Hash::make($request->pass);
-        $usu->id_rol = $idrol->id;
-        $usu->estado = 1;
-        $usu->save();
-        //end crear user
 
         if($res!=0){//validacion con ajax
             return \Response::json([
@@ -159,6 +151,15 @@ class EstudiantesController extends Controller
                     'error'  => 'Error datos'
                 ],423);
             }else{ 
+                //crear el user
+                    $usu = new User();
+                    $usu->name = $request->input('firstname');
+                    $usu->email = $co;
+                    $usu->password = Hash::make($vr);
+                    $usu->id_rol = $idrol->id;
+                    $usu->estado = 1;
+                    $usu->save();
+                    //end crear user
                 $Registrar = new Estudiante();
                 $Registrar->first_nom = $request->input('firstname');
                 $Registrar->second_nom = $request->input('secondname');
@@ -245,8 +246,15 @@ class EstudiantesController extends Controller
         return view('estudiantes.actualizar', compact('est','tipodoc','genero','etnia','estado', 'paren'));
     }
     public function actualizar_estudiante(Request $request, $id){
-           $Registrar = Estudiante::FindOrFail($id);
-        //#################################################
+           $num = $request->input('numero_doc');
+           $corr = $request->input('correo');
+           
+           $valdoc=DB::table('estudiante')->where('estudiante.num_doc', '=', $num)->where('estudiante.id', '!=', $id)->count();
+           $valcor=DB::table('estudiante')->where('estudiante.correo', '=', $corr)->where('estudiante.id', '!=', $id)->count();
+          
+           if( $valdoc != 1 && $valcor != 1){
+            $Registrar = Estudiante::FindOrFail($id);
+           //#################################################
             $Registrar->first_nom = $request->input('firstname');
             $Registrar->second_nom = $request->input('secondname');
             $Registrar->firts_ape = $request->input('firsape');
@@ -289,8 +297,16 @@ class EstudiantesController extends Controller
             $Acu->id_parentesco = $request->input('parentesco');
             $Acu->id_tipo_doc =$request->input('tdocacu');
             $Acu->save(); 
-
-
+            //#####################3
+             //actualizar usuario
+             $user = User::FindOrFail($Registrar->id_usuario);
+             $user->email = $request->input('correo');
+             $user->password = Hash::make($num);
+             $user->save();
+             Session::flash('ced','Datos actualizados correctamente.');
+           }else{
+            Session::flash('ced','¡Lo sentimos! El número de documento ó correo ya estan registrados.');
+           }
         //#################################################
         return redirect('/visualizar/estudiante');
 

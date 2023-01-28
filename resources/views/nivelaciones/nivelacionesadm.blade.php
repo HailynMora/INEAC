@@ -12,9 +12,9 @@
  @csrf
 <div class="modal fade alerta" id="exampleModalnotas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="background-color: #F1F1F1;">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Periodo Académico</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Periodo académico</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -62,7 +62,7 @@
           <div class="card-header" id="headingOne">
             <h2 class="mb-0">
               <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#info" aria-expanded="false" aria-controls="collapseOne">
-                Nota
+               <i class="fas fa-info-circle" style="font-size:24px; color:blue;"></i> Información
               </button>
             </h2>
           </div>
@@ -80,8 +80,8 @@
       </div>
       <div class="modal-footer">
         <input value="1" name="val" id="val" hidden>
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-        <button type="submit" class="btn btn-primary">Ver</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+        <button type="submit" class="btn btn-primary">Visualizar</button>
       </div>
     </div>
   </div>

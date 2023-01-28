@@ -1,6 +1,11 @@
 @extends('usuario.principa_usul')
 @section('content')
 
+<div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
+  <h3 class="letra1">Actualizar matrícula</h3>
+</div>
+<br>
+
 @if(Session::has('actualizar'))
                 <div class="alert alert-primary alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -13,12 +18,12 @@
             <!-- end mensaje-->
         <div class="row alerta">
             <div class="col-md-12" style="background-color:#e3e3e3;">
-                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#3843D0;"></i> Datos Estudiante</b></h4>
+                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#3843D0;"></i> Datos del estudiante </b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
                 <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-                        <label><h5><b><i class="fas fa-address-card" style="color:#3843D0;"></i>&nbsp Número de Documento</b></h5></label><br>
+                        <label><h5><b><i class="fas fa-address-card" style="color:#3843D0;"></i>&nbsp Número de documento</b></h5></label><br>
                     <h5> {{$tecmat[0]->num_doc}} </h5>
                     </div>
                     <div class="col-md-4">
@@ -47,7 +52,7 @@
                             <div class="container-fluid row">
                                 <div  class="col-md-4">
                                   <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Elegir Técnico</label>
+                                        <label for="exampleFormControlSelect1">Elegir programa técnico</label>
                                         <select class="form-control" id="programatec" name="programatec">
                                         <option value="{{$tecmat[0]->idtec}}" >{{$tecmat[0]->nombretec}}</option>
                                         @foreach($progtec as $pro)
@@ -94,16 +99,16 @@
                                    <br>
                                 </div><!--retorna la informacion-->  
                                 <br>
-                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha Matrícula</b></h4></label>
+                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha de matrícula</b></h4></label>
                                      <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                                 <div class="form-group col-md-4">
                                         <input type="date" class="form-control" name="fecha" id="fecha" value="{{date('Y-m-d', strtotime($tecmat[0]->fec_matricula))}}" required>
                                 </div>
                                 <input type="text" class="form-control" name="idmat" id="idmat" value="{{$tecmat[0]->id}}" hidden>
                                 <br>
-                                <div class="form-group col-md-12 text-center">
-                                    <a href="/listado/matricula/tecnico" id="cancelar" type="button" class="btn" style="background-color:#FED615; color:white;">Cancelar</a>
-                                    <button type="submit" class="btn btn-success">Actualizar</button>
+                                <div class="form-group col-md-12 modal-footer">
+                                    <a href="/listado/matricula/tecnico" id="cancelar" type="button" class="btn btn-danger">Salir</a>
+                                    <button type="submit" class="btn btn-success">Guardar</button>
                                         
                                 </div>
                             

@@ -9,7 +9,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Certificados Estudiantiles De Bachillerato</h3>
+ <h3 class="letra1">Certificados estudiantiles de bachillerato</h3>
 </div>
 <!--mensajes-->
       @if(Session::has('est'))
@@ -89,8 +89,8 @@
    <!--notas-->
    <div class="container alerta">
    <p>
-    <a class="btn btn-info" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
-      <u>Nota</u>
+    <a class="btn" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+       <i class="fas fa-info-circle" style="font-size:24px; color:blue;"></i> Información
     </a>
   </p>
   <div class="collapse" id="collapseExample1">
@@ -108,9 +108,9 @@
   @csrf
   <div class="modal fade alerta" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" style="background-color: #F1F1F1;">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Periodo Académico</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Periodo académico</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -138,14 +138,14 @@
                  <option value="B">B</option>
               </select>
             </div>
-            <input type="text" name="ides" value="{{$ide}}" id="ides" hidden>
+            <input type="text" name="ides" value="{{$ide}}" id="ides" hidden >
          </div>
          </div>
           <!-- end per acdemico-->
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Aceptar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-success">Guardar</button>
         </div>
       </div>
     </div>
@@ -155,9 +155,9 @@
   @csrf
   <div class="modal fade alerta" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" style="background-color: #F1F1F1;">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"> Periodo Académico</h5>
+          <h5 class="modal-title" id="exampleModalLabel"> Periodo académico</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -191,8 +191,8 @@
           <!-- end per acdemico-->
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Aceptar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-success">Guardar</button>
          
         </div>
       </div>
@@ -203,9 +203,9 @@
   @csrf
   <div class="modal fade alerta" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" style="background-color: #F1F1F1;">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Periodo Académico</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Periodo académico</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -239,8 +239,8 @@
           <!-- end per acdemico-->
         </div>
         <div class="modal-footer">
-         <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-          <button type="submit" class="btn btn-primary">Aceptar</button>
+         <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+         <button type="submit" class="btn btn-success">Guardar</button>
          
         </div>
       </div>

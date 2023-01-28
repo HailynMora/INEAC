@@ -12,9 +12,9 @@
  @csrf
 <div class="modal fade alerta" id="nivTec" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="background-color: #F1F1F1;">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Periodo Académico</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Periodo académico</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -51,8 +51,8 @@
         <!-- end per acdemico-->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-        <button type="submit" class="btn btn-primary">Generar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+        <button type="submit" class="btn btn-success">Generar</button>
       </div>
     </div>
   </div>

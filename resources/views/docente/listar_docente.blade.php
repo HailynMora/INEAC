@@ -1,12 +1,12 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado de Docentes</h3>
+ <h3 class="letra1">Listado de docentes</h3>
 </div>
 <div>
 <div class="row">
   <div class="col-md-6 alerta">
-   <a href="{{route('regdocente')}}" class="btn btn-success my-2 my-sm-0" >Registrar</a>&nbsp;
+   <a href="{{route('regdocente')}}" class="btn btn-success my-2 my-sm-0" >Registro</a>&nbsp;
    <a href="{{route('listapdf')}}" class="btn btn-warning"  style="color:white;">Generar Listado</a>
   </div>
   <div class="col-md-6">
@@ -32,7 +32,7 @@
       <table class="table table-striped "style="background-color:#0f468e; color: #fffff;">
       <thead class="alerta"style="background-color:#0f468e; color:white;">
           <tr>
-          <th scope="col">Tipo Doc</th>
+          <th scope="col">Tipo Doc.</th>
           <th scope="col">Documento</th>
           <th scope="col">Nombres</th>
           <th scope="col">Fec. Vinculación</th>
@@ -69,7 +69,7 @@
               ?>
               <!--MODAL VER-->
               <div class="modal fade" id="docente<?php echo $d->id;?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-body">
                     <br>
@@ -83,7 +83,7 @@
                         <div class="card-header" id="headingOne">
                           <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fas fa-chalkboard-teacher"></i> Datos Docente
+                            <i class="fas fa-chalkboard-teacher"></i> Datos de docente
                             </button>
                           </h5>
                         </div>
@@ -93,11 +93,11 @@
                               @csrf
                               <div class="form-row">
                                 <div class="form-group col-md-4">
-                                  <label for="tipo_doc">Tipo Documento</label>
+                                  <label for="tipo_doc">Tipo de documento</label>
                                   <input type="text" class="form-control" id="tipo_doc" name="tipo_doc" disabled value="{{$d->descripcion}}">
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="num_doc">N° Documento</label>
+                                  <label for="num_doc">N° documento</label>
                                   <input type="text" class="form-control" id="num_doc" name="num_doc" disabled value="{{$d->num_doc}}">
                                 </div>
                                 <div class="form-group col-md-4">
@@ -117,7 +117,7 @@
                                   <input type="text" class="form-control" id="genero" name="genero" disabled value="{{$d->genero}}">
                                 </div>
                                 <div class="form-group col-md-6">
-                                  <label for="fec_vinculacion">Fecha de Vinculación</label>
+                                  <label for="fec_vinculacion">Fecha de vinculación</label>
                                   <input type="text" class="form-control" id="fec_vinculacion" name="fec_vinculacion" disabled value="{{date('Y-m-d', strtotime($d->fec_vinculacion))}}">
                                 </div>
                                 <div class="form-group col-md-6">
@@ -151,7 +151,7 @@
                                     <tr>
                                       <th scope="col">Código</th>
                                       <th scope="col">Asignatura</th>
-                                      <th scope="col">Intensidad Horaria</th>
+                                      <th scope="col">Intensidad horaria</th>
                                       <th scope="col">Curso</th>
                                     </tr>
                                   </thead>
@@ -190,7 +190,7 @@
                     <!--FIN ACORDEON-->
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                 </div>                
               </div>
@@ -211,13 +211,13 @@
                   <div class="modal-body mt-2 text-center">
                     <strong style="text-align: center !important"> 
                       <h4 class="modal-title text-center" style=" text-align: center;">
-                        <span>¿Cambiar el estado {{$d->estado}} del Docente? </span>
+                        ¿Cambiar el estado <span style="color:blue;">{{$d->estado}}</span> del Docente?
                       </h4>
                     </strong>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                    <a  class="btn btn-primary" href="{{ route('cambiarEstado', $d->id) }}">Guardar</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                    <a  class="btn btn-success" href="{{ route('cambiarEstado', $d->id) }}">Guardar</a>
                     
                   </div>
                 </div>
@@ -259,7 +259,7 @@
                         <div class="card-header" id="headingOne">
                           <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fas fa-chalkboard-teacher"></i> Datos Docente
+                            <i class="fas fa-chalkboard-teacher"></i> Datos de docente
                             </button>
                           </h5>
                         </div>
@@ -269,15 +269,15 @@
                               @csrf
                               <div class="form-row">
                                 <div class="form-group col-md-4">
-                                  <label for="tipo_doc">Tipo Documento</label>
+                                  <label for="tipo_doc">Tipo de documento</label>
                                   <div class="form-control reset" id="tipodocdocente"> </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="num_doc">N° Documento</label>
+                                  <label for="num_doc">N° documento</label>
                                   <div class="form-control reset" id="numdocdocente"> </div>
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="correo">Fecha de Vinculación</label>
+                                  <label for="correo">Fecha de vinculación</label>
                                   <div class="form-control reset" id="fecdocente"> </div>
                                 </div>
                                 <div class="form-group col-md-4">
@@ -324,7 +324,7 @@
                                     <tr>
                                       <th scope="col">Código</th>
                                       <th scope="col">Asignatura</th>
-                                      <th scope="col">Intensidad Horaria</th>
+                                      <th scope="col">Intensidad horaria</th>
                                       <th scope="col">Curso</th>
                                     </tr>
                                   </thead>
@@ -342,7 +342,7 @@
                     <!--FIN ACORDEON-->
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                 </div>                
               </div>
@@ -363,7 +363,7 @@
                   <div class="modal-body mt-2 text-center">
                     <strong style="text-align: center !important"> 
                       <h4 class="modal-title text-center" style=" text-align: center;">
-                        <span>¿Cambiar el estado del Docente? </span>
+                        <span>¿Cambiar el estado del docente? </span>
                       </h4>
                     </strong>
                   </div>
@@ -371,8 +371,8 @@
                     <form action="{{route('deshabdocente')}}" method="GET">
                       @csrf
                     <input id="idocente" name="idocente" hidden> 
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
                    
                      </form>
                   </div>

@@ -277,19 +277,13 @@ class EstudiantesNotController extends Controller
         $doc = DB::table('docente')->where('id_usuario', $idlog)->select('docente.id as idoc')->first();
         $docc=$doc->idoc;
         //###########################################################
-        $resv = DB::table('asignaturas_tecnicos')
+        $resv = DB::table('notas_tecnico')
+                ->join('asignaturas_tecnicos', 'notas_tecnico.id_tecnicos', '=', 'asignaturas_tecnicos.id')
                 ->where('asignaturas_tecnicos.id_docente','=',$docc)
                 ->where('asignaturas_tecnicos.anio','=',$anio)
                 ->where('asignaturas_tecnicos.id_tecnico','=',$programa)
                 ->where('notas_tecnico.definitiva','<',3)
-                ->join('notas_tecnico','asignaturas_tecnicos.id','=','notas_tecnico.id')
-                ->join('programa_tecnico','asignaturas_tecnicos.id_tecnico','=','programa_tecnico.id')
-                ->join('asig_tecnicos','asignaturas_tecnicos.id_asignaturas','asig_tecnicos.id')
-                ->join('trimestre_tecnicos','asignaturas_tecnicos.id_trimestre','trimestre_tecnicos.id')
-                ->join('estudiante','notas_tecnico.id_estudiante','=','estudiante.id')
-                ->join('tipo_documento','estudiante.id_tipo_doc','=','tipo_documento.id')
-                ->join('docente','asignaturas_tecnicos.id_docente','=','docente.id')
-                ->count(); 
+                ->count();
         //##########################################################
         if($resv != 0){
             return Excel::download(new NivelacionesTecExport($docc, $anio, $programa), 'nivelaciones_tecnicos.xlsx');

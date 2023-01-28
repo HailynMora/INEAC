@@ -2,14 +2,14 @@
 @section('content')
 <!--Tabla de informacion-->
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado De Estudiantes</h3>
+ <h3 class="letra1">Listado de estudiantes</h3>
 </div>
 <div class="row alerta">
     <div class="col-md-1">
-        <a href="{{route('registro_es')}}" class="btn btn-success my-2 my-sm-0" >Registrar</a>
+        <a href="{{route('registro_es')}}" class="btn btn-success my-2 my-sm-0" >Registro</a>
     </div>
     <div class="col-md-1">
-        <a href="{{route('listadomatricula')}}" class="btn btn-warning my-2 my-sm-0" >Bto.Ciclo</a>
+        <a href="{{route('listadomatricula')}}" class="btn btn-warning my-2 my-sm-0" >&nbsp;Ciclos&nbsp;</a>
     </div>
     <div class="col-md-1">
         <a href="/listado/matricula/tecnico" class="btn btn-info my-2 my-sm-0" >Técnicos</a>
@@ -22,9 +22,15 @@
         </form>
     </div>
 </div>
-
-
-<br><br>
+<br>
+@if(Session::has('ced'))
+        <div class="alert alert-info alert-dismissible fade show alerta" role="alert">
+            {{Session::get('ced')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+ @endif
 <div class="container table-responsive">
 
 <table class="table">
@@ -59,7 +65,7 @@
                     <div class="modal-header alert" style="background-color:#ffc107; color:white;">
                         <h5 class="modal-title" id="staticBackdropLabel">
                        
-                          Datos Estudiante: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}
+                          Datos del estudiante: {{$d->first_nom }} {{$d->second_nom}} {{$d->firts_ape}} {{$d->second_ape}}
                        
                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -68,7 +74,7 @@
                     </div>
                     <div class="modal-body">
                     <!---Mostrar datos--> 
-                    <h4 class="text-centers">Datos Personales</h4>
+                    <h4 class="text-centers">Datos personales</h4>
                     <hr>
                     <div class="row">
                         <div class="col-md-3"><b>Tipo Identificación</b></div>
@@ -77,7 +83,7 @@
                         <div class="col-md-3 ml-auto">{{$d->num_doc}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><b>Dpt Expedición</b></div>
+                        <div class="col-md-3"><b>Dpto. Expedición</b></div>
                         <div class="col-md-3 ml-auto">{{$d->dpt_expedicion}}</div>
                         <div class="col-md-3"><b>Mpio. Expedición</b></div>
                         <div class="col-md-3 ml-auto">{{$d->mun_expedicion}}</div>
@@ -86,10 +92,10 @@
                         <div class="col-md-3"><b>Género</b></div>
                         <div class="col-md-3 ml-auto">{{$d->generoestu}}</div>
                         <div class="col-md-3"><b>Fecha Nac</b></div>
-                        <div class="col-md-3 ml-auto">{{$d->fecnacimiento}}</div>
+                        <div class="col-md-3 ml-auto">{{date('Y-m-d', strtotime($d->fecnacimiento))}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><b>Dpt Nacimiento</b></div>
+                        <div class="col-md-3"><b>Dpto. Nacimiento</b></div>
                         <div class="col-md-3 ml-auto">{{$d->dpt_nacimiento}}</div>
                         <div class="col-md-3"><b>Mpio. Nacimiento</b></div>
                         <div class="col-md-3 ml-auto">{{$d->mun_nacimiento}}</div>
@@ -113,7 +119,7 @@
                         <div class="col-md-3 ml-auto">{{$d->barrio}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><b>Dpt. Residencia</b></div>
+                        <div class="col-md-3"><b>Dpto. Residencia</b></div>
                         <div class="col-md-3 ml-auto">{{$d->dptresidencia}}</div>
                         <div class="col-md-3"><b>Mpio. Residencia</b></div>
                         <div class="col-md-3 ml-auto">{{$d->munresidencia}}</div>
@@ -134,7 +140,7 @@
                     <!---#########################################sistema salud----->
                      <br>
                       <hr>
-                        <h4 class="text-centers">Sistema De Salud</h4>
+                        <h4 class="text-centers">Sistema de salud</h4>
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Régimen Salud</b></div>
@@ -158,7 +164,7 @@
                     <!--#############Datos del acudiente-->
                       <br>
                       <hr>
-                        <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
+                        <h4 class="text-centers">Datos del padre y/o acudiente</h4>
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Tipo Identificación</b></div>
@@ -181,7 +187,7 @@
                     <!---############End Datos Acudiente-->
                     <br>
                       <hr>
-                        <h4 class="text-centers">Datos Del Programa</h4>
+                        <h4 class="text-centers">Datos del programa</h4>
                       <hr>
                       @foreach($pro as $p)
                       @if(isset($p->id_estudiante))
@@ -223,7 +229,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                     </div>
                 </div>
@@ -253,7 +259,7 @@
           <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header"  style="background-color:#ffc107; color:white;">
-                <h5 class="modal-title alerta" id="exampleModalLabel">Información Estudiante: <span class="nomes" id="nomcom"></span></h5>
+                <h5 class="modal-title alerta" id="exampleModalLabel">Información del estudiante: <span class="nomes" id="nomcom"></span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -261,16 +267,16 @@
               <div class="modal-body letraf">
                 
                <!---Mostrar datos--> 
-               <h4 class="text-centers">Datos Personales</h4>
+               <h4 class="text-centers">Datos personales</h4>
                     <hr>
                     <div class="row ">
-                        <div class="col-md-3"><b>Tipo Identificación</b></div>
+                        <div class="col-md-3"><b>Tipo de identificación</b></div>
                         <div class="col-md-3 ml-auto iden" id="limpiar1"> </div>
                         <div class="col-md-3"><b>Número</b></div>
                         <div class="col-md-3 ml-auto num" id="limpiar2"> </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><b>Dpt Expedición</b></div>
+                        <div class="col-md-3"><b>Dpto. Expedición</b></div>
                         <div class="col-md-3 ml-auto dtoex" id="limpiar3">  </div>
                         <div class="col-md-3"><b>Mpio. Expedición</b></div>
                         <div class="col-md-3 ml-auto mpioex" id="limpiar4"> </div>
@@ -278,11 +284,11 @@
                     <div class="row">
                         <div class="col-md-3"><b>Género</b></div>
                         <div class="col-md-3 ml-auto gen" id="limpiar5"> </div>
-                        <div class="col-md-3"><b>Fecha Nac</b></div>
+                        <div class="col-md-3"><b>Fecha Nac.</b></div>
                         <div class="col-md-3 ml-auto fecna" id="limpiar6"> </div>
                     </div>
                     <div class="row"> 
-                        <div class="col-md-3"><b>Dpt Nacimiento</b></div>
+                        <div class="col-md-3"><b>Dpto. Nacimiento</b></div>
                         <div class="col-md-3 ml-auto dtona" id="limpiar7"> </div>
                         <div class="col-md-3"><b>Mpio. Nacimiento</b></div>
                         <div class="col-md-3 ml-auto mpionac" id="limpiar8"> </div>
@@ -306,7 +312,7 @@
                         <div class="col-md-3 ml-auto barrio" id="limpiar14">  </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3"><b>Dpt. Residencia</b></div>
+                        <div class="col-md-3"><b>Dpto. Residencia</b></div>
                         <div class="col-md-3 ml-auto dtores" id="limpiar15"> </div>
                         <div class="col-md-3"><b>Mpio. Residencia</b></div>
                         <div class="col-md-3 ml-auto mpiores" id="limpiar16"> </div>
@@ -320,23 +326,23 @@
                     <div class="row">
                         <div class="col-md-3"><b>Estrato</b></div>
                         <div class="col-md-3 ml-auto estrato" id="limpiar19"> </div>
-                        <div class="col-md-3"><b>Tipo Sangre</b></div>
+                        <div class="col-md-3"><b>Tipo de sangre</b></div>
                         <div class="col-md-3 ml-auto tsangre" id="limpiar20"> </div>
                     </div>
                     <!--end mostrar datos-->
                     <!---#########################################sistema salud----->
                      <br>
                       <hr>
-                        <h4 class="text-centers">Sistema De Salud</h4>
+                        <h4 class="text-centers">Sistema de salud</h4>
                       <hr>
                       <div class="row">
-                        <div class="col-md-3"><b>Régimen Salud</b></div>
+                        <div class="col-md-3"><b>Régimen salud</b></div>
                         <div class="col-md-3 ml-auto regimen" id="limpiar21"> </div>
                         <div class="col-md-3"><b>Carnet/EPS</b></div>
                         <div class="col-md-3 ml-auto carnet" id="limpiar22"> </div>
                      </div>
                      <div class="row">
-                        <div class="col-md-3"><b>Nivel Formación</b></div>
+                        <div class="col-md-3"><b>Nivel formación</b></div>
                         <div class="col-md-3 ml-auto formacion" id="limpiar23"> </div>
                         <div class="col-md-3"><b>Ocupación</b></div>
                         <div class="col-md-3 ml-auto ocupacion" id="limpiar24"> </div>
@@ -351,10 +357,10 @@
                     <!--#############Datos del acudiente-->
                       <br>
                       <hr>
-                        <h4 class="text-centers">Datos De Padre Y/O Acudiente</h4>
+                        <h4 class="text-centers">Datos de padre y/o acudiente</h4>
                       <hr>
                       <div class="row">
-                        <div class="col-md-3"><b>Tipo Identificación</b></div>
+                        <div class="col-md-3"><b>Tipo de identificación</b></div>
                         <div class="col-md-3 ml-auto idenacu" id="limpiar27"> </div>
                         <div class="col-md-3"><b>Número</b></div>
                         <div class="col-md-3 ml-auto numacu" id="limpiar28"> </div>
@@ -366,7 +372,7 @@
                         <div class="col-md-3 ml-auto paren" id="limpiar30"> </div>
                       </div>
                       <div class="row">
-                        <div class="col-md-3"><b>Dirección Residencia</b></div>
+                        <div class="col-md-3"><b>Dirección residencia</b></div>
                         <div class="col-md-3 ml-auto diracu" id="limpiar31"> </div>
                         <div class="col-md-3"><b>Teléfono/Celular</b></div>
                         <div class="col-md-3 ml-auto telacu" id="limpiar32"> </div>
@@ -374,7 +380,7 @@
                     <!---############End Datos del programa-->
                     <br>
                       <hr>
-                        <h4 class="text-start">Datos Del Programa</h4> 
+                        <h4 class="text-start">Datos del programa</h4> 
                       <hr>
                       <div class="row">
                         <div class="col-md-3"><b>Código</b></div>
@@ -408,7 +414,7 @@
 
               </div>
               <div class="modal-footer letraf">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
               </div>
             </div>
           </div>

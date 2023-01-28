@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado De Estudiantes Pendientes De Nivelación En Bachillerato</h3>
+ <h3 class="letra1">Listado de estudiantes pendientes de nivelación en bachillerato</h3>
 </div>
 @if(Session::has('rep'))
   <div class="alert alert-dismissible fade show" role="alert" style="background-color:#E3E3E3;">
@@ -55,7 +55,7 @@
 				<!-- Modal -->
 				<div class="modal fade" id="recibo{{$m->idest}}{{$m->idnota}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
-					<div class="modal-content">
+					<div class="modal-content" style="background-color: #F1F1F1;">
 					<div class="modal-header" style="background-color:#ffc107; color:white;">
 						<h5 class="modal-title" id="exampleModalLabel">Ingresar información del recibo de pago</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -88,8 +88,8 @@
 						<!--end formulario-->
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-						<button type="submit" class="btn btn-primary">Guardar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+						<button type="submit" class="btn btn-success">Guardar</button>
 					</div>
 					</form>
 					</div>

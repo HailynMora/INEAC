@@ -1,9 +1,9 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Actualizar Estudiante</h3>
+ <h3 class="letra1">Actualizar estudiante</h3>
 </div>
-<br><br>
+<br>
 <div class="container letraf">
 <form action="{{route('actualizar_estudiante', $est[0]->id)}}" method="post">
  @csrf
@@ -16,7 +16,7 @@
            <div class="col-md-10">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="fas fa-edit"></i> Datos Personales
+                  <i class="fas fa-edit"></i> Datos personales
                 </button>
               </h2>
           </div>
@@ -35,7 +35,7 @@
       <div class="card-body">
           <div class="form-row">
           <div class="form-group col-md-4">
-              <label for="tipodoc">Tipo Documento</label>
+              <label for="tipodoc">Tipo documento</label>
               <select id="tipodoc" name="tipodoc" class="form-control" required>
               <option value="{{$est[0]->idtdoces}}">{{$est[0]->tdoces}}</option>
                 @foreach($tipodoc as $t)
@@ -44,22 +44,22 @@
               </select>
             </div>
             <div class="form-group col-md-4">
-              <label for="numero_doc">Número Documento</label>
+              <label for="numero_doc">Número documento</label>
               <input type="number" class="form-control" id="numero_doc" name="numero_doc" value="{{$est[0]->num_doc}}" required>
             </div>
             <div class="form-group col-md-4">
-            <label for="correo">Dpt. Expedición</label>
-            <input type="text" class="form-control" id="depex" name="depex" value="{{$est[0]->dpt_expedicion}}">
+            <label for="correo">Dpto. expedición</label>
+            <input type="text" class="form-control" id="depex" name="depex" value="{{$est[0]->dpt_expedicion}}" required>
             </div>
           </div>
           <!---###############################################--->
           <div class="form-row">
           <div class="form-group col-md-4">
-              <label for="numero_doc">Mpio Expedición</label>
-              <input type="text" class="form-control" id="mpioex" name="mpioex" value="{{$est[0]->mun_expedicion}}">
+              <label for="numero_doc">Mpio. expedición</label>
+              <input type="text" class="form-control" id="mpioex" name="mpioex" value="{{$est[0]->mun_expedicion}}" required>
             </div>
             <div class="form-group col-md-4">
-              <label for="genero">Genero</label>
+              <label for="genero">Género</label>
                 <select id="genero" class="form-control" name="genero" required>
                 <option value="{{$est[0]->idgen}}">{{$est[0]->generoestu}}</option>
                   @foreach($genero as $g)
@@ -68,7 +68,7 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-            <label for="correo">Fecha Nacimiento</label>
+            <label for="correo">Fecha de nacimiento</label>
             <input type="date" class="form-control" id="fecnac" name="fecnac" value="{{date('Y-m-d', strtotime($est[0]->fecnacimiento))}}" required >
             </div>
           </div>
@@ -76,30 +76,30 @@
           <!---###############################################--->
           <div class="form-row">
           <div class="form-group col-md-6">
-              <label for="numero_doc">Dpt. Nacimiento</label>
-              <input type="text" class="form-control" id="dpt_nac" name="dpt_nac"  value="{{$est[0]->dpt_nacimiento}}" >
+              <label for="numero_doc">Dpto. nacimiento</label>
+              <input type="text" class="form-control" id="dpt_nac" name="dpt_nac"  value="{{$est[0]->dpt_nacimiento}}"  required>
             </div>
             <div class="form-group col-md-6">
-             <label for="numero_doc">Mpio. Nacimiento</label>
-              <input type="text" class="form-control" id="mpio_nac" name="mpio_nac" value="{{$est[0]->mun_nacimiento}}">
+             <label for="numero_doc">Mpio. nacimiento</label>
+              <input type="text" class="form-control" id="mpio_nac" name="mpio_nac" value="{{$est[0]->mun_nacimiento}}"  required>
             </div>
           </div>
           <!---###############--->
           <div class="form-row">
           <div class="form-group col-md-3">
-              <label for="apellido">Primer Apellido</label>
+              <label for="apellido">Primer apellido</label>
               <input type="text" class="form-control" id="firsape" name="firsape" value="{{$est[0]->firts_ape}}" required onkeypress="return soloLetras(event)">
             </div>
             <div class="form-group col-md-3">
-            <label for="apellido">Segundo Apellido</label>
+            <label for="apellido">Segundo apellido</label>
               <input type="text" class="form-control" id="secondape" name="secondape" value="{{$est[0]->second_ape}}" onkeypress="return soloLetras(event)">
             </div>
             <div class="form-group col-md-3">
-             <label for="nombre">Primer Nombre</label>
+             <label for="nombre">Primer nombre</label>
               <input type="text" class="form-control" id="firstname" name="firstname" value="{{$est[0]->first_nom}}" required onkeypress="return soloLetras(event)">
             </div>
             <div class="form-group col-md-3">
-            <label for="apellido">Segundo Nombre</label>
+            <label for="apellido">Segundo nombre</label>
               <input type="text" class="form-control" id="secondname" name="secondname" value="{{$est[0]->second_nom}}" onkeypress="return soloLetras(event)">
             </div>
           </div>
@@ -107,16 +107,16 @@
           <!---###############--->
           <div class="form-row">
           <div class="form-group col-md-3">
-              <label for="apellido">Dtp. Residencia</label>
+              <label for="apellido">Dpto. residencia</label>
               <input type="text" class="form-control" id="dptres" name="dptres" value="{{$est[0]->dptresidencia}}"  onkeypress="return soloLetras(event)">
             </div>
             <div class="form-group col-md-3">
-              <label for="apellido">Mpio. Residencia</label>
+              <label for="apellido">Mpio. residencia</label>
               <input type="text" class="form-control" id="mpiores" name="mpiores" value="{{$est[0]->munresidencia}}"  onkeypress="return soloLetras(event)">
             </div>
             <div class="form-group col-md-3">
-            <label for="apellido">Dir. Residencia</label>
-              <input type="text" class="form-control" id="dirres" name="dirres" value="{{$est[0]->dirresidencia}}" >
+            <label for="apellido">Dir. residencia</label>
+              <input type="text" class="form-control" id="dirres" name="dirres" value="{{$est[0]->dirresidencia}}"  required>
             </div>
             <div class="form-group col-md-3">
              <label for="nombre">Barrio</label>
@@ -139,7 +139,7 @@
               <input type="number" class="form-control" id="estrato" name="estrato" value="{{$est[0]->estrato}}" required>
             </div>
             <div class="form-group col-md-4">
-            <label for="genero">Tipo Sanguineo</label>
+            <label for="genero">Tipo sanguineo</label>
                 <select id="sangre" class="form-control" name="sangre" >
                 <option value="{{$est[0]->tiposangre}}" selected> {{$est[0]->tiposangre}}</option>
                   <option value="A+">A+</option>
@@ -157,7 +157,7 @@
             <!---###############--->
             <div class="form-row">
             <div class="form-group col-md-6">
-             <label for="telefono">Telefono</label>
+             <label for="telefono">Teléfono</label>
              <input type="text" class="form-control" id="telefono" name="telefono" value="{{$est[0]->telefono}}">
             </div>
             <div class="form-group col-md-6">
@@ -183,7 +183,7 @@
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
         <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-         Sistema De Salud
+         Sistema de salud
         </button>
       </h2>
     </div>
@@ -192,7 +192,7 @@
          <!----##########################-->
          <div class="form-row">
           <div class="form-group col-md-4">
-              <label for="tipodoc">Regimen salud</label>
+              <label for="tipodoc">Regimen de salud</label>
               <input type="text" class="form-control" id="regimen" name="regimen" value="{{$est[0]->regimen}}" required>
             </div>
             <div class="form-group col-md-4">
@@ -200,7 +200,7 @@
             <input type="text" class="form-control" id="carnet" name="carnet" value="{{$est[0]->eps}}" required>
             </div>
             <div class="form-group col-md-4">
-              <label for="numero_doc">Nivel Formación</label>
+              <label for="numero_doc">Nivel formación</label>
               <input type="text" class="form-control" id="nivelformacion" name="nivelformacion" value="{{$est[0]->nivelformacion}}">
             </div>
             </div>
@@ -243,7 +243,7 @@
         <!----##########################-->
         <div class="form-row">
           <div class="form-group col-md-4">
-              <label for="tipodoc">Tipo Documento</label>
+              <label for="tipodoc">Tipo de documento</label>
               <select id="tdocacu" name="tdocacu" class="form-control" required>
               <option value="{{$est[0]->idtpoacu}}">{{$est[0]->tdocacu}}</option>
                 @foreach($tipodoc as $t)
@@ -252,11 +252,11 @@
               </select>
             </div>
             <div class="form-group col-md-4">
-              <label for="numero_doc">Número Documento</label>
+              <label for="numero_doc">Número de documento</label>
               <input type="number" class="form-control" id="numdocacu" name="numdocacu" value="{{$est[0]->numacu}}" required>
             </div>
             <div class="form-group col-md-4">
-            <label for="correo">Nombres y Apellidos</label>
+            <label for="correo">Nombres y apellidos</label>
             <input type="text" class="form-control" id="nombresacu" name="nombresacu" value="{{$est[0]->nomacu}}" required>
             </div>
           </div>
@@ -272,11 +272,11 @@
                 </select>
               </div>
            <div class="form-group col-md-4">
-              <label for="tipodoc">Dir. Residencia</label>
+              <label for="tipodoc">Dir. residencia</label>
               <input type="text" class="form-control" id="diracu" name="diracu" value="{{$est[0]->diracu}}" required>
             </div>
             <div class="form-group col-md-4">
-              <label for="numero_doc">Telefono/Celular</label>
+              <label for="numero_doc">Teléfono/Celular</label>
               <input type="number" class="form-control" id="telacu" name="telacu" value="{{$est[0]->telacu}}" required>
             </div>
           </div>
@@ -287,12 +287,11 @@
     </div>
   </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid modal-footer">
+      <a href="{{route('listarestu')}}"type="submit" class="btn btn-danger">Salir</a>
+      <button type="submit" class="btn btn-success">Guardar</button>
 
-        </div>
-        <a href="{{route('listarestu')}}"type="submit" class="btn btn-warning">Cancelar</a>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
-        <a href="{{url('/visualizar/estudiante')}}" type="button"   id="miboton" class="btn btn-success">Visualizar</a>
+</div>
    <!---############################################################################--->
     </form>
 </div>

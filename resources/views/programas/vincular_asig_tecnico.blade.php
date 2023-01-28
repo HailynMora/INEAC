@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:white;">
- <h3 class="letra1">Vincular Asignatura A Un Programa Técnico</h3>
+ <h3 class="letra1">Vincular asignaturas a un programa técnico</h3>
 </div>
 <div>
 </div>          
@@ -35,7 +35,7 @@
            <div class="col-md-10">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="fas fa-edit"></i> Vincular Asignaturas a un Programa Técnico 
+                  <i class="fas fa-edit"></i> Vincular asignaturas 
                 </button>
               </h2>
           </div>
@@ -100,7 +100,6 @@
                 <div class="form-group col-md-6">
                   <label for="periodo">Periodo</label>
                   <select id="periodo" class="form-control" name="periodo" required>
-                    <option value="0" selected>Seleccionar</option> 
                       <option value="A">A</option>
                       <option value="B">B</option>
                       <option value="C">C</option>
@@ -109,12 +108,11 @@
                   </div>          
                 </div>
                 <!---end periodo y anio--->
-                <a  class="btn btn-danger" href="{{url('/programas/reporte_programas_tecnicos')}}">Cancelar</a>
-                <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
-                <button type="submit" class="btn btn-primary">Registrar</button>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
-                  Listar
-                </button>
+                <div class="modal-footer">
+                    <a  class="btn btn-danger" href="{{url('/programas/reporte_programas_tecnicos')}}">Salir</a>
+                    <button type="button" class="btn btn-info" Onclick="resetform();" >Limpiar</button>
+                    <button type="submit" class="btn btn-success">Registrar</button>
+               </div>
               </form>
               <br>
              
@@ -122,102 +120,6 @@
       </div>
     </div>
   </div>
-
-  <!--########################modal--->
-
-  <!-- Button trigger modal -->
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header" style="color:black;">
-        <div class="modal-title alert text-center" role="alert">
-          <h3 class="letra1"> Asignaturas Vinculadas a Programas Técnicos</h3>
-        </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-     <!---###################-->
-        <div class="container">
-            <table class="table">
-                <thead style="background-color:#0f468e; color:white;" class="alerta">
-                    <tr>
-                    <th scope="col">Año</th>
-                    <th scope="col">Periodo</th>
-                    <th scope="col">Cód. Programa</th>
-                    <th scope="col">Programa</th>
-                    <th scope="col">Trimestre</th>
-                    <th scope="col">Asignatura</th>
-                    <th scope="col">I/Horaria</th>
-                    <th scope="col">Docente</th>
-                    <th scope="col">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody class="letraf">
-                
-                @foreach($asigpro as $s)
-                <tr style="background-color:#E3E3E3;;">
-                    <td>{{$s->anio}}</td>
-                    <td>{{$s->periodo}}</td>
-                    <td>{{$s->codigotec}}</td>
-                    <td>{{$s->nombretec}}</td>
-                    <td>{{$s->nombretri}}</td>
-                    <td>{{$s->asig}}</td>
-                    <td>{{$s->horas}}</td>
-                    <td>{{$s->nomdoc}} {{$s->apedoc}}</td>            
-                    <td>
-                        &nbsp&nbsp
-                        <a type="button" data-toggle="modal" data-target="#eliminarAsig{{$s->id}}" data-placement="bottom"  title="Eliminar"><i class="nav-icon fas fa-trash" style="color: red;"></i></a>
-                        <!---##############-->
-
-                        <!-- Button trigger modal -->
-                              <!-- Modal -->
-                              <div class="modal fade" id="eliminarAsig{{$s->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog  modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header" style="background-color:#FFC107;">
-                                      <h5 class="modal-title letra1" id="exampleModalLabel">Eliminar asignatura vinculada</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body alerta">
-                                      ¿Desea eliminar la materia Vinculada de forma permanente?
-                
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
-                                      <a type="submit" href="{{route('elimasig', $s->id)}}" class="btn btn-primary">Si</a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                        <!---#############-->
-
-                    </td>
-                </tr>
-                    <!-- Ventana modal para eliminar -->
-                    
-                    <!---fin ventana eliminar--->
-                @endforeach
-                
-                </tbody>
-            </table>
-        </div>
-      
-     <!---####################--->   
-      </div>
-      <div class="modal-footer alerta">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-  <!----#######################end modal---->
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

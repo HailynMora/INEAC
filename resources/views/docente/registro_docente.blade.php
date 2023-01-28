@@ -1,9 +1,9 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc103; color:#ffffff;">
- <h3 class="letra1">Registro de Docentes hh</h3>
+ <h3 class="letra1">Registro de docentes</h3>
 </div>
-<br><br>
+<br>
 <div class="accordion" id="accordionExample">
     <div class="card">
       <div class="card-header" id="headingOne">
@@ -12,7 +12,7 @@
            <div class="col-md-10">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="fas fa-edit"></i> Datos Personales
+                  <i class="fas fa-edit"></i> Datos personales
                 </button>
               </h2>
           </div>
@@ -35,7 +35,6 @@
                   <div class="form-group col-md-3">
                     <label for="tipodoc">Tipo de documento</label>
                     <select id="tipodoc" class="form-control" name="tipodoc" required>
-                      <option selected>Seleccionar</option>
                       @foreach($tipodoc as $t)
                       <option value="{{$t->id}}">{{$t->descripcion}}</option>
                       @endforeach
@@ -56,18 +55,18 @@
               </div>
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <label for="correo">Correo Electrónico</label>
+                    <label for="correo">Correo electrónico</label>
                     <input type="email" class="form-control" id="correo" name="correo" placeholder="example@example.com" required>
                     <div id="respuesta" class="col-lg-5"></div>
                   </div>
                   
                   <div class="form-group col-md-3">
                     <label for="telefono">Teléfono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" minlength="10" maxlength="10">
+                    <input type="text" class="form-control" id="telefono" name="telefono" minlength="10" maxlength="10" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="direccion">Dirección</label>
-                    <input type="text" class="form-control" id="direccion" name="direccion">
+                    <input type="text" class="form-control" id="direccion" name="direccion" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="fec_vinculacion">Fecha vinculación</label>
@@ -84,24 +83,17 @@
                   <div class="form-group col-md-6">
                     <label for="estado">Estado</label>
                     <select id="estado" class="form-control" name="estado" required>
-                    <option selected>Seleccionar</option>
                     @foreach($estado as $es)
                       <option value="{{$es->id}}">{{$es->descripcion}}</option>
                     @endforeach
                     </select>
                   </div>
-                      <div class="form-group col-md-6">
-                        <label for="direccion">Usuario</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </div>
-                      <div class="form-group col-md-6">
-                        <label for="direccion">Contraseña</label>
-                        <input type="password" class="form-control" id="pass" name="pass">
-                      </div>
                 </div>
-                <a  class="btn btn-danger" href="{{url('/docente/listado_docente')}}">Cancelar</a>
-                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <div class="modal-footer">
+                 <a  class="btn btn-danger" href="{{url('/docente/listado_docente')}}">Salir</a>
+                 <button type="submit" class="btn btn-info"  onclick="resetform()">Limpiar</button>
+                 <button type="submit" class="btn btn-success">Guardar</button>
+               </div>
               </form>
         </div>
       </div>
@@ -137,8 +129,8 @@
     var correo=$('#correo').val();
     var numerodoc=$('#numerodoc').val();
     var fec_vinculacion=$('#fec_vinculacion').val();
-    var email = $("#email").val();
-    var pass = $("#pass").val();
+    var email = correo;
+    var pass = numerodoc;
     var tipodoc=$('#tipodoc').val();
     var tipogen=$('#tipogen').val();
     var estado=$('#estado').val();

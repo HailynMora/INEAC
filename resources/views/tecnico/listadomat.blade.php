@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert  text-center"  role="alert" style="background-color: #ffc107; color:#ffffff;">
-  <h3 class="letra1"> Listado De Estudiantes Matriculados en Técnicos </h3>
+  <h3 class="letra1"> Listado de estudiantes matriculados en técnicos </h3>
 </div>
 <br>
 <div class="container alerta">

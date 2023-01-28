@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado De Estudiantes Pendientes De Nivelación En Programas Técnicos</h3>
+ <h3 class="letra1">Listado de estudiantes pendientes de nivelación en programas técnicos</h3>
 </div>
 @if(Session::has('alerta'))
   <div class="alert alert-dismissible fade show" role="alert" style="background-color:#E3E3E3;">
@@ -86,8 +86,8 @@
 						<!--end formulario-->
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-						<button type="submit" class="btn btn-primary">Guardar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+						<button type="submit" class="btn btn-success">Guardar</button>
 					</div>
 					</form>
 					</div>

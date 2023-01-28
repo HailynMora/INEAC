@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1">Registar Perfil Profesional</h3>
+ <h3 class="letra1">Registar perfil profesional</h3>
 </div>
 
 <div class="accordion" id="accordionExample">
@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col-6">
               <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <i class="fas fa-file-alt"></i>&nbsp;Datos De Perfil
+              <i class="fas fa-file-alt"></i>&nbsp;Datos de perfil
               </button>
             </div>
             <div class="col-6 text-right alerta" style="padding-top:10px;">
@@ -27,11 +27,11 @@
               @csrf
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                   <label for="nivel">Subir Foto</label>
+                   <label for="nivel">Subir foto</label>
                   <input type="file" class="form-control" id="foto" name="foto" required>
                   </div>
                   <div class="form-group col-md-6">
-                   <label for="nivel">Nivel de Estudios</label>
+                   <label for="nivel">Nivel de estudios</label>
                   <input type="text" class="form-control" id="nivel" name="nivel" required>
                   </div>
               </div>
@@ -41,7 +41,7 @@
                   <textarea class="form-control" id="descripcion" name="descripcion" rows="2" required></textarea>
                   </div>
                   <div class="form-group col-md-6">
-                  <label for="cur">Cursos Realizados</label>
+                  <label for="cur">Cursos realizados</label>
                   <textarea class="form-control" id="cur" name="cur" rows="2" required></textarea>
                   </div>
                 </div>
@@ -55,9 +55,9 @@
                   <textarea class="form-control" id="exp" name="exp" rows="2" required></textarea>
                   </div>
                 </div>
-                <a  class="btn btn-danger" href="{{url('/')}}">Cancelar</a>
-                <button type="button" class="btn btn-warning" Onclick="resetform();" >Limpiar</button>
-                <button type="submit" class="btn btn-success">Registrar</button>
+                  <button type="submit" class="btn btn-success float-right">Guardar</button><span class="float-right">&nbsp;</span>
+                  <button type="button" class="btn btn-info float-right" Onclick="resetform();" >Limpiar</button><span class="float-right">&nbsp;</span>
+                  <a class="btn btn-danger float-right" href="{{url('/inicio')}}">Salir</a>
               </form>
               <br>
              

@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1"> Asignaturas Vinculadas a Programas</h3>
+ <h3 class="letra1"> Asignaturas vinculadas a programas</h3>
 </div>
 <br>
 <div class="container table-responsive">
@@ -51,8 +51,8 @@
                             </h4>
                         </div>
                         <div class="modal-footer alerta">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                            <a  class="btn btn-primary" href="{{ route('desvincular', $s->id) }}">Guardar</a>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                            <a  class="btn btn-success" href="{{ route('desvincular', $s->id) }}">Guardar</a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,14 @@
             <!---fin ventana eliminar--->
             @endif
         @endforeach
-        
+        @if(!isset($s->anio))
+           <div class="alert alert-warning alert-dismissible fade show letraf" role="alert" style="font-size:18px;">
+                <strong >Lo sentimos.</strong> No hay información para la solicitud.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+        @endif
         </tbody>
     </table>
     {{$asigpro->links()}}

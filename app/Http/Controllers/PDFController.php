@@ -195,7 +195,7 @@ class PDFController extends Controller
                     ->where('notas.id_estudiante',$request->ides)
                     ->where('cursos.anio', '=', $request->anio)
                     ->where('cursos.periodo', '=', $request->periodo)
-                    ->where('matriculas.id_aprobado', '=', '5')
+                    ->where('matriculas.id_aprobado', '!=', '4')
                     ->select('notas.definitiva','asignaturas.nombre','desempenos.descripcion as desem','notas.id_curso', 'cursos.anio', 'cursos.periodo', 'tipo_curso.descripcion')
                     ->count();
         //###############################
@@ -218,8 +218,9 @@ class PDFController extends Controller
                     ->where('notas.id_estudiante',$request->ides)
                     ->where('cursos.anio', '=', $request->anio)
                     ->where('cursos.periodo', '=', $request->periodo)
-                    ->where('matriculas.id_aprobado', '=', '5')
+                    ->where('matriculas.id_aprobado', '!=', '4')
                     ->select('notas.definitiva','asignaturas.nombre','desempenos.descripcion as desem','notas.id_curso', 'cursos.anio', 'cursos.periodo', 'tipo_curso.descripcion')
+                    ->distinct()
                     ->get();
         
         $not = DB::table('notas')->where('notas.id_estudiante',$request->ides)

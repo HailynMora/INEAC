@@ -179,6 +179,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Spatie\Backup\BackupServiceProvider::class, //se agrego para backup
+
     ],
 
     /*

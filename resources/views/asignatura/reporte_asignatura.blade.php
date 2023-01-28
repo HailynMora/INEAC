@@ -1,14 +1,14 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1">Reporte Asignaturas Bachillerato</h3>
+ <h3 class="letra1">Reporte asignaturas bachillerato</h3>
 </div>
   <!--modal-->
    <!-- Button trigger modal-->
    <div class="row">
      <div class="col-6">
         <button type="button"class="btn btn-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegAsig">
-          Registrar
+          Registro
         </button>
       </div>
       <!-- Modal -->
@@ -18,7 +18,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
               <h3 class="text-center letra1" style="background-color: #ffc107; color:#ffffff; padding-top:15px; padding-bottom:15px;">
-                    Registro de Asignaturas
+                    Registro de asignaturas
               </h3>
             <div class="modal-body">
               <!--registrar modal-->
@@ -44,13 +44,13 @@
                                         <input type="text" class="form-control" id="nombre" name="nombre" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="intensidad_horaria">Intensidad Horaria</label>
+                                        <label for="intensidad_horaria">Intensidad horaria</label>
                                         <input type="number" class="form-control" id="intensidad_horaria" name="intensidad_horaria" placeholder="5" min="1" max="10" required>
                                     </div>
                                   
                                 <div class="form-group col-md-6">
-                                    <label for="val_habilitacion">Valor Habilitación</label>
-                                    <input type="number" class="form-control" id="val_habilitacion" name="val_habilitacion" placeholder="10000" min="10000" max="60000" >
+                                    <label for="val_habilitacion">Valor habilitación</label>
+                                    <input type="number" class="form-control" id="val_habilitacion" name="val_habilitacion" placeholder="10000" min="10000" max="100000" >
                                   </div>
                                 </div>
                                                               
@@ -63,9 +63,11 @@
             </div>
             <div class="modal-footer letraf">
               <!--botones -->
-              <a  class="btn btn-danger" href="{{url('/asignatura/reporte_asignatura')}}">Cancelar</a>
-               <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
-              <button type="submit" class="btn btn-primary">Registrar</button>
+             
+              <a  class="btn btn-danger" href="{{url('/asignatura/reporte_asignatura')}}">Salir</a>
+               <button type="submit" class="btn btn-info"  onclick="resetform()">Limpiar</button>
+              <button type="submit" class="btn btn-success">Guardar</button>
+            
               <!--end botones-->
             </div>
           </div>
@@ -125,7 +127,7 @@
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #FFC107 !important;">
                         <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
-                            <span class="alerta">¿Cambiar el estado {{$d->estado}} de la asignatura? </span>
+                            <span>¿Cambiar el estado <span style="color:black;">{{$d->estado}}</span> de la asignatura? </span>
                         </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -137,10 +139,8 @@
                         </strong>
                     </div>
                     <div class="modal-footer alerta">
-                       <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                        <a  class="btn btn-primary" href="{{ route('cambiarAsig', $d->id) }}">Guardar</a>
-                       
-                        
+                       <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                        <a  class="btn btn-success" href="{{ route('cambiarAsig', $d->id) }}">Guardar</a> 
                     </div>
                 </div>
              </div>
@@ -168,8 +168,8 @@
                     <form action="{{route('deshasignatura')}}" method="POST">
                       @csrf
                     <input id="idasig" name="idasig" hidden> 
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
                     </form>
                   </div>
                 </div>
@@ -302,10 +302,10 @@
       },
       error:function(jqXHR, response){
           if(jqXHR.status==422){
-            toastr.warning('Datos Repetidos!.', 'El código de la Asignatura debe ser único!', {timeOut:3000});
+            toastr.warning('Datos Repetidos!.', 'El código de la asignatura debe ser único!', {timeOut:3000});
           }else{
            if(jqXHR.status==423){
-            toastr.warning('Datos Repetidos!.', 'El nombre de la Asignatura  debe ser único!', {timeOut:3000});
+            toastr.warning('Datos Repetidos!.', 'El nombre de la asignatura  debe ser único!', {timeOut:3000});
            }
           }
          

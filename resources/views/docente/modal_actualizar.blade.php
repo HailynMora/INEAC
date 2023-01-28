@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Actualizar Docentes</h3>
+ <h3 class="letra1">Actualizar docente</h3>
 </div>
 <br><br>
 <div class="container letraf">
@@ -18,38 +18,38 @@
             </select>
             </div>
             <div class="form-group col-md-3">
-            <label for="numerodoc">Numero Documento</label>
+            <label for="numerodoc">Número de documento</label>
             <input type="text" class="form-control" id="numerodoc" name="numerodoc" value="{{$doc[0]->num_doc}}" minlength="5" maxlength="12" required>
             </div>
             <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required value="{{$doc[0]->nombre}}">
+            <input type="text" class="form-control" id="nombre" name="nombre"  value="{{$doc[0]->nombre}}" required>
             </div>
             <div class="form-group col-md-3">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido" required value="{{$doc[0]->apellido}}">
+            <input type="text" class="form-control" id="apellido" name="apellido"  value="{{$doc[0]->apellido}}" required>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
-            <label for="correo">Correo Electronico</label>
+            <label for="correo">Correo electrónico</label>
             <input type="email" class="form-control" id="correo" name="correo" value="{{$doc[0]->correo}}" required>
             </div>
             <div class="form-group col-md-3">
-            <label for="telefono">Telefono</label>
-            <input type="text" class="form-control" id="telefono" name="telefono" value="{{$doc[0]->telefono}}" minlength="10" maxlength="10">
+            <label for="telefono">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" value="{{$doc[0]->telefono}}" minlength="10" maxlength="10" required>
             </div>
             <div class="form-group col-md-3">
-            <label for="direccion">Direccion</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" value="{{$doc[0]->direccion}}">
+            <label for="direccion">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" value="{{$doc[0]->direccion}}" required>
             </div>
             <div class="form-group col-md-3">
-            <label for="fec_vinculacion">Fecha vinculación</label>
-            <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" required value="{{date('Y-m-d', strtotime($doc[0]->fec_vinculacion))}}"><td></td>
+            <label for="fec_vinculacion">Fecha de vinculación</label>
+            <input type="date" class="form-control" id="fec_vinculacion" name="fec_vinculacion" value="{{date('Y-m-d', strtotime($doc[0]->fec_vinculacion))}}"  required><td></td>
             </div>
            
             <div class="form-group col-md-6">
-            <label for="tipogen">Genero</label>
+            <label for="tipogen">Género</label>
             <select id="tipogen" class="form-control" name="tipogen" required>
             <option value="{{$doc[0]->id_genero}}" selected>{{$doc[0]->gendoc}}</option>
             @foreach($gen as $g)
@@ -71,8 +71,19 @@
                 </select>
             </div>
         </div>
-        <a href="{{route('listado_docente')}}"type="submit" class="btn btn-warning">Cancelar</a>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <div class="modal-footer">
+          <a href="{{route('listado_docente')}}"type="submit" class="btn btn-danger">Salir</a>
+          <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
         </form>
 </div>
+
+<script>
+     window.addEventListener('DOMContentLoaded', (evento) => {
+        /* Obtenemos la fecha de hoy en formato ISO */
+        const hoy_fecha = new Date().toISOString().substring(0, 10);
+        /* Buscamos la etiqueta, ya sea por ID (que no tiene) o por su selector */
+        document.querySelector("input[name='fec_vinculacion']").max = hoy_fecha;
+    });
+</script>
 @endsection

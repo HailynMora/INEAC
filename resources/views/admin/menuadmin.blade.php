@@ -104,7 +104,7 @@
             <a href="{{route('matriculados_bach')}}" class="nav-link" style="color:white;">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
-                Reporte
+                Reportes
               </p>
             </a>
           </li>

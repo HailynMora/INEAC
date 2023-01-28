@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Listado De Nivelaciones</h3>
+ <h3 class="letra1">Listado de nivelaciones</h3>
 </div>
   <div class="table-responsive">
 	<table class="table">
@@ -98,7 +98,7 @@
                     </div>
                     </div>
                     <div class="modal-footer" style="background-color:#E0FCFF;">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                         </div>
                         </div>
                         <div class="modal-footer" style="background-color:#E0FCFF;">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                         </div>
                         </div>
                     </div>

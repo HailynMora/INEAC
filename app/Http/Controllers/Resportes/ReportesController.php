@@ -640,8 +640,6 @@ class ReportesController extends Controller
 
     ProgramasTecnicos::all()->each->delete();
 
-    Archivo::all()->each->delete();
-
     Programas::all()->each->delete();
 
     User::all()->where('id_rol', '!=', '1')->each->delete();

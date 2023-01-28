@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #FFC107; color:#ffffff;">
- <h3 class="letra1"> Programas De Bachillerato Registrados</h3>
+ <h3 class="letra1"> Programas de bachillerato registrados</h3>
 </div>
 <!--mensaje-->
 @if(Session::has('mensaje'))
@@ -13,15 +13,80 @@
         </button>
         </div><br>
   @endif
-<!--end mensaje-->
-<div class="row">
-  <div class="col-6">
-    <button type="button"class="btn btn-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegBac">
-      Registrar
-    </button>
-    <!--BOTON REGISTRO ASIGNATURAS-->
-      <a href="{{route('reporte')}}"  class="btn btn-warning my-2 my-sm-0 alerta" >Asig. Bachillerato</a>
-    <!--FIN BOTON REGISTRO ASIG-->
+  <!--end mensaje-->
+  <div class="row">
+    <div class="col-6">
+      <button type="button"class="btn btn-success my-2 my-sm-0 alerta" data-toggle="modal" data-target="#RegBac">
+        Registro
+      </button>
+      <!--BOTON REGISTRO ASIGNATURAS-->
+        <a href="{{route('reporte')}}"  class="btn btn-warning my-2 my-sm-0 alerta" >Asig. bachillerato</a>
+      <!--FIN BOTON REGISTRO ASIG-->
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalListar">Listar</button>
+      <!--modal listar-->
+    <form action="{{route('listado_asig')}}" method="POST">
+      @csrf
+    <div class="modal fade" id="modalListar" tabindex="-1" aria-labelledby="modalListarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header letra1" style="background-color: #ffc107; color:#ffffff;">
+          <h5 class="modal-title" id="modalListarLabel">Ingrese datos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body alerta">
+          <!--formulario-->
+          <div class="form-group">
+            <label for="curso">Curso</label>
+            <select id="cursoid" name="cursoid" class="form-control" required>
+            <option value="0" selected>Seleccionar</option>
+               @if($rep)
+                @foreach($rep as $cur)
+                    <option value="{{$cur->id}}">{{$cur->programa}}</option>
+                @endforeach
+              @else
+               <option value="0" selected>Sin datos</option>
+              @endif
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="anio">Año</label>
+            <select id="anio" name="anio" class="form-control" required>
+            <option value="0" selected>Seleccionar</option>
+            @if($anio)
+                @foreach($anio as $an)
+                    <option value="{{$an->anio}}">{{$an->anio}}</option>
+                @endforeach
+              @else
+               <option value="0" selected>Sin datos</option>
+              @endif
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="periodo">Periodo</label>
+            <select id="periodo" name="periodo" class="form-control" required>
+            <option value="0" selected>Seleccionar</option>
+            @if($period)
+                @foreach($period as $per)
+                    <option value="{{$per->periodo}}">{{$per->periodo}}</option>
+                @endforeach
+              @else
+               <option value="0" selected>Sin datos</option>
+              @endif
+            </select>
+          </div>
+          <!--end formulario-->
+        </div>
+        <div class="modal-footer alerta">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+    <!--end modal-->
   </div>
   <div class="col-6">
     <form id="buscar" class="form-inline my-6 my-lg-0 float-right mb-6">
@@ -38,7 +103,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <h3 class="text-center letra1" style="background-color: #FFC107; color:#ffffff; padding-top:15px; padding-bottom:15px;">
-              Registro  Programas 
+              Registro de programas 
             </h3>
             <div class="modal-body">
               <!--registrar modal-->
@@ -47,7 +112,7 @@
                     <div class="card-header" id="headingOne">
                       <h2 class="mb-0">
                         <button class="btn btn-link btn-block text-left alerta" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          <i class="fas fa-edit"></i> Datos De Programa
+                          <i class="fas fa-edit"></i> Datos de programa
                         </button>
                       </h2>
                     </div>
@@ -70,7 +135,7 @@
                             <label for="jornada">Jornada</label>
                             <select class="form-control" id="jornada" name="jornada" required>
                               <option selected>Seleccionar</option>
-                              <option value="Sabado">Sabado</option>
+                              <option value="Sabado">Sábado</option>
                               <option value="Domingo">Domingo</option>
                             </select>
                           </div>
@@ -83,9 +148,10 @@
             </div>
             <div class="modal-footer letraf">
               <!--botones -->
-               <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Cancelar</a>
-                <button type="submit" class="btn btn-warning"  onclick="resetform()">Limpiar</button>
-                <button type="submit" class="btn btn-primary">Registrar</button>
+
+                <a  class="btn btn-danger" href="{{url('/programas/reporte_programas')}}">Salir</a>
+                <button type="submit" class="btn btn-info"  onclick="resetform()">Limpiar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
                 <!--end botones-->
             </div>
             </div>
@@ -145,7 +211,7 @@
                 <div class="modal-content">
                     <div class="modal-header alerta" style="background-color: #ffc107 !important;">
                         <h4 class="modal-title text-center" style="color: #fff; text-align: center;">
-                            <span>¿Cambiar el estado {{$d->estado}} del programa? </span>
+                            <span>¿Cambiar el estado <span style="color:black;">{{$d->estado}}</span> del programa? </span>
                         </h4>
                         <button type="button" class="close letraf" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -157,8 +223,8 @@
                         </strong>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning letraf" data-dismiss="modal">Salir</button>
-                        <a  class="btn btn-primary letraf" href="{{ route('cambiarPro', $d->id) }}">Guardar</a>
+                        <button type="button" class="btn btn-danger letraf" data-dismiss="modal">Salir</button>
+                        <a  class="btn btn-success letraf" href="{{ route('cambiarPro', $d->id) }}">Guardar</a>
                         
                     </div>
                 </div>

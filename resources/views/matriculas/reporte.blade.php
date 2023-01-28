@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center" role="alert" style="background-color: #ffc107; color:#ffffff;">
- <h3 class="letra1">Estudiantes Matriculados a Programas</h3>
+ <h3 class="letra1">Estudiantes matriculados a programas</h3>
 </div>
 <!----collapse--->
 @if(Session::has('excel'))
@@ -33,7 +33,7 @@
                     <table class="table">
                         <thead style="background-color:#0f468e;color: #ffffff;">
                             <tr>
-                            <th scope="col">Código Programa</th>
+                            <th scope="col">Código  de programa</th>
                             <th scope="col">Programa</th>
                             <th scope="col">Estudiantes</th>
                             <th scope="col">Notas</th>
@@ -64,7 +64,7 @@
                                                     <div class="modal-body">
                                                     <!---formulario-->
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">Periodo Académico</label>
+                                                            <label for="exampleInputEmail1">Periodo académico</label>
                                                             <select id="periodo" class="form-control" name="periodo">
                                                                 <option selected>Elegir...</option>
                                                                 <option value="A">A</option>
@@ -84,8 +84,8 @@
                                                         <!---end formulario-->
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
-                                                        <button type="submit" class="btn btn-primary">Generar</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                                        <button type="submit" class="btn btn-success">Generar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,7 +114,7 @@
                                                     <div class="modal-body">
                                                         <!---formulario-->
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">Periodo Académico</label>
+                                                            <label for="exampleInputEmail1">Periodo académico</label>
                                                             <select id="pernot" class="form-control" name="pernot">
                                                                 <option selected>Elegir...</option>
                                                                 <option value="A">A</option>
@@ -147,8 +147,8 @@
                                                         <!---end formulario-->
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
-                                                        <button type="submit" class="btn btn-primary">Generar</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                                        <button type="submit" class="btn btn-success">Generar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,7 +197,7 @@
                                                     </div>
                             
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Periodo Académico</label>
+                                                        <label for="exampleInputEmail1">Periodo académico</label>
                                                         <select id="periodo" class="form-control" name="periodo">
                                                             <option selected>Elegir...</option>
                                                             <option value="A">A</option>
@@ -219,8 +219,8 @@
                                             <!---end formulario-->
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
-                                                <button type="submit" class="btn btn-primary">Generar</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                                <button type="submit" class="btn btn-success">Generar</button>
                                             </div>
                                             </div>
                                         </div>
@@ -250,7 +250,7 @@
                                                     <div class="modal-body">
                                                         <!---formulario-->
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">Periodo Académico</label>
+                                                            <label for="exampleInputEmail1">Periodo académico</label>
                                                             <select id="pernot" class="form-control" name="pernot">
                                                                 <option selected>Elegir...</option>
                                                                 <option value="A">A</option>
@@ -286,8 +286,8 @@
                                                         <!---end formulario-->
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn" data-dismiss="modal" style="background-color:#FFBD03; color:white;">Salir</button>
-                                                        <button type="submit" class="btn btn-primary">Generar</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                                                        <button type="submit" class="btn btn-success">Generar</button>
                                                     </div>
                                                 </div>
                                             </div>

@@ -1,7 +1,7 @@
 @extends('usuario.principa_usul')
 @section('content')
 <div class="alert text-center"  role="alert" style="background-color:#ffc107;color: #ffffff;">
-  <h3 class="letra1"> Matrícula Estudiante</h3>
+  <h3 class="letra1"> Matrícula estudiantil</h3>
 </div>
 <!--mensajes-->
        <!---Mensaje-->
@@ -35,12 +35,12 @@
         <div class="container-fluid letraf">
         <div class="row">
             <div class="col-md-12" style="background-color:#e3e3e3;">
-                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos Estudiante</b></h4>
+                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#FFC300;"></i> Datos del estudiante</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
                 <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-                        <label><h5><b><i class="fas fa-address-card" style="color:#FFC300;"></i>&nbsp Número de Documento</b></h5></label><br>
+                        <label><h5><b><i class="fas fa-address-card" style="color:#FFC300;"></i>&nbsp Número de documento</b></h5></label><br>
                     <h5> {{$estu->num_doc}} </h5>
                     </div>
                     <div class="col-md-4">
@@ -112,10 +112,11 @@
                             
                                <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
                             <br>
-                            <div class="form-group col-md-12 text-center">
-                                <a href="/visualizar/estudiante" type="button" class="btn btn-warning">Cancelar</a>
-                                <button type="submit" class="btn btn-primary">Matricular</button>
-                                <a id="listado" type="button" class="btn btn-success">Visualizar</a> 
+
+                            <div class="form-group col-md-12 modal-footer">
+                                <a href="/visualizar/estudiante" type="button" class="btn btn-danger">Salir</a>
+                                <a id="listado" type="button" class="btn btn-primary">Visualizar</a> 
+                                <button type="submit" class="btn btn-success">Guardar</button>
                             </div>
                             
                                                     
@@ -137,12 +138,12 @@
      
         <div class="row">
             <div class="col-md-12" style="background-color:#e3e3e3;">
-                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#3843D0;"></i> Datos Estudiante</b></h4>
+                <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-book-reader" style="color:#3843D0;"></i> Datos del estudiante</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE"> <br>
                 <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4">
-                        <label><h5><b><i class="fas fa-address-card" style="color:#3843D0;"></i>&nbsp Número de Documento</b></h5></label><br>
+                        <label><h5><b><i class="fas fa-address-card" style="color:#3843D0;"></i>&nbsp Número de documento</b></h5></label><br>
                     <h5> {{$estu->num_doc}} </h5>
                     </div>
                     <div class="col-md-4">
@@ -164,14 +165,14 @@
         <div class="container-fluid letraf">
         <div class="row">
             <div class="col-md-12" style="background-color:#e3e3e3;">
-            <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#3843D0;"></i> Seleccionar Programa</b></h4>
+            <h4 class="text-left" style="margin-top: 15px;"><b><i class="fas fa-search" style="color:#3843D0;"></i> Seleccionar programa</b></h4>
                 <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                 <form id="formtec" action="{{route('matriculatecnico')}}" method="post">
                             @csrf
                             <div class="container-fluid row">
                                 <div  class="col-md-4">
                                   <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Elegir Curso</label>
+                                        <label for="exampleFormControlSelect1">Elegir curso</label>
                                         <select class="form-control" id="programatec" name="programatec">
                                         @foreach($prog as $pro)
                                         <option value="{{$pro->idtec}}">{{$pro->nombretec}}</option>
@@ -215,17 +216,17 @@
                                    <br>
                                 </div><!--retorna la informacion-->  
                                 <br>
-                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha Matrícula</b></h4></label>
+                                <label for="fec_vinculacion"><h4><b><i class="fas fa-calendar-alt" style="color:#3843D0;"></i> Fecha de matrícula</b></h4></label>
                                      <hr style="height:2px;border-width:0;color:gray;background-color:#FEFEFE">
                                 <div class="form-group col-md-4">
                                         <input type="date" class="form-control" name="fecha2" id="fecha2" required>
                                 </div>
                                     <input type="text" id="estu" name="estu" value="{{$estu->id}}" hidden>
                                 <br>
-                                <div class="form-group col-md-12 text-center">
-                                    <a href="/visualizar/estudiante" id="cancelar" type="button" class="btn btn-warning">Cancelar</a>
-                                    <button type="submit" class="btn btn-primary">Matricular</button>
-                                    <a  href="{{route('listado_tecnico')}}" id="listado" type="button" class="btn btn-success">Visualizar</a>                                       
+                                <div class="form-group col-md-12 modal-footer">
+                                    <a href="/visualizar/estudiante" id="cancelar" type="button" class="btn btn-danger">Salir</a>
+                                    <a  href="{{route('listado_tecnico')}}" id="listado" type="button" class="btn btn-primary">Visualizar</a>                                       
+                                    <button type="submit" class="btn btn-success">Guardar</button>
                                 </div>
                             
                                                     
